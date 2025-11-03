@@ -1,11 +1,28 @@
 # Podcast Feed Updater
 
-En Python-tjeneste for å filtrere og berike podcast RSS feeds. Perfekt for å:
+En Python-tjeneste for å filtrere, splitte og berike podcast RSS feeds. Perfekt for å:
 
-- **Splitte** kombinerte feeds basert på episode-titler
-- **Filtrere** ut spesifikke episoder
+- **Splitte** kombinerte feeds i separate feeds med riktig metadata
+- **Merge** items fra én feed med metadata fra en annen
+- **Filtrere** ut spesifikke episoder basert på tittel-mønstre
 - **Berike** feeds med Podcasting 2.0 tags (f.eks. `<podcast:person>`)
 - **Hente** creator-informasjon fra Podchaser API
+- **Bevare** all original XML-struktur og metadata
+
+## 🎯 Real-world Use Case: Rad Crew
+
+**Se [RADCREW_SETUP.md](RADCREW_SETUP.md)** for et komplett eksempel på hvordan dette brukes til å splitte og berike Rad Crew-feedene.
+
+**Kort versjon:**
+```bash
+# Split hovedfeed i 3 berikede feeds
+python3 split_radcrew.py
+
+# Generer: NEON (134 ep), Retro Crew (18 ep), Classic (337 ep)
+# Hver med korrekt metadata, artwork og beskrivelse
+```
+
+**Live feeds:** https://radcrew.netlify.app/
 
 ## Funksjoner
 
