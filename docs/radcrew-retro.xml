@@ -1,362 +1,374 @@
-<?xml version="1.0" ?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns2="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:ns3="https://podcastindex.org/namespace/1.0" xmlns:ns4="https://blubrry.com/developer/rawvoice-rss/" version="2.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:rawvoice="https://blubrry.com/developer/rawvoice-rss/" version="2.0">
   <channel>
     <title>Retro Crew</title>
-    <ns0:link href="https://www.radcrew.net/category/retrocrew/feed" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://www.radcrew.net/category/retrocrew/feed" rel="self" type="application/rss+xml"/>
     <link>https://www.radcrew.net/category/retrocrew/feed</link>
     <description>Norges første, beste og originale program om klassisk gaming.</description>
     <lastBuildDate>Tue, 08 Jul 2025 21:16:32 +0000</lastBuildDate>
     <language>no</language>
-    <ns1:updatePeriod>
-	hourly	</ns1:updatePeriod>
-    <ns1:updateFrequency>
-	1	</ns1:updateFrequency>
+    <sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+    <sy:updateFrequency>
+	1	</sy:updateFrequency>
     <generator>https://wordpress.org/?v=6.8.3</generator>
     <image>
-      <url>https://www.radcrew.net/media/2025/04/cropped-T-Skjorte-SEGA-scaled-1-32x32.png</url>
-      <title>Retro Crew</title>
-      <link>https://www.radcrew.net/category/retrocrew/feed</link>
-      <width>32</width>
-      <height>32</height>
-    </image>
-    <ns0:link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
-    <ns2:summary>Retro Crew er et ukentlig program om gamle spill og retrogaming, laget av Rad Crew og Gamer.no!</ns2:summary>
-    <ns2:author>RadCorp</ns2:author>
-    <ns2:explicit>false</ns2:explicit>
-    <ns2:image href="http://www.radcrew.net/media/powerpress/retr.jpg"/>
-    <ns2:owner>
-      <ns2:name>RadCorp</ns2:name>
-      <ns2:email>email@radcrew.net</ns2:email>
-    </ns2:owner>
+	<url>https://www.radcrew.net/media/2025/04/cropped-T-Skjorte-SEGA-scaled-1-32x32.png</url>
+	<title>Retro Crew</title>
+	<link>https://www.radcrew.net/category/retrocrew/feed</link>
+	<width>32</width>
+	<height>32</height>
+</image>
+    <atom:link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
+    <itunes:summary>Retro Crew er et ukentlig program om gamle spill og retrogaming, laget av Rad Crew og Gamer.no!</itunes:summary>
+    <itunes:author>RadCorp</itunes:author>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:image href="http://www.radcrew.net/media/powerpress/retr.jpg"/>
+    <itunes:owner>
+		<itunes:name>RadCorp</itunes:name>
+		<itunes:email>email@radcrew.net</itunes:email>
+	</itunes:owner>
     <copyright>RadCorp</copyright>
-    <ns3:license>RadCorp</ns3:license>
-    <ns3:medium>podcast</ns3:medium>
-    <ns2:subtitle>Gamle spill er konge!</ns2:subtitle>
+    <podcast:license>RadCorp</podcast:license>
+    <podcast:medium>podcast</podcast:medium>
+    <itunes:subtitle>Gamle spill er konge!</itunes:subtitle>
     <image>
-      <title>Retro Crew</title>
-      <url>http://www.radcrew.net/media/powerpress/retr.jpg</url>
-      <link>https://www.radcrew.net/category/retrocrew/feed</link>
-    </image>
-    <ns2:category text="Leisure">
-      <ns2:category text="Video Games"/>
-    </ns2:category>
-    <ns2:category text="TV &amp; Film"/>
-    <ns2:category text="Comedy"/>
-    <ns4:rating>TV-PG</ns4:rating>
-    <ns4:location>Norway</ns4:location>
-    <ns3:location>Norway</ns3:location>
-    <ns4:frequency>Weekly</ns4:frequency>
-    <ns3:podping usesPodping="true"/>
-    <ns3:guid>a1324b88-c003-56a1-9de2-9160e28f2094</ns3:guid>
-    <ns4:subscribe feed="https://www.radcrew.net/category/retrocrew/feed" itunes="http://itunes.apple.com/no/podcast/retro-crew/id567425444?l=nb"/>
-    <item>
+		<title>Retro Crew</title>
+		<url>http://www.radcrew.net/media/powerpress/retr.jpg</url>
+		<link>https://www.radcrew.net/category/retrocrew/feed</link>
+	</image>
+    <itunes:category text="Leisure">
+		<itunes:category text="Video Games"/>
+	</itunes:category>
+    <itunes:category text="TV &amp; Film"/>
+    <itunes:category text="Comedy"/>
+    <rawvoice:rating>TV-PG</rawvoice:rating>
+    <rawvoice:location>Norway</rawvoice:location>
+    <podcast:location>Norway</podcast:location>
+    <rawvoice:frequency>Weekly</rawvoice:frequency>
+    <podcast:podping usesPodping="true"/>
+    <podcast:guid>a1324b88-c003-56a1-9de2-9160e28f2094</podcast:guid>
+    <rawvoice:subscribe feed="https://www.radcrew.net/category/retrocrew/feed" itunes="http://itunes.apple.com/no/podcast/retro-crew/id567425444?l=nb"/>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2117631183</guid>
       <title>Retro Crew Special: Datamaskiner som landet med mageplask</title>
       <pubDate>Sun, 22 Jun 2025 15:23:04 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-special-datamaskiner-som-floppet</link>
-      <ns2:duration>00:51:48</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Hva drev Steve Jobs med etter han forlot Apple på 80-tallet? Veeel...Ketil, Martin og Jostein snakker om datamaskiner fra 80 og 90-tallet som floppa hardt.</ns2:summary>
-      <ns2:subtitle>Hva drev Steve Jobs med etter han forlot Apple på…</ns2:subtitle>
+      <itunes:duration>00:51:48</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Hva drev Steve Jobs med etter han forlot Apple på 80-tallet? Veeel...Ketil, Martin og Jostein snakker om datamaskiner fra 80 og 90-tallet som floppa hardt.</itunes:summary>
+      <itunes:subtitle>Hva drev Steve Jobs med etter han forlot Apple på…</itunes:subtitle>
       <description>Hva drev Steve Jobs med etter han forlot Apple på 80-tallet? Veeel...Ketil, Martin og Jostein snakker om datamaskiner fra 80 og 90-tallet som floppa hardt.</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2117631183-radcrew-retro-crew-special-datamaskiner-som-floppet.mp3" length="39677518"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-lFxI03gmM9SqnFJV-pyyBYw-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-lFxI03gmM9SqnFJV-pyyBYw-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2085967494</guid>
       <title>Hvilke spill var best på Amiga: Retro Crew Special</title>
       <pubDate>Sun, 27 Apr 2025 11:17:49 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/hvilke-spill-var-best-pa-amiga-retro-crew-special</link>
-      <ns2:duration>00:54:23</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Ketil, Martin og Jostein diskuterer merittene til spillkatalogen på Amiga.</ns2:summary>
-      <ns2:subtitle>Ketil, Martin og Jostein diskuterer merittene til…</ns2:subtitle>
+      <itunes:duration>00:54:23</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Ketil, Martin og Jostein diskuterer merittene til spillkatalogen på Amiga.</itunes:summary>
+      <itunes:subtitle>Ketil, Martin og Jostein diskuterer merittene til…</itunes:subtitle>
       <description>Ketil, Martin og Jostein diskuterer merittene til spillkatalogen på Amiga.</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2085967494-radcrew-hvilke-spill-var-best-pa-amiga-retro-crew-special.mp3" length="37828623"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-ZZ5zJCJY5JDLyySd-Rdy4zw-t3000x3000.png"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-ZZ5zJCJY5JDLyySd-Rdy4zw-t3000x3000.png"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2050188048</guid>
       <title>Retro Crew Spesial: Donkey Kong (1981)</title>
       <pubDate>Sun, 09 Mar 2025 00:00:00 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-spesial-donkey-kong-1981</link>
-      <ns2:duration>00:53:32</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Ketil, Martin og Jostein snakker om spillet som startet hele denne &quot;Mario&quot;-greia dere kanskje har hørt om. </ns2:summary>
-      <ns2:subtitle>Ketil, Martin og Jostein snakker om spillet som s…</ns2:subtitle>
-      <description>Ketil, Martin og Jostein snakker om spillet som startet hele denne &quot;Mario&quot;-greia dere kanskje har hørt om. </description>
+      <itunes:duration>00:53:32</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Ketil, Martin og Jostein snakker om spillet som startet hele denne "Mario"-greia dere kanskje har hørt om. </itunes:summary>
+      <itunes:subtitle>Ketil, Martin og Jostein snakker om spillet som s…</itunes:subtitle>
+      <description>Ketil, Martin og Jostein snakker om spillet som startet hele denne "Mario"-greia dere kanskje har hørt om. </description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2050188048-radcrew-retro-crew-spesial-donkey-kong-1981.mp3" length="81433282"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-befl5uLlezJ96sxA-ZhS5jg-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-befl5uLlezJ96sxA-ZhS5jg-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2020121481</guid>
       <title>Retro Crew Spesial: Ikoniske Amiga</title>
       <pubDate>Tue, 28 Jan 2025 11:01:00 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-ikoniske-amiga</link>
-      <ns2:duration>01:01:25</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Vi ser tilbake på Amiga, på godt og vondt, i denne timelange episoden av Retro Crew. Med: Ketil Espenæs, Martin Gjesdal og Jostein Hakestad</ns2:summary>
-      <ns2:subtitle>Vi ser tilbake på Amiga, på godt og vondt, i denn…</ns2:subtitle>
+      <itunes:duration>01:01:25</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Vi ser tilbake på Amiga, på godt og vondt, i denne timelange episoden av Retro Crew. Med: Ketil Espenæs, Martin Gjesdal og Jostein Hakestad</itunes:summary>
+      <itunes:subtitle>Vi ser tilbake på Amiga, på godt og vondt, i denn…</itunes:subtitle>
       <description>Vi ser tilbake på Amiga, på godt og vondt, i denne timelange episoden av Retro Crew. Med: Ketil Espenæs, Martin Gjesdal og Jostein Hakestad</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2020121481-radcrew-retro-crew-ikoniske-amiga.mp3" length="47170977"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-5kxzDzbTcd4NvFsX-QqcG1A-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-5kxzDzbTcd4NvFsX-QqcG1A-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1995400451</guid>
       <title>Retro Crew: Spillåret 1995</title>
       <pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retrocrew2025</link>
-      <ns2:duration>00:47:29</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Det er 30 år siden 1995 og vi ser tilbake på tingenes tilstand den gangen: Store teknologiske sprang, sjangere som ble født - og andre som sang på siste verset.
-Med: Are Ness Fløgstad, Jostein Hakestad</ns2:summary>
-      <ns2:subtitle>Det er 30 år siden 1995 og vi ser tilbake på ting…</ns2:subtitle>
+      <itunes:duration>00:47:29</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Det er 30 år siden 1995 og vi ser tilbake på tingenes tilstand den gangen: Store teknologiske sprang, sjangere som ble født - og andre som sang på siste verset.
+
+Med: Are Ness Fløgstad, Jostein Hakestad</itunes:summary>
+      <itunes:subtitle>Det er 30 år siden 1995 og vi ser tilbake på ting…</itunes:subtitle>
       <description>Det er 30 år siden 1995 og vi ser tilbake på tingenes tilstand den gangen: Store teknologiske sprang, sjangere som ble født - og andre som sang på siste verset.
+
 Med: Are Ness Fløgstad, Jostein Hakestad</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1995400451-radcrew-retrocrew2025.mp3" length="49175909"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-s7tzKKWsS7F5hWj5-InrvOA-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-s7tzKKWsS7F5hWj5-InrvOA-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1825965237</guid>
       <title>Retro Crew Special: MS DOS er tilbake in a big way!</title>
       <pubDate>Mon, 20 May 2024 10:46:59 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-special-ms-dos</link>
-      <ns2:duration>00:58:55</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Vi snakker MS DOS-gaming og litt retronyheter i denne nye episoden av Retro Crew! Ketil Espenæs, Jostein Hakestad, Martin Gjesdal</ns2:summary>
-      <ns2:subtitle>Vi snakker MS DOS-gaming og litt retronyheter i d…</ns2:subtitle>
+      <itunes:duration>00:58:55</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Vi snakker MS DOS-gaming og litt retronyheter i denne nye episoden av Retro Crew! Ketil Espenæs, Jostein Hakestad, Martin Gjesdal</itunes:summary>
+      <itunes:subtitle>Vi snakker MS DOS-gaming og litt retronyheter i d…</itunes:subtitle>
       <description>Vi snakker MS DOS-gaming og litt retronyheter i denne nye episoden av Retro Crew! Ketil Espenæs, Jostein Hakestad, Martin Gjesdal</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1825965237-radcrew-retro-crew-special-ms-dos.mp3" length="42570472"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-OPJSt6ien9GzSVUm-8lCBlg-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-OPJSt6ien9GzSVUm-8lCBlg-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1618584093</guid>
       <title>Retro Crew S12E04: Quake 2 remastered</title>
       <pubDate>Sun, 17 Sep 2023 19:49:20 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s12e04-quake-2-remastered</link>
-      <ns2:duration>00:34:47</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Ketil og Jostein snakker om Quake 2 remasteren og mer i en helt ny (og gammel, lol) episode av Retro Crew!</ns2:summary>
-      <ns2:subtitle>Ketil og Jostein snakker om Quake 2 remasteren og…</ns2:subtitle>
+      <itunes:duration>00:34:47</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Ketil og Jostein snakker om Quake 2 remasteren og mer i en helt ny (og gammel, lol) episode av Retro Crew!</itunes:summary>
+      <itunes:subtitle>Ketil og Jostein snakker om Quake 2 remasteren og…</itunes:subtitle>
       <description>Ketil og Jostein snakker om Quake 2 remasteren og mer i en helt ny (og gammel, lol) episode av Retro Crew!</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1618584093-radcrew-retro-crew-s12e04-quake-2-remastered.mp3" length="26057721"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-UqFVydytKz5kcxBB-aw41Jg-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-UqFVydytKz5kcxBB-aw41Jg-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1554171619</guid>
       <title>Retro Crew S12E03: Sonic fyller 32 + bør du investere i Atari?</title>
       <pubDate>Sat, 01 Jul 2023 13:43:20 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s12e03-sonic-fyller-30-bor-du-investere-i-atari</link>
-      <ns2:duration>00:49:27</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Vi snakker om Sonic på hans 32-årsdag og vurderer å investere i Atari (eller det som er igjen av det) (not financial advice lol)</ns2:summary>
-      <ns2:subtitle>Vi snakker om Sonic på hans 32-årsdag og vurderer…</ns2:subtitle>
+      <itunes:duration>00:49:27</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Vi snakker om Sonic på hans 32-årsdag og vurderer å investere i Atari (eller det som er igjen av det) (not financial advice lol)</itunes:summary>
+      <itunes:subtitle>Vi snakker om Sonic på hans 32-årsdag og vurderer…</itunes:subtitle>
       <description>Vi snakker om Sonic på hans 32-årsdag og vurderer å investere i Atari (eller det som er igjen av det) (not financial advice lol)</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1554171619-radcrew-retro-crew-s12e03-sonic-fyller-30-bor-du-investere-i-atari.mp3" length="37212031"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-UyyxTYxs09yNOjRM-fNC0kg-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-UyyxTYxs09yNOjRM-fNC0kg-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1508701141</guid>
       <title>Retro Crew S12E02: Gir A500 Mini den gode Amiga-følelsen?</title>
       <pubDate>Sun, 07 May 2023 18:21:06 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s12e02-gir-a500-mini-den-gode-amiga-folelsen</link>
-      <ns2:duration>00:37:12</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Martin Gjesdal joiner oss for å snakke A500 Mini, en mini-versjon av Amiga 500 med en rekke innebygde spill.
+      <itunes:duration>00:37:12</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Martin Gjesdal joiner oss for å snakke A500 Mini, en mini-versjon av Amiga 500 med en rekke innebygde spill.
+
 Telefonsvarer: speakpipe.com/radcrew
 RSS: feed.radcrew.net/radcrew
 Spotify: open.spotify.com/show/4EzDcGCwVTlZZZEYqP3k6H
 Apple Podcasts: podcasts.apple.com/no/podcast/rad-…ast/id415698006
 Facebook: facebook.com/radcrewshow
 Discord: radcrew.net/discord
-Rad Community: facebook.com/groups/radcommunity/</ns2:summary>
-      <ns2:subtitle>Martin Gjesdal joiner oss for å snakke A500 Mini,…</ns2:subtitle>
+Rad Community: facebook.com/groups/radcommunity/</itunes:summary>
+      <itunes:subtitle>Martin Gjesdal joiner oss for å snakke A500 Mini,…</itunes:subtitle>
       <description>Martin Gjesdal joiner oss for å snakke A500 Mini, en mini-versjon av Amiga 500 med en rekke innebygde spill.
+
 Telefonsvarer: speakpipe.com/radcrew
 RSS: feed.radcrew.net/radcrew
-Spotify: … &lt;a href=&quot;https://soundcloud.com/radcrew/retro-crew-s12e02-gir-a500-mini-den-gode-amiga-folelsen&quot;&gt;Les mer&lt;/a&gt;</description>
+Spotify: … &lt;a href="https://soundcloud.com/radcrew/retro-crew-s12e02-gir-a500-mini-den-gode-amiga-folelsen"&gt;Les mer&lt;/a&gt;</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1508701141-radcrew-retro-crew-s12e02-gir-a500-mini-den-gode-amiga-folelsen.mp3" length="26720143"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-z0DzjjTRLg3lBgrS-GDBgQA-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-z0DzjjTRLg3lBgrS-GDBgQA-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1455654013</guid>
       <title>Retro Crew S12E01: Atari 50</title>
       <pubDate>Sat, 25 Feb 2023 15:10:17 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s12e01-atari-50</link>
-      <ns2:duration>01:04:36</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Nytt år, ny runde med Retro Crew-episoder fra oss i Rad Crew. Vi snakker om den fenomenale spillsamlingen Atari 50 som er ute på alle konsoller og PC nå.  Med: Jostein Hakestad, Ketil Espenæs.</ns2:summary>
-      <ns2:subtitle>Nytt år, ny runde med Retro Crew-episoder fra oss…</ns2:subtitle>
+      <itunes:duration>01:04:36</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Nytt år, ny runde med Retro Crew-episoder fra oss i Rad Crew. Vi snakker om den fenomenale spillsamlingen Atari 50 som er ute på alle konsoller og PC nå.  Med: Jostein Hakestad, Ketil Espenæs.</itunes:summary>
+      <itunes:subtitle>Nytt år, ny runde med Retro Crew-episoder fra oss…</itunes:subtitle>
       <description>Nytt år, ny runde med Retro Crew-episoder fra oss i Rad Crew. Vi snakker om den fenomenale spillsamlingen Atari 50 som er ute på alle konsoller og PC nå.  Med: Jostein Hakestad, Ketil Espenæs.</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1455654013-radcrew-retro-crew-s12e01-atari-50.mp3" length="46149410"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-JXhWkhhXUFJwEwcd-T9OVfg-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-JXhWkhhXUFJwEwcd-T9OVfg-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1371465520</guid>
       <title>Retro Crew S11E05: Mortal Kombat 30 år!</title>
       <pubDate>Fri, 28 Oct 2022 07:23:43 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s11e05-mortal-kombat-30-ar</link>
-      <ns2:duration>00:47:22</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Mortal Kombat fyller 30 og Ketil og Jostein feirer anledningen. Vi begynner å føle oss gamle nå altså...</ns2:summary>
-      <ns2:subtitle>Mortal Kombat fyller 30 og Ketil og Jostein feire…</ns2:subtitle>
+      <itunes:duration>00:47:22</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Mortal Kombat fyller 30 og Ketil og Jostein feirer anledningen. Vi begynner å føle oss gamle nå altså...</itunes:summary>
+      <itunes:subtitle>Mortal Kombat fyller 30 og Ketil og Jostein feire…</itunes:subtitle>
       <description>Mortal Kombat fyller 30 og Ketil og Jostein feirer anledningen. Vi begynner å føle oss gamle nå altså...</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1371465520-radcrew-retro-crew-s11e05-mortal-kombat-30-ar.mp3" length="33948800"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-emC4Sv7AhoZFHJFk-lJI6KA-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-emC4Sv7AhoZFHJFk-lJI6KA-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1308745420</guid>
       <title>Retro Crew S11E04: Theme Park &amp; Theme Hospital</title>
       <pubDate>Wed, 20 Jul 2022 18:19:09 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s11e04-theme-park-theme-hospital</link>
-      <ns2:duration>00:48:56</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Og du trodde maten på Tusenfryd var dårlig! Ketil og Jostein snakker om Theme Park og Theme Hospital, to PC-klassikere fra 90-tallet.</ns2:summary>
-      <ns2:subtitle>Og du trodde maten på Tusenfryd var dårlig! Ketil…</ns2:subtitle>
+      <itunes:duration>00:48:56</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Og du trodde maten på Tusenfryd var dårlig! Ketil og Jostein snakker om Theme Park og Theme Hospital, to PC-klassikere fra 90-tallet.</itunes:summary>
+      <itunes:subtitle>Og du trodde maten på Tusenfryd var dårlig! Ketil…</itunes:subtitle>
       <description>Og du trodde maten på Tusenfryd var dårlig! Ketil og Jostein snakker om Theme Park og Theme Hospital, to PC-klassikere fra 90-tallet.</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1308745420-radcrew-retro-crew-s11e04-theme-park-theme-hospital.mp3" length="36711312"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-Oa9i1gDGv31Sxzvv-2cFZqw-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-Oa9i1gDGv31Sxzvv-2cFZqw-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1244079565</guid>
       <title>Retro Crew S11E03: Retro-racere fra 1980 til 2000-tallet</title>
       <pubDate>Mon, 04 Apr 2022 15:24:56 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s11e03-retro-racere-fra-1980-til-2000-tallet</link>
-      <ns2:duration>00:40:52</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Fra Test Drive til Need for Speed: Ketil, Jostein og Christian diskuterer noen av de beste racingspillene gjennom tidene. Det er en helt ny episode av Retro Crew!</ns2:summary>
-      <ns2:subtitle>Fra Test Drive til Need for Speed: Ketil, Jostein…</ns2:subtitle>
+      <itunes:duration>00:40:52</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Fra Test Drive til Need for Speed: Ketil, Jostein og Christian diskuterer noen av de beste racingspillene gjennom tidene. Det er en helt ny episode av Retro Crew!</itunes:summary>
+      <itunes:subtitle>Fra Test Drive til Need for Speed: Ketil, Jostein…</itunes:subtitle>
       <description>Fra Test Drive til Need for Speed: Ketil, Jostein og Christian diskuterer noen av de beste racingspillene gjennom tidene. Det er en helt ny episode av Retro Crew!</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1244079565-radcrew-retro-crew-s11e03-retro-racere-fra-1980-til-2000-tallet.mp3" length="30675462"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-z9MVtOQGWv3VaUS8-8N0LNw-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-z9MVtOQGWv3VaUS8-8N0LNw-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1220111920</guid>
       <title>Retro Crew S11E02: Amstrad - den glemte britiske kjempen</title>
       <pubDate>Mon, 21 Feb 2022 22:20:16 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s11e02-amstrad-den-glemte-britiske-kjempen</link>
-      <ns2:duration>00:42:44</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Vi snakker om den nesten glemte datamaskinprodusenten Amstrad og maskinvaren de laget, inkludert Amstrad CPC 64. Buckle up for dette blir nerdete.
-Støtt Rad Crew på Patreon: patreon.com/radcrewpodcast</ns2:summary>
-      <ns2:subtitle>Vi snakker om den nesten glemte datamaskinproduse…</ns2:subtitle>
+      <itunes:duration>00:42:44</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Vi snakker om den nesten glemte datamaskinprodusenten Amstrad og maskinvaren de laget, inkludert Amstrad CPC 64. Buckle up for dette blir nerdete.
+
+Støtt Rad Crew på Patreon: patreon.com/radcrewpodcast</itunes:summary>
+      <itunes:subtitle>Vi snakker om den nesten glemte datamaskinproduse…</itunes:subtitle>
       <description>Vi snakker om den nesten glemte datamaskinprodusenten Amstrad og maskinvaren de laget, inkludert Amstrad CPC 64. Buckle up for dette blir nerdete.
+
 Støtt Rad Crew på Patreon: patreon.com/radcrewpodcast</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1220111920-radcrew-retro-crew-s11e02-amstrad-den-glemte-britiske-kjempen.mp3" length="32124264"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-Oa9i1gDGv31Sxzvv-2cFZqw-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-Oa9i1gDGv31Sxzvv-2cFZqw-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/1195015504</guid>
       <title>Retro Crew S11E01: Sega vs Nintendo - War of the Ages</title>
       <pubDate>Wed, 12 Jan 2022 12:46:45 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retrocrews11e01</link>
-      <ns2:duration>01:11:22</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Nintendoes what Nintendon't...nei vent hvordan gikk den regla igjen. Vi ser nok en gang på den heiteste krigen i spillhistorien - Sega mot Nintendo. Men hva tok egentlig knekken på Sega sin maskinvarevirksomhet, til syvende og sist?
-med: Ketil, Are, Jostein</ns2:summary>
-      <ns2:subtitle>Nintendoes what Nintendon't...nei vent hvordan gi…</ns2:subtitle>
+      <itunes:duration>01:11:22</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Nintendoes what Nintendon't...nei vent hvordan gikk den regla igjen. Vi ser nok en gang på den heiteste krigen i spillhistorien - Sega mot Nintendo. Men hva tok egentlig knekken på Sega sin maskinvarevirksomhet, til syvende og sist?
+
+med: Ketil, Are, Jostein</itunes:summary>
+      <itunes:subtitle>Nintendoes what Nintendon't...nei vent hvordan gi…</itunes:subtitle>
       <description>Nintendoes what Nintendon't...nei vent hvordan gikk den regla igjen. Vi ser nok en gang på den heiteste krigen i spillhistorien - Sega mot Nintendo. Men hva tok egentlig knekken på Sega sin maskinvarevirksomhet, til syvende og sist?
+
 med: Ketil, Are, Jostein</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/1195015504-radcrew-retrocrews11e01.mp3" length="53621321"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-Oa9i1gDGv31Sxzvv-2cFZqw-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-Oa9i1gDGv31Sxzvv-2cFZqw-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/634438056</guid>
       <title>Retro Crew S09E05:  E3 hypetrain 1999</title>
       <pubDate>Mon, 10 Jun 2019 10:30:38 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retrocrews09e05-e3-99</link>
-      <ns2:duration>00:42:54</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>Popp ei flaske Fruitopia og bli med på kino for å se The Matrix, vi er tilbake i 1999 og snakker om alle de siste spillnyhetene fra Electronic Entertainment Expo som gikk av stabelen i juni det året.
+      <itunes:duration>00:42:54</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Popp ei flaske Fruitopia og bli med på kino for å se The Matrix, vi er tilbake i 1999 og snakker om alle de siste spillnyhetene fra Electronic Entertainment Expo som gikk av stabelen i juni det året.
+
 med
-Ketil Espenæs, Are Ness Fløgstad, Jostein Hakestad</ns2:summary>
-      <ns2:subtitle>Popp ei flaske Fruitopia og bli med på kino for å…</ns2:subtitle>
+Ketil Espenæs, Are Ness Fløgstad, Jostein Hakestad</itunes:summary>
+      <itunes:subtitle>Popp ei flaske Fruitopia og bli med på kino for å…</itunes:subtitle>
       <description>Popp ei flaske Fruitopia og bli med på kino for å se The Matrix, vi er tilbake i 1999 og snakker om alle de siste spillnyhetene fra Electronic Entertainment Expo som gikk av stabelen i juni det året.
+
 med
 Ketil Espenæs, Are Ness Fløgstad, Jostein Hakestad</description>
       <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/634438056-radcrew-retrocrews09e05-e3-99.mp3" length="41191130"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-000549523596-fwfty6-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-000549523596-fwfty6-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/627021411</guid>
       <title>Retro Crew S09E04: Vi snakker Bubble Bobble pluss oppfølgere</title>
       <pubDate>Mon, 27 May 2019 05:00:17 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s09e04-vi-snakker-bubble-bobble-pluss-oppfolgere</link>
-      <ns2:duration>00:23:46</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>God Retro-mandag! Are og Jostein snakker om Taitos klassiker Bubble Bobble fra 1986 og dens mange oppfølgere.</ns2:summary>
-      <ns2:subtitle>God Retro-mandag! Are og Jostein snakker om Taito…</ns2:subtitle>
+      <itunes:duration>00:23:46</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>God Retro-mandag! Are og Jostein snakker om Taitos klassiker Bubble Bobble fra 1986 og dens mange oppfølgere.</itunes:summary>
+      <itunes:subtitle>God Retro-mandag! Are og Jostein snakker om Taito…</itunes:subtitle>
       <description>God Retro-mandag! Are og Jostein snakker om Taitos klassiker Bubble Bobble fra 1986 og dens mange oppfølgere.</description>
       <enclosure type="audio/x-m4a" url="https://feeds.soundcloud.com/stream/627021411-radcrew-retro-crew-s09e04-vi-snakker-bubble-bobble-pluss-oppfolgere.m4a" length="17456016"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-000541837614-to70k6-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-000541837614-to70k6-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
-    <item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/619973043</guid>
       <title>Retro Crew S09E03: Dreamcast w/ Digital Foundry's John Linneman</title>
       <pubDate>Mon, 13 May 2019 15:55:30 +0000</pubDate>
       <link>https://soundcloud.com/radcrew/retro-crew-s09e03-dreamcast-w-digital-foundrys-john-linneman</link>
-      <ns2:duration>00:48:15</ns2:duration>
-      <ns2:author>RadCorp AS</ns2:author>
-      <ns2:explicit>yes</ns2:explicit>
-      <ns2:summary>John Linneman joined us for this English language episode of Retro Crew to chat about what made the Sega Dreamcast a very special video games console.
-also with:  Are Ness Fløgstad, Ketil Espenæs, Jostein Hakestad</ns2:summary>
-      <ns2:subtitle>John Linneman joined us for this English language…</ns2:subtitle>
+      <itunes:duration>00:48:15</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>John Linneman joined us for this English language episode of Retro Crew to chat about what made the Sega Dreamcast a very special video games console.
+
+also with:  Are Ness Fløgstad, Ketil Espenæs, Jostein Hakestad</itunes:summary>
+      <itunes:subtitle>John Linneman joined us for this English language…</itunes:subtitle>
       <description>John Linneman joined us for this English language episode of Retro Crew to chat about what made the Sega Dreamcast a very special video games console.
+
 also with:  Are Ness Fløgstad, Ketil Espenæs, Jostein Hakestad</description>
       <enclosure type="audio/x-m4a" url="https://feeds.soundcloud.com/stream/619973043-radcrew-retro-crew-s09e03-dreamcast-w-digital-foundrys-john-linneman.m4a" length="22651502"/>
-      <ns2:image href="https://i1.sndcdn.com/artworks-000534124143-ds9vtt-t3000x3000.jpg"/>
-      <ns2:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</ns2:keywords>
+      <itunes:image href="https://i1.sndcdn.com/artworks-000534124143-ds9vtt-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
       <dc:creator>RADCORP AS</dc:creator>
     </item>
   </channel>

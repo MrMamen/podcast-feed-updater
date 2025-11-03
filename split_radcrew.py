@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
 Split Rad Crew main feed into three enriched feeds.
+Uses lxml to preserve namespace prefixes (itunes:, podcast:, etc.)
 """
 
 import os
-from src.feed_merger import FeedSplitter
+from src.feed_merger_lxml import FeedSplitter
 
 
 def main():
