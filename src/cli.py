@@ -7,6 +7,7 @@ import argparse
 import sys
 from pathlib import Path
 from feed_processor import PodcastFeedProcessor, create_filtered_feed
+from feed_processor_xml import XMLPodcastFeedProcessor, create_filtered_feed_xml
 from podchaser_api import PodchaserAPI
 
 
@@ -70,6 +71,19 @@ Examples:
         help="Path to YAML config file (see example_config.yaml)"
     )
 
+    # Processing mode
+    parser.add_argument(
+        "--preserve-xml",
+        action="store_true",
+        default=True,
+        help="Preserve original XML structure (default: True)"
+    )
+    parser.add_argument(
+        "--use-feedgen",
+        action="store_true",
+        help="Use feedgen library (may not preserve all fields)"
+    )
+
     args = parser.parse_args()
 
     # Config file mode
@@ -82,28 +96,53 @@ Examples:
         parser.error("--source and --output are required (or use --config)")
 
     try:
-        processor = PodcastFeedProcessor(args.source)
-        processor.fetch_feed()
+        # Choose processor based on mode
+        if args.use_feedgen:
+            # Use feedgen-based processor (may not preserve all fields)
+            processor = PodcastFeedProcessor(args.source)
+            processor.fetch_feed()
 
-        # Apply filter
-        if args.pattern:
-            processor.filter_by_title_pattern(
-                args.pattern,
-                keep_matching=not args.exclude
+            # Apply filter
+            if args.pattern:
+                processor.filter_by_title_pattern(
+                    args.pattern,
+                    keep_matching=not args.exclude
+                )
+            else:
+                processor.filtered_entries = processor.parsed_feed.entries
+
+            # Generate output
+            processor.generate_feed(
+                args.output,
+                feed_title=args.title,
+                feed_description=args.description,
+                feed_link=args.link
             )
+
+            print(f"Success! Generated {len(processor.filtered_entries)} episodes")
         else:
-            # No filter, keep all
-            processor.filtered_entries = processor.parsed_feed.entries
+            # Use XML-based processor (preserves structure)
+            processor = XMLPodcastFeedProcessor(args.source)
+            processor.fetch_feed()
 
-        # Generate output
-        processor.generate_feed(
-            args.output,
-            feed_title=args.title,
-            feed_description=args.description,
-            feed_link=args.link
-        )
+            # Apply filter
+            if args.pattern:
+                processor.filter_by_title_pattern(
+                    args.pattern,
+                    keep_matching=not args.exclude
+                )
+            else:
+                processor.filtered_items = processor.items
 
-        print(f"Success! Generated {len(processor.filtered_entries)} episodes")
+            # Generate output
+            processor.generate_feed(
+                args.output,
+                feed_title=args.title,
+                feed_description=args.description,
+                feed_link=args.link
+            )
+
+            print(f"Success! Generated {len(processor.filtered_items)} episodes")
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
