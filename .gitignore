@@ -29,6 +29,7 @@ wheels/
 venv/
 env/
 ENV/
+.env
 
 # IDE
 .vscode/
@@ -57,3 +58,6 @@ htmlcov/
 
 # Logs
 *.log
+
+# Local Netlify folder
+.netlify

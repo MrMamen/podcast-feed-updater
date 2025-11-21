@@ -16,9 +16,9 @@ En Python-tjeneste for å filtrere, splitte og berike podcast RSS feeds. Perfekt
 **Kort versjon:**
 ```bash
 # Split hovedfeed i 3 berikede feeds
-python3 split_radcrew.py
+uv run split_radcrew.py
 
-# Generer: NEON (134 ep), Retro Crew (18 ep), Classic (337 ep)
+# Generer: NEON (135 ep), Retro Crew (18 ep), Classic (341 ep)
 # Hver med korrekt metadata, artwork og beskrivelse
 ```
 

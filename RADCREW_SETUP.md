@@ -5,11 +5,11 @@ Dette dokumentet forklarer hvordan Rad Crew-feedene er satt opp og hvordan du op
 ## 🎯 Hva gjør dette?
 
 Rad Crew publiserer alle sine podcasts (NEON, Retro Crew, og hovedshowet) i én samlet feed på Soundcloud:
-- **Kilde:** https://feed.radcrew.net/radcrew (489 episoder)
+- **Kilde:** https://feed.radcrew.net/radcrew (494 episoder)
 
 Dette scriptet **splitter** denne feeden i tre separate feeds og **beriker** dem med metadata fra de opprinnelige feedene:
 
-### 1. Rad Crew: NEON (134 episoder)
+### 1. Rad Crew: NEON (135 episoder)
 - **Filter:** Tittel inneholder "neon"
 - **Metadata fra:** https://feed.radcrew.net/radcrewneon
 - **Resultat:** Popkultur-episodene med riktige bilder og beskrivelse
@@ -19,7 +19,7 @@ Dette scriptet **splitter** denne feeden i tre separate feeds og **beriker** dem
 - **Metadata fra:** https://www.radcrew.net/category/retrocrew/feed
 - **Resultat:** Retrogaming-episodene med riktig artwork
 
-### 3. Rad Crew Classic (337 episoder)
+### 3. Rad Crew Classic (341 episoder)
 - **Filter:** Alt som ikke matcher de to over
 - **Metadata fra:** https://www.radcrew.net/category/classic/feed
 - **Resultat:** Gaming-hovedshowet med klassisk Rad Crew-metadata
@@ -30,11 +30,8 @@ Når nye episoder kommer ut:
 
 ### Steg 1: Kjør splitter-scriptet
 ```bash
-# Aktiver virtuelt miljø (hvis ikke allerede aktivert)
-source .venv/bin/activate
-
-# Kjør splitter
-python3 split_radcrew.py
+# Kjør splitter (uv håndterer virtuelt miljø automatisk)
+uv run split_radcrew.py
 ```
 
 Dette vil:
@@ -61,7 +58,7 @@ Etter opplasting er feedene tilgjengelige på:
 
 ### Arkitektur
 ```
-Soundcloud Feed (489 ep)
+Soundcloud Feed (494 ep)
          |
          v
    FeedSplitter
