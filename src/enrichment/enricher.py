@@ -145,6 +145,83 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Added podcast:season and podcast:episode tags to {added_count} episodes")
         return self
 
+    def auto_detect_guests_from_titles(
+        self,
+        pattern: str = r'med (.+?)(?:\s*\(|$)',
+        known_guests: Optional[Dict[str, Dict[str, str]]] = None,
+        split_multiple: bool = True
+    ) -> 'FeedEnricher':
+        """
+        Automatically detect and add guests from episode titles.
+
+        Args:
+            pattern: Regex pattern to extract guest names (default: "med Guest Name")
+            known_guests: Optional dict mapping guest names to additional info
+                         Example: {"Roar Granevang": {"href": "https://...", "img": "..."}}
+            split_multiple: If True, split multiple guests separated by " og " (default: True)
+
+        Returns:
+            Self for chaining
+        """
+        import re
+
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        if known_guests is None:
+            known_guests = {}
+
+        items = self.channel.findall('item')
+        guest_count = 0
+
+        for item in items:
+            title_elem = item.find('title')
+            if title_elem is None or not title_elem.text:
+                continue
+
+            title = title_elem.text
+
+            # Try to extract guest name(s) from title
+            match = re.search(pattern, title, re.IGNORECASE)
+            if match:
+                guest_names_raw = match.group(1).strip()
+
+                # Remove episode number if present (e.g., " (#120)")
+                guest_names_raw = re.sub(r'\s*\(#?\d+\)$', '', guest_names_raw)
+
+                # Split multiple guests if enabled
+                if split_multiple and ' og ' in guest_names_raw.lower():
+                    # Split on " og " (case insensitive)
+                    guest_names = re.split(r'\s+og\s+', guest_names_raw, flags=re.IGNORECASE)
+                else:
+                    guest_names = [guest_names_raw]
+
+                # Create person element for each guest
+                for guest_name in guest_names:
+                    guest_name = guest_name.strip()
+                    if not guest_name:
+                        continue
+
+                    person_elem = etree.Element(
+                        '{https://podcastindex.org/namespace/1.0}person',
+                        role='guest'
+                    )
+                    person_elem.text = guest_name
+
+                    # Add additional info if available
+                    if guest_name in known_guests:
+                        guest_info = known_guests[guest_name]
+                        if 'href' in guest_info:
+                            person_elem.set('href', guest_info['href'])
+                        if 'img' in guest_info:
+                            person_elem.set('img', guest_info['img'])
+
+                    item.append(person_elem)
+                    guest_count += 1
+
+        print(f"✓ Auto-detected and added {guest_count} guests from episode titles")
+        return self
+
     def add_episode_persons(
         self,
         episode_mapping: Dict[str, List[Dict[str, str]]]

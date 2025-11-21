@@ -106,37 +106,48 @@ def main():
     # Add podcast:season and podcast:episode tags
     enricher.add_podcast_season_episode()
 
-    # Add guest information for specific episodes
-    # Format: {"Episode Title substring": [{"name": "...", "role": "guest"}]}
-    episode_guests = {
-        "med Anette Jøsendal": [{
-            "name": "Anette Jøsendal",
-            "role": "guest",
+    # Auto-detect guests from episode titles
+    # Episodes with "med Guest Name" will automatically get guest tags
+    # Multiple guests separated by " og " are automatically split into separate tags
+    # Optional: Add known guest info for profiles/images
+    known_guests = {
+        "Anette Jøsendal": {
             "href": "https://www.podchaser.com/creators/anette-josendal-107ZbPSK9m"
-        }],
-        "med Roar Granevang": [{
-            "name": "Roar Granevang",
-            "role": "guest",
+        },
+        "Roar Granevang": {
             "href": "https://www.podchaser.com/creators/roar-granevang-107ZbQKYBB"
-        }],
-        "med André": [{
-            "name": "André",
-            "role": "guest",
-            # Add href if available
-        }],
-        "med Tormod": [{
-            "name": "Tormod",
-            "role": "guest",
-        }],
-        "med Johan": [{
-            "name": "Johan",
-            "role": "guest",
-        }],
-        # Add more guests as needed...
-        # You can extract these from episode titles or Podchaser
+        },
+        "Jostein Hakestad": {
+            # Add href when available
+        },
+        "Kent William Innholt": {
+            # Add href when available
+        },
+        "Trond Sneås Skauge": {
+            # Add href when available
+        },
+        "Øystein Henriksen": {
+            # Add href when available
+        },
+        "Thorbjørn Hope Andersen": {
+            # Add href when available
+        },
+        "Joachim Froholt": {
+            # Add href when available
+        },
+        "David Skaufjord": {
+            # Add href when available
+        },
+        "Terje Høiback": {
+            # Add href when available
+        }
+        # Add more known guests here with their profile URLs
     }
 
-    enricher.add_episode_persons(episode_guests)
+    enricher.auto_detect_guests_from_titles(
+        pattern=r'med (.+?)(?:\s*\(|$)',  # Matches "med Guest Name (optional #123)"
+        known_guests=known_guests
+    )
 
     # Add funding (Patreon)
     enricher.add_funding(
@@ -212,7 +223,7 @@ def main():
     print("  ✓ Beta title suffix for testing")
     print("  ✓ 2 default hosts (Sigve & Hans-Henrik)")
     print("  ✓ Season/episode tags with season names (e.g., 'Vår 2020')")
-    print("  ✓ Guest information for episodes with 'med [Name]' pattern")
+    print("  ✓ Auto-detected guests from episode titles")
     print("  ✓ Patreon funding link")
     print("  ✓ Medium type: podcast")
     print("  ✓ Update frequency: biweekly schedule")
