@@ -1,98 +1,52 @@
 # Podcast Feed Updater
 
-En Python-tjeneste for å filtrere, splitte og berike podcast RSS feeds. Perfekt for å:
+En Python-tjeneste for å filtrere, splitte og berike podcast RSS feeds med Podcasting 2.0 tags.
 
-- **Splitte** kombinerte feeds i separate feeds med riktig metadata
-- **Merge** items fra én feed med metadata fra en annen
-- **Filtrere** ut spesifikke episoder basert på tittel-mønstre
-- **Berike** feeds med Podcasting 2.0 tags (f.eks. `<podcast:person>`)
-- **Hente** creator-informasjon fra Podchaser API
-- **Bevare** all original XML-struktur og metadata
+## 🎯 Use Cases
 
-## 🎯 Real-world Use Case: Rad Crew
+### 1. Rad Crew Feed Splitting
+Splitt en kombinert feed i tre separate feeds med riktig metadata.
 
-**Se [RADCREW_SETUP.md](RADCREW_SETUP.md)** for et komplett eksempel på hvordan dette brukes til å splitte og berike Rad Crew-feedene.
+**Se [RADCREW_SETUP.md](RADCREW_SETUP.md)** for komplett dokumentasjon.
 
-**Kort versjon:**
 ```bash
-# Split hovedfeed i 3 berikede feeds
 uv run split_radcrew.py
 
-# Generer: NEON (135 ep), Retro Crew (18 ep), Classic (341 ep)
-# Hver med korrekt metadata, artwork og beskrivelse
+# Genererer:
+# - NEON (135 episoder)
+# - Retro Crew (18 episoder)
+# - Classic (341 episoder)
 ```
 
 **Live feeds:** https://radcrew.netlify.app/
 
-## Funksjoner
+### 2. cd SPILL Feed Enrichment
+Berik en eksisterende feed med Podcasting 2.0 tags.
 
-### 1. Filtrering av episoder
-Filtrer episoder basert på regex-mønstre i tittelen:
+**Se [ENRICHMENT_GUIDE.md](ENRICHMENT_GUIDE.md)** for komplett dokumentasjon.
 
 ```bash
-# Behold kun episoder som matcher "Tech Talk"
-python3 src/cli.py --source https://example.com/feed.xml \
-                   --output filtered.xml \
-                   --pattern "Tech Talk"
+uv run enrich_cdspill.py
 
-# Ekskluder episoder som matcher
-python3 src/cli.py --source https://example.com/feed.xml \
-                   --output filtered.xml \
-                   --pattern "Ads|Promo" \
-                   --exclude
+# Legger til:
+# - Hosts og gjester (podcast:person)
+# - Sesong/episode tags med navn
+# - Funding link (Patreon)
+# - Social media integrasjon
+# - Update frequency (biweekly)
+# - Podroll (anbefalinger)
 ```
 
-### 2. Berike med Podcasting 2.0 tags
-Legg til `<podcast:person>` tags for hosts, guests, etc:
-
-```python
-from src.feed_processor import PodcastFeedProcessor
-
-processor = PodcastFeedProcessor("https://example.com/feed.xml")
-processor.fetch_feed()
-processor.filter_by_title_pattern("My Show")
-
-# Legg til person-informasjon
-persons = {
-    "episode_guid_123": [
-        {"name": "John Doe", "role": "host", "href": "https://example.com/john"}
-    ]
-}
-processor.enrich_with_persons(persons)
-processor.generate_feed("output.xml")
-```
-
-### 3. Podchaser API-integrasjon
-Hent creator-informasjon automatisk:
-
-```python
-from src.podchaser_api import PodchaserAPI
-
-api = PodchaserAPI(api_key="your_api_key")
-creators = api.enrich_feed_with_creators("My Podcast Name")
-# Returns: [{"name": "...", "role": "host", "href": "...", "img": "..."}]
-```
-
-## Installasjon
+## 📦 Installasjon
 
 ### Med uv (anbefalt)
 ```bash
-# 1. Installer uv hvis du ikke har det
+# 1. Installer uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# 2. Opprett virtuelt miljø
-uv venv
-
-# 3. Aktiver miljøet
-source .venv/bin/activate
-# Eller bruk convenience-scriptet:
-# source activate.sh
-
-# 4. Installer dependencies
-uv pip install -e .
-
-# Med dev-dependencies
-uv pip install -e ".[dev]"
+# 2. Kjør script (uv håndterer alt automatisk)
+uv run split_radcrew.py
+uv run enrich_cdspill.py
 ```
 
 ### Med pip
@@ -101,156 +55,185 @@ uv pip install -e ".[dev]"
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Installer
+# Installer dependencies
 pip install -e .
 ```
 
-**Viktig:** På macOS/Linux bruker du `python3` kommandoen (ikke `python`).
-
-## Bruk
-
-### Metode 1: Command-line (enkelt)
-
-```bash
-# Grunnleggende filtrering
-python3 src/cli.py \
-    --source "https://feeds.example.com/podcast.xml" \
-    --output "filtered_feed.xml" \
-    --pattern "Interesting Topic" \
-    --title "My Filtered Podcast"
-```
-
-### Metode 2: Config-fil (avansert)
-
-Opprett en `config.yaml` (se `example_config.yaml` for komplett eksempel):
-
-```yaml
-feeds:
-  - name: "My Favorite Show"
-    source_url: "https://example.com/combined-feed.xml"
-    output_file: "output/favorite_show.xml"
-
-    filter:
-      type: "title_pattern"
-      pattern: "My Favorite Show:"
-      keep_matching: true
-
-    metadata:
-      title: "My Favorite Show - Separated Feed"
-      description: "Only episodes from My Favorite Show"
-
-    enrich:
-      persons:
-        static:
-          - name: "Host Name"
-            role: "host"
-            href: "https://example.com/host"
-```
-
-Kjør:
-```bash
-python3 src/cli.py --config config.yaml
-```
-
-### Metode 3: Python API
-
-```python
-from src.feed_processor import PodcastFeedProcessor
-
-# Initialize
-processor = PodcastFeedProcessor("https://example.com/feed.xml")
-
-# Fetch og parse
-processor.fetch_feed()
-
-# Filtrer episoder
-processor.filter_by_title_pattern("Tech Talk", keep_matching=True)
-
-# Eller bruk custom filter-funksjon
-processor.filter_by_custom_function(
-    lambda entry: len(entry.get('title', '')) > 50
-)
-
-# Generer ny feed
-processor.generate_feed(
-    "output.xml",
-    feed_title="Filtered Podcast",
-    feed_description="My filtered feed"
-)
-```
-
-## Use Cases
-
-### Use Case 1: Splitt kombinert feed
-Noen podcasts publiserer flere shows i samme feed:
-
-```yaml
-feeds:
-  - name: "Show A Only"
-    source_url: "https://network.example.com/all-shows.xml"
-    output_file: "show_a.xml"
-    filter:
-      type: "title_pattern"
-      pattern: "^Show A:"
-      keep_matching: true
-
-  - name: "Show B Only"
-    source_url: "https://network.example.com/all-shows.xml"
-    output_file: "show_b.xml"
-    filter:
-      type: "title_pattern"
-      pattern: "^Show B:"
-      keep_matching: true
-```
-
-### Use Case 2: Berik med creator-info fra Podchaser
-
-```yaml
-feeds:
-  - name: "My Podcast with Creators"
-    source_url: "https://example.com/feed.xml"
-    output_file: "enriched.xml"
-
-    enrich:
-      persons:
-        podchaser:
-          enabled: true
-          podcast_name: "My Podcast Name"
-
-podchaser:
-  api_key: "your_api_key_here"
-```
-
-## Konfigurasjon
-
-### Miljøvariabler
-- `PODCHASER_API_KEY`: API-nøkkel for Podchaser (valgfritt)
-
-## Struktur
+## 🏗️ Arkitektur
 
 ```
 podcast-feed-updater/
 ├── src/
-│   ├── feed_processor.py    # Hovedlogikk for feed-prosessering
-│   ├── podchaser_api.py     # Podchaser API-klient
-│   └── cli.py               # Command-line interface
-├── pyproject.toml           # Project dependencies
-├── example_config.yaml      # Eksempel-konfigurasjon
-└── README.md
+│   ├── common/              # Felles utilities
+│   │   ├── base_feed.py     # Baseklasse for feed-operasjoner
+│   │   └── __init__.py
+│   ├── radcrew/             # Rad Crew feed splitting
+│   │   ├── splitter.py      # FeedSplitter + FeedMerger
+│   │   └── __init__.py
+│   └── enrichment/          # Feed enrichment
+│       ├── enricher.py      # FeedEnricher
+│       ├── podchaser_api.py # Podchaser API integration
+│       └── __init__.py
+├── split_radcrew.py         # Rad Crew script
+├── enrich_cdspill.py        # cd SPILL enrichment script
+├── docs/                    # Generated feeds
+├── RADCREW_SETUP.md         # Rad Crew dokumentasjon
+└── ENRICHMENT_GUIDE.md      # Enrichment guide
 ```
 
-## Kommende funksjoner
+## ✨ Features
 
-- [ ] Støtte for flere Podcasting 2.0 tags (`<podcast:chapters>`, `<podcast:transcript>`)
-- [ ] Webhook-basert auto-oppdatering
-- [ ] Web UI for konfigurasjon
-- [ ] Docker container
-- [ ] Flere API-integrasjoner (Apple Podcasts, Spotify)
+### Podcasting 2.0 Tags Support
 
-## Lisens
+**Channel-level:**
+- `<podcast:person>` - Hosts og gjester
+- `<podcast:funding>` - Funding links (Patreon, etc)
+- `<podcast:medium>` - Content type
+- `<podcast:updateFrequency>` - Publishing schedule (with rrule)
+- `<podcast:podroll>` - Podcast recommendations
+- `<podcast:socialInteract>` - Social media integration
+
+**Episode-level:**
+- `<podcast:season>` - Season med navn (f.eks. "Vår 2020")
+- `<podcast:episode>` - Episode numbers
+- `<podcast:person>` - Per-episode guests
+- `<podcast:chapters>` - Chapter markers (preserved from original)
+
+### Feed Operations
+- **Split feeds** - Del opp kombinerte feeds
+- **Merge feeds** - Kombiner items med metadata
+- **Preserve XML** - Bevarer all original struktur (lxml)
+- **Namespace handling** - Korrekt håndtering av itunes:, podcast:, etc.
+
+## 🔧 API Integration
+
+### Podchaser API (Optional)
+```bash
+# Set credentials
+export PODCHASER_API_KEY='your_key'
+export PODCHASER_API_SECRET='your_secret'
+
+# Run with API
+uv run enrich_cdspill.py --podchaser
+```
+
+**Note:** Podchaser integration er optional. Scriptet fungerer fint med manuell data.
+
+## 📝 Bruk
+
+### Basic Example - Feed Enrichment
+
+```python
+from src.enrichment.enricher import FeedEnricher
+
+# Initialize
+enricher = FeedEnricher("https://example.com/feed.xml")
+enricher.fetch_feed()
+
+# Add hosts
+hosts = [
+    {
+        "name": "Host Name",
+        "role": "host",
+        "href": "https://example.com/host"
+    }
+]
+enricher.add_channel_persons(hosts)
+
+# Add funding
+enricher.add_funding(
+    url="https://patreon.com/show",
+    message="Support us on Patreon"
+)
+
+# Add medium
+enricher.add_medium("podcast")
+
+# Add update frequency
+enricher.add_update_frequency(
+    complete=False,
+    frequency=1,
+    dtstart="2020-01-01",
+    rrule="FREQ=WEEKLY"
+)
+
+# Add podroll
+enricher.add_podroll([
+    {
+        "feedTitle": "Another Podcast",
+        "url": "https://example.com/feed.xml",
+        "feedGuid": "guid-here"
+    }
+])
+
+# Write output
+enricher.write_feed("output.xml")
+```
+
+### Basic Example - Feed Splitting
+
+```python
+from src.radcrew.splitter import FeedSplitter
+
+# Initialize
+splitter = FeedSplitter("https://example.com/combined-feed.xml")
+splitter.fetch_feed()
+
+# Split by patterns
+patterns = [
+    ("show a", True),  # Keep matching
+    ("show b", True),  # Keep matching
+    # Rest goes to third feed
+]
+
+metadata_urls = [
+    "https://example.com/show-a-metadata.xml",
+    "https://example.com/show-b-metadata.xml",
+    "https://example.com/rest-metadata.xml"
+]
+
+output_files = [
+    "docs/show-a.xml",
+    "docs/show-b.xml",
+    "docs/rest.xml"
+]
+
+splitter.split_by_patterns(patterns, metadata_urls, output_files)
+```
+
+## 🧪 Development
+
+```bash
+# Install with dev dependencies
+uv pip install -e ".[dev]"
+
+# Run tests
+pytest
+
+# Format code
+black .
+
+# Lint
+ruff check .
+```
+
+## 📚 Dependencies
+
+- **lxml** - XML processing (preserves namespaces)
+- **requests** - HTTP client
+- **python-dotenv** - Environment variables
+- **pyyaml** - Config files
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first.
+
+## 📄 License
 
 MIT
 
-## Bidrag
+## 🔗 Resources
 
-Pull requests er velkomne! For større endringer, vennligst åpne et issue først.
+- [Podcasting 2.0 Namespace](https://github.com/Podcastindex-org/podcast-namespace)
+- [Podchaser API](https://api-docs.podchaser.com)
+- [Podcast Index](https://podcastindex.org)

@@ -44,7 +44,7 @@ class BaseFeed:
         Args:
             output_file: Output file path
         """
-        if not self.root:
+        if self.root is None:
             raise ValueError("No feed loaded")
 
         tree = etree.ElementTree(self.root)

@@ -1,0 +1,238 @@
+#!/usr/bin/env python3
+"""
+Enrich cd SPILL feed with Podcasting 2.0 tags.
+Adds host/guest information and funding links.
+
+Usage:
+    uv run enrich_cdspill.py              # Without Podchaser (default, recommended)
+    uv run enrich_cdspill.py --podchaser  # With Podchaser API (when API is available)
+
+The script adds:
+    - 2 default hosts (Sigve & Hans-Henrik)
+    - Guest information for episodes matching patterns
+    - Patreon funding link
+    - Bluesky social interaction
+"""
+
+import os
+import sys
+from dotenv import load_dotenv
+from src.enrichment.enricher import FeedEnricher
+
+# Load environment variables from .env
+load_dotenv()
+
+
+def main():
+    """Enrich cd SPILL feed."""
+    # Check if --podchaser flag is provided
+    use_podchaser = "--podchaser" in sys.argv
+
+    print("="*60)
+    print("CD SPILL FEED ENRICHER")
+    if use_podchaser:
+        print("Mode: WITH Podchaser API")
+    else:
+        print("Mode: Manual data (use --podchaser flag to enable API)")
+    print("="*60)
+
+    # Initialize enricher
+    enricher = FeedEnricher("https://feed.podbean.com/cdspill/feed.xml")
+    enricher.fetch_feed()
+
+    # Add beta suffix to title
+    enricher.set_beta_title(" (Beta)")
+
+    # Define hosts manually (always available as fallback)
+    manual_hosts = [
+        {
+            "name": "Sigve Indregard",
+            "role": "host",
+            "href": "https://www.podchaser.com/creators/sigve-indregard-107ZbOzxDQ",
+        },
+        {
+            "name": "Hans-Henrik Mamen",
+            "role": "host",
+            "href": "https://www.podchaser.com/creators/hans-henrik-mamen-107ZbOzNaP",
+        },
+    ]
+
+    hosts = manual_hosts  # Default to manual data
+
+    # Only try Podchaser if flag is set
+    if use_podchaser:
+        print("\n" + "="*60)
+        print("FETCHING HOSTS FROM PODCHASER API")
+        print("="*60)
+
+        api_key = os.environ.get('PODCHASER_API_KEY')
+        api_secret = os.environ.get('PODCHASER_API_SECRET')
+
+        if not api_key or not api_secret:
+            print("\n⚠ WARNING: Missing Podchaser credentials!")
+            print("Required in .env file:")
+            print("  PODCHASER_API_KEY=your_client_id")
+            print("  PODCHASER_API_SECRET=your_client_secret")
+            print("\nGet credentials at: https://www.podchaser.com/api")
+            print("\nFalling back to manual host data...\n")
+        else:
+            try:
+                from src.enrichment.podchaser_api import PodchaserAPI
+
+                # Use Podchaser API
+                api = PodchaserAPI(api_key, api_secret)
+
+                if not api.access_token:
+                    print("⚠ Failed to authenticate with Podchaser")
+                    print("Falling back to manual host data...\n")
+                else:
+                    podchaser_hosts = api.enrich_feed_with_creators("cd SPILL")
+
+                    if podchaser_hosts:
+                        hosts = podchaser_hosts
+                        print(f"✓ Fetched {len(hosts)} hosts from Podchaser API")
+                        for host in hosts:
+                            print(f"  - {host['name']} ({host['role']})")
+                    else:
+                        print("⚠ Could not fetch from Podchaser, using manual data")
+            except Exception as e:
+                print(f"⚠ Error with Podchaser API: {e}")
+                print("Falling back to manual host data...\n")
+    else:
+        print(f"\nUsing manual host data ({len(manual_hosts)} hosts)")
+
+    enricher.add_channel_persons(hosts)
+
+    # Add podcast:season and podcast:episode tags
+    enricher.add_podcast_season_episode()
+
+    # Add guest information for specific episodes
+    # Format: {"Episode Title substring": [{"name": "...", "role": "guest"}]}
+    episode_guests = {
+        "med Anette Jøsendal": [{
+            "name": "Anette Jøsendal",
+            "role": "guest",
+            "href": "https://www.podchaser.com/creators/anette-josendal-107ZbPSK9m"
+        }],
+        "med Roar Granevang": [{
+            "name": "Roar Granevang",
+            "role": "guest",
+            "href": "https://www.podchaser.com/creators/roar-granevang-107ZbQKYBB"
+        }],
+        "med André": [{
+            "name": "André",
+            "role": "guest",
+            # Add href if available
+        }],
+        "med Tormod": [{
+            "name": "Tormod",
+            "role": "guest",
+        }],
+        "med Johan": [{
+            "name": "Johan",
+            "role": "guest",
+        }],
+        # Add more guests as needed...
+        # You can extract these from episode titles or Podchaser
+    }
+
+    enricher.add_episode_persons(episode_guests)
+
+    # Add funding (Patreon)
+    enricher.add_funding(
+        url="https://www.patreon.com/cdSPILL",
+        message="Støtt cd SPILL på Patreon"
+    )
+
+    # Add medium type
+    enricher.add_medium("podcast")
+
+    # Add update frequency (biweekly: every other week, started March 2020)
+    # FREQ=WEEKLY;INTERVAL=2 means every 2 weeks
+    # Change to complete=True if the podcast is finished
+    enricher.add_update_frequency(
+        complete=False,
+        frequency=2,
+        dtstart="2020-03-09",
+        rrule="FREQ=WEEKLY;INTERVAL=2"
+    )
+
+    # Add podroll (recommended podcasts)
+    recommended_podcasts = [
+        {
+            "feedTitle": "Spæll",
+            "url": "https://feed.podbean.com/spaell/feed.xml",
+            "feedGuid": "ea5e71e4-fb02-51f7-936d-5acdb482be40"
+        },
+        {
+            "feedTitle": "Retro Crew",
+            "url": "https://radcrew.netlify.app/radcrew-retro.xml",
+            "feedGuid": "a1324b88-c003-56a1-9de2-9160e28f2094"
+        },
+        {
+            "feedTitle": "The Upper Memory Block",
+            "url": "https://rss.libsyn.com/shows/327911/destinations/2668616.xml",
+            "feedGuid": "56989d48-fc1a-5f62-8451-25f71b234b97"
+        }
+    ]
+    enricher.add_podroll(recommended_podcasts)
+
+    # Add social media interactions
+    # Bluesky (ActivityPub)
+    enricher.add_social_interact(
+        protocol="activitypub",
+        uri="https://bsky.app/profile/cdspill.bsky.social",
+        account_id="@cdspill.bsky.social"
+    )
+
+    # Twitter/X
+    enricher.add_social_interact(
+        protocol="twitter",
+        uri="https://x.com/cd_SPILL",
+        account_id="@cd_SPILL"
+    )
+
+    # Facebook (using disabled protocol per spec)
+    enricher.add_social_interact(
+        protocol="disabled",
+        uri="https://www.facebook.com/cdSPILL"
+    )
+
+    # Create output directory
+    os.makedirs("docs", exist_ok=True)
+
+    # Write enriched feed
+    enricher.write_feed("docs/cdspill-enriched.xml")
+
+    print("\n" + "="*60)
+    print("DONE!")
+    print("="*60)
+    print("\nEnriched feed: docs/cdspill-enriched.xml")
+    print("\nWhat was added:")
+    print("  ✓ Beta title suffix for testing")
+    print("  ✓ 2 default hosts (Sigve & Hans-Henrik)")
+    print("  ✓ Season/episode tags with season names (e.g., 'Vår 2020')")
+    print("  ✓ Guest information for episodes with 'med [Name]' pattern")
+    print("  ✓ Patreon funding link")
+    print("  ✓ Medium type: podcast")
+    print("  ✓ Update frequency: biweekly schedule")
+    print("  ✓ Podroll: 3 recommended podcasts")
+    print("  ✓ Social interactions: Bluesky, Twitter/X, Facebook")
+    print("\nNext steps:")
+    print("  1. Review docs/cdspill-enriched.xml")
+    print("  2. Add more guest mappings to episode_guests dict")
+    print("  3. Add profile images for hosts/guests")
+    print("  4. Upload to hosting when ready")
+    print()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n\nInterrupted by user")
+    except Exception as e:
+        print(f"\n\nError: {e}")
+        import traceback
+        traceback.print_exc()
+        exit(1)

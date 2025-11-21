@@ -1,0 +1,395 @@
+"""
+Feed Enricher - Add Podcasting 2.0 tags to existing feeds.
+Preserves all original content while adding new metadata.
+"""
+
+from lxml import etree
+from typing import List, Dict, Optional
+from src.common.base_feed import BaseFeed
+
+
+class FeedEnricher(BaseFeed):
+    """Enrich podcast feeds with Podcasting 2.0 tags."""
+
+    def set_beta_title(self, suffix: str = " (Beta)") -> 'FeedEnricher':
+        """
+        Add suffix to feed title for beta testing.
+
+        Args:
+            suffix: Suffix to add to title (default: " (Beta)")
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        # Find and update title
+        title_elem = self.channel.find('title')
+        if title_elem is not None and title_elem.text:
+            if suffix not in title_elem.text:
+                title_elem.text = title_elem.text + suffix
+                print(f"✓ Updated title to: {title_elem.text}")
+
+        # Also update itunes:title if present
+        itunes_title = self.channel.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}title')
+        if itunes_title is not None and itunes_title.text:
+            if suffix not in itunes_title.text:
+                itunes_title.text = itunes_title.text + suffix
+
+        return self
+
+    def add_channel_persons(
+        self,
+        persons: List[Dict[str, str]]
+    ) -> 'FeedEnricher':
+        """
+        Add default hosts to channel level.
+
+        Args:
+            persons: List of person dicts with keys: name, role, img, href
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        # Ensure podcast namespace is registered
+        self._ensure_podcast_namespace()
+
+        # Add persons to channel
+        for person_data in persons:
+            person_elem = etree.Element(
+                '{https://podcastindex.org/namespace/1.0}person',
+                role=person_data.get('role', 'host')
+            )
+            person_elem.text = person_data['name']
+
+            if 'img' in person_data:
+                person_elem.set('img', person_data['img'])
+            if 'href' in person_data:
+                person_elem.set('href', person_data['href'])
+
+            # Insert after last itunes tag for organization
+            inserted = False
+            for i, elem in enumerate(self.channel):
+                if 'itunes' in elem.tag and i + 1 < len(self.channel):
+                    if 'itunes' not in self.channel[i + 1].tag:
+                        self.channel.insert(i + 1, person_elem)
+                        inserted = True
+                        break
+
+            if not inserted:
+                self.channel.append(person_elem)
+
+        print(f"✓ Added {len(persons)} default host(s) to channel")
+        return self
+
+    def add_podcast_season_episode(self) -> 'FeedEnricher':
+        """
+        Add podcast:season and podcast:episode tags to all episodes.
+        Uses itunes:season and itunes:episode as source.
+        For cd SPILL: Season 1 = Vår 2020, Season 2 = Høst 2020, etc.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        # Season name mapping (S1 = Vår 2020, S2 = Høst 2020, etc.)
+        def get_season_name(season_num: int) -> str:
+            """Generate season name from number."""
+            if season_num <= 0:
+                return f"Sesong {season_num}"
+
+            # Calculate year and season
+            year = 2020 + (season_num - 1) // 2
+            is_spring = (season_num % 2) == 1
+
+            season_name = "Vår" if is_spring else "Høst"
+            return f"{season_name} {year}"
+
+        items = self.channel.findall('item')
+        added_count = 0
+
+        for item in items:
+            # Find itunes:season and itunes:episode
+            season_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}season')
+            episode_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}episode')
+
+            if season_elem is not None and season_elem.text:
+                season_num = int(season_elem.text)
+                season_name = get_season_name(season_num)
+
+                # Add podcast:season
+                podcast_season = etree.Element(
+                    '{https://podcastindex.org/namespace/1.0}season',
+                    name=season_name
+                )
+                podcast_season.text = str(season_num)
+                item.append(podcast_season)
+
+            if episode_elem is not None and episode_elem.text:
+                # Add podcast:episode
+                podcast_episode = etree.Element(
+                    '{https://podcastindex.org/namespace/1.0}episode'
+                )
+                podcast_episode.text = episode_elem.text
+                item.append(podcast_episode)
+
+            if season_elem is not None or episode_elem is not None:
+                added_count += 1
+
+        print(f"✓ Added podcast:season and podcast:episode tags to {added_count} episodes")
+        return self
+
+    def add_episode_persons(
+        self,
+        episode_mapping: Dict[str, List[Dict[str, str]]]
+    ) -> 'FeedEnricher':
+        """
+        Add persons to specific episodes.
+
+        Args:
+            episode_mapping: Dict mapping episode title/guid to list of persons
+                            Example: {"Episode Title": [{"name": "...", "role": "guest"}]}
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        items = self.channel.findall('item')
+        matched = 0
+
+        for item in items:
+            # Try to match by title
+            title_elem = item.find('title')
+            title = title_elem.text if title_elem is not None else ''
+
+            # Try to match by guid
+            guid_elem = item.find('guid')
+            guid = guid_elem.text if guid_elem is not None else ''
+
+            # Check if this episode has person mappings
+            persons = None
+            if title in episode_mapping:
+                persons = episode_mapping[title]
+            elif guid in episode_mapping:
+                persons = episode_mapping[guid]
+
+            # Also try partial title match (useful for "with Guest Name" patterns)
+            if not persons:
+                for key in episode_mapping:
+                    if key.lower() in title.lower():
+                        persons = episode_mapping[key]
+                        break
+
+            if persons:
+                for person_data in persons:
+                    person_elem = etree.Element(
+                        '{https://podcastindex.org/namespace/1.0}person',
+                        role=person_data.get('role', 'guest')
+                    )
+                    person_elem.text = person_data['name']
+
+                    if 'img' in person_data:
+                        person_elem.set('img', person_data['img'])
+                    if 'href' in person_data:
+                        person_elem.set('href', person_data['href'])
+
+                    item.append(person_elem)
+
+                matched += 1
+
+        print(f"✓ Added persons to {matched} episodes")
+        return self
+
+    def add_funding(
+        self,
+        url: str,
+        message: str = "Support the show"
+    ) -> 'FeedEnricher':
+        """
+        Add podcast:funding tag to channel.
+
+        Args:
+            url: URL to funding page (Patreon, etc)
+            message: Message to display
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        funding_elem = etree.Element(
+            '{https://podcastindex.org/namespace/1.0}funding',
+            url=url
+        )
+        funding_elem.text = message
+
+        self.channel.append(funding_elem)
+        print(f"✓ Added funding link: {url}")
+        return self
+
+    def add_social_interact(
+        self,
+        protocol: str,
+        uri: str,
+        account_id: Optional[str] = None
+    ) -> 'FeedEnricher':
+        """
+        Add podcast:socialInteract tag.
+
+        Args:
+            protocol: Protocol (activitypub, twitter, etc)
+            uri: URI for interaction
+            account_id: Optional account ID
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        social_elem = etree.Element(
+            '{https://podcastindex.org/namespace/1.0}socialInteract',
+            protocol=protocol,
+            uri=uri
+        )
+        if account_id:
+            social_elem.set('accountId', account_id)
+
+        self.channel.append(social_elem)
+        print(f"✓ Added social interact: {protocol} ({uri})")
+        return self
+
+    def add_medium(
+        self,
+        medium: str = "podcast"
+    ) -> 'FeedEnricher':
+        """
+        Add podcast:medium tag.
+
+        Args:
+            medium: Medium type (podcast, music, video, film, audiobook, newsletter, blog)
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        medium_elem = etree.Element(
+            '{https://podcastindex.org/namespace/1.0}medium'
+        )
+        medium_elem.text = medium
+
+        self.channel.append(medium_elem)
+        print(f"✓ Added medium: {medium}")
+        return self
+
+    def add_podroll(
+        self,
+        podcasts: List[Dict[str, str]]
+    ) -> 'FeedEnricher':
+        """
+        Add podcast:podroll tag to recommend other podcasts.
+
+        Args:
+            podcasts: List of podcast dicts with keys:
+                - url: Feed URL (required)
+                - title: Podcast title (optional but recommended)
+                - feedGuid: podcast:guid (required per spec, will use URL hash if missing)
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        podroll_elem = etree.Element(
+            '{https://podcastindex.org/namespace/1.0}podroll'
+        )
+
+        for podcast in podcasts:
+            attrs = {'feedUrl': podcast['url']}
+
+            # feedGuid is required per spec
+            if 'feedGuid' in podcast:
+                attrs['feedGuid'] = podcast['feedGuid']
+
+            # Add optional attributes
+            if 'feedTitle' in podcast:
+                attrs['feedTitle'] = podcast['feedTitle']
+
+            remote_elem = etree.SubElement(
+                podroll_elem,
+                '{https://podcastindex.org/namespace/1.0}remoteItem',
+                **attrs
+            )
+
+        self.channel.append(podroll_elem)
+        print(f"✓ Added podroll with {len(podcasts)} recommended podcasts")
+        return self
+
+    def add_update_frequency(
+        self,
+        complete: bool = True,
+        frequency: Optional[int] = None,
+        dtstart: Optional[str] = None,
+        rrule: Optional[str] = None
+    ) -> 'FeedEnricher':
+        """
+        Add podcast:updateFrequency tag.
+
+        Args:
+            complete: Whether the feed is complete (no more episodes coming)
+            frequency: Number of episodes per time period (e.g., 2 for biweekly)
+            dtstart: ISO 8601 date when schedule started (e.g., "2020-01-01")
+            rrule: iCalendar RRULE for recurrence (e.g., "FREQ=WEEKLY;INTERVAL=2")
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        freq_elem = etree.Element(
+            '{https://podcastindex.org/namespace/1.0}updateFrequency'
+        )
+
+        if complete:
+            freq_elem.set('complete', 'true')
+            freq_elem.text = "complete"
+            print("✓ Added update frequency: complete (no more episodes)")
+        else:
+            if frequency:
+                freq_elem.text = str(frequency)
+                if dtstart:
+                    freq_elem.set('dtstart', dtstart)
+                if rrule:
+                    freq_elem.set('rrule', rrule)
+                    print(f"✓ Added update frequency: {frequency} episodes per period (rrule: {rrule})")
+                else:
+                    print(f"✓ Added update frequency: {frequency} episodes per period")
+            else:
+                freq_elem.text = "1"
+                print("✓ Added update frequency: irregular schedule")
+
+        self.channel.append(freq_elem)
+        return self
+
+    def write_feed(self, output_file: str) -> None:
+        """
+        Write enriched feed to file.
+
+        Args:
+            output_file: Output file path
+        """
+        super().write_feed(output_file)
+        print(f"✓ Enriched feed written to: {output_file}")
