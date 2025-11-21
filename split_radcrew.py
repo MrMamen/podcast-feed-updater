@@ -5,7 +5,7 @@ Uses lxml to preserve namespace prefixes (itunes:, podcast:, etc.)
 """
 
 import os
-from src.feed_merger_lxml import FeedSplitter
+from src.radcrew.splitter import FeedSplitter
 
 
 def main():
