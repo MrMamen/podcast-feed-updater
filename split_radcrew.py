@@ -56,7 +56,7 @@ def main():
                 return
 
     # Fetch feed if we haven't already
-    if splitter.source_episode_count is None:
+    if splitter.source_latest_pubdate is None:
         splitter.fetch_feed()
 
     # Define patterns and target metadata feeds

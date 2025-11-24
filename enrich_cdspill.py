@@ -59,7 +59,7 @@ def main():
             return
 
     # Fetch feed if we haven't already (check_if_changed might have done it)
-    if enricher.source_episode_count is None:
+    if enricher.source_latest_pubdate is None:
         enricher.fetch_feed()
 
     # Add beta suffix to title

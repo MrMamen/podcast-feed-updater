@@ -22,7 +22,6 @@ class BaseFeed:
         self.source_url = source_url
         self.root: Optional[etree._Element] = None
         self.channel: Optional[etree._Element] = None
-        self.source_episode_count: Optional[int] = None
         self.source_latest_pubdate: Optional[str] = None
         self.source_latest_link: Optional[str] = None
 
@@ -39,7 +38,6 @@ class BaseFeed:
             raise ValueError("No channel found in feed")
 
         items = self.channel.findall('item')
-        self.source_episode_count = len(items)
 
         # Get latest episode pubDate and link (first item is typically newest)
         if items:
