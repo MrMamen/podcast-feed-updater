@@ -158,6 +158,8 @@ class FeedEnricher(BaseFeed):
             pattern: Regex pattern to extract guest names (default: "med Guest Name")
             known_guests: Optional dict mapping guest names to additional info
                          Example: {"Roar Granevang": {"href": "https://...", "img": "..."}}
+                         Can include 'alias' key to normalize name variations:
+                         {"Aksel Bjerke": {"alias": "Aksel M. Bjerke"}}
             split_multiple: If True, split multiple guests separated by " og " (default: True)
 
         Returns:
@@ -173,6 +175,7 @@ class FeedEnricher(BaseFeed):
 
         items = self.channel.findall('item')
         guest_count = 0
+        normalizations = []  # Track normalizations for reporting
 
         for item in items:
             title_elem = item.find('title')
@@ -202,15 +205,25 @@ class FeedEnricher(BaseFeed):
                     if not guest_name:
                         continue
 
+                    # Check for alias/normalization
+                    original_name = guest_name
+                    if guest_name in known_guests and 'alias' in known_guests[guest_name]:
+                        normalized_name = known_guests[guest_name]['alias']
+                        normalizations.append(f"  '{original_name}' → '{normalized_name}'")
+                        guest_name = normalized_name
+
                     person_elem = etree.Element(
                         '{https://podcastindex.org/namespace/1.0}person',
                         role='guest'
                     )
                     person_elem.text = guest_name
 
-                    # Add additional info if available
-                    if guest_name in known_guests:
-                        guest_info = known_guests[guest_name]
+                    # Add additional info if available (check both original and normalized name)
+                    guest_info = known_guests.get(original_name, {})
+                    if not guest_info:
+                        guest_info = known_guests.get(guest_name, {})
+
+                    if guest_info:
                         if 'href' in guest_info:
                             person_elem.set('href', guest_info['href'])
                         if 'img' in guest_info:
@@ -220,6 +233,13 @@ class FeedEnricher(BaseFeed):
                     guest_count += 1
 
         print(f"✓ Auto-detected and added {guest_count} guests from episode titles")
+
+        # Report normalizations if any
+        if normalizations:
+            print(f"\n  Name normalizations applied:")
+            for norm in sorted(set(normalizations)):
+                print(norm)
+
         return self
 
     def add_episode_persons(

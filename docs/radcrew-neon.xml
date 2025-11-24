@@ -10,7 +10,7 @@
     <atom:link href="https://feed.radcrew.net/radcrewneon" rel="self" type="application/rss+xml"/>
     <link>https://www.radcrew.net/category/weekend-crew/feed</link>
     <description>Den nye podcasten fra Radcrew.net! Bli med Jostein, Ida og gjester for en solid dose popkultur, film, TV og tegneserier.</description>
-    <lastBuildDate>Mon, 03 Nov 2025 14:58:08 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Nov 2025 13:55:01 +0000</lastBuildDate>
     <language>no</language>
     <sy:updatePeriod>
 hourly</sy:updatePeriod>
@@ -52,7 +52,27 @@ hourly</sy:updatePeriod>
     <rawvoice:frequency>Weeky</rawvoice:frequency>
     <podcast:podping usesPodping="true"/>
     <podcast:guid>ebb3bbef-a091-5434-b050-b0c727bf686c</podcast:guid>
-    <rawvoice:subscribe feed="https://www.radcrew.net/category/weekend-crew/feed?327e=1762210430" itunes="https://itunes.apple.com/no/podcast/rad-crew-neon/id601434583?mt=2"/>
+    <rawvoice:subscribe feed="https://www.radcrew.net/category/weekend-crew/feed?3102=1763717378" itunes="https://itunes.apple.com/no/podcast/rad-crew-neon/id601434583?mt=2"/>
+    <item>
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2214043727</guid>
+      <title>Neon #286: Nerd Origins - Hvordan ble vi interessert i soundtracks?</title>
+      <pubDate>Mon, 17 Nov 2025 13:48:31 +0000</pubDate>
+      <link>https://soundcloud.com/radcrew/rad-crew-neon-286-nerd-origins-hvordan-ble-vi-interesserte-i-filmmusikk</link>
+      <itunes:duration>00:57:27</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Ida og Jostein snakker om hvordan de ble interessert i filmmusikk og hva de lytter til om dagen. 
+
+John Williams. James Horner. Jerry Goldsmith. Hans Zimmer. Bernard Herrmann. Bear McCreary. Alle disse har figurert med "Music by"-kreditter på filmer, og denne uka skal vi snakke litt om flere av de største komponistene Hollywood har sett - og hvordan Ida og Jostein ble interessert i filmmusikk generelt. </itunes:summary>
+      <itunes:subtitle>Ida og Jostein snakker om hvordan de ble interess…</itunes:subtitle>
+      <description>Ida og Jostein snakker om hvordan de ble interessert i filmmusikk og hva de lytter til om dagen. 
+
+John Williams. James Horner. Jerry Goldsmith. Hans Zimmer. Bernard Herrmann. Bear McCreary. Alle… &lt;a href="https://soundcloud.com/radcrew/rad-crew-neon-286-nerd-origins-hvordan-ble-vi-interesserte-i-filmmusikk"&gt;Les mer&lt;/a&gt;</description>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2214043727-radcrew-rad-crew-neon-286-nerd-origins-hvordan-ble-vi-interesserte-i-filmmusikk.mp3" length="44699277"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-Z5huWhBx6e5JdYZ0-70bbwA-t3000x3000.jpg"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
+      <dc:creator>RADCORP AS</dc:creator>
+    </item>
     <item>
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2204091183</guid>
       <title>NEON #285: Back to the Future fyller 40 år (feat Chris fra Attack of the Killer Kast)</title>

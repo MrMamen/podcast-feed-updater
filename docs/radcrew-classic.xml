@@ -5,7 +5,7 @@
     <atom:link href="https://www.radcrew.net/category/classic/feed" rel="self" type="application/rss+xml"/>
     <link>https://www.radcrew.net/category/classic/feed</link>
     <description>For deg som kun vil høre gaming-episodene fra Rad Crew!</description>
-    <lastBuildDate>Fri, 31 Oct 2025 23:34:26 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Nov 2025 18:34:07 +0000</lastBuildDate>
     <language>no</language>
     <sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -49,6 +49,70 @@
     <podcast:podping usesPodping="true"/>
     <podcast:guid>90ccfe7c-1319-5c44-8679-dbdbcdbfffd3</podcast:guid>
     <rawvoice:subscribe feed="https://www.radcrew.net/category/classic/feed" itunes="https://itunes.apple.com/no/podcast/rad-crew-classic/id946932980" spotify="https://open.spotify.com/show/4EzDcGCwVTlZZZEYqP3k6H"/>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2214930335</guid>
+      <title>Rad Crew 732: Steam Machine annonsert - Valves Steambokser og andre buskevekster</title>
+      <pubDate>Tue, 18 Nov 2025 20:35:49 +0000</pubDate>
+      <link>https://soundcloud.com/radcrew/rad-crew-732-valves-steambokser-og-andre-buskevekster</link>
+      <itunes:duration>01:53:27</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Ny konsoll? I 2026? For første gang siden Sega ga seg i konsollbransjen har vi en utfordrer på banen, og det er selveste kongene av PC gaming, Valve med sin STEAM MACHINE. Hva er det som skjer? Pluss: Topp 5 Half-Life spinoffs, Atelier Ryza-samlingen, Call of Duty Black Ops 7 og mer!</itunes:summary>
+      <itunes:subtitle>Ny konsoll? I 2026? For første gang siden Sega ga…</itunes:subtitle>
+      <description>Ny konsoll? I 2026? For første gang siden Sega ga seg i konsollbransjen har vi en utfordrer på banen, og det er selveste kongene av PC gaming, Valve med sin STEAM MACHINE. Hva er det som skjer? Pluss: Topp 5 Half-Life spinoffs, Atelier Ryza-samlingen, Call of Duty Black Ops 7 og mer!</description>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2214930335-radcrew-rad-crew-732-valves-steambokser-og-andre-buskevekster.mp3" length="83493536"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-YOOyO8hhQPikBxxo-OXcuZA-t3000x3000.png"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
+      <dc:creator>RADCORP AS</dc:creator>
+    </item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2210879810</guid>
+      <title>Rad Crew 731: Hva er magien bak ARC Raiders? Pluss vi snakker Hyrule Warriors AOI</title>
+      <pubDate>Tue, 11 Nov 2025 19:51:25 +0000</pubDate>
+      <link>https://soundcloud.com/radcrew/rad-crew-731-hva-er-magien-bak-arc-raiders-pluss-vi-snakker-hyrule-warriors-aoi</link>
+      <itunes:duration>01:29:13</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Hva er nøkkelen til Arc Raiders eksplosive suksess? Are og Jostein diskuterer i ukas episode av Rad Crew. Pluss: Hyrule Warriors: Age of Imprisonment er minst like fortryllende, og vi snakker om shooter-franchisene som forsvant fullstendig! Enjoy!</itunes:summary>
+      <itunes:subtitle>Hva er nøkkelen til Arc Raiders eksplosive sukses…</itunes:subtitle>
+      <description>Hva er nøkkelen til Arc Raiders eksplosive suksess? Are og Jostein diskuterer i ukas episode av Rad Crew. Pluss: Hyrule Warriors: Age of Imprisonment er minst like fortryllende, og vi snakker om shooter-franchisene som forsvant fullstendig! Enjoy!</description>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2210879810-radcrew-rad-crew-731-hva-er-magien-bak-arc-raiders-pluss-vi-snakker-hyrule-warriors-aoi.mp3" length="66135380"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-8r3z5veOX2Z0na0H-D1TGLw-t3000x3000.png"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
+      <dc:creator>RADCORP AS</dc:creator>
+    </item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2210284037</guid>
+      <title>Rad Crew Nights Utdrag Nov. 2025: Battlestar Bonanza</title>
+      <pubDate>Mon, 10 Nov 2025 19:55:57 +0000</pubDate>
+      <link>https://soundcloud.com/radcrew/rad-crew-nights-utdrag-battlestar-bonanza</link>
+      <itunes:duration>00:02:31</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Bli medlem for å høre resten, på Patreon eller utenfor Patreon, ditt valg!  https://jostein.party eller https://patreon.com/radcrewpodcast</itunes:summary>
+      <itunes:subtitle>Bli medlem for å høre resten, på Patreon eller ut…</itunes:subtitle>
+      <description>Bli medlem for å høre resten, på Patreon eller utenfor Patreon, ditt valg!  https://jostein.party eller https://patreon.com/radcrewpodcast</description>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2210284037-radcrew-rad-crew-nights-utdrag-battlestar-bonanza.mp3" length="3803655"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-qcizyDa6RnnhkqzE-7XpfOw-t3000x3000.png"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
+      <dc:creator>RADCORP AS</dc:creator>
+    </item>
+    <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
+      <guid isPermaLink="false">tag:soundcloud,2010:tracks/2206401751</guid>
+      <title>Rad Crew 730: Ytre verdener 2 og WTF er disse kjendisspillene?</title>
+      <pubDate>Tue, 04 Nov 2025 19:13:47 +0000</pubDate>
+      <link>https://soundcloud.com/radcrew/rad-crew-730-ytre-verdener-2-og-topp-5-kjendisspill</link>
+      <itunes:duration>01:41:25</itunes:duration>
+      <itunes:author>RadCorp AS</itunes:author>
+      <itunes:explicit>yes</itunes:explicit>
+      <itunes:summary>Vi snakker Outer Worlds 2, Vampire The Masquerade Bloodlines 2, Unpacking IRL, The Legend of Zelda: Skyward Sword HD, og ikke minst Topp 5-en denne uka: Disse kjendisene ga sine navn til noen helt spinnville dataspill.</itunes:summary>
+      <itunes:subtitle>Vi snakker Outer Worlds 2, Vampire The Masquerade…</itunes:subtitle>
+      <description>Vi snakker Outer Worlds 2, Vampire The Masquerade Bloodlines 2, Unpacking IRL, The Legend of Zelda: Skyward Sword HD, og ikke minst Topp 5-en denne uka: Disse kjendisene ga sine navn til noen helt spinnville dataspill.</description>
+      <enclosure type="audio/mpeg" url="https://feeds.soundcloud.com/stream/2206401751-radcrew-rad-crew-730-ytre-verdener-2-og-topp-5-kjendisspill.mp3" length="75641923"/>
+      <itunes:image href="https://i1.sndcdn.com/artworks-yXQtUbtHIzEw6Se4-ePFEdA-t3000x3000.png"/>
+      <itunes:keywords>gaming, spill, film, tv, tegneserier, comics, xbox, playstation, nintendo, norsk</itunes:keywords>
+      <dc:creator>RADCORP AS</dc:creator>
+    </item>
     <item xmlns:feedpress="https://feed.press/xmlns" xmlns:media="http://search.yahoo.com/mrss/" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0">
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2203686251</guid>
       <title>Rad Crew #729: Bloodlines 2 og glemte Playstation-konsoller</title>

@@ -110,6 +110,7 @@ def main():
     # Episodes with "med Guest Name" will automatically get guest tags
     # Multiple guests separated by " og " are automatically split into separate tags
     # Optional: Add known guest info for profiles/images
+    # Use 'alias' key to normalize name variations (e.g., "Aksel Bjerke" → "Aksel M. Bjerke")
     known_guests = {
         "Anette Jøsendal": {
             "href": "https://www.podchaser.com/creators/anette-josendal-107ZbPSK9m"
@@ -139,6 +140,21 @@ def main():
             # Add href when available
         },
         "Terje Høiback": {
+            # Add href when available
+        },
+        # Name normalizations (aliases)
+        "Aksel Bjerke": {
+            "alias": "Aksel M. Bjerke"
+            # Will use the same href as "Aksel M. Bjerke" if defined
+        },
+        "Aksel M. Bjerke": {
+            # Add href when available
+        },
+        "Aleksander": {
+            "alias": "Aleksander Hakestad"
+            # Normalize to full name for consistency
+        },
+        "Aleksander Hakestad": {
             # Add href when available
         }
         # Add more known guests here with their profile URLs
@@ -179,6 +195,11 @@ def main():
             "feedTitle": "Retro Crew",
             "url": "https://radcrew.netlify.app/radcrew-retro.xml",
             "feedGuid": "a1324b88-c003-56a1-9de2-9160e28f2094"
+        },
+        {
+            "feedTitle": "Retropodden",
+            "url": "https://feeds.soundcloud.com/users/soundcloud:users:622595196/sounds.rss",
+            "feedGuid": "7b33030d-fae9-54e1-a5fb-73da19ff901e"
         },
         {
             "feedTitle": "The Upper Memory Block",
@@ -227,7 +248,7 @@ def main():
     print("  ✓ Patreon funding link")
     print("  ✓ Medium type: podcast")
     print("  ✓ Update frequency: biweekly schedule")
-    print("  ✓ Podroll: 3 recommended podcasts")
+    print("  ✓ Podroll: 4 recommended podcasts")
     print("  ✓ Social interactions: Bluesky, Twitter/X, Facebook")
     print("\nNext steps:")
     print("  1. Review docs/cdspill-enriched.xml")
