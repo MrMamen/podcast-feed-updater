@@ -61,3 +61,5 @@ htmlcov/
 
 # Local Netlify folder
 .netlify
+# Cache files
+docs/*.cache

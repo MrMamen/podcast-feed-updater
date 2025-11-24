@@ -24,6 +24,7 @@ class BaseFeed:
         self.channel: Optional[etree._Element] = None
         self.source_episode_count: Optional[int] = None
         self.source_latest_pubdate: Optional[str] = None
+        self.source_latest_link: Optional[str] = None
 
     def fetch_feed(self) -> None:
         """Fetch and parse RSS feed from source URL."""
@@ -40,11 +41,17 @@ class BaseFeed:
         items = self.channel.findall('item')
         self.source_episode_count = len(items)
 
-        # Get latest episode pubDate (first item is typically newest)
+        # Get latest episode pubDate and link (first item is typically newest)
         if items:
-            first_pubdate = items[0].find('pubDate')
+            first_item = items[0]
+
+            first_pubdate = first_item.find('pubDate')
             if first_pubdate is not None and first_pubdate.text:
                 self.source_latest_pubdate = first_pubdate.text.strip()
+
+            first_link = first_item.find('link')
+            if first_link is not None and first_link.text:
+                self.source_latest_link = first_link.text.strip()
 
         print(f"Found {len(items)} episodes")
         if self.source_latest_pubdate:
@@ -52,14 +59,14 @@ class BaseFeed:
 
     def check_if_changed(self, output_file: str) -> bool:
         """
-        Check if source feed has new episodes compared to existing output.
-        Uses pubDate of latest episode for comparison.
+        Check if source feed has new or updated episodes compared to existing output.
+        Uses both pubDate and link of latest episode for comparison.
 
         Args:
             output_file: Path to existing output file to compare against
 
         Returns:
-            True if feed has new episodes (or output doesn't exist), False otherwise
+            True if feed has new/updated episodes (or output doesn't exist), False otherwise
         """
         # If output doesn't exist, we need to generate it
         if not os.path.exists(output_file):
@@ -70,25 +77,42 @@ class BaseFeed:
         if self.source_latest_pubdate is None:
             self.fetch_feed()
 
-        # If source has no pubDate, fall back to always regenerate
-        if not self.source_latest_pubdate:
-            print("ℹ No pubDate found in source, regenerating...")
+        # If source has no pubDate or link, fall back to always regenerate
+        if not self.source_latest_pubdate or not self.source_latest_link:
+            print("ℹ No pubDate/link found in source, regenerating...")
             return True
 
-        # Check cached pubDate
-        cache_file = output_file + '.pubdate'
+        # Check cached pubDate and link
+        cache_file = output_file + '.cache'
         if os.path.exists(cache_file):
             try:
                 with open(cache_file, 'r') as f:
-                    cached_pubdate = f.read().strip()
+                    lines = f.read().strip().split('\n')
+                    if len(lines) >= 2:
+                        cached_pubdate = lines[0]
+                        cached_link = lines[1]
+                    else:
+                        # Old format, regenerate
+                        print("ℹ Old cache format, regenerating...")
+                        return True
 
-                if cached_pubdate == self.source_latest_pubdate:
-                    print(f"ℹ No new episodes (latest: {self.source_latest_pubdate})")
+                # Check if both match
+                pubdate_match = cached_pubdate == self.source_latest_pubdate
+                link_match = cached_link == self.source_latest_link
+
+                if pubdate_match and link_match:
+                    print(f"ℹ No changes detected")
+                    print(f"  Latest: {self.source_latest_pubdate}")
                     return False
-                else:
+                elif not pubdate_match:
                     print(f"ℹ New episode detected!")
                     print(f"  Previous: {cached_pubdate}")
                     print(f"  Current:  {self.source_latest_pubdate}")
+                    return True
+                else:  # link changed but pubdate same
+                    print(f"ℹ Episode updated!")
+                    print(f"  Date: {self.source_latest_pubdate}")
+                    print(f"  Link changed (episode was modified)")
                     return True
 
             except Exception as e:
@@ -100,16 +124,16 @@ class BaseFeed:
 
     def save_latest_pubdate(self, output_file: str) -> None:
         """
-        Save latest episode pubDate to cache file for future comparisons.
+        Save latest episode pubDate and link to cache file for future comparisons.
 
         Args:
-            output_file: Path to output file (pubdate will be saved as output_file.pubdate)
+            output_file: Path to output file (cache will be saved as output_file.cache)
         """
-        if self.source_latest_pubdate:
-            cache_file = output_file + '.pubdate'
+        if self.source_latest_pubdate and self.source_latest_link:
+            cache_file = output_file + '.cache'
             with open(cache_file, 'w') as f:
-                f.write(self.source_latest_pubdate)
-            print(f"✓ Saved latest pubDate to cache")
+                f.write(f"{self.source_latest_pubdate}\n{self.source_latest_link}\n")
+            print(f"✓ Saved episode metadata to cache")
 
     def write_feed(self, output_file: str) -> None:
         """

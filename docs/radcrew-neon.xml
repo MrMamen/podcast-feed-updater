@@ -52,7 +52,7 @@ hourly</sy:updatePeriod>
     <rawvoice:frequency>Weeky</rawvoice:frequency>
     <podcast:podping usesPodping="true"/>
     <podcast:guid>ebb3bbef-a091-5434-b050-b0c727bf686c</podcast:guid>
-    <rawvoice:subscribe feed="https://www.radcrew.net/category/weekend-crew/feed?3102=1763717378" itunes="https://itunes.apple.com/no/podcast/rad-crew-neon/id601434583?mt=2"/>
+    <rawvoice:subscribe feed="https://www.radcrew.net/category/weekend-crew/feed?ecc5=1764027589" itunes="https://itunes.apple.com/no/podcast/rad-crew-neon/id601434583?mt=2"/>
     <item>
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2214043727</guid>
       <title>Neon #286: Nerd Origins - Hvordan ble vi interessert i soundtracks?</title>

@@ -15,8 +15,9 @@ The script adds:
     - Bluesky social interaction
 
 Smart caching:
-    - Checks if source feed has changed before regenerating
-    - Skips processing if episode count is unchanged
+    - Checks latest episode's pubDate AND link before regenerating
+    - Detects new episodes (pubDate change) AND updated episodes (link change)
+    - Skips processing if no changes detected
     - Use --force to override and regenerate anyway
     - Perfect for automated GitHub Actions workflows
 """
