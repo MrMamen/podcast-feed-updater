@@ -68,7 +68,7 @@ podcast-feed-updater/
 │   │   ├── base_feed.py     # Baseklasse for feed-operasjoner
 │   │   └── __init__.py
 │   ├── radcrew/             # Rad Crew feed splitting
-│   │   ├── splitter.py      # FeedSplitter + FeedMerger
+│   │   ├── splitter.py      # FeedSplitter
 │   │   └── __init__.py
 │   └── enrichment/          # Feed enrichment
 │       ├── enricher.py      # FeedEnricher

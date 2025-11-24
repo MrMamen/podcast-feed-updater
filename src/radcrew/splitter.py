@@ -1,5 +1,5 @@
 """
-Feed Splitter and Merger for Rad Crew.
+Feed Splitter for Rad Crew.
 Uses lxml to preserve namespace prefixes (itunes:, podcast:, etc.)
 """
 
@@ -8,93 +8,6 @@ import requests
 from lxml import etree
 from typing import List
 from src.common.base_feed import BaseFeed
-
-
-class FeedMerger(BaseFeed):
-    """Merge feed items with target feed metadata, preserving namespaces."""
-
-    def __init__(self, items_source_url: str, metadata_source_url: str):
-        """
-        Initialize merger.
-
-        Args:
-            items_source_url: URL of feed to get items from
-            metadata_source_url: URL of feed to get channel metadata from
-        """
-        super().__init__(items_source_url)
-        self.metadata_url = metadata_source_url
-        self.items_root = None
-        self.metadata_root = None
-        self.items = []
-        self.metadata_channel = None
-
-    def fetch_feeds(self) -> None:
-        """Fetch both feeds."""
-        print(f"Fetching items from: {self.source_url}")
-        response = requests.get(self.source_url, timeout=30)
-        response.raise_for_status()
-        self.items_root = etree.fromstring(response.content)
-
-        print(f"Fetching metadata from: {self.metadata_url}")
-        response = requests.get(self.metadata_url, timeout=30)
-        response.raise_for_status()
-        self.metadata_root = etree.fromstring(response.content)
-
-        # Extract items from source
-        items_channel = self.items_root.find('channel')
-        if items_channel is not None:
-            self.items = items_channel.findall('item')
-            print(f"Found {len(self.items)} items in source feed")
-
-        # Get metadata channel
-        self.metadata_channel = self.metadata_root.find('channel')
-        if self.metadata_channel is None:
-            raise ValueError("No channel found in metadata feed")
-
-    def merge(self, output_file: str) -> None:
-        """
-        Merge items with metadata and write output.
-
-        Args:
-            output_file: Output file path
-        """
-        if not self.items or not self.metadata_channel:
-            raise ValueError("Must fetch feeds before merging")
-
-        # Create new root with metadata feed's structure
-        # Deep copy the metadata root to preserve everything
-        new_root = etree.Element(
-            self.metadata_root.tag,
-            attrib=self.metadata_root.attrib,
-            nsmap=self.metadata_root.nsmap  # Preserve namespace map!
-        )
-
-        # Create new channel
-        new_channel = etree.SubElement(new_root, 'channel')
-
-        # Copy all channel-level metadata (everything except items)
-        for elem in self.metadata_channel:
-            if elem.tag != 'item':
-                # Deep copy to preserve all attributes and namespaces
-                new_channel.append(etree.fromstring(etree.tostring(elem)))
-
-        # Add items from source feed
-        for item in self.items:
-            # Deep copy items to preserve their structure
-            new_channel.append(etree.fromstring(etree.tostring(item)))
-
-        # Write output with pretty print
-        tree = etree.ElementTree(new_root)
-        tree.write(
-            output_file,
-            encoding='utf-8',
-            xml_declaration=True,
-            pretty_print=True
-        )
-
-        print(f"✓ Merged feed written to: {output_file}")
-        print(f"  - Channel metadata from: {self.metadata_url}")
-        print(f"  - {len(self.items)} items from: {self.source_url}")
 
 
 class FeedSplitter(BaseFeed):

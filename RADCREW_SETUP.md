@@ -77,9 +77,8 @@ Output XML files
 
 ### Kode-komponenter
 
-1. **`src/feed_merger.py`**
-   - `FeedMerger`: Kombinerer items fra én feed med metadata fra en annen
-   - `FeedSplitter`: Splitter feed basert på title-patterns
+1. **`src/radcrew/splitter.py`**
+   - `FeedSplitter`: Splitter feed basert på title-patterns og merger med metadata
 
 2. **`split_radcrew.py`**
    - Kjørbart script som koordinerer hele prosessen
