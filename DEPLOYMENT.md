@@ -77,11 +77,14 @@ Eller workflow-filen gjør dette automatisk.
 ## ⏰ Kjøreplan
 
 Workflow kjører automatisk:
-- **Hver 6. time** (00:00, 06:00, 12:00, 18:00 UTC)
+- **Mandager:** Hver time (når nye episoder publiseres)
+- **Resten av uken:** Én gang daglig kl. 12:00 UTC (for oppdateringer/rettelser)
 - **Ved push til master** (for testing)
 - **Manuelt** (via Actions tab)
 
-**Smart caching:** Scriptet sjekker om feeden har endret seg (pubDate + link) og hopper over regenerering hvis ingen endringer.
+**Rasjonale:** cd SPILL publiserer nye episoder på mandager, så workflow sjekker oftere den dagen for rask oppdatering. Resten av uken sjekkes kun én gang daglig for eventuelle rettelser eller oppdateringer.
+
+**Smart caching:** Scriptet sjekker om feeden har endret seg (pubDate + link) og hopper over regenerering hvis ingen endringer. Dette gjør hyppige kjøringer billige og raske.
 
 ---
 

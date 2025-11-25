@@ -43,7 +43,9 @@ Test i nettleser eller valider på: https://podba.se/validate/
 
 ## 🎉 Ferdig!
 
-Feeden din oppdateres nå automatisk hver 6. time.
+Feeden din oppdateres nå automatisk:
+- **Mandager:** Hver time (når nye episoder publiseres)
+- **Resten av uken:** Daglig kl. 12:00 UTC
 
 ---
 
