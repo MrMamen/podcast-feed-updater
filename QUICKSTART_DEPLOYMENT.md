@@ -14,17 +14,24 @@ git commit -m "Add GitHub Actions deployment workflow"
 git push -u origin master
 ```
 
-## 🔧 Steg 2: Aktiver GitHub Pages
+## 🔧 Steg 2: Gi GitHub Actions write-tilgang
 
 1. Gå til repository på GitHub
-2. Klikk **Settings** (øverst til høyre)
-3. Klikk **Pages** (venstre meny)
-4. Under **Source**:
+2. Klikk **Settings** → **Actions** → **General** (venstre meny)
+3. Scroll ned til **Workflow permissions**
+4. Velg **Read and write permissions**
+5. Kryss av **Allow GitHub Actions to create and approve pull requests**
+6. Klikk **Save**
+
+## 🔧 Steg 3: Aktiver GitHub Pages
+
+1. Fortsatt i **Settings**, klikk **Pages** (venstre meny)
+2. Under **Source**:
    - Branch: `gh-pages` (vil bli opprettet automatisk første gang)
    - Folder: `/ (root)`
-5. Klikk **Save**
+3. Klikk **Save**
 
-## ▶️ Steg 3: Kjør første deploy
+## ▶️ Steg 4: Kjør første deploy
 
 1. Gå til **Actions** tab (øverst)
 2. Klikk på workflow "Enrich cd SPILL Feed"
@@ -32,7 +39,7 @@ git push -u origin master
 4. Klikk den grønne **Run workflow** knappen
 5. Vent 1-2 minutter
 
-## ✅ Steg 4: Verifiser at det fungerer
+## ✅ Steg 5: Verifiser at det fungerer
 
 Din berikede feed er nå tilgjengelig på:
 ```
@@ -109,6 +116,14 @@ GitHub sender e-post automatisk hvis noe feiler.
 ---
 
 ## 🆘 Troubleshooting
+
+### Permission denied (403) feil
+**Løsning:**
+1. Gå til **Settings** → **Actions** → **General**
+2. Velg **Read and write permissions**
+3. Kryss av **Allow GitHub Actions to create and approve pull requests**
+4. Klikk **Save**
+5. Re-run workflow
 
 ### "gh-pages branch not found"
 - Det er normalt første gang

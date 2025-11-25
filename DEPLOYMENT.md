@@ -26,21 +26,31 @@ gh repo create podcast-feed-updater --public --source=. --remote=origin --push
 git push origin master
 ```
 
-### 2. Aktiver GitHub Pages
+### 2. Gi GitHub Actions write-tilgang
 
-1. Gå til GitHub repository settings
-2. Naviger til **Pages** (venstre meny)
-3. Under **Source**, velg:
+GitHub Actions trenger tillatelse til å pushe til repo og deploye til Pages:
+
+1. Gå til repository **Settings**
+2. Klikk **Actions** → **General** (venstre meny)
+3. Scroll ned til **Workflow permissions**
+4. Velg **Read and write permissions**
+5. Kryss av **Allow GitHub Actions to create and approve pull requests**
+6. Klikk **Save**
+
+### 3. Aktiver GitHub Pages
+
+1. Fortsatt i **Settings**, naviger til **Pages** (venstre meny)
+2. Under **Source**, velg:
    - Branch: `gh-pages`
    - Folder: `/ (root)`
-4. Klikk **Save**
+3. Klikk **Save**
 
 Din feed vil være tilgjengelig på:
 ```
 https://[ditt-github-brukernavn].github.io/podcast-feed-updater/cdspill-enriched.xml
 ```
 
-### 3. Legg til Podchaser API secrets (Valgfritt)
+### 4. Legg til Podchaser API secrets (Valgfritt)
 
 Hvis du vil bruke Podchaser API:
 
@@ -54,7 +64,7 @@ Hvis du vil bruke Podchaser API:
    - Name: `PODCHASER_API_SECRET`
    - Value: [din API secret]
 
-### 4. Fjern Beta-suffix (Produksjon)
+### 5. Fjern Beta-suffix (Produksjon)
 
 Rediger `enrich_cdspill.py` og kommenter ut beta-suffixet:
 
@@ -64,7 +74,7 @@ Rediger `enrich_cdspill.py` og kommenter ut beta-suffixet:
 
 Eller workflow-filen gjør dette automatisk.
 
-### 5. Test workflow
+### 6. Test workflow
 
 1. Gå til **Actions** tab i GitHub
 2. Velg "Enrich cd SPILL Feed"
@@ -180,17 +190,34 @@ Valider feeden regelmessig:
 
 ## 🔧 Feilsøking
 
+### Permission denied (403) feil
+
+**Feilmelding:**
+```
+remote: Permission to [repo].git denied to github-actions[bot].
+fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested URL returned error: 403
+```
+
+**Løsning:**
+1. Gå til **Settings** → **Actions** → **General**
+2. Under **Workflow permissions**, velg **Read and write permissions**
+3. Kryss av **Allow GitHub Actions to create and approve pull requests**
+4. Klikk **Save**
+5. Re-run workflow
+
 ### Workflow feiler
 
 1. Sjekk **Actions** tab for error logs
 2. Test lokalt først: `uv run enrich_cdspill.py`
 3. Sjekk at alle dependencies er i `pyproject.toml`
+4. Verifiser at workflow har `permissions: contents: write`
 
 ### GitHub Pages ikke tilgjengelig
 
 1. Sjekk at `gh-pages` branch eksisterer
 2. Sjekk at GitHub Pages er aktivert i Settings
 3. Vent 2-3 minutter etter første deploy
+4. Verifiser at Source er satt til `gh-pages` branch
 
 ### Smart caching ikke fungerer
 

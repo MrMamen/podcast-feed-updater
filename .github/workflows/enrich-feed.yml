@@ -20,6 +20,12 @@ jobs:
   enrich:
     runs-on: ubuntu-latest
 
+    # Grant write permissions for GitHub Pages deployment
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
