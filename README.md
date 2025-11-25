@@ -20,6 +20,8 @@ uv run split_radcrew.py
 
 **Live feeds:** https://radcrew.netlify.app/
 
+**Deploy your own:** Se [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md) for automatisk GitHub Pages setup.
+
 ### 2. cd SPILL Feed Enrichment
 Berik en eksisterende feed med Podcasting 2.0 tags.
 
@@ -39,7 +41,33 @@ uv run enrich_cdspill.py
 # - Podlove Simple Chapters (inline chapter markers)
 ```
 
-## 📦 Installasjon
+## 🚀 Deployment (Automatisk kjøring)
+
+For å sette opp automatisk feed-enrichment og hosting:
+
+**Quick start (5 minutter):**
+```bash
+# 1. Push til GitHub
+git push origin master
+
+# 2. Aktiver GitHub Pages i repo settings
+
+# 3. Trigger workflow i Actions tab
+```
+
+Se **[QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md)** for steg-for-steg guide.
+
+**Resultat:**
+- ✅ Automatisk kjøring hver 6. time
+- ✅ Gratis hosting på GitHub Pages
+- ✅ Smart caching (kun ved endringer)
+- ✅ Feed URL: `https://[username].github.io/podcast-feed-updater/cdspill-enriched.xml`
+
+Se **[DEPLOYMENT.md](DEPLOYMENT.md)** for full dokumentasjon og alternative løsninger.
+
+---
+
+## 📦 Lokal installasjon
 
 ### Med uv (anbefalt)
 ```bash

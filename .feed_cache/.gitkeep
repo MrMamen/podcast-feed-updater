@@ -1,0 +1,2 @@
+# This directory stores feed cache metadata for smart caching
+# Cache files (*.json) should be committed to enable GitHub Actions caching

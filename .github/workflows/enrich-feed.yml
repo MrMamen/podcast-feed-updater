@@ -1,0 +1,58 @@
+name: Enrich cd SPILL Feed
+
+on:
+  # Run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+  # Run on push to master (for testing)
+  push:
+    branches: [ master ]
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Run enrichment script
+      env:
+        PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
+        PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
+      run: |
+        # Remove beta suffix for production
+        sed -i 's/enricher.set_beta_title(" (Beta)")/# enricher.set_beta_title(" (Beta)")/' enrich_cdspill.py
+
+        # Run enrichment (without --force to use smart caching)
+        uv run enrich_cdspill.py
+
+    - name: Commit cache updates
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add .feed_cache/*.json
+        git diff --staged --quiet || git commit -m "Update feed cache [skip ci]"
+        git push || true
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        publish_branch: gh-pages
+        force_orphan: true

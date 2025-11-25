@@ -63,3 +63,7 @@ htmlcov/
 .netlify
 # Cache files
 docs/*.cache
+.feed_cache/
+
+# Don't ignore feed cache metadata (needed for GitHub Actions)
+!.feed_cache/*.json
