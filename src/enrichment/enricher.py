@@ -481,6 +481,44 @@ class FeedEnricher(BaseFeed):
         self.channel.append(freq_elem)
         return self
 
+    def add_op3_prefix(self) -> 'FeedEnricher':
+        """
+        Add OP3 (Open Podcast Prefix Project) analytics to episode enclosures.
+        Prefixes enclosure URLs with https://op3.dev/e/ to enable
+        privacy-respecting download tracking.
+
+        For HTTPS URLs, the protocol is stripped (e.g., https://example.com/file.mp3
+        becomes https://op3.dev/e/example.com/file.mp3). For HTTP URLs, the full
+        URL including protocol is kept.
+
+        This provides free, public stats without compromising listener privacy.
+        Stats page: https://op3.dev/show/[your-show-guid]
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        OP3_PREFIX = "https://op3.dev/e/"
+        items = self.channel.findall('item')
+        prefixed_count = 0
+
+        for item in items:
+            enclosure = item.find('enclosure')
+            if enclosure is not None:
+                url = enclosure.get('url')
+                if url and not url.startswith(OP3_PREFIX):
+                    # Strip https:// prefix if present (http:// URLs keep the protocol)
+                    if url.startswith('https://'):
+                        url = url[8:]  # Remove 'https://'
+                    enclosure.set('url', OP3_PREFIX + url)
+                    prefixed_count += 1
+
+        print(f"✓ Added OP3 analytics prefix to {prefixed_count} episode enclosures")
+        print(f"  Stats will be available at: https://op3.dev/show/[your-show-guid]")
+        return self
+
     def write_feed(self, output_file: str) -> None:
         """
         Write enriched feed to file.

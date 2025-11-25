@@ -12,6 +12,7 @@ Podcasting 2.0 er en samling nye RSS-tags som gjør podcasts mer interaktive og 
 - **`<podcast:transcript>`** - Transkripsjoner
 - **`<podcast:value>`** - Bitcoin/streaming payments
 - **`<podcast:socialInteract>`** - Kommentarer på sosiale medier
+- **OP3 Analytics** - Privacy-respecting download tracking
 
 Mer info: https://podcastindex.org/namespace/1.0
 
@@ -109,10 +110,12 @@ Etter enrichment:
 - ✅ 2 hosts med profil-linker
 - ✅ Patreon funding-link
 - ✅ Bluesky social interaction
+- ✅ OP3 analytics tracking
 
 **Episode-nivå:**
-- ✅ 11 episoder med gjeste-informasjon
-- ✅ Automatisk matching basert på episode-tittel
+- ✅ Auto-detected guests fra episode-titler
+- ✅ Season/episode tags med norske navn
+- ✅ OP3-prefixede enclosure-URLer
 
 **Output:**
 - `docs/cdspill-enriched.xml` (klar for hosting)
@@ -159,6 +162,34 @@ episode_guests = {
 ```
 
 ## 🌟 Avanserte features
+
+### OP3 Analytics
+
+OP3 (Open Podcast Prefix Project) gir deg gratis nedlastingsstatistikk uten å kompromittere lytternes personvern:
+
+```python
+# Legger til OP3-prefix automatisk
+enricher.add_op3_prefix()
+
+# Enclosure-URLer blir prefixet (HTTPS-protokoll fjernes for kortere URLer):
+# Fra: https://example.com/episode.mp3
+# Til:  https://op3.dev/e/example.com/episode.mp3
+
+# HTTP-URLer beholder protokollen:
+# Fra: http://example.com/episode.mp3
+# Til:  https://op3.dev/e/http://example.com/episode.mp3
+
+# Stats tilgjengelig på:
+# https://op3.dev/show/[your-show-guid]
+```
+
+**Fordeler:**
+- 🆓 Gratis og åpen kildekode
+- 🔒 Privacy-respecting (ingen tracking cookies)
+- 📊 Industri-standard nedlastingsmetrikk
+- 🌍 Offentlig tilgjengelig statistikk
+
+Mer info: https://op3.dev
 
 ### Legge til flere Podcasting 2.0 tags
 

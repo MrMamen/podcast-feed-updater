@@ -252,6 +252,9 @@ def main():
         uri="https://www.facebook.com/cdSPILL"
     )
 
+    # Add OP3 analytics prefix for privacy-respecting download tracking
+    enricher.add_op3_prefix()
+
     # Create output directory
     os.makedirs("docs", exist_ok=True)
 
@@ -275,6 +278,7 @@ def main():
     print("  ✓ Update frequency: biweekly schedule")
     print("  ✓ Podroll: 4 recommended podcasts")
     print("  ✓ Social interactions: Bluesky, Twitter/X, Facebook")
+    print("  ✓ OP3 analytics: Privacy-respecting download tracking")
     print("\nNext steps:")
     print("  1. Review docs/cdspill-enriched.xml")
     print("  2. Add more guest mappings to episode_guests dict")

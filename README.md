@@ -35,6 +35,7 @@ uv run enrich_cdspill.py
 # - Social media integrasjon
 # - Update frequency (biweekly)
 # - Podroll (anbefalinger)
+# - OP3 analytics (privacy-respecting tracking)
 ```
 
 ## 📦 Installasjon
@@ -98,6 +99,7 @@ podcast-feed-updater/
 - `<podcast:episode>` - Episode numbers
 - `<podcast:person>` - Per-episode guests
 - `<podcast:chapters>` - Chapter markers (preserved from original)
+- OP3 prefixed enclosures - Privacy-respecting download tracking
 
 ### Feed Operations
 - **Split feeds** - Del opp kombinerte feeds
@@ -237,3 +239,4 @@ MIT
 - [Podcasting 2.0 Namespace](https://github.com/Podcastindex-org/podcast-namespace)
 - [Podchaser API](https://api-docs.podchaser.com)
 - [Podcast Index](https://podcastindex.org)
+- [OP3 Analytics](https://op3.dev) - Privacy-respecting download tracking
