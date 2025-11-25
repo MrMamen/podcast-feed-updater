@@ -79,8 +79,8 @@ def main():
 
     splitter.split_by_patterns(patterns, metadata_urls, output_files)
 
-    # Save pubDate for next run
-    splitter.save_latest_pubdate(output_files[0])
+    # Save cache for next run
+    splitter.save_cache(output_files[0])
 
     print("\n" + "="*60)
     print("DONE!")

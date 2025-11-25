@@ -258,8 +258,8 @@ def main():
     # Write enriched feed
     enricher.write_feed(output_file)
 
-    # Save pubDate for next run
-    enricher.save_latest_pubdate(output_file)
+    # Save cache for next run
+    enricher.save_cache(output_file)
 
     print("\n" + "="*60)
     print("DONE!")

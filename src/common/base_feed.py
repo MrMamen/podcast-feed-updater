@@ -120,9 +120,9 @@ class BaseFeed:
             print("ℹ No cache file found, generating...")
             return True
 
-    def save_latest_pubdate(self, output_file: str) -> None:
+    def save_cache(self, output_file: str) -> None:
         """
-        Save latest episode pubDate and link to cache file for future comparisons.
+        Save latest episode metadata (pubDate and link) to cache file.
 
         Args:
             output_file: Path to output file (cache will be saved as output_file.cache)
