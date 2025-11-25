@@ -5,6 +5,8 @@ Preserves all original content while adding new metadata.
 
 from lxml import etree
 from typing import List, Dict, Optional
+import requests
+import json
 from src.common.base_feed import BaseFeed
 
 
@@ -517,6 +519,113 @@ class FeedEnricher(BaseFeed):
 
         print(f"✓ Added OP3 analytics prefix to {prefixed_count} episode enclosures")
         print(f"  Stats will be available at: https://op3.dev/show/[your-show-guid]")
+        return self
+
+    def convert_json_chapters_to_psc(self) -> 'FeedEnricher':
+        """
+        Convert podcast:chapters JSON references to Podlove Simple Chapters (PSC) format.
+
+        Fetches JSON chapter files from podcast:chapters URLs and converts them to
+        inline psc:chapters XML format for better client compatibility.
+
+        JSON format (Podcasting 2.0):
+            {"version": "1.2.0", "chapters": [{"startTime": 0, "title": "Intro"}]}
+
+        PSC format (Podlove Simple Chapters):
+            <psc:chapters version="1.2">
+                <psc:chapter start="00:00:00" title="Intro" />
+            </psc:chapters>
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        # Ensure PSC namespace is registered
+        psc_ns = "http://podlove.org/simple-chapters"
+        if psc_ns not in self.root.nsmap.values():
+            # Add namespace to root element
+            nsmap = self.root.nsmap.copy()
+            nsmap['psc'] = psc_ns
+            # Create new root with updated namespaces
+            new_root = etree.Element(self.root.tag, nsmap=nsmap)
+            new_root.text = self.root.text
+            new_root.tail = self.root.tail
+            for key, value in self.root.attrib.items():
+                new_root.set(key, value)
+            for child in self.root:
+                new_root.append(child)
+            self.root = new_root
+            self.channel = self.root.find('channel')
+
+        items = self.channel.findall('item')
+        converted_count = 0
+        failed_count = 0
+
+        for item in items:
+            # Find podcast:chapters element
+            podcast_chapters = item.find('{https://podcastindex.org/namespace/1.0}chapters')
+
+            if podcast_chapters is not None:
+                json_url = podcast_chapters.get('url')
+                if json_url and json_url.endswith('.json'):
+                    try:
+                        # Fetch JSON chapters
+                        response = requests.get(json_url, timeout=10)
+                        response.raise_for_status()
+                        chapters_data = response.json()
+
+                        # Create PSC chapters element
+                        psc_chapters = etree.Element(
+                            f'{{{psc_ns}}}chapters',
+                            version="1.2"
+                        )
+
+                        # Convert each chapter
+                        if 'chapters' in chapters_data:
+                            for chapter in chapters_data['chapters']:
+                                start_time = chapter.get('startTime', 0)
+                                title = chapter.get('title', '')
+
+                                # Convert seconds to HH:MM:SS format
+                                hours = int(start_time // 3600)
+                                minutes = int((start_time % 3600) // 60)
+                                seconds = int(start_time % 60)
+                                time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+                                # Create chapter element
+                                attrs = {
+                                    'start': time_str,
+                                    'title': title
+                                }
+
+                                # Add optional attributes
+                                if 'url' in chapter:
+                                    attrs['href'] = chapter['url']
+                                if 'img' in chapter:
+                                    attrs['image'] = chapter['img']
+
+                                psc_chapter = etree.SubElement(
+                                    psc_chapters,
+                                    f'{{{psc_ns}}}chapter',
+                                    **attrs
+                                )
+
+                            # Add PSC chapters to item (after podcast:chapters)
+                            chapter_index = list(item).index(podcast_chapters)
+                            item.insert(chapter_index + 1, psc_chapters)
+                            converted_count += 1
+
+                    except Exception as e:
+                        failed_count += 1
+                        # Silently skip episodes with failed chapter conversions
+                        continue
+
+        print(f"✓ Converted {converted_count} JSON chapters to Podlove Simple Chapters format")
+        if failed_count > 0:
+            print(f"  ⚠ {failed_count} episodes failed to convert (JSON not accessible)")
+
         return self
 
     def write_feed(self, output_file: str) -> None:

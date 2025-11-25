@@ -8,13 +8,16 @@ Podcasting 2.0 er en samling nye RSS-tags som gjør podcasts mer interaktive og 
 
 - **`<podcast:person>`** - Vis hvem som er hosts og gjester
 - **`<podcast:funding>`** - Link til Patreon/støttekanaler
-- **`<podcast:chapters>`** - Kapitler med tidskoder
+- **`<podcast:chapters>`** - Kapitler med tidskoder (JSON format)
+- **`<psc:chapters>`** - Podlove Simple Chapters (inline XML)
 - **`<podcast:transcript>`** - Transkripsjoner
 - **`<podcast:value>`** - Bitcoin/streaming payments
 - **`<podcast:socialInteract>`** - Kommentarer på sosiale medier
 - **OP3 Analytics** - Privacy-respecting download tracking
 
-Mer info: https://podcastindex.org/namespace/1.0
+Mer info:
+- https://podcastindex.org/namespace/1.0
+- https://podlove.org/simple-chapters/
 
 ## 📝 Eksempel: cd SPILL
 
@@ -116,6 +119,7 @@ Etter enrichment:
 - ✅ Auto-detected guests fra episode-titler
 - ✅ Season/episode tags med norske navn
 - ✅ OP3-prefixede enclosure-URLer
+- ✅ Podlove Simple Chapters (inline XML format)
 
 **Output:**
 - `docs/cdspill-enriched.xml` (klar for hosting)
@@ -190,6 +194,37 @@ enricher.add_op3_prefix()
 - 🌍 Offentlig tilgjengelig statistikk
 
 Mer info: https://op3.dev
+
+### Podlove Simple Chapters
+
+Konverterer eksisterende JSON-chapters til Podlove Simple Chapters format for bedre kompatibilitet:
+
+```python
+# Konverterer automatisk fra podcast:chapters JSON
+enricher.convert_json_chapters_to_psc()
+
+# JSON format (podcast:chapters):
+# {"chapters": [{"startTime": 0, "title": "Intro"}]}
+
+# Blir til PSC format:
+# <psc:chapters version="1.2">
+#   <psc:chapter start="00:00:00" title="Intro" />
+# </psc:chapters>
+```
+
+**Fordeler:**
+- ✅ Inline XML (ingen eksterne filer å vedlikeholde)
+- ✅ Bedre kompatibilitet med eldre podcast-apper
+- ✅ Støtter både JSON og PSC samtidig
+- ✅ Automatisk tidskonvertering (sekunder → HH:MM:SS)
+
+**Hva konverteres:**
+- Kapittel-titler (title)
+- Start-tider (startTime → start)
+- Kapittel-URL-er (url → href) - valgfritt
+- Kapittel-bilder (img → image) - valgfritt
+
+Mer info: https://podlove.org/simple-chapters/
 
 ### Legge til flere Podcasting 2.0 tags
 

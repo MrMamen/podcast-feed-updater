@@ -36,6 +36,7 @@ uv run enrich_cdspill.py
 # - Update frequency (biweekly)
 # - Podroll (anbefalinger)
 # - OP3 analytics (privacy-respecting tracking)
+# - Podlove Simple Chapters (inline chapter markers)
 ```
 
 ## 📦 Installasjon
@@ -98,7 +99,8 @@ podcast-feed-updater/
 - `<podcast:season>` - Season med navn (f.eks. "Vår 2020")
 - `<podcast:episode>` - Episode numbers
 - `<podcast:person>` - Per-episode guests
-- `<podcast:chapters>` - Chapter markers (preserved from original)
+- `<podcast:chapters>` - Chapter markers (JSON format, preserved from original)
+- `<psc:chapters>` - Podlove Simple Chapters (inline XML format)
 - OP3 prefixed enclosures - Privacy-respecting download tracking
 
 ### Feed Operations
@@ -240,3 +242,4 @@ MIT
 - [Podchaser API](https://api-docs.podchaser.com)
 - [Podcast Index](https://podcastindex.org)
 - [OP3 Analytics](https://op3.dev) - Privacy-respecting download tracking
+- [Podlove Simple Chapters](https://podlove.org/simple-chapters/) - Chapter format specification

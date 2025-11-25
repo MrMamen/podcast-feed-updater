@@ -255,6 +255,9 @@ def main():
     # Add OP3 analytics prefix for privacy-respecting download tracking
     enricher.add_op3_prefix()
 
+    # Convert JSON chapters to Podlove Simple Chapters format
+    enricher.convert_json_chapters_to_psc()
+
     # Create output directory
     os.makedirs("docs", exist_ok=True)
 
@@ -279,6 +282,7 @@ def main():
     print("  ✓ Podroll: 4 recommended podcasts")
     print("  ✓ Social interactions: Bluesky, Twitter/X, Facebook")
     print("  ✓ OP3 analytics: Privacy-respecting download tracking")
+    print("  ✓ Podlove Simple Chapters: Inline chapter markers")
     print("\nNext steps:")
     print("  1. Review docs/cdspill-enriched.xml")
     print("  2. Add more guest mappings to episode_guests dict")
