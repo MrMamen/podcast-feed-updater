@@ -367,6 +367,41 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Added social interact: {protocol} ({uri})")
         return self
 
+    def add_guid(
+        self,
+        guid: str
+    ) -> 'FeedEnricher':
+        """
+        Add podcast:guid tag to uniquely identify the podcast.
+
+        This is the globally unique identifier for the podcast that stays
+        the same even if the feed URL changes. This allows podcast apps to
+        continue tracking the podcast across URL changes.
+
+        Args:
+            guid: UUID v5 or other globally unique identifier
+                 Example: "ead4c236-bf58-58c6-a2c6-a6b28d128cb6"
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        # Remove existing guid if present
+        existing = self.channel.find('{https://podcastindex.org/namespace/1.0}guid')
+        if existing is not None:
+            self.channel.remove(existing)
+
+        guid_elem = etree.Element(
+            '{https://podcastindex.org/namespace/1.0}guid'
+        )
+        guid_elem.text = guid
+
+        self.channel.append(guid_elem)
+        print(f"✓ Added podcast:guid: {guid}")
+        return self
+
     def add_medium(
         self,
         medium: str = "podcast"

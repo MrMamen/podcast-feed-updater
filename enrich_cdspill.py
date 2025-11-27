@@ -125,6 +125,9 @@ def main():
 
     enricher.add_channel_persons(hosts)
 
+    # Add podcast GUID (unique identifier for the podcast)
+    enricher.add_guid("a550e4b5-6615-5a5d-b1d5-a371c01552a2")
+
     # Add podcast:season and podcast:episode tags
     enricher.add_podcast_season_episode()
 
@@ -274,6 +277,7 @@ def main():
     print("\nWhat was added:")
     print("  ✓ Beta title suffix for testing")
     print("  ✓ 2 default hosts (Sigve & Hans-Henrik)")
+    print("  ✓ Podcast GUID: Unique identifier for feed portability")
     print("  ✓ Season/episode tags with season names (e.g., 'Vår 2020')")
     print("  ✓ Auto-detected guests from episode titles")
     print("  ✓ Patreon funding link")

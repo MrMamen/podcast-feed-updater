@@ -3,14 +3,20 @@ name: Enrich cd SPILL Feed
 on:
   # Schedule based on publishing pattern
   schedule:
-    # Run every hour on Mondays (when new episodes are published)
-    - cron: '0 * * * 1'
-
-    # Run once daily at 12:00 UTC on other days (check for corrections/updates)
-    - cron: '0 12 * * 0,2-6'
+    # Run on Mondays at 7:00, 9:00, 11:00, and 13:00 UTC
+    - cron: '0 7,9,11,13 * * 1'
 
   # Allow manual trigger
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force regeneration (ignore cache)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
 
   # Run on push to master (for testing)
   push:
@@ -48,8 +54,14 @@ jobs:
         # Remove beta suffix for production
         sed -i 's/enricher.set_beta_title(" (Beta)")/# enricher.set_beta_title(" (Beta)")/' enrich_cdspill.py
 
-        # Run enrichment (without --force to use smart caching)
-        uv run enrich_cdspill.py
+        # Run enrichment (with or without --force based on input)
+        if [ "${{ github.event.inputs.force }}" = "true" ]; then
+          echo "Running with --force flag"
+          uv run enrich_cdspill.py --force
+        else
+          echo "Running with smart caching (no --force)"
+          uv run enrich_cdspill.py
+        fi
 
     - name: Commit cache updates
       run: |
