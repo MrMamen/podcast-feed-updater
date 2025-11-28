@@ -62,6 +62,10 @@ def main():
     if enricher.source_latest_pubdate is None:
         enricher.fetch_feed()
 
+    # Validate that source feed doesn't already have Podcasting 2.0 tags
+    # This will fail loudly if Podbean adds support for these tags
+    enricher.validate_no_conflicts()
+
     # Add beta suffix to title
     enricher.set_beta_title(" (Beta)")
 
