@@ -6,20 +6,12 @@ Adds host/guest information and funding links.
 Usage:
     uv run enrich_cdspill.py              # Without Podchaser (default, recommended)
     uv run enrich_cdspill.py --podchaser  # With Podchaser API (when API is available)
-    uv run enrich_cdspill.py --force      # Force regeneration even if no changes detected
 
 The script adds:
     - 2 default hosts (Sigve & Hans-Henrik)
     - Guest information for episodes matching patterns
     - Patreon funding link
     - Bluesky social interaction
-
-Smart caching:
-    - Checks latest episode's pubDate AND link before regenerating
-    - Detects new episodes (pubDate change) AND updated episodes (link change)
-    - Skips processing if no changes detected
-    - Use --force to override and regenerate anyway
-    - Perfect for automated GitHub Actions workflows
 """
 
 import os
@@ -35,7 +27,6 @@ def main():
     """Enrich cd SPILL feed."""
     # Check command line flags
     use_podchaser = "--podchaser" in sys.argv
-    force_regenerate = "--force" in sys.argv
 
     print("="*60)
     print("CD SPILL FEED ENRICHER")
@@ -43,24 +34,14 @@ def main():
         print("Mode: WITH Podchaser API")
     else:
         print("Mode: Manual data (use --podchaser flag to enable API)")
-    if force_regenerate:
-        print("Mode: FORCE REGENERATE (ignoring cache)")
     print("="*60)
 
     # Initialize enricher
     enricher = FeedEnricher("https://feed.podbean.com/cdspill/feed.xml")
 
-    # Check if feed has changed (unless --force)
+    # Fetch feed
     output_file = "docs/cdspill-enriched.xml"
-    if not force_regenerate:
-        if not enricher.check_if_changed(output_file):
-            print("\n✓ Feed is up to date, skipping regeneration")
-            print("  (Use --force to regenerate anyway)")
-            return
-
-    # Fetch feed if we haven't already (check_if_changed might have done it)
-    if enricher.source_latest_pubdate is None:
-        enricher.fetch_feed()
+    enricher.fetch_feed()
 
     # Validate that source feed doesn't already have Podcasting 2.0 tags
     # This will fail loudly if Podbean adds support for these tags
@@ -270,9 +251,6 @@ def main():
 
     # Write enriched feed
     enricher.write_feed(output_file)
-
-    # Save cache for next run
-    enricher.save_cache(output_file)
 
     print("\n" + "="*60)
     print("DONE!")

@@ -62,6 +62,5 @@ htmlcov/
 # Local Netlify folder
 .netlify
 
-# Don't ignore cache files (needed for GitHub Actions smart caching)
-# Cache files are small metadata files used to detect feed changes
+# Generated feeds (GitHub Actions generates these)
 /docs/

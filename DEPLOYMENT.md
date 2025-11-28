@@ -6,9 +6,8 @@ Guide for å sette opp automatisk kjøring og hosting av den berikede feeden.
 
 ### Fordeler:
 - ✅ Helt gratis
-- ✅ Automatisk kjøring hver 6. time
+- ✅ Automatisk kjøring på mandager
 - ✅ Gratis hosting via GitHub Pages
-- ✅ Smart caching (kjører kun ved endringer)
 - ✅ Manuell trigger tilgjengelig
 - ✅ Versjonskontroll og historikk
 
@@ -87,14 +86,11 @@ Eller workflow-filen gjør dette automatisk.
 ## ⏰ Kjøreplan
 
 Workflow kjører automatisk:
-- **Mandager:** Hver time (når nye episoder publiseres)
-- **Resten av uken:** Én gang daglig kl. 12:00 UTC (for oppdateringer/rettelser)
+- **Mandager:** Kl. 07:00, 09:00, 11:00, og 13:00 UTC (når nye episoder publiseres)
 - **Ved push til master** (for testing)
 - **Manuelt** (via Actions tab)
 
-**Rasjonale:** cd SPILL publiserer nye episoder på mandager, så workflow sjekker oftere den dagen for rask oppdatering. Resten av uken sjekkes kun én gang daglig for eventuelle rettelser eller oppdateringer.
-
-**Smart caching:** Scriptet sjekker om feeden har endret seg (pubDate + link) og hopper over regenerering hvis ingen endringer. Dette gjør hyppige kjøringer billige og raske.
+**Rasjonale:** cd SPILL publiserer nye episoder på mandager, så workflow kjører kun den dagen med 4 kjøringer fordelt utover dagen for rask oppdatering.
 
 ---
 
@@ -219,11 +215,6 @@ fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested U
 3. Vent 2-3 minutter etter første deploy
 4. Verifiser at Source er satt til `gh-pages` branch
 
-### Smart caching ikke fungerer
-
-1. Sjekk at `.feed_cache/cdspill-enriched.xml.json` blir committed
-2. Bruk `--force` flag for å tvinge regenerering
-
 ---
 
 ## 🎯 Anbefaling for cd SPILL
@@ -233,8 +224,7 @@ fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested U
 1. **Gratis** - Ingen kostnader
 2. **Pålitelig** - GitHub infrastruktur
 3. **Enkelt** - Alt er allerede satt opp i `.github/workflows/`
-4. **Smart** - Caching reduserer unødvendig prosessering
-5. **Transparent** - Se historikk og logs i Actions tab
+4. **Transparent** - Se historikk og logs i Actions tab
 
 **URL du kan bruke:**
 ```
@@ -263,7 +253,7 @@ Denne kan du:
 ## 💡 Tips
 
 - **Custom domain:** Kan legge til via GitHub Pages settings (f.eks. `podcast.cdspill.no`)
-- **Kjøre oftere:** Endre cron schedule i workflow (men 6 timer er nok for de fleste)
+- **Kjøre oftere:** Endre cron schedule i workflow hvis nødvendig
 - **Monitoring:** Sett opp UptimeRobot for å overvåke feed-tilgjengelighet
 - **Backup:** GitHub Pages history fungerer som backup
 
@@ -273,6 +263,6 @@ Denne kan du:
 
 Hvis du støter på problemer:
 1. Sjekk GitHub Actions logs
-2. Test lokalt: `uv run enrich_cdspill.py --force`
+2. Test lokalt: `uv run enrich_cdspill.py`
 3. Valider XML: `xmllint --noout docs/cdspill-enriched.xml`
 4. Åpne issue i repo eller spør i Podcasting 2.0 community

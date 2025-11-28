@@ -8,15 +8,6 @@ on:
 
   # Allow manual trigger
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Force regeneration (ignore cache)'
-        required: false
-        default: 'false'
-        type: choice
-        options:
-          - 'false'
-          - 'true'
 
   # Run on push to master (for testing)
   push:
@@ -54,33 +45,8 @@ jobs:
         # Remove beta suffix for production
         sed -i 's/enricher.set_beta_title(" (Beta)")/# enricher.set_beta_title(" (Beta)")/' enrich_cdspill.py
 
-        # Run enrichment (with or without --force based on input)
-        if [ "${{ github.event.inputs.force }}" = "true" ]; then
-          echo "Running with --force flag"
-          uv run enrich_cdspill.py --force
-        else
-          echo "Running with smart caching (no --force)"
-          uv run enrich_cdspill.py
-        fi
-
-    - name: Commit cache updates
-      run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-
-        # Add cache files if they exist (cache is stored as docs/*.cache)
-        if ls docs/*.cache 1> /dev/null 2>&1; then
-          git add docs/*.cache
-          # Only commit if there are changes
-          if ! git diff --staged --quiet; then
-            git commit -m "Update feed cache [skip ci]"
-            git push
-          else
-            echo "No cache changes to commit"
-          fi
-        else
-          echo "No cache files found yet (first run)"
-        fi
+        # Run enrichment
+        uv run enrich_cdspill.py
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

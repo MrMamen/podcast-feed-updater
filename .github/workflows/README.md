@@ -4,14 +4,13 @@
 
 Automatisk workflow som:
 1. Kjører `enrich_cdspill.py` på mandager
-2. Sjekker om feeden har endret seg (smart caching)
-3. Genererer beriket feed med Podcasting 2.0 tags
-4. Deployer til GitHub Pages
+2. Genererer beriket feed med Podcasting 2.0 tags
+3. Deployer til GitHub Pages
 
 ### Triggers
 
 - **Scheduled (Mondays only):** Kl. 07:00, 09:00, 11:00, og 13:00 UTC
-- **Manual:** Via Actions tab → "Run workflow" (med valgfri `--force` parameter)
+- **Manual:** Via Actions tab → "Run workflow"
 - **Push:** Automatisk ved push til master (for testing)
 
 **Rasjonale:** cd SPILL publiserer nye episoder på mandager, så workflow kjører kun den dagen med 4 kjøringer fordelt utover dagen.
@@ -31,25 +30,16 @@ For Podchaser API support, legg til i repository secrets:
 
 Hvis secrets ikke er satt, bruker workflow manuell host-data (fungerer fint).
 
-### Manual Trigger med Force Flag
-
-Når du kjører workflow manuelt kan du velge om du vil tvinge regenerering:
+### Manual Trigger
 
 **Via GitHub web:**
 1. Gå til Actions tab
 2. Velg "Enrich cd SPILL Feed"
 3. Klikk "Run workflow"
-4. Velg "Force regeneration (ignore cache)":
-   - **false** (default): Bruker smart caching, hopper over hvis ingen endringer
-   - **true**: Tvinger regenerering selv om ingen endringer er detektert
 
 **Via GitHub CLI:**
 ```bash
-# Normal kjøring med smart caching
 gh workflow run enrich-feed.yml
-
-# Med --force flag
-gh workflow run enrich-feed.yml -f force=true
 ```
 
 ### Overvåkning
@@ -81,5 +71,3 @@ schedule:
 ```
 
 Se cron syntax: https://crontab.guru/
-
-**Viktig:** Smart caching sørger for at kjøringer uten endringer er raske og billige, så hyppige sjekk koster lite.

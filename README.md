@@ -58,9 +58,8 @@ git push origin master
 Se **[QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md)** for steg-for-steg guide.
 
 **Resultat:**
-- ✅ Automatisk kjøring (hver time på mandager, daglig resten av uken)
+- ✅ Automatisk kjøring på mandager (kl 07:00, 09:00, 11:00, 13:00 UTC)
 - ✅ Gratis hosting på GitHub Pages
-- ✅ Smart caching (kun ved endringer)
 - ✅ Feed URL: `https://[username].github.io/podcast-feed-updater/cdspill-enriched.xml`
 
 Se **[DEPLOYMENT.md](DEPLOYMENT.md)** for full dokumentasjon og alternative løsninger.
