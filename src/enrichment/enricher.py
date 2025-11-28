@@ -200,6 +200,9 @@ class FeedEnricher(BaseFeed):
         Uses itunes:season and itunes:episode as source.
         For cd SPILL: Season 1 = Vår 2020, Season 2 = Høst 2020, etc.
 
+        The podcast:episode tag includes a display attribute showing both
+        the season episode number and total episode number (e.g., "2 (#80)").
+
         Returns:
             Self for chaining
         """
@@ -220,6 +223,19 @@ class FeedEnricher(BaseFeed):
             return f"{season_name} {year}"
 
         items = self.channel.findall('item')
+
+        # First pass: count episodes per season (feed is in reverse chronological order)
+        season_episode_counts = {}
+        for item in items:
+            season_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}season')
+            if season_elem is not None and season_elem.text:
+                season_num = int(season_elem.text)
+                if season_num not in season_episode_counts:
+                    season_episode_counts[season_num] = 0
+                season_episode_counts[season_num] += 1
+
+        # Second pass: add podcast:season and podcast:episode tags
+        season_counters = {}
         added_count = 0
 
         for item in items:
@@ -240,12 +256,37 @@ class FeedEnricher(BaseFeed):
                 item.append(podcast_season)
 
             if episode_elem is not None and episode_elem.text:
-                # Add podcast:episode
-                podcast_episode = etree.Element(
-                    '{https://podcastindex.org/namespace/1.0}episode'
-                )
-                podcast_episode.text = episode_elem.text
-                item.append(podcast_episode)
+                total_episode_num = int(episode_elem.text)
+
+                # Calculate season episode number (reverse chronological order)
+                if season_elem is not None and season_elem.text:
+                    season_num = int(season_elem.text)
+
+                    # Initialize counter for this season if not present
+                    if season_num not in season_counters:
+                        season_counters[season_num] = season_episode_counts[season_num]
+
+                    # Get the episode number within the season
+                    season_episode_num = season_counters[season_num]
+                    season_counters[season_num] -= 1
+
+                    # Create display attribute: "2 (#80)"
+                    display_value = f"{season_episode_num} (#{total_episode_num})"
+
+                    # Add podcast:episode with display attribute
+                    podcast_episode = etree.Element(
+                        '{https://podcastindex.org/namespace/1.0}episode',
+                        display=display_value
+                    )
+                    podcast_episode.text = str(total_episode_num)
+                    item.append(podcast_episode)
+                else:
+                    # No season info, just use total episode number
+                    podcast_episode = etree.Element(
+                        '{https://podcastindex.org/namespace/1.0}episode'
+                    )
+                    podcast_episode.text = str(total_episode_num)
+                    item.append(podcast_episode)
 
             if season_elem is not None or episode_elem is not None:
                 added_count += 1
