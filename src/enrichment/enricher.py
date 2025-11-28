@@ -112,6 +112,41 @@ class FeedEnricher(BaseFeed):
 
         return self
 
+    def remove_episode_numbers_from_titles(self, pattern: str = r'\s*\(#?\d+\)$') -> 'FeedEnricher':
+        """
+        Remove episode numbers from episode titles.
+
+        Args:
+            pattern: Regex pattern to match episode numbers (default: matches "(#123)" or "(123)" at end of title)
+
+        Returns:
+            Self for chaining
+        """
+        import re
+
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        items = self.channel.findall('item')
+        removed_count = 0
+
+        for item in items:
+            # Update <title>
+            title_elem = item.find('title')
+            if title_elem is not None and title_elem.text:
+                new_title = re.sub(pattern, '', title_elem.text).strip()
+                if new_title != title_elem.text:
+                    title_elem.text = new_title
+                    removed_count += 1
+
+            # Also update <itunes:title> if present
+            itunes_title = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}title')
+            if itunes_title is not None and itunes_title.text:
+                itunes_title.text = re.sub(pattern, '', itunes_title.text).strip()
+
+        print(f"✓ Removed episode numbers from {removed_count} episode titles")
+        return self
+
     def add_channel_persons(
         self,
         persons: List[Dict[str, str]]

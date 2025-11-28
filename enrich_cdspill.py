@@ -50,12 +50,15 @@ def main():
     # Add beta suffix to title
     enricher.set_beta_title(" (Beta)")
 
+    # Remove episode numbers from titles
+    enricher.remove_episode_numbers_from_titles()
+
     # Define hosts manually (always available as fallback)
     manual_hosts = [
         {
             "name": "Sigve Indregard",
             "role": "host",
-            "href": "https://www.podchaser.com/creators/sigve-indregard-107ZbOzxDQ",
+            "href": "https://www.podchaser.com/creators/sigve-baar-digernes-107tVQyeYz",
         },
         {
             "name": "Hans-Henrik Mamen",
@@ -123,10 +126,10 @@ def main():
     # Use 'alias' key to normalize name variations (e.g., "Aksel Bjerke" → "Aksel M. Bjerke")
     known_guests = {
         "Anette Jøsendal": {
-            "href": "https://www.podchaser.com/creators/anette-josendal-107ZbPSK9m"
+            "href": "https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx"
         },
         "Roar Granevang": {
-            "href": "https://www.podchaser.com/creators/roar-granevang-107ZbQKYBB"
+            "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy"
         },
         "Jostein Hakestad": {
             # Add href when available
