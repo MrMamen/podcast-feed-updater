@@ -64,3 +64,4 @@ htmlcov/
 
 # Don't ignore cache files (needed for GitHub Actions smart caching)
 # Cache files are small metadata files used to detect feed changes
+/docs/
