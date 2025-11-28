@@ -55,6 +55,9 @@ class BaseFeed:
         if self.source_latest_pubdate:
             print(f"Latest episode: {self.source_latest_pubdate}")
 
+        # Format existing podcast:chapters elements for readability
+        self._format_existing_chapters(items)
+
 
     def write_feed(self, output_file: str) -> None:
         """
@@ -75,6 +78,33 @@ class BaseFeed:
         )
 
         print(f"✓ Feed written to: {output_file}")
+
+    def _format_existing_chapters(self, items: list) -> None:
+        """
+        Format existing podcast:chapters elements for better readability.
+
+        Args:
+            items: List of item elements
+        """
+        for item in items:
+            # Find podcast:chapters element
+            chapters = item.find('{https://podcastindex.org/namespace/1.0}chapters')
+            if chapters is not None:
+                self._add_newline_before_element(item, chapters)
+
+    def _add_newline_before_element(self, parent: etree._Element, element: etree._Element) -> None:
+        """
+        Add a newline before an element by setting the tail of the previous sibling.
+
+        Args:
+            parent: Parent element
+            element: Element to add newline before
+        """
+        children = list(parent)
+        idx = children.index(element)
+        if idx > 0:
+            prev_elem = children[idx - 1]
+            prev_elem.tail = '\n        '
 
     def _ensure_podcast_namespace(self) -> None:
         """Ensure podcast namespace is registered in root element."""

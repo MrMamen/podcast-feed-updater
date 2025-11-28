@@ -249,6 +249,9 @@ def main():
     # Convert JSON chapters to Podlove Simple Chapters format
     enricher.convert_json_chapters_to_psc()
 
+    # Format podcast elements for better readability (call after all enrichment)
+    enricher.format_podcast_elements()
+
     # Create output directory
     os.makedirs("docs", exist_ok=True)
 

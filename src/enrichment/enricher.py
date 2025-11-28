@@ -797,6 +797,10 @@ class FeedEnricher(BaseFeed):
                             # Add PSC chapters to item (after podcast:chapters)
                             chapter_index = list(item).index(podcast_chapters)
                             item.insert(chapter_index + 1, psc_chapters)
+
+                            # Add newline before psc:chapters for better readability
+                            self._add_newline_before_element(item, psc_chapters)
+
                             converted_count += 1
 
                     except Exception as e:
@@ -808,6 +812,39 @@ class FeedEnricher(BaseFeed):
         if failed_count > 0:
             print(f"  ⚠ {failed_count} episodes failed to convert (JSON not accessible)")
 
+        return self
+
+    def format_podcast_elements(self) -> 'FeedEnricher':
+        """
+        Format podcast elements for better readability.
+        Adds newlines before all podcast:season, podcast:episode, and podcast:person elements.
+
+        This should be called after all enrichment methods have been run.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        items = self.channel.findall('item')
+        for item in items:
+            # Add newline before all podcast:season elements
+            seasons = item.findall('{https://podcastindex.org/namespace/1.0}season')
+            for season in seasons:
+                self._add_newline_before_element(item, season)
+
+            # Add newline before all podcast:episode elements
+            episodes = item.findall('{https://podcastindex.org/namespace/1.0}episode')
+            for episode in episodes:
+                self._add_newline_before_element(item, episode)
+
+            # Add newline before all podcast:person elements
+            persons = item.findall('{https://podcastindex.org/namespace/1.0}person')
+            for person in persons:
+                self._add_newline_before_element(item, person)
+
+        print("✓ Formatted podcast elements for better readability")
         return self
 
     def write_feed(self, output_file: str) -> None:
