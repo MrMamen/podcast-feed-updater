@@ -42,9 +42,6 @@ jobs:
         PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
-        # Remove beta suffix for production
-        sed -i 's/enricher.set_beta_title(" (Beta)")/# enricher.set_beta_title(" (Beta)")/' enrich_cdspill.py
-
         # Run enrichment
         uv run enrich_cdspill.py
 
