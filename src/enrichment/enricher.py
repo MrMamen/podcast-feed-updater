@@ -764,9 +764,50 @@ class FeedEnricher(BaseFeed):
                             version="1.2"
                         )
 
-                        # Convert each chapter
+                        # Convert each chapter (sorted by startTime)
                         if 'chapters' in chapters_data:
-                            for chapter in chapters_data['chapters']:
+                            original_chapters = chapters_data['chapters']
+
+                            # Sort chapters by startTime to ensure chronological order
+                            sorted_chapters = sorted(
+                                original_chapters,
+                                key=lambda ch: ch.get('startTime', 0)
+                            )
+
+                            # Check if first chapter starts at 0:00
+                            missing_intro = (
+                                len(sorted_chapters) > 0 and
+                                sorted_chapters[0].get('startTime', 0) > 0
+                            )
+
+                            if missing_intro:
+                                # Get episode title for better reporting
+                                title_elem = item.find('title')
+                                episode_title = title_elem.text if title_elem is not None else 'Unknown'
+                                print(f"  ⚠️  Missing 00:00 intro chapter: {episode_title}")
+                                print(f"      Source JSON: {json_url}")
+
+                                # Add intro chapter at 00:00
+                                intro_chapter = {
+                                    'startTime': 0,
+                                    'title': 'Intro'
+                                }
+                                sorted_chapters.insert(0, intro_chapter)
+
+                            # Detect if chapters were unsorted in source JSON
+                            is_unsorted = any(
+                                original_chapters[i].get('startTime', 0) > original_chapters[i+1].get('startTime', 0)
+                                for i in range(len(original_chapters) - 1)
+                            )
+
+                            if is_unsorted:
+                                # Get episode title for better reporting
+                                title_elem = item.find('title')
+                                episode_title = title_elem.text if title_elem is not None else 'Unknown'
+                                print(f"  ⚠️  Unsorted chapters detected: {episode_title}")
+                                print(f"      Source JSON: {json_url}")
+
+                            for chapter in sorted_chapters:
                                 start_time = chapter.get('startTime', 0)
                                 title = chapter.get('title', '')
 
