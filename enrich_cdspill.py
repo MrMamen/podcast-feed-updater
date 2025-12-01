@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
 """
 Enrich cd SPILL feed with Podcasting 2.0 tags.
-Adds host/guest information and funding links.
+Adds host/guest information, funding links, and rich metadata.
 
 Usage:
-    uv run enrich_cdspill.py              # Without Podchaser (default, recommended)
-    uv run enrich_cdspill.py --podchaser  # With Podchaser API (when API is available)
+    uv run enrich_cdspill.py
+
+Person data:
+    - Permanent staff: cdspill_permanent_staff.json (hosts and other permanent roles)
+    - Known guests: cdspill_known_guests.json (profile images, URLs, name aliases)
+    - Auto-detection: Guests detected from episode titles ("med [name]")
+    - Lookup new guests: uv run python3 lookup_guest.py "Guest Name"
 
 The script adds:
-    - 2 default hosts (Sigve & Hans-Henrik)
-    - Guest information for episodes matching patterns
+    - Permanent hosts at channel level (with profile images and URLs)
+    - Auto-detected guests per episode (with profile data where available)
     - Patreon funding link
-    - Bluesky social interaction
+    - Social interactions (Bluesky, Twitter/X, Facebook)
+    - Season/episode numbering with Norwegian season names
+    - OP3 analytics for privacy-respecting download tracking
+    - Podlove Simple Chapters (converted from JSON)
 """
 
 import os
@@ -25,15 +33,8 @@ load_dotenv()
 
 def main():
     """Enrich cd SPILL feed."""
-    # Check command line flags
-    use_podchaser = "--podchaser" in sys.argv
-
     print("="*60)
     print("CD SPILL FEED ENRICHER")
-    if use_podchaser:
-        print("Mode: WITH Podchaser API")
-    else:
-        print("Mode: Manual data (use --podchaser flag to enable API)")
     print("="*60)
 
     # Initialize enricher
@@ -53,63 +54,35 @@ def main():
     # Remove episode numbers from titles
     enricher.remove_episode_numbers_from_titles()
 
-    # Define hosts manually (always available as fallback)
-    manual_hosts = [
-        {
-            "name": "Sigve Indregard",
-            "role": "host",
-            "href": "https://www.podchaser.com/creators/sigve-baar-digernes-107tVQyeYz",
-        },
-        {
-            "name": "Hans-Henrik Mamen",
-            "role": "host",
-            "href": "https://www.podchaser.com/creators/hans-henrik-mamen-107ZbOzNaP",
-        },
-    ]
+    # Load permanent staff (hosts and other permanent roles)
+    import json
 
-    hosts = manual_hosts  # Default to manual data
+    permanent_staff_file = "cdspill_permanent_staff.json"
+    known_guests_file = "cdspill_known_guests.json"
 
-    # Only try Podchaser if flag is set
-    if use_podchaser:
-        print("\n" + "="*60)
-        print("FETCHING HOSTS FROM PODCHASER API")
-        print("="*60)
+    hosts = []
+    known_guests_data = None
 
-        api_key = os.environ.get('PODCHASER_API_KEY')
-        api_secret = os.environ.get('PODCHASER_API_SECRET')
+    # Load permanent staff config
+    print(f"\n📋 Loading permanent staff from: {permanent_staff_file}")
+    try:
+        with open(permanent_staff_file, 'r', encoding='utf-8') as f:
+            permanent_staff = json.load(f)
 
-        if not api_key or not api_secret:
-            print("\n⚠ WARNING: Missing Podchaser credentials!")
-            print("Required in .env file:")
-            print("  PODCHASER_API_KEY=your_client_id")
-            print("  PODCHASER_API_SECRET=your_client_secret")
-            print("\nGet credentials at: https://www.podchaser.com/api")
-            print("\nFalling back to manual host data...\n")
-        else:
-            try:
-                from src.enrichment.podchaser_api import PodchaserAPI
+        # Get hosts from config (already includes img/href if defined)
+        hosts = permanent_staff.get('hosts', [])
+        print(f"✓ Loaded {len(hosts)} permanent host(s)")
 
-                # Use Podchaser API
-                api = PodchaserAPI(api_key, api_secret)
+        for host in hosts:
+            img_status = "📷" if 'img' in host else "  "
+            href_status = "🔗" if 'href' in host else "  "
+            print(f"  {img_status}{href_status} {host['name']} ({host['role']})")
 
-                if not api.access_token:
-                    print("⚠ Failed to authenticate with Podchaser")
-                    print("Falling back to manual host data...\n")
-                else:
-                    podchaser_hosts = api.enrich_feed_with_creators("cd SPILL")
-
-                    if podchaser_hosts:
-                        hosts = podchaser_hosts
-                        print(f"✓ Fetched {len(hosts)} hosts from Podchaser API")
-                        for host in hosts:
-                            print(f"  - {host['name']} ({host['role']})")
-                    else:
-                        print("⚠ Could not fetch from Podchaser, using manual data")
-            except Exception as e:
-                print(f"⚠ Error with Podchaser API: {e}")
-                print("Falling back to manual host data...\n")
-    else:
-        print(f"\nUsing manual host data ({len(manual_hosts)} hosts)")
+    except FileNotFoundError:
+        print(f"⚠ Config file not found: {permanent_staff_file}")
+        print(f"  Using empty host list")
+    except Exception as e:
+        print(f"⚠ Error loading config: {e}")
 
     enricher.add_channel_persons(hosts)
 
@@ -122,56 +95,35 @@ def main():
     # Auto-detect guests from episode titles
     # Episodes with "med Guest Name" will automatically get guest tags
     # Multiple guests separated by " og " are automatically split into separate tags
-    # Optional: Add known guest info for profiles/images
-    # Use 'alias' key to normalize name variations (e.g., "Aksel Bjerke" → "Aksel M. Bjerke")
-    known_guests = {
-        "Anette Jøsendal": {
-            "href": "https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx"
-        },
-        "Roar Granevang": {
-            "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy"
-        },
-        "Jostein Hakestad": {
-            # Add href when available
-        },
-        "Kent William Innholt": {
-            # Add href when available
-        },
-        "Trond Sneås Skauge": {
-            # Add href when available
-        },
-        "Øystein Henriksen": {
-            # Add href when available
-        },
-        "Thorbjørn Hope Andersen": {
-            # Add href when available
-        },
-        "Joachim Froholt": {
-            # Add href when available
-        },
-        "David Skaufjord": {
-            # Add href when available
-        },
-        "Terje Høiback": {
-            # Add href when available
-        },
-        # Name normalizations (aliases)
-        "Aksel Bjerke": {
-            "alias": "Aksel M. Bjerke"
-            # Will use the same href as "Aksel M. Bjerke" if defined
-        },
-        "Aksel M. Bjerke": {
-            # Add href when available
-        },
-        "Aleksander": {
-            "alias": "Aleksander Hakestad"
-            # Normalize to full name for consistency
-        },
-        "Aleksander Hakestad": {
-            # Add href when available
-        }
-        # Add more known guests here with their profile URLs
-    }
+
+    # Load known guests data (images, URLs, aliases)
+    known_guests = {}
+
+    print(f"\n📦 Loading known guests from: {known_guests_file}")
+    try:
+        with open(known_guests_file, 'r', encoding='utf-8') as f:
+            known_guests_data = json.load(f)
+
+        guests = known_guests_data.get('guests', {})
+        aliases = known_guests_data.get('aliases', {})
+
+        # Add guests with their profile data
+        for name, data in guests.items():
+            known_guests[name] = data
+
+        # Add aliases
+        for alias, real_name in aliases.items():
+            known_guests[alias] = {"alias": real_name}
+
+        guests_with_images = sum(1 for g in guests.values() if g.get('img'))
+        print(f"✓ Loaded {len(guests)} guests ({guests_with_images} with images) and {len(aliases)} aliases")
+
+    except FileNotFoundError:
+        print(f"⚠ File not found: {known_guests_file}")
+        print(f"  Guests will not have profile images")
+        print(f"  Use 'uv run python3 lookup_guest.py <name>' to add guest data")
+    except Exception as e:
+        print(f"⚠ Error loading known guests: {e}")
 
     enricher.auto_detect_guests_from_titles(
         pattern=r'med (.+?)(?:\s*\(|$)',  # Matches "med Guest Name (optional #123)"
@@ -264,10 +216,10 @@ def main():
     print("\nEnriched feed: docs/cdspill-enriched.xml")
     print("\nWhat was added:")
     print("  ✓ Beta title suffix for testing")
-    print("  ✓ 2 default hosts (Sigve & Hans-Henrik)")
+    print(f"  ✓ {len(hosts)} permanent host(s) with profile images and URLs")
     print("  ✓ Podcast GUID: Unique identifier for feed portability")
     print("  ✓ Season/episode tags with season names (e.g., 'Vår 2020')")
-    print("  ✓ Auto-detected guests from episode titles")
+    print("  ✓ Auto-detected guests from episode titles (with profile data)")
     print("  ✓ Patreon funding link")
     print("  ✓ Medium type: podcast")
     print("  ✓ Update frequency: biweekly schedule")
@@ -275,11 +227,18 @@ def main():
     print("  ✓ Social interactions: Bluesky, Twitter/X, Facebook")
     print("  ✓ OP3 analytics: Privacy-respecting download tracking")
     print("  ✓ Podlove Simple Chapters: Inline chapter markers")
+    print("\nPerson data files:")
+    print(f"  📋 Permanent staff: {permanent_staff_file}")
+    print(f"  📦 Known guests: {known_guests_file}")
+    if os.path.exists(known_guests_file) and known_guests_data:
+        guests = known_guests_data.get('guests', {})
+        aliases = known_guests_data.get('aliases', {})
+        guests_with_img = sum(1 for g in guests.values() if g.get('img'))
+        print(f"     → {len(guests)} guests ({guests_with_img} with images), {len(aliases)} aliases")
     print("\nNext steps:")
     print("  1. Review docs/cdspill-enriched.xml")
-    print("  2. Add more guest mappings to episode_guests dict")
-    print("  3. Add profile images for hosts/guests")
-    print("  4. Upload to hosting when ready")
+    print("  2. Add new guests: uv run python3 lookup_guest.py 'Guest Name'")
+    print("  3. Upload to hosting when ready")
     print()
 
 

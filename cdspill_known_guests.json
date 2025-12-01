@@ -1,0 +1,39 @@
+{
+  "_comment": "Known guests with Podchaser profile data and name aliases. Add new guests using: uv run python3 lookup_guest.py 'Guest Name'",
+  "guests": {
+    "Roar Granevang": {
+      "img": "https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg",
+      "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy"
+    },
+    "Anette Vik Jøsendal": {
+      "img": "https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg",
+      "href": "https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx"
+    },
+    "Jon Håvard Gundersen": {
+      "img": "https://creator-images.podchaser.com/5d33917bcab6db3365951a4e00f68a31.jpeg"
+    },
+    "Kristian Amlie": {
+      "img": "https://creator-images.podchaser.com/f30c4e10e1d22d3d43d343933eebe490.jpeg"
+    },
+    "Terje Høiback": {
+      "img": "https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg"
+    },
+    "David Skaufjord": {
+      "img": "https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg"
+    },
+    "Audun Rodem": {
+      "img": "https://creator-images.podchaser.com/a9f2efd93c83d033f2611ec76e93abe5.jpeg"
+    },
+    "Erlend Fiddan": {
+      "img": "https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg"
+    },
+    "Ketil Espenæs": {
+      "img": "https://creator-images.podchaser.com/dfdb5f7f33b0ebbb36b66f939c4f4f6f.jpeg"
+    }
+  },
+  "aliases": {
+    "Anette Jøsendal": "Anette Vik Jøsendal",
+    "Aksel Bjerke": "Aksel M. Bjerke",
+    "Aleksander": "Aleksander Hakestad"
+  }
+}

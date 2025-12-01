@@ -64,3 +64,4 @@ htmlcov/
 
 # Generated feeds (GitHub Actions generates these)
 /docs/
+*.backup

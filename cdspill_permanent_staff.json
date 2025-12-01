@@ -1,0 +1,39 @@
+{
+  "hosts": [
+    {
+      "name": "Sigve Baar Digernes",
+      "role": "host",
+      "img": "https://creator-images.podchaser.com/71bbd16436f94f6bc85f2bb97e13298c.jpeg",
+      "href": "https://www.podchaser.com/creators/sigve-baar-digernes-107tVQyeYz"
+    },
+    {
+      "name": "Erik André Vik Mamen",
+      "role": "host",
+      "img": "https://creator-images.podchaser.com/a375188d8b4f3ecd4aee14ca208d71d9.jpeg",
+      "href": "https://www.podchaser.com/creators/erik-andre-vik-mamen-107ZE1234"
+    }
+  ],
+  "other_roles": [
+    {
+      "name": "Halvor Blindheim",
+      "role": "cover art designer",
+      "podcast_role": "coverArtDesigner"
+    },
+    {
+      "name": "Anette Vik Jøsendal",
+      "role": "cover art designer",
+      "podcast_role": "coverArtDesigner"
+    },
+    {
+      "name": "Kristian Amlie",
+      "role": "theme music",
+      "podcast_role": "themeMusic"
+    },
+    {
+      "name": "Joachim Froholt",
+      "role": "consultant",
+      "podcast_role": "consultant"
+    }
+  ],
+  "_comment": "Hosts go on channel level. Other roles are tracked but not currently added to feed. Podchaser cache is only used for guest data and profile images."
+}
