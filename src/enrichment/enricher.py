@@ -325,6 +325,7 @@ class FeedEnricher(BaseFeed):
         items = self.channel.findall('item')
         guest_count = 0
         normalizations = []  # Track normalizations for reporting
+        missing_metadata = []  # Track guests without profile images
 
         for item in items:
             title_elem = item.find('title')
@@ -372,11 +373,22 @@ class FeedEnricher(BaseFeed):
                     if not guest_info:
                         guest_info = known_guests.get(guest_name, {})
 
+                    has_href = False
                     if guest_info:
                         if 'href' in guest_info:
                             person_elem.set('href', guest_info['href'])
+                            has_href = True
                         if 'img' in guest_info:
                             person_elem.set('img', guest_info['img'])
+
+                    # Track guests without href (Podchaser URL)
+                    # img is nice to have but not critical
+                    if not has_href:
+                        missing_metadata.append({
+                            'name': guest_name,
+                            'original_name': original_name if original_name != guest_name else None,
+                            'episode': title
+                        })
 
                     item.append(person_elem)
                     guest_count += 1
@@ -388,6 +400,41 @@ class FeedEnricher(BaseFeed):
             print(f"\n  Name normalizations applied:")
             for norm in sorted(set(normalizations)):
                 print(norm)
+
+        # Report guests without metadata
+        if missing_metadata:
+            # Group by guest name to avoid duplicates
+            unique_missing = {}
+            for guest in missing_metadata:
+                name = guest['name']
+                if name not in unique_missing:
+                    unique_missing[name] = {
+                        'original_name': guest['original_name'],
+                        'episodes': []
+                    }
+                unique_missing[name]['episodes'].append(guest['episode'])
+
+            print(f"\n⚠ Found {len(unique_missing)} guest(s) without Podchaser URL (href):")
+            for name, info in sorted(unique_missing.items()):
+                episode_count = len(info['episodes'])
+                if episode_count == 1:
+                    print(f"  - {name} (1 episode)")
+                else:
+                    print(f"  - {name} ({episode_count} episodes)")
+
+                # Show original name if it was normalized from an alias
+                if info['original_name']:
+                    print(f"    (detected as '{info['original_name']}' in titles)")
+
+            print(f"\n💡 Add Podchaser profile with:")
+            print(f"   uv run python3 lookup_guest.py \"Guest Name\"")
+
+            # If there are guests that might need aliases
+            detected_names = [info['original_name'] for info in unique_missing.values()
+                            if info['original_name']]
+            if detected_names:
+                print(f"\n💡 If name variations exist, add aliases with:")
+                print(f"   uv run python3 lookup_guest.py \"Full Name\" --alias \"Short Name\"")
 
         return self
 

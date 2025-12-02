@@ -43,8 +43,8 @@ Vi har laget et komplett eksempel for cd SPILL-podcasten:
   <itunes:author>C:\SPILL＞</itunes:author>
 
   <!-- NYE TAGS -->
-  <podcast:person role="host" href="...">Sigve Indregard</podcast:person>
-  <podcast:person role="host" href="...">Hans-Henrik Mamen</podcast:person>
+  <podcast:person role="host" img="..." href="...">Sigve Baar Digernes</podcast:person>
+  <podcast:person role="host" img="..." href="...">Erik André Vik Mamen</podcast:person>
   <podcast:funding url="https://www.patreon.com/cdSPILL">
     Støtt cd SPILL på Patreon
   </podcast:funding>
@@ -54,54 +54,67 @@ Vi har laget et komplett eksempel for cd SPILL-podcasten:
     <title>Total Annihilation med Roar Granevang</title>
     ...
     <!-- NYE TAGS -->
-    <podcast:person role="guest" href="...">Roar Granevang</podcast:person>
+    <podcast:person role="guest" img="..." href="...">Roar Granevang</podcast:person>
   </item>
 </channel>
 ```
 
 ## 🚀 Hvordan bruke
 
-### Metode 1: Automatisk via Podchaser API (anbefalt)
+### Steg 1: Kjør enrichment-scriptet
 
 ```bash
-# 1. Få en API-nøkkel fra Podchaser
-# Registrer deg på: https://www.podchaser.com/api
-
-# 2. Sett API-nøkkelen som miljøvariabel
-export PODCHASER_API_KEY='your_key_here'
-
-# 3. Kjør enrichment-scriptet
-uv run python3 enrich_cdspill.py
+uv run enrich_cdspill.py
 ```
 
 Dette vil:
-- ✅ Hente hosts automatisk fra Podchaser
-- ✅ Finne gjester basert på episode-titler ("med [Name]")
+- ✅ Legge til permanent hosts fra `cdspill_permanent_staff.json`
+- ✅ Auto-detektere gjester fra episode-titler ("med [Name]")
+- ✅ Berike med profil-bilder og URLs fra `cdspill_known_guests.json`
 - ✅ Legge til funding link (Patreon)
-- ✅ Legge til social interact (Bluesky)
+- ✅ Legge til social interact (Bluesky, Twitter/X, Facebook)
+- ✅ Legge til season/episode tags
+- ✅ OP3 analytics for nedlastingssporing
+- ✅ Podlove Simple Chapters
 
-### Metode 2: Manuell konfigurasjon
+### Steg 2: Legg til nye gjester (valgfritt)
 
-Hvis du ikke har Podchaser API-nøkkel, eller vil ha mer kontroll:
+Hvis en ny gjest dukker opp og mangler profilbilde:
+
+```bash
+# Slå opp gjest i Podchaser
+uv run python3 lookup_guest.py "Guest Name"
+
+# Med alias for navnevarianter
+uv run python3 lookup_guest.py "Full Name" --alias "Short Name"
+```
+
+Dette legger automatisk til gjesten i `cdspill_known_guests.json` med profilbilde og Podchaser-URL.
+
+**Se [PERSON_DATA_README.md](PERSON_DATA_README.md)** for fullstendig dokumentasjon av person-data systemet.
+
+### Tilpass for din podcast
 
 ```python
-# enrich_cdspill.py
+# 1. Kopier scriptet
+cp enrich_cdspill.py enrich_yourpodcast.py
 
-hosts = [
+# 2. Lag permanent staff config
+{
+  "hosts": [
     {
-        "name": "Your Name",
-        "role": "host",
-        "href": "https://example.com/yourprofile",
-        "img": "https://example.com/yourphoto.jpg"  # Valgfritt
+      "name": "Your Name",
+      "role": "host",
+      "img": "https://example.com/photo.jpg",
+      "href": "https://example.com/profile"
     }
-]
+  ]
+}
 
-episode_guests = {
-    "med John Doe": [{  # Matcher episode-titler som inneholder dette
-        "name": "John Doe",
-        "role": "guest",
-        "href": "https://example.com/john"
-    }]
+# 3. Lag known guests fil (start tom)
+{
+  "guests": {},
+  "aliases": {}
 }
 ```
 
@@ -110,59 +123,22 @@ episode_guests = {
 Etter enrichment:
 
 **Channel-nivå:**
-- ✅ 2 hosts med profil-linker
+- ✅ 2 hosts med profil-bilder og URLs
 - ✅ Patreon funding-link
-- ✅ Bluesky social interaction
+- ✅ Social interactions (Bluesky, Twitter/X, Facebook)
 - ✅ OP3 analytics tracking
+- ✅ Podcast GUID for portabilitet
+- ✅ Update frequency (biweekly)
+- ✅ Podroll (anbefalte podcasts)
 
 **Episode-nivå:**
 - ✅ Auto-detected guests fra episode-titler
-- ✅ Season/episode tags med norske navn
+- ✅ Season/episode tags med norske sesongnavn
 - ✅ OP3-prefixede enclosure-URLer
 - ✅ Podlove Simple Chapters (inline XML format)
 
 **Output:**
 - `docs/cdspill-enriched.xml` (klar for hosting)
-
-## 🔧 Tilpass for din podcast
-
-### 1. Kopier og tilpass scriptet
-
-```bash
-cp enrich_cdspill.py enrich_yourpodcast.py
-```
-
-### 2. Endre feed-URL og informasjon
-
-```python
-# I enrich_yourpodcast.py
-
-enricher = FeedEnricher("https://your-feed-url.com/feed.xml")
-
-hosts = [
-    {"name": "Your Host", "role": "host", ...}
-]
-
-enricher.add_funding(
-    url="https://your-patreon-url",
-    message="Support us"
-)
-```
-
-### 3. Legg til gjeste-matching
-
-```python
-episode_guests = {
-    "Episode #123": [{
-        "name": "Guest Name",
-        "role": "guest"
-    }],
-    # Eller match på mønster:
-    "with": [{  # Matcher alle episoder med "with" i tittelen
-        "name": "Regular Guest",
-        "role": "guest"
-    }]
-}
 ```
 
 ## 🌟 Avanserte features
@@ -243,35 +219,17 @@ def add_location(self, geo: str, osm: str):
     """Add podcast:location"""
 ```
 
-### Hente gjester fra andre kilder
-
-```python
-# Integrer med andre APIs
-from your_api import get_episode_guests
-
-for episode in episodes:
-    guests = get_episode_guests(episode.id)
-    enricher.add_episode_persons({
-        episode.title: guests
-    })
-```
-
 ## 📚 Ressurser
 
+- **Person Data System:** [PERSON_DATA_README.md](PERSON_DATA_README.md)
 - **Podchaser API Docs:** https://api-docs.podchaser.com
 - **Podcasting 2.0 Spec:** https://github.com/Podcastindex-org/podcast-namespace
 - **Podcast Apps som støtter 2.0:** https://podcastindex.org/apps
 - **Validator:** https://podba.se/validate/
+- **OP3 Analytics:** https://op3.dev
+- **Podlove Simple Chapters:** https://podlove.org/simple-chapters/
 
 ## 🆘 Feilsøking
-
-### "No PODCHASER_API_KEY"
-**Løsning:** Sett miljøvariabelen:
-```bash
-export PODCHASER_API_KEY='your_key'
-```
-
-Eller bruk manuell konfigurasjon (scriptet fortsetter automatisk).
 
 ### "podcast namespace not found"
 **Løsning:** Scriptet legger automatisk til namespace. Hvis det fortsatt feiler, sjekk at lxml er installert:
@@ -280,15 +238,30 @@ uv pip install lxml
 ```
 
 ### Gjester blir ikke funnet
-**Løsning:** Sjekk episode_guests-mappingen. Nøkkelen må matche deler av episode-tittelen:
+**Løsning:** Gjester detekteres automatisk fra episode-titler med mønsteret "med [Name]":
 ```python
 # Eksempel:
 # Episode: "Total Annihilation med Roar Granevang (#120)"
-# Mapping:
-"med Roar": [...]  # ✅ Matcher
-"Roar Granevang": [...]  # ✅ Matcher
-"Episode 120": [...]  # ❌ Matcher ikke (ikke i tittelen)
+# Auto-detekterer: "Roar Granevang"
+
+# Episode: "OutRun med Mats Lindh og Øystein Lill (#53)"
+# Auto-detekterer: "Mats Lindh" og "Øystein Lill"
 ```
+
+Hvis en gjest mangler profilbilde:
+```bash
+uv run python3 lookup_guest.py "Guest Name"
+```
+
+### Gjest har feil navn i episode-tittel
+**Løsning:** Legg til alias i `cdspill_known_guests.json`:
+```json
+{
+  "aliases": {
+    "Short Name": "Full Name",
+    "Nickname": "Real Name"
+  }
+}
 
 ## 💡 Tips
 

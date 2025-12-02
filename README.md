@@ -136,19 +136,27 @@ podcast-feed-updater/
 - **Preserve XML** - Bevarer all original struktur (lxml)
 - **Namespace handling** - Korrekt håndtering av itunes:, podcast:, etc.
 
-## 🔧 API Integration
+## 🔧 Person Data
 
-### Podchaser API (Optional)
+### Podchaser Integration
+
+Person data (hosts og gjester) vedlikeholdes i JSON-filer. Podchaser brukes for å berike med profil-URLs:
+
 ```bash
-# Set credentials
-export PODCHASER_API_KEY='your_key'
-export PODCHASER_API_SECRET='your_secret'
+# Auto-populate alle gjester fra episode-titler
+uv run python3 populate_guests.py
 
-# Run with API
-uv run enrich_cdspill.py --podchaser
+# Legg til gjest fra Podchaser URL (interaktiv matching med piltaster)
+uv run python3 add_guest_from_url.py "https://www.podchaser.com/creators/name-id"
+
+# Legg til enkelt-gjest ved søk
+uv run python3 lookup_guest.py "Guest Name"
 ```
 
-**Note:** Podchaser integration er optional. Scriptet fungerer fint med manuell data.
+**Alias-system**: Offisielle navn fra Podchaser brukes som hovednavn.
+Navnevarianter fra episode-titler legges til som aliaser.
+
+**Se [PERSON_DATA_README.md](PERSON_DATA_README.md)** for komplett dokumentasjon.
 
 ## 📝 Bruk
 
