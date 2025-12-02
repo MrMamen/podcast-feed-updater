@@ -15,6 +15,7 @@ import re
 import requests
 from dotenv import load_dotenv
 import os
+from urllib.parse import unquote
 
 import inquirer
 
@@ -23,6 +24,9 @@ load_dotenv()
 
 def extract_creator_info_from_url(url):
     """Extract creator ID and name from Podchaser URL."""
+    # URL-decode first to handle encoded characters like %C3%B8 (ø)
+    url = unquote(url)
+
     # URL format: https://www.podchaser.com/creators/name-107tZxOga3
     match = re.search(r'/creators/([^/]+)-([a-zA-Z0-9]+)$', url)
     if match:
