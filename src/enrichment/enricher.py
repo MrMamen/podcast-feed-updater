@@ -309,6 +309,8 @@ class FeedEnricher(BaseFeed):
                          Example: {"Roar Granevang": {"href": "https://...", "img": "..."}}
                          Can include 'alias' key to normalize name variations:
                          {"Aksel Bjerke": {"alias": "Aksel M. Bjerke"}}
+                         Can include 'extra_episodes' list to add guest to specific episodes by GUID:
+                         {"Terje Høiback": {"href": "...", "extra_episodes": [{"guid": "...", "note": "..."}]}}
             split_multiple: If True, split multiple guests separated by " og " (default: True)
 
         Returns:
@@ -324,9 +326,46 @@ class FeedEnricher(BaseFeed):
 
         items = self.channel.findall('item')
         guest_count = 0
+        extra_episodes_count = 0
         normalizations = []  # Track normalizations for reporting
         missing_metadata = []  # Track guests without profile images
 
+        # First pass: Handle extra_episodes (manual additions by GUID)
+        for guest_name, guest_info in known_guests.items():
+            if 'extra_episodes' not in guest_info:
+                continue
+
+            # Skip if this is an alias entry
+            if 'alias' in guest_info:
+                continue
+
+            for episode_spec in guest_info['extra_episodes']:
+                episode_guid = episode_spec['guid']
+
+                # Find item with matching GUID
+                for item in items:
+                    guid_elem = item.find('guid')
+                    if guid_elem is None or not guid_elem.text:
+                        continue
+
+                    if guid_elem.text == episode_guid:
+                        # Add guest to this episode
+                        person_elem = etree.Element(
+                            '{https://podcastindex.org/namespace/1.0}person',
+                            role='guest'
+                        )
+                        person_elem.text = guest_name
+
+                        if 'href' in guest_info:
+                            person_elem.set('href', guest_info['href'])
+                        if 'img' in guest_info:
+                            person_elem.set('img', guest_info['img'])
+
+                        item.append(person_elem)
+                        extra_episodes_count += 1
+                        break
+
+        # Second pass: Auto-detect from titles
         for item in items:
             title_elem = item.find('title')
             if title_elem is None or not title_elem.text:
@@ -393,7 +432,12 @@ class FeedEnricher(BaseFeed):
                     item.append(person_elem)
                     guest_count += 1
 
-        print(f"✓ Auto-detected and added {guest_count} guests from episode titles")
+        # Report summary
+        total_added = guest_count + extra_episodes_count
+        if extra_episodes_count > 0:
+            print(f"✓ Added {total_added} guest appearances ({guest_count} auto-detected from titles, {extra_episodes_count} from extra_episodes)")
+        else:
+            print(f"✓ Auto-detected and added {guest_count} guests from episode titles")
 
         # Report normalizations if any
         if normalizations:
