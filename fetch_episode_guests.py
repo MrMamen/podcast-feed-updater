@@ -142,13 +142,30 @@ def search_episode_on_podchaser(episode_title, access_token):
     return episodes[0] if episodes else None
 
 
+def check_query_cost(query, access_token):
+    """Check the cost of a query before executing it."""
+    response = requests.post(
+        'https://api.podchaser.com/graphql/cost',
+        json={'query': query},
+        headers={
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {access_token}'
+        }
+    )
+
+    if response.status_code == 200:
+        data = response.json()
+        return data.get('cost', 0)
+    return None
+
+
 def fetch_episode_credits(episode_id, access_token):
     """Fetch credits for a specific episode."""
     query = '''
     query {
       episode(identifier: { type: PODCHASER, id: "%s" }) {
         title
-        credits {
+        credits(first: 25) {
           data {
             role {
               title
@@ -163,6 +180,11 @@ def fetch_episode_credits(episode_id, access_token):
       }
     }
     ''' % episode_id
+
+    # Check cost first
+    cost = check_query_cost(query, access_token)
+    if cost:
+        print(f"📊 Estimated query cost: {cost} points")
 
     response = requests.post(
         'https://api.podchaser.com/graphql',
@@ -261,15 +283,40 @@ def main():
     print(f"📡 Fetching episode credits...")
     credits = fetch_episode_credits(episode_data['id'], access_token)
 
-    # Extract guests from credits
+    # Show all credits for reference
+    print("📋 All episode credits from Podchaser:")
+    production_roles = {'host', 'editor', 'audio editor', 'producer', 'executive producer',
+                       'social media manager', 'theme music', 'songwriter', 'cover art'}
+
     guests = []
+    other_people = []
+
     for credit in credits:
-        role_title = credit.get('role', {}).get('title', '').lower()
-        # Include guests and anyone who is not a host/producer
-        if 'guest' in role_title or role_title in ['', 'creator', 'participant']:
-            creator = credit.get('creator', {})
-            if creator:
-                guests.append(creator)
+        creator = credit.get('creator', {})
+        creator_name = creator.get('name', 'Unknown')
+        role_title = credit.get('role', {}).get('title', '')
+        role_title_lower = role_title.lower()
+
+        print(f"  • {creator_name}: {role_title}")
+
+        # Categorize the person
+        if role_title_lower in production_roles:
+            # Skip production roles
+            continue
+        elif 'guest' in role_title_lower:
+            guests.append(creator)
+        elif role_title_lower in ['consultant', 'contributor', 'participant']:
+            # Potentially guests but not explicitly marked
+            other_people.append((creator, role_title))
+
+    print()
+
+    if other_people:
+        print(f"⚠️  Found {len(other_people)} person(s) with ambiguous roles:")
+        for person, role in other_people:
+            print(f"  • {person['name']}: {role}")
+        print("  These are NOT automatically included. Add manually if they are guests.")
+        print()
 
     if not guests:
         print("⚠️  No guests found for this episode on Podchaser")
@@ -303,50 +350,69 @@ def main():
 
     print()
     print("="*60)
-    print("EXTRA_EPISODES JSON")
+    print("UPDATING KNOWN GUESTS")
     print("="*60)
     print()
-
-    if already_in_feed:
-        print("✅ Guests already in known_guests.json:")
-        print()
-        for name in already_in_feed:
-            guest_data = known_guests[name]
-
-            # Check if this guest already has this episode in extra_episodes
-            extra_eps = guest_data.get('extra_episodes', [])
-            has_episode = any(ep['guid'] == guid for ep in extra_eps)
-
-            if has_episode:
-                print(f'  // "{name}" already has this episode in extra_episodes')
-            else:
-                print(f'  "{name}": {{')
-                if 'img' in guest_data:
-                    print(f'    "img": "{guest_data["img"]}",')
-                if 'href' in guest_data:
-                    print(f'    "href": "{guest_data["href"]}",')
-                print(f'    "extra_episodes": [')
-                print(f'      {{')
-                print(f'        "guid": "{guid}",')
-                print(f'        "note": "{title}"')
-                print(f'      }}')
-                print(f'    ]')
-                print(f'  }},')
-        print()
 
     if guests_to_add:
         print("⚠️  Guests NOT in known_guests.json (add these first):")
         print()
         for guest in guests_to_add:
-            print(f'  // Add {guest["name"]} first with:')
-            print(f'  // uv run python3 lookup_guest.py "{guest["name"]}"')
-            print(f'  // or')
-            print(f'  // uv run python3 add_guest_from_url.py "{guest["href"]}"')
+            print(f'  • {guest["name"]}')
+            print(f'    Add with: uv run python3 lookup_guest.py "{guest["name"]}"')
+            print(f'    Or: uv run python3 add_guest_from_url.py "{guest["href"]}"')
         print()
+        print("❌ Cannot add extra_episodes until all guests are in known_guests.json")
+        sys.exit(1)
 
-    print()
-    print("💡 Copy the JSON above and add to cdspill_known_guests.json")
-    print("   (merge with existing extra_episodes arrays if present)")
+    # Update known_guests.json with extra_episodes
+    guests_updated = 0
+    guests_already_had_episode = 0
+
+    for name in already_in_feed:
+        # Check if this guest already has this episode in extra_episodes
+        extra_eps = known_guests[name].get('extra_episodes', [])
+        has_episode = any(ep['guid'] == guid for ep in extra_eps)
+
+        if has_episode:
+            print(f'  ⏭️  {name} - already has this episode')
+            guests_already_had_episode += 1
+        else:
+            # Add the episode to extra_episodes
+            if 'extra_episodes' not in known_guests[name]:
+                known_guests[name]['extra_episodes'] = []
+
+            known_guests[name]['extra_episodes'].append({
+                'guid': guid,
+                'note': title
+            })
+            print(f'  ✓ {name} - added to extra_episodes')
+            guests_updated += 1
+
+    if guests_updated > 0:
+        # Save updated known_guests.json
+        with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
+            full_data = json.load(f)
+
+        full_data['guests'] = known_guests
+
+        with open('cdspill_known_guests.json', 'w', encoding='utf-8') as f:
+            json.dump(full_data, f, indent=2, ensure_ascii=False)
+            f.write('\n')  # Add trailing newline
+
+        print()
+        print("="*60)
+        print(f"✓ Updated cdspill_known_guests.json")
+        print(f"  • {guests_updated} guest(s) updated")
+        if guests_already_had_episode > 0:
+            print(f"  • {guests_already_had_episode} guest(s) already had this episode")
+        print("="*60)
+    elif guests_already_had_episode > 0:
+        print()
+        print("="*60)
+        print("No updates needed - all guests already have this episode")
+        print("="*60)
+
     print()
 
 
