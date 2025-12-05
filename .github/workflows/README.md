@@ -2,18 +2,15 @@
 
 ## Enrich cd SPILL Feed
 
-Automatisk workflow som:
-1. Kjører `enrich_cdspill.py` på mandager
+Workflow som:
+1. Kjører `enrich_cdspill.py` når manuelt triggeret
 2. Genererer beriket feed med Podcasting 2.0 tags
 3. Deployer til GitHub Pages
 
 ### Triggers
 
-- **Scheduled (Mondays only):** Kl. 07:00, 09:00, 11:00, og 13:00 UTC
 - **Manual:** Via Actions tab → "Run workflow"
-- **Push:** Automatisk ved push til master (for testing)
-
-**Rasjonale:** cd SPILL publiserer nye episoder på mandager, så workflow kjører kun den dagen med 4 kjøringer fordelt utover dagen.
+- **Push:** Automatisk ved push til master branch
 
 ### Output
 
@@ -46,28 +43,4 @@ gh workflow run enrich-feed.yml
 
 Se workflow status og logs:
 - **Actions tab:** https://github.com/[username]/podcast-feed-updater/actions
-- **E-postvarsler:** GitHub sender automatisk e-post ved failures
-
-### Customization
-
-Endre kjørefrekvens i `enrich-feed.yml`:
-
-```yaml
-schedule:
-  # Hver time hele uken
-  - cron: '0 * * * *'
-
-  # Hver 30. minutt hele uken
-  - cron: '*/30 * * * *'
-
-  # Hver dag kl 12:00 UTC
-  - cron: '0 12 * * *'
-
-  # Kun på hverdager kl 08:00 UTC
-  - cron: '0 8 * * 1-5'
-
-  # Nåværende oppsett
-  - cron: '0 7,9,11,13 * * 1'  # Mandager kl 07:00, 09:00, 11:00, 13:00 UTC
-```
-
-Se cron syntax: https://crontab.guru/
+- **E-postvarsler:** GitHub sender e-post ved failures

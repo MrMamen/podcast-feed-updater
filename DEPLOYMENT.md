@@ -1,14 +1,13 @@
-# Deployment Guide - Automatisk Feed Enrichment
+# Deployment Guide - Feed Enrichment Hosting
 
-Guide for å sette opp automatisk kjøring og hosting av den berikede feeden.
+Guide for å sette opp hosting av den berikede feeden.
 
 ## 🎯 Anbefalt løsning: GitHub Actions + GitHub Pages
 
 ### Fordeler:
 - ✅ Helt gratis
-- ✅ Automatisk kjøring på mandager
 - ✅ Gratis hosting via GitHub Pages
-- ✅ Manuell trigger tilgjengelig
+- ✅ Manuell oppdatering via Actions
 - ✅ Versjonskontroll og historikk
 
 ---
@@ -83,14 +82,15 @@ Eller workflow-filen gjør dette automatisk.
 
 ---
 
-## ⏰ Kjøreplan
+## 🔄 Oppdatering av feed
 
-Workflow kjører automatisk:
-- **Mandager:** Kl. 07:00, 09:00, 11:00, og 13:00 UTC (når nye episoder publiseres)
-- **Ved push til master** (for testing)
-- **Manuelt** (via Actions tab)
+For å oppdatere feeden:
+1. Gå til **Actions** tab i GitHub
+2. Velg "Enrich cd SPILL Feed"
+3. Klikk **Run workflow** → **Run workflow**
+4. Vent på at jobben er ferdig (ca. 1-2 min)
 
-**Rasjonale:** cd SPILL publiserer nye episoder på mandager, så workflow kjører kun den dagen med 4 kjøringer fordelt utover dagen for rask oppdatering.
+**Anbefaling:** Kjør workflow manuelt når nye episoder publiseres.
 
 ---
 
@@ -253,7 +253,6 @@ Denne kan du:
 ## 💡 Tips
 
 - **Custom domain:** Kan legge til via GitHub Pages settings (f.eks. `podcast.cdspill.no`)
-- **Kjøre oftere:** Endre cron schedule i workflow hvis nødvendig
 - **Monitoring:** Sett opp UptimeRobot for å overvåke feed-tilgjengelighet
 - **Backup:** GitHub Pages history fungerer som backup
 

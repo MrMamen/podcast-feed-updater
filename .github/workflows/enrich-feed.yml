@@ -1,15 +1,10 @@
 name: Enrich cd SPILL Feed
 
 on:
-  # Schedule based on publishing pattern
-  schedule:
-    # Run on Mondays at 7:00, 9:00, 11:00, and 13:00 UTC
-    - cron: '0 7,9,11,13 * * 1'
-
   # Allow manual trigger
   workflow_dispatch:
 
-  # Run on push to master (for testing)
+  # Run on push to master
   push:
     branches: [ master ]
 
