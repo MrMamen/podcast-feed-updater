@@ -48,9 +48,6 @@ def main():
     # This will fail loudly if Podbean adds support for these tags
     enricher.validate_no_conflicts()
 
-    # Add beta suffix to title
-    enricher.set_beta_title(" (Beta)")
-
     # Remove episode numbers from titles
     enricher.remove_episode_numbers_from_titles()
 
@@ -215,7 +212,6 @@ def main():
     print("="*60)
     print("\nEnriched feed: docs/cdspill-enriched.xml")
     print("\nWhat was added:")
-    print("  ✓ Beta title suffix for testing")
     print(f"  ✓ {len(hosts)} permanent host(s) with profile images and URLs")
     print("  ✓ Podcast GUID: Unique identifier for feed portability")
     print("  ✓ Season/episode tags with season names (e.g., 'Vår 2020')")
