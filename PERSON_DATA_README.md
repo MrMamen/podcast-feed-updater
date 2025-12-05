@@ -256,6 +256,36 @@ Guests are auto-detected from episode titles using the pattern:
 - "med Guest1 og Guest2" → detects both guests
 - Episode numbers are automatically stripped
 
+### Manual Episode Assignment (extra_episodes)
+
+For guests not mentioned in episode titles, use `extra_episodes` with GUID-based identification:
+
+```json
+{
+  "guests": {
+    "Guest Name": {
+      "href": "https://www.podchaser.com/creators/...",
+      "img": "https://creator-images.podchaser.com/...",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        }
+      ]
+    }
+  }
+}
+```
+
+**Finding the GUID:**
+```bash
+# Search feed for episode title
+curl -s https://feed.podbean.com/cdspill/feed.xml | grep -A 5 "Episode Title"
+# Look for the <guid> tag, e.g.: cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c
+```
+
+The `note` field is optional but recommended for human readability. GUIDs are stable identifiers that won't change even if episode titles are modified.
+
 ### Detecting Missing Aliases
 
 The enricher helps you identify when aliases are needed. If a guest appears in titles with a different name than in `known_guests`, you'll see:
