@@ -396,6 +396,10 @@ def main():
 
         full_data['guests'] = known_guests
 
+        # Sort guests and aliases alphabetically
+        full_data['guests'] = dict(sorted(full_data['guests'].items()))
+        full_data['aliases'] = dict(sorted(full_data.get('aliases', {}).items()))
+
         with open('cdspill_known_guests.json', 'w', encoding='utf-8') as f:
             json.dump(full_data, f, indent=2, ensure_ascii=False)
             f.write('\n')  # Add trailing newline

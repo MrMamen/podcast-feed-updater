@@ -264,8 +264,14 @@ def main():
 
     # Save updated file
     print(f"\n💾 Saving to {known_guests_file}...")
+
+    # Sort guests and aliases alphabetically
+    known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
+    known_guests_data['aliases'] = dict(sorted(known_guests_data['aliases'].items()))
+
     with open(known_guests_file, 'w', encoding='utf-8') as f:
         json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+        f.write('\n')  # Add trailing newline
 
     print("\n" + "="*60)
     print("DONE!")

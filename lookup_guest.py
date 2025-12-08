@@ -165,9 +165,14 @@ def main():
         known_guests_data['aliases'][alias] = selected['name']
         print(f"\n✓ Adding alias: '{alias}' → '{selected['name']}'")
 
+    # Sort guests and aliases alphabetically
+    known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
+    known_guests_data['aliases'] = dict(sorted(known_guests_data['aliases'].items()))
+
     # Save
     with open(known_guests_file, 'w', encoding='utf-8') as f:
         json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+        f.write('\n')  # Add trailing newline
 
     print(f"\n✓ Added to {known_guests_file}:")
     print(f"   Name: {selected['name']}")

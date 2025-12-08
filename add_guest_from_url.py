@@ -22,6 +22,17 @@ import inquirer
 load_dotenv()
 
 
+def save_known_guests(known_guests_data, known_guests_file):
+    """Save known guests data with alphabetical sorting."""
+    # Sort guests and aliases alphabetically
+    known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
+    known_guests_data['aliases'] = dict(sorted(known_guests_data['aliases'].items()))
+
+    with open(known_guests_file, 'w', encoding='utf-8') as f:
+        json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+        f.write('\n')  # Add trailing newline
+
+
 def extract_creator_info_from_url(url):
     """Extract creator ID and name from Podchaser URL."""
     # URL-decode first to handle encoded characters like %C3%B8 (ø)
@@ -217,8 +228,7 @@ def main():
             print(f"  ✓ Added img")
 
         if updated:
-            with open(known_guests_file, 'w', encoding='utf-8') as f:
-                json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+            save_known_guests(known_guests_data, known_guests_file)
             print(f"\n✓ Updated {known_guests_file}")
         else:
             print(f"  (no updates needed)")
@@ -246,8 +256,7 @@ def main():
                 print(f"  ✓ Added img to '{real_name}'")
 
             if updated:
-                with open(known_guests_file, 'w', encoding='utf-8') as f:
-                    json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+                save_known_guests(known_guests_data, known_guests_file)
                 print(f"\n✓ Updated {known_guests_file}")
 
         return
@@ -332,8 +341,7 @@ def main():
 
         guests[podchaser_name] = guest_data
 
-        with open(known_guests_file, 'w', encoding='utf-8') as f:
-            json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+        save_known_guests(known_guests_data, known_guests_file)
 
         print(f"\n✓ Added new guest: {podchaser_name}")
         print(f"✓ Saved to {known_guests_file}")
@@ -395,8 +403,7 @@ def main():
                 print(f"  ✓ Added img")
 
         if updated:
-            with open(known_guests_file, 'w', encoding='utf-8') as f:
-                json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
+            save_known_guests(known_guests_data, known_guests_file)
             print(f"\n✓ Updated {known_guests_file}")
         else:
             print(f"  (no updates needed)")

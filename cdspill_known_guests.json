@@ -1,70 +1,32 @@
 {
   "_comment": "Known guests with Podchaser profile data and name aliases. Add new guests using: uv run python3 lookup_guest.py 'Guest Name'. Use 'extra_episodes' to manually add guests to specific episodes by GUID (e.g., when guest is not mentioned in title).",
   "guests": {
-    "Roar Granevang": {
-      "img": "https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg",
-      "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy",
-      "extra_episodes": [
-        {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        }
-      ]
-    },
-    "Anette Vik Jøsendal": {
-      "img": "https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg",
-      "href": "https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx"
-    },
-    "Jon Håvard Gundersen": {
-      "img": "https://creator-images.podchaser.com/5d33917bcab6db3365951a4e00f68a31.jpeg",
-      "href": "https://www.podchaser.com/creators/jon-havard-gundersen-107to5wpar"
-    },
-    "Terje Høiback": {
-      "img": "https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg",
-      "href": "https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg",
-      "extra_episodes": [
-        {
-          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
-          "note": "Spillåret 1994 (#106)"
-        },
-        {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        }
-      ]
-    },
-    "David Skaufjord": {
-      "img": "https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg",
-      "href": "https://www.podchaser.com/creators/david-skaufjord-107tssHm8i"
-    },
-    "Audun Rodem": {
-      "img": "https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg",
-      "href": "https://www.podchaser.com/creators/audun-rodem-107tZxOPfL"
-    },
-    "Erlend Fiddan": {
-      "img": "https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg",
-      "href": "https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD",
-      "extra_episodes": [
-        {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        }
-      ]
-    },
-    "Ketil Espenæs": {
-      "href": "https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb"
-    },
     "Adrian Haugen": {
       "href": "https://www.podchaser.com/creators/adrian-haugen-107tZxOga4"
     },
     "Aksel M. Bjerke": {
       "href": "https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM"
     },
+    "Aleks Gisvold": {
+      "href": "https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3"
+    },
     "Aleksander Hakestad": {
       "href": "https://www.podchaser.com/creators/aleksander-kvalvik-hakestad-107tZxOPfH"
     },
     "Anders Ekroll": {
       "href": "https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb"
+    },
+    "Andreas Hedemann": {
+      "img": "https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg",
+      "href": "https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ"
+    },
+    "Anette Vik Jøsendal": {
+      "img": "https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg",
+      "href": "https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx"
+    },
+    "Audun Rodem": {
+      "img": "https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg",
+      "href": "https://www.podchaser.com/creators/audun-rodem-107tZxOPfL"
     },
     "C. Alexander Espeseth": {
       "href": "https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK",
@@ -75,6 +37,10 @@
         }
       ]
     },
+    "David Skaufjord": {
+      "img": "https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg",
+      "href": "https://www.podchaser.com/creators/david-skaufjord-107tssHm8i"
+    },
     "Einar Johan Trøan Sømåen": {
       "href": "https://www.podchaser.com/creators/einar-johan-troan-somaen-107tZxOPjN"
     },
@@ -84,6 +50,16 @@
     "Erik Fossum": {
       "img": "https://creator-images.podchaser.com/2f59994933293d4433aa673e7dd3fcee.jpeg",
       "href": "https://www.podchaser.com/creators/erik-fossum-107tZxQLCw"
+    },
+    "Erlend Fiddan": {
+      "img": "https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg",
+      "href": "https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Erling Rostvåg": {
       "img": "https://creator-images.podchaser.com/74ab51c992d9c7709aedabb276a4c7aa.jpeg",
@@ -114,6 +90,10 @@
     "Jon Cato Lorentzen": {
       "href": "https://www.podchaser.com/creators/jon-cato-lorentzen-107tZxOPnW"
     },
+    "Jon Håvard Gundersen": {
+      "img": "https://creator-images.podchaser.com/5d33917bcab6db3365951a4e00f68a31.jpeg",
+      "href": "https://www.podchaser.com/creators/jon-havard-gundersen-107to5wpar"
+    },
     "Jostein Hakestad": {
       "href": "https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX",
       "extra_episodes": [
@@ -123,8 +103,14 @@
         }
       ]
     },
+    "Jørn Inge Henriksen": {
+      "href": "https://www.podchaser.com/creators/jorn-inge-henriksen-107tZxOPnZ"
+    },
     "Kent William Innholt": {
       "href": "https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK"
+    },
+    "Ketil Espenæs": {
+      "href": "https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb"
     },
     "Martin Gjesdal": {
       "img": "https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg",
@@ -147,6 +133,33 @@
     },
     "Mattis Folkestad": {
       "href": "https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu"
+    },
+    "Roar Granevang": {
+      "img": "https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg",
+      "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
+    },
+    "Sindre Skaare": {
+      "href": "https://www.podchaser.com/creators/sindre-skaare-107tZxQbrB"
+    },
+    "Terje Høiback": {
+      "img": "https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg",
+      "href": "https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Thorbjørn Hope Andersen": {
       "href": "https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v",
@@ -180,26 +193,13 @@
           "note": "Spillåret 1985 (#124)"
         }
       ]
-    },
-    "Aleks Gisvold": {
-      "href": "https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3"
-    },
-    "Jørn Inge Henriksen": {
-      "href": "https://www.podchaser.com/creators/jorn-inge-henriksen-107tZxOPnZ"
-    },
-    "Sindre Skaare": {
-      "href": "https://www.podchaser.com/creators/sindre-skaare-107tZxQbrB"
-    },
-    "Andreas Hedemann": {
-      "img": "https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg",
-      "href": "https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ"
     }
   },
   "aliases": {
-    "Anette Jøsendal": "Anette Vik Jøsendal",
     "Aksel Bjerke": "Aksel M. Bjerke",
     "Aleksander": "Aleksander Hakestad",
     "Aleksikon": "Aleks Gisvold",
+    "Anette Jøsendal": "Anette Vik Jøsendal",
     "Jåddi": "Jørn Inge Henriksen",
     "Sindre Opsahl Skaare": "Sindre Skaare"
   }
