@@ -3,7 +3,13 @@
   "guests": {
     "Roar Granevang": {
       "img": "https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg",
-      "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy"
+      "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Anette Vik Jøsendal": {
       "img": "https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg",
@@ -20,6 +26,10 @@
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
           "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         }
       ]
     },
@@ -33,7 +43,13 @@
     },
     "Erlend Fiddan": {
       "img": "https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg",
-      "href": "https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD"
+      "href": "https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Ketil Espenæs": {
       "href": "https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb"
@@ -87,29 +103,59 @@
       "href": "https://www.podchaser.com/creators/jens-erik-vaaler-107tZxOPjQ"
     },
     "Joachim Froholt": {
-      "href": "https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT"
+      "href": "https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Jon Cato Lorentzen": {
       "href": "https://www.podchaser.com/creators/jon-cato-lorentzen-107tZxOPnW"
     },
     "Jostein Hakestad": {
-      "href": "https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX"
+      "href": "https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Kent William Innholt": {
       "href": "https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK"
     },
     "Martin Gjesdal": {
       "img": "https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg",
-      "href": "https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1"
+      "href": "https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Mats Lindh": {
-      "href": "https://www.podchaser.com/creators/mats-lindh-107u25OzEC"
+      "href": "https://www.podchaser.com/creators/mats-lindh-107u25OzEC",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Mattis Folkestad": {
       "href": "https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu"
     },
     "Thorbjørn Hope Andersen": {
-      "href": "https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v"
+      "href": "https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Tor-Andre Kiil Mørkved": {
       "href": "https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY"
@@ -127,7 +173,13 @@
       "href": "https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm"
     },
     "Øystein Henriksen": {
-      "href": "https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm"
+      "href": "https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
+        }
+      ]
     },
     "Aleks Gisvold": {
       "href": "https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3"
