@@ -28,7 +28,12 @@ Berik en eksisterende feed med Podcasting 2.0 tags.
 **Se [ENRICHMENT_GUIDE.md](ENRICHMENT_GUIDE.md)** for komplett dokumentasjon.
 
 ```bash
+# Normal bruk (henter fra nettet)
 uv run enrich_cdspill.py
+
+# Lokal testing med cached feed (for utvikling)
+uv run python3 download_cdspill_cache.py  # Last ned cache først
+uv run enrich_cdspill.py --local-cache     # Bruk lokal cache
 
 # Legger til:
 # - Hosts og gjester (podcast:person)

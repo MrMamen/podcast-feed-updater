@@ -4,7 +4,13 @@ Enrich cd SPILL feed with Podcasting 2.0 tags.
 Adds host/guest information, funding links, and rich metadata.
 
 Usage:
-    uv run enrich_cdspill.py
+    uv run enrich_cdspill.py                  # Fetch from online source
+    uv run enrich_cdspill.py --local-cache    # Use local cached copy
+
+Local cache:
+    The --local-cache option uses a local copy of the feed for testing
+    when the network is down or for faster development iterations.
+    Download the cache with: uv run python3 download_cdspill_cache.py
 
 Person data:
     - Permanent staff: cdspill_permanent_staff.json (hosts and other permanent roles)
@@ -24,6 +30,7 @@ The script adds:
 
 import os
 import sys
+import argparse
 from dotenv import load_dotenv
 from src.enrichment.enricher import FeedEnricher
 
@@ -33,12 +40,35 @@ load_dotenv()
 
 def main():
     """Enrich cd SPILL feed."""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description='Enrich cd SPILL feed with Podcasting 2.0 tags'
+    )
+    parser.add_argument(
+        '--local-cache',
+        action='store_true',
+        help='Use local cached feed instead of fetching from network (for testing/development only)'
+    )
+    args = parser.parse_args()
+
     print("="*60)
     print("CD SPILL FEED ENRICHER")
     print("="*60)
 
+    # Determine source
+    if args.local_cache:
+        cache_file = ".cache/cdspill-original.xml"
+        if not os.path.exists(cache_file):
+            print(f"\n❌ Error: Local cache not found at {cache_file}")
+            print("   Download the cache first with: uv run python3 download_cdspill_cache.py")
+            sys.exit(1)
+        print(f"\n📁 Using local cache: {cache_file}")
+        source = cache_file
+    else:
+        source = "https://feed.podbean.com/cdspill/feed.xml"
+
     # Initialize enricher
-    enricher = FeedEnricher("https://feed.podbean.com/cdspill/feed.xml")
+    enricher = FeedEnricher(source)
 
     # Fetch feed
     output_file = "docs/cdspill-enriched.xml"

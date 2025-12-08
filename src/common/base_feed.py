@@ -26,12 +26,19 @@ class BaseFeed:
         self.source_latest_link: Optional[str] = None
 
     def fetch_feed(self) -> None:
-        """Fetch and parse RSS feed from source URL."""
-        print(f"Fetching feed: {self.source_url}")
-        response = requests.get(self.source_url, timeout=30)
-        response.raise_for_status()
+        """Fetch and parse RSS feed from source URL or local file."""
+        # Check if source is a local file path
+        if os.path.isfile(self.source_url):
+            print(f"Loading feed from local file: {self.source_url}")
+            with open(self.source_url, 'rb') as f:
+                content = f.read()
+        else:
+            print(f"Fetching feed: {self.source_url}")
+            response = requests.get(self.source_url, timeout=30)
+            response.raise_for_status()
+            content = response.content
 
-        self.root = etree.fromstring(response.content)
+        self.root = etree.fromstring(content)
         self.channel = self.root.find('channel')
 
         if self.channel is None:

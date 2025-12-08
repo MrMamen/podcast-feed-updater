@@ -65,3 +65,6 @@ htmlcov/
 # Generated feeds (GitHub Actions generates these)
 /docs/
 *.backup
+
+# Local cache for development/testing
+.cache/
