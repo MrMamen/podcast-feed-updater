@@ -104,6 +104,11 @@ def main():
     # Format podcast elements for better readability (call after all enrichment)
     enricher.format_podcast_elements()
 
+    # Update feed metadata to reflect YouTube-specific location
+    enricher.update_atom_link("https://mrmamen.github.io/podcast-feed-updater/cdspill-youtube.xml")
+    enricher.update_generator("podcast-feed-updater v1.0 (YouTube variant)")
+    enricher.update_lastBuildDate()
+
     # Create output directory
     os.makedirs("docs", exist_ok=True)
 

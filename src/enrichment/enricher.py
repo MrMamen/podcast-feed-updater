@@ -1163,6 +1163,128 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Removed {removed_podcast_chapters} podcast:chapters and {removed_psc_chapters} psc:chapters tags")
         return self
 
+    def update_atom_link(self, url: str) -> 'FeedEnricher':
+        """
+        Update atom:link to point to the actual feed URL.
+
+        The atom:link with rel="self" should point to the feed's own URL,
+        not the original source. This is important for feed validators and
+        podcast apps to correctly identify the feed location.
+
+        Args:
+            url: The actual URL where this feed is published
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        atom_ns = '{http://www.w3.org/2005/Atom}'
+
+        # Find atom:link with rel="self"
+        for link in self.channel.findall(f'{atom_ns}link'):
+            if link.get('rel') == 'self':
+                old_url = link.get('href')
+                link.set('href', url)
+                print(f"✓ Updated atom:link from {old_url} to {url}")
+                return self
+
+        # If no atom:link exists, create one
+        atom_link = etree.Element(
+            f'{atom_ns}link',
+            href=url,
+            rel='self',
+            type='application/rss+xml'
+        )
+        # Insert after title
+        title = self.channel.find('title')
+        if title is not None:
+            title_idx = list(self.channel).index(title)
+            self.channel.insert(title_idx + 1, atom_link)
+            print(f"✓ Added atom:link: {url}")
+        else:
+            self.channel.insert(0, atom_link)
+            print(f"✓ Added atom:link: {url}")
+
+        return self
+
+    def update_generator(self, text: str) -> 'FeedEnricher':
+        """
+        Update generator tag to reflect the actual generator.
+
+        Args:
+            text: Generator description (e.g., "podcast-feed-updater v1.0")
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        generator = self.channel.find('generator')
+        if generator is not None:
+            old_text = generator.text
+            generator.text = text
+            print(f"✓ Updated generator from '{old_text}' to '{text}'")
+        else:
+            # Create generator element if it doesn't exist
+            generator = etree.Element('generator')
+            generator.text = text
+            # Insert after pubDate if it exists
+            pubdate = self.channel.find('pubDate')
+            if pubdate is not None:
+                pubdate_idx = list(self.channel).index(pubdate)
+                self.channel.insert(pubdate_idx + 1, generator)
+            else:
+                self.channel.append(generator)
+            print(f"✓ Added generator: '{text}'")
+
+        return self
+
+    def update_lastBuildDate(self) -> 'FeedEnricher':
+        """
+        Update or add lastBuildDate with current timestamp.
+
+        lastBuildDate indicates when the feed was last generated/updated.
+        This is useful for feed readers to know when to check for updates.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        from datetime import datetime
+        from email.utils import formatdate
+
+        # Generate RFC 2822 formatted date (same format as pubDate)
+        timestamp = formatdate(timeval=None, localtime=True)
+
+        lastbuilddate = self.channel.find('lastBuildDate')
+        if lastbuilddate is not None:
+            lastbuilddate.text = timestamp
+            print(f"✓ Updated lastBuildDate: {timestamp}")
+        else:
+            # Create lastBuildDate element
+            lastbuilddate = etree.Element('lastBuildDate')
+            lastbuilddate.text = timestamp
+            # Insert after generator if it exists, otherwise after pubDate
+            generator = self.channel.find('generator')
+            if generator is not None:
+                generator_idx = list(self.channel).index(generator)
+                self.channel.insert(generator_idx + 1, lastbuilddate)
+            else:
+                pubdate = self.channel.find('pubDate')
+                if pubdate is not None:
+                    pubdate_idx = list(self.channel).index(pubdate)
+                    self.channel.insert(pubdate_idx + 1, lastbuilddate)
+                else:
+                    self.channel.append(lastbuilddate)
+            print(f"✓ Added lastBuildDate: {timestamp}")
+
+        return self
+
     def write_feed(self, output_file: str) -> None:
         """
         Write enriched feed to file.

@@ -35,16 +35,15 @@ The script adds:
 import os
 import sys
 import argparse
-import requests
-import shutil
 from dotenv import load_dotenv
+from src.enrichment.enricher import FeedEnricher
 
 # Load environment variables from .env
 load_dotenv()
 
 
 def main():
-    """Generate Spotify feed (identical copy of enriched feed)."""
+    """Generate Spotify feed (copy of enriched feed with updated metadata)."""
     # Parse command line arguments
     parser = argparse.ArgumentParser(
         description='Generate cd SPILL feed for Spotify (identical to main enriched feed)'
@@ -64,38 +63,35 @@ def main():
 
     # Determine source
     if args.local_cache:
-        # For local testing, copy the enriched feed that was generated
-        source_file = "docs/cdspill-enriched.xml"
-        if not os.path.exists(source_file):
-            print(f"\n❌ Error: Enriched feed not found at {source_file}")
+        # For local testing, use the enriched feed that was generated
+        source = "docs/cdspill-enriched.xml"
+        if not os.path.exists(source):
+            print(f"\n❌ Error: Enriched feed not found at {source}")
             print("   Run enrich_cdspill.py first to generate the enriched feed")
             sys.exit(1)
-        print(f"\n📁 Using local enriched feed: {source_file}")
-
-        # Create output directory
-        os.makedirs("docs", exist_ok=True)
-
-        # Simply copy the file
-        shutil.copy2(source_file, output_file)
-        print(f"✓ Copied enriched feed to: {output_file}")
-
+        print(f"\n📁 Using local enriched feed: {source}")
     else:
         # Fetch from already enriched feed (deployed on GitHub Pages)
-        source_url = "https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml"
-        print(f"\n🌐 Fetching enriched feed from: {source_url}")
+        source = "https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml"
+        print(f"\n🌐 Fetching enriched feed from: {source}")
 
-        # Fetch and save
-        response = requests.get(source_url, timeout=30)
-        response.raise_for_status()
+    # Initialize enricher with source feed
+    enricher = FeedEnricher(source)
+    enricher.fetch_feed()
 
-        # Create output directory
-        os.makedirs("docs", exist_ok=True)
+    print("\n📋 Source feed is already enriched with all Podcasting 2.0 tags")
+    print("   Updating metadata for Spotify variant...")
 
-        # Write content exactly as received (preserves all formatting and namespaces)
-        with open(output_file, 'wb') as f:
-            f.write(response.content)
+    # Update feed metadata to reflect Spotify-specific location
+    enricher.update_atom_link("https://mrmamen.github.io/podcast-feed-updater/cdspill-spotify.xml")
+    enricher.update_generator("podcast-feed-updater v1.0 (Spotify variant)")
+    enricher.update_lastBuildDate()
 
-        print(f"✓ Downloaded and saved to: {output_file}")
+    # Create output directory
+    os.makedirs("docs", exist_ok=True)
+
+    # Write Spotify feed
+    enricher.write_feed(output_file)
 
     print("\n" + "="*60)
     print("DONE!")
