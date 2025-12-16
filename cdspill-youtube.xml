@@ -2,13 +2,13 @@
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:psc="http://podlove.org/simple-chapters" version="2.0">
 
 <channel>
-    <title>cd SPILL (Beta)</title>
-    <atom:link href="https://feed.podbean.com/cdspill/feed.xml" rel="self" type="application/rss+xml"/>
+    <title>cd SPILL</title>
+    <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-youtube.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
-    <pubDate>Mon, 24 Nov 2025 07:18:00 +0100</pubDate>
-    <generator>https://podbean.com/?v=5.5</generator>
-    <language>no</language>
+    <pubDate>Mon, 08 Dec 2025 08:41:30 +0100</pubDate>
+    <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
+    <lastBuildDate>Tue, 16 Dec 2025 22:36:32 +0000</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2025 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -22,6 +22,7 @@
 	</itunes:category>
     <itunes:owner>
         <itunes:name>C:\SPILL＞</itunes:name>
+                <itunes:email>CD_SPILL@pm.me</itunes:email>
             </itunes:owner>
     	<itunes:block>No</itunes:block>
 	<itunes:explicit>false</itunes:explicit>
@@ -33,6 +34,161 @@
         <width>144</width>
         <height>144</height>
     </image>
+    <item>
+        <title>Spillåret 1985 (#124)</title>
+        <itunes:title>Spillåret 1985 (#124)</itunes:title>
+        <link>https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/</link>        <pubDate>Mon, 08 Dec 2025 08:41:30 +0100</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c</guid>
+                                    <description>&lt;p&gt;Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.&lt;/p&gt;
+&lt;p&gt;&lt;a href='https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/'&gt;Joachim har skrevet en artikkel om episoden hos Spillhistorie.no&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+
+0:00 Velkommen til cd SPILL
+2:22 Teleporterer 1985
+4:28 Terje Høiback
+5:58 Sopwith
+8:18 Daleks
+10:22 Super Mario Bros.
+11:25 Børre fra Overvåkerne
+12:30 Pinball Construction Set
+13:36 A Mind Forever Voyaging
+14:29 Erlend Fiddan
+16:36 Winter Games
+18:19 Frogger Jr.
+19:35 Bruce Lee
+21:17 Hintmannen fra Overvåkerne
+23:23 Wishbringer
+25:28 King's Quest II: Romancing the Throne
+26:55 Joachim Froholt
+28:56 Silent Service
+30:12 Star Trek: The Kobayashi Alternative
+32:35 EGA Trek
+33:19 Ultima III: Exodus
+34:37 Roar Granevang
+36:24 Ghosts 'N Goblins
+37:25 M.U.L.E.
+37:54 Beyond Castle Wolfenstein
+40:59 The Seven Cities of Gold
+42:29 Kato fra Overvåkerne
+44:11 Solitare
+45:24 Where in the World Is Carmen Sandiego?
+47:02 The World's Greatest Baseball Game
+47:58 Jostein Hakestad
+49:42 Oregon Trail
+50:48 Windows med Reversi
+53:39 Martin Gjesdal
+55:03 River Raid
+56:39 Wizzardz &amp; War Lordz
+57:17 The Wizard of Oz
+57:44 Wizard of Wall Street
+59:05 James Bond 007: A View to a Kill
+1:00:45 Mats Lindh
+1:03:43 Hyper Sports
+1:05:24 Boulder Dash II: Rockford's Revenge
+1:06:04 Maybritt fra Overvåkerne
+1:07:34 Mickey's Space Adventure
+1:08:30 Borrowed Time
+1:09:27 F-15 Strike Eagle
+1:10:32 Indiana Jones and the Temple of Doom
+1:11:15 Øystein Henriksen
+1:12:46 Gradius
+1:13:32 MrMamen kårer GOTY 1985
+1:15:14 Sigve kårer GOTY 1985
+1:16:28 cd SPILLs gjester i 2025
+1:18:11 Kommentarer fra sosiale medier
+1:25:07 Årets episoder
+1:27:04 Sigve kårer beste spill vi pratet om i 2025
+1:28:17 Mamen kårer beste spill vi pratet om i 2025
+1:29:50 Vi kårer cd SPILLs beste episode i 2025</description>
+                                                            <content:encoded>&lt;p&gt;Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.&lt;/p&gt;
+&lt;p&gt;&lt;a href='https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/'&gt;Joachim har skrevet en artikkel om episoden hos Spillhistorie.no&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+
+0:00 Velkommen til cd SPILL
+2:22 Teleporterer 1985
+4:28 Terje Høiback
+5:58 Sopwith
+8:18 Daleks
+10:22 Super Mario Bros.
+11:25 Børre fra Overvåkerne
+12:30 Pinball Construction Set
+13:36 A Mind Forever Voyaging
+14:29 Erlend Fiddan
+16:36 Winter Games
+18:19 Frogger Jr.
+19:35 Bruce Lee
+21:17 Hintmannen fra Overvåkerne
+23:23 Wishbringer
+25:28 King's Quest II: Romancing the Throne
+26:55 Joachim Froholt
+28:56 Silent Service
+30:12 Star Trek: The Kobayashi Alternative
+32:35 EGA Trek
+33:19 Ultima III: Exodus
+34:37 Roar Granevang
+36:24 Ghosts 'N Goblins
+37:25 M.U.L.E.
+37:54 Beyond Castle Wolfenstein
+40:59 The Seven Cities of Gold
+42:29 Kato fra Overvåkerne
+44:11 Solitare
+45:24 Where in the World Is Carmen Sandiego?
+47:02 The World's Greatest Baseball Game
+47:58 Jostein Hakestad
+49:42 Oregon Trail
+50:48 Windows med Reversi
+53:39 Martin Gjesdal
+55:03 River Raid
+56:39 Wizzardz &amp; War Lordz
+57:17 The Wizard of Oz
+57:44 Wizard of Wall Street
+59:05 James Bond 007: A View to a Kill
+1:00:45 Mats Lindh
+1:03:43 Hyper Sports
+1:05:24 Boulder Dash II: Rockford's Revenge
+1:06:04 Maybritt fra Overvåkerne
+1:07:34 Mickey's Space Adventure
+1:08:30 Borrowed Time
+1:09:27 F-15 Strike Eagle
+1:10:32 Indiana Jones and the Temple of Doom
+1:11:15 Øystein Henriksen
+1:12:46 Gradius
+1:13:32 MrMamen kårer GOTY 1985
+1:15:14 Sigve kårer GOTY 1985
+1:16:28 cd SPILLs gjester i 2025
+1:18:11 Kommentarer fra sosiale medier
+1:25:07 Årets episoder
+1:27:04 Sigve kårer beste spill vi pratet om i 2025
+1:28:17 Mamen kårer beste spill vi pratet om i 2025
+1:29:50 Vi kårer cd SPILLs beste episode i 2025</content:encoded>
+                                    
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/hhmjqbk2h4s5drtt/1985.mp3" length="117144260" type="audio/mpeg"/>
+        <itunes:summary>Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.
+Joachim har skrevet en artikkel om episoden hos Spillhistorie.no.
+Støtt oss gjerne på Patreon.Følg oss gjerne på Bluesky, Twitter, Facebook, og Podchaser.</itunes:summary>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>5543</itunes:duration>
+        <itunes:season>12</itunes:season>
+        <itunes:episode>124</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/>
+        <podcast:season name="Høst 2025">12</podcast:season>
+        <podcast:episode display="6 (#124)">124</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/mats-lindh-107u25OzEC">Mats Lindh</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v">Thorbjørn Hope Andersen</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm">Øystein Henriksen</podcast:person></item>
     <item>
         <title>OutRun med Mats Lindh (#123)</title>
         <itunes:title>OutRun med Mats Lindh (#123)</itunes:title>
@@ -857,7 +1013,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="11 (#116)">116</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Lode Runner med Roar Granevang (#115)</title>
         <itunes:title>Lode Runner med Roar Granevang (#115)</itunes:title>
@@ -1044,7 +1200,7 @@ Les mer om episoden hos spillhistorie.noStøtt oss gjerne på Patreon.Følg oss 
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="9 (#114)">114</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg">David Skaufjord</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/david-skaufjord-107tssHm8i" img="https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg">David Skaufjord</podcast:person></item>
     <item>
         <title>The Legend of Kyrandia: Hand of Fate med Erling Rostvåg (#113)</title>
         <itunes:title>The Legend of Kyrandia: Hand of Fate med Erling Rostvåg (#113)</itunes:title>
@@ -1266,12 +1422,66 @@ Støtt oss gjerne på Patreon.Følg oss gjerne på Bluesky, Twitter, Facebook, o
 &lt;p&gt;Spillhistorie.no har som vanlig &lt;a href='https://spillhistorie.no/?p=63024'&gt;skrevet en artikkel om episoden/spillet&lt;/a&gt;.
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:35 Velkommen til cd SPILL
+3:33 Kommentarer fra forrige episode
+10:13 Dagens spill: Tomb Raider
+16:50 Hovedpersonen
+17:45 Hva går spillet ut på?
+22:42 Utdrag fra manualen
+27:35 Mer om Lara Croft
+28:46 Litt om historien
+32:28 Tech Specs
+36:54 Musikken
+39:44 Hvordan spillet ble til
+44:59 Gameplay
+50:02 Litt om dinosaurer
+52:29 Nude Raider
+56:38 Anniversary og Remaster
+59:19 Oppfølgere
+1:02:10 Tomb Raider-filmen
+1:07:32 Diverse avsporinger
+1:11:24 Kommentarer fra sosiale medier
+1:15:41 Har det holdt seg?
+1:21:26 Finnes det noe tilsvarende idag?
+1:22:55 Tips fra Ekroll
+1:24:49 Tips fra Mamen
+1:25:34 Tips fra Sigve
+1:27:42 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Ikoniske Lara Croft started med Tomb Raider. Det var faktisk ikke gitt at hovedpersonen engang skulle være en kvinne. Vi har fått med oss Anders Ekroll for å mimre om dette revolusjonerende action-platform-eventyr-spillet. &lt;/p&gt;
 &lt;p&gt;Spillhistorie.no har som vanlig &lt;a href='https://spillhistorie.no/?p=63024'&gt;skrevet en artikkel om episoden/spillet&lt;/a&gt;.&lt;br&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:35 Velkommen til cd SPILL
+3:33 Kommentarer fra forrige episode
+10:13 Dagens spill: Tomb Raider
+16:50 Hovedpersonen
+17:45 Hva går spillet ut på?
+22:42 Utdrag fra manualen
+27:35 Mer om Lara Croft
+28:46 Litt om historien
+32:28 Tech Specs
+36:54 Musikken
+39:44 Hvordan spillet ble til
+44:59 Gameplay
+50:02 Litt om dinosaurer
+52:29 Nude Raider
+56:38 Anniversary og Remaster
+59:19 Oppfølgere
+1:02:10 Tomb Raider-filmen
+1:07:32 Diverse avsporinger
+1:11:24 Kommentarer fra sosiale medier
+1:15:41 Har det holdt seg?
+1:21:26 Finnes det noe tilsvarende idag?
+1:22:55 Tips fra Ekroll
+1:24:49 Tips fra Mamen
+1:25:34 Tips fra Sigve
+1:27:42 Neste episode</content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/ciztqu2m3mzvdsik/Tomb_Raidera7imc.mp3" length="120426341" type="audio/mpeg"/>
         <itunes:summary>Ikoniske Lara Croft started med Tomb Raider. Det var faktisk ikke gitt at hovedpersonen engang skulle være en kvinne. Vi har fått med oss Anders Ekroll for å mimre om dette revolusjonerende action-platform-eventyr-spillet. 
@@ -1296,14 +1506,92 @@ Spillhistorie.no har som vanlig skrevet en artikkel om episoden/spillet.Støtt o
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/2025/03/17/half-life-endret-skytespillsjangeren/'&gt;episoden/spillet hos spillhistorie.no&lt;/a&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:56 Velkommen til cd SPILL
+4:48 Kommentarer fra forrige episode
+11:19 Dagens spill: Half-Life
+16:05 Hva går spillet ut på?
+20:47 Tech Specs
+25:56 Hvordan vi opplevde grafikken
+27:57 Hva skjer i spillet?
+33:24 Et glimt inn i Xen
+34:38 Mange forskere og folk å prate med
+35:21 Brekkjern!
+36:57 Ulike våpen
+37:35 Glock 17 (9mm Pistol)
+37:51 Colt Python (.357 Magnum Revolver)
+39:28 MP5 (Submachine Gun)
+40:09 SPAS-12 (Assault Shotgun)
+41:39 Black Mesa Crossbow (Tranquilizer Gun)
+42:52 HECU RPG
+44:34 Tau Cannon ( XVL1456 / Gauss Gun)
+46:01 Gluon Gun
+46:38 Hivehand
+47:48 Snark
+48:54 Spoilers Hva skjer i resten av spillet?
+53:40 Gonarch
+54:34 The Nihilanth (The Alien Controller)
+55:16 Musikken
+57:26 Hvordan spille dette idag?
+59:18 Leveldesign
+1:01:29 Stiger!
+1:02:13 Litt flere minner
+1:03:40 Expansions
+1:06:15 Smell AI
+1:08:13 Kommentarer fra sosiale medier
+1:14:26 Har det holdt seg?
+1:17:31 Finnes det noe tilsvarende idag?
+1:18:43 Litt om Valve
+1:21:35 Et tips fra Sigve
+1:26:33 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Valves debut spill Half-Life skulle virkelig endre skytespillsjangeren. Plutselig var det en historiefortelling midt i all skytingen. Og hva er greia med den mystiske G-man? Vi har fått med oss Aksel Bjerke for å finne svaret!&lt;/p&gt;
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/2025/03/17/half-life-endret-skytespillsjangeren/'&gt;episoden/spillet hos spillhistorie.no&lt;/a&gt;&lt;br&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:56 Velkommen til cd SPILL
+4:48 Kommentarer fra forrige episode
+11:19 Dagens spill: Half-Life
+16:05 Hva går spillet ut på?
+20:47 Tech Specs
+25:56 Hvordan vi opplevde grafikken
+27:57 Hva skjer i spillet?
+33:24 Et glimt inn i Xen
+34:38 Mange forskere og folk å prate med
+35:21 Brekkjern!
+36:57 Ulike våpen
+37:35 Glock 17 (9mm Pistol)
+37:51 Colt Python (.357 Magnum Revolver)
+39:28 MP5 (Submachine Gun)
+40:09 SPAS-12 (Assault Shotgun)
+41:39 Black Mesa Crossbow (Tranquilizer Gun)
+42:52 HECU RPG
+44:34 Tau Cannon ( XVL1456 / Gauss Gun)
+46:01 Gluon Gun
+46:38 Hivehand
+47:48 Snark
+48:54 Spoilers Hva skjer i resten av spillet?
+53:40 Gonarch
+54:34 The Nihilanth (The Alien Controller)
+55:16 Musikken
+57:26 Hvordan spille dette idag?
+59:18 Leveldesign
+1:01:29 Stiger!
+1:02:13 Litt flere minner
+1:03:40 Expansions
+1:06:15 Smell AI
+1:08:13 Kommentarer fra sosiale medier
+1:14:26 Har det holdt seg?
+1:17:31 Finnes det noe tilsvarende idag?
+1:18:43 Litt om Valve
+1:21:35 Et tips fra Sigve
+1:26:33 Neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/vkyemqwcz432kp26/Half-Life.mp3" length="128299708" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/vkyemqwcz432kp26/Half-Life.mp3" length="114292513" type="audio/mpeg"/>
         <itunes:summary>Valves debut spill Half Live skulle virkelig endre skytespillsjangeren. Plutselig var det en historiefortelling midt i all skytingen. Og hva er greia med den mystiske G-man? Vi har fått med oss Aksel Bjerke for å finne svaret!</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1315,7 +1603,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/ynxez4mqh9ibjacj/Half-Life.srt" type="application/srt"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="6 (#111)">111</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
     <item>
         <title>Zaxxon med Roar Granevang og Terje Høiback (#110)</title>
         <itunes:title>Zaxxon med Roar Granevang og Terje Høiback (#110)</itunes:title>
@@ -1393,7 +1681,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="5 (#110)">110</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Beneath a Steel Sky med Jåddi (#109)</title>
         <itunes:title>Beneath a Steel Sky med Jåddi (#109)</itunes:title>
@@ -1407,7 +1695,35 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/?p=61851'&gt;episoden hos spillhistorie.no&lt;/a&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:35 Velkommen til cd SPILL
+4:03 Kommentarer fra forrige episode
+15:14 Dagens spill: Beneath a Steel Sky
+16:55 Hva tror Sigve spillet går ut på?
+20:05 Settingen
+26:53 Litt om brukergrensesnittet
+29:55 Tech Specs
+32:29 Sammenligning med Sierra og Lucasarts
+38:27 Hvordan ble spillet til?
+42:59 Grafiske stilen
+46:26 Slettede originaler
+48:56 Spoiler hele historien
+1:07:16 Suno/AI sang om BASS
+1:12:18 Noen minneverdige øyeblikk
+1:26:27 Litt fra manualen
+1:32:07 Musikken
+1:33:36 Hvordan spille idag?
+1:40:19 Litt om stemmeskuespillet
+1:47:50 Kommentarer fra sosiale medier
+1:59:08 Remastered til iOS
+2:01:09 Oppfølgere
+2:03:07 Har det holdt seg?
+2:05:38 Finnes det noe tilsvarende idag?
+2:08:19 Shoutout til patreon
+2:09:07 Tips fra Sigve
+2:11:49 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Revolution Software utga et legendarisk dystopisk sci-fi pek-og-klikk-spill i 1994. Hvorfor blir Robert Foster kidnappet fra "the gap" og inn til storbyen Union City? Hvem er den mystiske Overmann, og hva er forholdet til datasystemet Linc? Bli med oss til Beneath a Steel Sky og få svarene du trenger.&lt;br&gt;
 &lt;br&gt;
 &lt;/p&gt;
@@ -1416,9 +1732,37 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/?p=61851'&gt;episoden hos spillhistorie.no&lt;/a&gt;&lt;br&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:35 Velkommen til cd SPILL
+4:03 Kommentarer fra forrige episode
+15:14 Dagens spill: Beneath a Steel Sky
+16:55 Hva tror Sigve spillet går ut på?
+20:05 Settingen
+26:53 Litt om brukergrensesnittet
+29:55 Tech Specs
+32:29 Sammenligning med Sierra og Lucasarts
+38:27 Hvordan ble spillet til?
+42:59 Grafiske stilen
+46:26 Slettede originaler
+48:56 Spoiler hele historien
+1:07:16 Suno/AI sang om BASS
+1:12:18 Noen minneverdige øyeblikk
+1:26:27 Litt fra manualen
+1:32:07 Musikken
+1:33:36 Hvordan spille idag?
+1:40:19 Litt om stemmeskuespillet
+1:47:50 Kommentarer fra sosiale medier
+1:59:08 Remastered til iOS
+2:01:09 Oppfølgere
+2:03:07 Har det holdt seg?
+2:05:38 Finnes det noe tilsvarende idag?
+2:08:19 Shoutout til patreon
+2:09:07 Tips fra Sigve
+2:11:49 Neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/yxk4xfbh926jt3uu/BASS.mp3" length="166125757" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/yxk4xfbh926jt3uu/BASS.mp3" length="163000006" type="audio/mpeg"/>
         <itunes:summary>Revolution Software utga et legendarisk dystopisk sci-fi pek-og-klikk-spill i 1994. Hvorfor blir Robert Foster kidnappet fra ”the gap” og inn til storbyen Union City? Hvem er den mystiske Overmann, og hva er forholdet til datasystemet Linc? Bli med oss til Beneath a Steel Sky og få svarene du trenger.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1430,7 +1774,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BASS.png"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/qsez6m3vjqgxzcxn/BASS.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="4 (#109)">109</podcast:episode>
-        <podcast:person role="guest">Jåddi</podcast:person></item>
+        <podcast:person role="guest">Jørn Inge Henriksen</podcast:person></item>
     <item>
         <title>Wacky Wheels med Anette Jøsendal (#108)</title>
         <itunes:title>Wacky Wheels med Anette Jøsendal (#108)</itunes:title>
@@ -1618,7 +1962,7 @@ Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podch
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="2 (#107)">107</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person></item>
     <item>
         <title>Spillåret 1994 (#106)</title>
         <itunes:title>Spillåret 1994 (#106)</itunes:title>
@@ -1782,7 +2126,10 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Spill_ret_19946gujy.jpg"/>
         <podcast:season name="Høst 2024">10</podcast:season>
-        <podcast:episode display="7 (#106)">106</podcast:episode></item>
+        <podcast:episode display="7 (#106)">106</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
     <item>
         <title>Ports of Call med Hans Arne Jacobsen (#105)</title>
         <itunes:title>Ports of Call med Hans Arne Jacobsen (#105)</itunes:title>
@@ -2051,7 +2398,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RoboCod_x4xjfz.jpg"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="4 (#103)">103</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>EGA Trek: The Mongol Invasion (#102)</title>
         <itunes:title>EGA Trek: The Mongol Invasion (#102)</itunes:title>
@@ -2619,14 +2966,70 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Introduksjon
+0:39 Velkommen til cd SPILL
+3:48 Kommentarer fra Settlers II
+15:19 Hva er Moonstone? (Kun gale svar)
+21:51 Dagens spill: Moonstone: A Hard Days Knight
+22:42 Hva går spillet ut på?
+31:56 Tech Specs
+34:24 Gameplay og fighting
+42:08 Deathscenes
+53:24 Highwood
+53:42 Tavern
+57:00 Healer
+58:25 Waterdeep
+1:01:47 The Wyrm (Dragen)
+1:05:37 The Guardian
+1:06:33 Ending
+1:11:18 The wizard's tower
+1:12:12 Kartet
+1:12:41 Items
+1:16:10 Bakgrunnshistorien
+1:26:20 Lydeffekter
+1:27:19 Mer om inspirasjonen
+1:32:38 DOS vs Amiga
+1:38:59 Kommentarer fra sosiale medier
+1:44:54 Har det holdt seg?
+1:50:09 Finnes det noe tilsvarende idag?
+1:55:01 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Etter utallige oppfordringer har tiden endelig kommet for at Mr.Moonstone aka Torbjørn Preus Schou skal prate om sitt favorittspill Moonstone: A Hard Days Knight. Er det virkelig et kult spill, eller bare noe han er indoktrinert til å si? cd SPILL finner ut av det!&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/2024/05/13/endelig-moonstone-med-cd-spill/'&gt;episoden/spillet hos Spillhistorie.no&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Introduksjon
+0:39 Velkommen til cd SPILL
+3:48 Kommentarer fra Settlers II
+15:19 Hva er Moonstone? (Kun gale svar)
+21:51 Dagens spill: Moonstone: A Hard Days Knight
+22:42 Hva går spillet ut på?
+31:56 Tech Specs
+34:24 Gameplay og fighting
+42:08 Deathscenes
+53:24 Highwood
+53:42 Tavern
+57:00 Healer
+58:25 Waterdeep
+1:01:47 The Wyrm (Dragen)
+1:05:37 The Guardian
+1:06:33 Ending
+1:11:18 The wizard's tower
+1:12:12 Kartet
+1:12:41 Items
+1:16:10 Bakgrunnshistorien
+1:26:20 Lydeffekter
+1:27:19 Mer om inspirasjonen
+1:32:38 DOS vs Amiga
+1:38:59 Kommentarer fra sosiale medier
+1:44:54 Har det holdt seg?
+1:50:09 Finnes det noe tilsvarende idag?
+1:55:01 Neste episode</content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/nfbj72f3sz82vs4w/Moonstone.mp3" length="127108525" type="audio/mpeg"/>
         <itunes:summary>Etter utallige oppfordringer har tiden endelig kommet for at Mr.Moonstone aka Torbjørn Preus Schou skal prate om sitt favorittspill Moonstone: A Hard Days Knight. Er det virkelig et kult spill, eller bare noe han er indoktrinert til å si? cd SPILL finner ut av det!</itunes:summary>
@@ -2652,16 +3055,76 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/2024/04/29/er-the-settlers-ii-seriens-beste-spill/'&gt;episoden og spillet hos spillhistorie&lt;/a&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:54 Velkommen til cd SPILL
+5:19 Kommentarer fra Another World
+9:59 Kommentarer fra I
+12:11 Kommentarer fra: Legend
+14:14 Dagens spill: The Settlers II: Veni, Vidi, Vici
+18:10 Hva går spillet ut på?
+24:15 Ulike versjoner
+30:07 Hvilke ressurser og enheter finnes?
+35:06 Supply chain spill
+46:17 Grunnleggende tips og triks
+56:31 Tech Specs
+1:00:26 Manualen
+1:02:12 Esel?
+1:03:51 Plasseringen av bygninger
+1:09:51 Katapult
+1:12:32 Hadde det fungert uten krig?
+1:15:22 Minimalistisk GUI
+1:21:31 Litt om Blue Byte
+1:25:17 Settlers 1
+1:27:36 Musikken
+1:32:58 Oppfølgere
+1:35:18 Portaler
+1:38:12 Intro
+1:39:43 Kommentarer fra sosiale medier
+1:48:19 Har det holdt seg?
+1:51:17 Finnes det noe tilsvarende idag?
+1:55:06 Et tips fra Sigve
+1:58:02 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Romere havarerer på en øde øy uten håp om å bli reddet, eneste håp er å slå røtter. Men kanskje er de ikke alene her? Er The Settlers II det beste spillet i serien? Vi har fått hjelp av Erlend Fiddan til å finne svaret.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Du kan laste ned &lt;a href='https://www.siedler25.org'&gt;Return to the roots her&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/2024/04/29/er-the-settlers-ii-seriens-beste-spill/'&gt;episoden og spillet hos spillhistorie&lt;/a&gt;&lt;br&gt;
 Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:54 Velkommen til cd SPILL
+5:19 Kommentarer fra Another World
+9:59 Kommentarer fra I
+12:11 Kommentarer fra: Legend
+14:14 Dagens spill: The Settlers II: Veni, Vidi, Vici
+18:10 Hva går spillet ut på?
+24:15 Ulike versjoner
+30:07 Hvilke ressurser og enheter finnes?
+35:06 Supply chain spill
+46:17 Grunnleggende tips og triks
+56:31 Tech Specs
+1:00:26 Manualen
+1:02:12 Esel?
+1:03:51 Plasseringen av bygninger
+1:09:51 Katapult
+1:12:32 Hadde det fungert uten krig?
+1:15:22 Minimalistisk GUI
+1:21:31 Litt om Blue Byte
+1:25:17 Settlers 1
+1:27:36 Musikken
+1:32:58 Oppfølgere
+1:35:18 Portaler
+1:38:12 Intro
+1:39:43 Kommentarer fra sosiale medier
+1:48:19 Har det holdt seg?
+1:51:17 Finnes det noe tilsvarende idag?
+1:55:06 Et tips fra Sigve
+1:58:02 Neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5exd99kyqaugnejt/Settlers2.mp3" length="136357309" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5exd99kyqaugnejt/Settlers2.mp3" length="135345930" type="audio/mpeg"/>
         <itunes:summary>Romere havarerer på en øde øy uten håp om å bli reddet, eneste håp er å slå røtter. Men kanskje er de ikke alene her? Er The Settlers II det beste spillet i serien? Vi har fått hjelp av Erlend Fiddan til å finne svaret.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -2673,7 +3136,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Settlers.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="8 (#95)">95</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person></item>
     <item>
         <title>Legend (#94)</title>
         <itunes:title>Legend (#94)</itunes:title>
@@ -2766,7 +3229,18 @@ Les om &lt;a href='https://spillhistorie.no/2024/04/01/cd-spill-i-med-anders-ekr
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt; og &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;.
 Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:36 Velkommen til cd SPILL
+2:51 Dagens spill: I
+9:17 Tech Specs
+17:48 Hva går spillet ut på?
+34:58 Sykt creepy
+49:52 Tolkning av historien
+57:24 Musikken
+1:15:24 Har det holdt seg?
+1:19:10 Finnes det noe tilsvarende idag?</description>
                                                             <content:encoded>&lt;p&gt;Dette er en aprilspøk. Spillet I finnes ikke, men kos dere med episoden. Alt er bare løgn og fanteri.&lt;/p&gt;
 &lt;p&gt;Et av 90-tallets største spill kom for 30 år siden, og har kanskje gått under radaren for enkelte. Men da kan du puste lettet ut, for cd SPILL har fått med seg Ander Ekroll for å prate om I, og vi har fått med ALLE detaljene! Ingenting blir spart på, så bare å nyte episoden.&lt;br&gt;
 &lt;br&gt;
@@ -2774,7 +3248,18 @@ Les om &lt;a href='https://spillhistorie.no/2024/04/01/cd-spill-i-med-anders-ekr
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt; og &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;.&lt;br&gt;
 Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:36 Velkommen til cd SPILL
+2:51 Dagens spill: I
+9:17 Tech Specs
+17:48 Hva går spillet ut på?
+34:58 Sykt creepy
+49:52 Tolkning av historien
+57:24 Musikken
+1:15:24 Har det holdt seg?
+1:19:10 Finnes det noe tilsvarende idag?</content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/kw8b9k/I.mp3" length="92251015" type="audio/mpeg"/>
         <itunes:summary>Dette er en aprilspøk. Spillet I finnes ikke, men kos dere med episoden. Alt er bare løgn og fanteri.
@@ -2905,16 +3390,56 @@ Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podch
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt; og &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;.
 Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:36 Velkommen til cd SPILL
+2:41 Kommentarer fra forrige episode
+10:22 Dagens spill: Double Dragon
+11:53 Hva går spillet ut på?
+19:35 MrMamen ragequitter
+21:23 Tech Specs
+29:28 Ulike moves
+33:05 The story so far
+37:49 Lydeffekter
+40:06 Musikken
+46:07 Lore
+47:35 Filmen Double Dragon
+50:40 Oppfølgere
+52:56 Kommentarer fra sosiale medier
+58:53 Har det holdt seg?
+1:00:48 Finnes det noe tilsvarende idag?
+1:03:46 Et lite tips
+1:05:13 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Det er lenge siden vi har pratet om noen slåssespill. Faktisk ikke siden første episode. Da er det på tide å sjekke ut serien med det legendariske navnet Double Dragon. Vi har også fått med oss at det har kommet en film med samme navn.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Les mer &lt;a href='https://spillhistorie.no/2024/03/04/cd-spill-banker-banditter-i-double-dragon/'&gt;hos spillhistoire .no&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt; og &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;.&lt;br&gt;
 Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:36 Velkommen til cd SPILL
+2:41 Kommentarer fra forrige episode
+10:22 Dagens spill: Double Dragon
+11:53 Hva går spillet ut på?
+19:35 MrMamen ragequitter
+21:23 Tech Specs
+29:28 Ulike moves
+33:05 The story so far
+37:49 Lydeffekter
+40:06 Musikken
+46:07 Lore
+47:35 Filmen Double Dragon
+50:40 Oppfølgere
+52:56 Kommentarer fra sosiale medier
+58:53 Har det holdt seg?
+1:00:48 Finnes det noe tilsvarende idag?
+1:03:46 Et lite tips
+1:05:13 Neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/h8vwrr/DoubleDragon.mp3" length="54327582" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/h8vwrr/DoubleDragon.mp3" length="53847383" type="audio/mpeg"/>
         <itunes:summary>Det er lenge siden vi har pratet om noen slåssespill. Faktisk ikke siden første episode. Da er det på tide å sjekke ut serien med det legendariske navnet Double Dragon. Vi har også fått med oss at det har kommet en film med samme navn.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -3399,15 +3924,69 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Blues
 &lt;p&gt;Froholt har skrevet &lt;a href='https://spillhistorie.no/2023/11/13/bli-med-cd-spill-pa-jakt-etter-sagnomsuste-atlantis/'&gt;en flott artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:46 Velkommen til cd SPILL
+5:00 Praktisk info
+6:58 Kommentarer fra forrige episode
+15:29 Dagens spill: Indiana Jones and the Fate of Atlantis
+45:26 Spoiler hele historien
+47:46 Ulike paths
+59:31 Ship rib
+1:07:01 Kule puzzles
+1:11:34 De tre diskene
+1:17:02 Flere puzzles
+1:21:04 Algerie
+1:26:39 Ballongferd
+1:31:44 Ubåtsekvensen
+1:34:51 Enter Atlantis
+1:41:00 Sofia possessed
+1:44:28 Spoiler ending
+1:53:54 Voice acting
+1:58:20 Hva fungerer dårlig?
+2:02:39 Musikken
+2:07:34 Bakgrunnshistorien
+2:11:34 Indiana Jones and the Fate of Atlantis: The Action Game
+2:12:50 Kommentarer fra sosiale medier
+2:17:42 Har det holdt seg?
+2:19:55 HD-remake
+2:22:50 Neste episode: SimTower</description>
                                                             <content:encoded>&lt;p&gt;Sigve og MrMamen tar for seg pek-og-klikk-klassikeren Indiana Jones and Fate of Atlantis. Som sidekick har de fått med seg Eirik Gjerløw.&lt;/p&gt;
 &lt;p&gt;Hjemmesiden til fan-remaken: https://remakeofatlantis.blogspot.com&lt;/p&gt;
 &lt;p&gt;Froholt har skrevet &lt;a href='https://spillhistorie.no/2023/11/13/bli-med-cd-spill-pa-jakt-etter-sagnomsuste-atlantis/'&gt;en flott artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:46 Velkommen til cd SPILL
+5:00 Praktisk info
+6:58 Kommentarer fra forrige episode
+15:29 Dagens spill: Indiana Jones and the Fate of Atlantis
+45:26 Spoiler hele historien
+47:46 Ulike paths
+59:31 Ship rib
+1:07:01 Kule puzzles
+1:11:34 De tre diskene
+1:17:02 Flere puzzles
+1:21:04 Algerie
+1:26:39 Ballongferd
+1:31:44 Ubåtsekvensen
+1:34:51 Enter Atlantis
+1:41:00 Sofia possessed
+1:44:28 Spoiler ending
+1:53:54 Voice acting
+1:58:20 Hva fungerer dårlig?
+2:02:39 Musikken
+2:07:34 Bakgrunnshistorien
+2:11:34 Indiana Jones and the Fate of Atlantis: The Action Game
+2:12:50 Kommentarer fra sosiale medier
+2:17:42 Har det holdt seg?
+2:19:55 HD-remake
+2:22:50 Neste episode: SimTower</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/gn2z8u/Fate_of_Atlantis.mp3" length="144233299" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/gn2z8u/Fate_of_Atlantis.mp3" length="145314741" type="audio/mpeg"/>
         <itunes:summary>Sigve og MrMamen tar for seg pek-og-klikk-klassikeren Indiana Jones and Fate of Atlantis. Som sidekick har de fått med seg Eirik Gjerløw.
 
 Hjemmesiden til fan-remaken: https://remakeofatlantis.blogspot.com
@@ -3434,14 +4013,56 @@ Følg oss på Bluesky: https://bsky.app/profile/cdspill.bsky.social</itunes:summ
 &lt;p&gt;Spillhistorie.no har nok en gang &lt;a href='https://spillhistorie.no/2023/10/30/starcraft-ble-et-av-tidenes-storste-pc-spill/'&gt;skrevet en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;bluesky&lt;/a&gt;&lt;/p&gt;
-</description>
+
+
+0:00 Introduksjon
+1:02 Velkommen til cd SPILL
+5:59 Kommentarer fra forrige episode
+8:02 Dagens spill: StarCraft
+10:17 Første minner fra StarCraft
+15:46 Lore/Origin story
+30:59 Terran, Zerg, Protoss, hva er favoritten?
+34:59 Favorittenheter
+45:57 Ulike strategier
+50:23 Tech Specs
+52:44 Gjennomgang av historien i kampanjen
+1:09:39 Musikken
+1:12:46 Gjennomgang av historien i Brood War
+1:21:12 Historiespoiler over
+1:31:46 Utviklingshistorien
+1:33:44 Funfacts
+1:42:34 Kommentarer fra sosiale medier
+1:50:53 Har det holdt seg?
+1:54:29 Finnes det noe tilsvarende idag?
+1:57:53 Neste episode: Indiana Jones and the Fate of Atlantis</description>
                                                             <content:encoded>&lt;p&gt;Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel Bjerke og Tor-Andre Kiil Mørkved!&lt;/p&gt;
 &lt;p&gt;Spillhistorie.no har nok en gang &lt;a href='https://spillhistorie.no/2023/10/30/starcraft-ble-et-av-tidenes-storste-pc-spill/'&gt;skrevet en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;bluesky&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Introduksjon
+1:02 Velkommen til cd SPILL
+5:59 Kommentarer fra forrige episode
+8:02 Dagens spill: StarCraft
+10:17 Første minner fra StarCraft
+15:46 Lore/Origin story
+30:59 Terran, Zerg, Protoss, hva er favoritten?
+34:59 Favorittenheter
+45:57 Ulike strategier
+50:23 Tech Specs
+52:44 Gjennomgang av historien i kampanjen
+1:09:39 Musikken
+1:12:46 Gjennomgang av historien i Brood War
+1:21:12 Historiespoiler over
+1:31:46 Utviklingshistorien
+1:33:44 Funfacts
+1:42:34 Kommentarer fra sosiale medier
+1:50:53 Har det holdt seg?
+1:54:29 Finnes det noe tilsvarende idag?
+1:57:53 Neste episode: Indiana Jones and the Fate of Atlantis</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/zbsfje/StarCraft.mp3" length="125093385" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/zbsfje/StarCraft.mp3" length="125061518" type="audio/mpeg"/>
         <itunes:summary>Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel Bjerke og Tor-Andre Kiil Mørkved!</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -3529,13 +4150,47 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
                                     <description>&lt;p&gt;Sid Meier's Railroad Tycoon er den litt mindre kjente bestefaren til Transport Tycoon. Men jaggu er det mange viktige prinsipper som ble funnet opp for dette spillet. Som vikar har vi fått Erlend Fiddan, mens Joachim Froholt er gjest.&lt;/p&gt;
 &lt;p&gt;Podcasten Video Game History Hour har &lt;a href='https://www.podchaser.com/podcasts/video-game-history-hour-1583700/episodes/ep-116-the-first-cd-rom-game-182918249?fbclid=IwAR3_vrKgez4RKCxqZcJseY5J_nh7ZlU2Mtwjg65zrkzYCRINnxk0NvFBINo'&gt;en episode om det første CD-ROM-spillet&lt;/a&gt;. Det finnes også en &lt;a href='https://cdrom.ca/games/2023/06/29/first-cdrom-games.html'&gt;bloggpost om researchen&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Les tilhørende &lt;a href='https://spillhistorie.no/2023/10/02/railroad-tycoon-la-grunnlaget-for-en-ny-sjanger/'&gt;artikkel om episoder hos spillhistorie&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Kort intro
+0:46 Velkommen til cd SPILL
+2:41 Fra forrige episode
+10:06 Dagens spill: Railroad Tycoon
+12:28 Hva går spillet ut på?
+37:55 Ulike kart
+39:52 Tech Specs
+47:15 Litt om lokomotivene
+52:17 Musikken
+55:01 Tastatur og mus
+57:57 Utviklingen av spillet
+1:17:24 Oppfølgere og spinoffs
+1:22:33 Fra sosiale medier
+1:26:49 Har det holdt seg?
+1:30:45 Finnes det noe tilsvarende idag?
+1:35:59 Neste episode</description>
                                                             <content:encoded>&lt;p&gt;Sid Meier's Railroad Tycoon er den litt mindre kjente bestefaren til Transport Tycoon. Men jaggu er det mange viktige prinsipper som ble funnet opp for dette spillet. Som vikar har vi fått Erlend Fiddan, mens Joachim Froholt er gjest.&lt;/p&gt;
 &lt;p&gt;Podcasten Video Game History Hour har &lt;a href='https://www.podchaser.com/podcasts/video-game-history-hour-1583700/episodes/ep-116-the-first-cd-rom-game-182918249?fbclid=IwAR3_vrKgez4RKCxqZcJseY5J_nh7ZlU2Mtwjg65zrkzYCRINnxk0NvFBINo'&gt;en episode om det første CD-ROM-spillet&lt;/a&gt;. Det finnes også en &lt;a href='https://cdrom.ca/games/2023/06/29/first-cdrom-games.html'&gt;bloggpost om researchen&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Les tilhørende &lt;a href='https://spillhistorie.no/2023/10/02/railroad-tycoon-la-grunnlaget-for-en-ny-sjanger/'&gt;artikkel om episoder hos spillhistorie&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Kort intro
+0:46 Velkommen til cd SPILL
+2:41 Fra forrige episode
+10:06 Dagens spill: Railroad Tycoon
+12:28 Hva går spillet ut på?
+37:55 Ulike kart
+39:52 Tech Specs
+47:15 Litt om lokomotivene
+52:17 Musikken
+55:01 Tastatur og mus
+57:57 Utviklingen av spillet
+1:17:24 Oppfølgere og spinoffs
+1:22:33 Fra sosiale medier
+1:26:49 Har det holdt seg?
+1:30:45 Finnes det noe tilsvarende idag?
+1:35:59 Neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5crpm4/RailroadTycoon.mp3" length="116477471" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5crpm4/RailroadTycoon.mp3" length="122817579" type="audio/mpeg"/>
         <itunes:summary>Sid Meier’s Railroad Tycoon er den litt mindre kjente bestefaren til Transport Tycoon. Men jaggu er det mange viktige prinsipper som ble funnet opp for dette spillet. Som vikar har vi fått Erlend Fiddan, mens Joachim Froholt er gjest.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -3547,7 +4202,7 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RailroadTycoon_r5s6jz.jpg"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="4 (#82)">82</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person></item>
     <item>
         <title>Juksekoder med Aleksikon og Håkon Puntervold (#81)</title>
@@ -3559,15 +4214,31 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;bluesky&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
-</description>
+
+
+0:00 Intro
+5:40 Kommentarer fra Dark Forces
+9:00 Episodens tema: Juksekoder
+1:02:17 Fra Facebook
+1:14:34 Fra Twitter
+1:18:52 Fra Bluesky
+1:23:23 Neste episode: Railroad Tycoon</description>
                                                             <content:encoded>&lt;p&gt;Idag går vi litt utenfor det vanlige formatet og prater om juksekoder i spill. Aleksikon er vikar for Sigve, mens Håkon Puntervold er gjest.&lt;/p&gt;
 &lt;p&gt;Les &lt;a href='https://spillhistorie.no/2023/09/18/hva-betyr-iddqd-for-deg/'&gt;utfyllende artikkel hos spillhistorie&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;bluesky&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+5:40 Kommentarer fra Dark Forces
+9:00 Episodens tema: Juksekoder
+1:02:17 Fra Facebook
+1:14:34 Fra Twitter
+1:18:52 Fra Bluesky
+1:23:23 Neste episode: Railroad Tycoon</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/cepftk/cheats.mp3" length="84399807" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/cepftk/cheats.mp3" length="84021410" type="audio/mpeg"/>
         <itunes:summary>Idag går vi litt utenfor det vanlige formatet og prater om juksekoder i spill. Aleksikon er vikar for Sigve, mens Håkon Puntervold er gjest.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -3588,12 +4259,54 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <guid isPermaLink="false">cdspill.podbean.com/297f5148-eb05-304d-960a-d5e991512938</guid>
                                     <description>&lt;p&gt;Sigve glimrer fortsatt med sitt fravær, men med Jostein og Joachim som vikarer er det enkelt å fylle tiden med tilbakeblikk på LucasArts' spillet Star Wars: Dark Forces&lt;/p&gt;
 &lt;p&gt;Les &lt;a href='https://spillhistorie.no/2023/09/04/star-wars-dark-forces-er-fortsatt-verdt-a-spille/'&gt;tilhørende artikkel hos Spillhistorie&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+0:38 Velkommen til vikarer og gjester
+4:32 Kommentarer fra Freddi Fisk
+6:13 Litt om Ron Gilbert
+8:22 Dagens spill: Star Wars: Dark Forces
+13:31 I forhold til Doom
+16:57 Kyle Katarn
+22:41 Cutscenes
+25:59 Musikken
+33:33 Spillmotoren: Jedi
+38:38 Tech Specs
+41:34 The Force Engine
+46:41 Våpnene
+49:30 Juksekoder
+51:12 John Romero
+54:44 George Lucas
+56:53 Dark Forces II
+1:04:20 Kommentarer fra sosiale medier
+1:10:54 Har det holdt seg?
+1:13:48 Finnes det noe tilsvarende idag?</description>
                                                             <content:encoded>&lt;p&gt;Sigve glimrer fortsatt med sitt fravær, men med Jostein og Joachim som vikarer er det enkelt å fylle tiden med tilbakeblikk på LucasArts' spillet Star Wars: Dark Forces&lt;/p&gt;
 &lt;p&gt;Les &lt;a href='https://spillhistorie.no/2023/09/04/star-wars-dark-forces-er-fortsatt-verdt-a-spille/'&gt;tilhørende artikkel hos Spillhistorie&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+0:38 Velkommen til vikarer og gjester
+4:32 Kommentarer fra Freddi Fisk
+6:13 Litt om Ron Gilbert
+8:22 Dagens spill: Star Wars: Dark Forces
+13:31 I forhold til Doom
+16:57 Kyle Katarn
+22:41 Cutscenes
+25:59 Musikken
+33:33 Spillmotoren: Jedi
+38:38 Tech Specs
+41:34 The Force Engine
+46:41 Våpnene
+49:30 Juksekoder
+51:12 John Romero
+54:44 George Lucas
+56:53 Dark Forces II
+1:04:20 Kommentarer fra sosiale medier
+1:10:54 Har det holdt seg?
+1:13:48 Finnes det noe tilsvarende idag?</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/88jnjk/darkforces.mp3" length="88356287" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/88jnjk/darkforces.mp3" length="86895986" type="audio/mpeg"/>
         <itunes:summary>Sigve glimrer fortsatt med sitt fravær, men med Jostein og Joachim som vikarer er det enkelt å fylle tiden med tilbakeblikk på LucasArts’ spillet Star Wars: Dark Forces</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -3615,13 +4328,49 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
                                     <description>&lt;p&gt;Humongous Entertainment ble stiftet av Ron Gilbert og Shelley Day og er og regne som eventyrspill for barn. For å få de nostalgiske minnene har MrMamen fått med seg vikar Alexander Espeseth i Sigves fravær.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Les mer &lt;a href='https://spillhistorie.no/2023/08/21/freddi-fisk-og-humongous-entertainment/'&gt;om episoden hos spillhistorie.no&lt;/a&gt;&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+1:23 Velkommen til vikaren C. Alexander Espeseth
+2:55 Anbefaling av Retrospill
+5:26 Mamens anbefaling
+8:05 Kommentarer fra tidligere episoder
+11:16 Musikkquiz fra Tiltcast
+15:43 Dagens spill: Freddi Fisk og de forsvunne sjøgressfrøene
+31:24 Stemmeskuespillet
+34:20 Tech Specs
+37:08 Pajama Sam
+38:24 Spy Fox
+39:26 Putt-Putt
+41:31 Musikk
+44:22 Kommentarer fra Facebook
+45:53 En personlig historie fra Alex
+47:24 Har det holdt seg?
+50:26 Finnes det noe tilsvarende idag?</description>
                                                             <content:encoded>&lt;p&gt;Humongous Entertainment ble stiftet av Ron Gilbert og Shelley Day og er og regne som eventyrspill for barn. For å få de nostalgiske minnene har MrMamen fått med seg vikar Alexander Espeseth i Sigves fravær.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Les mer &lt;a href='https://spillhistorie.no/2023/08/21/freddi-fisk-og-humongous-entertainment/'&gt;om episoden hos spillhistorie.no&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+1:23 Velkommen til vikaren C. Alexander Espeseth
+2:55 Anbefaling av Retrospill
+5:26 Mamens anbefaling
+8:05 Kommentarer fra tidligere episoder
+11:16 Musikkquiz fra Tiltcast
+15:43 Dagens spill: Freddi Fisk og de forsvunne sjøgressfrøene
+31:24 Stemmeskuespillet
+34:20 Tech Specs
+37:08 Pajama Sam
+38:24 Spy Fox
+39:26 Putt-Putt
+41:31 Musikk
+44:22 Kommentarer fra Facebook
+45:53 En personlig historie fra Alex
+47:24 Har det holdt seg?
+50:26 Finnes det noe tilsvarende idag?</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dyae2g/freddi.mp3" length="62528897" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dyae2g/freddi.mp3" length="57474359" type="audio/mpeg"/>
         <itunes:summary>Humongous Entertainment ble stiftet av Ron Gilbert og Shelley Day og er og regne som eventyrspill for barn. For å få de nostalgiske minnene har MrMamen fått med seg vikar Alexander Espeseth i Sigves fravær.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -3716,14 +4465,88 @@ Gammel anmeldelse fra &lt;a href='https://www.smspower.org/Scans/SegaMasterForce
 Les &lt;a href='https://spillhistorie.no/2018/05/04/tilbakeblikk-california-games/'&gt;et tilbakeblikk skrevet av Joachim Froholt&lt;/a&gt;
 Les &lt;a href='https://spillhistorie.no/2023/06/19/bli-med-til-solfylte-california/'&gt;tilhørende artikkel hos spillhistorie.no&lt;/a&gt;
 Støtt oss gjerne &lt;a href='https://www.patreon.com/cdSPILL'&gt;på patreon: https://www.patreon.com/cdSPILL&lt;/a&gt;&lt;/p&gt;
-</description>
+
+
+0:00 Intro
+2:15 Velkommen til Jostein Hakestad
+3:13 Praktisk info
+4:34 Tilbakeblikk på TiltCast 3.0
+6:46 Kommentarer fra DigDug og Digger
+9:45 Dagens spill: California Games
+14:01 Øvelsene: Half Pipe
+14:23 Øvelsene: Footbag
+15:02 Surfing
+16:00 Rollerskating
+16:41 BMX
+17:20 Flying disc
+19:52 Vi prater om konsoll(!)
+23:28 Best idretter
+28:19 Litt om Mega Drive-versjonen
+31:53 Tech Specs: California Games
+36:44 Dagens spill: California Games II
+40:02 Øvelsene: Bodyboarding
+40:33 Gjennomgår øvelsene
+42:00 Hanggliding
+42:50 Jet surfing
+44:06 Skateboarding
+48:52 Snowboarding
+52:30 Rangering av idrettene
+56:08 Musikken
+58:46 Uncredited
+1:01:47 Vanskeligere å ta vare på spillhistorien
+1:04:39 En gammel anmeldelse av CF2
+1:06:36 Musikken i California Games II
+1:07:45 Andre Epyx Spill
+1:09:57 Lignende spill: DuckTales\; Quest for Gold
+1:10:38 Home Alone
+1:10:55 Kommentarer fra Facebook og Twitter
+1:17:54 Har California Games holdt seg?
+1:19:25 Har California Games II holdt seg?
+1:20:37 Finnes det noe tilsvarende idag?</description>
                                                             <content:encoded>&lt;p&gt;California Games var en stor hit på en del hjemmedatamaskiner og konsoller. Men cd SPILL trenger eksperthjelp fra Jostein Hakestad fra RadCrew for å mimre om dette spillet. For PC versjonen var kanskje ikke den beste.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;
 Gammel anmeldelse fra &lt;a href='https://www.smspower.org/Scans/SegaMasterForce-Magazine-Issue2?gallerypage=23'&gt;SegaMasterForce&lt;/a&gt;&lt;br&gt;
 Les &lt;a href='https://spillhistorie.no/2018/05/04/tilbakeblikk-california-games/'&gt;et tilbakeblikk skrevet av Joachim Froholt&lt;/a&gt;&lt;br&gt;
 Les &lt;a href='https://spillhistorie.no/2023/06/19/bli-med-til-solfylte-california/'&gt;tilhørende artikkel hos spillhistorie.no&lt;/a&gt;&lt;br&gt;
 Støtt oss gjerne &lt;a href='https://www.patreon.com/cdSPILL'&gt;på patreon: https://www.patreon.com/cdSPILL&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Intro
+2:15 Velkommen til Jostein Hakestad
+3:13 Praktisk info
+4:34 Tilbakeblikk på TiltCast 3.0
+6:46 Kommentarer fra DigDug og Digger
+9:45 Dagens spill: California Games
+14:01 Øvelsene: Half Pipe
+14:23 Øvelsene: Footbag
+15:02 Surfing
+16:00 Rollerskating
+16:41 BMX
+17:20 Flying disc
+19:52 Vi prater om konsoll(!)
+23:28 Best idretter
+28:19 Litt om Mega Drive-versjonen
+31:53 Tech Specs: California Games
+36:44 Dagens spill: California Games II
+40:02 Øvelsene: Bodyboarding
+40:33 Gjennomgår øvelsene
+42:00 Hanggliding
+42:50 Jet surfing
+44:06 Skateboarding
+48:52 Snowboarding
+52:30 Rangering av idrettene
+56:08 Musikken
+58:46 Uncredited
+1:01:47 Vanskeligere å ta vare på spillhistorien
+1:04:39 En gammel anmeldelse av CF2
+1:06:36 Musikken i California Games II
+1:07:45 Andre Epyx Spill
+1:09:57 Lignende spill: DuckTales\; Quest for Gold
+1:10:38 Home Alone
+1:10:55 Kommentarer fra Facebook og Twitter
+1:17:54 Har California Games holdt seg?
+1:19:25 Har California Games II holdt seg?
+1:20:37 Finnes det noe tilsvarende idag?</content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/mnwmtw/cg.mp3" length="107147826" type="audio/mpeg"/>
         <itunes:summary>California Games var en stor hit på en del hjemmedatamaskiner og konsoller. Men cd SPILL trenger eksperthjelp fra Jostein Hakestad fra RadCrew for å mimre om dette spillet. For PC versjonen var kanskje ikke den beste.
@@ -3749,13 +4572,41 @@ Støtt oss gjerne på patreon: https://www.patreon.com/cdSPILL</itunes:summary>
                                     <description>&lt;p&gt;Dig Dug gikk sin seiersgang i diverse arkadehaller og nådde mange ulike hjemmedatamaskiner. Men ikke lenge etter kom det også et veldig lignende spill til PC: Digger. Vi sammenligner og ser tilbake på disse gravespillene.&lt;/p&gt;
 &lt;p&gt;Les mer om episoden og spillene hos spillhistorie.no: https://spillhistorie.no/2023/06/05/graving-for-alle-pengene/&lt;/p&gt;
 &lt;p&gt;Vi blir glade om du støtter oss på Patreon: &lt;a href='http://patreon.com/cdSPILL'&gt;patreon.com/cdSPILL&lt;/a&gt;&lt;/p&gt;
-</description>
+
+
+0:00 Kort intro
+2:22 Fra forrige gang
+10:56 Dagens spill: Dig Dug
+15:44 Utdrag fra Manualen
+17:25 Tech Specs: Dig Dug
+22:30 Dagens spill: Digger
+28:30 Musikken
+32:31 Tech Specs: Digger
+35:59 Lore
+43:39 Fra sosiale medier
+47:47 Har det holdt seg?
+50:36 Finnes det noe tilsvarende idag?
+52:46 Hva skal vi snakke om neste gang?</description>
                                                             <content:encoded>&lt;p&gt;Dig Dug gikk sin seiersgang i diverse arkadehaller og nådde mange ulike hjemmedatamaskiner. Men ikke lenge etter kom det også et veldig lignende spill til PC: Digger. Vi sammenligner og ser tilbake på disse gravespillene.&lt;/p&gt;
 &lt;p&gt;Les mer om episoden og spillene hos spillhistorie.no: https://spillhistorie.no/2023/06/05/graving-for-alle-pengene/&lt;/p&gt;
 &lt;p&gt;Vi blir glade om du støtter oss på Patreon: &lt;a href='http://patreon.com/cdSPILL'&gt;patreon.com/cdSPILL&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Kort intro
+2:22 Fra forrige gang
+10:56 Dagens spill: Dig Dug
+15:44 Utdrag fra Manualen
+17:25 Tech Specs: Dig Dug
+22:30 Dagens spill: Digger
+28:30 Musikken
+32:31 Tech Specs: Digger
+35:59 Lore
+43:39 Fra sosiale medier
+47:47 Har det holdt seg?
+50:36 Finnes det noe tilsvarende idag?
+52:46 Hva skal vi snakke om neste gang?</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dcpfwh/DigDug.mp3" length="67312289" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dcpfwh/DigDug.mp3" length="57506233" type="audio/mpeg"/>
         <itunes:summary>Dig Dug gikk sin seiersgang i diverse arkadehaller og nådde mange ulike hjemmedatamaskiner. Men ikke lenge etter kom det også et veldig lignende spill til PC: Digger. Vi sammenligner og ser tilbake på disse gravespillene.
 Les mer om episoden og spillene hos spillhistorie.no: https://spillhistorie.no/2023/06/05/graving-for-alle-pengene/
 Vi blir glade om du støtter oss på Patreon: patreon.com/cdSPILL</itunes:summary>
@@ -3778,14 +4629,46 @@ Vi blir glade om du støtter oss på Patreon: patreon.com/cdSPILL</itunes:summar
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;&lt;a href='https://spillhistorie.no/2023/05/22/ta-over-verden-i-cyberpunk-klassikeren-syndicate/'&gt;Les mer om spillet og episoden&lt;/a&gt; hos spillhistore.no&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;patreon&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 Kort intro
+2:27 Velkommen til Anders Ekroll
+4:31 Kommentarer fra forrige episode
+8:30 Idag: Syndicate
+22:43 Lore i Syndicate
+28:50 Tech Specs
+31:06 Musikken
+37:22 Brukergrensesnittet
+56:09 Våpnene
+1:07:25 Oppfølgerne
+1:15:26 Kommentarer fra sosiale medier
+1:26:08 Introsekvensen
+1:30:26 Har det holdt seg?
+1:33:34 Finnes det noe tilsvarende idag?
+1:38:56 Hvilket spill prater vi om i neste episode?</description>
                                                             <content:encoded>&lt;p&gt;Skal vil dømme etter dataspill, går vi en ganske kjip fremtid i møte. Nøyaktig hvor kjip varierer fra spill til spill, og jeg vil vel påstå at Bullfrog-spillet &lt;a href='https://spillhistorie.no/2020/12/07/spillhistories-klassikerkalender-luke-7/'&gt;Syndicate&lt;/a&gt; byr på en fremtidsvisjon som er hakket kjipere enn i gjennomsnittsspillet. I alle fall så lenge vi ikke blander inn imperialistiske romvesener eller absurde naturkatastrofer.  MrMamen og Sigve var såpass ubrukelige at de ikke kom forbi brett 2, men heldigvis blir episoden reddet i havn av Anders Ekroll som var adskillig mer vellykket i sin gjennomspilling.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;&lt;a href='https://spillhistorie.no/2023/05/22/ta-over-verden-i-cyberpunk-klassikeren-syndicate/'&gt;Les mer om spillet og episoden&lt;/a&gt; hos spillhistore.no&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;patreon&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Kort intro
+2:27 Velkommen til Anders Ekroll
+4:31 Kommentarer fra forrige episode
+8:30 Idag: Syndicate
+22:43 Lore i Syndicate
+28:50 Tech Specs
+31:06 Musikken
+37:22 Brukergrensesnittet
+56:09 Våpnene
+1:07:25 Oppfølgerne
+1:15:26 Kommentarer fra sosiale medier
+1:26:08 Introsekvensen
+1:30:26 Har det holdt seg?
+1:33:34 Finnes det noe tilsvarende idag?
+1:38:56 Hvilket spill prater vi om i neste episode?</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/x3k254/syndicate.mp3" length="107886417" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/x3k254/syndicate.mp3" length="106301187" type="audio/mpeg"/>
         <itunes:summary>Skal vil dømme etter dataspill, går vi en ganske kjip fremtid i møte. Nøyaktig hvor kjip varierer fra spill til spill, og jeg vil vel påstå at Bullfrog-spillet Syndicate byr på en fremtidsvisjon som er hakket kjipere enn i gjennomsnittsspillet. I alle fall så lenge vi ikke blander inn imperialistiske romvesener eller absurde naturkatastrofer.  MrMamen og Sigve var såpass ubrukelige at de ikke kom forbi brett 2, men heldigvis blir episoden reddet i havn av Anders Ekroll som var adskillig mer vellykket i sin gjennomspilling.
  
 Les mer om spillet og episoden hos spillhistore.no
@@ -3810,14 +4693,48 @@ Støtt oss gjerne på patreon.</itunes:summary>
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Gå til spillhistorie.no og &lt;a href='https://spillhistorie.no/2023/05/08/captain-comic-banet-vei-for-plattformspill-pa-pc/'&gt;les tilhørende artikkel&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;patreon&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+
+0:00 cd SPILL introduksjon
+1:31 Intro av gjest: Sindre Opsahl Skaare
+5:45 Kommentarer fra sist
+9:30 Episodens spill: The Adventures of Captain Comic
+16:43 Introskjerm og manual
+19:39 Går igjennom spillet brett for brett
+29:41 Tech Specs
+32:07 Musikken
+35:42 Fiendene
+44:44 LItt om hvordan det ble til
+50:22 BoxArt
+57:40 Kommentarer fra sosiale medier
+58:58 Oppfølgeren: Captain Comic II: Fractured Reality
+1:04:03 Har det holdt seg?
+1:09:45 Et tips fra Sigve
+1:10:46 Neste spill: Syndicate</description>
                                                             <content:encoded>&lt;p&gt;Et av de tidlige vellykkede plattformspillene var The Adventures of Captain Comic. IBM-maskiner var ikke spesielt gode på scrolling, men dette spillet forsøkte likevel. Det var også en pioner ved at spillet var shareware. Vi har fått med oss Sindre fra spillegal for å diskutere klassikeren som banet vei for Commander Keen og andre lignende spill.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;Gå til spillhistorie.no og &lt;a href='https://spillhistorie.no/2023/05/08/captain-comic-banet-vei-for-plattformspill-pa-pc/'&gt;les tilhørende artikkel&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;patreon&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
+
+
+0:00 cd SPILL introduksjon
+1:31 Intro av gjest: Sindre Opsahl Skaare
+5:45 Kommentarer fra sist
+9:30 Episodens spill: The Adventures of Captain Comic
+16:43 Introskjerm og manual
+19:39 Går igjennom spillet brett for brett
+29:41 Tech Specs
+32:07 Musikken
+35:42 Fiendene
+44:44 LItt om hvordan det ble til
+50:22 BoxArt
+57:40 Kommentarer fra sosiale medier
+58:58 Oppfølgeren: Captain Comic II: Fractured Reality
+1:04:03 Har det holdt seg?
+1:09:45 Et tips fra Sigve
+1:10:46 Neste spill: Syndicate</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/sfnpyj/CaptainComic.mp3" length="97757393" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/sfnpyj/CaptainComic.mp3" length="97328853" type="audio/mpeg"/>
         <itunes:summary>Et av de tidlige vellykkede plattformspillene var The Adventures of Captain Comic. IBM-maskiner var ikke spesielt gode på scrolling, men dette spillet forsøkte likevel. Det var også en pioner ved at spillet var shareware. Vi har fått med oss Sindre fra spillegal for å diskutere klassikeren som banet vei for Commander Keen og andre lignende spill.
  
 Gå til spillhistorie.no og les tilhørende artikkel.
@@ -3832,7 +4749,7 @@ Støtt oss gjerne på patreon.</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CaptainComic.jpg"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="9 (#75)">75</podcast:episode>
-        <podcast:person role="guest">Sindre Opsahl Skaare</podcast:person></item>
+        <podcast:person role="guest">Sindre Skaare</podcast:person></item>
     <item>
         <title>Battle Chess med Aleksikon (#74)</title>
         <itunes:title>Battle Chess med Aleksikon (#74)</itunes:title>
@@ -3841,11 +4758,39 @@ Støtt oss gjerne på patreon.</itunes:summary>
                                     <description>&lt;p&gt;Hva med et slag sjakk hvor alle brikkene blir levende og faktisk sloss mot hverandre? Aleksikon har blitt med for å fortelle om sine sjakkerfaringer, og ikke minst på hvilken tvilsom måte han stiftet bekjentskap med dette sjakkspillet.&lt;/p&gt;
 &lt;p&gt;Les tilhørende &lt;a href='https://spillhistorie.no/2023/04/24/har-battle-chess-talt-tidens-tann/'&gt;artikkel hos spillhistore.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne &lt;a href='https://www.patreon.com/cdSPILL'&gt;på Patreon&lt;/a&gt;!&lt;/p&gt;
-</description>
+
+
+0:00 Introduksjon
+1:25 Velkommen til Aleksikon
+2:19 Kommentarer fra forrige episode
+5:32 Dagens spill: Battle Chess
+24:51 Ulike kampanimasjoner
+33:49 Musikken
+37:06 Bakgrunnsstoff
+38:59 Produsenten som alltid skulle mene noe
+42:00 Battle Chess: Enhanced CD-ROM
+45:18 Hva mener lytterne?
+50:30 Har det holdt seg?
+53:06 Finnes det noe tilsvarende idag?
+59:59 Neste episodes spill</description>
                                                             <content:encoded>&lt;p&gt;Hva med et slag sjakk hvor alle brikkene blir levende og faktisk sloss mot hverandre? Aleksikon har blitt med for å fortelle om sine sjakkerfaringer, og ikke minst på hvilken tvilsom måte han stiftet bekjentskap med dette sjakkspillet.&lt;/p&gt;
 &lt;p&gt;Les tilhørende &lt;a href='https://spillhistorie.no/2023/04/24/har-battle-chess-talt-tidens-tann/'&gt;artikkel hos spillhistore.&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne &lt;a href='https://www.patreon.com/cdSPILL'&gt;på Patreon&lt;/a&gt;!&lt;/p&gt;
-</content:encoded>
+
+
+0:00 Introduksjon
+1:25 Velkommen til Aleksikon
+2:19 Kommentarer fra forrige episode
+5:32 Dagens spill: Battle Chess
+24:51 Ulike kampanimasjoner
+33:49 Musikken
+37:06 Bakgrunnsstoff
+38:59 Produsenten som alltid skulle mene noe
+42:00 Battle Chess: Enhanced CD-ROM
+45:18 Hva mener lytterne?
+50:30 Har det holdt seg?
+53:06 Finnes det noe tilsvarende idag?
+59:59 Neste episodes spill</content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/gqvfya/BattleChess_vizzy.mp3" length="65123447" type="audio/mpeg"/>
         <itunes:summary>Hva med et slag sjakk hvor alle brikkene blir levende og faktisk sloss mot hverandre? Aleksikon har blitt med for å fortelle om sine sjakkerfaringer, og ikke minst på hvilken tvilsom måte han stiftet bekjentskap med dette sjakkspillet.
@@ -3980,7 +4925,7 @@ Relevante lenker:Last ned FreeCol herKjøp original-spillet fra GOGLes et flott 
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="5 (#71)">71</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>DStroy med Anette Jøsendal (#70)</title>
@@ -4325,7 +5270,7 @@ Les tilhørende artikkel hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Blade_Runnerbdzdr.jpg"/>
         <podcast:season name="Høst 2022">6</podcast:season>
         <podcast:episode display="3 (#61)">61</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
     <item>
         <title>The Blues Brothers (#60)</title>
         <itunes:title>The Blues Brothers (#60)</itunes:title>
@@ -4458,7 +5403,7 @@ Les tilhørende artikkel hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cannon_fodder_gkj6xd.jpg"/>
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="13 (#57)">57</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Secret Agent (#56)</title>
         <itunes:title>Secret Agent (#56)</itunes:title>
@@ -4542,7 +5487,7 @@ Les mer om episoden hos spillhistorie.no.</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL_pop_square_f9j8r5.jpg"/>
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="10 (#54)">54</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
     <item>
         <title>Road Rash (#53)</title>
         <itunes:title>Road Rash (#53)</itunes:title>
@@ -4616,7 +5561,7 @@ Les tilhørende artikkel hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/warcraft_contrast_bbbazk.jpg"/>
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="7 (#51)">51</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/a9f2efd93c83d033f2611ec76e93abe5.jpeg">Audun Rodem</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/audun-rodem-107tZxOPfL" img="https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg">Audun Rodem</podcast:person></item>
     <item>
         <title>System Shock med Jon Cato Lorentzen (#50)</title>
         <itunes:title>System Shock med Jon Cato Lorentzen (#50)</itunes:title>
@@ -4860,7 +5805,7 @@ Det brutale DOOM skremte alle og enhver, også Ethel fra Barna i våre hjerter. 
         <itunes:image href="https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg"/>
         <podcast:season name="Høst 2021">4</podcast:season>
         <podcast:episode display="7 (#42)">42</podcast:episode>
-        <podcast:person role="guest">Jåddi</podcast:person></item>
+        <podcast:person role="guest">Jørn Inge Henriksen</podcast:person></item>
     <item>
         <title>Tex Murphy: Mean Streets (#41)</title>
         <itunes:title>Tex Murphy: Mean Streets (#41)</itunes:title>
@@ -5152,7 +6097,7 @@ Les hele artikkelen hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/quake.jpg"/>
         <podcast:season name="Vår 2021">3</podcast:season>
         <podcast:episode display="11 (#32)">32</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/dfdb5f7f33b0ebbb36b66f939c4f4f6f.jpeg">Ketil Espenæs</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb">Ketil Espenæs</podcast:person></item>
     <item>
         <title>Populous (#31)</title>
         <itunes:title>Populous (#31)</itunes:title>
@@ -5634,7 +6579,7 @@ DoubleJump: https://www.doublejump.no
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rise_of_Triad8ehoh.jpg"/>
         <podcast:season name="Høst 2020">2</podcast:season>
         <podcast:episode display="4 (#15)">15</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/dfdb5f7f33b0ebbb36b66f939c4f4f6f.jpeg">Ketil Espenæs</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb">Ketil Espenæs</podcast:person></item>
     <item>
         <title>Arkanoid (#14)</title>
         <itunes:title>Arkanoid (#14)</itunes:title>
@@ -5836,7 +6781,7 @@ Takk til Kristian Amlie for intromusikk</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/keen_2a9x4y.jpg"/>
         <podcast:season name="Vår 2020">1</podcast:season>
         <podcast:episode display="8 (#8)">8</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/a9f2efd93c83d033f2611ec76e93abe5.jpeg">Audun Rodem</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/audun-rodem-107tZxOPfL" img="https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg">Audun Rodem</podcast:person></item>
     <item>
         <title>Delta Force (#7)</title>
         <itunes:title>Delta Force (#7)</itunes:title>
