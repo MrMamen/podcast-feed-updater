@@ -1,15 +1,11 @@
-name: Enrich cd SPILL Feed
+name: Enrich cd SPILL Feed (YouTube)
 
 on:
-  # Allow manual trigger
+  # Manual trigger only
   workflow_dispatch:
 
-  # Run on push to master
-  push:
-    branches: [ master ]
-
 jobs:
-  enrich:
+  enrich-youtube:
     runs-on: ubuntu-latest
 
     # Grant write permissions for GitHub Pages deployment
@@ -32,14 +28,13 @@ jobs:
         curl -LsSf https://astral.sh/uv/install.sh | sh
         echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
-    - name: Run main enrichment script
+    - name: Run YouTube enrichment script
       env:
         PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
-        # Run main enrichment script only
-        # Spotify and YouTube feeds are generated separately via manual workflows
-        uv run enrich_cdspill.py
+        # Run YouTube script only (fetches from already deployed enriched feed)
+        uv run enrich_cdspill_youtube.py
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -47,5 +42,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
         publish_branch: gh-pages
-        # Incremental update - merges with existing files (preserves Spotify/YouTube feeds)
+        # Incremental update - merges with existing files
         keep_files: true

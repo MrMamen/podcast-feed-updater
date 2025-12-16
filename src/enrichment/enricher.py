@@ -979,6 +979,190 @@ class FeedEnricher(BaseFeed):
         print("✓ Formatted podcast elements for better readability")
         return self
 
+    def _format_youtube_timestamp(self, time_str: str) -> str:
+        """
+        Convert HH:MM:SS to YouTube format (strip leading zeros).
+
+        Examples:
+            "00:00:00" → "0:00"
+            "00:12:34" → "12:34"
+            "01:23:45" → "1:23:45"
+
+        Args:
+            time_str: Time string in HH:MM:SS format
+
+        Returns:
+            YouTube-friendly time format
+        """
+        parts = time_str.split(':')
+        if len(parts) != 3:
+            return time_str  # Invalid format, return as-is
+
+        hours, minutes, seconds = parts
+        hours = int(hours)
+        minutes = int(minutes)
+
+        if hours > 0:
+            # Format: H:MM:SS (preserve leading zero in minutes)
+            return f"{hours}:{minutes:02d}:{seconds}"
+        else:
+            # Format: M:SS or MM:SS (no leading zero on minutes)
+            return f"{minutes}:{seconds}"
+
+    def restore_episode_numbers_to_titles(self, format: str = ' (#{episode})') -> 'FeedEnricher':
+        """
+        Restore episode numbers to episode titles from itunes:episode tags.
+        Inverse operation of remove_episode_numbers_from_titles().
+
+        This is useful for feeds like YouTube that display episode numbers differently
+        than podcast apps. Skips bonus episodes (episodeType=bonus) as they should
+        not have episode numbers in titles.
+
+        Args:
+            format: Format string with {episode} placeholder (default: ' (#{episode})')
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        items = self.channel.findall('item')
+        restored_count = 0
+        skipped_bonus = 0
+
+        for item in items:
+            # Skip bonus episodes (they should not have episode numbers in titles)
+            episode_type = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}episodeType')
+            if episode_type is not None and episode_type.text == 'bonus':
+                skipped_bonus += 1
+                continue
+
+            episode_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}episode')
+            if episode_elem is None or not episode_elem.text:
+                continue
+
+            episode_num = episode_elem.text.strip()
+            suffix = format.format(episode=episode_num)
+
+            # Update <title>
+            title_elem = item.find('title')
+            if title_elem is not None and title_elem.text:
+                if suffix not in title_elem.text:  # Avoid duplicates
+                    title_elem.text = title_elem.text + suffix
+                    restored_count += 1
+
+            # Update <itunes:title> if present
+            itunes_title = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}title')
+            if itunes_title is not None and itunes_title.text:
+                if suffix not in itunes_title.text:
+                    itunes_title.text = itunes_title.text + suffix
+
+        print(f"✓ Restored episode numbers to {restored_count} episode titles (skipped {skipped_bonus} bonus episodes)")
+        return self
+
+    def add_chapter_timestamps_to_description(self, separator: str = '\n\n') -> 'FeedEnricher':
+        """
+        Extract chapter timestamps from psc:chapters and append to episode descriptions.
+        Formats chapters as "0:00 Intro\n12:34 Chapter Title\n..." for YouTube compatibility.
+
+        YouTube doesn't support podcast:chapters or psc:chapters tags, but it does
+        support timestamps in the description text. This method extracts chapter
+        information and appends it as plain text.
+
+        Args:
+            separator: Separator between original description and timestamps (default: '\n\n')
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        psc_ns = "http://podlove.org/simple-chapters"
+        items = self.channel.findall('item')
+        updated_count = 0
+
+        for item in items:
+            # Find psc:chapters element (must be present from convert_json_chapters_to_psc)
+            psc_chapters = item.find(f'{{{psc_ns}}}chapters')
+            if psc_chapters is None:
+                continue
+
+            # Extract all chapter elements
+            chapters = psc_chapters.findall(f'{{{psc_ns}}}chapter')
+            if not chapters:
+                continue
+
+            # Build timestamp text block
+            timestamp_lines = []
+            for chapter in chapters:
+                start_time = chapter.get('start', '00:00:00')
+                title = chapter.get('title', '')
+
+                # Convert to YouTube format (e.g., "0:00", "12:34", "1:23:45")
+                youtube_time = self._format_youtube_timestamp(start_time)
+                timestamp_lines.append(f"{youtube_time} {title}")
+
+            if not timestamp_lines:
+                continue
+
+            timestamp_text = '\n'.join(timestamp_lines)
+
+            # Update <description>
+            desc_elem = item.find('description')
+            if desc_elem is not None and desc_elem.text:
+                if timestamp_text not in desc_elem.text:
+                    desc_elem.text = desc_elem.text + separator + timestamp_text
+
+            # Update <content:encoded>
+            content_elem = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
+            if content_elem is not None and content_elem.text:
+                if timestamp_text not in content_elem.text:
+                    content_elem.text = content_elem.text + separator + timestamp_text
+
+            updated_count += 1
+
+        print(f"✓ Added chapter timestamps to {updated_count} episode descriptions")
+        return self
+
+    def remove_chapter_tags(self) -> 'FeedEnricher':
+        """
+        Remove podcast:chapters and psc:chapters tags from episodes.
+
+        This is useful for feeds like YouTube that don't support chapter tags
+        but use timestamps in descriptions instead. Removing these tags reduces
+        feed size without losing functionality.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        podcast_ns = 'https://podcastindex.org/namespace/1.0'
+        psc_ns = "http://podlove.org/simple-chapters"
+        items = self.channel.findall('item')
+
+        removed_podcast_chapters = 0
+        removed_psc_chapters = 0
+
+        for item in items:
+            # Remove podcast:chapters
+            podcast_chapters = item.find(f'{{{podcast_ns}}}chapters')
+            if podcast_chapters is not None:
+                item.remove(podcast_chapters)
+                removed_podcast_chapters += 1
+
+            # Remove psc:chapters
+            psc_chapters = item.find(f'{{{psc_ns}}}chapters')
+            if psc_chapters is not None:
+                item.remove(psc_chapters)
+                removed_psc_chapters += 1
+
+        print(f"✓ Removed {removed_podcast_chapters} podcast:chapters and {removed_psc_chapters} psc:chapters tags")
+        return self
+
     def write_feed(self, output_file: str) -> None:
         """
         Write enriched feed to file.
