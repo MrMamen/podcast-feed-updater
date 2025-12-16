@@ -84,34 +84,6 @@ class FeedEnricher(BaseFeed):
         print("✓ Validation passed: No conflicting Podcasting 2.0 tags found")
         return self
 
-    def set_beta_title(self, suffix: str = " (Beta)") -> 'FeedEnricher':
-        """
-        Add suffix to feed title for beta testing.
-
-        Args:
-            suffix: Suffix to add to title (default: " (Beta)")
-
-        Returns:
-            Self for chaining
-        """
-        if self.channel is None:
-            raise ValueError("Must fetch feed first")
-
-        # Find and update title
-        title_elem = self.channel.find('title')
-        if title_elem is not None and title_elem.text:
-            if suffix not in title_elem.text:
-                title_elem.text = title_elem.text + suffix
-                print(f"✓ Updated title to: {title_elem.text}")
-
-        # Also update itunes:title if present
-        itunes_title = self.channel.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}title')
-        if itunes_title is not None and itunes_title.text:
-            if suffix not in itunes_title.text:
-                itunes_title.text = itunes_title.text + suffix
-
-        return self
-
     def remove_episode_numbers_from_titles(self, pattern: str = r'\s*\(#?\d+\)$') -> 'FeedEnricher':
         """
         Remove episode numbers from episode titles.

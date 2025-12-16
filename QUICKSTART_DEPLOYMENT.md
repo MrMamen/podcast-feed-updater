@@ -69,32 +69,6 @@ Hvis du vil bruke Podchaser API for å hente host-info:
 
 Uten disse secrets bruker scriptet manuell host-data (fungerer fint!).
 
----
-
-## 📋 Valgfritt: Fjern "(Beta)" fra tittel
-
-Når du er klar for produksjon:
-
-1. Åpne `enrich_cdspill.py`
-2. Finn linjen:
-   ```python
-   enricher.set_beta_title(" (Beta)")
-   ```
-3. Kommenter den ut:
-   ```python
-   # enricher.set_beta_title(" (Beta)")
-   ```
-4. Commit og push:
-   ```bash
-   git add enrich_cdspill.py
-   git commit -m "Remove beta suffix for production"
-   git push
-   ```
-
-Eller la workflow gjøre det automatisk (allerede konfigurert).
-
----
-
 ## 🔄 Manuell kjøring
 
 Når som helst kan du trigge en ny kjøring:

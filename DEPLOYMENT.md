@@ -62,17 +62,7 @@ Hvis du vil bruke Podchaser API:
    - Name: `PODCHASER_API_SECRET`
    - Value: [din API secret]
 
-### 5. Fjern Beta-suffix (Produksjon)
-
-Rediger `enrich_cdspill.py` og kommenter ut beta-suffixet:
-
-```python
-# enricher.set_beta_title(" (Beta)")  # Deaktivert for produksjon
-```
-
-Eller workflow-filen gjør dette automatisk.
-
-### 6. Test workflow
+### 5. Test workflow
 
 1. Gå til **Actions** tab i GitHub
 2. Velg "Enrich cd SPILL Feed"
