@@ -2,13 +2,13 @@
 <rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:psc="http://podlove.org/simple-chapters" version="2.0">
 
 <channel>
-    <title>cd SPILL (Beta)</title>
-    <atom:link href="https://feed.podbean.com/cdspill/feed.xml" rel="self" type="application/rss+xml"/>
+    <title>cd SPILL</title>
+    <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
-    <pubDate>Mon, 24 Nov 2025 07:18:00 +0100</pubDate>
-    <generator>https://podbean.com/?v=5.5</generator>
-    <language>no</language>
+    <pubDate>Mon, 08 Dec 2025 08:41:30 +0100</pubDate>
+    <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
+    <lastBuildDate>Wed, 17 Dec 2025 09:30:13 +0000</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2025 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -22,6 +22,7 @@
 	</itunes:category>
     <itunes:owner>
         <itunes:name>C:\SPILL＞</itunes:name>
+                <itunes:email>CD_SPILL@pm.me</itunes:email>
             </itunes:owner>
     	<itunes:block>No</itunes:block>
 	<itunes:explicit>false</itunes:explicit>
@@ -33,6 +34,47 @@
         <width>144</width>
         <height>144</height>
     </image>
+    <item>
+        <title>Spillåret 1985</title>
+        <itunes:title>Spillåret 1985</itunes:title>
+        <link>https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/</link>        <pubDate>Mon, 08 Dec 2025 08:41:30 +0100</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c</guid>
+                                    <description>&lt;p&gt;Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.&lt;/p&gt;
+&lt;p&gt;&lt;a href='https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/'&gt;Joachim har skrevet en artikkel om episoden hos Spillhistorie.no&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+</description>
+                                                            <content:encoded>&lt;p&gt;Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.&lt;/p&gt;
+&lt;p&gt;&lt;a href='https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/'&gt;Joachim har skrevet en artikkel om episoden hos Spillhistorie.no&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+</content:encoded>
+                                    
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/hhmjqbk2h4s5drtt/1985.mp3" length="117144260" type="audio/mpeg"/>
+        <itunes:summary>Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.
+Joachim har skrevet en artikkel om episoden hos Spillhistorie.no.
+Støtt oss gjerne på Patreon.Følg oss gjerne på Bluesky, Twitter, Facebook, og Podchaser.</itunes:summary>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>5543</itunes:duration>
+        <itunes:season>12</itunes:season>
+        <itunes:episode>124</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/bswe4jx6padqyjkf/1985_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Velkommen til cd SPILL"/><psc:chapter start="00:02:22" title="Teleporterer 1985"/><psc:chapter start="00:04:28" title="Terje Høiback"/><psc:chapter start="00:05:58" title="Sopwith"/><psc:chapter start="00:08:18" title="Daleks"/><psc:chapter start="00:10:22" title="Super Mario Bros."/><psc:chapter start="00:11:25" title="Børre fra Overvåkerne"/><psc:chapter start="00:12:30" title="Pinball Construction Set"/><psc:chapter start="00:13:36" title="A Mind Forever Voyaging"/><psc:chapter start="00:14:29" title="Erlend Fiddan"/><psc:chapter start="00:16:36" title="Winter Games"/><psc:chapter start="00:18:19" title="Frogger Jr."/><psc:chapter start="00:19:35" title="Bruce Lee"/><psc:chapter start="00:21:17" title="Hintmannen fra Overvåkerne"/><psc:chapter start="00:23:23" title="Wishbringer"/><psc:chapter start="00:25:28" title="King's Quest II: Romancing the Throne"/><psc:chapter start="00:26:55" title="Joachim Froholt"/><psc:chapter start="00:28:56" title="Silent Service"/><psc:chapter start="00:30:12" title="Star Trek: The Kobayashi Alternative"/><psc:chapter start="00:32:35" title="EGA Trek"/><psc:chapter start="00:33:19" title="Ultima III: Exodus"/><psc:chapter start="00:34:37" title="Roar Granevang"/><psc:chapter start="00:36:24" title="Ghosts 'N Goblins"/><psc:chapter start="00:37:25" title="M.U.L.E."/><psc:chapter start="00:37:54" title="Beyond Castle Wolfenstein"/><psc:chapter start="00:40:59" title="The Seven Cities of Gold"/><psc:chapter start="00:42:29" title="Kato fra Overvåkerne"/><psc:chapter start="00:44:11" title="Solitare"/><psc:chapter start="00:45:24" title="Where in the World Is Carmen Sandiego?"/><psc:chapter start="00:47:02" title="The World's Greatest Baseball Game"/><psc:chapter start="00:47:58" title="Jostein Hakestad"/><psc:chapter start="00:49:42" title="Oregon Trail"/><psc:chapter start="00:50:48" title="Windows med Reversi"/><psc:chapter start="00:53:39" title="Martin Gjesdal"/><psc:chapter start="00:55:03" title="River Raid"/><psc:chapter start="00:56:39" title="Wizzardz &amp; War Lordz"/><psc:chapter start="00:57:17" title="The Wizard of Oz"/><psc:chapter start="00:57:44" title="Wizard of Wall Street"/><psc:chapter start="00:59:05" title="James Bond 007: A View to a Kill"/><psc:chapter start="01:00:45" title="Mats Lindh"/><psc:chapter start="01:03:43" title="Hyper Sports"/><psc:chapter start="01:05:24" title="Boulder Dash II: Rockford's Revenge"/><psc:chapter start="01:06:04" title="Maybritt fra Overvåkerne"/><psc:chapter start="01:07:34" title="Mickey's Space Adventure"/><psc:chapter start="01:08:30" title="Borrowed Time"/><psc:chapter start="01:09:27" title="F-15 Strike Eagle"/><psc:chapter start="01:10:32" title="Indiana Jones and the Temple of Doom"/><psc:chapter start="01:11:15" title="Øystein Henriksen"/><psc:chapter start="01:12:46" title="Gradius"/><psc:chapter start="01:13:32" title="MrMamen kårer GOTY 1985"/><psc:chapter start="01:15:14" title="Sigve kårer GOTY 1985"/><psc:chapter start="01:16:28" title="cd SPILLs gjester i 2025"/><psc:chapter start="01:18:11" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:25:07" title="Årets episoder"/><psc:chapter start="01:27:04" title="Sigve kårer beste spill vi pratet om i 2025"/><psc:chapter start="01:28:17" title="Mamen kårer beste spill vi pratet om i 2025"/><psc:chapter start="01:29:50" title="Vi kårer cd SPILLs beste episode i 2025"/></psc:chapters>
+        <podcast:season name="Høst 2025">12</podcast:season>
+        <podcast:episode display="6 (#124)">124</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/mats-lindh-107u25OzEC">Mats Lindh</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v">Thorbjørn Hope Andersen</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm">Øystein Henriksen</podcast:person></item>
     <item>
         <title>OutRun med Mats Lindh</title>
         <itunes:title>OutRun med Mats Lindh</itunes:title>
@@ -305,7 +347,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:31" title="Velkommen til cd SPILL"/><psc:chapter start="00:03:09" title="Dagens spill: Mortal Kombat"/><psc:chapter start="00:15:37" title="Spesialangrep"/><psc:chapter start="00:23:30" title="Mimre om One Must Fall: 2097"/><psc:chapter start="00:25:13" title="Tech Specs"/><psc:chapter start="00:28:39" title="Lore"/><psc:chapter start="00:31:02" title="De ulike slosskjemper"/><psc:chapter start="00:31:33" title="Liu Kang"/><psc:chapter start="00:31:51" title="Rayden"/><psc:chapter start="00:32:10" title="Scorpion og Sub-Zero"/><psc:chapter start="00:33:48" title="Sonya Blade"/><psc:chapter start="00:34:23" title="Kano"/><psc:chapter start="00:35:21" title="Johnny Cage"/><psc:chapter start="00:37:41" title="Prosjektilangrep"/><psc:chapter start="00:39:14" title="Hvordan fungerer turneringen?"/><psc:chapter start="00:41:18" title="Goro"/><psc:chapter start="00:43:45" title="Shang Tsung"/><psc:chapter start="00:47:10" title="Seierssekvens"/><psc:chapter start="00:49:54" title="Morsomt gameplay?"/><psc:chapter start="00:54:21" title="Secret character: Reptile"/><psc:chapter start="00:59:41" title="Time Killers"/><psc:chapter start="01:01:27" title="Massevis av oppfølgere"/><psc:chapter start="01:04:02" title="Filmen Mortal Kombat"/><psc:chapter start="01:08:55" title="TV-serie: Mortal Kombat Conquest"/><psc:chapter start="01:10:54" title="Andre inkarnasjoner"/><psc:chapter start="01:13:35" title="Skuespillerne var på retrospillmessa"/><psc:chapter start="01:19:21" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:27:00" title="Hvorfor staves Combat med K"/><psc:chapter start="01:28:14" title="Har det holdt seg?"/><psc:chapter start="01:31:53" title="Er det bedre enn Street Fighter II?"/><psc:chapter start="01:35:23" title="Er det bedre enn One Must Fall?"/><psc:chapter start="01:38:41" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:42:11" title="Neste episode: Ignition"/><psc:chapter start="01:42:50" title="AI tolkning av Mortal Kombat"/></psc:chapters>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="11 (#116)">116</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Lode Runner med Roar Granevang</title>
         <itunes:title>Lode Runner med Roar Granevang</itunes:title>
@@ -380,7 +422,7 @@ Les mer om episoden hos spillhistorie.noStøtt oss gjerne på Patreon.Følg oss 
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="9 (#114)">114</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg">David Skaufjord</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/david-skaufjord-107tssHm8i" img="https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg">David Skaufjord</podcast:person></item>
     <item>
         <title>The Legend of Kyrandia: Hand of Fate med Erling Rostvåg</title>
         <itunes:title>The Legend of Kyrandia: Hand of Fate med Erling Rostvåg</itunes:title>
@@ -472,6 +514,8 @@ Spillhistorie.no har som vanlig skrevet en artikkel om episoden/spillet.Støtt o
         <itunes:episode>112</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tomb_raider9qsqd.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/esnj86bqcj9pfd24/Tomb_Raidera7imc_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:35" title="Velkommen til cd SPILL"/><psc:chapter start="00:03:33" title="Kommentarer fra forrige episode"/><psc:chapter start="00:10:13" title="Dagens spill: Tomb Raider"/><psc:chapter start="00:16:50" title="Hovedpersonen"/><psc:chapter start="00:17:45" title="Hva går spillet ut på?"/><psc:chapter start="00:22:42" title="Utdrag fra manualen"/><psc:chapter start="00:27:35" title="Mer om Lara Croft"/><psc:chapter start="00:28:46" title="Litt om historien"/><psc:chapter start="00:32:28" title="Tech Specs"/><psc:chapter start="00:36:54" title="Musikken"/><psc:chapter start="00:39:44" title="Hvordan spillet ble til"/><psc:chapter start="00:44:59" title="Gameplay"/><psc:chapter start="00:50:02" title="Litt om dinosaurer"/><psc:chapter start="00:52:29" title="Nude Raider"/><psc:chapter start="00:56:38" title="Anniversary og Remaster"/><psc:chapter start="00:59:19" title="Oppfølgere"/><psc:chapter start="01:02:10" title="Tomb Raider-filmen"/><psc:chapter start="01:07:32" title="Diverse avsporinger"/><psc:chapter start="01:11:24" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:15:41" title="Har det holdt seg?"/><psc:chapter start="01:21:26" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:22:55" title="Tips fra Ekroll"/><psc:chapter start="01:24:49" title="Tips fra Mamen"/><psc:chapter start="01:25:34" title="Tips fra Sigve"/><psc:chapter start="01:27:42" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="7 (#112)">112</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
@@ -491,7 +535,7 @@ Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/vkyemqwcz432kp26/Half-Life.mp3" length="128299708" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/vkyemqwcz432kp26/Half-Life.mp3" length="114292513" type="audio/mpeg"/>
         <itunes:summary>Valves debut spill Half Live skulle virkelig endre skytespillsjangeren. Plutselig var det en historiefortelling midt i all skytingen. Og hva er greia med den mystiske G-man? Vi har fått med oss Aksel Bjerke for å finne svaret!</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -501,9 +545,11 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>111</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/ynxez4mqh9ibjacj/Half-Life.srt" type="application/srt"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/2v92i3mx7eybhunz/Half-Life_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:56" title="Velkommen til cd SPILL"/><psc:chapter start="00:04:48" title="Kommentarer fra forrige episode"/><psc:chapter start="00:11:19" title="Dagens spill: Half-Life"/><psc:chapter start="00:16:05" title="Hva går spillet ut på?"/><psc:chapter start="00:20:47" title="Tech Specs"/><psc:chapter start="00:25:56" title="Hvordan vi opplevde grafikken"/><psc:chapter start="00:27:57" title="Hva skjer i spillet?"/><psc:chapter start="00:33:24" title="Et glimt inn i Xen"/><psc:chapter start="00:34:38" title="Mange forskere og folk å prate med"/><psc:chapter start="00:35:21" title="Brekkjern!"/><psc:chapter start="00:36:57" title="Ulike våpen"/><psc:chapter start="00:37:35" title="Glock 17 (9mm Pistol)"/><psc:chapter start="00:37:51" title="Colt Python (.357 Magnum Revolver)"/><psc:chapter start="00:39:28" title="MP5 (Submachine Gun)"/><psc:chapter start="00:40:09" title="SPAS-12 (Assault Shotgun)"/><psc:chapter start="00:41:39" title="Black Mesa Crossbow (Tranquilizer Gun)"/><psc:chapter start="00:42:52" title="HECU RPG"/><psc:chapter start="00:44:34" title="Tau Cannon ( XVL1456 / Gauss Gun)"/><psc:chapter start="00:46:01" title="Gluon Gun"/><psc:chapter start="00:46:38" title="Hivehand"/><psc:chapter start="00:47:48" title="Snark"/><psc:chapter start="00:48:54" title="Spoilers Hva skjer i resten av spillet?"/><psc:chapter start="00:53:40" title="Gonarch"/><psc:chapter start="00:54:34" title="The Nihilanth (The Alien Controller)"/><psc:chapter start="00:55:16" title="Musikken"/><psc:chapter start="00:57:26" title="Hvordan spille dette idag?"/><psc:chapter start="00:59:18" title="Leveldesign"/><psc:chapter start="01:01:29" title="Stiger!"/><psc:chapter start="01:02:13" title="Litt flere minner"/><psc:chapter start="01:03:40" title="Expansions"/><psc:chapter start="01:06:15" title="Smell AI"/><psc:chapter start="01:08:13" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:14:26" title="Har det holdt seg?"/><psc:chapter start="01:17:31" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:18:43" title="Litt om Valve"/><psc:chapter start="01:21:35" title="Et tips fra Sigve"/><psc:chapter start="01:26:33" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="6 (#111)">111</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
     <item>
         <title>Zaxxon med Roar Granevang og Terje Høiback</title>
         <itunes:title>Zaxxon med Roar Granevang og Terje Høiback</itunes:title>
@@ -539,7 +585,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="5 (#110)">110</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Beneath a Steel Sky med Jåddi</title>
         <itunes:title>Beneath a Steel Sky med Jåddi</itunes:title>
@@ -564,7 +610,7 @@ Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/yxk4xfbh926jt3uu/BASS.mp3" length="166125757" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/yxk4xfbh926jt3uu/BASS.mp3" length="163000006" type="audio/mpeg"/>
         <itunes:summary>Revolution Software utga et legendarisk dystopisk sci-fi pek-og-klikk-spill i 1994. Hvorfor blir Robert Foster kidnappet fra ”the gap” og inn til storbyen Union City? Hvem er den mystiske Overmann, og hva er forholdet til datasystemet Linc? Bli med oss til Beneath a Steel Sky og få svarene du trenger.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -574,9 +620,11 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>109</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BASS.png"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/qsez6m3vjqgxzcxn/BASS.vtt" type="text/vtt"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/rbs9vjvps62mprcs/BASS_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:35" title="Velkommen til cd SPILL"/><psc:chapter start="00:04:03" title="Kommentarer fra forrige episode"/><psc:chapter start="00:15:14" title="Dagens spill: Beneath a Steel Sky"/><psc:chapter start="00:16:55" title="Hva tror Sigve spillet går ut på?"/><psc:chapter start="00:20:05" title="Settingen"/><psc:chapter start="00:26:53" title="Litt om brukergrensesnittet"/><psc:chapter start="00:29:55" title="Tech Specs"/><psc:chapter start="00:32:29" title="Sammenligning med Sierra og Lucasarts"/><psc:chapter start="00:38:27" title="Hvordan ble spillet til?"/><psc:chapter start="00:42:59" title="Grafiske stilen"/><psc:chapter start="00:46:26" title="Slettede originaler"/><psc:chapter start="00:48:56" title="Spoiler hele historien"/><psc:chapter start="01:07:16" title="Suno/AI sang om BASS"/><psc:chapter start="01:12:18" title="Noen minneverdige øyeblikk"/><psc:chapter start="01:26:27" title="Litt fra manualen"/><psc:chapter start="01:32:07" title="Musikken"/><psc:chapter start="01:33:36" title="Hvordan spille idag?"/><psc:chapter start="01:40:19" title="Litt om stemmeskuespillet"/><psc:chapter start="01:47:50" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:59:08" title="Remastered til iOS"/><psc:chapter start="02:01:09" title="Oppfølgere"/><psc:chapter start="02:03:07" title="Har det holdt seg?"/><psc:chapter start="02:05:38" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="02:08:19" title="Shoutout til patreon"/><psc:chapter start="02:09:07" title="Tips fra Sigve"/><psc:chapter start="02:11:49" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="4 (#109)">109</podcast:episode>
-        <podcast:person role="guest">Jåddi</podcast:person></item>
+        <podcast:person role="guest">Jørn Inge Henriksen</podcast:person></item>
     <item>
         <title>Wacky Wheels med Anette Jøsendal</title>
         <itunes:title>Wacky Wheels med Anette Jøsendal</itunes:title>
@@ -642,7 +690,7 @@ Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podch
         <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:46" title="Velkommen til cd SPILL"/><psc:chapter start="00:06:29" title="Dagens spill: The Need for Speed"/><psc:chapter start="00:13:27" title="Hva går spillet ut på?"/><psc:chapter start="00:22:07" title="Gjennomgang av ulike biler"/><psc:chapter start="00:22:18" title="Acura NSX"/><psc:chapter start="00:24:11" title="Toyota Supra Turbo"/><psc:chapter start="00:24:55" title="Mazda RX-7"/><psc:chapter start="00:25:33" title="Porsche 911 Carrera"/><psc:chapter start="00:26:04" title="Dodge Viper RT/10"/><psc:chapter start="00:26:40" title="Chevrolet Corvette ZR-1"/><psc:chapter start="00:27:25" title="Ferrari 512TR"/><psc:chapter start="00:28:02" title="Lamborghini Diablo VT"/><psc:chapter start="00:29:27" title="Litt om utviklerne"/><psc:chapter start="00:31:26" title="Litt mer om bilene"/><psc:chapter start="00:37:26" title="Tech Specs"/><psc:chapter start="00:40:11" title="Banene"/><psc:chapter start="00:40:35" title="Alpine"/><psc:chapter start="00:40:49" title="City"/><psc:chapter start="00:41:19" title="Coastal"/><psc:chapter start="00:43:10" title="Autumn Valley Speedway"/><psc:chapter start="00:43:38" title="Rusty Springs Raceway"/><psc:chapter start="00:43:57" title="Vertigo Ridge"/><psc:chapter start="00:44:35" title="Burnt Sienna"/><psc:chapter start="00:44:57" title="Transtropolis"/><psc:chapter start="00:45:25" title="Lost Vegas"/><psc:chapter start="00:47:18" title="Politiet"/><psc:chapter start="00:49:32" title="Litt om fysikken"/><psc:chapter start="00:51:53" title="Highlights reel"/><psc:chapter start="00:52:53" title="Ulike utgaver"/><psc:chapter start="00:58:49" title="Et kikk i databladet GiGA"/><psc:chapter start="01:18:59" title="Musikken"/><psc:chapter start="01:21:18" title="Oppfølgere"/><psc:chapter start="01:27:32" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:33:09" title="Har det holdt seg?"/><psc:chapter start="01:36:46" title="Hvordan får man tak i spillet?"/><psc:chapter start="01:38:23" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:41:52" title="Et tips fra Sigve"/><psc:chapter start="01:43:54" title="Et tips fra Mamen"/><psc:chapter start="01:44:42" title="Et tips fra Erlend"/><psc:chapter start="01:46:08" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="2 (#107)">107</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person></item>
     <item>
         <title>Spillåret 1994</title>
         <itunes:title>Spillåret 1994</itunes:title>
@@ -676,7 +724,10 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mcdn.podbean.com/mf/web/wxqjuwutfhgzb7d3/1994_chapters.json" type="application/json"/>
         <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Velkommen til cd SPILL"/><psc:chapter start="00:02:43" title="Spillåret 1994"/><psc:chapter start="00:05:55" title="Dr. Bobbledrage"/><psc:chapter start="00:06:17" title="One Must Fall: 2097"/><psc:chapter start="00:08:08" title="Alone in the Dark III"/><psc:chapter start="00:10:20" title="Beneath a Steel Sky"/><psc:chapter start="00:12:13" title="Alexander Espeseth"/><psc:chapter start="00:15:39" title="Boppin"/><psc:chapter start="00:17:45" title="Doom II"/><psc:chapter start="00:20:12" title="Cannon Fodder II"/><psc:chapter start="00:21:23" title="Hans Arne Jacobsen"/><psc:chapter start="00:23:38" title="Sid Meier's Colonization"/><psc:chapter start="00:26:57" title="Jazz Jackrabbit"/><psc:chapter start="00:28:23" title="Cool Spot"/><psc:chapter start="00:29:40" title="Cyberdogs"/><psc:chapter start="00:31:03" title="The Incredible Machine II"/><psc:chapter start="00:32:25" title="Terje Høiback"/><psc:chapter start="00:34:23" title="Wing Commander III: Heart of the Tiger"/><psc:chapter start="00:36:01" title="Little Big Adventure"/><psc:chapter start="00:38:30" title="Disney's Aladdin"/><psc:chapter start="00:41:03" title="Torbjørn Preus Schou"/><psc:chapter start="00:44:02" title="Holliday Lemmings"/><psc:chapter start="00:45:24" title="Theme Park"/><psc:chapter start="00:47:37" title="Hocus Pocus"/><psc:chapter start="00:48:44" title="Mattis Folkestad"/><psc:chapter start="00:50:42" title="King's Quest: Collector's Edition"/><psc:chapter start="00:52:36" title="Micro Machines"/><psc:chapter start="00:55:12" title="Jon Håvard/Suno"/><psc:chapter start="00:57:51" title="Transport Tycoon"/><psc:chapter start="00:59:28" title="Rise of the Triad"/><psc:chapter start="01:01:58" title="Lode Runner: The Legend Returns"/><psc:chapter start="01:04:02" title="System Shock"/><psc:chapter start="01:06:00" title="Martin Gjesdal"/><psc:chapter start="01:07:50" title="Night Trap"/><psc:chapter start="01:10:00" title="Syndicate+"/><psc:chapter start="01:12:03" title="Pagan: Ultima VIII"/><psc:chapter start="01:14:20" title="Erland Fiddan"/><psc:chapter start="01:16:47" title="Pizza Tycoon"/><psc:chapter start="01:19:22" title="Warcraft: Orcs &amp; Humans"/><psc:chapter start="01:20:20" title="Sid Meier's Pirates!"/><psc:chapter start="01:21:07" title="Rise of the Robots"/><psc:chapter start="01:23:02" title="Andreas Hedemann"/><psc:chapter start="01:24:19" title="Earthworm Jim"/><psc:chapter start="01:25:09" title="Under a Killing Moon"/><psc:chapter start="01:27:44" title="UFO: Enemy Unknown"/><psc:chapter start="01:30:33" title="The Settlers"/><psc:chapter start="01:33:11" title="The Elder Scrolls: Arena"/><psc:chapter start="01:35:00" title="The Legend of Kyrandia: Malcolm's Revenge"/><psc:chapter start="01:37:16" title="Magic Carpet"/><psc:chapter start="01:38:34" title="Jostein Hakestad"/><psc:chapter start="01:40:59" title="Disney's: Lion King"/><psc:chapter start="01:42:02" title="Mortal Kombat II"/><psc:chapter start="01:42:57" title="Wacky Wheels"/><psc:chapter start="01:44:01" title="SimCity 2000"/><psc:chapter start="01:46:41" title="Myst"/><psc:chapter start="01:48:32" title="1942: The Pacific Air War"/><psc:chapter start="01:48:52" title="Leisure Suit Larry 6: Shape Up or Slip Out!"/><psc:chapter start="01:49:16" title="Crystal Caliburn"/><psc:chapter start="01:49:48" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:57:36" title="Sigve kårer 1994s beste spill"/><psc:chapter start="01:59:48" title="Mamen kårer 1994s beste spill"/><psc:chapter start="02:01:32" title="Vi kårer beste episode av cd SPILL"/><psc:chapter start="02:05:32" title="Sigve kårer beste spill vi pratet om i  2024"/><psc:chapter start="02:06:08" title="Mamen kårer beste spill vi pratet om i  2024"/><psc:chapter start="02:07:08" title="Takk for i år!"/></psc:chapters>
         <podcast:season name="Høst 2024">10</podcast:season>
-        <podcast:episode display="7 (#106)">106</podcast:episode></item>
+        <podcast:episode display="7 (#106)">106</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
     <item>
         <title>Ports of Call med Hans Arne Jacobsen</title>
         <itunes:title>Ports of Call med Hans Arne Jacobsen</itunes:title>
@@ -787,7 +838,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:01:06" title="Velkommen til cd SPILL"/><psc:chapter start="00:05:30" title="Kommentarer fra forrige episode"/><psc:chapter start="00:10:24" title="Dagens spill: James Pond 2: Codename: RoboCod"/><psc:chapter start="00:11:56" title="Litt om James Pond"/><psc:chapter start="00:13:54" title="Hva er våre første minner fra James Pond"/><psc:chapter start="00:18:18" title="Hva går spillet ut på?"/><psc:chapter start="00:27:48" title="Tech Specs"/><psc:chapter start="00:29:58" title="Litt om bigboksen til Terje"/><psc:chapter start="00:33:02" title="Hvordan fungerer kjøretøy?"/><psc:chapter start="00:37:16" title="Nylige betrakninger"/><psc:chapter start="00:39:48" title="Litt åpent"/><psc:chapter start="00:45:33" title="Bosser"/><psc:chapter start="00:47:02" title="Musikken"/><psc:chapter start="00:50:58" title="Oppfølgere"/><psc:chapter start="00:53:55" title="Andre plattformer"/><psc:chapter start="00:55:48" title="Litt kritikk"/><psc:chapter start="00:57:43" title="Har Terje fullført det?"/><psc:chapter start="00:58:49" title="Speedrun"/><psc:chapter start="01:00:27" title="Hva skjer når man vinner?"/><psc:chapter start="01:04:29" title="24"/><psc:chapter start="01:05:46" title="Litt om Millenium Interactive og Vectordean"/><psc:chapter start="01:10:27" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:17:22" title="Har det holdt seg?"/><psc:chapter start="01:22:20" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:23:42" title="Et tips fra Sigve"/><psc:chapter start="01:24:59" title="Litt om spillegal"/><psc:chapter start="01:27:10" title="Neste episode"/></psc:chapters>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="4 (#103)">103</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>EGA Trek: The Mongol Invasion</title>
         <itunes:title>EGA Trek: The Mongol Invasion</itunes:title>
@@ -1020,6 +1071,8 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>96</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Moonstone_kontrast.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/dtzby4cxbf77mhxx/Moonstone_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Introduksjon"/><psc:chapter start="00:00:39" title="Velkommen til cd SPILL"/><psc:chapter start="00:03:48" title="Kommentarer fra Settlers II"/><psc:chapter start="00:15:19" title="Hva er Moonstone? (Kun gale svar)"/><psc:chapter start="00:21:51" title="Dagens spill: Moonstone: A Hard Days Knight"/><psc:chapter start="00:22:42" title="Hva går spillet ut på?"/><psc:chapter start="00:31:56" title="Tech Specs"/><psc:chapter start="00:34:24" title="Gameplay og fighting"/><psc:chapter start="00:42:08" title="Deathscenes"/><psc:chapter start="00:53:24" title="Highwood"/><psc:chapter start="00:53:42" title="Tavern"/><psc:chapter start="00:57:00" title="Healer"/><psc:chapter start="00:58:25" title="Waterdeep"/><psc:chapter start="01:01:47" title="The Wyrm (Dragen)"/><psc:chapter start="01:05:37" title="The Guardian"/><psc:chapter start="01:06:33" title="Ending"/><psc:chapter start="01:11:18" title="The wizard's tower"/><psc:chapter start="01:12:12" title="Kartet"/><psc:chapter start="01:12:41" title="Items"/><psc:chapter start="01:16:10" title="Bakgrunnshistorien"/><psc:chapter start="01:26:20" title="Lydeffekter"/><psc:chapter start="01:27:19" title="Mer om inspirasjonen"/><psc:chapter start="01:32:38" title="DOS vs Amiga"/><psc:chapter start="01:38:59" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:44:54" title="Har det holdt seg?"/><psc:chapter start="01:50:09" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:55:01" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="9 (#96)">96</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
@@ -1043,7 +1096,7 @@ Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5exd99kyqaugnejt/Settlers2.mp3" length="136357309" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5exd99kyqaugnejt/Settlers2.mp3" length="135345930" type="audio/mpeg"/>
         <itunes:summary>Romere havarerer på en øde øy uten håp om å bli reddet, eneste håp er å slå røtter. Men kanskje er de ikke alene her? Er The Settlers II det beste spillet i serien? Vi har fått hjelp av Erlend Fiddan til å finne svaret.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1053,9 +1106,11 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>95</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Settlers.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/5254bg4hrczca8rf/Settlers2_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:54" title="Velkommen til cd SPILL"/><psc:chapter start="00:05:19" title="Kommentarer fra Another World"/><psc:chapter start="00:09:59" title="Kommentarer fra I"/><psc:chapter start="00:12:11" title="Kommentarer fra: Legend"/><psc:chapter start="00:14:14" title="Dagens spill: The Settlers II: Veni, Vidi, Vici"/><psc:chapter start="00:18:10" title="Hva går spillet ut på?"/><psc:chapter start="00:24:15" title="Ulike versjoner"/><psc:chapter start="00:30:07" title="Hvilke ressurser og enheter finnes?"/><psc:chapter start="00:35:06" title="Supply chain spill"/><psc:chapter start="00:46:17" title="Grunnleggende tips og triks"/><psc:chapter start="00:56:31" title="Tech Specs"/><psc:chapter start="01:00:26" title="Manualen"/><psc:chapter start="01:02:12" title="Esel?"/><psc:chapter start="01:03:51" title="Plasseringen av bygninger"/><psc:chapter start="01:09:51" title="Katapult"/><psc:chapter start="01:12:32" title="Hadde det fungert uten krig?"/><psc:chapter start="01:15:22" title="Minimalistisk GUI"/><psc:chapter start="01:21:31" title="Litt om Blue Byte"/><psc:chapter start="01:25:17" title="Settlers 1"/><psc:chapter start="01:27:36" title="Musikken"/><psc:chapter start="01:32:58" title="Oppfølgere"/><psc:chapter start="01:35:18" title="Portaler"/><psc:chapter start="01:38:12" title="Intro"/><psc:chapter start="01:39:43" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:48:19" title="Har det holdt seg?"/><psc:chapter start="01:51:17" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:55:06" title="Et tips fra Sigve"/><psc:chapter start="01:58:02" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="8 (#95)">95</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person></item>
     <item>
         <title>Legend</title>
         <itunes:title>Legend</itunes:title>
@@ -1122,6 +1177,8 @@ Et av 90-tallets største spill kom for 30 år siden, og har kanskje gått under
         <itunes:episode>93</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/crmnt8/I_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:36" title="Velkommen til cd SPILL"/><psc:chapter start="00:02:51" title="Dagens spill: I"/><psc:chapter start="00:09:17" title="Tech Specs"/><psc:chapter start="00:17:48" title="Hva går spillet ut på?"/><psc:chapter start="00:34:58" title="Sykt creepy"/><psc:chapter start="00:49:52" title="Tolkning av historien"/><psc:chapter start="00:57:24" title="Musikken"/><psc:chapter start="01:15:24" title="Har det holdt seg?"/><psc:chapter start="01:19:10" title="Finnes det noe tilsvarende idag?"/></psc:chapters>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="6 (#93)">93</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
@@ -1198,7 +1255,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/h8vwrr/DoubleDragon.mp3" length="54327582" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/h8vwrr/DoubleDragon.mp3" length="53847383" type="audio/mpeg"/>
         <itunes:summary>Det er lenge siden vi har pratet om noen slåssespill. Faktisk ikke siden første episode. Da er det på tide å sjekke ut serien med det legendariske navnet Double Dragon. Vi har også fått med oss at det har kommet en film med samme navn.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1208,6 +1265,8 @@ Vi har også en side på &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podch
         <itunes:episode>91</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DoubleDragon.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/mft8ci/DoubleDragon_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:36" title="Velkommen til cd SPILL"/><psc:chapter start="00:02:41" title="Kommentarer fra forrige episode"/><psc:chapter start="00:10:22" title="Dagens spill: Double Dragon"/><psc:chapter start="00:11:53" title="Hva går spillet ut på?"/><psc:chapter start="00:19:35" title="MrMamen ragequitter"/><psc:chapter start="00:21:23" title="Tech Specs"/><psc:chapter start="00:29:28" title="Ulike moves"/><psc:chapter start="00:33:05" title="The story so far"/><psc:chapter start="00:37:49" title="Lydeffekter"/><psc:chapter start="00:40:06" title="Musikken"/><psc:chapter start="00:46:07" title="Lore"/><psc:chapter start="00:47:35" title="Filmen Double Dragon"/><psc:chapter start="00:50:40" title="Oppfølgere"/><psc:chapter start="00:52:56" title="Kommentarer fra sosiale medier"/><psc:chapter start="00:58:53" title="Har det holdt seg?"/><psc:chapter start="01:00:48" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:03:46" title="Et lite tips"/><psc:chapter start="01:05:13" title="Neste episode"/></psc:chapters>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="4 (#91)">91</podcast:episode></item>
     <item>
@@ -1401,7 +1460,7 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Blues
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/gn2z8u/Fate_of_Atlantis.mp3" length="144233299" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/gn2z8u/Fate_of_Atlantis.mp3" length="145314741" type="audio/mpeg"/>
         <itunes:summary>Sigve og MrMamen tar for seg pek-og-klikk-klassikeren Indiana Jones and Fate of Atlantis. Som sidekick har de fått med seg Eirik Gjerløw.
 
 Hjemmesiden til fan-remaken: https://remakeofatlantis.blogspot.com
@@ -1416,26 +1475,28 @@ Følg oss på Bluesky: https://bsky.app/profile/cdspill.bsky.social</itunes:summ
         <itunes:episode>85</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Indy_atlantis_9jhqt9.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/e6zk9idpyg8uuszg/Fate_of_Atlantis_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:46" title="Velkommen til cd SPILL"/><psc:chapter start="00:05:00" title="Praktisk info"/><psc:chapter start="00:06:58" title="Kommentarer fra forrige episode"/><psc:chapter start="00:15:29" title="Dagens spill: Indiana Jones and the Fate of Atlantis"/><psc:chapter start="00:45:26" title="Spoiler hele historien"/><psc:chapter start="00:47:46" title="Ulike paths"/><psc:chapter start="00:59:31" title="Ship rib"/><psc:chapter start="01:07:01" title="Kule puzzles"/><psc:chapter start="01:11:34" title="De tre diskene"/><psc:chapter start="01:17:02" title="Flere puzzles"/><psc:chapter start="01:21:04" title="Algerie"/><psc:chapter start="01:26:39" title="Ballongferd"/><psc:chapter start="01:31:44" title="Ubåtsekvensen"/><psc:chapter start="01:34:51" title="Enter Atlantis"/><psc:chapter start="01:41:00" title="Sofia possessed"/><psc:chapter start="01:44:28" title="Spoiler ending"/><psc:chapter start="01:53:54" title="Voice acting"/><psc:chapter start="01:58:20" title="Hva fungerer dårlig?"/><psc:chapter start="02:02:39" title="Musikken"/><psc:chapter start="02:07:34" title="Bakgrunnshistorien"/><psc:chapter start="02:11:34" title="Indiana Jones and the Fate of Atlantis: The Action Game"/><psc:chapter start="02:12:50" title="Kommentarer fra sosiale medier"/><psc:chapter start="02:17:42" title="Har det holdt seg?"/><psc:chapter start="02:19:55" title="HD-remake"/><psc:chapter start="02:22:50" title="Neste episode: SimTower"/></psc:chapters>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="7 (#85)">85</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
     <item>
-        <title>StarCraft med Aksel Bjerke og Tor-Andre Kiil Mørkved</title>
-        <itunes:title>StarCraft med Aksel Bjerke og Tor-Andre Kiil Mørkved</itunes:title>
+        <title>StarCraft med Aksel M. Bjerke og Tor-Andre Kiil Mørkved</title>
+        <itunes:title>StarCraft med Aksel M. Bjerke og Tor-Andre Kiil Mørkved</itunes:title>
         <link>https://spillhistorie.no/2023/10/30/starcraft-ble-et-av-tidenes-storste-pc-spill/</link>        <pubDate>Mon, 30 Oct 2023 07:36:00 +0100</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/db3dbdca-29fc-323e-b02e-e992ed4efa17</guid>
-                                    <description>&lt;p&gt;Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel Bjerke og Tor-Andre Kiil Mørkved!&lt;/p&gt;
+                                    <description>&lt;p&gt;Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel M. Bjerke og Tor-Andre Kiil Mørkved!&lt;/p&gt;
 &lt;p&gt;Spillhistorie.no har nok en gang &lt;a href='https://spillhistorie.no/2023/10/30/starcraft-ble-et-av-tidenes-storste-pc-spill/'&gt;skrevet en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;bluesky&lt;/a&gt;&lt;/p&gt;
 </description>
-                                                            <content:encoded>&lt;p&gt;Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel Bjerke og Tor-Andre Kiil Mørkved!&lt;/p&gt;
+                                                            <content:encoded>&lt;p&gt;Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel M. Bjerke og Tor-Andre Kiil Mørkved!&lt;/p&gt;
 &lt;p&gt;Spillhistorie.no har nok en gang &lt;a href='https://spillhistorie.no/2023/10/30/starcraft-ble-et-av-tidenes-storste-pc-spill/'&gt;skrevet en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;bluesky&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/zbsfje/StarCraft.mp3" length="125093385" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/zbsfje/StarCraft.mp3" length="125061518" type="audio/mpeg"/>
         <itunes:summary>Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel Bjerke og Tor-Andre Kiil Mørkved!</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1445,9 +1506,11 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <itunes:episode>84</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/starcraft_square.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/w7x724ejjr73rghb/StarCraft_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Introduksjon"/><psc:chapter start="00:01:02" title="Velkommen til cd SPILL"/><psc:chapter start="00:05:59" title="Kommentarer fra forrige episode"/><psc:chapter start="00:08:02" title="Dagens spill: StarCraft"/><psc:chapter start="00:10:17" title="Første minner fra StarCraft"/><psc:chapter start="00:15:46" title="Lore/Origin story"/><psc:chapter start="00:30:59" title="Terran, Zerg, Protoss, hva er favoritten?"/><psc:chapter start="00:34:59" title="Favorittenheter"/><psc:chapter start="00:45:57" title="Ulike strategier"/><psc:chapter start="00:50:23" title="Tech Specs"/><psc:chapter start="00:52:44" title="Gjennomgang av historien i kampanjen"/><psc:chapter start="01:09:39" title="Musikken"/><psc:chapter start="01:12:46" title="Gjennomgang av historien i Brood War"/><psc:chapter start="01:21:12" title="Historiespoiler over"/><psc:chapter start="01:31:46" title="Utviklingshistorien"/><psc:chapter start="01:33:44" title="Funfacts"/><psc:chapter start="01:42:34" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:50:53" title="Har det holdt seg?"/><psc:chapter start="01:54:29" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:57:53" title="Neste episode: Indiana Jones and the Fate of Atlantis"/></psc:chapters>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="6 (#84)">84</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY">Tor-Andre Kiil Mørkved</podcast:person></item>
     <item>
         <title>Simon the Sorcerer med Martin Gjesdal og Joachim Froholt</title>
@@ -1495,7 +1558,7 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
 &lt;p&gt;Les tilhørende &lt;a href='https://spillhistorie.no/2023/10/02/railroad-tycoon-la-grunnlaget-for-en-ny-sjanger/'&gt;artikkel om episoder hos spillhistorie&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5crpm4/RailroadTycoon.mp3" length="116477471" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5crpm4/RailroadTycoon.mp3" length="122817579" type="audio/mpeg"/>
         <itunes:summary>Sid Meier’s Railroad Tycoon er den litt mindre kjente bestefaren til Transport Tycoon. Men jaggu er det mange viktige prinsipper som ble funnet opp for dette spillet. Som vikar har vi fått Erlend Fiddan, mens Joachim Froholt er gjest.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1505,9 +1568,11 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <itunes:episode>82</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RailroadTycoon_r5s6jz.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/2pk2nava9qvhuqyg/RailroadTycoon_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Kort intro"/><psc:chapter start="00:00:46" title="Velkommen til cd SPILL"/><psc:chapter start="00:02:41" title="Fra forrige episode"/><psc:chapter start="00:10:06" title="Dagens spill: Railroad Tycoon"/><psc:chapter start="00:12:28" title="Hva går spillet ut på?"/><psc:chapter start="00:37:55" title="Ulike kart"/><psc:chapter start="00:39:52" title="Tech Specs"/><psc:chapter start="00:47:15" title="Litt om lokomotivene"/><psc:chapter start="00:52:17" title="Musikken"/><psc:chapter start="00:55:01" title="Tastatur og mus"/><psc:chapter start="00:57:57" title="Utviklingen av spillet"/><psc:chapter start="01:17:24" title="Oppfølgere og spinoffs"/><psc:chapter start="01:22:33" title="Fra sosiale medier"/><psc:chapter start="01:26:49" title="Har det holdt seg?"/><psc:chapter start="01:30:45" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:35:59" title="Neste episode"/></psc:chapters>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="4 (#82)">82</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person></item>
     <item>
         <title>Juksekoder med Aleksikon og Håkon Puntervold</title>
@@ -1527,7 +1592,7 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
 &lt;p&gt; &lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/cepftk/cheats.mp3" length="84399807" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/cepftk/cheats.mp3" length="84021410" type="audio/mpeg"/>
         <itunes:summary>Idag går vi litt utenfor det vanlige formatet og prater om juksekoder i spill. Aleksikon er vikar for Sigve, mens Håkon Puntervold er gjest.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1537,6 +1602,8 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <itunes:episode>81</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CheatCodes.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/bxte4p588bh6sijz/cheats_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:05:40" title="Kommentarer fra Dark Forces"/><psc:chapter start="00:09:00" title="Episodens tema: Juksekoder"/><psc:chapter start="01:02:17" title="Fra Facebook"/><psc:chapter start="01:14:34" title="Fra Twitter"/><psc:chapter start="01:18:52" title="Fra Bluesky"/><psc:chapter start="01:23:23" title="Neste episode: Railroad Tycoon"/></psc:chapters>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="3 (#81)">81</podcast:episode>
         <podcast:person role="guest">Aleks Gisvold</podcast:person>
@@ -1553,7 +1620,7 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
 &lt;p&gt;Les &lt;a href='https://spillhistorie.no/2023/09/04/star-wars-dark-forces-er-fortsatt-verdt-a-spille/'&gt;tilhørende artikkel hos Spillhistorie&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/88jnjk/darkforces.mp3" length="88356287" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/88jnjk/darkforces.mp3" length="86895986" type="audio/mpeg"/>
         <itunes:summary>Sigve glimrer fortsatt med sitt fravær, men med Jostein og Joachim som vikarer er det enkelt å fylle tiden med tilbakeblikk på LucasArts’ spillet Star Wars: Dark Forces</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1563,6 +1630,8 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <itunes:episode>80</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarWars-DF-JJ.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/ej2x7a5npqxwdhr8/darkforces_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:00:38" title="Velkommen til vikarer og gjester"/><psc:chapter start="00:04:32" title="Kommentarer fra Freddi Fisk"/><psc:chapter start="00:06:13" title="Litt om Ron Gilbert"/><psc:chapter start="00:08:22" title="Dagens spill: Star Wars: Dark Forces"/><psc:chapter start="00:13:31" title="I forhold til Doom"/><psc:chapter start="00:16:57" title="Kyle Katarn"/><psc:chapter start="00:22:41" title="Cutscenes"/><psc:chapter start="00:25:59" title="Musikken"/><psc:chapter start="00:33:33" title="Spillmotoren: Jedi"/><psc:chapter start="00:38:38" title="Tech Specs"/><psc:chapter start="00:41:34" title="The Force Engine"/><psc:chapter start="00:46:41" title="Våpnene"/><psc:chapter start="00:49:30" title="Juksekoder"/><psc:chapter start="00:51:12" title="John Romero"/><psc:chapter start="00:54:44" title="George Lucas"/><psc:chapter start="00:56:53" title="Dark Forces II"/><psc:chapter start="01:04:20" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:10:54" title="Har det holdt seg?"/><psc:chapter start="01:13:48" title="Finnes det noe tilsvarende idag?"/></psc:chapters>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="2 (#80)">80</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
@@ -1581,7 +1650,7 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
 &lt;p&gt;Les mer &lt;a href='https://spillhistorie.no/2023/08/21/freddi-fisk-og-humongous-entertainment/'&gt;om episoden hos spillhistorie.no&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dyae2g/freddi.mp3" length="62528897" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dyae2g/freddi.mp3" length="57474359" type="audio/mpeg"/>
         <itunes:summary>Humongous Entertainment ble stiftet av Ron Gilbert og Shelley Day og er og regne som eventyrspill for barn. For å få de nostalgiske minnene har MrMamen fått med seg vikar Alexander Espeseth i Sigves fravær.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -1591,6 +1660,8 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;blues
         <itunes:episode>79</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Freddi_Fisk_Kelp_Seedsa085v.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/2ryz6mbc8nippfaz/freddi_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:01:23" title="Velkommen til vikaren C. Alexander Espeseth"/><psc:chapter start="00:02:55" title="Anbefaling av Retrospill"/><psc:chapter start="00:05:26" title="Mamens anbefaling"/><psc:chapter start="00:08:05" title="Kommentarer fra tidligere episoder"/><psc:chapter start="00:11:16" title="Musikkquiz fra Tiltcast"/><psc:chapter start="00:15:43" title="Dagens spill: Freddi Fisk og de forsvunne sjøgressfrøene"/><psc:chapter start="00:31:24" title="Stemmeskuespillet"/><psc:chapter start="00:34:20" title="Tech Specs"/><psc:chapter start="00:37:08" title="Pajama Sam"/><psc:chapter start="00:38:24" title="Spy Fox"/><psc:chapter start="00:39:26" title="Putt-Putt"/><psc:chapter start="00:41:31" title="Musikk"/><psc:chapter start="00:44:22" title="Kommentarer fra Facebook"/><psc:chapter start="00:45:53" title="En personlig historie fra Alex"/><psc:chapter start="00:47:24" title="Har det holdt seg?"/><psc:chapter start="00:50:26" title="Finnes det noe tilsvarende idag?"/></psc:chapters>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="1 (#79)">79</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person></item>
@@ -1698,6 +1769,8 @@ Støtt oss gjerne på patreon: https://www.patreon.com/cdSPILL</itunes:summary>
         <itunes:episode>78</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CaleforniaGames2_utq63e.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/5pqp9tpmv9xuck4y/cg_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro"/><psc:chapter start="00:02:15" title="Velkommen til Jostein Hakestad"/><psc:chapter start="00:03:13" title="Praktisk info"/><psc:chapter start="00:04:34" title="Tilbakeblikk på TiltCast 3.0"/><psc:chapter start="00:06:46" title="Kommentarer fra DigDug og Digger"/><psc:chapter start="00:09:45" title="Dagens spill: California Games"/><psc:chapter start="00:14:01" title="Øvelsene: Half Pipe"/><psc:chapter start="00:14:23" title="Øvelsene: Footbag"/><psc:chapter start="00:15:02" title="Surfing"/><psc:chapter start="00:16:00" title="Rollerskating"/><psc:chapter start="00:16:41" title="BMX"/><psc:chapter start="00:17:20" title="Flying disc"/><psc:chapter start="00:19:52" title="Vi prater om konsoll(!)"/><psc:chapter start="00:23:28" title="Best idretter"/><psc:chapter start="00:28:19" title="Litt om Mega Drive-versjonen"/><psc:chapter start="00:31:53" title="Tech Specs: California Games"/><psc:chapter start="00:36:44" title="Dagens spill: California Games II"/><psc:chapter start="00:40:02" title="Øvelsene: Bodyboarding"/><psc:chapter start="00:40:33" title="Gjennomgår øvelsene"/><psc:chapter start="00:42:00" title="Hanggliding"/><psc:chapter start="00:42:50" title="Jet surfing"/><psc:chapter start="00:44:06" title="Skateboarding"/><psc:chapter start="00:48:52" title="Snowboarding"/><psc:chapter start="00:52:30" title="Rangering av idrettene"/><psc:chapter start="00:56:08" title="Musikken"/><psc:chapter start="00:58:46" title="Uncredited"/><psc:chapter start="01:01:47" title="Vanskeligere å ta vare på spillhistorien"/><psc:chapter start="01:04:39" title="En gammel anmeldelse av CF2"/><psc:chapter start="01:06:36" title="Musikken i California Games II"/><psc:chapter start="01:07:45" title="Andre Epyx Spill"/><psc:chapter start="01:09:57" title="Lignende spill: DuckTales\; Quest for Gold"/><psc:chapter start="01:10:38" title="Home Alone"/><psc:chapter start="01:10:55" title="Kommentarer fra Facebook og Twitter"/><psc:chapter start="01:17:54" title="Har California Games holdt seg?"/><psc:chapter start="01:19:25" title="Har California Games II holdt seg?"/><psc:chapter start="01:20:37" title="Finnes det noe tilsvarende idag?"/></psc:chapters>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="12 (#78)">78</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person></item>
@@ -1715,7 +1788,7 @@ Støtt oss gjerne på patreon: https://www.patreon.com/cdSPILL</itunes:summary>
 &lt;p&gt;Vi blir glade om du støtter oss på Patreon: &lt;a href='http://patreon.com/cdSPILL'&gt;patreon.com/cdSPILL&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dcpfwh/DigDug.mp3" length="67312289" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dcpfwh/DigDug.mp3" length="57506233" type="audio/mpeg"/>
         <itunes:summary>Dig Dug gikk sin seiersgang i diverse arkadehaller og nådde mange ulike hjemmedatamaskiner. Men ikke lenge etter kom det også et veldig lignende spill til PC: Digger. Vi sammenligner og ser tilbake på disse gravespillene.
 Les mer om episoden og spillene hos spillhistorie.no: https://spillhistorie.no/2023/06/05/graving-for-alle-pengene/
 Vi blir glade om du støtter oss på Patreon: patreon.com/cdSPILL</itunes:summary>
@@ -1727,6 +1800,8 @@ Vi blir glade om du støtter oss på Patreon: patreon.com/cdSPILL</itunes:summar
         <itunes:episode>77</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/digger_smaller6r4ym.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/72zz5rq6xp4xc8cy/DigDug_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Kort intro"/><psc:chapter start="00:02:22" title="Fra forrige gang"/><psc:chapter start="00:10:56" title="Dagens spill: Dig Dug"/><psc:chapter start="00:15:44" title="Utdrag fra Manualen"/><psc:chapter start="00:17:25" title="Tech Specs: Dig Dug"/><psc:chapter start="00:22:30" title="Dagens spill: Digger"/><psc:chapter start="00:28:30" title="Musikken"/><psc:chapter start="00:32:31" title="Tech Specs: Digger"/><psc:chapter start="00:35:59" title="Lore"/><psc:chapter start="00:43:39" title="Fra sosiale medier"/><psc:chapter start="00:47:47" title="Har det holdt seg?"/><psc:chapter start="00:50:36" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="00:52:46" title="Hva skal vi snakke om neste gang?"/></psc:chapters>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="11 (#77)">77</podcast:episode></item>
     <item>
@@ -1745,7 +1820,7 @@ Vi blir glade om du støtter oss på Patreon: patreon.com/cdSPILL</itunes:summar
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;patreon&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/x3k254/syndicate.mp3" length="107886417" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/x3k254/syndicate.mp3" length="106301187" type="audio/mpeg"/>
         <itunes:summary>Skal vil dømme etter dataspill, går vi en ganske kjip fremtid i møte. Nøyaktig hvor kjip varierer fra spill til spill, og jeg vil vel påstå at Bullfrog-spillet Syndicate byr på en fremtidsvisjon som er hakket kjipere enn i gjennomsnittsspillet. I alle fall så lenge vi ikke blander inn imperialistiske romvesener eller absurde naturkatastrofer.  MrMamen og Sigve var såpass ubrukelige at de ikke kom forbi brett 2, men heldigvis blir episoden reddet i havn av Anders Ekroll som var adskillig mer vellykket i sin gjennomspilling.
  
 Les mer om spillet og episoden hos spillhistore.no
@@ -1758,6 +1833,8 @@ Støtt oss gjerne på patreon.</itunes:summary>
         <itunes:episode>76</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/syndicate.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/u96hgj647j9zmbkp/syndicate_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Kort intro"/><psc:chapter start="00:02:27" title="Velkommen til Anders Ekroll"/><psc:chapter start="00:04:31" title="Kommentarer fra forrige episode"/><psc:chapter start="00:08:30" title="Idag: Syndicate"/><psc:chapter start="00:22:43" title="Lore i Syndicate"/><psc:chapter start="00:28:50" title="Tech Specs"/><psc:chapter start="00:31:06" title="Musikken"/><psc:chapter start="00:37:22" title="Brukergrensesnittet"/><psc:chapter start="00:56:09" title="Våpnene"/><psc:chapter start="01:07:25" title="Oppfølgerne"/><psc:chapter start="01:15:26" title="Kommentarer fra sosiale medier"/><psc:chapter start="01:26:08" title="Introsekvensen"/><psc:chapter start="01:30:26" title="Har det holdt seg?"/><psc:chapter start="01:33:34" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="01:38:56" title="Hvilket spill prater vi om i neste episode?"/></psc:chapters>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="10 (#76)">76</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
@@ -1777,7 +1854,7 @@ Støtt oss gjerne på patreon.</itunes:summary>
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;patreon&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/sfnpyj/CaptainComic.mp3" length="97757393" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/sfnpyj/CaptainComic.mp3" length="97328853" type="audio/mpeg"/>
         <itunes:summary>Et av de tidlige vellykkede plattformspillene var The Adventures of Captain Comic. IBM-maskiner var ikke spesielt gode på scrolling, men dette spillet forsøkte likevel. Det var også en pioner ved at spillet var shareware. Vi har fått med oss Sindre fra spillegal for å diskutere klassikeren som banet vei for Commander Keen og andre lignende spill.
  
 Gå til spillhistorie.no og les tilhørende artikkel.
@@ -1790,9 +1867,11 @@ Støtt oss gjerne på patreon.</itunes:summary>
         <itunes:episode>75</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CaptainComic.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/u78ydzmiyjkmihwy/CaptainComic_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="cd SPILL introduksjon"/><psc:chapter start="00:01:31" title="Intro av gjest: Sindre Opsahl Skaare"/><psc:chapter start="00:05:45" title="Kommentarer fra sist"/><psc:chapter start="00:09:30" title="Episodens spill: The Adventures of Captain Comic"/><psc:chapter start="00:16:43" title="Introskjerm og manual"/><psc:chapter start="00:19:39" title="Går igjennom spillet brett for brett"/><psc:chapter start="00:29:41" title="Tech Specs"/><psc:chapter start="00:32:07" title="Musikken"/><psc:chapter start="00:35:42" title="Fiendene"/><psc:chapter start="00:44:44" title="LItt om hvordan det ble til"/><psc:chapter start="00:50:22" title="BoxArt"/><psc:chapter start="00:57:40" title="Kommentarer fra sosiale medier"/><psc:chapter start="00:58:58" title="Oppfølgeren: Captain Comic II: Fractured Reality"/><psc:chapter start="01:04:03" title="Har det holdt seg?"/><psc:chapter start="01:09:45" title="Et tips fra Sigve"/><psc:chapter start="01:10:46" title="Neste spill: Syndicate"/></psc:chapters>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="9 (#75)">75</podcast:episode>
-        <podcast:person role="guest">Sindre Opsahl Skaare</podcast:person></item>
+        <podcast:person role="guest">Sindre Skaare</podcast:person></item>
     <item>
         <title>Battle Chess med Aleksikon</title>
         <itunes:title>Battle Chess med Aleksikon</itunes:title>
@@ -1819,6 +1898,8 @@ Støtt oss gjerne på Patreon!</itunes:summary>
         <itunes:episode>74</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BattleChess_v2b2eg3.jpg"/>
+        <podcast:chapters url="https://mcdn.podbean.com/mf/web/gcb88kd48jue277y/BattleChess_vizzy_chapters.json" type="application/json"/>
+        <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Introduksjon"/><psc:chapter start="00:01:25" title="Velkommen til Aleksikon"/><psc:chapter start="00:02:19" title="Kommentarer fra forrige episode"/><psc:chapter start="00:05:32" title="Dagens spill: Battle Chess"/><psc:chapter start="00:24:51" title="Ulike kampanimasjoner"/><psc:chapter start="00:33:49" title="Musikken"/><psc:chapter start="00:37:06" title="Bakgrunnsstoff"/><psc:chapter start="00:38:59" title="Produsenten som alltid skulle mene noe"/><psc:chapter start="00:42:00" title="Battle Chess: Enhanced CD-ROM"/><psc:chapter start="00:45:18" title="Hva mener lytterne?"/><psc:chapter start="00:50:30" title="Har det holdt seg?"/><psc:chapter start="00:53:06" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="00:59:59" title="Neste episodes spill"/></psc:chapters>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="8 (#74)">74</podcast:episode>
         <podcast:person role="guest">Aleks Gisvold</podcast:person></item>
@@ -1920,7 +2001,7 @@ Relevante lenker:Last ned FreeCol herKjøp original-spillet fra GOGLes et flott 
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="5 (#71)">71</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/50c5ab1f98ed30b6799eb68d3a68ee4f.jpeg">Erlend Fiddan</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>DStroy med Anette Jøsendal</title>
@@ -2241,7 +2322,7 @@ Les tilhørende artikkel hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Blade_Runnerbdzdr.jpg"/>
         <podcast:season name="Høst 2022">6</podcast:season>
         <podcast:episode display="3 (#61)">61</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
     <item>
         <title>The Blues Brothers</title>
         <itunes:title>The Blues Brothers</itunes:title>
@@ -2374,7 +2455,7 @@ Les tilhørende artikkel hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cannon_fodder_gkj6xd.jpg"/>
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="13 (#57)">57</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Secret Agent</title>
         <itunes:title>Secret Agent</itunes:title>
@@ -2458,7 +2539,7 @@ Les mer om episoden hos spillhistorie.no.</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL_pop_square_f9j8r5.jpg"/>
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="10 (#54)">54</podcast:episode>
-        <podcast:person role="guest">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
     <item>
         <title>Road Rash</title>
         <itunes:title>Road Rash</itunes:title>
@@ -2532,7 +2613,7 @@ Les tilhørende artikkel hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/warcraft_contrast_bbbazk.jpg"/>
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="7 (#51)">51</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/a9f2efd93c83d033f2611ec76e93abe5.jpeg">Audun Rodem</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/audun-rodem-107tZxOPfL" img="https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg">Audun Rodem</podcast:person></item>
     <item>
         <title>System Shock med Jon Cato Lorentzen</title>
         <itunes:title>System Shock med Jon Cato Lorentzen</itunes:title>
@@ -2776,7 +2857,7 @@ Det brutale DOOM skremte alle og enhver, også Ethel fra Barna i våre hjerter. 
         <itunes:image href="https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg"/>
         <podcast:season name="Høst 2021">4</podcast:season>
         <podcast:episode display="7 (#42)">42</podcast:episode>
-        <podcast:person role="guest">Jåddi</podcast:person></item>
+        <podcast:person role="guest">Jørn Inge Henriksen</podcast:person></item>
     <item>
         <title>Tex Murphy: Mean Streets</title>
         <itunes:title>Tex Murphy: Mean Streets</itunes:title>
@@ -3062,7 +3143,7 @@ Les hele artikkelen hos spillhistorie.no</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/quake.jpg"/>
         <podcast:season name="Vår 2021">3</podcast:season>
         <podcast:episode display="11 (#32)">32</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/dfdb5f7f33b0ebbb36b66f939c4f4f6f.jpeg">Ketil Espenæs</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb">Ketil Espenæs</podcast:person></item>
     <item>
         <title>Populous</title>
         <itunes:title>Populous</itunes:title>
@@ -3544,7 +3625,7 @@ DoubleJump: https://www.doublejump.no
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rise_of_Triad8ehoh.jpg"/>
         <podcast:season name="Høst 2020">2</podcast:season>
         <podcast:episode display="4 (#15)">15</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/dfdb5f7f33b0ebbb36b66f939c4f4f6f.jpeg">Ketil Espenæs</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb">Ketil Espenæs</podcast:person></item>
     <item>
         <title>Arkanoid</title>
         <itunes:title>Arkanoid</itunes:title>
@@ -3746,7 +3827,7 @@ Takk til Kristian Amlie for intromusikk</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/keen_2a9x4y.jpg"/>
         <podcast:season name="Vår 2020">1</podcast:season>
         <podcast:episode display="8 (#8)">8</podcast:episode>
-        <podcast:person role="guest" img="https://creator-images.podchaser.com/a9f2efd93c83d033f2611ec76e93abe5.jpeg">Audun Rodem</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/audun-rodem-107tZxOPfL" img="https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg">Audun Rodem</podcast:person></item>
     <item>
         <title>Delta Force</title>
         <itunes:title>Delta Force</itunes:title>
