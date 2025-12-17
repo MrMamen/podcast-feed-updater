@@ -37,9 +37,17 @@ jobs:
         PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
-        # Run main enrichment script only
-        # Spotify and YouTube feeds are generated separately via manual workflows
+        # Run main enrichment script
+        # This generates the main cdspill-enriched.xml feed
         uv run enrich_cdspill.py
+
+    - name: Run YouTube enrichment script
+      env:
+        PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
+        PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
+      run: |
+        # Generate YouTube variant from the freshly created enriched feed
+        uv run enrich_cdspill_youtube.py --local-cache
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -47,5 +55,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
         publish_branch: gh-pages
-        # Incremental update - merges with existing files (preserves Spotify/YouTube feeds)
+        # Incremental update - merges with existing files (preserves Spotify feed)
         keep_files: true
