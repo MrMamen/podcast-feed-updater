@@ -36,6 +36,11 @@ jobs:
         # Run Spotify script only (fetches from already deployed enriched feed)
         uv run enrich_cdspill_spotify.py
 
+    - name: Remove main enriched feed before publishing
+      run: |
+        # Don't overwrite the deployed enriched feed - only publish Spotify variant
+        rm -f docs/cdspill-enriched.xml
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:

@@ -41,7 +41,6 @@ ENV/
 output/
 *.xml
 !example*.xml
-!docs/*.xml
 
 # Config with secrets
 config.yaml
