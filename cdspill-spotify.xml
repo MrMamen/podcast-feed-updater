@@ -3,12 +3,12 @@
 
 <channel>
     <title>cd SPILL</title>
-    <atom:link href="https://feed.podbean.com/cdspill/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-spotify.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 08 Dec 2025 08:41:30 +0100</pubDate>
-    <generator>https://podbean.com/?v=5.5</generator>
-    <language>no</language>
+    <generator>podcast-feed-updater v1.0 (Spotify variant)</generator>
+    <lastBuildDate>Wed, 17 Dec 2025 08:23:01 +0000</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2025 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
