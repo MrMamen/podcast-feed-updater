@@ -1227,11 +1227,14 @@ class FeedEnricher(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        from datetime import datetime
-        from email.utils import formatdate
+        from datetime import datetime, timezone, timedelta
+        from email.utils import format_datetime
 
-        # Generate RFC 2822 formatted date (same format as pubDate)
-        timestamp = formatdate(timeval=None, localtime=True)
+        # Generate RFC 2822 formatted date with Norwegian timezone (+0100)
+        # This ensures consistency with pubDate regardless of where the script runs
+        norway_tz = timezone(timedelta(hours=1))
+        now = datetime.now(norway_tz)
+        timestamp = format_datetime(now)
 
         lastbuilddate = self.channel.find('lastBuildDate')
         if lastbuilddate is not None:
