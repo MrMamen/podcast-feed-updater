@@ -1,28 +1,8 @@
 # Podcast Feed Updater
 
-En Python-tjeneste for å filtrere, splitte og berike podcast RSS feeds med Podcasting 2.0 tags.
+En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 
-## 🎯 Use Cases
-
-### 1. Rad Crew Feed Splitting
-Splitt en kombinert feed i tre separate feeds med riktig metadata.
-
-**Se [RADCREW_SETUP.md](RADCREW_SETUP.md)** for komplett dokumentasjon.
-
-```bash
-uv run split_radcrew.py
-
-# Genererer:
-# - NEON (135 episoder)
-# - Retro Crew (18 episoder)
-# - Classic (341 episoder)
-```
-
-**Live feeds:** https://radcrew.netlify.app/
-
-**Deploy your own:** Se [QUICKSTART_DEPLOYMENT.md](QUICKSTART_DEPLOYMENT.md) for automatisk GitHub Pages setup.
-
-### 2. cd SPILL Feed Enrichment
+## 🎯 Use Case: cd SPILL Feed Enrichment
 Berik en eksisterende feed med Podcasting 2.0 tags.
 
 **Se [ENRICHMENT_GUIDE.md](ENRICHMENT_GUIDE.md)** for komplett dokumentasjon.
@@ -79,7 +59,6 @@ Se **[DEPLOYMENT.md](DEPLOYMENT.md)** for full dokumentasjon og alternative løs
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 2. Kjør script (uv håndterer alt automatisk)
-uv run split_radcrew.py
 uv run enrich_cdspill.py
 ```
 
@@ -101,17 +80,12 @@ podcast-feed-updater/
 │   ├── common/              # Felles utilities
 │   │   ├── base_feed.py     # Baseklasse for feed-operasjoner
 │   │   └── __init__.py
-│   ├── radcrew/             # Rad Crew feed splitting
-│   │   ├── splitter.py      # FeedSplitter
-│   │   └── __init__.py
 │   └── enrichment/          # Feed enrichment
 │       ├── enricher.py      # FeedEnricher
 │       ├── podchaser_api.py # Podchaser API integration
 │       └── __init__.py
-├── split_radcrew.py         # Rad Crew script
 ├── enrich_cdspill.py        # cd SPILL enrichment script
 ├── docs/                    # Generated feeds
-├── RADCREW_SETUP.md         # Rad Crew dokumentasjon
 └── ENRICHMENT_GUIDE.md      # Enrichment guide
 ```
 
@@ -136,8 +110,6 @@ podcast-feed-updater/
 - OP3 prefixed enclosures - Privacy-respecting download tracking
 
 ### Feed Operations
-- **Split feeds** - Del opp kombinerte feeds
-- **Merge feeds** - Kombiner items med metadata
 - **Preserve XML** - Bevarer all original struktur (lxml)
 - **Namespace handling** - Korrekt håndtering av itunes:, podcast:, etc.
 
@@ -212,37 +184,6 @@ enricher.add_podroll([
 
 # Write output
 enricher.write_feed("output.xml")
-```
-
-### Basic Example - Feed Splitting
-
-```python
-from src.radcrew.splitter import FeedSplitter
-
-# Initialize
-splitter = FeedSplitter("https://example.com/combined-feed.xml")
-splitter.fetch_feed()
-
-# Split by patterns
-patterns = [
-    ("show a", True),  # Keep matching
-    ("show b", True),  # Keep matching
-    # Rest goes to third feed
-]
-
-metadata_urls = [
-    "https://example.com/show-a-metadata.xml",
-    "https://example.com/show-b-metadata.xml",
-    "https://example.com/rest-metadata.xml"
-]
-
-output_files = [
-    "docs/show-a.xml",
-    "docs/show-b.xml",
-    "docs/rest.xml"
-]
-
-splitter.split_by_patterns(patterns, metadata_urls, output_files)
 ```
 
 ## 🧪 Development
