@@ -2,7 +2,17 @@
   "_comment": "Known guests with Podchaser profile data and name aliases. Add new guests using: uv run python3 lookup_guest.py 'Guest Name'. Use 'extra_episodes' to manually add guests to specific episodes by GUID (e.g., when guest is not mentioned in title).",
   "guests": {
     "Adrian Haugen": {
-      "href": "https://www.podchaser.com/creators/adrian-haugen-107tZxOga4"
+      "href": "https://www.podchaser.com/creators/adrian-haugen-107tZxOga4",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
+        }
+      ]
     },
     "Aksel M. Bjerke": {
       "href": "https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM"
@@ -43,6 +53,14 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
         }
       ]
     },
@@ -57,12 +75,22 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
         }
       ]
     },
     "Audun Rodem": {
       "img": "https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg",
-      "href": "https://www.podchaser.com/creators/audun-rodem-107tZxOPfL"
+      "href": "https://www.podchaser.com/creators/audun-rodem-107tZxOPfL",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        }
+      ]
     },
     "C. Alexander Espeseth": {
       "href": "https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK",
@@ -70,6 +98,10 @@
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
           "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
@@ -86,6 +118,14 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
@@ -104,6 +144,14 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
         }
       ]
     },
@@ -121,7 +169,13 @@
       "href": "https://www.podchaser.com/creators/goran-solbakken-107tZxOPjO"
     },
     "Hans Arne Jacobsen": {
-      "href": "https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R"
+      "href": "https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        }
+      ]
     },
     "Håkon Puntervold": {
       "href": "https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5",
@@ -129,12 +183,29 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
     "Jens Erik Vaaler": {
       "img": "https://creator-images.podchaser.com/f59a70e5e37521b7ab93b154d7909b46.jpeg",
       "href": "https://www.podchaser.com/creators/jens-erik-vaaler-107tZxOPjQ"
+    },
+    "Jo Bjørnar Hausnes": {
+      "href": "https://www.podchaser.com/creators/jo-bj%C3%B8rnar-hausnes-107tjTnmty",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        }
+      ]
     },
     "Joachim Froholt": {
       "href": "https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT",
@@ -146,11 +217,25 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
     "Jon Cato Lorentzen": {
-      "href": "https://www.podchaser.com/creators/jon-cato-lorentzen-107tZxOPnW"
+      "href": "https://www.podchaser.com/creators/jon-cato-lorentzen-107tZxOPnW",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        }
+      ]
     },
     "Jon Håvard Gundersen": {
       "img": "https://creator-images.podchaser.com/5d33917bcab6db3365951a4e00f68a31.jpeg",
@@ -174,6 +259,18 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
@@ -197,6 +294,14 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
         }
       ]
     },
@@ -210,7 +315,22 @@
       ]
     },
     "Mattis Folkestad": {
-      "href": "https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu"
+      "href": "https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
+        }
+      ]
+    },
+    "Maurice Adams": {
+      "href": "https://www.podchaser.com/creators/maurice-adams-107tjTnmu1",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        }
+      ]
     },
     "Roar Granevang": {
       "img": "https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg",
@@ -223,6 +343,10 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
         }
       ]
     },
@@ -244,6 +368,14 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
@@ -269,11 +401,30 @@
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
           "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
         }
       ]
     },
     "Trond Sneås Skauge": {
-      "href": "https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm"
+      "href": "https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        }
+      ]
+    },
+    "Yngve Vindal Eriksen": {
+      "href": "https://www.podchaser.com/creators/yngve-vindal-eriksen-107ta1wGjG",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
+          "note": "Spillåret 1992 (#67)"
+        }
+      ]
     },
     "Øystein Henriksen": {
       "href": "https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm",
