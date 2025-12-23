@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 22 Dec 2025 07:15:00 +0100</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Mon, 22 Dec 2025 10:06:29 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Tue, 23 Dec 2025 14:44:51 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2025 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -50,9 +50,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 </content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/h9h6grvncd9hfyw6/1995.mp3" length="222419262" type="audio/mpeg"/>
-        <itunes:summary>Vi går igjennom spillåret 1995, og for et år! Dette blir en lang episode med mange lytterbidrag! Vi kårer også 1995s beste spill!
-Spillhistorie.no har skrevet om episoden.
-Støtt oss gjerne på Patreon.Følg oss gjerne på Bluesky, Twitter, Facebook, og Podchaser.</itunes:summary>
+        <itunes:summary>Vi går igjennom spillåret 1995, og for et år! Dette blir en lang episode med mange lytterbidrag! Vi kårer også 1995s beste spill!</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
@@ -96,9 +94,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 </content:encoded>
                                     
         <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/hhmjqbk2h4s5drtt/1985.mp3" length="117144260" type="audio/mpeg"/>
-        <itunes:summary>Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.
-Joachim har skrevet en artikkel om episoden hos Spillhistorie.no.
-Støtt oss gjerne på Patreon.Følg oss gjerne på Bluesky, Twitter, Facebook, og Podchaser.</itunes:summary>
+        <itunes:summary>Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
@@ -4155,5 +4151,5 @@ Kristian Amlie for temamusikk (http://amlie.name)</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/omf-fix2_3wrh7u.jpg"/>
         <podcast:season name="Vår 2020">1</podcast:season>
         <podcast:episode display="1 (#1)">1</podcast:episode></item>
-<podcast:guid>a550e4b5-6615-5a5d-b1d5-a371c01552a2</podcast:guid><podcast:funding url="https://www.patreon.com/cdSPILL">Støtt cd SPILL på Patreon</podcast:funding><podcast:medium>podcast</podcast:medium><podcast:updateFrequency dtstart="2020-03-09" rrule="FREQ=WEEKLY;INTERVAL=2">2</podcast:updateFrequency><podcast:podroll><podcast:remoteItem feedUrl="https://feed.podbean.com/spaell/feed.xml" feedGuid="ea5e71e4-fb02-51f7-936d-5acdb482be40" feedTitle="Spæll"/><podcast:remoteItem feedUrl="https://radcrew.netlify.app/radcrew-retro.xml" feedGuid="a1324b88-c003-56a1-9de2-9160e28f2094" feedTitle="Retro Crew"/><podcast:remoteItem feedUrl="https://feeds.soundcloud.com/users/soundcloud:users:622595196/sounds.rss" feedGuid="7b33030d-fae9-54e1-a5fb-73da19ff901e" feedTitle="Retropodden"/><podcast:remoteItem feedUrl="https://rss.libsyn.com/shows/327911/destinations/2668616.xml" feedGuid="56989d48-fc1a-5f62-8451-25f71b234b97" feedTitle="The Upper Memory Block"/></podcast:podroll><podcast:socialInteract protocol="activitypub" uri="https://bsky.app/profile/cdspill.bsky.social" accountId="@cdspill.bsky.social"/><podcast:socialInteract protocol="twitter" uri="https://x.com/cd_SPILL" accountId="@cd_SPILL"/><podcast:socialInteract protocol="disabled" uri="https://www.facebook.com/cdSPILL"/></channel>
+<podcast:guid>a550e4b5-6615-5a5d-b1d5-a371c01552a2</podcast:guid><podcast:funding url="https://www.patreon.com/cdSPILL">Støtt cd SPILL på Patreon</podcast:funding><podcast:medium>podcast</podcast:medium><podcast:updateFrequency dtstart="2020-03-09T00:00:00+01:00" rrule="FREQ=WEEKLY;INTERVAL=2">2</podcast:updateFrequency><podcast:podroll><podcast:remoteItem feedUrl="https://feed.podbean.com/spaell/feed.xml" feedGuid="ea5e71e4-fb02-51f7-936d-5acdb482be40" title="Spæll"/><podcast:remoteItem feedUrl="https://radcrew.netlify.app/radcrew-retro.xml" feedGuid="a1324b88-c003-56a1-9de2-9160e28f2094" title="Retro Crew"/><podcast:remoteItem feedUrl="https://feeds.soundcloud.com/users/soundcloud:users:622595196/sounds.rss" feedGuid="7b33030d-fae9-54e1-a5fb-73da19ff901e" title="Retropodden"/><podcast:remoteItem feedUrl="https://rss.libsyn.com/shows/327911/destinations/2668616.xml" feedGuid="56989d48-fc1a-5f62-8451-25f71b234b97" title="The Upper Memory Block"/></podcast:podroll><podcast:socialInteract protocol="atproto" uri="https://bsky.app/profile/cdspill.bsky.social" accountId="@cdspill.bsky.social"/><podcast:socialInteract protocol="twitter" uri="https://x.com/cd_SPILL" accountId="@cd_SPILL"/><podcast:socialInteract protocol="disabled" uri="https://www.facebook.com/cdSPILL"/></channel>
 </rss>
