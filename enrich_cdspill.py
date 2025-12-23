@@ -172,7 +172,7 @@ def main():
     enricher.add_update_frequency(
         complete=False,
         frequency=2,
-        dtstart="2020-03-09T00:00:00+01:00",
+        dtstart="2020-03-09T00:00:00Z",
         rrule="FREQ=WEEKLY;INTERVAL=2"
     )
 
@@ -204,22 +204,28 @@ def main():
     # Add social media interactions
     # Bluesky (AT Protocol)
     enricher.add_social_interact(
-        protocol="atproto",
+        protocol="disabled",
         uri="https://bsky.app/profile/cdspill.bsky.social",
-        account_id="@cdspill.bsky.social"
+        account_id="@cdspill.bsky.social",
+        account_url="https://bsky.app/profile/cdspill.bsky.social",
+        priority=8
     )
 
     # Twitter/X
     enricher.add_social_interact(
-        protocol="twitter",
+        protocol="disabled",
         uri="https://x.com/cd_SPILL",
-        account_id="@cd_SPILL"
+        account_id="@cd_SPILL",
+        account_url="https://x.com/cd_SPILL",
+        priority=10
     )
 
     # Facebook (using disabled protocol per spec)
     enricher.add_social_interact(
         protocol="disabled",
-        uri="https://www.facebook.com/cdSPILL"
+        uri="https://www.facebook.com/cdSPILL",
+        account_url="https://www.facebook.com/cdSPILL",
+        priority=9
     )
 
     # Add OP3 analytics prefix for privacy-respecting download tracking

@@ -549,7 +549,9 @@ class FeedEnricher(BaseFeed):
         self,
         protocol: str,
         uri: str,
-        account_id: Optional[str] = None
+        account_id: Optional[str] = None,
+        account_url: Optional[str] = None,
+        priority: Optional[int] = None
     ) -> 'FeedEnricher':
         """
         Add podcast:socialInteract tag.
@@ -558,6 +560,8 @@ class FeedEnricher(BaseFeed):
             protocol: Protocol (activitypub, twitter, etc)
             uri: URI for interaction
             account_id: Optional account ID
+            account_url: Optional account URL
+            priority: Optional priority (lower numbers = higher priority)
 
         Returns:
             Self for chaining
@@ -572,6 +576,10 @@ class FeedEnricher(BaseFeed):
         )
         if account_id:
             social_elem.set('accountId', account_id)
+        if account_url:
+            social_elem.set('accountUrl', account_url)
+        if priority is not None:
+            social_elem.set('priority', str(priority))
 
         self.channel.append(social_elem)
         print(f"✓ Added social interact: {protocol} ({uri})")
