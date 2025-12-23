@@ -668,8 +668,8 @@ class FeedEnricher(BaseFeed):
                 attrs['feedGuid'] = podcast['feedGuid']
 
             # Add optional attributes
-            if 'feedTitle' in podcast:
-                attrs['feedTitle'] = podcast['feedTitle']
+            if 'title' in podcast:
+                attrs['title'] = podcast['title']
 
             remote_elem = etree.SubElement(
                 podroll_elem,

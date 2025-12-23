@@ -172,29 +172,29 @@ def main():
     enricher.add_update_frequency(
         complete=False,
         frequency=2,
-        dtstart="2020-03-09",
+        dtstart="2020-03-09T00:00:00+01:00",
         rrule="FREQ=WEEKLY;INTERVAL=2"
     )
 
     # Add podroll (recommended podcasts)
     recommended_podcasts = [
         {
-            "feedTitle": "Spæll",
+            "title": "Spæll",
             "url": "https://feed.podbean.com/spaell/feed.xml",
             "feedGuid": "ea5e71e4-fb02-51f7-936d-5acdb482be40"
         },
         {
-            "feedTitle": "Retro Crew",
+            "title": "Retro Crew",
             "url": "https://radcrew.netlify.app/radcrew-retro.xml",
             "feedGuid": "a1324b88-c003-56a1-9de2-9160e28f2094"
         },
         {
-            "feedTitle": "Retropodden",
+            "title": "Retropodden",
             "url": "https://feeds.soundcloud.com/users/soundcloud:users:622595196/sounds.rss",
             "feedGuid": "7b33030d-fae9-54e1-a5fb-73da19ff901e"
         },
         {
-            "feedTitle": "The Upper Memory Block",
+            "title": "The Upper Memory Block",
             "url": "https://rss.libsyn.com/shows/327911/destinations/2668616.xml",
             "feedGuid": "56989d48-fc1a-5f62-8451-25f71b234b97"
         }
@@ -202,9 +202,9 @@ def main():
     enricher.add_podroll(recommended_podcasts)
 
     # Add social media interactions
-    # Bluesky (ActivityPub)
+    # Bluesky (AT Protocol)
     enricher.add_social_interact(
-        protocol="activitypub",
+        protocol="atproto",
         uri="https://bsky.app/profile/cdspill.bsky.social",
         account_id="@cdspill.bsky.social"
     )
