@@ -5,6 +5,10 @@
       "href": "https://www.podchaser.com/creators/adrian-haugen-107tZxOga4",
       "extra_episodes": [
         {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        },
+        {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
           "note": "Spillåret 1993 (#87)"
         },
@@ -25,6 +29,10 @@
           "note": "Spillåret 1995 (#125)"
         },
         {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        },
+        {
           "guid": "cdspill.podbean.com/fef81a80-8071-321c-abaa-5362d8ff6716",
           "note": "The Incredible Machine (#26)"
         }
@@ -40,7 +48,13 @@
       ]
     },
     "Anders Ekroll": {
-      "href": "https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb"
+      "href": "https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        }
+      ]
     },
     "Andreas Hedemann": {
       "img": "https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg",
@@ -82,6 +96,15 @@
         }
       ]
     },
+    "Arne Digernes": {
+      "href": "https://www.podchaser.com/creators/arne-digernes-107to8CFFp",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        }
+      ]
+    },
     "Audun Rodem": {
       "img": "https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg",
       "href": "https://www.podchaser.com/creators/audun-rodem-107tZxOPfL",
@@ -118,6 +141,10 @@
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -185,12 +212,25 @@
           "note": "Spillåret 1995 (#125)"
         },
         {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        },
+        {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
           "note": "Spillåret 1993 (#87)"
         },
         {
           "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
           "note": "Spillåret 1992 (#67)"
+        }
+      ]
+    },
+    "Ivar Lobben": {
+      "href": "https://www.podchaser.com/creators/ivar-lobben-107to8CFBp",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
         }
       ]
     },
@@ -219,6 +259,10 @@
           "note": "Spillåret 1985 (#124)"
         },
         {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        },
+        {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
           "note": "Spillåret 1993 (#87)"
         },
@@ -239,7 +283,13 @@
     },
     "Jon Håvard Gundersen": {
       "img": "https://creator-images.podchaser.com/5d33917bcab6db3365951a4e00f68a31.jpeg",
-      "href": "https://www.podchaser.com/creators/jon-havard-gundersen-107to5wpar"
+      "href": "https://www.podchaser.com/creators/jon-havard-gundersen-107to5wpar",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        }
+      ]
     },
     "Jostein Hakestad": {
       "href": "https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX",
@@ -300,6 +350,10 @@
           "note": "Spillåret 1994 (#106)"
         },
         {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        },
+        {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
           "note": "Spillåret 1993 (#87)"
         }
@@ -345,6 +399,10 @@
           "note": "Spillåret 1985 (#124)"
         },
         {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        },
+        {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
           "note": "Spillåret 1993 (#87)"
         }
@@ -352,6 +410,15 @@
     },
     "Sindre Skaare": {
       "href": "https://www.podchaser.com/creators/sindre-skaare-107tZxQbrB"
+    },
+    "Svein-Erik Vik": {
+      "href": "https://www.podchaser.com/creators/svein-erik-vik-107to8CFFo",
+      "extra_episodes": [
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
+        }
+      ]
     },
     "Terje Høiback": {
       "img": "https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg",
@@ -368,6 +435,10 @@
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
           "note": "Spillåret 1994 (#106)"
+        },
+        {
+          "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
+          "note": "Liveepisode (#100)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -445,6 +516,7 @@
     "Aleksander": "Aleksander Hakestad",
     "Aleksikon": "Aleks Gisvold",
     "Anette Jøsendal": "Anette Vik Jøsendal",
+    "Jan Anders Ekroll": "Anders Ekroll",
     "Jåddi": "Jørn Inge Henriksen",
     "Sindre Opsahl Skaare": "Sindre Skaare"
   }
