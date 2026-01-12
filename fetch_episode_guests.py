@@ -466,9 +466,13 @@ def main():
     guests_updated = 0
     guests_already_had_episode = 0
 
+    # Reload the full data from file to avoid race conditions
+    with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
+        full_data = json.load(f)
+
     for name in already_in_feed:
-        # Check if this guest already has this episode in extra_episodes
-        extra_eps = known_guests[name].get('extra_episodes', [])
+        # Check if this guest already has this episode in extra_episodes (from file)
+        extra_eps = full_data['guests'].get(name, {}).get('extra_episodes', [])
         has_episode = any(ep['guid'] == guid for ep in extra_eps)
 
         if has_episode:
@@ -476,8 +480,8 @@ def main():
             guests_already_had_episode += 1
         else:
             # Add the episode to extra_episodes
-            if 'extra_episodes' not in known_guests[name]:
-                known_guests[name]['extra_episodes'] = []
+            if 'extra_episodes' not in full_data['guests'][name]:
+                full_data['guests'][name]['extra_episodes'] = []
 
             # Create note with episode number if available
             note = title
@@ -486,7 +490,7 @@ def main():
                 if f'(#{episode_num})' not in title:
                     note = f"{title} (#{episode_num})"
 
-            known_guests[name]['extra_episodes'].append({
+            full_data['guests'][name]['extra_episodes'].append({
                 'guid': guid,
                 'note': note
             })
@@ -494,12 +498,6 @@ def main():
             guests_updated += 1
 
     if guests_updated > 0:
-        # Save updated known_guests.json
-        with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
-            full_data = json.load(f)
-
-        full_data['guests'] = known_guests
-
         # Sort extra_episodes by episode number for each guest
         import re
         for guest_name, guest_data in full_data['guests'].items():
