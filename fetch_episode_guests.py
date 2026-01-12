@@ -172,7 +172,7 @@ def fetch_episode_credits(episode_id, access_token):
     query {
       episode(identifier: { type: PODCHASER, id: "%s" }) {
         title
-        credits(first: 25) {
+        credits(first: 100) {
           data {
             role {
               title
@@ -388,11 +388,79 @@ def main():
         print()
         for guest in guests_to_add:
             print(f'  • {guest["name"]}')
-            print(f'    Add with: uv run python3 lookup_guest.py "{guest["name"]}"')
-            print(f'    Or: uv run python3 add_guest_from_url.py "{guest["href"]}"')
         print()
-        print("❌ Cannot add extra_episodes until all guests are in known_guests.json")
-        sys.exit(1)
+
+        # Ask if user wants to add them now
+        response = input(f"Add {len(guests_to_add)} missing guest(s) now? (Y/n): ").strip().lower()
+
+        if response != 'n' and response != 'no':
+            import subprocess
+            added_count = 0
+
+            for guest in guests_to_add:
+                print(f"\n{'='*60}")
+                print(f"Adding guest {added_count + 1}/{len(guests_to_add)}: {guest['name']}")
+                print(f"{'='*60}\n")
+
+                # Run lookup_guest.py for this guest
+                try:
+                    result = subprocess.run(
+                        ['uv', 'run', 'python3', 'lookup_guest.py', guest['name']],
+                        check=False
+                    )
+
+                    if result.returncode == 0:
+                        added_count += 1
+                    else:
+                        print(f"\n⚠️  Failed to add {guest['name']}")
+                        response = input("Continue with next guest? (Y/n): ").strip().lower()
+                        if response == 'n' or response == 'no':
+                            break
+
+                except KeyboardInterrupt:
+                    print("\n\nInterrupted by user")
+                    break
+
+            print(f"\n✓ Added {added_count}/{len(guests_to_add)} guest(s)")
+
+            if added_count < len(guests_to_add):
+                print("\n⚠️  Some guests were not added. Run the script again to continue.")
+                sys.exit(1)
+
+            # Reload known guests data
+            known_guests, aliases = load_known_guests()
+
+            # Re-process the guests that were just added
+            guests_to_add = []
+            for guest in guests:
+                name = guest['name']
+                canonical_name = aliases.get(name, name)
+
+                if canonical_name not in known_guests and name not in title and canonical_name not in title:
+                    guests_to_add.append({
+                        'name': name,
+                        'img': guest.get('imageUrl'),
+                        'href': guest.get('url')
+                    })
+
+            if guests_to_add:
+                print("\n❌ Some guests are still missing. Please add them manually.")
+                sys.exit(1)
+
+            # Update already_in_feed list
+            already_in_feed = []
+            for guest in guests:
+                name = guest['name']
+                canonical_name = aliases.get(name, name)
+
+                if name not in title and canonical_name not in title and canonical_name in known_guests:
+                    already_in_feed.append(canonical_name)
+        else:
+            print("\n❌ Cannot add extra_episodes until all guests are in known_guests.json")
+            print("\nTo add manually, run:")
+            for guest in guests_to_add:
+                print(f'  uv run python3 lookup_guest.py "{guest["name"]}"')
+            sys.exit(1)
 
     # Update known_guests.json with extra_episodes
     guests_updated = 0
