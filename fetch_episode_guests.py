@@ -346,17 +346,23 @@ def main():
         name = guest['name']
         print(f"  • {name}")
 
-        # Check if guest is already in the episode title
+        # Resolve alias to canonical name
+        canonical_name = aliases.get(name, name)
+
+        # Check if guest is already in the episode title (check both name and canonical name)
         # If so, they will be auto-detected and don't need extra_episodes
-        if name in title:
+        if name in title or canonical_name in title:
             print(f"    ℹ️  Already in episode title (will be auto-detected)")
-            guests_in_title.append(name)
+            guests_in_title.append(canonical_name)
             continue
 
-        # Check if guest is in known_guests
-        if name in known_guests:
-            print(f"    ✓ Already in cdspill_known_guests.json")
-            already_in_feed.append(name)
+        # Check if guest is in known_guests (either directly or via alias)
+        if canonical_name in known_guests:
+            if name != canonical_name:
+                print(f"    ✓ Found via alias '{name}' → '{canonical_name}'")
+            else:
+                print(f"    ✓ Already in cdspill_known_guests.json")
+            already_in_feed.append(canonical_name)
         else:
             print(f"    ⚠️  Not in cdspill_known_guests.json")
             guests_to_add.append({

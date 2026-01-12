@@ -2,9 +2,13 @@
 """
 Look up guest information from Podchaser and add to cdspill_known_guests.json
 
+The script automatically detects when the searched name differs from the Podchaser name
+and prompts to add the searched name as an alias.
+
 Usage:
     uv run python3 lookup_guest.py "Guest Name"
-    uv run python3 lookup_guest.py "Guest Name" --alias "Short Name"
+    uv run python3 lookup_guest.py "Jan Anders Ekroll"  # Will suggest alias if Podchaser has "Anders Ekroll"
+    uv run python3 lookup_guest.py "Guest Name" --alias "Short Name"  # Manual alias
 """
 
 import sys
@@ -151,19 +155,62 @@ def main():
         print(f"❌ File not found: {known_guests_file}")
         sys.exit(1)
 
-    # Add guest data
-    guest_data = {}
-    if selected.get('imageUrl'):
-        guest_data['img'] = selected['imageUrl']
-    if selected.get('url'):
-        guest_data['href'] = selected['url']
+    # Check if this person already exists (by href)
+    selected_href = selected.get('url')
+    existing_guest_name = None
 
-    known_guests_data['guests'][selected['name']] = guest_data
+    if selected_href:
+        for guest_name_in_file, guest_data in known_guests_data['guests'].items():
+            if guest_data.get('href') == selected_href:
+                existing_guest_name = guest_name_in_file
+                break
 
-    # Add alias if provided
+    if existing_guest_name:
+        print(f"\n✓ This person already exists as: '{existing_guest_name}'")
+
+        # If searched name differs, add as alias
+        if guest_name != existing_guest_name:
+            print(f"\n⚠️  Searched for: '{guest_name}'")
+            print(f"   Already exists as: '{existing_guest_name}'")
+            print()
+            response = input(f"Add '{guest_name}' as alias for '{existing_guest_name}'? (Y/n): ").strip().lower()
+            if response != 'n' and response != 'no':
+                alias = guest_name
+                canonical_name = existing_guest_name
+            else:
+                print("No changes made")
+                sys.exit(0)
+        else:
+            print("Guest already in database, no changes needed")
+            sys.exit(0)
+    else:
+        # New guest - check if searched name differs from found name (potential alias)
+        canonical_name = selected['name']
+
+        if not alias and guest_name != selected['name']:
+            print(f"\n⚠️  Search name differs from Podchaser name:")
+            print(f"   Searched for: '{guest_name}'")
+            print(f"   Found on Podchaser: '{selected['name']}'")
+            print()
+            response = input(f"Add '{guest_name}' as alias for '{selected['name']}'? (Y/n): ").strip().lower()
+            if response != 'n' and response != 'no':
+                alias = guest_name
+                print(f"✓ Will add alias: '{alias}' → '{selected['name']}'")
+
+        # Add guest data
+        guest_data = {}
+        if selected.get('imageUrl'):
+            guest_data['img'] = selected['imageUrl']
+        if selected.get('url'):
+            guest_data['href'] = selected['url']
+
+        known_guests_data['guests'][canonical_name] = guest_data
+        print(f"\n✓ Adding new guest: '{canonical_name}'")
+
+    # Add alias if set
     if alias:
-        known_guests_data['aliases'][alias] = selected['name']
-        print(f"\n✓ Adding alias: '{alias}' → '{selected['name']}'")
+        known_guests_data['aliases'][alias] = canonical_name
+        print(f"✓ Adding alias: '{alias}' → '{canonical_name}'")
 
     # Sort guests and aliases alphabetically
     known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
@@ -174,14 +221,20 @@ def main():
         json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
         f.write('\n')  # Add trailing newline
 
-    print(f"\n✓ Added to {known_guests_file}:")
-    print(f"   Name: {selected['name']}")
-    if guest_data.get('img'):
-        print(f"   Image: ✓")
-    if guest_data.get('href'):
-        print(f"   Profile: {guest_data['href']}")
-    if alias:
-        print(f"   Alias: {alias}")
+    if existing_guest_name:
+        print(f"\n✓ Updated {known_guests_file}:")
+        print(f"   Guest: {canonical_name}")
+        if alias:
+            print(f"   Added alias: {alias}")
+    else:
+        print(f"\n✓ Added to {known_guests_file}:")
+        print(f"   Name: {canonical_name}")
+        if known_guests_data['guests'][canonical_name].get('img'):
+            print(f"   Image: ✓")
+        if known_guests_data['guests'][canonical_name].get('href'):
+            print(f"   Profile: {known_guests_data['guests'][canonical_name]['href']}")
+        if alias:
+            print(f"   Alias: {alias}")
 
     print(f"\nNext: Run 'uv run enrich_cdspill.py' to use the new guest data")
 
