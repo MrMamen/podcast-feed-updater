@@ -53,6 +53,10 @@
         {
           "guid": "cdspill.podbean.com/443eae59-5039-3c44-884e-d3b72901f8ba",
           "note": "Liveepisode (#100)"
+        },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
         }
       ]
     },
@@ -68,6 +72,15 @@
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
           "note": "Spillåret 1994 (#106)"
         },
+        {
+          "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
+          "note": "Spillåret 1993 (#87)"
+        }
+      ]
+    },
+    "André Kvebek": {
+      "href": "https://www.podchaser.com/creators/andre-kvebek-107tjTnmtz",
+      "extra_episodes": [
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
           "note": "Spillåret 1993 (#87)"
