@@ -55,7 +55,7 @@ def fetch_feed():
 def find_episode_in_feed(feed_xml, search_term):
     """
     Find episode in feed by title, GUID, or episode number.
-    Returns (guid, title, url) tuple or None.
+    Returns (guid, title, url, episode_num) tuple or None.
     """
     root = etree.fromstring(feed_xml.encode('utf-8'))
     items = root.findall('.//item')
@@ -81,36 +81,42 @@ def find_episode_in_feed(feed_xml, search_term):
 
         # Match by episode number
         if episode_number and episode_num == episode_number:
-            return guid, title, url
+            return guid, title, url, episode_num
 
         # Match by GUID
         if search_term in guid:
-            return guid, title, url
+            return guid, title, url, episode_num
 
         # Match by title (case insensitive, partial match)
         if search_term.lower() in title.lower():
-            return guid, title, url
+            return guid, title, url, episode_num
 
-    return None, None, None
+    return None, None, None, None
 
 
 def search_episode_on_podchaser(episode_title, access_token):
-    """Search for episode on Podchaser by title."""
+    """Search for episode on Podchaser by title within cd SPILL podcast."""
     # Remove episode number from title for better search
     import re
     clean_title = re.sub(r'\s*\(#?\d+\)$', '', episode_title)
 
+    # cd SPILL podcast ID on Podchaser
+    CDSPILL_PODCAST_ID = "1540724"
+
     query = '''
     query {
-      episodes(searchTerm: "%s", first: 5) {
-        data {
-          id
-          title
-          url
+      podcast(identifier: { type: PODCHASER, id: "%s" }) {
+        title
+        episodes(searchTerm: "%s", first: 5) {
+          data {
+            id
+            title
+            url
+          }
         }
       }
     }
-    ''' % clean_title
+    ''' % (CDSPILL_PODCAST_ID, clean_title)
 
     response = requests.post(
         'https://api.podchaser.com/graphql',
@@ -131,7 +137,8 @@ def search_episode_on_podchaser(episode_title, access_token):
         print(f"❌ Error: {result['errors']}")
         return None
 
-    episodes = result.get('data', {}).get('episodes', {}).get('data', [])
+    podcast = result.get('data', {}).get('podcast', {})
+    episodes = podcast.get('episodes', {}).get('data', [])
 
     # Try to find exact match
     for episode in episodes:
@@ -248,7 +255,7 @@ def main():
     # Find episode in feed
     print(f"🔍 Searching for episode: {search_term}")
     feed_xml = fetch_feed()
-    guid, title, url = find_episode_in_feed(feed_xml, search_term)
+    guid, title, url, episode_num = find_episode_in_feed(feed_xml, search_term)
 
     if not guid:
         print(f"❌ Episode not found in feed")
@@ -256,6 +263,8 @@ def main():
 
     print(f"✓ Found episode:")
     print(f"  Title: {title}")
+    if episode_num:
+        print(f"  Episode: #{episode_num}")
     print(f"  GUID: {guid}")
     print(f"  URL: {url}")
     print()
@@ -331,10 +340,18 @@ def main():
     # Process guests
     guests_to_add = []
     already_in_feed = []
+    guests_in_title = []
 
     for guest in guests:
         name = guest['name']
         print(f"  • {name}")
+
+        # Check if guest is already in the episode title
+        # If so, they will be auto-detected and don't need extra_episodes
+        if name in title:
+            print(f"    ℹ️  Already in episode title (will be auto-detected)")
+            guests_in_title.append(name)
+            continue
 
         # Check if guest is in known_guests
         if name in known_guests:
@@ -353,6 +370,12 @@ def main():
     print("UPDATING KNOWN GUESTS")
     print("="*60)
     print()
+
+    if guests_in_title:
+        print(f"ℹ️  {len(guests_in_title)} guest(s) already in episode title (will be auto-detected):")
+        for name in guests_in_title:
+            print(f"  • {name}")
+        print()
 
     if guests_to_add:
         print("⚠️  Guests NOT in known_guests.json (add these first):")
@@ -382,9 +405,16 @@ def main():
             if 'extra_episodes' not in known_guests[name]:
                 known_guests[name]['extra_episodes'] = []
 
+            # Create note with episode number if available
+            note = title
+            if episode_num:
+                # Check if title already has episode number
+                if f'(#{episode_num})' not in title:
+                    note = f"{title} (#{episode_num})"
+
             known_guests[name]['extra_episodes'].append({
                 'guid': guid,
-                'note': title
+                'note': note
             })
             print(f'  ✓ {name} - added to extra_episodes')
             guests_updated += 1
@@ -395,6 +425,20 @@ def main():
             full_data = json.load(f)
 
         full_data['guests'] = known_guests
+
+        # Sort extra_episodes by episode number for each guest
+        import re
+        for guest_name, guest_data in full_data['guests'].items():
+            if 'extra_episodes' in guest_data:
+                def get_episode_num(ep):
+                    # Extract episode number from note (e.g., "Title (#125)" -> 125)
+                    note = ep.get('note', '')
+                    match = re.search(r'\(#(\d+)\)', note)
+                    if match:
+                        return int(match.group(1))
+                    return -1  # Put episodes without number at the end
+
+                guest_data['extra_episodes'].sort(key=get_episode_num, reverse=True)
 
         # Sort guests and aliases alphabetically
         full_data['guests'] = dict(sorted(full_data['guests'].items()))
@@ -410,11 +454,17 @@ def main():
         print(f"  • {guests_updated} guest(s) updated")
         if guests_already_had_episode > 0:
             print(f"  • {guests_already_had_episode} guest(s) already had this episode")
+        if guests_in_title:
+            print(f"  • {len(guests_in_title)} guest(s) skipped (already in episode title)")
         print("="*60)
-    elif guests_already_had_episode > 0:
+    elif guests_already_had_episode > 0 or guests_in_title:
         print()
         print("="*60)
-        print("No updates needed - all guests already have this episode")
+        print("No updates needed")
+        if guests_already_had_episode > 0:
+            print(f"  • {guests_already_had_episode} guest(s) already have this episode")
+        if guests_in_title:
+            print(f"  • {len(guests_in_title)} guest(s) in episode title (auto-detected)")
         print("="*60)
 
     print()

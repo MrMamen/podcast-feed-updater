@@ -21,12 +21,12 @@
       "href": "https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/fef81a80-8071-321c-abaa-5362d8ff6716",
-          "note": "The Incredible Machine (#26)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/fef81a80-8071-321c-abaa-5362d8ff6716",
+          "note": "The Incredible Machine (#26)"
         }
       ]
     },
@@ -47,12 +47,12 @@
       "href": "https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
-          "note": "Spillåret 1994 (#106)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -69,12 +69,12 @@
       "href": "https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
-          "note": "Spillåret 1994 (#106)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -138,12 +138,12 @@
       "href": "https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         },
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
@@ -211,12 +211,12 @@
       "href": "https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -245,20 +245,12 @@
       "href": "https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
-          "guid": "cdspill.podbean.com/9e043cc3-e029-3947-a339-bd2bf0f60eb8",
-          "note": "Bonus: Retro Crew: Westwood"
-        },
-        {
-          "guid": "cdspill.podbean.com/a5e1ad7e-814e-3a16-bc91-7b594e82b574",
-          "note": "Bonus: Retro Crew: LucasArts"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         },
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
@@ -271,6 +263,14 @@
         {
           "guid": "cdspill.podbean.com/1fc93006-afb6-3f44-855b-f20ae2de8792",
           "note": "Spillåret 1992 (#67)"
+        },
+        {
+          "guid": "cdspill.podbean.com/9e043cc3-e029-3947-a339-bd2bf0f60eb8",
+          "note": "Bonus: Retro Crew: Westwood"
+        },
+        {
+          "guid": "cdspill.podbean.com/a5e1ad7e-814e-3a16-bc91-7b594e82b574",
+          "note": "Bonus: Retro Crew: LucasArts"
         }
       ]
     },
@@ -288,12 +288,12 @@
       "href": "https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         },
         {
           "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
@@ -337,12 +337,12 @@
       "href": "https://www.podchaser.com/creators/roar-granevang-107tehTONy",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -358,16 +358,16 @@
       "href": "https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
-          "note": "Spillåret 1994 (#106)"
+          "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
+          "note": "Spillåret 1995 (#125)"
         },
         {
           "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
           "note": "Spillåret 1985 (#124)"
         },
         {
-          "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
-          "note": "Spillåret 1995 (#125)"
+          "guid": "cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c",
+          "note": "Spillåret 1994 (#106)"
         },
         {
           "guid": "cdspill.podbean.com/4aa82a82-81aa-3389-afd3-c2eb8be671d0",
@@ -383,12 +383,12 @@
       "href": "https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         }
       ]
     },
@@ -430,12 +430,12 @@
       "href": "https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm",
       "extra_episodes": [
         {
-          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
-          "note": "Spillåret 1985 (#124)"
-        },
-        {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
           "note": "Spillåret 1995 (#125)"
+        },
+        {
+          "guid": "cdspill.podbean.com/82e4feff-9115-3305-be8b-c92c0cc2f44c",
+          "note": "Spillåret 1985 (#124)"
         }
       ]
     }
