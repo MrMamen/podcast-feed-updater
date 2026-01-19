@@ -1142,6 +1142,11 @@ class FeedEnricher(BaseFeed):
                                         # Extract potential episode name
                                         potential_name = chapter_title_lower.replace("kommentarer fra ", "").strip()
 
+                                        # Skip very short extracted names (≤3 chars) to avoid false matches
+                                        # Example: "Kommentarer fra I" would incorrectly match "I Have No Mouth..."
+                                        if len(potential_name) <= 3:
+                                            continue
+
                                         # Try word-based matching for better partial matches
                                         # This helps match "Kommentarer fra Freddi Fisk" to "freddi fisk og humongous entertainment"
                                         potential_words = normalize_words(potential_name)
