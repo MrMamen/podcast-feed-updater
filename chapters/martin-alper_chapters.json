@@ -1,0 +1,35 @@
+{
+  "version": "1.1.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Introduction",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MartinAlper_9nvcpx.jpg"
+    },
+    {
+      "startTime": 59,
+      "title": "Interview with Martin Alper"
+    },
+    {
+      "startTime": 110,
+      "title": "The Formation of Trilobyte"
+    },
+    {
+      "startTime": 366,
+      "title": "The Success of The 7th Guest",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/7thguest_tnfvu8.jpg"
+    },
+    {
+      "startTime": 558,
+      "title": "The 11th Hour"
+    },
+    {
+      "startTime": 838,
+      "title": "Rob Landeros' New Project"
+    },
+    {
+      "startTime": 896,
+      "title": "Conclusion"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "version": "1.1.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"
+    },
+    {
+      "startTime": 36,
+      "title": "Velkommen til cd SPILL",
+      "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
+    },
+    {
+      "startTime": 171,
+      "title": "Dagens spill: I",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"
+    },
+    {
+      "startTime": 557,
+      "title": "Tech Specs",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"
+    },
+    {
+      "startTime": 1068,
+      "title": "Hva går spillet ut på?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"
+    },
+    {
+      "startTime": 2098,
+      "title": "Sykt creepy"
+    },
+    {
+      "startTime": 2992,
+      "title": "Tolkning av historien"
+    },
+    {
+      "startTime": 3444,
+      "title": "Musikken",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"
+    },
+    {
+      "startTime": 4524,
+      "title": "Har det holdt seg?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"
+    },
+    {
+      "startTime": 4750,
+      "title": "Finnes det noe tilsvarende idag?"
+    }
+  ]
+}
