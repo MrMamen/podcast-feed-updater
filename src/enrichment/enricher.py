@@ -992,8 +992,9 @@ class FeedEnricher(BaseFeed):
                             for chapter in sorted_chapters:
                                 chapter_title = chapter.get('title', '').strip()
 
-                                # Skip if chapter already has an image (including empty string to disable auto-matching)
-                                # You can use "img": "" in chapter file to prevent auto-matching
+                                # Skip if chapter already has an image (including null to disable auto-matching)
+                                # You can use "img": null in chapter file to prevent auto-matching
+                                # (empty/null values are cleaned up before saving output)
                                 if 'img' in chapter:
                                     continue
 
@@ -1201,6 +1202,12 @@ class FeedEnricher(BaseFeed):
                                     chapter['img'] = image_to_inject
                                     images_injected += 1
 
+                            # Clean up empty img fields before saving (both "" and null)
+                            # This follows Podbean's practice of omitting the field entirely
+                            for chapter in sorted_chapters:
+                                if 'img' in chapter and not chapter['img']:
+                                    del chapter['img']
+
                             # Save enriched JSON to output directory (for ALL episodes)
                             output_file = os.path.join(output_dir, filename)
                             with open(output_file, 'w', encoding='utf-8') as f:
@@ -1245,7 +1252,7 @@ class FeedEnricher(BaseFeed):
                                 if 'url' in chapter:
                                     attrs['href'] = chapter['url']
                                 # Only add image if it has a non-empty value
-                                # (empty string "" can be used to disable auto-matching without adding image)
+                                # (null or "" in source file disables auto-matching; cleaned up before PSC)
                                 if 'img' in chapter and chapter['img']:
                                     attrs['image'] = chapter['img']
 

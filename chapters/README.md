@@ -200,7 +200,7 @@ The enricher automatically adds images to standard chapters that don't already h
 - ✅ **Works everywhere** - JSON chapters, PSC chapters, and podcast apps
 - ✅ **Source files stay clean** - No `img` fields needed in `chapters/` directory
 - ✅ **Non-destructive** - Existing images are never overwritten
-- ✅ **Controllable** - Disable auto-matching per chapter with `"img": ""`
+- ✅ **Controllable** - Disable auto-matching per chapter with `"img": null`
 - ✅ **Future-ready** - Music and tech chapters ready for dedicated icons when available
 
 ### Disabling Auto-Matching
@@ -211,17 +211,17 @@ To prevent auto-matching for specific chapters (e.g., when automatic matching is
 {
   "startTime": 100,
   "title": "Star Wars: Rebel Assault II",
-  "img": ""
+  "img": null
 }
 ```
 
 This tells the enricher to:
 - ✅ Skip this chapter during auto-matching
-- ✅ Not add any image to the output (empty string is filtered out)
+- ✅ Not add any image to the output (null/empty values are removed before saving)
 - 💡 Useful when automatic matching picks the wrong episode
 - 💡 Useful when you want no image for a specific chapter
 
-**Note:** Use empty string `""` rather than `null` to follow JSON best practices. Standard practice is to omit the field entirely when there's no value, but empty string explicitly signals "no auto-matching wanted here".
+**Why `null`?** It's semantically correct for "intentionally no value" and follows JSON best practices. The enricher automatically removes `null` and empty `img` fields from the output, following Podbean's convention of omitting the field entirely.
 
 ### Coverage
 
