@@ -1049,6 +1049,14 @@ class FeedEnricher(BaseFeed):
                                 elif chapter_title_lower in episode_titles_to_covers:
                                     image_to_inject = episode_titles_to_covers[chapter_title_lower]
 
+                                # Exact suffix matching: Chapter ends with episode name
+                                # Example: "Historien i Duke Nukem" → Duke Nukem episode
+                                elif not image_to_inject:
+                                    for episode_name, cover in episode_titles_to_covers.items():
+                                        if len(episode_name) > 3 and chapter_title_lower.endswith(episode_name):
+                                            image_to_inject = cover
+                                            break
+
                                 # "I forhold til [game]" - cross-reference to that game's episode
                                 elif "i forhold til" in chapter_title_lower:
                                     game_name = chapter_title_lower.split("i forhold til", 1)[1].strip()
