@@ -1,0 +1,234 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Velkommen til cd SPILL"
+    },
+    {
+      "startTime": 141.883,
+      "title": "Teleporterer 1985"
+    },
+    {
+      "startTime": 268.268,
+      "title": "Terje Høiback"
+    },
+    {
+      "startTime": 357.757,
+      "title": "Sopwith"
+    },
+    {
+      "startTime": 497.911,
+      "title": "Daleks"
+    },
+    {
+      "startTime": 621.576,
+      "title": "Super Mario Bros."
+    },
+    {
+      "startTime": 685.422,
+      "title": "Børre fra Overvåkerne"
+    },
+    {
+      "startTime": 750.24,
+      "title": "Pinball Construction Set"
+    },
+    {
+      "startTime": 815.929,
+      "title": "A Mind Forever Voyaging"
+    },
+    {
+      "startTime": 868.822,
+      "title": "Erlend Fiddan"
+    },
+    {
+      "startTime": 995.57,
+      "title": "Winter Games"
+    },
+    {
+      "startTime": 1098.569,
+      "title": "Frogger Jr."
+    },
+    {
+      "startTime": 1174.874,
+      "title": "Bruce Lee"
+    },
+    {
+      "startTime": 1277.452,
+      "title": "Hintmannen fra Overvåkerne"
+    },
+    {
+      "startTime": 1403.487,
+      "title": "Wishbringer"
+    },
+    {
+      "startTime": 1528.286,
+      "title": "King's Quest II: Romancing the Throne"
+    },
+    {
+      "startTime": 1614.831,
+      "title": "Joachim Froholt"
+    },
+    {
+      "startTime": 1735.903,
+      "title": "Silent Service"
+    },
+    {
+      "startTime": 1812.181,
+      "title": "Star Trek: The Kobayashi Alternative"
+    },
+    {
+      "startTime": 1954.945,
+      "title": "EGA Trek",
+      "toc": false
+    },
+    {
+      "startTime": 1999.408,
+      "title": "Ultima III: Exodus"
+    },
+    {
+      "startTime": 2076.742,
+      "title": "Roar Granevang"
+    },
+    {
+      "startTime": 2183.943,
+      "title": "Ghosts 'N Goblins"
+    },
+    {
+      "startTime": 2244.988,
+      "title": "M.U.L.E."
+    },
+    {
+      "startTime": 2274.434,
+      "title": "Beyond Castle Wolfenstein"
+    },
+    {
+      "startTime": 2459,
+      "title": "The Seven Cities of Gold"
+    },
+    {
+      "startTime": 2549.392,
+      "title": "Kato fra Overvåkerne"
+    },
+    {
+      "startTime": 2650.688,
+      "title": "Solitare"
+    },
+    {
+      "startTime": 2723.57,
+      "title": "Where in the World Is Carmen Sandiego?"
+    },
+    {
+      "startTime": 2822,
+      "title": "The World's Greatest Baseball Game"
+    },
+    {
+      "startTime": 2877.826,
+      "title": "Jostein Hakestad"
+    },
+    {
+      "startTime": 2982.151,
+      "title": "Oregon Trail"
+    },
+    {
+      "startTime": 3048.287,
+      "title": "Windows med Reversi"
+    },
+    {
+      "startTime": 3219.278,
+      "title": "Martin Gjesdal"
+    },
+    {
+      "startTime": 3303.387,
+      "title": "River Raid"
+    },
+    {
+      "startTime": 3398.838,
+      "title": "Wizzardz & War Lordz"
+    },
+    {
+      "startTime": 3436.63,
+      "title": "The Wizard of Oz"
+    },
+    {
+      "startTime": 3463.565,
+      "title": "Wizard of Wall Street"
+    },
+    {
+      "startTime": 3545.15,
+      "title": "James Bond 007: A View to a Kill"
+    },
+    {
+      "startTime": 3645.167,
+      "title": "Mats Lindh"
+    },
+    {
+      "startTime": 3822.713,
+      "title": "Hyper Sports"
+    },
+    {
+      "startTime": 3924.35,
+      "title": "Boulder Dash II: Rockford's Revenge"
+    },
+    {
+      "startTime": 3963.806,
+      "title": "Maybritt fra Overvåkerne"
+    },
+    {
+      "startTime": 4054.391,
+      "title": "Mickey's Space Adventure"
+    },
+    {
+      "startTime": 4110.352,
+      "title": "Borrowed Time"
+    },
+    {
+      "startTime": 4166.72,
+      "title": "F-15 Strike Eagle"
+    },
+    {
+      "startTime": 4232.254,
+      "title": "Indiana Jones and the Temple of Doom"
+    },
+    {
+      "startTime": 4274.911,
+      "title": "Øystein Henriksen"
+    },
+    {
+      "startTime": 4366.424,
+      "title": "Gradius"
+    },
+    {
+      "startTime": 4412.137,
+      "title": "MrMamen kårer GOTY 1985"
+    },
+    {
+      "startTime": 4513.924,
+      "title": "Sigve kårer GOTY 1985"
+    },
+    {
+      "startTime": 4588.256,
+      "title": "cd SPILLs gjester i 2025"
+    },
+    {
+      "startTime": 4691.263,
+      "title": "Kommentarer fra sosiale medier"
+    },
+    {
+      "startTime": 5106.712,
+      "title": "Årets episoder"
+    },
+    {
+      "startTime": 5224.505,
+      "title": "Sigve kårer beste spill vi pratet om i 2025"
+    },
+    {
+      "startTime": 5297.328,
+      "title": "Mamen kårer beste spill vi pratet om i 2025"
+    },
+    {
+      "startTime": 5390.368,
+      "title": "Vi kårer cd SPILLs beste episode i 2025"
+    }
+  ]
+}

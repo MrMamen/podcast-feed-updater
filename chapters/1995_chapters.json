@@ -1,0 +1,442 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Velkommen til cd SPILL"
+    },
+    {
+      "startTime": 110.445,
+      "title": "Spillåret 1995"
+    },
+    {
+      "startTime": 279.642,
+      "title": "Robert Forthun Damli"
+    },
+    {
+      "startTime": 299.682,
+      "title": "Command & Conquer"
+    },
+    {
+      "startTime": 424.653,
+      "title": "Backpacker",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Backpacker_2_f4trjf.jpg"
+    },
+    {
+      "startTime": 493.816,
+      "title": "Caesar II"
+    },
+    {
+      "startTime": 570.937,
+      "title": "Anette Jøsendal"
+    },
+    {
+      "startTime": 636.713,
+      "title": "Dstroy"
+    },
+    {
+      "startTime": 702.584,
+      "title": "Brain Dead 13"
+    },
+    {
+      "startTime": 905.582,
+      "title": "SimTower"
+    },
+    {
+      "startTime": 1041.82,
+      "title": "Project Highrise",
+      "toc": false
+    },
+    {
+      "startTime": 1086.454,
+      "title": "Trond Rune Trøan"
+    },
+    {
+      "startTime": 1183.871,
+      "title": "Congo: The Movie - Descent into Zinj"
+    },
+    {
+      "startTime": 1307.221,
+      "title": "The Dig"
+    },
+    {
+      "startTime": 1399.423,
+      "title": "Eirik Gjerløw"
+    },
+    {
+      "startTime": 1573.513,
+      "title": "Teen Agent"
+    },
+    {
+      "startTime": 1643.414,
+      "title": "Descent"
+    },
+    {
+      "startTime": 1718.86,
+      "title": "The 11th Hour"
+    },
+    {
+      "startTime": 1823.604,
+      "title": "Windows 95"
+    },
+    {
+      "startTime": 1921.921,
+      "title": "Remi Jakobsen"
+    },
+    {
+      "startTime": 2006.93,
+      "title": "Destruction Derby"
+    },
+    {
+      "startTime": 2075.823,
+      "title": "Dr. Drago's Madcap Chase",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/drago_mickp7.jpg"
+    },
+    {
+      "startTime": 2169.335,
+      "title": "The MoneyMakers Rallye",
+      "toc": false
+    },
+    {
+      "startTime": 2203.682,
+      "title": "Discworld"
+    },
+    {
+      "startTime": 2269.511,
+      "title": "Andreas Hedemann"
+    },
+    {
+      "startTime": 2391.262,
+      "title": "Minesweeper"
+    },
+    {
+      "startTime": 2470.853,
+      "title": "Myst"
+    },
+    {
+      "startTime": 2554.21,
+      "title": "Doom II",
+      "img": "https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg"
+    },
+    {
+      "startTime": 2597.435,
+      "title": "Geir Arne Aasen"
+    },
+    {
+      "startTime": 2639.688,
+      "title": "Full Throttle"
+    },
+    {
+      "startTime": 2723.769,
+      "title": "Earthworm Jim"
+    },
+    {
+      "startTime": 2802.386,
+      "title": "Tyrian"
+    },
+    {
+      "startTime": 2878.18,
+      "title": "Fade to Black"
+    },
+    {
+      "startTime": 2927.353,
+      "title": "Aleksikon"
+    },
+    {
+      "startTime": 3036.725,
+      "title": "Heroes of Might and Magic",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/homm_phoenix_epu2qp.jpg"
+    },
+    {
+      "startTime": 3141.674,
+      "title": "Worms"
+    },
+    {
+      "startTime": 3311.115,
+      "title": "Hi-Octane"
+    },
+    {
+      "startTime": 3409.746,
+      "title": "Rayman"
+    },
+    {
+      "startTime": 3513.33,
+      "title": "Inbred with Rednex"
+    },
+    {
+      "startTime": 3684.16,
+      "title": "Terje Høiback"
+    },
+    {
+      "startTime": 3812.3,
+      "title": "Hexen"
+    },
+    {
+      "startTime": 3858.372,
+      "title": "Erlend Magnus Viggen"
+    },
+    {
+      "startTime": 3898.314,
+      "title": "MechWarrior 2"
+    },
+    {
+      "startTime": 4005.495,
+      "title": "WarCraft II: Tides of Darkness",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/warcraft_contrast_bbbazk.jpg"
+    },
+    {
+      "startTime": 4070.403,
+      "title": "The Incredible Machine 2",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TIM_p56ctj.jpeg"
+    },
+    {
+      "startTime": 4211.14,
+      "title": "Lemmings 3D"
+    },
+    {
+      "startTime": 4341.729,
+      "title": "Karl-Peder Sjømæling"
+    },
+    {
+      "startTime": 4414.35,
+      "title": "Lode Runner On-Line: The Mad Monks' Revenge"
+    },
+    {
+      "startTime": 4448.379,
+      "title": "Transport Tycoon Deluxe",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/ttd.jpg"
+    },
+    {
+      "startTime": 4576.883,
+      "title": "Oregon Trail II"
+    },
+    {
+      "startTime": 4651.293,
+      "title": "Magic Carpet: Plus"
+    },
+    {
+      "startTime": 4711.374,
+      "title": "Erlend Fiddan"
+    },
+    {
+      "startTime": 4834.242,
+      "title": "Mer Warcraft II",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/warcraft_contrast_bbbazk.jpg"
+    },
+    {
+      "startTime": 4907.681,
+      "title": "Micro Machines 2: Turbo Tournament",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MicroMachines.jpg"
+    },
+    {
+      "startTime": 5025.812,
+      "title": "Andre Pedersen"
+    },
+    {
+      "startTime": 5078.84,
+      "title": "Phantasmagoria"
+    },
+    {
+      "startTime": 5166.105,
+      "title": "SimCity 2000",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Sim_City_cv8hpx.jpg"
+    },
+    {
+      "startTime": 5245.638,
+      "title": "Ole-Christian Rochmann"
+    },
+    {
+      "startTime": 5277.555,
+      "title": "Star Wars: Dark Forces"
+    },
+    {
+      "startTime": 5416.471,
+      "title": "Sid Meier's CivNet"
+    },
+    {
+      "startTime": 5507.53,
+      "title": "SimTown"
+    },
+    {
+      "startTime": 5594.476,
+      "title": "Apache Longbow"
+    },
+    {
+      "startTime": 5691.222,
+      "title": "Joachim Froholt"
+    },
+    {
+      "startTime": 5820.318,
+      "title": "The Beast Within: A Gabriel Knight Mystery"
+    },
+    {
+      "startTime": 5879.633,
+      "title": "Star Trek: The Next Generation: A Final Unity"
+    },
+    {
+      "startTime": 5997.485,
+      "title": "Ivar GoldenBoy Lobben"
+    },
+    {
+      "startTime": 6050.831,
+      "title": "Eivind Johnsen"
+    },
+    {
+      "startTime": 6104.71,
+      "title": "Star Wars: Rebel Assault II - The Hidden Empire"
+    },
+    {
+      "startTime": 6189.606,
+      "title": "André Nordstrand"
+    },
+    {
+      "startTime": 6251.688,
+      "title": "Wormssong"
+    },
+    {
+      "startTime": 6286.762,
+      "title": "Kato fra Overvåkerne"
+    },
+    {
+      "startTime": 6379.195,
+      "title": "Gunnar Feragen"
+    },
+    {
+      "startTime": 6436.252,
+      "title": "Super Noah's Ark 3-D"
+    },
+    {
+      "startTime": 6495.604,
+      "title": "The Adventures of Hyperman"
+    },
+    {
+      "startTime": 6613.947,
+      "title": "Lars-Arne Kvien"
+    },
+    {
+      "startTime": 6653.241,
+      "title": "Smurfene: Operasjon Smurfine"
+    },
+    {
+      "startTime": 6706.374,
+      "title": "The Need for Speed"
+    },
+    {
+      "startTime": 6776.266,
+      "title": "Thinkin' Things Collection"
+    },
+    {
+      "startTime": 6885.394,
+      "title": "Martin Gjesdal"
+    },
+    {
+      "startTime": 7011.512,
+      "title": "William Shatner's TekWar"
+    },
+    {
+      "startTime": 7121.441,
+      "title": "Kjetil Hartvigsen"
+    },
+    {
+      "startTime": 7153.248,
+      "title": "Wing Commander IV: The Price of Freedom"
+    },
+    {
+      "startTime": 7183.758,
+      "title": "Tobias Eie"
+    },
+    {
+      "startTime": 7201.963,
+      "title": "Eivind Bergesen"
+    },
+    {
+      "startTime": 7211.555,
+      "title": "Terminal Velocity"
+    },
+    {
+      "startTime": 7286.79,
+      "title": "Erling Rosvåg"
+    },
+    {
+      "startTime": 7422.613,
+      "title": "David Skaufjord"
+    },
+    {
+      "startTime": 7437.217,
+      "title": "Tor-Andre Kiil Mørkved"
+    },
+    {
+      "startTime": 7454.934,
+      "title": "Øystein Henriksen"
+    },
+    {
+      "startTime": 7569.62,
+      "title": "Vidar Syrtveit"
+    },
+    {
+      "startTime": 7615.228,
+      "title": "Roar Granevang"
+    },
+    {
+      "startTime": 7801.908,
+      "title": "Andre Pedersen"
+    },
+    {
+      "startTime": 7835.47,
+      "title": "Tobias Eie"
+    },
+    {
+      "startTime": 7849.646,
+      "title": "Albion"
+    },
+    {
+      "startTime": 7914.557,
+      "title": "Simon the Sorcerer II: The Lion, the Wizard and the Wardrobe"
+    },
+    {
+      "startTime": 7947.187,
+      "title": "Eirik Gjerløw"
+    },
+    {
+      "startTime": 8074.535,
+      "title": "Capitalism"
+    },
+    {
+      "startTime": 8105.547,
+      "title": "Space Quest 6: Roger Wilco in the Spinal Frontier"
+    },
+    {
+      "startTime": 8130.52,
+      "title": "Sid Meier's Colonization",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"
+    },
+    {
+      "startTime": 8378.887,
+      "title": "Kommentarer fra sosiale medier"
+    },
+    {
+      "startTime": 8499.7,
+      "title": "Jagged Alliance"
+    },
+    {
+      "startTime": 8541.67,
+      "title": "Jostein Hakestad"
+    },
+    {
+      "startTime": 8662.536,
+      "title": "X-COM: Terror from the Deep"
+    },
+    {
+      "startTime": 8778.606,
+      "title": "Sigve kårer 1995s beste spill"
+    },
+    {
+      "startTime": 8901.654,
+      "title": "Mamen kårer 1995s beste spill"
+    },
+    {
+      "startTime": 9024.773,
+      "title": "Takk for i år!"
+    }
+  ]
+}
