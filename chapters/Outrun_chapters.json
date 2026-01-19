@@ -1,0 +1,271 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"
+    },
+    {
+      "startTime": 41.97,
+      "title": "Velkommen til cd SPILL",
+      "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
+    },
+    {
+      "startTime": 241.514,
+      "title": "Kommentarer fra forrige episode",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"
+    },
+    {
+      "startTime": 441.65,
+      "title": "Dagens spill: OutRun",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"
+    },
+    {
+      "startTime": 745.566,
+      "title": "Tech Specs"
+    },
+    {
+      "startTime": 1110.136,
+      "title": "Kjøreopplevelsen"
+    },
+    {
+      "startTime": 1245.203,
+      "title": "Ulike veier"
+    },
+    {
+      "startTime": 1412.412,
+      "title": "Vanskelighetsgrad"
+    },
+    {
+      "startTime": 1651.668,
+      "title": "Formidler baner med enkel grafikk"
+    },
+    {
+      "startTime": 1944.116,
+      "title": "Ulike endings",
+      "url": "https://www.vgmuseum.com/end/arcade/c/out.htm"
+    },
+    {
+      "startTime": 2024.502,
+      "title": "Vineyard",
+      "toc": false
+    },
+    {
+      "startTime": 2053.202,
+      "title": "Death Valley",
+      "toc": false
+    },
+    {
+      "startTime": 2067.122,
+      "title": "Desolation Hill",
+      "toc": false
+    },
+    {
+      "startTime": 2095.201,
+      "title": "Autobahn",
+      "toc": false
+    },
+    {
+      "startTime": 2108.496,
+      "title": "Lakeside",
+      "toc": false
+    },
+    {
+      "startTime": 2129.535,
+      "title": "Ulike miljøer"
+    },
+    {
+      "startTime": 2332.91,
+      "title": "Hva gjør OutRun så bra?"
+    },
+    {
+      "startTime": 2417.785,
+      "title": "Arkadeversjonen"
+    },
+    {
+      "startTime": 2622.409,
+      "title": "Nedtur med DOS-port"
+    },
+    {
+      "startTime": 2654.48,
+      "title": "C64-port",
+      "toc": false
+    },
+    {
+      "startTime": 2722.888,
+      "title": "ZX Spectrum",
+      "toc": false
+    },
+    {
+      "startTime": 2752.239,
+      "title": "Amiga-port",
+      "url": "https://spillhistorie.no/2025/11/17/se-hvordan-amiga-versjonen-av-out-run-ble-laget/",
+      "toc": false
+    },
+    {
+      "startTime": 2771.169,
+      "title": "Når spilte vi dette?"
+    },
+    {
+      "startTime": 2874.876,
+      "title": "Utviklingen av C64-versjonen"
+    },
+    {
+      "startTime": 3015,
+      "title": "US Gold",
+      "toc": false
+    },
+    {
+      "startTime": 3249.99,
+      "title": "Home Alone",
+      "url": "https://podcasts.apple.com/no/podcast/home-alone-21/id1502143710?i=1000502353638",
+      "img": "https://mcdn.podbean.com/mf/web/crwgbd/home_alone_ubmjxd.jpg",
+      "toc": false
+    },
+    {
+      "startTime": 3299.231,
+      "title": "Musikken"
+    },
+    {
+      "startTime": 3713.13,
+      "title": "Utviklingen av spillet"
+    },
+    {
+      "startTime": 3777.683,
+      "title": "TX1"
+    },
+    {
+      "startTime": 3934.297,
+      "title": "Lotus"
+    },
+    {
+      "startTime": 4013.8,
+      "title": "Stunts",
+      "img": "https://mcdn.podbean.com/mf/web/b4mpqm/213363-stunts-dos-front-cover_1_a351a.png",
+      "toc": false
+    },
+    {
+      "startTime": 4058.646,
+      "title": "Stunt Car Racer"
+    },
+    {
+      "startTime": 4188.784,
+      "title": "Inspirert av The Cannonball Run",
+      "url": "https://www.imdb.com/title/tt0082136/"
+    },
+    {
+      "startTime": 4226.459,
+      "title": "Mer trivia"
+    },
+    {
+      "startTime": 4256.365,
+      "title": "Outrun / SynthWave"
+    },
+    {
+      "startTime": 4387.845,
+      "title": "Far Cry 3: Blood Dragon",
+      "toc": false
+    },
+    {
+      "startTime": 4457.562,
+      "title": "Oppfølgere"
+    },
+    {
+      "startTime": 4464.902,
+      "title": "Out Run 3-D",
+      "toc": false
+    },
+    {
+      "startTime": 4479.17,
+      "title": "Turbo Out Run",
+      "toc": false
+    },
+    {
+      "startTime": 4504.759,
+      "title": "Battle Out Run",
+      "toc": false
+    },
+    {
+      "startTime": 4507.568,
+      "title": "OutRun Europa",
+      "toc": false
+    },
+    {
+      "startTime": 4509.983,
+      "title": "OutRunners",
+      "toc": false
+    },
+    {
+      "startTime": 4511.787,
+      "title": "OutRun 2019",
+      "toc": false
+    },
+    {
+      "startTime": 4516.2,
+      "title": "OutRun 2",
+      "toc": false
+    },
+    {
+      "startTime": 4519.26,
+      "title": "OutRun 2006: Coast 2 Coast",
+      "toc": false
+    },
+    {
+      "startTime": 4522.919,
+      "title": "OutRun: Online Arcade",
+      "toc": false
+    },
+    {
+      "startTime": 4535.687,
+      "title": "OutRun 2",
+      "url": "https://www.gamer.no/artikler/outrun-2/11481"
+    },
+    {
+      "startTime": 4610.828,
+      "title": "Ulike versjoner av Arkadeversjonen"
+    },
+    {
+      "startTime": 4683.147,
+      "title": "Turbo OutRun Reimagined"
+    },
+    {
+      "startTime": 4813.758,
+      "title": "Kommentarer fra sosiale medier",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"
+    },
+    {
+      "startTime": 5160.687,
+      "title": "Har det holdt seg?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"
+    },
+    {
+      "startTime": 5302.893,
+      "title": "Outrun-film",
+      "url": "https://spillhistorie.no/2025/04/23/outrun-filmatiseres-av-michael-bay/"
+    },
+    {
+      "startTime": 5354.756,
+      "title": "Finnes det noe tilsvarende idag?"
+    },
+    {
+      "startTime": 5369.69,
+      "title": "Need for Speed Heat",
+      "toc": false
+    },
+    {
+      "startTime": 5428.25,
+      "title": "Burnout Paradise",
+      "toc": false
+    },
+    {
+      "startTime": 5474.777,
+      "title": "Sigves tips"
+    },
+    {
+      "startTime": 5579.617,
+      "title": "Neste episode",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"
+    }
+  ]
+}
