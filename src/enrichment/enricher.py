@@ -9,6 +9,7 @@ import requests
 import json
 import os
 import shutil
+import string
 from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
 
@@ -836,6 +837,13 @@ class FeedEnricher(BaseFeed):
         # Create output directory for hosted chapter files
         os.makedirs(output_dir, exist_ok=True)
 
+        # Helper function for word-based matching
+        def normalize_words(text):
+            """Remove punctuation and split into words for fuzzy matching."""
+            translator = str.maketrans('', '', string.punctuation)
+            clean_text = text.translate(translator)
+            return set(clean_text.lower().split())
+
         # Get podcast logo for standard chapters
         podcast_logo = None
         channel_image = self.channel.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
@@ -843,11 +851,28 @@ class FeedEnricher(BaseFeed):
             podcast_logo = channel_image.get('href')
 
         # Build episode index for previous/next episode cover art
+        # Also build a mapping from game names to their episode cover art
         episode_covers = []
+        episode_titles_to_covers = {}
+
         for item in items:
             itunes_image = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
             cover_url = itunes_image.get('href') if itunes_image is not None else None
             episode_covers.append(cover_url)
+
+            # Extract game name from episode title for cross-referencing
+            title_elem = item.find('title')
+            if title_elem is not None and cover_url:
+                full_title = title_elem.text or ''
+                # Remove guest names: "Rainbow Six med Jostein Hakestad" -> "Rainbow Six"
+                game_name = full_title.split(' med ')[0].strip()
+                # Store both exact case and lowercase for matching
+                episode_titles_to_covers[game_name.lower()] = cover_url
+                # Also store with colon variations for better matching
+                # "Rainbow Six: Rogue Spear" -> also match "Rainbow Six"
+                if ':' in game_name:
+                    base_name = game_name.split(':')[0].strip()
+                    episode_titles_to_covers[base_name.lower()] = cover_url
 
         for item_index, item in enumerate(items):
             # Find podcast:chapters element
@@ -895,90 +920,6 @@ class FeedEnricher(BaseFeed):
                                     # If we can't fetch Podbean version for comparison, that's okay
                                     pass
 
-                                # Get episode cover art for image injection
-                                cover_art_url = episode_covers[item_index]
-
-                                # Get previous and next episode cover art
-                                prev_cover_url = episode_covers[item_index + 1] if item_index + 1 < len(episode_covers) else None
-                                next_cover_url = episode_covers[item_index - 1] if item_index > 0 else None
-
-                                # Inject images for standard chapters
-                                if 'chapters' in chapters_data:
-                                    images_injected = 0
-                                    for chapter in chapters_data['chapters']:
-                                        # Skip if chapter already has an image
-                                        if 'img' in chapter:
-                                            continue
-
-                                        chapter_title = chapter.get('title', '').strip()
-                                        chapter_title_lower = chapter_title.lower()
-
-                                        # Match patterns for image injection
-                                        image_to_inject = None
-
-                                        # Episode cover art patterns
-                                        if cover_art_url and (
-                                            chapter_title.startswith("Intro") or
-                                            chapter_title.startswith("Dagens spill:") or
-                                            chapter_title == "Hva går spillet ut på?" or
-                                            chapter_title == "Har det holdt seg?" or
-                                            chapter_title == "Kommentarer fra sosiale medier"
-                                        ):
-                                            image_to_inject = cover_art_url
-
-                                        # Podcast logo patterns
-                                        elif podcast_logo and (
-                                            "velkommen til cd spill" in chapter_title_lower or
-                                            chapter_title == "Velkommen til cd SPILL"
-                                        ):
-                                            image_to_inject = podcast_logo
-
-                                        # Previous episode cover art patterns
-                                        elif prev_cover_url and (
-                                            "kommentarer fra forrige episode" in chapter_title_lower or
-                                            "kommentarer fra sist" in chapter_title_lower
-                                        ):
-                                            image_to_inject = prev_cover_url
-
-                                        # Next episode cover art patterns
-                                        elif next_cover_url and (
-                                            "neste episode" in chapter_title_lower
-                                        ):
-                                            image_to_inject = next_cover_url
-
-                                        # Music and tech chapters (using episode cover for now)
-                                        # TODO: Replace with dedicated images when available:
-                                        #   - "Musikken" -> music note icon
-                                        #   - "Tech Specs" -> technical icon
-                                        elif cover_art_url and (
-                                            chapter_title == "Musikken" or
-                                            chapter_title == "Tech Specs"
-                                        ):
-                                            image_to_inject = cover_art_url
-
-                                        # Inject the image
-                                        if image_to_inject:
-                                            chapter['img'] = image_to_inject
-                                            images_injected += 1
-
-                                    if images_injected > 0:
-                                        # Write enhanced JSON to output directory
-                                        output_file = os.path.join(output_dir, filename)
-                                        with open(output_file, 'w', encoding='utf-8') as f:
-                                            json.dump(chapters_data, f, indent=2, ensure_ascii=False)
-                                    else:
-                                        # No images injected, just copy file
-                                        output_file = os.path.join(output_dir, filename)
-                                        shutil.copy2(local_file, output_file)
-                                else:
-                                    # No chapters, just copy file
-                                    output_file = os.path.join(output_dir, filename)
-                                    shutil.copy2(local_file, output_file)
-
-                                # Update podcast:chapters URL to point to our hosted version
-                                new_url = f"{base_url}/{filename}"
-                                podcast_chapters.set('url', new_url)
-
                             except Exception as e:
                                 # Fall back to remote if local file is invalid
                                 print(f"  ⚠️  Failed to load local file {filename}: {e}")
@@ -990,15 +931,24 @@ class FeedEnricher(BaseFeed):
                             response.raise_for_status()
                             chapters_data = response.json()
 
-                        # Create PSC chapters element
-                        psc_chapters = etree.Element(
-                            f'{{{psc_ns}}}chapters',
-                            version="1.2"
-                        )
-
-                        # Convert each chapter (sorted by startTime)
+                        # Process chapters data (sorting, intro, images) before saving and PSC conversion
                         if 'chapters' in chapters_data:
                             original_chapters = chapters_data['chapters']
+
+                            # Get episode title for reporting
+                            title_elem = item.find('title')
+                            episode_title = title_elem.text if title_elem is not None else 'Unknown'
+
+                            # Detect if chapters are unsorted in source JSON
+                            is_unsorted = any(
+                                original_chapters[i].get('startTime', 0) > original_chapters[i+1].get('startTime', 0)
+                                for i in range(len(original_chapters) - 1)
+                            )
+
+                            if is_unsorted:
+                                source_label = "local file" if source_type == "local" else json_url
+                                print(f"  ⚠️  Unsorted chapters detected: {episode_title}")
+                                print(f"      Source: {source_label}")
 
                             # Sort chapters by startTime to ensure chronological order
                             sorted_chapters = sorted(
@@ -1013,11 +963,7 @@ class FeedEnricher(BaseFeed):
                                 visible_chapters[0].get('startTime', 0) > 0
                             )
 
-                            if missing_intro and source_type == "remote":
-                                # Only auto-add intro for remote sources (local files should be complete)
-                                # Get episode title for better reporting
-                                title_elem = item.find('title')
-                                episode_title = title_elem.text if title_elem is not None else 'Unknown'
+                            if missing_intro:
                                 print(f"  ⚠️  Missing 00:00 intro chapter: {episode_title}")
                                 print(f"      Source JSON: {json_url}")
 
@@ -1028,21 +974,154 @@ class FeedEnricher(BaseFeed):
                                 }
                                 sorted_chapters.insert(0, intro_chapter)
 
-                            # Detect if chapters were unsorted in source JSON
-                            is_unsorted = any(
-                                original_chapters[i].get('startTime', 0) > original_chapters[i+1].get('startTime', 0)
-                                for i in range(len(original_chapters) - 1)
-                            )
+                            # Update chapters_data with sorted (and possibly intro-added) chapters
+                            chapters_data['chapters'] = sorted_chapters
 
-                            if is_unsorted:
-                                # Get episode title for better reporting
-                                title_elem = item.find('title')
-                                episode_title = title_elem.text if title_elem is not None else 'Unknown'
-                                source_label = "local file" if source_type == "local" else json_url
-                                print(f"  ⚠️  Unsorted chapters detected: {episode_title}")
-                                print(f"      Source: {source_label}")
+                            # Get episode cover art for image injection
+                            cover_art_url = episode_covers[item_index]
 
+                            # Get previous and next episode cover art
+                            prev_cover_url = episode_covers[item_index + 1] if item_index + 1 < len(episode_covers) else None
+                            next_cover_url = episode_covers[item_index - 1] if item_index > 0 else None
+
+                            # Inject images for standard chapters (for ALL episodes, not just local)
+                            images_injected = 0
                             for chapter in sorted_chapters:
+                                # Skip if chapter already has an image
+                                if 'img' in chapter:
+                                    continue
+
+                                chapter_title = chapter.get('title', '').strip()
+                                chapter_title_lower = chapter_title.lower()
+                                start_time = chapter.get('startTime', 0)
+
+                                # Match patterns for image injection
+                                image_to_inject = None
+
+                                # FIRST CHAPTER: Always gets episode cover (regardless of title)
+                                if start_time == 0 and cover_art_url:
+                                    image_to_inject = cover_art_url
+
+                                # Episode cover art patterns
+                                elif cover_art_url and (
+                                    chapter_title.startswith("Dagens") or
+                                    chapter_title_lower.startswith("idag:") or
+                                    chapter_title.startswith("Episodens") or
+                                    chapter_title == "Hva går spillet ut på?" or
+                                    chapter_title == "Har det holdt seg?" or
+                                    chapter_title == "Kommentarer fra sosiale medier" or
+                                    "fra sosiale medier" in chapter_title_lower or
+                                    "facebook" in chapter_title_lower or
+                                    "twitter" in chapter_title_lower or
+                                    "bluesky" in chapter_title_lower
+                                ):
+                                    image_to_inject = cover_art_url
+
+                                # Podcast logo patterns
+                                elif podcast_logo and "cd spill" in chapter_title_lower:
+                                    image_to_inject = podcast_logo
+
+                                # Previous episode cover art patterns
+                                elif prev_cover_url and (
+                                    "fra sist" in chapter_title_lower or
+                                    "fra forrige" in chapter_title_lower
+                                ):
+                                    image_to_inject = prev_cover_url
+
+                                # Next episode cover art patterns
+                                elif next_cover_url and (
+                                    "neste" in chapter_title_lower
+                                ):
+                                    image_to_inject = next_cover_url
+
+                                # Music and tech chapters (using episode cover for now)
+                                # TODO: Replace with dedicated images when available:
+                                #   - "Musikken" -> music note icon
+                                #   - "Tech Specs" -> technical icon
+                                elif cover_art_url and (
+                                    "musikk" in chapter_title_lower or
+                                    "tech" in chapter_title_lower
+                                ):
+                                    image_to_inject = cover_art_url
+
+                                # Cross-reference: Match chapter title against episode game names
+                                # Example: "Home Alone" chapter in OutRun episode gets Home Alone episode cover
+                                elif chapter_title_lower in episode_titles_to_covers:
+                                    image_to_inject = episode_titles_to_covers[chapter_title_lower]
+
+                                # "I forhold til [game]" - cross-reference to that game's episode
+                                elif "i forhold til" in chapter_title_lower:
+                                    game_name = chapter_title_lower.split("i forhold til", 1)[1].strip()
+                                    if game_name in episode_titles_to_covers:
+                                        image_to_inject = episode_titles_to_covers[game_name]
+
+                                # "Ligner på [game]" - cross-reference to that game's episode
+                                elif "ligner på" in chapter_title_lower:
+                                    game_name = chapter_title_lower.split("ligner på", 1)[1].strip()
+                                    if game_name in episode_titles_to_covers:
+                                        image_to_inject = episode_titles_to_covers[game_name]
+
+                                # "Kommentarer fra [episode]" - match episode name (not previous, not social media)
+                                elif chapter_title_lower.startswith("kommentarer fra "):
+                                    # Skip if it's social media or previous episode (already handled above)
+                                    if not any(x in chapter_title_lower for x in ["sosiale medier", "forrige", "sist", "facebook", "twitter", "bluesky"]):
+                                        # Extract potential episode name
+                                        potential_name = chapter_title_lower.replace("kommentarer fra ", "").strip()
+
+                                        # Try word-based matching for better partial matches
+                                        # This helps match "Kommentarer fra Freddi Fisk" to "freddi fisk og humongous entertainment"
+                                        potential_words = normalize_words(potential_name)
+
+                                        best_match = None
+                                        best_match_score = 0
+
+                                        for episode_name, cover in episode_titles_to_covers.items():
+                                            if len(episode_name) <= 3:  # Skip very short episode names
+                                                continue
+
+                                            episode_words = normalize_words(episode_name)
+                                            common_words = potential_words & episode_words
+
+                                            # Calculate match score: number of overlapping words
+                                            match_score = len(common_words)
+
+                                            # Good match if:
+                                            # - At least 2 words overlap, OR
+                                            # - All words from potential_name are found in episode_name
+                                            if match_score >= 2 or (len(potential_words) > 0 and match_score == len(potential_words)):
+                                                if match_score > best_match_score:
+                                                    best_match = cover
+                                                    best_match_score = match_score
+
+                                        if best_match:
+                                            image_to_inject = best_match
+
+                                # Inject the image
+                                if image_to_inject:
+                                    chapter['img'] = image_to_inject
+                                    images_injected += 1
+
+                            # Save enriched JSON to output directory (for ALL episodes)
+                            output_file = os.path.join(output_dir, filename)
+                            with open(output_file, 'w', encoding='utf-8') as f:
+                                json.dump(chapters_data, f, indent=2, ensure_ascii=False)
+
+                            # Update podcast:chapters URL to point to our hosted version (for ALL episodes)
+                            new_url = f"{base_url}/{filename}"
+                            podcast_chapters.set('url', new_url)
+
+                        # Create PSC chapters element
+                        psc_chapters = etree.Element(
+                            f'{{{psc_ns}}}chapters',
+                            version="1.2"
+                        )
+
+                        # Convert chapters to PSC format (chapters are already sorted and have intro)
+                        if 'chapters' in chapters_data:
+                            # Use the already processed chapters from chapters_data
+                            processed_chapters = chapters_data['chapters']
+
+                            for chapter in processed_chapters:
                                 # Skip hidden chapters (toc: false)
                                 if chapter.get('toc', True) is False:
                                     continue
