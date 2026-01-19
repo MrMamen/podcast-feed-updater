@@ -200,7 +200,28 @@ The enricher automatically adds images to standard chapters that don't already h
 - ✅ **Works everywhere** - JSON chapters, PSC chapters, and podcast apps
 - ✅ **Source files stay clean** - No `img` fields needed in `chapters/` directory
 - ✅ **Non-destructive** - Existing images are never overwritten
+- ✅ **Controllable** - Disable auto-matching per chapter with `"img": ""`
 - ✅ **Future-ready** - Music and tech chapters ready for dedicated icons when available
+
+### Disabling Auto-Matching
+
+To prevent auto-matching for specific chapters (e.g., when automatic matching is incorrect):
+
+```json
+{
+  "startTime": 100,
+  "title": "Star Wars: Rebel Assault II",
+  "img": ""
+}
+```
+
+This tells the enricher to:
+- ✅ Skip this chapter during auto-matching
+- ✅ Not add any image to the output (empty string is filtered out)
+- 💡 Useful when automatic matching picks the wrong episode
+- 💡 Useful when you want no image for a specific chapter
+
+**Note:** Use empty string `""` rather than `null` to follow JSON best practices. Standard practice is to omit the field entirely when there's no value, but empty string explicitly signals "no auto-matching wanted here".
 
 ### Coverage
 

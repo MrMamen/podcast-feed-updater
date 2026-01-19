@@ -866,12 +866,15 @@ class FeedEnricher(BaseFeed):
                 full_title = title_elem.text or ''
                 # Remove guest names: "Rainbow Six med Jostein Hakestad" -> "Rainbow Six"
                 game_name = full_title.split(' med ')[0].strip()
+                # Normalize apostrophes: replace curly quotes (U+2019) with straight quotes (U+0027)
+                # This ensures matching with chapter files that use straight quotes
+                game_name_normalized = game_name.replace('\u2019', "'")
                 # Store both exact case and lowercase for matching
-                episode_titles_to_covers[game_name.lower()] = cover_url
+                episode_titles_to_covers[game_name_normalized.lower()] = cover_url
                 # Also store with colon variations for better matching
                 # "Rainbow Six: Rogue Spear" -> also match "Rainbow Six"
-                if ':' in game_name:
-                    base_name = game_name.split(':')[0].strip()
+                if ':' in game_name_normalized:
+                    base_name = game_name_normalized.split(':')[0].strip()
                     episode_titles_to_covers[base_name.lower()] = cover_url
 
         for item_index, item in enumerate(items):
@@ -987,12 +990,16 @@ class FeedEnricher(BaseFeed):
                             # Inject images for standard chapters (for ALL episodes, not just local)
                             images_injected = 0
                             for chapter in sorted_chapters:
-                                # Skip if chapter already has an image
+                                chapter_title = chapter.get('title', '').strip()
+
+                                # Skip if chapter already has an image (including empty string to disable auto-matching)
+                                # You can use "img": "" in chapter file to prevent auto-matching
                                 if 'img' in chapter:
                                     continue
 
-                                chapter_title = chapter.get('title', '').strip()
-                                chapter_title_lower = chapter_title.lower()
+                                # Normalize apostrophes for consistent matching
+                                chapter_title_normalized = chapter_title.replace('\u2019', "'")
+                                chapter_title_lower = chapter_title_normalized.lower()
                                 start_time = chapter.get('startTime', 0)
 
                                 # Match patterns for image injection
@@ -1051,26 +1058,84 @@ class FeedEnricher(BaseFeed):
 
                                 # Exact suffix matching: Chapter ends with episode name
                                 # Example: "Historien i Duke Nukem" → Duke Nukem episode
-                                elif not image_to_inject:
+                                if not image_to_inject:
                                     for episode_name, cover in episode_titles_to_covers.items():
                                         if len(episode_name) > 3 and chapter_title_lower.endswith(episode_name):
                                             image_to_inject = cover
                                             break
 
+                                # PREFIX matching: Chapter starts with episode name
+                                # Example: "Doom II" → "Doom", "Transport Tycoon Deluxe" → "Transport Tycoon"
+                                # Choose LONGEST matching prefix to avoid false matches
+                                # (e.g., "Legend of Kyrandia" should match "the legend of kyrandia: hand of fate" not just "legend")
+                                # Also normalize "the " prefix for better matching
+                                if not image_to_inject:
+                                    best_prefix_match = None
+                                    best_prefix_length = 0
+
+                                    # Normalize chapter title by removing "the " prefix
+                                    chapter_normalized = chapter_title_lower
+                                    if chapter_normalized.startswith("the "):
+                                        chapter_normalized = chapter_normalized[4:]
+
+                                    for episode_name, cover in episode_titles_to_covers.items():
+                                        if len(episode_name) <= 3:
+                                            continue
+
+                                        # Normalize episode name by removing "the " prefix
+                                        episode_normalized = episode_name
+                                        if episode_normalized.startswith("the "):
+                                            episode_normalized = episode_normalized[4:]
+
+                                        # Check if chapter starts with episode name (using normalized versions)
+                                        if chapter_normalized.startswith(episode_normalized):
+                                            # Keep the longest match (use normalized length for comparison)
+                                            if len(episode_normalized) > best_prefix_length:
+                                                best_prefix_match = cover
+                                                best_prefix_length = len(episode_normalized)
+
+                                    if best_prefix_match:
+                                        image_to_inject = best_prefix_match
+
+                                # Reverse PREFIX matching: Episode name starts with chapter
+                                # Example: "Backpacker" → "Backpacker 2"
+                                # Choose LONGEST matching episode name to avoid false matches
+                                if not image_to_inject:
+                                    best_reverse_match = None
+                                    best_reverse_length = 0
+
+                                    for episode_name, cover in episode_titles_to_covers.items():
+                                        if len(chapter_title_lower) > 3 and episode_name.startswith(chapter_title_lower):
+                                            # Keep the longest episode name match
+                                            if len(episode_name) > best_reverse_length:
+                                                best_reverse_match = cover
+                                                best_reverse_length = len(episode_name)
+
+                                    if best_reverse_match:
+                                        image_to_inject = best_reverse_match
+
                                 # "I forhold til [game]" - cross-reference to that game's episode
-                                elif "i forhold til" in chapter_title_lower:
+                                if not image_to_inject and "i forhold til" in chapter_title_lower:
                                     game_name = chapter_title_lower.split("i forhold til", 1)[1].strip()
                                     if game_name in episode_titles_to_covers:
                                         image_to_inject = episode_titles_to_covers[game_name]
 
                                 # "Ligner på [game]" - cross-reference to that game's episode
-                                elif "ligner på" in chapter_title_lower:
+                                if not image_to_inject and "ligner på" in chapter_title_lower:
                                     game_name = chapter_title_lower.split("ligner på", 1)[1].strip()
                                     if game_name in episode_titles_to_covers:
                                         image_to_inject = episode_titles_to_covers[game_name]
 
+                                # CONTAINS matching for "Mer [game]" pattern
+                                # Example: "Mer Warcraft II" → contains "warcraft"
+                                if not image_to_inject and chapter_title_lower.startswith("mer "):
+                                    for episode_name, cover in episode_titles_to_covers.items():
+                                        if len(episode_name) > 3 and episode_name in chapter_title_lower:
+                                            image_to_inject = cover
+                                            break
+
                                 # "Kommentarer fra [episode]" - match episode name (not previous, not social media)
-                                elif chapter_title_lower.startswith("kommentarer fra "):
+                                if not image_to_inject and chapter_title_lower.startswith("kommentarer fra "):
                                     # Skip if it's social media or previous episode (already handled above)
                                     if not any(x in chapter_title_lower for x in ["sosiale medier", "forrige", "sist", "facebook", "twitter", "bluesky"]):
                                         # Extract potential episode name
@@ -1097,6 +1162,33 @@ class FeedEnricher(BaseFeed):
                                             # - At least 2 words overlap, OR
                                             # - All words from potential_name are found in episode_name
                                             if match_score >= 2 or (len(potential_words) > 0 and match_score == len(potential_words)):
+                                                if match_score > best_match_score:
+                                                    best_match = cover
+                                                    best_match_score = match_score
+
+                                        if best_match:
+                                            image_to_inject = best_match
+
+                                # Fuzzy word-based matching as last resort for multi-word titles
+                                # Example: "Heroes of Might and Magic" → "Heroes of Might & Magic"
+                                if not image_to_inject:
+                                    chapter_words = normalize_words(chapter_title_lower)
+
+                                    # Only apply to chapters with at least 3 words to avoid false positives
+                                    if len(chapter_words) >= 3:
+                                        best_match = None
+                                        best_match_score = 0
+
+                                        for episode_name, cover in episode_titles_to_covers.items():
+                                            if len(episode_name) <= 3:
+                                                continue
+
+                                            episode_words = normalize_words(episode_name)
+                                            common_words = chapter_words & episode_words
+                                            match_score = len(common_words)
+
+                                            # Strong match if most words overlap (at least 80% of chapter words)
+                                            if len(chapter_words) > 0 and match_score >= len(chapter_words) * 0.8:
                                                 if match_score > best_match_score:
                                                     best_match = cover
                                                     best_match_score = match_score
@@ -1152,7 +1244,9 @@ class FeedEnricher(BaseFeed):
                                 # Add optional attributes
                                 if 'url' in chapter:
                                     attrs['href'] = chapter['url']
-                                if 'img' in chapter:
+                                # Only add image if it has a non-empty value
+                                # (empty string "" can be used to disable auto-matching without adding image)
+                                if 'img' in chapter and chapter['img']:
                                     attrs['image'] = chapter['img']
 
                                 psc_chapter = etree.SubElement(

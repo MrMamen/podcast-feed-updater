@@ -19,8 +19,7 @@
     },
     {
       "startTime": 424.653,
-      "title": "Backpacker",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Backpacker_2_f4trjf.jpg"
+      "title": "Backpacker"
     },
     {
       "startTime": 493.816,
@@ -89,8 +88,7 @@
     },
     {
       "startTime": 2075.823,
-      "title": "Dr. Drago's Madcap Chase",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/drago_mickp7.jpg"
+      "title": "Dr. Drago's Madcap Chase"
     },
     {
       "startTime": 2169.335,
@@ -115,8 +113,7 @@
     },
     {
       "startTime": 2554.21,
-      "title": "Doom II",
-      "img": "https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg"
+      "title": "Doom II"
     },
     {
       "startTime": 2597.435,
@@ -144,8 +141,7 @@
     },
     {
       "startTime": 3036.725,
-      "title": "Heroes of Might and Magic",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/homm_phoenix_epu2qp.jpg"
+      "title": "Heroes of Might and Magic"
     },
     {
       "startTime": 3141.674,
@@ -181,13 +177,11 @@
     },
     {
       "startTime": 4005.495,
-      "title": "WarCraft II: Tides of Darkness",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/warcraft_contrast_bbbazk.jpg"
+      "title": "WarCraft II: Tides of Darkness"
     },
     {
       "startTime": 4070.403,
-      "title": "The Incredible Machine 2",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TIM_p56ctj.jpeg"
+      "title": "The Incredible Machine 2"
     },
     {
       "startTime": 4211.14,
@@ -203,8 +197,7 @@
     },
     {
       "startTime": 4448.379,
-      "title": "Transport Tycoon Deluxe",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/ttd.jpg"
+      "title": "Transport Tycoon Deluxe"
     },
     {
       "startTime": 4576.883,
@@ -220,13 +213,11 @@
     },
     {
       "startTime": 4834.242,
-      "title": "Mer Warcraft II",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/warcraft_contrast_bbbazk.jpg"
+      "title": "Mer Warcraft II"
     },
     {
       "startTime": 4907.681,
-      "title": "Micro Machines 2: Turbo Tournament",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MicroMachines.jpg"
+      "title": "Micro Machines 2: Turbo Tournament"
     },
     {
       "startTime": 5025.812,
@@ -238,8 +229,7 @@
     },
     {
       "startTime": 5166.105,
-      "title": "SimCity 2000",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Sim_City_cv8hpx.jpg"
+      "title": "SimCity 2000"
     },
     {
       "startTime": 5245.638,
@@ -283,7 +273,8 @@
     },
     {
       "startTime": 6104.71,
-      "title": "Star Wars: Rebel Assault II - The Hidden Empire"
+      "title": "Star Wars: Rebel Assault II - The Hidden Empire",
+      "img": ""
     },
     {
       "startTime": 6189.606,
@@ -407,8 +398,7 @@
     },
     {
       "startTime": 8130.52,
-      "title": "Sid Meier's Colonization",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"
+      "title": "Sid Meier's Colonization"
     },
     {
       "startTime": 8378.887,
