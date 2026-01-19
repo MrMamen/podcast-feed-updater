@@ -123,8 +123,11 @@ The enricher automatically adds images to standard chapters that don't already h
 **Episode Cover Art** (from episode's `itunes:image`) is automatically injected for:
 - **"Intro"** - Episode introduction
 - **"Dagens spill: [Game Name]"** - Today's game announcement
+- **"Hva går spillet ut på?"** - "What is the game about?" explanation
 - **"Har det holdt seg?"** - "Has it aged well?" evaluation
 - **"Kommentarer fra sosiale medier"** - Social media comments
+- **"Musikken"** - Music discussion (TODO: replace with music icon)
+- **"Tech Specs"** - Technical specifications (TODO: replace with tech icon)
 
 **Podcast Logo** (from channel `itunes:image`) is automatically injected for:
 - **"Velkommen til cd SPILL"** - Welcome segment
@@ -190,13 +193,14 @@ The enricher automatically adds images to standard chapters that don't already h
 
 ### Benefits
 
-- ✅ **No manual work** - 7 standard chapters get images automatically
+- ✅ **No manual work** - 10 standard chapters get images automatically
 - ✅ **Consistent across episodes** - Same pattern = same image type
 - ✅ **Contextual images** - Previous/next episode chapters show correct covers
 - ✅ **All Podbean-hosted** - No extra hosting needed
 - ✅ **Works everywhere** - JSON chapters, PSC chapters, and podcast apps
 - ✅ **Source files stay clean** - No `img` fields needed in `chapters/` directory
 - ✅ **Non-destructive** - Existing images are never overwritten
+- ✅ **Future-ready** - Music and tech chapters ready for dedicated icons when available
 
 ### Coverage
 

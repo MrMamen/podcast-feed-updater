@@ -918,8 +918,9 @@ class FeedEnricher(BaseFeed):
 
                                         # Episode cover art patterns
                                         if cover_art_url and (
-                                            chapter_title == "Intro" or
+                                            chapter_title.startswith("Intro") or
                                             chapter_title.startswith("Dagens spill:") or
+                                            chapter_title == "Hva går spillet ut på?" or
                                             chapter_title == "Har det holdt seg?" or
                                             chapter_title == "Kommentarer fra sosiale medier"
                                         ):
@@ -944,6 +945,16 @@ class FeedEnricher(BaseFeed):
                                             "neste episode" in chapter_title_lower
                                         ):
                                             image_to_inject = next_cover_url
+
+                                        # Music and tech chapters (using episode cover for now)
+                                        # TODO: Replace with dedicated images when available:
+                                        #   - "Musikken" -> music note icon
+                                        #   - "Tech Specs" -> technical icon
+                                        elif cover_art_url and (
+                                            chapter_title == "Musikken" or
+                                            chapter_title == "Tech Specs"
+                                        ):
+                                            image_to_inject = cover_art_url
 
                                         # Inject the image
                                         if image_to_inject:
