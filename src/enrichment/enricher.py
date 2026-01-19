@@ -7,6 +7,9 @@ from lxml import etree
 from typing import List, Dict, Optional
 import requests
 import json
+import os
+import shutil
+from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
 
 
@@ -774,20 +777,32 @@ class FeedEnricher(BaseFeed):
         print(f"  Stats will be available at: https://op3.dev/show/[your-show-guid]")
         return self
 
-    def convert_json_chapters_to_psc(self) -> 'FeedEnricher':
+    def convert_json_chapters_to_psc(
+        self,
+        chapters_dir: str = "chapters",
+        output_dir: str = "docs/chapters",
+        base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters"
+    ) -> 'FeedEnricher':
         """
         Convert podcast:chapters JSON references to Podlove Simple Chapters (PSC) format.
 
-        Fetches JSON chapter files from podcast:chapters URLs and converts them to
-        inline psc:chapters XML format for better client compatibility.
+        First attempts to load chapters from local JSON files matching Podbean filenames.
+        If found, copies to output directory and updates podcast:chapters URL.
+        If not found, fetches from podcast:chapters URLs.
+        Supports toc: false flag to exclude chapters from table of contents.
 
         JSON format (Podcasting 2.0):
-            {"version": "1.2.0", "chapters": [{"startTime": 0, "title": "Intro"}]}
+            {"version": "1.2.0", "chapters": [{"startTime": 0, "title": "Intro", "toc": false}]}
 
         PSC format (Podlove Simple Chapters):
             <psc:chapters version="1.2">
                 <psc:chapter start="00:00:00" title="Intro" />
             </psc:chapters>
+
+        Args:
+            chapters_dir: Directory containing source chapter JSON files (default: "chapters")
+            output_dir: Directory to copy chapter files for hosting (default: "docs/chapters")
+            base_url: Base URL for hosted chapter files (default: GitHub Pages URL)
 
         Returns:
             Self for chaining
@@ -815,8 +830,26 @@ class FeedEnricher(BaseFeed):
         items = self.channel.findall('item')
         converted_count = 0
         failed_count = 0
+        local_count = 0
+        used_local_files = set()  # Track which local files are used
 
+        # Create output directory for hosted chapter files
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Get podcast logo for standard chapters
+        podcast_logo = None
+        channel_image = self.channel.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
+        if channel_image is not None:
+            podcast_logo = channel_image.get('href')
+
+        # Build episode index for previous/next episode cover art
+        episode_covers = []
         for item in items:
+            itunes_image = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
+            cover_url = itunes_image.get('href') if itunes_image is not None else None
+            episode_covers.append(cover_url)
+
+        for item_index, item in enumerate(items):
             # Find podcast:chapters element
             podcast_chapters = item.find('{https://podcastindex.org/namespace/1.0}chapters')
 
@@ -824,10 +857,127 @@ class FeedEnricher(BaseFeed):
                 json_url = podcast_chapters.get('url')
                 if json_url and json_url.endswith('.json'):
                     try:
-                        # Fetch JSON chapters
-                        response = requests.get(json_url, timeout=10)
-                        response.raise_for_status()
-                        chapters_data = response.json()
+                        chapters_data = None
+                        source_type = "remote"
+
+                        # Extract filename from URL (e.g., "Outrun_chapters.json")
+                        url_path = urlparse(json_url).path
+                        filename = os.path.basename(url_path)
+                        local_file = os.path.join(chapters_dir, filename)
+
+                        # Try to load local chapter file first
+                        if os.path.exists(local_file):
+                            try:
+                                with open(local_file, 'r', encoding='utf-8') as f:
+                                    chapters_data = json.load(f)
+                                source_type = "local"
+                                local_count += 1
+                                used_local_files.add(filename)
+
+                                # Validate against Podbean version
+                                try:
+                                    response = requests.get(json_url, timeout=10)
+                                    response.raise_for_status()
+                                    podbean_data = response.json()
+
+                                    local_chapter_count = len(chapters_data.get('chapters', []))
+                                    podbean_chapter_count = len(podbean_data.get('chapters', []))
+
+                                    if local_chapter_count != podbean_chapter_count:
+                                        title_elem = item.find('title')
+                                        episode_title = title_elem.text if title_elem is not None else 'Unknown'
+                                        print(f"  ⚠️  Chapter count mismatch: {episode_title}")
+                                        print(f"      Local file: {local_chapter_count} chapters ({filename})")
+                                        print(f"      Podbean:    {podbean_chapter_count} chapters")
+                                        print(f"      Check if the local file needs updating")
+
+                                except Exception:
+                                    # If we can't fetch Podbean version for comparison, that's okay
+                                    pass
+
+                                # Get episode cover art for image injection
+                                cover_art_url = episode_covers[item_index]
+
+                                # Get previous and next episode cover art
+                                prev_cover_url = episode_covers[item_index + 1] if item_index + 1 < len(episode_covers) else None
+                                next_cover_url = episode_covers[item_index - 1] if item_index > 0 else None
+
+                                # Inject images for standard chapters
+                                if 'chapters' in chapters_data:
+                                    images_injected = 0
+                                    for chapter in chapters_data['chapters']:
+                                        # Skip if chapter already has an image
+                                        if 'img' in chapter:
+                                            continue
+
+                                        chapter_title = chapter.get('title', '').strip()
+                                        chapter_title_lower = chapter_title.lower()
+
+                                        # Match patterns for image injection
+                                        image_to_inject = None
+
+                                        # Episode cover art patterns
+                                        if cover_art_url and (
+                                            chapter_title == "Intro" or
+                                            chapter_title.startswith("Dagens spill:") or
+                                            chapter_title == "Har det holdt seg?" or
+                                            chapter_title == "Kommentarer fra sosiale medier"
+                                        ):
+                                            image_to_inject = cover_art_url
+
+                                        # Podcast logo patterns
+                                        elif podcast_logo and (
+                                            "velkommen til cd spill" in chapter_title_lower or
+                                            chapter_title == "Velkommen til cd SPILL"
+                                        ):
+                                            image_to_inject = podcast_logo
+
+                                        # Previous episode cover art patterns
+                                        elif prev_cover_url and (
+                                            "kommentarer fra forrige episode" in chapter_title_lower or
+                                            "kommentarer fra sist" in chapter_title_lower
+                                        ):
+                                            image_to_inject = prev_cover_url
+
+                                        # Next episode cover art patterns
+                                        elif next_cover_url and (
+                                            "neste episode" in chapter_title_lower
+                                        ):
+                                            image_to_inject = next_cover_url
+
+                                        # Inject the image
+                                        if image_to_inject:
+                                            chapter['img'] = image_to_inject
+                                            images_injected += 1
+
+                                    if images_injected > 0:
+                                        # Write enhanced JSON to output directory
+                                        output_file = os.path.join(output_dir, filename)
+                                        with open(output_file, 'w', encoding='utf-8') as f:
+                                            json.dump(chapters_data, f, indent=2, ensure_ascii=False)
+                                    else:
+                                        # No images injected, just copy file
+                                        output_file = os.path.join(output_dir, filename)
+                                        shutil.copy2(local_file, output_file)
+                                else:
+                                    # No chapters, just copy file
+                                    output_file = os.path.join(output_dir, filename)
+                                    shutil.copy2(local_file, output_file)
+
+                                # Update podcast:chapters URL to point to our hosted version
+                                new_url = f"{base_url}/{filename}"
+                                podcast_chapters.set('url', new_url)
+
+                            except Exception as e:
+                                # Fall back to remote if local file is invalid
+                                print(f"  ⚠️  Failed to load local file {filename}: {e}")
+                                pass
+
+                        # Fall back to fetching from URL if no local file
+                        if chapters_data is None:
+                            response = requests.get(json_url, timeout=10)
+                            response.raise_for_status()
+                            chapters_data = response.json()
 
                         # Create PSC chapters element
                         psc_chapters = etree.Element(
@@ -845,13 +995,15 @@ class FeedEnricher(BaseFeed):
                                 key=lambda ch: ch.get('startTime', 0)
                             )
 
-                            # Check if first chapter starts at 0:00
+                            # Check if first chapter starts at 0:00 (excluding hidden chapters)
+                            visible_chapters = [ch for ch in sorted_chapters if ch.get('toc', True)]
                             missing_intro = (
-                                len(sorted_chapters) > 0 and
-                                sorted_chapters[0].get('startTime', 0) > 0
+                                len(visible_chapters) > 0 and
+                                visible_chapters[0].get('startTime', 0) > 0
                             )
 
-                            if missing_intro:
+                            if missing_intro and source_type == "remote":
+                                # Only auto-add intro for remote sources (local files should be complete)
                                 # Get episode title for better reporting
                                 title_elem = item.find('title')
                                 episode_title = title_elem.text if title_elem is not None else 'Unknown'
@@ -875,10 +1027,15 @@ class FeedEnricher(BaseFeed):
                                 # Get episode title for better reporting
                                 title_elem = item.find('title')
                                 episode_title = title_elem.text if title_elem is not None else 'Unknown'
+                                source_label = "local file" if source_type == "local" else json_url
                                 print(f"  ⚠️  Unsorted chapters detected: {episode_title}")
-                                print(f"      Source JSON: {json_url}")
+                                print(f"      Source: {source_label}")
 
                             for chapter in sorted_chapters:
+                                # Skip hidden chapters (toc: false)
+                                if chapter.get('toc', True) is False:
+                                    continue
+
                                 start_time = chapter.get('startTime', 0)
                                 title = chapter.get('title', '')
 
@@ -921,8 +1078,23 @@ class FeedEnricher(BaseFeed):
                         continue
 
         print(f"✓ Converted {converted_count} JSON chapters to Podlove Simple Chapters format")
+        if local_count > 0:
+            print(f"  📁 {local_count} from local files (with toc: false support)")
         if failed_count > 0:
             print(f"  ⚠ {failed_count} episodes failed to convert (JSON not accessible)")
+
+        # Check for unused local chapter files
+        if os.path.exists(chapters_dir):
+            all_local_files = set()
+            for filename in os.listdir(chapters_dir):
+                if filename.endswith('.json') and not filename.startswith('.'):
+                    all_local_files.add(filename)
+
+            unused_files = all_local_files - used_local_files
+            if unused_files:
+                print(f"  ⚠️  Found {len(unused_files)} unused chapter file(s) in {chapters_dir}/")
+                for filename in sorted(unused_files):
+                    print(f"      - {filename} (check filename matches Podbean URL)")
 
         return self
 

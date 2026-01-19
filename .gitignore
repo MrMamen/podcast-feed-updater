@@ -67,3 +67,8 @@ htmlcov/
 
 # Local cache for development/testing
 .cache/
+
+# Chapter analysis files (temporary, not for commit)
+CHAPTER_ANALYSIS_REPORT.md
+chapter_analysis.json
+analyze_chapters.py
