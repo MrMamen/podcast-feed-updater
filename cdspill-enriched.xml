@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 22 Dec 2025 07:15:00 +0100</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Sat, 03 Jan 2026 00:06:04 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 19 Jan 2026 10:07:30 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -140,7 +140,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://twitter.com/cd_SPILL'&gt;Twitter&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/fqsu8qk3p42cffpy/Outrun.mp3" length="125777720" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/fqsu8qk3p42cffpy/Outrun.mp3" length="126368588" type="audio/mpeg"/>
         <itunes:summary>OutRun er kanskje et av de mest kjente arcade-racingsspillene noensinne. Vi har først og fremst testet versjonen som kom til DOS i 89, men har selvsagt tittet litt på originalen og de øvrige portene. Med på laget har vi fått Mats Lindh fra Spillhistorie.no og Gamer.no.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -982,7 +982,20 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mcdn.podbean.com/mf/web/smfpzyvu4wn478db/100_chapters_json_chapters.json" type="application/json"/>
         <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Vi er live!"/><psc:chapter start="00:02:32" title="Velkommen til cd SPILL"/><psc:chapter start="00:07:00" title="AI Låt: Vi feirer 100"/><psc:chapter start="00:08:55" title="Prat med Jon Håvard"/><psc:chapter start="00:15:33" title="Hilsen fra Spruceman"/><psc:chapter start="00:17:31" title="Klipp fra første episode"/><psc:chapter start="00:19:57" title="Hilsen fra Adrian Huagen"/><psc:chapter start="00:23:10" title="Hilsen fra Eirik Gjerløw"/><psc:chapter start="00:25:17" title="Hilsen fra Ekroll"/><psc:chapter start="00:26:55" title="Credits til bidragsytere"/><psc:chapter start="00:35:58" title="Hilsen fra Fotpromp"/><psc:chapter start="00:37:11" title="Credits til tidligere gjester"/><psc:chapter start="00:42:54" title="Hilsen fra Punti"/><psc:chapter start="00:47:05" title="Punti synger Wormssong"/><psc:chapter start="00:50:51" title="Hilsen fra Aleksikon"/><psc:chapter start="00:52:50" title="Martins nerdestats"/><psc:chapter start="01:00:04" title="Hvilke spill er educational"/><psc:chapter start="01:04:35" title="Hvor mange har spilt spillene?"/><psc:chapter start="01:09:12" title="Hilsen fra Joachim"/><psc:chapter start="01:10:56" title="Lydklipp quiz"/><psc:chapter start="01:12:28" title="Musikkquiz"/><psc:chapter start="01:14:58" title="Hilsen fra Mamens far"/><psc:chapter start="01:18:42" title="Klipp fra podcast Demo"/><psc:chapter start="01:25:19" title="Hilsen fra Terje Høiback"/><psc:chapter start="01:28:08" title="Hvilken episode liker lytterne best?"/><psc:chapter start="01:36:33" title="Hvor mange av episodene er unike?"/><psc:chapter start="01:42:50" title="AI Låt: cd SPILL The concert"/><psc:chapter start="01:47:00" title="Mottoet til cd SPILL"/><psc:chapter start="01:49:32" title="AMA fra livechatten"/><psc:chapter start="01:58:09" title="Hilsen fra Sigves far"/><psc:chapter start="02:01:23" title="Vi runder av"/><psc:chapter start="02:05:26" title="AI låt: Takk for 100"/></psc:chapters>
         <podcast:season name="Høst 2024">10</podcast:season>
-        <podcast:episode display="1 (#100)">100</podcast:episode></item>
+        <podcast:episode display="1 (#100)">100</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3">Aleks Gisvold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/arne-digernes-107to8CFFp">Arne Digernes</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/ivar-lobben-107to8CFBp">Ivar Lobben</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jon-havard-gundersen-107to5wpar" img="https://creator-images.podchaser.com/5d33917bcab6db3365951a4e00f68a31.jpeg">Jon Håvard Gundersen</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/svein-erik-vik-107to8CFFo">Svein-Erik Vik</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Diablo med Martin Gjesdal</title>
         <itunes:title>Diablo med Martin Gjesdal</itunes:title>
@@ -1458,8 +1471,9 @@ Følg oss på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Blues
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="9 (#87)">87</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ" img="https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg">Andreas Hedemann</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ" img="https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg">Andreas Hedemann</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/andre-kvebek-107tjTnmtz">André Kvebek</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/audun-rodem-107tZxOPfL" img="https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg">Audun Rodem</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person>
