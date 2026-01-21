@@ -1,13 +1,7 @@
 {
   "env": {
-    "CLAUDE_CODE_USE_BEDROCK": "1",
-    "ANTHROPIC_MODEL": "eu.anthropic.claude-sonnet-4-5-20250929-v1:0",
-    "AWS_REGION": "eu-central-1",
-    "AWS_DEFAULT_REGION": "eu-central-1",
     "DISABLE_BUG_COMMAND": "1",
-    "DISABLE_TELEMETRY": "1",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "eu.anthropic.claude-3-haiku-20240307-v1:0",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "eu.anthropic.claude-sonnet-4-5-20250929-v1:0"
+    "DISABLE_TELEMETRY": "1"
   },
   "includeCoAuthoredBy": false,
   "enableAllProjectMcpServers": true,
@@ -21,7 +15,6 @@
       "mcp__terraform__moduleDetails",
       "mcp__terraform__resolveProviderDocID",
       "mcp__terraform__getProviderDocs",
-      "mcp__terraform__searchModules",
       "Bash(git add:*)",
       "Bash(git commit -m :*)",
       "mcp__playwright__browser_take_screenshot",
