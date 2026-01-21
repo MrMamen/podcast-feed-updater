@@ -1,0 +1,95 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Velkommen til cd SPILL og ny vignett"
+    },
+    {
+      "startTime": 123,
+      "title": "Velkommen fra cd SPILL"
+    },
+    {
+      "startTime": 174,
+      "title": "Hvem er vi egentlig?"
+    },
+    {
+      "startTime": 185,
+      "title": "Lang fartstid som venner"
+    },
+    {
+      "startTime": 206,
+      "title": "Sjekk pinne-mikrofonen"
+    },
+    {
+      "startTime": 218,
+      "title": "Vi er på beige datamaskiner"
+    },
+    {
+      "startTime": 231,
+      "title": "Vi startet med One Must Fall: 2097"
+    },
+    {
+      "startTime": 343,
+      "title": "Bubble Bobble"
+    },
+    {
+      "startTime": 578,
+      "title": "LucasArts"
+    },
+    {
+      "startTime": 629,
+      "title": "Indiana Jones and the Fate of Atlantis"
+    },
+    {
+      "startTime": 850,
+      "title": "Sam & Max: Hit the Road"
+    },
+    {
+      "startTime": 950,
+      "title": "Sam & Max: Hit the Road",
+      "toc": false
+    },
+    {
+      "startTime": 1032,
+      "title": "Andre LucasArts-spill"
+    },
+    {
+      "startTime": 1114,
+      "title": "Grim Fandango"
+    },
+    {
+      "startTime": 1198,
+      "title": "Westwood"
+    },
+    {
+      "startTime": 1291,
+      "title": "Command & Conquer"
+    },
+    {
+      "startTime": 1375,
+      "title": "Command & Conquer",
+      "toc": false
+    },
+    {
+      "startTime": 1479,
+      "title": "Andre Westwood-spill"
+    },
+    {
+      "startTime": 1534,
+      "title": "The Legend of Kyrandia: Hand of Fate"
+    },
+    {
+      "startTime": 1647,
+      "title": "Jones in the Fast Lane"
+    },
+    {
+      "startTime": 1878,
+      "title": "Andre Sierra-spill"
+    },
+    {
+      "startTime": 1968,
+      "title": "Avslutning og takk for oss"
+    }
+  ]
+}
