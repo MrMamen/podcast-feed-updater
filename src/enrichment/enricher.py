@@ -1059,9 +1059,23 @@ class FeedEnricher(BaseFeed):
 
                                 # Exact suffix matching: Chapter ends with episode name
                                 # Example: "Historien i Duke Nukem" → Duke Nukem episode
+                                # Also normalize "the " prefix for better matching
+                                # Example: "Oppsummering av Secret of Monkey Island" → "The Secret of Monkey Island"
+                                # Only normalize if result has multiple words (to avoid "the games" → "games" false matches)
                                 if not image_to_inject:
                                     for episode_name, cover in episode_titles_to_covers.items():
-                                        if len(episode_name) > 3 and chapter_title_lower.endswith(episode_name):
+                                        if len(episode_name) <= 3:
+                                            continue
+
+                                        # Normalize episode name by removing "the " prefix
+                                        # Only if result still has multiple words (contains space)
+                                        episode_normalized = episode_name
+                                        if episode_normalized.startswith("the "):
+                                            without_the = episode_normalized[4:]
+                                            if ' ' in without_the:  # Must have at least 2 words after removing "the"
+                                                episode_normalized = without_the
+
+                                        if chapter_title_lower.endswith(episode_normalized):
                                             image_to_inject = cover
                                             break
 
