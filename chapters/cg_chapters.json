@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -30,27 +30,32 @@
     },
     {
       "startTime": 841,
-      "title": "Øvelsene: Half Pipe"
+      "title": "Øvelsene"
     },
     {
       "startTime": 863,
-      "title": "Øvelsene: Footbag"
+      "title": "Footbag",
+      "toc": false
     },
     {
       "startTime": 902,
-      "title": "Surfing"
+      "title": "Surfing",
+      "toc": false
     },
     {
       "startTime": 960,
-      "title": "Rollerskating"
+      "title": "Rollerskating",
+      "toc": false
     },
     {
       "startTime": 1001,
-      "title": "BMX"
+      "title": "BMX",
+      "toc": false
     },
     {
       "startTime": 1040,
-      "title": "Flying disc"
+      "title": "Flying disc",
+      "toc": false
     },
     {
       "startTime": 1192,
@@ -84,19 +89,23 @@
     },
     {
       "startTime": 2520,
-      "title": "Hanggliding"
+      "title": "Hanggliding",
+      "toc": false
     },
     {
       "startTime": 2570,
-      "title": "Jet surfing"
+      "title": "Jet surfing",
+      "toc": false
     },
     {
       "startTime": 2646,
-      "title": "Skateboarding"
+      "title": "Skateboarding",
+      "toc": false
     },
     {
       "startTime": 2932,
-      "title": "Snowboarding"
+      "title": "Snowboarding",
+      "toc": false
     },
     {
       "startTime": 3150,

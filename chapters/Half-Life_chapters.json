@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -7,159 +7,169 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 56,
+      "startTime": 55.771,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 288,
+      "startTime": 287.934,
       "title": "Kommentarer fra forrige episode",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/zaxxon_wbtkha.jpg"
     },
     {
-      "startTime": 679,
+      "startTime": 678.713,
       "title": "Dagens spill: Half-Life",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 965,
+      "startTime": 964.609,
       "title": "Hva går spillet ut på?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 1247,
+      "startTime": 1247.209,
       "title": "Tech Specs",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 1556,
+      "startTime": 1556.481,
       "title": "Hvordan vi opplevde grafikken"
     },
     {
-      "startTime": 1677,
+      "startTime": 1677.368,
       "title": "Hva skjer i spillet?"
     },
     {
-      "startTime": 2004,
+      "startTime": 2003.999,
       "title": "Et glimt inn i Xen"
     },
     {
-      "startTime": 2078,
+      "startTime": 2077.691,
       "title": "Mange forskere og folk å prate med"
     },
     {
-      "startTime": 2121,
+      "startTime": 2120.727,
       "title": "Brekkjern!"
     },
     {
-      "startTime": 2217,
+      "startTime": 2217.49,
       "title": "Ulike våpen"
     },
     {
-      "startTime": 2255,
-      "title": "Glock 17 (9mm Pistol)"
+      "startTime": 2254.792,
+      "title": "Glock 17 (9mm Pistol)",
+      "toc": false
     },
     {
-      "startTime": 2271,
-      "title": "Colt Python (.357 Magnum Revolver)"
+      "startTime": 2270.88,
+      "title": "Colt Python (.357 Magnum Revolver)",
+      "toc": false
     },
     {
-      "startTime": 2368,
-      "title": "MP5 (Submachine Gun)"
+      "startTime": 2368.405,
+      "title": "MP5 (Submachine Gun)",
+      "toc": false
     },
     {
-      "startTime": 2409,
-      "title": "SPAS-12 (Assault Shotgun)"
+      "startTime": 2409.322,
+      "title": "SPAS-12 (Assault Shotgun)",
+      "toc": false
     },
     {
-      "startTime": 2499,
-      "title": "Black Mesa Crossbow (Tranquilizer Gun)"
+      "startTime": 2498.631,
+      "title": "Black Mesa Crossbow (Tranquilizer Gun)",
+      "toc": false
     },
     {
-      "startTime": 2572,
-      "title": "HECU RPG"
+      "startTime": 2571.74,
+      "title": "HECU RPG",
+      "toc": false
     },
     {
-      "startTime": 2674,
-      "title": "Tau Cannon ( XVL1456 / Gauss Gun)"
+      "startTime": 2674.444,
+      "title": "Tau Cannon ( XVL1456 / Gauss Gun)",
+      "toc": false
     },
     {
-      "startTime": 2761,
-      "title": "Gluon Gun"
+      "startTime": 2761.184,
+      "title": "Gluon Gun",
+      "toc": false
     },
     {
-      "startTime": 2798,
-      "title": "Hivehand"
+      "startTime": 2797.66,
+      "title": "Hivehand",
+      "toc": false
     },
     {
-      "startTime": 2868,
-      "title": "Snark"
+      "startTime": 2868.148,
+      "title": "Snark",
+      "toc": false
     },
     {
-      "startTime": 2934,
+      "startTime": 2933.534,
       "title": "Spoilers Hva skjer i resten av spillet?"
     },
     {
-      "startTime": 3220,
+      "startTime": 3219.525,
       "title": "Gonarch"
     },
     {
-      "startTime": 3274,
+      "startTime": 3274.295,
       "title": "The Nihilanth (The Alien Controller)"
     },
     {
-      "startTime": 3316,
+      "startTime": 3315.952,
       "title": "Musikken",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 3446,
+      "startTime": 3445.997,
       "title": "Hvordan spille dette idag?"
     },
     {
-      "startTime": 3558,
+      "startTime": 3557.953,
       "title": "Leveldesign"
     },
     {
-      "startTime": 3689,
+      "startTime": 3688.77,
       "title": "Stiger!"
     },
     {
-      "startTime": 3733,
+      "startTime": 3733.502,
       "title": "Litt flere minner"
     },
     {
-      "startTime": 3820,
+      "startTime": 3819.529,
       "title": "Expansions"
     },
     {
-      "startTime": 3975,
+      "startTime": 3975.474,
       "title": "Smell AI"
     },
     {
-      "startTime": 4093,
+      "startTime": 4093.409,
       "title": "Kommentarer fra sosiale medier",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 4466,
+      "startTime": 4466.151,
       "title": "Har det holdt seg?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"
     },
     {
-      "startTime": 4651,
+      "startTime": 4650.996,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 4723,
+      "startTime": 4723.413,
       "title": "Litt om Valve"
     },
     {
-      "startTime": 4895,
+      "startTime": 4894.532,
       "title": "Et tips fra Sigve"
     },
     {
-      "startTime": 5193,
+      "startTime": 5192.835,
       "title": "Neste episode",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tomb_raider9qsqd.jpg"
     }

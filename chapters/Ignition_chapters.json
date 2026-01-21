@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -7,115 +7,122 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 37,
+      "startTime": 36,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 104,
+      "startTime": 104.465,
       "title": "Tiltcast"
     },
     {
-      "startTime": 272,
+      "startTime": 271.8,
       "title": "Dagens spill: Ignition",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 507,
+      "startTime": 507.23,
       "title": "Hva går spillet ut på?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 732,
+      "startTime": 732.258,
       "title": "Tech Specs",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 1097,
+      "startTime": 1097.477,
       "title": "3DFX"
     },
     {
-      "startTime": 1314,
+      "startTime": 1313.914,
       "title": "De ulike kjøretøyene"
     },
     {
-      "startTime": 1493,
+      "startTime": 1492.666,
       "title": "Ulike baner"
     },
     {
-      "startTime": 1518,
-      "title": "Moosejaw Falls"
+      "startTime": 1517.605,
+      "title": "Moosejaw Falls",
+      "toc": false
     },
     {
-      "startTime": 1721,
-      "title": "Gold Rush"
+      "startTime": 1720.584,
+      "title": "Gold Rush",
+      "toc": false
     },
     {
-      "startTime": 1729,
-      "title": "Snake Island"
+      "startTime": 1728.7,
+      "title": "Snake Island",
+      "toc": false
     },
     {
-      "startTime": 1748,
-      "title": "Yodel Peaks"
+      "startTime": 1748.5,
+      "title": "Yodel Peaks",
+      "toc": false
     },
     {
-      "startTime": 1771,
-      "title": "Lost Ruins"
+      "startTime": 1770.77,
+      "title": "Lost Ruins",
+      "toc": false
     },
     {
-      "startTime": 1863,
-      "title": "Cape Thor."
+      "startTime": 1863.368,
+      "title": "Cape Thor.",
+      "toc": false
     },
     {
-      "startTime": 1904,
-      "title": "Tokyo Bullet."
+      "startTime": 1904.52,
+      "title": "Tokyo Bullet.",
+      "toc": false
     },
     {
-      "startTime": 1986,
+      "startTime": 1986.381,
       "title": "Hvordan fikk vi spilt det?"
     },
     {
-      "startTime": 2116,
-      "title": "Musikken",
+      "startTime": 2116.199,
+      "title": "Musikken Mamen hørte",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 2274,
+      "startTime": 2273.85,
       "title": "Ekte musikken",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 2410,
+      "startTime": 2410.329,
       "title": "Lore"
     },
     {
-      "startTime": 2513,
+      "startTime": 2512.914,
       "title": "Får man kjøpt det idag?"
     },
     {
-      "startTime": 2641,
+      "startTime": 2641.103,
       "title": "Kommentarer fra sosiale medier",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 2933,
+      "startTime": 2932.949,
       "title": "Har det holdt seg?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 3031,
+      "startTime": 3031.496,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 3126,
+      "startTime": 3125.578,
       "title": "Tips fra Sigve"
     },
     {
-      "startTime": 3200,
+      "startTime": 3199.849,
       "title": "Tips fra Mamen"
     },
     {
-      "startTime": 3305,
+      "startTime": 3304.897,
       "title": "Neste episode",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     }

@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -7,123 +7,128 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 112,
+      "startTime": 112.472,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 174,
+      "startTime": 174.207,
       "title": "Old Man Games"
     },
     {
-      "startTime": 603,
+      "startTime": 603.35,
       "title": "Dagens spill: Duke Nukem 3D",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 697,
+      "startTime": 697.7,
       "title": "Førsteinntrykk"
     },
     {
-      "startTime": 1039,
+      "startTime": 1038.961,
       "title": "Tastatur og mus"
     },
     {
-      "startTime": 1193,
+      "startTime": 1193.89,
       "title": "Litt om mulighter i ulike 3D-motorer"
     },
     {
-      "startTime": 1439,
+      "startTime": 1439.142,
       "title": "Hva går spillet ut på?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 1648,
-      "title": "Vi har episode om Duke 1 og 2"
+      "startTime": 1647.977,
+      "title": "Vi har episode om Duke 1 og 2",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke_8r3yx7.jpg"
     },
     {
-      "startTime": 1696,
+      "startTime": 1695.586,
       "title": "Tech Specs",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 2098,
+      "startTime": 2097.54,
       "title": "Multiplayer"
     },
     {
-      "startTime": 2399,
+      "startTime": 2398.567,
       "title": "Hvem er Duke?"
     },
     {
-      "startTime": 2565,
+      "startTime": 2565.158,
       "title": "Åpne brett"
     },
     {
-      "startTime": 2985,
+      "startTime": 2984.978,
       "title": "Damene"
     },
     {
-      "startTime": 3441,
+      "startTime": 3440.634,
       "title": "Våpenutvalget"
     },
     {
-      "startTime": 3746,
+      "startTime": 3745.953,
       "title": "Musikken",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 3946,
+      "startTime": 3946.248,
       "title": "Brettdesign"
     },
     {
-      "startTime": 4179,
+      "startTime": 4179.321,
       "title": "Duke Nukem Forever",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke_8r3yx7.jpg"
     },
     {
-      "startTime": 4402,
+      "startTime": 4401.577,
       "title": "Mye referanser"
     },
     {
-      "startTime": 4595,
+      "startTime": 4595.215,
       "title": "Hvor får man kjøpt det?"
     },
     {
-      "startTime": 4891,
+      "startTime": 4891.249,
       "title": "Kommentarer fra sosiale medier",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 5295,
+      "startTime": 5295.255,
       "title": "Har det holdt seg?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
     },
     {
-      "startTime": 5676,
+      "startTime": 5675.566,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 5699,
-      "title": "Saint's row"
+      "startTime": 5699.191,
+      "title": "Saint's row",
+      "toc": false
     },
     {
-      "startTime": 5756,
-      "title": "Broforce"
+      "startTime": 5755.568,
+      "title": "Broforce",
+      "toc": false
     },
     {
-      "startTime": 5781,
-      "title": "New Order"
+      "startTime": 5781.416,
+      "title": "New Order",
+      "toc": false
     },
     {
-      "startTime": 5873,
-      "title": "Ion Fury"
+      "startTime": 5873.431,
+      "title": "Ion Fury",
+      "toc": false
     },
     {
-      "startTime": 6020,
+      "startTime": 6020.314,
       "title": "Anbefaling fra Sigve"
     },
     {
-      "startTime": 6099,
+      "startTime": 6098.654,
       "title": "Kjøp Overvåkerne"
     }
   ]

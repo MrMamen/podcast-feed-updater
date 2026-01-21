@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -7,170 +7,187 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 46,
+      "startTime": 45.928,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 389,
+      "startTime": 389.79,
       "title": "Dagens spill: The Need for Speed",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 807,
+      "startTime": 807.524,
       "title": "Hva går spillet ut på?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 1327,
+      "startTime": 1326.88,
       "title": "Gjennomgang av ulike biler"
     },
     {
-      "startTime": 1338,
-      "title": "Acura NSX"
+      "startTime": 1338.511,
+      "title": "Acura NSX",
+      "toc": false
     },
     {
-      "startTime": 1451,
-      "title": "Toyota Supra Turbo"
+      "startTime": 1451.273,
+      "title": "Toyota Supra Turbo",
+      "toc": false
     },
     {
-      "startTime": 1495,
-      "title": "Mazda RX-7"
+      "startTime": 1494.986,
+      "title": "Mazda RX-7",
+      "toc": false
     },
     {
-      "startTime": 1533,
-      "title": "Porsche 911 Carrera"
+      "startTime": 1533.172,
+      "title": "Porsche 911 Carrera",
+      "toc": false
     },
     {
-      "startTime": 1564,
-      "title": "Dodge Viper RT/10"
+      "startTime": 1564.165,
+      "title": "Dodge Viper RT/10",
+      "toc": false
     },
     {
-      "startTime": 1600,
-      "title": "Chevrolet Corvette ZR-1"
+      "startTime": 1599.908,
+      "title": "Chevrolet Corvette ZR-1",
+      "toc": false
     },
     {
-      "startTime": 1645,
-      "title": "Ferrari 512TR"
+      "startTime": 1644.776,
+      "title": "Ferrari 512TR",
+      "toc": false
     },
     {
-      "startTime": 1682,
-      "title": "Lamborghini Diablo VT"
+      "startTime": 1681.684,
+      "title": "Lamborghini Diablo VT",
+      "toc": false
     },
     {
-      "startTime": 1767,
+      "startTime": 1767.444,
       "title": "Litt om utviklerne"
     },
     {
-      "startTime": 1886,
+      "startTime": 1885.872,
       "title": "Litt mer om bilene"
     },
     {
-      "startTime": 2246,
+      "startTime": 2246.31,
       "title": "Tech Specs",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 2411,
+      "startTime": 2410.525,
       "title": "Banene"
     },
     {
-      "startTime": 2435,
-      "title": "Alpine"
+      "startTime": 2434.559,
+      "title": "Alpine",
+      "toc": false
     },
     {
-      "startTime": 2449,
-      "title": "City"
+      "startTime": 2449.499,
+      "title": "City",
+      "toc": false
     },
     {
-      "startTime": 2479,
-      "title": "Coastal"
+      "startTime": 2479.323,
+      "title": "Coastal",
+      "toc": false
     },
     {
-      "startTime": 2590,
-      "title": "Autumn Valley Speedway"
+      "startTime": 2589.717,
+      "title": "Autumn Valley Speedway",
+      "toc": false
     },
     {
-      "startTime": 2618,
-      "title": "Rusty Springs Raceway"
+      "startTime": 2618.69,
+      "title": "Rusty Springs Raceway",
+      "toc": false
     },
     {
-      "startTime": 2637,
-      "title": "Vertigo Ridge"
+      "startTime": 2636.561,
+      "title": "Vertigo Ridge",
+      "toc": false
     },
     {
-      "startTime": 2675,
-      "title": "Burnt Sienna"
+      "startTime": 2675.23,
+      "title": "Burnt Sienna",
+      "toc": false
     },
     {
-      "startTime": 2697,
-      "title": "Transtropolis"
+      "startTime": 2696.595,
+      "title": "Transtropolis",
+      "toc": false
     },
     {
-      "startTime": 2725,
-      "title": "Lost Vegas"
+      "startTime": 2725.429,
+      "title": "Lost Vegas",
+      "toc": false
     },
     {
-      "startTime": 2838,
+      "startTime": 2838.414,
       "title": "Politiet"
     },
     {
-      "startTime": 2972,
+      "startTime": 2972.271,
       "title": "Litt om fysikken"
     },
     {
-      "startTime": 3113,
+      "startTime": 3112.554,
       "title": "Highlights reel"
     },
     {
-      "startTime": 3173,
+      "startTime": 3172.605,
       "title": "Ulike utgaver"
     },
     {
-      "startTime": 3529,
+      "startTime": 3528.698,
       "title": "Et kikk i databladet GiGA"
     },
     {
-      "startTime": 4739,
+      "startTime": 4738.931,
       "title": "Musikken",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 4878,
+      "startTime": 4878.187,
       "title": "Oppfølgere"
     },
     {
-      "startTime": 5252,
+      "startTime": 5251.774,
       "title": "Kommentarer fra sosiale medier",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 5589,
+      "startTime": 5589.108,
       "title": "Har det holdt seg?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
-      "startTime": 5806,
+      "startTime": 5805.838,
       "title": "Hvordan får man tak i spillet?"
     },
     {
-      "startTime": 5903,
+      "startTime": 5903.61,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 6112,
+      "startTime": 6111.876,
       "title": "Et tips fra Sigve"
     },
     {
-      "startTime": 6234,
+      "startTime": 6234.287,
       "title": "Et tips fra Mamen"
     },
     {
-      "startTime": 6282,
+      "startTime": 6281.657,
       "title": "Et tips fra Erlend"
     },
     {
-      "startTime": 6368,
+      "startTime": 6367.838,
       "title": "Neste episode",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/wackyWheels_square_2xrdqe.jpg"
     }

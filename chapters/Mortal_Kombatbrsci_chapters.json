@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -7,147 +7,155 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     },
     {
-      "startTime": 31,
+      "startTime": 31.215,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 189,
+      "startTime": 189.47,
       "title": "Dagens spill: Mortal Kombat",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     },
     {
-      "startTime": 937,
+      "startTime": 937.432,
       "title": "Spesialangrep"
     },
     {
-      "startTime": 1410,
+      "startTime": 1410.33,
       "title": "Mimre om One Must Fall: 2097",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/omf-fix2_3wrh7u.jpg"
     },
     {
-      "startTime": 1513,
+      "startTime": 1513.215,
       "title": "Tech Specs",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     },
     {
-      "startTime": 1719,
+      "startTime": 1719.346,
       "title": "Lore"
     },
     {
-      "startTime": 1862,
+      "startTime": 1862.482,
       "title": "De ulike slosskjemper"
     },
     {
-      "startTime": 1893,
-      "title": "Liu Kang"
+      "startTime": 1892.793,
+      "title": "Liu Kang",
+      "toc": false
     },
     {
-      "startTime": 1911,
-      "title": "Rayden"
+      "startTime": 1910.618,
+      "title": "Rayden",
+      "toc": false
     },
     {
-      "startTime": 1930,
-      "title": "Scorpion og Sub-Zero"
+      "startTime": 1930.422,
+      "title": "Scorpion og Sub-Zero",
+      "toc": false
     },
     {
-      "startTime": 2028,
-      "title": "Sonya Blade"
+      "startTime": 2028.309,
+      "title": "Sonya Blade",
+      "toc": false
     },
     {
-      "startTime": 2063,
-      "title": "Kano"
+      "startTime": 2063.468,
+      "title": "Kano",
+      "toc": false
     },
     {
-      "startTime": 2121,
-      "title": "Johnny Cage"
+      "startTime": 2120.554,
+      "title": "Johnny Cage",
+      "toc": false
     },
     {
-      "startTime": 2261,
+      "startTime": 2260.769,
       "title": "Prosjektilangrep"
     },
     {
-      "startTime": 2354,
+      "startTime": 2354.126,
       "title": "Hvordan fungerer turneringen?"
     },
     {
-      "startTime": 2478,
-      "title": "Goro"
+      "startTime": 2478.492,
+      "title": "Goro",
+      "toc": false
     },
     {
-      "startTime": 2625,
-      "title": "Shang Tsung"
+      "startTime": 2624.88,
+      "title": "Shang Tsung",
+      "toc": false
     },
     {
-      "startTime": 2830,
+      "startTime": 2830.97,
       "title": "Seierssekvens"
     },
     {
-      "startTime": 2994,
+      "startTime": 2994.524,
       "title": "Morsomt gameplay?"
     },
     {
-      "startTime": 3261,
+      "startTime": 3261.518,
       "title": "Secret character: Reptile"
     },
     {
-      "startTime": 3581,
+      "startTime": 3581.115,
       "title": "Time Killers"
     },
     {
-      "startTime": 3687,
+      "startTime": 3686.884,
       "title": "Massevis av oppfølgere"
     },
     {
-      "startTime": 3842,
+      "startTime": 3842.209,
       "title": "Filmen Mortal Kombat",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     },
     {
-      "startTime": 4135,
+      "startTime": 4135.17,
       "title": "TV-serie: Mortal Kombat Conquest"
     },
     {
-      "startTime": 4254,
+      "startTime": 4254.36,
       "title": "Andre inkarnasjoner"
     },
     {
-      "startTime": 4415,
+      "startTime": 4414.96,
       "title": "Skuespillerne var på retrospillmessa"
     },
     {
-      "startTime": 4761,
+      "startTime": 4760.617,
       "title": "Kommentarer fra sosiale medier",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     },
     {
-      "startTime": 5220,
+      "startTime": 5220.139,
       "title": "Hvorfor staves Combat med K"
     },
     {
-      "startTime": 5294,
+      "startTime": 5294.148,
       "title": "Har det holdt seg?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     },
     {
-      "startTime": 5513,
+      "startTime": 5512.752,
       "title": "Er det bedre enn Street Fighter II?"
     },
     {
-      "startTime": 5723,
-      "title": "Er det bedre enn One Must Fall?"
+      "startTime": 5723.501,
+      "title": "Er det bedre enn One Must Fall 2097?"
     },
     {
-      "startTime": 5921,
+      "startTime": 5920.549,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 6131,
+      "startTime": 6131.331,
       "title": "Neste episode: Ignition",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
-      "startTime": 6170,
+      "startTime": 6170.522,
       "title": "AI tolkning av Mortal Kombat",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"
     }

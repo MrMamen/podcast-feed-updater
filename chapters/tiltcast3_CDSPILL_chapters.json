@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -52,7 +52,8 @@
     },
     {
       "startTime": 950,
-      "title": "Sam & Max: Hit the Road"
+      "title": "Sam & Max: Hit the Road",
+      "toc": false
     },
     {
       "startTime": 1032,
@@ -75,6 +76,7 @@
     {
       "startTime": 1375,
       "title": "Command & Conquer",
+      "toc": false,
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/C_C8czfu.jpg"
     },
     {
