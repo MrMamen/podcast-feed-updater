@@ -1,0 +1,301 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Intro"
+    },
+    {
+      "startTime": 35.783,
+      "title": "Velkommen til cd SPILL"
+    },
+    {
+      "startTime": 125.269,
+      "title": "Velkommen til Martin Gjesdal"
+    },
+    {
+      "startTime": 273,
+      "title": "Velkommen til Kent William Innholt"
+    },
+    {
+      "startTime": 315.471,
+      "title": "Dagens spill: The Dig"
+    },
+    {
+      "startTime": 398.521,
+      "title": "Vårt forhold til The Dig"
+    },
+    {
+      "startTime": 577.811,
+      "title": "Samme år som Full Throttle",
+      "toc": false
+    },
+    {
+      "startTime": 609.8,
+      "title": "Sci-Fi som Zak McKracken",
+      "toc": false
+    },
+    {
+      "startTime": 644.845,
+      "title": "SciFi-setting"
+    },
+    {
+      "startTime": 769.349,
+      "title": "Besetningsmedlemmene"
+    },
+    {
+      "startTime": 825.92,
+      "title": "Commander Boston Low",
+      "toc": false
+    },
+    {
+      "startTime": 879.939,
+      "title": "Dr. Ludger Brink",
+      "toc": false
+    },
+    {
+      "startTime": 936.184,
+      "title": "Maggie Robbins",
+      "toc": false
+    },
+    {
+      "startTime": 1072.332,
+      "title": "Ken Borden",
+      "toc": false
+    },
+    {
+      "startTime": 1098.35,
+      "title": "Cora Miles",
+      "toc": false
+    },
+    {
+      "startTime": 1175.709,
+      "title": "Hva gjør man med asteroiden?"
+    },
+    {
+      "startTime": 1423.778,
+      "title": "Faktasjekk fra Romkapsel"
+    },
+    {
+      "startTime": 1621.355,
+      "title": "Hemmelige ordrer"
+    },
+    {
+      "startTime": 1673.193,
+      "title": "Musikken"
+    },
+    {
+      "startTime": 2166.7,
+      "title": "Bakgrunnshistorien"
+    },
+    {
+      "startTime": 2241.43,
+      "title": "Amazing Stories",
+      "toc": false
+    },
+    {
+      "startTime": 2278.9,
+      "title": "Indiana Jones and the Last Crusade",
+      "toc": false
+    },
+    {
+      "startTime": 2380.69,
+      "title": "Noah Falstein"
+    },
+    {
+      "startTime": 2547.813,
+      "title": "Brian Moriarty"
+    },
+    {
+      "startTime": 2806.348,
+      "title": "DOTT",
+      "toc": false
+    },
+    {
+      "startTime": 2854.359,
+      "title": "Skulle blitt et horrorspill"
+    },
+    {
+      "startTime": 2901.519,
+      "title": "Sean Clark"
+    },
+    {
+      "startTime": 3135.55,
+      "title": "Resten av historien til LucasArts"
+    },
+    {
+      "startTime": 3226.992,
+      "title": "Grim Fandango",
+      "toc": false
+    },
+    {
+      "startTime": 3321.674,
+      "title": "Sammenligning med Full Throttle"
+    },
+    {
+      "startTime": 3368.741,
+      "title": "Lead artist Bill Tiller"
+    },
+    {
+      "startTime": 3465.192,
+      "title": "Mer om Sean Clark"
+    },
+    {
+      "startTime": 3568.671,
+      "title": "Orson Scott Card"
+    },
+    {
+      "startTime": 3660.32,
+      "title": "Tech Specs"
+    },
+    {
+      "startTime": 3901.353,
+      "title": "Spoiler: Hva skjer i The Dig?"
+    },
+    {
+      "startTime": 4127.5,
+      "title": "Life Crystals",
+      "toc": false
+    },
+    {
+      "startTime": 4421.709,
+      "title": "Museum",
+      "toc": false
+    },
+    {
+      "startTime": 4569.19,
+      "title": "Alien Inventor",
+      "toc": false
+    },
+    {
+      "startTime": 4822.271,
+      "title": "Brink",
+      "toc": false
+    },
+    {
+      "startTime": 4885.445,
+      "title": "Stemmeskuespillet"
+    },
+    {
+      "startTime": 5058.449,
+      "title": "Hvordan var tidligere utgaver?"
+    },
+    {
+      "startTime": 5178.148,
+      "title": "Hvordan opplevde vi historien?"
+    },
+    {
+      "startTime": 5271.752,
+      "title": "Simon the Sorcerer",
+      "toc": false
+    },
+    {
+      "startTime": 5306.369,
+      "title": "Fate of Atlantis",
+      "toc": false
+    },
+    {
+      "startTime": 5314.216,
+      "title": "Secret of Monkey Island",
+      "toc": false
+    },
+    {
+      "startTime": 5425.775,
+      "title": "Hva tenker Sigve?"
+    },
+    {
+      "startTime": 5498.965,
+      "title": "The Edges vurderinger"
+    },
+    {
+      "startTime": 5528.929,
+      "title": "Mamens inntrykk"
+    },
+    {
+      "startTime": 5601.29,
+      "title": "Unik setting"
+    },
+    {
+      "startTime": 5643.739,
+      "title": "Sammenligning med Simon the Sorcerer"
+    },
+    {
+      "startTime": 5741.183,
+      "title": "Boka av Alen Dean Foster"
+    },
+    {
+      "startTime": 5935.65,
+      "title": "Planeten Cocytus"
+    },
+    {
+      "startTime": 6010.928,
+      "title": "Hvorfor heter det The Dig?"
+    },
+    {
+      "startTime": 6131.22,
+      "title": "Hvor involvert var Steven Spielberg?"
+    },
+    {
+      "startTime": 6229.807,
+      "title": "Martins topp 8 The Dig improvements"
+    },
+    {
+      "startTime": 6559.714,
+      "title": "Gåtene"
+    },
+    {
+      "startTime": 6823.711,
+      "title": "Kommentarer fra sosiale medier"
+    },
+    {
+      "startTime": 7239.74,
+      "title": "Greit med walktrough eller longplay"
+    },
+    {
+      "startTime": 7321.5,
+      "title": "Har det holdt seg?"
+    },
+    {
+      "startTime": 7800.971,
+      "title": "Finnes det noe tilsvarende idag?"
+    },
+    {
+      "startTime": 7827.208,
+      "title": "Heaven's Vault",
+      "toc": false
+    },
+    {
+      "startTime": 7970.396,
+      "title": "Kule Sci-fi-filmer"
+    },
+    {
+      "startTime": 7983.302,
+      "title": "Contact",
+      "toc": false
+    },
+    {
+      "startTime": 8021.932,
+      "title": "Nærkontakt av tredje grad",
+      "toc": false
+    },
+    {
+      "startTime": 8069.254,
+      "title": "Arrival",
+      "toc": false
+    },
+    {
+      "startTime": 8118.35,
+      "title": "The Abyss",
+      "toc": false
+    },
+    {
+      "startTime": 8160.308,
+      "title": "Interstellar",
+      "toc": false
+    },
+    {
+      "startTime": 8278.679,
+      "title": "Neste episode"
+    }
+  ]
+}
