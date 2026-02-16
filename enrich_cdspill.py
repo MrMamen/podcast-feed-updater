@@ -228,6 +228,9 @@ def main():
         priority=9
     )
 
+    # Trim itunes:summary to first paragraph (before footer is added)
+    enricher.trim_itunes_summary(min_length=100)
+
     # Add episode article link and social footer to descriptions
     enricher.add_description_footer(
         episode_article_domain="spillhistorie.no",
@@ -240,7 +243,7 @@ def main():
         },
         social_links=[
             {"name": "Bluesky", "url": "https://bsky.app/profile/cdspill.bsky.social"},
-            {"name": "Twitter", "url": "https://twitter.com/cd_SPILL"},
+            {"name": "X", "url": "https://x.com/cd_SPILL"},
             {"name": "Facebook", "url": "https://www.facebook.com/cdSPILL"},
             {"name": "Podchaser", "url": "https://www.podchaser.com/cdSPILL"},
         ],

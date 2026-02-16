@@ -1480,10 +1480,10 @@ class FeedEnricher(BaseFeed):
                     names.append(name_html)
             social_parts.append("Følg oss gjerne på " + ", ".join(names) + ".")
 
-        social_footer = "\n".join(social_parts)
+        social_footer = "<br>\n".join(social_parts)
 
         for item in items:
-            footer_lines = []
+            footer_parts = []
 
             # Check if <link> matches the article domain
             if episode_article_domain and episode_article_prefix:
@@ -1491,19 +1491,19 @@ class FeedEnricher(BaseFeed):
                 if link_elem is not None and link_elem.text:
                     link_url = link_elem.text.strip()
                     if episode_article_domain in link_url:
-                        footer_lines.append(
-                            f"{episode_article_prefix} "
-                            f"<a href='{link_url}'>{episode_article_text}</a>."
+                        footer_parts.append(
+                            f"<p>{episode_article_prefix} "
+                            f"<a href='{link_url}'>{episode_article_text}</a>.</p>"
                         )
                         article_count += 1
 
             if social_footer:
-                footer_lines.append(social_footer)
+                footer_parts.append(f"<p>{social_footer}</p>")
 
-            if not footer_lines:
+            if not footer_parts:
                 continue
 
-            footer_html = "\n\n".join(footer_lines)
+            footer_html = "\n".join(footer_parts)
 
             # Update <description>
             desc_elem = item.find('description')
@@ -1518,6 +1518,104 @@ class FeedEnricher(BaseFeed):
             footer_count += 1
 
         print(f"✓ Added description footer to {footer_count} episodes ({article_count} with article links)")
+        return self
+
+    def trim_itunes_summary(self, min_length: int = 100) -> 'FeedEnricher':
+        """
+        Trim itunes:summary to the first paragraph of the description.
+
+        Extracts the first <p> tag content from the description and uses it
+        as itunes:summary. If the first paragraph is shorter than min_length,
+        the second paragraph is appended.
+
+        This ensures summaries are concise and consistent, without links,
+        footer text, or other non-summary content.
+
+        Args:
+            min_length: Minimum character count for the summary. If the first
+                        paragraph is shorter, the next paragraph is included.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        from html.parser import HTMLParser
+
+        class ParagraphExtractor(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.paragraphs = []
+                self.current_text = ''
+                self.in_p = False
+
+            def handle_starttag(self, tag, attrs):
+                if tag == 'p':
+                    self.in_p = True
+                    self.current_text = ''
+
+            def handle_endtag(self, tag):
+                if tag == 'p' and self.in_p:
+                    text = self.current_text.strip()
+                    if text:
+                        self.paragraphs.append(text)
+                    self.in_p = False
+
+            def handle_data(self, data):
+                if self.in_p:
+                    self.current_text += data
+
+            def handle_entityref(self, name):
+                entities = {
+                    'aring': 'å', 'oslash': 'ø', 'aelig': 'æ',
+                    'Aring': 'Å', 'Oslash': 'Ø', 'Aelig': 'Æ',
+                    'amp': '&', 'nbsp': ' ',
+                }
+                char = entities.get(name, f'&{name};')
+                if self.in_p:
+                    self.current_text += char
+
+        itunes_ns = 'http://www.itunes.com/dtds/podcast-1.0.dtd'
+        content_ns = 'http://purl.org/rss/1.0/modules/content/'
+        items = self.channel.findall('item')
+        updated_count = 0
+
+        for item in items:
+            summary_elem = item.find(f'{{{itunes_ns}}}summary')
+            if summary_elem is None:
+                continue
+
+            # Get HTML description
+            content_elem = item.find(f'{{{content_ns}}}encoded')
+            desc_elem = item.find('description')
+            html = ''
+            if content_elem is not None and content_elem.text:
+                html = content_elem.text
+            elif desc_elem is not None and desc_elem.text:
+                html = desc_elem.text
+
+            if not html:
+                continue
+
+            # Extract paragraphs
+            parser = ParagraphExtractor()
+            parser.feed(html)
+
+            if not parser.paragraphs:
+                continue
+
+            # Build summary from first paragraph, add second if too short
+            summary = parser.paragraphs[0]
+            if len(summary) < min_length and len(parser.paragraphs) > 1:
+                summary = summary + ' ' + parser.paragraphs[1]
+
+            old_summary = (summary_elem.text or '').strip()
+            if old_summary != summary:
+                summary_elem.text = summary
+                updated_count += 1
+
+        print(f"✓ Trimmed itunes:summary to first paragraph on {updated_count} episodes")
         return self
 
     def add_chapter_timestamps_to_description(self, separator: str = '\n\n') -> 'FeedEnricher':
