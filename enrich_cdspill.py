@@ -228,6 +228,24 @@ def main():
         priority=9
     )
 
+    # Add episode article link and social footer to descriptions
+    enricher.add_description_footer(
+        episode_article_domain="spillhistorie.no",
+        episode_article_prefix="Spillhistorie har skrevet",
+        episode_article_text="en artikkel om episoden",
+        funding={
+            "name": "Patreon",
+            "url": "https://www.patreon.com/cdSPILL",
+            "text": "Støtt oss gjerne på",
+        },
+        social_links=[
+            {"name": "Bluesky", "url": "https://bsky.app/profile/cdspill.bsky.social"},
+            {"name": "Twitter", "url": "https://twitter.com/cd_SPILL"},
+            {"name": "Facebook", "url": "https://www.facebook.com/cdSPILL"},
+            {"name": "Podchaser", "url": "https://www.podchaser.com/cdSPILL"},
+        ],
+    )
+
     # Add OP3 analytics prefix for privacy-respecting download tracking
     enricher.add_op3_prefix()
 

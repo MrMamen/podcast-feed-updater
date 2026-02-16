@@ -1431,6 +1431,95 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Restored episode numbers to {restored_count} episode titles (skipped {skipped_bonus} bonus episodes)")
         return self
 
+    def add_description_footer(
+        self,
+        social_links: List[Dict[str, str]],
+        funding: Optional[Dict[str, str]] = None,
+        episode_article_domain: Optional[str] = None,
+        episode_article_text: str = "en artikkel om episoden",
+        episode_article_prefix: Optional[str] = None,
+    ) -> 'FeedEnricher':
+        """
+        Append a standardized footer to episode descriptions.
+
+        Adds an episode article link (derived from the item's <link> tag if it
+        matches episode_article_domain) and social/funding links to both
+        <description> and <content:encoded>.
+
+        Args:
+            social_links: List of dicts with 'name' and 'url' keys
+            funding: Optional dict with 'name', 'url', and 'text' keys
+                     (text is the call-to-action, e.g. "Støtt oss gjerne på")
+            episode_article_domain: Domain to match in <link> tag (e.g. "spillhistorie.no")
+            episode_article_text: Anchor text for the article link
+            episode_article_prefix: Text before the link (e.g. "Spillhistorie har skrevet")
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        items = self.channel.findall('item')
+        article_count = 0
+        footer_count = 0
+
+        # Build social footer HTML
+        social_parts = []
+        if funding:
+            social_parts.append(
+                f"{funding['text']} <a href='{funding['url']}'>{funding['name']}</a>."
+            )
+        if social_links:
+            names = []
+            for i, link in enumerate(social_links):
+                name_html = f"<a href='{link['url']}'>{link['name']}</a>"
+                if i == len(social_links) - 1 and len(social_links) > 1:
+                    names.append(f"og {name_html}")
+                else:
+                    names.append(name_html)
+            social_parts.append("Følg oss gjerne på " + ", ".join(names) + ".")
+
+        social_footer = "\n".join(social_parts)
+
+        for item in items:
+            footer_lines = []
+
+            # Check if <link> matches the article domain
+            if episode_article_domain and episode_article_prefix:
+                link_elem = item.find('link')
+                if link_elem is not None and link_elem.text:
+                    link_url = link_elem.text.strip()
+                    if episode_article_domain in link_url:
+                        footer_lines.append(
+                            f"{episode_article_prefix} "
+                            f"<a href='{link_url}'>{episode_article_text}</a>."
+                        )
+                        article_count += 1
+
+            if social_footer:
+                footer_lines.append(social_footer)
+
+            if not footer_lines:
+                continue
+
+            footer_html = "\n\n".join(footer_lines)
+
+            # Update <description>
+            desc_elem = item.find('description')
+            if desc_elem is not None and desc_elem.text:
+                desc_elem.text = desc_elem.text.rstrip() + "\n\n" + footer_html
+
+            # Update <content:encoded>
+            content_elem = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
+            if content_elem is not None and content_elem.text:
+                content_elem.text = content_elem.text.rstrip() + "\n\n" + footer_html
+
+            footer_count += 1
+
+        print(f"✓ Added description footer to {footer_count} episodes ({article_count} with article links)")
+        return self
+
     def add_chapter_timestamps_to_description(self, separator: str = '\n\n') -> 'FeedEnricher':
         """
         Extract chapter timestamps from psc:chapters and append to episode descriptions.
