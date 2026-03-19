@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
@@ -7,12 +7,12 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 47,
+      "startTime": 47.264,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 231,
+      "startTime": 230.942,
       "title": "Kommentarer fra forrige episode",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/100_epidoser_collagebmaf5.jpg"
     },
@@ -22,156 +22,168 @@
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 731,
+      "startTime": 730.66,
       "title": "Tech Specs",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 1037,
+      "startTime": 1036.56,
       "title": "Hva går spillet ut på?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 1194,
+      "startTime": 1194.274,
       "title": "Inspirert av Softporn Adventure"
     },
     {
-      "startTime": 1488,
+      "startTime": 1488.47,
       "title": "AI låt om Larry Laffer"
     },
     {
-      "startTime": 1722,
+      "startTime": 1721.91,
       "title": "Age Verification Check"
     },
     {
-      "startTime": 1870,
+      "startTime": 1869.535,
       "title": "Musikken",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 1947,
+      "startTime": 1946.618,
       "title": "Hva er en leisure suit?"
     },
     {
-      "startTime": 2079,
+      "startTime": 2079.105,
       "title": "Hva er lounge lizards?"
     },
     {
-      "startTime": 2167,
+      "startTime": 2167.229,
       "title": "Hvordan spiller man?"
     },
     {
-      "startTime": 2258,
+      "startTime": 2258.429,
       "title": "Dødsscene"
     },
     {
-      "startTime": 2365,
+      "startTime": 2364.777,
       "title": "Spoiler av hele historien"
     },
     {
-      "startTime": 3071,
+      "startTime": 3070.819,
       "title": "Sammenligning av damene i de ulike versjonene"
     },
     {
-      "startTime": 3083,
-      "title": "EGA: Hooker"
+      "startTime": 3082.81,
+      "title": "EGA: Hooker",
+      "toc": false
     },
     {
-      "startTime": 3157,
-      "title": "VGA: Hooker"
+      "startTime": 3157.426,
+      "title": "VGA: Hooker",
+      "toc": false
     },
     {
-      "startTime": 3186,
-      "title": "Reloaded: Hooker"
+      "startTime": 3185.738,
+      "title": "Reloaded: Hooker",
+      "toc": false
     },
     {
-      "startTime": 3267,
-      "title": "EGA: Fawn"
+      "startTime": 3266.62,
+      "title": "EGA: Fawn",
+      "toc": false
     },
     {
-      "startTime": 3305,
-      "title": "VGA: Fawn"
+      "startTime": 3304.972,
+      "title": "VGA: Fawn",
+      "toc": false
     },
     {
-      "startTime": 3331,
-      "title": "Reloaded: Fawn"
+      "startTime": 3331.101,
+      "title": "Reloaded: Fawn",
+      "toc": false
     },
     {
-      "startTime": 3376,
-      "title": "EGA: Faith"
+      "startTime": 3376.316,
+      "title": "EGA: Faith",
+      "toc": false
     },
     {
-      "startTime": 3423,
-      "title": "VGA: Faith"
+      "startTime": 3423.265,
+      "title": "VGA: Faith",
+      "toc": false
     },
     {
-      "startTime": 3465,
-      "title": "Reloaded: Faith"
+      "startTime": 3465.424,
+      "title": "Reloaded: Faith",
+      "toc": false
     },
     {
-      "startTime": 3542,
-      "title": "EGA: Eve"
+      "startTime": 3541.79,
+      "title": "EGA: Eve",
+      "toc": false
     },
     {
-      "startTime": 3585,
-      "title": "VGA: Eve"
+      "startTime": 3585.381,
+      "title": "VGA: Eve",
+      "toc": false
     },
     {
-      "startTime": 3632,
-      "title": "Reloaded: Eve"
+      "startTime": 3632.353,
+      "title": "Reloaded: Eve",
+      "toc": false
     },
     {
-      "startTime": 3690,
+      "startTime": 3690.151,
       "title": "Er det sex og nakenhet?"
     },
     {
-      "startTime": 3785,
+      "startTime": 3784.903,
       "title": "Remake Leisure Suit Larry 1: In the Land of the Lounge Lizards (VGA)"
     },
     {
-      "startTime": 3860,
+      "startTime": 3860.257,
       "title": "Remake: Leisure Suit Larry: Reloaded"
     },
     {
-      "startTime": 4019,
+      "startTime": 4019.454,
       "title": "Litt info fra boksen"
     },
     {
-      "startTime": 4166,
+      "startTime": 4166.146,
       "title": "Litt om Al Lowe"
     },
     {
-      "startTime": 4219,
+      "startTime": 4219.222,
       "title": "Oppfølgere"
     },
     {
-      "startTime": 4366,
+      "startTime": 4365.807,
       "title": "Funfact om kildekoden"
     },
     {
-      "startTime": 4466,
+      "startTime": 4466.153,
       "title": "Kommentarer fra sosiale medier",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 4994,
+      "startTime": 4994.276,
       "title": "Age Verification Checks"
     },
     {
-      "startTime": 5082,
+      "startTime": 5081.591,
       "title": "Har det holdt seg?",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"
     },
     {
-      "startTime": 5317,
+      "startTime": 5316.754,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 5475,
+      "startTime": 5474.805,
       "title": "Et tips fra Sigve"
     },
     {
-      "startTime": 5619,
+      "startTime": 5618.772,
       "title": "Neste episode",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"
     }
