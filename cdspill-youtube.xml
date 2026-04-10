@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 30 Mar 2026 06:30:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Mon, 30 Mar 2026 14:39:09 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Fri, 10 Apr 2026 14:58:09 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -172,7 +172,8 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt7yvcu.jpg"/>
-        <podcast:season name="Vår 2026">13</podcast:season></item>
+        <podcast:season name="Vår 2026">13</podcast:season>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Aleksikons påskelabyrint 2026</title>
         <itunes:title>Aleksikons påskelabyrint 2026</itunes:title>
@@ -328,7 +329,8 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/>
-        <podcast:season name="Vår 2026">13</podcast:season></item>
+        <podcast:season name="Vår 2026">13</podcast:season>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Shufflepuck Cafe med Lasse Sørnes (#129)</title>
         <itunes:title>Shufflepuck Cafe med Lasse Sørnes (#129)</itunes:title>
