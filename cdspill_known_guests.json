@@ -28,12 +28,20 @@
         {
           "guid": "cdspill.podbean.com/fb48b146-ffe3-3e3e-921c-dd6d46e3c825",
           "note": "Aleksikons sololabyrint 2026",
-          "role": ["guest host", "narrator", "author"]
+          "role": [
+            "guest host",
+            "narrator",
+            "author"
+          ]
         },
         {
           "guid": "cdspill.podbean.com/a255d53a-9d90-3a4e-ac0d-19d396360c40",
           "note": "Aleksikons påskelabyrint 2026",
-          "role": ["guest host", "narrator", "author"]
+          "role": [
+            "guest host",
+            "narrator",
+            "author"
+          ]
         },
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
@@ -352,6 +360,9 @@
     },
     "Ketil Espenæs": {
       "href": "https://www.podchaser.com/creators/ketil-espenaes-107tZxOPnb"
+    },
+    "Lasse Sørnes": {
+      "href": "https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9"
     },
     "Martin Gjesdal": {
       "img": "https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg",
