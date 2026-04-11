@@ -325,19 +325,25 @@ class FeedEnricher(BaseFeed):
                         continue
 
                     if guid_elem.text == episode_guid:
-                        # Add guest to this episode
-                        person_elem = etree.Element(
-                            '{https://podcastindex.org/namespace/1.0}person',
-                            role='guest'
-                        )
-                        person_elem.text = guest_name
+                        # Add guest to this episode (one person element per role)
+                        roles = episode_spec.get('role', 'guest')
+                        if isinstance(roles, str):
+                            roles = [roles]
 
-                        if 'href' in guest_info:
-                            person_elem.set('href', guest_info['href'])
-                        if 'img' in guest_info:
-                            person_elem.set('img', guest_info['img'])
+                        for role in roles:
+                            person_elem = etree.Element(
+                                '{https://podcastindex.org/namespace/1.0}person',
+                                role=role
+                            )
+                            person_elem.text = guest_name
 
-                        item.append(person_elem)
+                            if 'href' in guest_info:
+                                person_elem.set('href', guest_info['href'])
+                            if 'img' in guest_info:
+                                person_elem.set('img', guest_info['img'])
+
+                            item.append(person_elem)
+
                         extra_episodes_count += 1
                         break
 

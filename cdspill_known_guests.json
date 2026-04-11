@@ -23,14 +23,17 @@
     },
     "Aleks Gisvold": {
       "href": "https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3",
+      "img": "https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&is=69da3469&hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&=",
       "extra_episodes": [
         {
           "guid": "cdspill.podbean.com/fb48b146-ffe3-3e3e-921c-dd6d46e3c825",
-          "note": "Aleksikons sololabyrint 2026"
+          "note": "Aleksikons sololabyrint 2026",
+          "role": ["guest host", "narrator", "author"]
         },
         {
           "guid": "cdspill.podbean.com/a255d53a-9d90-3a4e-ac0d-19d396360c40",
-          "note": "Aleksikons påskelabyrint 2026"
+          "note": "Aleksikons påskelabyrint 2026",
+          "role": ["guest host", "narrator", "author"]
         },
         {
           "guid": "cdspill.podbean.com/10d4a68c-1a22-32f2-b5f4-00cc0a531aef",
