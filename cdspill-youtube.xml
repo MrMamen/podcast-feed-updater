@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 30 Mar 2026 06:30:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Sat, 11 Apr 2026 23:22:10 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Sat, 11 Apr 2026 23:30:09 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -439,7 +439,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="6 (#129)">129</podcast:episode>
-        <podcast:person role="guest">Lasse Sørnes</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
     <item>
         <title>Boppin' (#128)</title>
         <itunes:title>Boppin' (#128)</itunes:title>
