@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 13 Apr 2026 07:01:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Mon, 13 Apr 2026 13:04:26 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Wed, 15 Apr 2026 14:22:29 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -115,7 +115,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 1:58:53 Gjerløw kommenterer Påskelabyrinten
 2:00:48 Neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dzm95wamkpahxvpu/constructor.mp3" length="161240518" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/dzm95wamkpahxvpu/constructor.mp3" length="161355646" type="audio/mpeg"/>
         <itunes:summary>Det merkelige erkebritiske byggespillet Constructor har så mange elementer ved seg at cd SPILL har blitt nødt til å hyre inn Eirik Gjerløw i MrMamens fravær.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -127,7 +127,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="7 (#130)">130</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>Aleksikons sololabyrint 2026</title>
         <itunes:title>Aleksikons sololabyrint 2026</itunes:title>
@@ -266,7 +266,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>2331</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
@@ -425,7 +425,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>4194</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/gvzu28njpc9vqcyy/team-captions.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
@@ -1068,13 +1068,13 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>12</itunes:season>
         <itunes:episode>125</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSpill_spill_ret1995ae763.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSpill_spill_ret1995ae763.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/ytrn7g9xyg39jf3i/1995.vtt" type="text/vtt"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="7 (#125)">125</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ" img="https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg">Andreas Hedemann</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erling-rostvag-107ta6VV6W" img="https://creator-images.podchaser.com/74ab51c992d9c7709aedabb276a4c7aa.jpeg">Erling Rostvåg</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
@@ -3525,7 +3525,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/arne-digernes-107to8CFFp">Arne Digernes</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/ivar-lobben-107to8CFBp">Ivar Lobben</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
@@ -4704,7 +4704,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/andre-kvebek-107tjTnmtz">André Kvebek</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/audun-rodem-107tZxOPfL" img="https://creator-images.podchaser.com/fad6c8b6b52c7aa8e1c66b45625cde88.jpeg">Audun Rodem</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jo-bj%C3%B8rnar-hausnes-107tjTnmty">Jo Bjørnar Hausnes</podcast:person>
@@ -4863,7 +4863,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Indy_atlantis_9jhqt9.jpg"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="7 (#85)">85</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>StarCraft med Aksel M. Bjerke og Tor-Andre Kiil Mørkved (#84)</title>
         <itunes:title>StarCraft med Aksel M. Bjerke og Tor-Andre Kiil Mørkved (#84)</itunes:title>
@@ -5917,7 +5917,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="5 (#71)">71</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>DStroy med Anette Jøsendal (#70)</title>
         <itunes:title>DStroy med Anette Jøsendal (#70)</itunes:title>
@@ -6068,7 +6068,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:episode display="10 (#67)">67</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
@@ -6271,7 +6271,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Theme_Parkakcpa.jpg"/>
         <podcast:season name="Høst 2022">6</podcast:season>
         <podcast:episode display="4 (#62)">62</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>Blade Runner med Aksel M. Bjerke (#61)</title>
         <itunes:title>Blade Runner med Aksel M. Bjerke (#61)</itunes:title>
@@ -6672,7 +6672,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="5 (#49)">49</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jens-erik-vaaler-107tZxOPjQ" img="https://creator-images.podchaser.com/f59a70e5e37521b7ab93b154d7909b46.jpeg">Jens Erik Vaaler</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>Grim Fandango med C. Alexander Espeseth og Einar Johan Trøan Sømåen (#48)</title>
         <itunes:title>Grim Fandango med C. Alexander Espeseth og Einar Johan Trøan Sømåen (#48)</itunes:title>
@@ -6953,7 +6953,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Street_Rod8jo27.jpg"/>
         <podcast:season name="Høst 2021">4</podcast:season>
         <podcast:episode display="5 (#40)">40</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>The Secret of Monkey Island med Torbjørn Preus Schou (#39)</title>
         <itunes:title>The Secret of Monkey Island med Torbjørn Preus Schou (#39)</itunes:title>
@@ -7046,7 +7046,7 @@ Se making-of dokumentarer på YouTube: Del 1 og Del 2.</itunes:summary>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/The_Neverhood94qg2.jpg"/>
         <podcast:season name="Høst 2021">4</podcast:season>
         <podcast:episode display="2 (#37)">37</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>Transport Tycoon (#36)</title>
         <itunes:title>Transport Tycoon (#36)</itunes:title>
