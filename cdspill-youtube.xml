@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 13 Apr 2026 07:01:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Wed, 15 Apr 2026 14:22:29 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Wed, 15 Apr 2026 22:58:06 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -124,7 +124,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>130</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/6ieu8b77tqb2mjvp/constructor.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="7 (#130)">130</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
@@ -266,7 +266,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>2331</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt" type="text/vtt"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/6na5k4bv68pbm3rk/solo2026.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
@@ -425,7 +425,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>4194</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/gvzu28njpc9vqcyy/team-captions.vtt" type="text/vtt"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/kbwr78gh5g6ntapg/p_ske20269ngn7.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
@@ -531,7 +531,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>129</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/mr7j4znbvqg7hx8f/shufflepuck.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="6 (#129)">129</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
@@ -609,7 +609,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>128</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/9z4sn64mqnd8pmib/Boppin.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="5 (#128)">128</podcast:episode></item>
     <item>
@@ -703,7 +703,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>127</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/24td5t389g6bcymm/StuntCarRacer.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="4 (#127)">127</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
@@ -826,7 +826,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>126</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/j6pyt3mkv7ngrph8/TheDig.vtt" type="text/vtt"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="3 (#126)">126</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
@@ -1224,7 +1224,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>12</itunes:season>
         <itunes:episode>124</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wuw64fvqeaj7sxj7/1985.vtt" type="text/vtt"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="6 (#124)">124</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
