@@ -25,3 +25,12 @@ line-length = 100
 
 [tool.ruff]
 line-length = 100
+
+[dependency-groups]
+dev = [
+    "faster-whisper>=1.2.1",
+    "nvidia-cublas-cu12>=12.9.2.10",
+    "nvidia-cuda-nvrtc>=13.0.88",
+    "nvidia-cudnn-cu12<9.21",
+    "pyannote-audio>=4.0.4",
+]
