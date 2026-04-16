@@ -76,3 +76,6 @@ analyze_chapters.py
 # Transcript output files (we commit the pipeline, not the generated transcripts)
 transcripts/*.vtt
 transcripts/*.srt
+
+# Speaker voice profiles (biometric data — keep local only)
+transcripts/speaker_profiles.npy
