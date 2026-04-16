@@ -26,8 +26,10 @@
     ["CDpillter",     "cd-spillytter"],
     ["CDpillter,",    "cd-spillytter,"],
     ["CD Spillytter", "cd-spillytter"],
+    ["CD-spill",      "cd SPILL"],
     ["CD Spill",      "cd SPILL"],
     ["CDspill",       "cd SPILL"],
+    ["seriespill",    "cd SPILL"],
     ["Sedspill",      "DOS-spill"],
     ["silllytter",    "spillytter"],
 

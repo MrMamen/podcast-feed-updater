@@ -176,7 +176,66 @@ def diarize(audio_wav, *, num_speakers: int | None = None,
     for spk in sorted(totals, key=lambda x: -totals[x]):
         print(f"    {spk}: {totals[spk]/60:.1f} min")
 
-    return segments
+    return segments, pipeline
+
+
+def match_profiles(diar_segments: list, audio_wav, pipeline,
+                   profiles_path: Path, *, threshold: float = 0.5,
+                   sample_rate: int = 16000) -> dict[str, str]:
+    """Match SPEAKER_XX clusters against saved voice profiles.
+    Returns {speaker_id: name} for confident matches."""
+    import numpy as np
+    import torch
+    from collections import defaultdict
+
+    profiles = np.load(profiles_path, allow_pickle=True).item()
+    emb_model = pipeline._embedding
+
+    by_speaker: dict[str, list] = defaultdict(list)
+    for seg in diar_segments:
+        by_speaker[seg["speaker"]].append(seg)
+
+    speaker_map: dict[str, str] = {}
+    print(f"Matching {len(by_speaker)} clusters against "
+          f"{len(profiles)} profiles...")
+
+    for spk, segs in sorted(by_speaker.items()):
+        long_segs = sorted(segs, key=lambda s: s["end"] - s["start"],
+                           reverse=True)[:30]
+        embs = []
+        for seg in long_segs:
+            s_idx = int(seg["start"] * sample_rate)
+            e_idx = int(seg["end"] * sample_rate)
+            if e_idx - s_idx < emb_model.min_num_samples:
+                continue
+            try:
+                chunk = audio_wav[s_idx:e_idx]
+                t = torch.from_numpy(chunk).unsqueeze(0).unsqueeze(0)
+                emb = np.array(emb_model(t)[0])
+                embs.append(emb)
+            except Exception:
+                continue
+        if not embs:
+            continue
+
+        cluster_emb = np.mean(embs, axis=0)
+        cluster_emb /= np.linalg.norm(cluster_emb) + 1e-8
+
+        sims = {}
+        for name, prof_emb in profiles.items():
+            sims[name] = float(np.dot(cluster_emb, prof_emb))
+
+        best_name = max(sims, key=sims.get)
+        best_sim = sims[best_name]
+        sim_str = "  ".join(f"{n}={v:.3f}" for n, v in sorted(sims.items()))
+
+        if best_sim >= threshold:
+            speaker_map[spk] = best_name
+            print(f"  {spk} → {best_name} (sim={best_sim:.3f})  [{sim_str}]")
+        else:
+            print(f"  {spk} → unknown (best {best_name}={best_sim:.3f})  [{sim_str}]")
+
+    return speaker_map
 
 
 def speaker_for_range(segments, start: float, end: float) -> str | None:
@@ -395,6 +454,9 @@ def main() -> int:
                         help="Alternative: match episode by title fragment")
     parser.add_argument("--refresh-rss", action="store_true",
                         help="Re-download RSS cache instead of using cached copy")
+    parser.add_argument("--profiles", type=Path,
+                        help="Speaker profiles .npy (built with build_speaker_profiles.py). "
+                             "Auto-identifies known speakers after diarization.")
     parser.add_argument("--corrections", type=Path,
                         help="JSON with word/regex/post fixes to apply")
     parser.add_argument("--env", type=Path,
@@ -430,6 +492,7 @@ def main() -> int:
 
     # Episode metadata lookup (if requested)
     initial_prompt = args.initial_prompt
+    meta = None
     if args.episode_number or args.episode_guid or args.episode_title:
         feed = fetch_rss(project_root, refresh=args.refresh_rss)
         meta = find_episode(feed,
@@ -460,6 +523,7 @@ def main() -> int:
     )
 
     diar_segments = None
+    pipeline = None
     if not args.no_diarization:
         if not hf_token:
             sys.stderr.write(
@@ -467,13 +531,35 @@ def main() -> int:
                 "Use --no-diarization to silence this warning.\n"
             )
         else:
-            diar_segments = diarize(
+            diar_segments, pipeline = diarize(
                 wav, num_speakers=args.speakers, hf_token=hf_token
             )
 
+    # Auto-identify known speakers from profiles
+    if diar_segments and args.profiles and not speaker_map:
+        profile_map = match_profiles(
+            diar_segments, wav, pipeline, args.profiles,
+        )
+        # Merge: profile matches for known hosts, guest names for the rest
+        guest_names = [p for p in (meta.get("people", []) if meta else [])
+                       if p not in profile_map.values()]
+        unmatched = sorted(set(s["speaker"] for s in diar_segments) - set(profile_map))
+        speaker_map.update(profile_map)
+        # Assign guest names to unmatched speakers by talk-time (most → first guest)
+        if guest_names and unmatched:
+            from collections import defaultdict as _dd
+            totals: dict[str, float] = _dd(float)
+            for s in diar_segments:
+                if s["speaker"] in unmatched:
+                    totals[s["speaker"]] += s["end"] - s["start"]
+            for spk in sorted(totals, key=lambda x: -totals[x]):
+                if guest_names:
+                    speaker_map[spk] = guest_names.pop(0)
+                    print(f"  {spk} → {speaker_map[spk]} (guest from metadata)")
+
     # Merge + render VTT -----------------------------------------------------
     print(f"\nWriting {args.output}...")
-    lines = ["WEBVTT", "Kind: captions", f"Language: {args.language}", ""]
+    lines = ["WEBVTT", ""]
     for seg in segs:
         text = seg.text.strip()
         text = apply_word_fixes(text, corrections)
