@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 13 Apr 2026 07:01:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Fri, 17 Apr 2026 11:28:35 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Fri, 17 Apr 2026 13:28:18 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -1154,7 +1154,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>10</itunes:season>
         <itunes:episode>102</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/vkhbjhfscvph6dpp/EGATrek.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/EGA_Trek615tz_chapters_json_chapters.json" type="application/json"/>
         <psc:chapters version="1.2"><psc:chapter start="00:00:00" title="Intro" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:00:49" title="Velkommen til cd SPILL" image="https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"/><psc:chapter start="00:02:19" title="Kommentarer fra forrige episode" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"/><psc:chapter start="00:08:43" title="Dagens spill: EGA Trek: The Mongol Invasion" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:11:06" title="Briefing"/><psc:chapter start="00:14:52" title="Hva går spillet ut på?" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:24:21" title="Tech Specs" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:27:47" title="Litt om hvordan man spiller"/><psc:chapter start="00:39:35" title="Hvem er Nels Anderson"/><psc:chapter start="00:42:46" title="Musikken" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:43:18" title="Kommentarer fra sosiale medier" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:45:49" title="Har det holdt seg?" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><psc:chapter start="00:47:02" title="Finnes det noe tilsvarende idag?"/><psc:chapter start="00:49:36" title="Et tips fra Mamen"/><psc:chapter start="00:51:39" title="Neste episode" image="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RoboCod_x4xjfz.jpg"/></psc:chapters>
         <podcast:season name="Høst 2024">10</podcast:season>
