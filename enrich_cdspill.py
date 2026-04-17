@@ -252,6 +252,14 @@ def main():
     # Add OP3 analytics prefix for privacy-respecting download tracking
     enricher.add_op3_prefix()
 
+    # Add language attribute to podcast:transcript tags (required by Apple Podcasts)
+    enricher.add_language_to_transcripts(
+        default_language="no",
+        overrides={
+            "0c247448-5242-370f-a0ba-775ad8c94ca4": "en",  # Martin Alper interview
+        },
+    )
+
     # Convert JSON chapters to Podlove Simple Chapters format
     enricher.convert_json_chapters_to_psc()
 

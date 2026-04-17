@@ -784,6 +784,48 @@ class FeedEnricher(BaseFeed):
         print(f"  Stats will be available at: https://op3.dev/show/[your-show-guid]")
         return self
 
+    def add_language_to_transcripts(
+        self,
+        default_language: str = "no",
+        overrides: dict[str, str] | None = None,
+    ) -> 'FeedEnricher':
+        """Add language attribute to all podcast:transcript tags.
+
+        Args:
+            default_language: ISO 639-1 language code for most episodes.
+            overrides: {guid_substring: language_code} for exceptions.
+
+        Returns:
+            Self for chaining.
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        overrides = overrides or {}
+        ns = "https://podcastindex.org/namespace/1.0"
+        items = self.channel.findall('item')
+        count = 0
+
+        for item in items:
+            transcript = item.find(f'{{{ns}}}transcript')
+            if transcript is None:
+                continue
+
+            # Determine language from overrides (match on GUID substring)
+            lang = default_language
+            guid_el = item.find('guid')
+            if guid_el is not None and guid_el.text:
+                for guid_sub, override_lang in overrides.items():
+                    if guid_sub in guid_el.text:
+                        lang = override_lang
+                        break
+
+            transcript.set('language', lang)
+            count += 1
+
+        print(f"✓ Added language attribute to {count} podcast:transcript tags")
+        return self
+
     def convert_json_chapters_to_psc(
         self,
         chapters_dir: str = "chapters",
