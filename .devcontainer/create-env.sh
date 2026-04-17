@@ -37,20 +37,21 @@ if ! command -v aws &> /dev/null; then
     exit 1
 fi
 
+AWS_PROFILE="ok-ki-prod-origo-bedrock-inference-access"
+
 # Get AWS credentials using AWS CLI
 echo "Fetching AWS credentials..."
 
-aws sso login
+aws sso login --profile "$AWS_PROFILE"
 
 # Export credentials using AWS CLI configure export-credentials
-PROFILE="ki-bedrock-inference-026090540363"
-echo "Using AWS profile: $PROFILE"
+echo "Using AWS profile: $AWS_PROFILE"
 
 # Export credentials in env format
-CREDENTIALS_OUTPUT=$(aws configure export-credentials --profile "$PROFILE" --format env)
+CREDENTIALS_OUTPUT=$(aws configure export-credentials --profile "$AWS_PROFILE" --format env)
 
 if [ $? -ne 0 ]; then
-    echo "Error: Failed to export credentials for profile $PROFILE"
+    echo "Error: Failed to export credentials for profile $AWS_PROFILE"
     echo "Make sure the profile exists and is properly configured."
     exit 1
 fi

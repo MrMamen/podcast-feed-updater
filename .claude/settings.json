@@ -1,91 +1,71 @@
 {
-  "env": {
-    "DISABLE_BUG_COMMAND": "1",
-    "DISABLE_TELEMETRY": "1"
-  },
+  "env": {},
   "includeCoAuthoredBy": false,
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": ["playwright"],
   "permissions": {
     "allow": [
-      "Bash(git add agent.md TODO.md)",
-      "mcp__GoldenPath__list_doc_sources",
-      "mcp__GoldenPath__fetch_docs",
-      "mcp__terraform__searchModules",
-      "mcp__terraform__moduleDetails",
-      "mcp__terraform__resolveProviderDocID",
-      "mcp__terraform__getProviderDocs",
+      "Bash(bb create:*)",
+      "Bash(bb issue:*)",
+      "Bash(bb next:*)",
+      "Bash(bb pr:*)",
+      "Bash(bb view:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(gh project item-list:*)",
       "Bash(git add:*)",
       "Bash(git commit -m :*)",
-      "mcp__playwright__browser_take_screenshot",
-      "mcp__playwright__browser_snapshot",
-      "mcp__playwright__browser_click",
-      "mcp__playwright__browser_evaluate",
-      "mcp__playwright__browser_navigate",
-      "mcp__playwright__browser_wait_for",
-      "Bash(mkdir:*)"
+      "Bash(git commit:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(ok pkg add :*)",
+      "Bash(ok pkg install)",
+      "Bash(ok pkg install:*)",
+      "Bash(ok pkg update)",
+      "Bash(sort:*)",
+      "Bash(test:*)",
+      "Bash(tree:*)",
+      "Skill(dig-ai-platform:bedrock)",
+      "Skill(dig-ai-platform:claude-hooks)",
+      "Skill(dig-ai-platform:python)",
+      "Skill(dig-ai-platform:subagent)",
+      "Skill(dig-designsystem:punkt-docs)",
+      "Skill(dig-iac-platform:ok-boilerplate-templates)"
     ],
     "deny": [
+      "Bash(gh project delete:*)",
+      "Bash(gh project field-delete:*)",
+      "Bash(gh project item-delete:*)",
       "Read(**.ssh/**)",
-      "Read(.gnupg/**)",
-      "Read(.aws/**)",
-      "Read(.docker/config.json)",
-      "Read(secrets**)",
-      "Read(.secrets**)",
-      "Read(.env**)",
-      "Read(*.pem)",
-      "Read(*.key)",
-      "Read(*.p12)",
-      "Read(*.pfx)",
-      "Read(id_rsa*)",
-      "Read(id_ed25519*)",
-      "Read(id_ecdsa*)",
       "Read(*.crt)",
       "Read(*.csr)",
-      "Read(.devcontainer/devcontainer.env)"
-    ]
+      "Read(*.key)",
+      "Read(*.p12)",
+      "Read(*.pem)",
+      "Read(*.pfx)",
+      "Read(.aws/**)",
+      "Read(.devcontainer/devcontainer.env)",
+      "Read(.docker/config.json)",
+      "Read(.env**)",
+      "Read(.gnupg/**)",
+      "Read(.secrets**)",
+      "Read(id_ecdsa*)",
+      "Read(id_ed25519*)",
+      "Read(id_rsa*)",
+      "Read(secrets**)"
+    ],
+    "defaultMode": "acceptEdits"
   },
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 scripts/log-hook-event.py Notification"
-          }
-        ]
+  "enabledPlugins": {
+    "ai-platform@dig": false,
+    "iac-platform@dig": false,
+    "claude-today@dig": false,
+    "betterbeads@dig": false
+  },
+  "extraKnownMarketplaces": {
+    "dig": {
+      "source": {
+        "source": "github",
+        "repo": "oslokommune/claude-marketplace"
       }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 scripts/log-hook-event.py PreCompact"
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "uv run scripts/load-memories.py"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 scripts/review_session.py"
-          }
-        ]
-      }
-    ]
+    }
   }
 }

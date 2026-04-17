@@ -1,10 +1,12 @@
 .devcontainer/devcontainer.env
 .transcripts/
 .memories/
+.tmp/
 
 # Python
 __pycache__/
 *.py[cod]
+*.pyc
 *$py.class
 *.so
 .Python
