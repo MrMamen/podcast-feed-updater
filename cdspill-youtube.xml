@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 13 Apr 2026 07:01:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Fri, 17 Apr 2026 10:17:51 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Fri, 17 Apr 2026 11:28:35 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -425,7 +425,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>4194</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/kbwr78gh5g6ntapg/p_ske20269ngn7.vtt" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/gvzu28njpc9vqcyy/team-captions.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
@@ -7133,7 +7133,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>3</itunes:season>
         <itunes:episode>34</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/AlleyCatSquare.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/AlleyCatSquare.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/x62knreqzq5597di/AlleyCat.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2021">3</podcast:season>
         <podcast:episode display="13 (#34)">34</podcast:episode></item>
     <item>
