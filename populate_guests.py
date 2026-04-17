@@ -13,157 +13,65 @@ Usage:
 """
 
 import sys
-import json
-import re
-import requests
+
 from dotenv import load_dotenv
-import os
+from lxml import etree
+
+from src.common.feed_loader import load_feed
+from src.common.guest_config import (
+    KNOWN_GUESTS_PATH,
+    load_known_guests_data,
+    save_known_guests,
+)
+from src.common.podcast_utils import extract_guests_from_title
+from src.enrichment.podchaser_api import PodchaserAPI, from_env
 
 load_dotenv()
 
 
-def fetch_feed():
-    """Fetch the cd SPILL feed."""
-    print("📡 Fetching cd SPILL feed...")
-    response = requests.get("https://feed.podbean.com/cdspill/feed.xml")
-    response.raise_for_status()
-    return response.text
-
-
 def extract_guests_from_feed(feed_xml):
     """Extract all unique guest names from episode titles."""
-    from lxml import etree
-
     root = etree.fromstring(feed_xml.encode('utf-8'))
-    items = root.findall('.//item')
-
     all_guests = set()
-    pattern = r'med (.+?)(?:\s*\(|$)'
 
-    for item in items:
+    for item in root.findall('.//item'):
         title_elem = item.find('title')
         if title_elem is None or not title_elem.text:
             continue
-
-        title = title_elem.text
-
-        # Try to extract guest name(s)
-        match = re.search(pattern, title, re.IGNORECASE)
-        if match:
-            guest_names_raw = match.group(1).strip()
-
-            # Remove episode number if present
-            guest_names_raw = re.sub(r'\s*\(#?\d+\)$', '', guest_names_raw)
-
-            # Split multiple guests
-            if ' og ' in guest_names_raw.lower():
-                guest_names = re.split(r'\s+og\s+', guest_names_raw, flags=re.IGNORECASE)
-            else:
-                guest_names = [guest_names_raw]
-
-            for guest_name in guest_names:
-                guest_name = guest_name.strip()
-                if guest_name:
-                    all_guests.add(guest_name)
+        for guest_name in extract_guests_from_title(title_elem.text):
+            all_guests.add(guest_name)
 
     return sorted(all_guests)
 
 
-def authenticate_podchaser():
-    """Authenticate with Podchaser API."""
-    api_key = os.getenv('PODCHASER_API_KEY')
-    api_secret = os.getenv('PODCHASER_API_SECRET')
-
-    if not api_key or not api_secret:
-        print("⚠ Missing Podchaser credentials in .env file")
-        print("  Will add guests without profile data")
+def search_podchaser(guest_name, client: PodchaserAPI | None):
+    """Search for a guest on Podchaser. Returns best-match dict or None."""
+    if client is None:
         return None
-
-    mutation = '''
-    mutation {
-        requestAccessToken(
-            input: {
-                grant_type: CLIENT_CREDENTIALS
-                client_id: "%s"
-                client_secret: "%s"
-            }
-        ) {
-            access_token
-        }
-    }
-    ''' % (api_key, api_secret)
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': mutation}
-    )
-
-    token_data = response.json()
-    if 'errors' in token_data or 'data' not in token_data:
-        print(f"⚠ Failed to authenticate with Podchaser")
-        return None
-
-    return token_data['data']['requestAccessToken']['access_token']
-
-
-def search_podchaser(guest_name, access_token):
-    """Search for a guest on Podchaser."""
-    if not access_token:
-        return None
-
-    query = '''
-    query {
-      creators(searchTerm: "%s", first: 5) {
-        data {
-          name
-          imageUrl
-          url
-        }
-      }
-    }
-    ''' % guest_name
 
     try:
-        response = requests.post(
-            'https://api.podchaser.com/graphql',
-            json={'query': query},
-            headers={
-                'Content-Type': 'application/json',
-                'Authorization': f'Bearer {access_token}'
-            },
-            timeout=10
-        )
-
-        result = response.json()
-
-        if 'errors' in result:
-            return None
-
-        creators = result.get('data', {}).get('creators', {}).get('data', [])
-
-        # Return best match (first result with matching name)
-        for creator in creators:
-            # Exact match or very close match
-            if creator['name'].lower() == guest_name.lower():
-                return {
-                    'name': creator['name'],
-                    'img': creator.get('imageUrl'),
-                    'href': creator.get('url')
-                }
-
-        # If no exact match, return first result if available
-        if creators:
-            return {
-                'name': creators[0]['name'],
-                'img': creators[0].get('imageUrl'),
-                'href': creators[0].get('url')
-            }
-
-        return None
-
+        creators = client.search_creator(guest_name, first=5)
     except Exception as e:
         print(f"  ⚠ Error searching for {guest_name}: {e}")
         return None
+
+    for creator in creators:
+        if creator.get('name', '').lower() == guest_name.lower():
+            return {
+                'name': creator['name'],
+                'img': creator.get('imageUrl'),
+                'href': creator.get('url'),
+            }
+
+    if creators:
+        best = creators[0]
+        return {
+            'name': best['name'],
+            'img': best.get('imageUrl'),
+            'href': best.get('url'),
+        }
+
+    return None
 
 
 def main():
@@ -172,19 +80,11 @@ def main():
     print("="*60)
 
     # Load existing known_guests
-    known_guests_file = 'cdspill_known_guests.json'
-
-    try:
-        with open(known_guests_file, 'r', encoding='utf-8') as f:
-            known_guests_data = json.load(f)
-    except FileNotFoundError:
+    known_guests_file = str(KNOWN_GUESTS_PATH)
+    if not KNOWN_GUESTS_PATH.exists():
         print(f"⚠ File not found: {known_guests_file}")
         print(f"  Creating new file...")
-        known_guests_data = {
-            "_comment": "Known guests with Podchaser profile data and name aliases. Add new guests using: uv run python3 lookup_guest.py 'Guest Name'",
-            "guests": {},
-            "aliases": {}
-        }
+    known_guests_data = load_known_guests_data()
 
     existing_guests = set(known_guests_data['guests'].keys())
     existing_aliases = set(known_guests_data['aliases'].keys())
@@ -195,7 +95,7 @@ def main():
     print(f"   {len(existing_aliases)} aliases")
 
     # Fetch feed and extract guests
-    feed_xml = fetch_feed()
+    feed_xml = load_feed(use_cache=False)
     all_guests = extract_guests_from_feed(feed_xml)
 
     print(f"\n🔍 Found {len(all_guests)} unique guests in episode titles")
@@ -213,9 +113,9 @@ def main():
 
     # Authenticate with Podchaser
     print(f"\n🔑 Authenticating with Podchaser...")
-    access_token = authenticate_podchaser()
+    client = from_env(required=False)
 
-    if access_token:
+    if client is not None:
         print("✓ Authenticated successfully")
     else:
         print("⚠ No Podchaser access - will add guests without profile data")
@@ -233,7 +133,7 @@ def main():
         print(f"[{i}/{len(new_guests)}] {guest_name}")
 
         # Search Podchaser
-        profile_data = search_podchaser(guest_name, access_token)
+        profile_data = search_podchaser(guest_name, client)
 
         if profile_data:
             guest_data = {}
@@ -264,14 +164,7 @@ def main():
 
     # Save updated file
     print(f"\n💾 Saving to {known_guests_file}...")
-
-    # Sort guests and aliases alphabetically
-    known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
-    known_guests_data['aliases'] = dict(sorted(known_guests_data['aliases'].items()))
-
-    with open(known_guests_file, 'w', encoding='utf-8') as f:
-        json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
-        f.write('\n')  # Add trailing newline
+    save_known_guests(known_guests_data)
 
     print("\n" + "="*60)
     print("DONE!")

@@ -3,6 +3,9 @@ Podchaser API Integration
 Fetches person/creator information from Podchaser.
 """
 
+import os
+import sys
+
 import requests
 from typing import List, Dict, Optional
 
@@ -268,3 +271,176 @@ class PodchaserAPI:
             print(f"⚠ No credits found for this podcast")
 
         return creators
+
+    def search_creator(self, name: str, first: int = 5) -> List[Dict]:
+        """
+        Search for creators (people) on Podchaser by name.
+
+        Returns a list of dicts with ``name``, ``imageUrl`` and ``url`` keys.
+        """
+        query = '''
+        query {
+          creators(searchTerm: "%s", first: %d) {
+            data {
+              name
+              imageUrl
+              url
+            }
+          }
+        }
+        ''' % (name, first)
+
+        response = requests.post(
+            self.BASE_URL,
+            json={"query": query},
+            headers=self.headers,
+            timeout=15,
+        )
+
+        cost = response.headers.get("X-Podchaser-Query-Cost")
+        remaining = response.headers.get("X-Podchaser-Points-Remaining")
+        if cost is not None:
+            print(f"Query cost: {cost}")
+        if remaining is not None:
+            print(f"Points remaining: {remaining}")
+
+        result = response.json()
+        if "errors" in result:
+            print(f"❌ Error: {result['errors']}")
+            return []
+
+        return result.get("data", {}).get("creators", {}).get("data", [])
+
+    def search_episode(self, podcast_id: str, episode_title: str, first: int = 5) -> Optional[Dict]:
+        """
+        Search for an episode within a specific podcast by title.
+
+        Returns the best match (exact-match preferred, otherwise first result),
+        or None.
+        """
+        query = '''
+        query {
+          podcast(identifier: { type: PODCHASER, id: "%s" }) {
+            title
+            episodes(searchTerm: "%s", first: %d) {
+              data {
+                id
+                title
+                url
+              }
+            }
+          }
+        }
+        ''' % (podcast_id, episode_title, first)
+
+        response = requests.post(
+            self.BASE_URL,
+            json={"query": query},
+            headers=self.headers,
+            timeout=15,
+        )
+
+        cost = response.headers.get("X-Podchaser-Query-Cost")
+        remaining = response.headers.get("X-Podchaser-Points-Remaining")
+        if cost is not None:
+            print(f"Query cost: {cost}")
+        if remaining is not None:
+            print(f"Points remaining: {remaining}")
+
+        result = response.json()
+        if "errors" in result:
+            print(f"❌ Error: {result['errors']}")
+            return None
+
+        episodes = (
+            result.get("data", {}).get("podcast", {}).get("episodes", {}).get("data", [])
+        )
+
+        for episode in episodes:
+            if episode.get("title", "").lower() == episode_title.lower():
+                return episode
+
+        return episodes[0] if episodes else None
+
+    def fetch_episode_credits(self, episode_id: str) -> List[Dict]:
+        """Return the credits list for a Podchaser episode id."""
+        query = '''
+        query {
+          episode(identifier: { type: PODCHASER, id: "%s" }) {
+            title
+            credits(first: 100) {
+              data {
+                role {
+                  title
+                }
+                creator {
+                  name
+                  imageUrl
+                  url
+                }
+              }
+            }
+          }
+        }
+        ''' % episode_id
+
+        response = requests.post(
+            self.BASE_URL,
+            json={"query": query},
+            headers=self.headers,
+            timeout=15,
+        )
+
+        cost = response.headers.get("X-Podchaser-Query-Cost")
+        remaining = response.headers.get("X-Podchaser-Points-Remaining")
+        if cost is not None:
+            print(f"Query cost: {cost}")
+        if remaining is not None:
+            print(f"Points remaining: {remaining}")
+
+        if response.status_code != 200:
+            print(f"❌ HTTP Error {response.status_code}: {response.text}")
+            return []
+
+        result = response.json()
+        if "errors" in result:
+            print(f"❌ GraphQL Error: {result['errors']}")
+            return []
+
+        episode = result.get("data", {}).get("episode")
+        if not episode:
+            return []
+
+        return episode.get("credits", {}).get("data", [])
+
+
+def from_env(*, required: bool = True) -> Optional[PodchaserAPI]:
+    """
+    Build a ``PodchaserAPI`` client from ``PODCHASER_API_KEY`` /
+    ``PODCHASER_API_SECRET`` environment variables.
+
+    When ``required`` is True (default), exits the process with an error if
+    credentials are missing. When False, returns ``None`` so callers can
+    degrade gracefully (e.g. populate_guests.py adding guests without data).
+    """
+    api_key = os.getenv("PODCHASER_API_KEY")
+    api_secret = os.getenv("PODCHASER_API_SECRET")
+
+    if not api_key or not api_secret:
+        message = (
+            "❌ Missing Podchaser credentials in .env file\n"
+            "   PODCHASER_API_KEY and PODCHASER_API_SECRET required"
+        )
+        if required:
+            print(message)
+            sys.exit(1)
+        print("⚠ Missing Podchaser credentials in .env file")
+        return None
+
+    client = PodchaserAPI(api_key=api_key, api_secret=api_secret)
+    if not client.access_token:
+        if required:
+            print("❌ Failed to authenticate with Podchaser")
+            sys.exit(1)
+        return None
+    return client

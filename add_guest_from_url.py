@@ -10,27 +10,20 @@ Usage:
 """
 
 import sys
-import json
 import re
-import requests
-from dotenv import load_dotenv
-import os
 from urllib.parse import unquote
 
 import inquirer
+from dotenv import load_dotenv
+
+from src.common.guest_config import (
+    KNOWN_GUESTS_PATH,
+    load_known_guests_data,
+    save_known_guests,
+)
+from src.enrichment.podchaser_api import from_env
 
 load_dotenv()
-
-
-def save_known_guests(known_guests_data, known_guests_file):
-    """Save known guests data with alphabetical sorting."""
-    # Sort guests and aliases alphabetically
-    known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
-    known_guests_data['aliases'] = dict(sorted(known_guests_data['aliases'].items()))
-
-    with open(known_guests_file, 'w', encoding='utf-8') as f:
-        json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
-        f.write('\n')  # Add trailing newline
 
 
 def extract_creator_info_from_url(url):
@@ -53,79 +46,6 @@ def extract_creator_info_from_url(url):
         return match.group(1), None
 
     return None, None
-
-
-def authenticate_podchaser():
-    """Authenticate with Podchaser API."""
-    api_key = os.getenv('PODCHASER_API_KEY')
-    api_secret = os.getenv('PODCHASER_API_SECRET')
-
-    if not api_key or not api_secret:
-        print("❌ Missing Podchaser credentials in .env file")
-        print("   PODCHASER_API_KEY and PODCHASER_API_SECRET required")
-        sys.exit(1)
-
-    mutation = '''
-    mutation {
-        requestAccessToken(
-            input: {
-                grant_type: CLIENT_CREDENTIALS
-                client_id: "%s"
-                client_secret: "%s"
-            }
-        ) {
-            access_token
-        }
-    }
-    ''' % (api_key, api_secret)
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': mutation}
-    )
-
-    token_data = response.json()
-    if 'errors' in token_data or 'data' not in token_data:
-        print(f"❌ Failed to authenticate: {token_data}")
-        sys.exit(1)
-
-    return token_data['data']['requestAccessToken']['access_token']
-
-
-def search_creator_by_name(name, access_token):
-    """Search for creator by name on Podchaser."""
-    query = '''
-    query {
-      creators(searchTerm: "%s", first: 1) {
-        data {
-          name
-          imageUrl
-          url
-        }
-      }
-    }
-    ''' % name
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': query},
-        headers={
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {access_token}'
-        }
-    )
-
-    result = response.json()
-
-    if 'errors' in result:
-        print(f"❌ Error: {result['errors']}")
-        return None
-
-    creators = result.get('data', {}).get('creators', {}).get('data', [])
-    if creators:
-        return creators[0]
-
-    return None
 
 
 def normalize_name(name):
@@ -179,12 +99,13 @@ def main():
 
     # Authenticate
     print("\n🔑 Authenticating with Podchaser...")
-    access_token = authenticate_podchaser()
+    client = from_env(required=True)
     print("✓ Authenticated")
 
     # Search for creator
     print(f"🔍 Searching for '{name_from_url}'...")
-    creator = search_creator_by_name(name_from_url, access_token)
+    creators = client.search_creator(name_from_url, first=1)
+    creator = creators[0] if creators else None
 
     if not creator:
         print("❌ Creator not found")
@@ -198,13 +119,11 @@ def main():
         print(f"  🔗 URL: {creator['url']}")
 
     # Load known_guests
-    known_guests_file = 'cdspill_known_guests.json'
-    try:
-        with open(known_guests_file, 'r', encoding='utf-8') as f:
-            known_guests_data = json.load(f)
-    except FileNotFoundError:
+    known_guests_file = str(KNOWN_GUESTS_PATH)
+    if not KNOWN_GUESTS_PATH.exists():
         print(f"❌ File not found: {known_guests_file}")
         sys.exit(1)
+    known_guests_data = load_known_guests_data()
 
     guests = known_guests_data.get('guests', {})
     aliases = known_guests_data.get('aliases', {})
@@ -228,7 +147,7 @@ def main():
             print(f"  ✓ Added img")
 
         if updated:
-            save_known_guests(known_guests_data, known_guests_file)
+            save_known_guests(known_guests_data)
             print(f"\n✓ Updated {known_guests_file}")
         else:
             print(f"  (no updates needed)")
@@ -256,7 +175,7 @@ def main():
                 print(f"  ✓ Added img to '{real_name}'")
 
             if updated:
-                save_known_guests(known_guests_data, known_guests_file)
+                save_known_guests(known_guests_data)
                 print(f"\n✓ Updated {known_guests_file}")
 
         return
@@ -341,7 +260,7 @@ def main():
 
         guests[podchaser_name] = guest_data
 
-        save_known_guests(known_guests_data, known_guests_file)
+        save_known_guests(known_guests_data)
 
         print(f"\n✓ Added new guest: {podchaser_name}")
         print(f"✓ Saved to {known_guests_file}")
@@ -403,7 +322,7 @@ def main():
                 print(f"  ✓ Added img")
 
         if updated:
-            save_known_guests(known_guests_data, known_guests_file)
+            save_known_guests(known_guests_data)
             print(f"\n✓ Updated {known_guests_file}")
         else:
             print(f"  (no updates needed)")

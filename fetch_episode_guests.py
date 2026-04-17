@@ -11,45 +11,20 @@ Usage:
 
 import sys
 import json
-import requests
+
 from dotenv import load_dotenv
-import os
 from lxml import etree
 
+from src.common.feed_loader import load_feed
+from src.common.guest_config import (
+    KNOWN_GUESTS_PATH,
+    load_known_guests,
+    load_known_guests_data,
+    save_known_guests,
+)
+from src.enrichment.podchaser_api import from_env
+
 load_dotenv()
-
-
-def authenticate_podchaser():
-    """Authenticate with Podchaser API."""
-    api_key = os.getenv('PODCHASER_API_KEY')
-    api_secret = os.getenv('PODCHASER_API_SECRET')
-
-    if not api_key or not api_secret:
-        print("❌ Error: PODCHASER_API_KEY and PODCHASER_API_SECRET must be set in .env")
-        sys.exit(1)
-
-    response = requests.post(
-        'https://api.podchaser.com/oauth/token',
-        json={
-            'grant_type': 'client_credentials',
-            'client_id': api_key,
-            'client_secret': api_secret
-        }
-    )
-
-    if response.status_code != 200:
-        print(f"❌ Authentication failed: {response.status_code}")
-        print(response.text)
-        sys.exit(1)
-
-    return response.json()['access_token']
-
-
-def fetch_feed():
-    """Fetch the cd SPILL feed."""
-    response = requests.get("https://feed.podbean.com/cdspill/feed.xml")
-    response.raise_for_status()
-    return response.text
 
 
 def find_episode_in_feed(feed_xml, search_term):
@@ -94,150 +69,7 @@ def find_episode_in_feed(feed_xml, search_term):
     return None, None, None, None
 
 
-def search_episode_on_podchaser(episode_title, access_token):
-    """Search for episode on Podchaser by title within cd SPILL podcast."""
-    # Remove episode number from title for better search
-    import re
-    clean_title = re.sub(r'\s*\(#?\d+\)$', '', episode_title)
-
-    # cd SPILL podcast ID on Podchaser
-    CDSPILL_PODCAST_ID = "1540724"
-
-    query = '''
-    query {
-      podcast(identifier: { type: PODCHASER, id: "%s" }) {
-        title
-        episodes(searchTerm: "%s", first: 5) {
-          data {
-            id
-            title
-            url
-          }
-        }
-      }
-    }
-    ''' % (CDSPILL_PODCAST_ID, clean_title)
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': query},
-        headers={
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {access_token}'
-        }
-    )
-
-    print(f"Query cost: {response.headers.get('X-Podchaser-Query-Cost')}")
-    print(f"Points remaining: {response.headers.get('X-Podchaser-Points-Remaining')}")
-    print()
-
-    result = response.json()
-
-    if 'errors' in result:
-        print(f"❌ Error: {result['errors']}")
-        return None
-
-    podcast = result.get('data', {}).get('podcast', {})
-    episodes = podcast.get('episodes', {}).get('data', [])
-
-    # Try to find exact match
-    for episode in episodes:
-        if episode['title'].lower() == clean_title.lower():
-            return episode
-
-    # If no exact match, return first result
-    return episodes[0] if episodes else None
-
-
-def check_query_cost(query, access_token):
-    """Check the cost of a query before executing it."""
-    response = requests.post(
-        'https://api.podchaser.com/graphql/cost',
-        json={'query': query},
-        headers={
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {access_token}'
-        }
-    )
-
-    if response.status_code == 200:
-        data = response.json()
-        return data.get('cost', 0)
-    return None
-
-
-def fetch_episode_credits(episode_id, access_token):
-    """Fetch credits for a specific episode."""
-    query = '''
-    query {
-      episode(identifier: { type: PODCHASER, id: "%s" }) {
-        title
-        credits(first: 100) {
-          data {
-            role {
-              title
-            }
-            creator {
-              name
-              imageUrl
-              url
-            }
-          }
-        }
-      }
-    }
-    ''' % episode_id
-
-    # Check cost first
-    cost = check_query_cost(query, access_token)
-    if cost:
-        print(f"📊 Estimated query cost: {cost} points")
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': query},
-        headers={
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {access_token}'
-        }
-    )
-
-    query_cost = response.headers.get('X-Podchaser-Query-Cost')
-    points_remaining = response.headers.get('X-Podchaser-Points-Remaining')
-
-    print(f"Query cost: {query_cost}")
-    print(f"Points remaining: {points_remaining}")
-    print()
-
-    if response.status_code != 200:
-        print(f"❌ HTTP Error {response.status_code}: {response.text}")
-        return []
-
-    result = response.json()
-
-    if 'errors' in result:
-        print(f"❌ GraphQL Error: {result['errors']}")
-        return []
-
-    if not result.get('data'):
-        print(f"❌ No data in response. Full response: {result}")
-        return []
-
-    episode = result.get('data', {}).get('episode', {})
-    if not episode:
-        return []
-
-    return episode.get('credits', {}).get('data', [])
-
-
-def load_known_guests():
-    """Load existing known guests."""
-    try:
-        with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            return data.get('guests', {}), data.get('aliases', {})
-    except FileNotFoundError:
-        return {}, {}
+CDSPILL_PODCAST_ID = "1540724"
 
 
 def main():
@@ -254,7 +86,7 @@ def main():
 
     # Find episode in feed
     print(f"🔍 Searching for episode: {search_term}")
-    feed_xml = fetch_feed()
+    feed_xml = load_feed(use_cache=False)
     guid, title, url, episode_num = find_episode_in_feed(feed_xml, search_term)
 
     if not guid:
@@ -271,13 +103,15 @@ def main():
 
     # Authenticate with Podchaser
     print("🔑 Authenticating with Podchaser...")
-    access_token = authenticate_podchaser()
+    client = from_env(required=True)
     print("✓ Authenticated")
     print()
 
-    # Search for episode on Podchaser
+    # Search for episode on Podchaser (strip episode number from title for better search)
+    import re
+    clean_title = re.sub(r'\s*\(#?\d+\)$', '', title)
     print(f"📡 Searching for episode on Podchaser...")
-    episode_data = search_episode_on_podchaser(title, access_token)
+    episode_data = client.search_episode(CDSPILL_PODCAST_ID, clean_title, first=5)
 
     if not episode_data:
         print("❌ Episode not found on Podchaser")
@@ -290,7 +124,7 @@ def main():
 
     # Fetch credits for this episode
     print(f"📡 Fetching episode credits...")
-    credits = fetch_episode_credits(episode_data['id'], access_token)
+    credits = client.fetch_episode_credits(episode_data['id'])
 
     # Show all credits for reference
     print("📋 All episode credits from Podchaser:")
@@ -467,8 +301,7 @@ def main():
     guests_already_had_episode = 0
 
     # Reload the full data from file to avoid race conditions
-    with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
-        full_data = json.load(f)
+    full_data = load_known_guests_data()
 
     for name in already_in_feed:
         # Check if this guest already has this episode in extra_episodes (from file)
@@ -512,13 +345,7 @@ def main():
 
                 guest_data['extra_episodes'].sort(key=get_episode_num, reverse=True)
 
-        # Sort guests and aliases alphabetically
-        full_data['guests'] = dict(sorted(full_data['guests'].items()))
-        full_data['aliases'] = dict(sorted(full_data.get('aliases', {}).items()))
-
-        with open('cdspill_known_guests.json', 'w', encoding='utf-8') as f:
-            json.dump(full_data, f, indent=2, ensure_ascii=False)
-            f.write('\n')  # Add trailing newline
+        save_known_guests(full_data)
 
         print()
         print("="*60)

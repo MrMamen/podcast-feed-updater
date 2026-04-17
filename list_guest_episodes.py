@@ -13,41 +13,15 @@ Usage:
     uv run python3 list_guest_episodes.py "Jostein Hakestad"
 """
 
-import argparse
-import json
 import re
 import sys
 from typing import Dict, List, Tuple
 
-import requests
 from lxml import etree
 
-
-def fetch_feed() -> str:
-    """Fetch the cd SPILL feed from Podbean."""
-    response = requests.get("https://feed.podbean.com/cdspill/feed.xml")
-    response.raise_for_status()
-    return response.text
-
-
-def load_known_guests() -> Tuple[Dict, Dict]:
-    """Load known guests and aliases from JSON file."""
-    try:
-        with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            return data.get('guests', {}), data.get('aliases', {})
-    except FileNotFoundError:
-        return {}, {}
-
-
-def normalize_name(name: str, aliases: Dict) -> str:
-    """Normalize guest name using aliases."""
-    return aliases.get(name, name)
-
-
-def is_bonus_episode(title: str) -> bool:
-    """Check if episode is a bonus episode."""
-    return 'Bonus' in title or 'bonus' in title
+from src.common.feed_loader import load_feed
+from src.common.guest_config import load_known_guests, resolve_alias
+from src.common.podcast_utils import extract_guests_from_title, is_bonus_episode
 
 
 def get_episode_info(item) -> Tuple[str, str, str]:
@@ -72,44 +46,24 @@ def find_episodes_in_titles(feed_xml: str, guest_name: str, canonical_name: str)
     """
     Find episodes where guest is mentioned in the title.
     Excludes bonus episodes.
-
-    Args:
-        feed_xml: The RSS feed XML as string
-        guest_name: The guest name to search for
-        canonical_name: The canonical name (after alias normalization)
-
-    Returns:
-        List of episode dicts with guid, title, episode_num, source
     """
     root = etree.fromstring(feed_xml.encode('utf-8'))
-    items = root.findall('.//item')
-
     episodes = []
-    pattern = r'med (.+?)(?:\s*\(|$)'
 
-    for item in items:
+    for item in root.findall('.//item'):
         guid, title, episode_num = get_episode_info(item)
 
-        # Skip bonus episodes
         if is_bonus_episode(title):
             continue
 
-        # Search for pattern "med [Guest Name]"
-        match = re.search(pattern, title)
-        if match:
-            guest_text = match.group(1)
-
-            # Split multiple guests separated by " og "
-            guest_names = [g.strip() for g in guest_text.split(' og ')]
-
-            # Check if our guest is in the list
-            if guest_name in guest_names or canonical_name in guest_names:
-                episodes.append({
-                    'guid': guid,
-                    'title': title,
-                    'episode_num': episode_num,
-                    'source': 'full'
-                })
+        guest_names = extract_guests_from_title(title)
+        if guest_name in guest_names or canonical_name in guest_names:
+            episodes.append({
+                'guid': guid,
+                'title': title,
+                'episode_num': episode_num,
+                'source': 'full'
+            })
 
     return episodes
 
@@ -257,14 +211,13 @@ def main():
     known_guests, aliases = load_known_guests()
 
     # Normalize name
-    canonical_name = normalize_name(guest_name, aliases)
+    canonical_name = resolve_alias(guest_name, aliases)
     if canonical_name != guest_name:
         print(f"ℹ️  Bruker kanonisk navn: {canonical_name}")
         print()
 
-    # Fetch feed
-    print("📡 Henter feed...")
-    feed_xml = fetch_feed()
+    # Load feed from local cache
+    feed_xml = load_feed(use_cache=True)
 
     # Find episodes in titles (full guest appearances)
     title_episodes = find_episodes_in_titles(feed_xml, guest_name, canonical_name)

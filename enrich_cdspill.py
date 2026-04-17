@@ -29,9 +29,10 @@ The script adds:
 """
 
 import os
-import sys
 import argparse
 from dotenv import load_dotenv
+from src.common.feed_loader import resolve_feed_source
+from src.common.guest_config import KNOWN_GUESTS_PATH, load_known_guests_data
 from src.enrichment.enricher import FeedEnricher
 
 # Load environment variables from .env
@@ -55,17 +56,10 @@ def main():
     print("CD SPILL FEED ENRICHER")
     print("="*60)
 
-    # Determine source
+    # Determine source (exits if --local-cache set but cache missing)
+    source = resolve_feed_source(use_cache=args.local_cache)
     if args.local_cache:
-        cache_file = ".cache/cdspill-original.xml"
-        if not os.path.exists(cache_file):
-            print(f"\n❌ Error: Local cache not found at {cache_file}")
-            print("   Download the cache first with: uv run python3 download_cdspill_cache.py")
-            sys.exit(1)
-        print(f"\n📁 Using local cache: {cache_file}")
-        source = cache_file
-    else:
-        source = "https://feed.podbean.com/cdspill/feed.xml"
+        print(f"\n📁 Using local cache: {source}")
 
     # Initialize enricher
     enricher = FeedEnricher(source)
@@ -85,7 +79,7 @@ def main():
     import json
 
     permanent_staff_file = "cdspill_permanent_staff.json"
-    known_guests_file = "cdspill_known_guests.json"
+    known_guests_file = str(KNOWN_GUESTS_PATH)
 
     hosts = []
     known_guests_data = None
@@ -127,30 +121,28 @@ def main():
     known_guests = {}
 
     print(f"\n📦 Loading known guests from: {known_guests_file}")
-    try:
-        with open(known_guests_file, 'r', encoding='utf-8') as f:
-            known_guests_data = json.load(f)
-
-        guests = known_guests_data.get('guests', {})
-        aliases = known_guests_data.get('aliases', {})
-
-        # Add guests with their profile data
-        for name, data in guests.items():
-            known_guests[name] = data
-
-        # Add aliases
-        for alias, real_name in aliases.items():
-            known_guests[alias] = {"alias": real_name}
-
-        guests_with_images = sum(1 for g in guests.values() if g.get('img'))
-        print(f"✓ Loaded {len(guests)} guests ({guests_with_images} with images) and {len(aliases)} aliases")
-
-    except FileNotFoundError:
+    if not KNOWN_GUESTS_PATH.exists():
         print(f"⚠ File not found: {known_guests_file}")
         print(f"  Guests will not have profile images")
         print(f"  Use 'uv run python3 lookup_guest.py <name>' to add guest data")
-    except Exception as e:
-        print(f"⚠ Error loading known guests: {e}")
+    else:
+        try:
+            known_guests_data = load_known_guests_data()
+            guests = known_guests_data.get('guests', {})
+            aliases = known_guests_data.get('aliases', {})
+
+            # Add guests with their profile data
+            for name, data in guests.items():
+                known_guests[name] = data
+
+            # Add aliases (flattened into the same dict for the enricher)
+            for alias, real_name in aliases.items():
+                known_guests[alias] = {"alias": real_name}
+
+            guests_with_images = sum(1 for g in guests.values() if g.get('img'))
+            print(f"✓ Loaded {len(guests)} guests ({guests_with_images} with images) and {len(aliases)} aliases")
+        except Exception as e:
+            print(f"⚠ Error loading known guests: {e}")
 
     enricher.auto_detect_guests_from_titles(
         pattern=r'med (.+?)(?:\s*\(|$)',  # Matches "med Guest Name (optional #123)"

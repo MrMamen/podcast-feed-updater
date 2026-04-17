@@ -12,47 +12,17 @@ Usage:
 """
 
 import sys
-import os
-import json
-import requests
+
 from dotenv import load_dotenv
 
+from src.common.guest_config import (
+    KNOWN_GUESTS_PATH,
+    load_known_guests_data,
+    save_known_guests,
+)
+from src.enrichment.podchaser_api import from_env
+
 load_dotenv()
-
-def search_creator(name, access_token):
-    """Search for a creator on Podchaser."""
-    query = '''
-    query {
-      creators(searchTerm: "%s", first: 5) {
-        data {
-          name
-          imageUrl
-          url
-        }
-      }
-    }
-    ''' % name
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': query},
-        headers={
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {access_token}'
-        }
-    )
-
-    print(f"Query cost: {response.headers.get('X-Podchaser-Query-Cost')}")
-    print(f"Points remaining: {response.headers.get('X-Podchaser-Points-Remaining')}")
-
-    result = response.json()
-
-    if 'errors' in result:
-        print(f"❌ Error: {result['errors']}")
-        return None
-
-    creators = result.get('data', {}).get('creators', {}).get('data', [])
-    return creators
 
 
 def main():
@@ -67,47 +37,13 @@ def main():
     if len(sys.argv) >= 4 and sys.argv[2] == '--alias':
         alias = sys.argv[3]
 
-    # Get API credentials
-    api_key = os.getenv('PODCHASER_API_KEY')
-    api_secret = os.getenv('PODCHASER_API_SECRET')
-
-    if not api_key or not api_secret:
-        print("❌ Missing Podchaser credentials in .env file")
-        print("   PODCHASER_API_KEY and PODCHASER_API_SECRET required")
-        sys.exit(1)
-
     # Authenticate
     print(f"🔍 Searching Podchaser for: {guest_name}")
     print("="*60)
-
-    mutation = '''
-    mutation {
-        requestAccessToken(
-            input: {
-                grant_type: CLIENT_CREDENTIALS
-                client_id: "%s"
-                client_secret: "%s"
-            }
-        ) {
-            access_token
-        }
-    }
-    ''' % (api_key, api_secret)
-
-    response = requests.post(
-        'https://api.podchaser.com/graphql',
-        json={'query': mutation}
-    )
-
-    token_data = response.json()
-    if 'errors' in token_data or 'data' not in token_data:
-        print(f"❌ Failed to authenticate: {token_data}")
-        sys.exit(1)
-
-    access_token = token_data['data']['requestAccessToken']['access_token']
+    client = from_env(required=True)
 
     # Search for creator
-    creators = search_creator(guest_name, access_token)
+    creators = client.search_creator(guest_name, first=5)
 
     if not creators:
         print(f"\n❌ No results found for '{guest_name}'")
@@ -146,14 +82,12 @@ def main():
     selected = creators[choice - 1]
 
     # Load known_guests.json
-    known_guests_file = 'cdspill_known_guests.json'
+    known_guests_file = str(KNOWN_GUESTS_PATH)
 
-    try:
-        with open(known_guests_file, 'r', encoding='utf-8') as f:
-            known_guests_data = json.load(f)
-    except FileNotFoundError:
+    if not KNOWN_GUESTS_PATH.exists():
         print(f"❌ File not found: {known_guests_file}")
         sys.exit(1)
+    known_guests_data = load_known_guests_data()
 
     # Check if this person already exists (by href)
     selected_href = selected.get('url')
@@ -212,14 +146,8 @@ def main():
         known_guests_data['aliases'][alias] = canonical_name
         print(f"✓ Adding alias: '{alias}' → '{canonical_name}'")
 
-    # Sort guests and aliases alphabetically
-    known_guests_data['guests'] = dict(sorted(known_guests_data['guests'].items()))
-    known_guests_data['aliases'] = dict(sorted(known_guests_data['aliases'].items()))
-
     # Save
-    with open(known_guests_file, 'w', encoding='utf-8') as f:
-        json.dump(known_guests_data, f, indent=2, ensure_ascii=False)
-        f.write('\n')  # Add trailing newline
+    save_known_guests(known_guests_data)
 
     if existing_guest_name:
         print(f"\n✓ Updated {known_guests_file}:")

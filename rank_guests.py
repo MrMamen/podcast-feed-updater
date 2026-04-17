@@ -13,125 +13,47 @@ Usage:
     uv run python3 rank_guests.py
 """
 
-import json
-import re
 from collections import defaultdict
-from typing import Dict, Tuple
+from typing import Dict
 
-import requests
 from lxml import etree
 
-
-def fetch_feed() -> str:
-    """Fetch the cd SPILL feed from Podbean."""
-    print("📡 Henter feed fra Podbean...")
-    response = requests.get("https://feed.podbean.com/cdspill/feed.xml")
-    response.raise_for_status()
-    print("✓ Feed hentet")
-    return response.text
-
-
-def load_known_guests() -> Tuple[Dict, Dict]:
-    """Load known guests and aliases from JSON file."""
-    try:
-        with open('cdspill_known_guests.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            guests = data.get('guests', {})
-            aliases = data.get('aliases', {})
-            print(f"✓ Lastet {len(guests)} kjente gjester og {len(aliases)} alias")
-            return guests, aliases
-    except FileNotFoundError:
-        print("⚠ cdspill_known_guests.json ikke funnet")
-        return {}, {}
-
-
-def normalize_name(name: str, aliases: Dict) -> str:
-    """
-    Normalize guest name using aliases.
-
-    Args:
-        name: The name to normalize
-        aliases: Dict mapping name variations to canonical names
-
-    Returns:
-        Canonical name
-    """
-    return aliases.get(name, name)
-
-
-def is_bonus_episode(title: str) -> bool:
-    """Check if episode is a bonus episode."""
-    return 'Bonus' in title or 'bonus' in title
+from src.common.feed_loader import load_feed
+from src.common.guest_config import load_known_guests, resolve_alias
+from src.common.podcast_utils import extract_guests_from_title, is_bonus_episode
 
 
 def extract_guests_from_titles(feed_xml: str, aliases: Dict) -> Dict[str, int]:
     """
-    Extract guest names from episode titles using pattern "med [Guest Name]".
-    Excludes bonus episodes.
-
-    Args:
-        feed_xml: The RSS feed XML as string
-        aliases: Dict mapping name variations to canonical names
-
-    Returns:
-        Dict with guest names and their full appearance counts
+    Count canonical guest names in episode titles (bonus episodes excluded).
     """
     root = etree.fromstring(feed_xml.encode('utf-8'))
-    items = root.findall('.//item')
+    guest_counter: Dict[str, int] = defaultdict(int)
 
-    guest_counter = defaultdict(int)
-    pattern = r'med (.+?)(?:\s*\(|$)'
-
-    for item in items:
+    for item in root.findall('.//item'):
         title_elem = item.find('title')
         if title_elem is None or not title_elem.text:
             continue
 
         title = title_elem.text
-
-        # Skip bonus episodes
         if is_bonus_episode(title):
             continue
 
-        # Search for pattern "med [Guest Name]"
-        match = re.search(pattern, title)
-        if match:
-            guest_text = match.group(1)
-
-            # Split multiple guests separated by " og "
-            guest_names = [g.strip() for g in guest_text.split(' og ')]
-
-            for guest_name in guest_names:
-                # Normalize name using aliases
-                canonical_name = normalize_name(guest_name, aliases)
-                guest_counter[canonical_name] += 1
+        for guest_name in extract_guests_from_title(title):
+            canonical_name = resolve_alias(guest_name, aliases)
+            guest_counter[canonical_name] += 1
 
     return dict(guest_counter)
 
 
 def count_extra_episodes(known_guests: Dict, aliases: Dict) -> Dict[str, int]:
-    """
-    Count guest contributions from manually added extra_episodes.
-    Excludes bonus episodes.
-
-    Args:
-        known_guests: Dict of known guests with their metadata
-        aliases: Dict mapping name variations to canonical names
-
-    Returns:
-        Dict with guest names and their contribution counts
-    """
-    extra_counter = defaultdict(int)
+    """Count contributions per guest from manually added extra_episodes."""
+    extra_counter: Dict[str, int] = defaultdict(int)
 
     for guest_name, guest_data in known_guests.items():
-        # Normalize name
-        canonical_name = normalize_name(guest_name, aliases)
-
-        # Count extra episodes (excluding bonus episodes)
-        extra_episodes = guest_data.get('extra_episodes', [])
-        for episode in extra_episodes:
+        canonical_name = resolve_alias(guest_name, aliases)
+        for episode in guest_data.get('extra_episodes', []):
             note = episode.get('note', '')
-            # Skip bonus episodes
             if not is_bonus_episode(note):
                 extra_counter[canonical_name] += 1
 
@@ -214,9 +136,10 @@ def main():
 
     # Load known guests and aliases
     known_guests, aliases = load_known_guests()
+    print(f"✓ Lastet {len(known_guests)} kjente gjester og {len(aliases)} alias")
 
-    # Fetch feed
-    feed_xml = fetch_feed()
+    # Load feed from local cache
+    feed_xml = load_feed(use_cache=True)
 
     print()
     print("📊 Analyserer gjesteopptredener (bonusepisoder ekskludert)...")

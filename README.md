@@ -79,6 +79,9 @@ podcast-feed-updater/
 ├── src/
 │   ├── common/              # Felles utilities
 │   │   ├── base_feed.py     # Baseklasse for feed-operasjoner
+│   │   ├── feed_loader.py   # Henter feed fra cache eller nett
+│   │   ├── guest_config.py  # Les/skriv cdspill_known_guests.json
+│   │   ├── podcast_utils.py # Bonus-deteksjon, gjesteparsing
 │   │   └── __init__.py
 │   └── enrichment/          # Feed enrichment
 │       ├── enricher.py      # FeedEnricher
