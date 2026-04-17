@@ -62,16 +62,11 @@ htmlcov/
 .netlify
 
 # Generated feeds (GitHub Actions generates these)
-/docs/
+# (output/ already ignored above)
 *.backup
 
 # Local cache for development/testing
 .cache/
-
-# Chapter analysis files (temporary, not for commit)
-CHAPTER_ANALYSIS_REPORT.md
-chapter_analysis.json
-analyze_chapters.py
 
 # Transcript output files (we commit the pipeline, not the generated transcripts)
 transcripts/*.vtt

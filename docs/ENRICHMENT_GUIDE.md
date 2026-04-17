@@ -68,9 +68,9 @@ uv run enrich_cdspill.py
 ```
 
 Dette vil:
-- ✅ Legge til permanent hosts fra `cdspill_permanent_staff.json`
+- ✅ Legge til permanent hosts fra `config/cdspill_permanent_staff.json`
 - ✅ Auto-detektere gjester fra episode-titler ("med [Name]")
-- ✅ Berike med profil-bilder og URLs fra `cdspill_known_guests.json`
+- ✅ Berike med profil-bilder og URLs fra `config/cdspill_known_guests.json`
 - ✅ Legge til funding link (Patreon)
 - ✅ Legge til social interact (Bluesky, Twitter/X, Facebook)
 - ✅ Legge til season/episode tags
@@ -83,13 +83,13 @@ Hvis en ny gjest dukker opp og mangler profilbilde:
 
 ```bash
 # Slå opp gjest i Podchaser
-uv run python3 lookup_guest.py "Guest Name"
+uv run python3 scripts/guests/lookup_guest.py "Guest Name"
 
 # Med alias for navnevarianter
-uv run python3 lookup_guest.py "Full Name" --alias "Short Name"
+uv run python3 scripts/guests/lookup_guest.py "Full Name" --alias "Short Name"
 ```
 
-Dette legger automatisk til gjesten i `cdspill_known_guests.json` med profilbilde og Podchaser-URL.
+Dette legger automatisk til gjesten i `config/cdspill_known_guests.json` med profilbilde og Podchaser-URL.
 
 **Se [PERSON_DATA_README.md](PERSON_DATA_README.md)** for fullstendig dokumentasjon av person-data systemet.
 
@@ -138,7 +138,7 @@ Etter enrichment:
 - ✅ Podlove Simple Chapters (inline XML format)
 
 **Output:**
-- `docs/cdspill-enriched.xml` (klar for hosting)
+- `output/cdspill-enriched.xml` (klar for hosting)
 ```
 
 ## 🌟 Avanserte features
@@ -250,11 +250,11 @@ uv pip install lxml
 
 Hvis en gjest mangler profilbilde:
 ```bash
-uv run python3 lookup_guest.py "Guest Name"
+uv run python3 scripts/guests/lookup_guest.py "Guest Name"
 ```
 
 ### Gjest har feil navn i episode-tittel
-**Løsning:** Legg til alias i `cdspill_known_guests.json`:
+**Løsning:** Legg til alias i `config/cdspill_known_guests.json`:
 ```json
 {
   "aliases": {
@@ -290,7 +290,7 @@ uv run python3 lookup_guest.py "Guest Name"
 ## 🚦 Neste steg
 
 1. ✅ Kjør `enrich_cdspill.py` og test resultatet
-2. ✅ Last opp `docs/cdspill-enriched.xml` til Netlify
+2. ✅ Last opp `output/cdspill-enriched.xml` til Netlify
 3. ✅ Test i en Podcasting 2.0-app (f.eks. Fountain, Podverse)
 4. ✅ Legg til flere gjester over tid
 5. ✅ Vurder andre tags (chapters, transcripts, value)

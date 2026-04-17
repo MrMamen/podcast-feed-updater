@@ -453,14 +453,14 @@ class FeedEnricher(BaseFeed):
                     print(f"    (detected as '{info['original_name']}' in titles)")
 
             print(f"\n💡 Add Podchaser profile with:")
-            print(f"   uv run python3 lookup_guest.py \"Guest Name\"")
+            print(f"   uv run python3 scripts/guests/lookup_guest.py \"Guest Name\"")
 
             # If there are guests that might need aliases
             detected_names = [info['original_name'] for info in unique_missing.values()
                             if info['original_name']]
             if detected_names:
                 print(f"\n💡 If name variations exist, add aliases with:")
-                print(f"   uv run python3 lookup_guest.py \"Full Name\" --alias \"Short Name\"")
+                print(f"   uv run python3 scripts/guests/lookup_guest.py \"Full Name\" --alias \"Short Name\"")
 
         return self
 
@@ -829,7 +829,7 @@ class FeedEnricher(BaseFeed):
     def convert_json_chapters_to_psc(
         self,
         chapters_dir: str = "chapters",
-        output_dir: str = "docs/chapters",
+        output_dir: str = "output/chapters",
         base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters"
     ) -> 'FeedEnricher':
         """
@@ -850,7 +850,7 @@ class FeedEnricher(BaseFeed):
 
         Args:
             chapters_dir: Directory containing source chapter JSON files (default: "chapters")
-            output_dir: Directory to copy chapter files for hosting (default: "docs/chapters")
+            output_dir: Directory to copy chapter files for hosting (default: "output/chapters")
             base_url: Base URL for hosted chapter files (default: GitHub Pages URL)
 
         Returns:

@@ -7,11 +7,16 @@ sorted from longest to shortest (default), shortest to longest, or in
 feed order (unsorted).
 
 Usage:
-    uv run python3 list_episodes_by_length.py            # longest first
-    uv run python3 list_episodes_by_length.py --asc      # shortest first
-    uv run python3 list_episodes_by_length.py --no-sort  # feed order
-    uv run python3 list_episodes_by_length.py --no-bonus # exclude bonus episodes
+    uv run python3 scripts/analysis/list_episodes_by_length.py            # longest first
+    uv run python3 scripts/analysis/list_episodes_by_length.py --asc      # shortest first
+    uv run python3 scripts/analysis/list_episodes_by_length.py --no-sort  # feed order
+    uv run python3 scripts/analysis/list_episodes_by_length.py --no-bonus # exclude bonus episodes
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 import argparse
 import os

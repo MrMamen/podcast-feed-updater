@@ -253,5 +253,5 @@ Denne kan du:
 Hvis du støter på problemer:
 1. Sjekk GitHub Actions logs
 2. Test lokalt: `uv run enrich_cdspill.py`
-3. Valider XML: `xmllint --noout docs/cdspill-enriched.xml`
+3. Valider XML: `xmllint --noout output/cdspill-enriched.xml`
 4. Åpne issue i repo eller spør i Podcasting 2.0 community

@@ -53,7 +53,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: ./output
         publish_branch: gh-pages
         # Incremental update - merges with existing files (preserves Spotify feed)
         keep_files: true

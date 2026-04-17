@@ -39,13 +39,13 @@ jobs:
     - name: Remove main enriched feed before publishing
       run: |
         # Don't overwrite the deployed enriched feed - only publish Spotify variant
-        rm -f docs/cdspill-enriched.xml
+        rm -f output/cdspill-enriched.xml
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: ./output
         publish_branch: gh-pages
         # Incremental update - merges with existing files
         keep_files: true

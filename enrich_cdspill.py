@@ -10,13 +10,13 @@ Usage:
 Local cache:
     The --local-cache option uses a local copy of the feed for testing
     when the network is down or for faster development iterations.
-    Download the cache with: uv run python3 download_cdspill_cache.py
+    Download the cache with: uv run python3 scripts/download_cdspill_cache.py
 
 Person data:
     - Permanent staff: cdspill_permanent_staff.json (hosts and other permanent roles)
     - Known guests: cdspill_known_guests.json (profile images, URLs, name aliases)
     - Auto-detection: Guests detected from episode titles ("med [name]")
-    - Lookup new guests: uv run python3 lookup_guest.py "Guest Name"
+    - Lookup new guests: uv run python3 scripts/guests/lookup_guest.py "Guest Name"
 
 The script adds:
     - Permanent hosts at channel level (with profile images and URLs)
@@ -65,7 +65,7 @@ def main():
     enricher = FeedEnricher(source)
 
     # Fetch feed
-    output_file = "docs/cdspill-enriched.xml"
+    output_file = "output/cdspill-enriched.xml"
     enricher.fetch_feed()
 
     # Validate that source feed doesn't already have Podcasting 2.0 tags
@@ -78,7 +78,7 @@ def main():
     # Load permanent staff (hosts and other permanent roles)
     import json
 
-    permanent_staff_file = "cdspill_permanent_staff.json"
+    permanent_staff_file = "config/cdspill_permanent_staff.json"
     known_guests_file = str(KNOWN_GUESTS_PATH)
 
     hosts = []
@@ -124,7 +124,7 @@ def main():
     if not KNOWN_GUESTS_PATH.exists():
         print(f"⚠ File not found: {known_guests_file}")
         print(f"  Guests will not have profile images")
-        print(f"  Use 'uv run python3 lookup_guest.py <name>' to add guest data")
+        print(f"  Use 'uv run python3 scripts/guests/lookup_guest.py <name>' to add guest data")
     else:
         try:
             known_guests_data = load_known_guests_data()
@@ -272,7 +272,7 @@ def main():
     print("\n" + "="*60)
     print("DONE!")
     print("="*60)
-    print("\nEnriched feed: docs/cdspill-enriched.xml")
+    print("\nEnriched feed: output/cdspill-enriched.xml")
     print("\nWhat was added:")
     print(f"  ✓ {len(hosts)} permanent host(s) with profile images and URLs")
     print("  ✓ Podcast GUID: Unique identifier for feed portability")
@@ -294,8 +294,8 @@ def main():
         guests_with_img = sum(1 for g in guests.values() if g.get('img'))
         print(f"     → {len(guests)} guests ({guests_with_img} with images), {len(aliases)} aliases")
     print("\nNext steps:")
-    print("  1. Review docs/cdspill-enriched.xml")
-    print("  2. Add new guests: uv run python3 lookup_guest.py 'Guest Name'")
+    print("  1. Review output/cdspill-enriched.xml")
+    print("  2. Add new guests: uv run python3 scripts/guests/lookup_guest.py 'Guest Name'")
     print("  3. Upload to hosting when ready")
     print()
 

@@ -30,7 +30,7 @@ def load_feed(
     if use_cache:
         if not cache_path.exists():
             print(f"❌ Fant ikke lokal cache på {cache_path}")
-            print("   Kjør først: uv run python3 download_cdspill_cache.py")
+            print("   Kjør først: uv run python3 scripts/download_cdspill_cache.py")
             sys.exit(1)
         if not quiet:
             print(f"📂 Leser feed fra {cache_path}...")
@@ -59,7 +59,7 @@ def resolve_feed_source(use_cache: bool, cache_path: Path = CACHE_PATH, url: str
     if use_cache:
         if not cache_path.exists():
             print(f"❌ Fant ikke lokal cache på {cache_path}")
-            print("   Kjør først: uv run python3 download_cdspill_cache.py")
+            print("   Kjør først: uv run python3 scripts/download_cdspill_cache.py")
             sys.exit(1)
         return str(cache_path)
     return url

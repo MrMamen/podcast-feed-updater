@@ -258,14 +258,14 @@ def fetch_rss(project_root: Path, refresh: bool = False) -> str:
     """Return CDspill feed XML.
 
     Priority:
-      1. docs/cdspill-enriched.xml (local enriched, has podcast:person guest tags)
+      1. output/cdspill-enriched.xml (local enriched, has podcast:person guest tags)
       2. .cache/cdspill_feed.xml   (cached Podbean original, refreshed every 24 h)
       3. Live fetch from Podbean   (when cache is missing or --refresh-rss)
     """
     import urllib.request
 
     # 1. Local enriched feed — richer metadata, no network needed
-    enriched = project_root / "docs" / "cdspill-enriched.xml"
+    enriched = project_root / "output" / "cdspill-enriched.xml"
     if enriched.exists():
         print(f"Using local enriched feed: {enriched.relative_to(project_root)}")
         return enriched.read_text(encoding="utf-8")

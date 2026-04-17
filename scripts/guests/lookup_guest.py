@@ -6,10 +6,15 @@ The script automatically detects when the searched name differs from the Podchas
 and prompts to add the searched name as an alias.
 
 Usage:
-    uv run python3 lookup_guest.py "Guest Name"
-    uv run python3 lookup_guest.py "Jan Anders Ekroll"  # Will suggest alias if Podchaser has "Anders Ekroll"
-    uv run python3 lookup_guest.py "Guest Name" --alias "Short Name"  # Manual alias
+    uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+    uv run python3 scripts/guests/lookup_guest.py "Jan Anders Ekroll"  # Will suggest alias if Podchaser has "Anders Ekroll"
+    uv run python3 scripts/guests/lookup_guest.py "Guest Name" --alias "Short Name"  # Manual alias
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 import sys
 
@@ -27,7 +32,7 @@ load_dotenv()
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: uv run python3 lookup_guest.py 'Guest Name' [--alias 'Short Name']")
+        print("Usage: uv run python3 scripts/guests/lookup_guest.py 'Guest Name' [--alias 'Short Name']")
         sys.exit(1)
 
     guest_name = sys.argv[1]

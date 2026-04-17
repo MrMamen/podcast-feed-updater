@@ -10,8 +10,13 @@ Bonus episodes are excluded from all counts.
 Results are grouped by number of full appearances and sorted by full appearances first.
 
 Usage:
-    uv run python3 rank_guests.py
+    uv run python3 scripts/analysis/rank_guests.py
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 from collections import defaultdict
 from typing import Dict

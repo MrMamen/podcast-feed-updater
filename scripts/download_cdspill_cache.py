@@ -7,7 +7,7 @@ This is useful for testing the enrichment script when the network is down
 or for faster development iterations without repeatedly hitting the live feed.
 
 Usage:
-    uv run python3 download_cdspill_cache.py
+    uv run python3 scripts/download_cdspill_cache.py
 
 The cached feed will be saved to: .cache/cdspill-original.xml
 

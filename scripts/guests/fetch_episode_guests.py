@@ -4,10 +4,15 @@ Fetch all guests for a specific episode from Podchaser.
 Generates extra_episodes JSON that can be added to cdspill_known_guests.json.
 
 Usage:
-    uv run python3 fetch_episode_guests.py "Episode Title"
-    uv run python3 fetch_episode_guests.py "cdspill.podbean.com/guid"
-    uv run python3 fetch_episode_guests.py "#106"
+    uv run python3 scripts/guests/fetch_episode_guests.py "Episode Title"
+    uv run python3 scripts/guests/fetch_episode_guests.py "cdspill.podbean.com/guid"
+    uv run python3 scripts/guests/fetch_episode_guests.py "#106"
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 import sys
 import json
@@ -74,7 +79,7 @@ CDSPILL_PODCAST_ID = "1540724"
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: uv run python3 fetch_episode_guests.py \"Episode Title or GUID or #106\"")
+        print("Usage: uv run python3 scripts/guests/fetch_episode_guests.py \"Episode Title or GUID or #106\"")
         sys.exit(1)
 
     search_term = sys.argv[1]
@@ -239,7 +244,7 @@ def main():
                 # Run lookup_guest.py for this guest
                 try:
                     result = subprocess.run(
-                        ['uv', 'run', 'python3', 'lookup_guest.py', guest['name']],
+                        ['uv', 'run', 'python3', 'scripts/guests/lookup_guest.py', guest['name']],
                         check=False
                     )
 
@@ -293,7 +298,7 @@ def main():
             print("\n❌ Cannot add extra_episodes until all guests are in known_guests.json")
             print("\nTo add manually, run:")
             for guest in guests_to_add:
-                print(f'  uv run python3 lookup_guest.py "{guest["name"]}"')
+                print(f'  uv run python3 scripts/guests/lookup_guest.py "{guest["name"]}"')
             sys.exit(1)
 
     # Update known_guests.json with extra_episodes

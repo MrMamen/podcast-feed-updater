@@ -107,7 +107,7 @@ def load_audio(path: str, sample_rate: int = 16000):
 
 def load_known_names(project_root: Path) -> set[str]:
     """Load all guest names + aliases from cdspill_known_guests.json."""
-    path = project_root / "cdspill_known_guests.json"
+    path = project_root / "config" / "cdspill_known_guests.json"
     if not path.exists():
         return set()
     data = json.loads(path.read_text(encoding="utf-8"))

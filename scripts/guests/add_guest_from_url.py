@@ -6,8 +6,13 @@ If the name from Podchaser doesn't match any existing guest, the user can
 select the matching guest from a list using arrow keys.
 
 Usage:
-    uv run python3 add_guest_from_url.py "https://www.podchaser.com/creators/name-id"
+    uv run python3 scripts/guests/add_guest_from_url.py "https://www.podchaser.com/creators/name-id"
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 import sys
 import re
@@ -78,7 +83,7 @@ def find_similar_guests(podchaser_name, known_guests):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: uv run python3 add_guest_from_url.py 'https://www.podchaser.com/creators/...'")
+        print("Usage: uv run python3 scripts/guests/add_guest_from_url.py 'https://www.podchaser.com/creators/...'")
         sys.exit(1)
 
     url = sys.argv[1]

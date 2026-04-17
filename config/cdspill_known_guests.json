@@ -1,5 +1,5 @@
 {
-  "_comment": "Known guests with Podchaser profile data and name aliases. Add new guests using: uv run python3 lookup_guest.py 'Guest Name'. Use 'extra_episodes' to manually add guests to specific episodes by GUID (e.g., when guest is not mentioned in title).",
+  "_comment": "Known guests with Podchaser profile data and name aliases. Add new guests using: uv run python3 scripts/guests/lookup_guest.py 'Guest Name'. Use 'extra_episodes' to manually add guests to specific episodes by GUID (e.g., when guest is not mentioned in title).",
   "guests": {
     "Adrian Haugen": {
       "href": "https://www.podchaser.com/creators/adrian-haugen-107tZxOga4",

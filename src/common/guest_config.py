@@ -6,11 +6,11 @@ import json
 from pathlib import Path
 from typing import Dict, Tuple
 
-KNOWN_GUESTS_PATH = Path("cdspill_known_guests.json")
+KNOWN_GUESTS_PATH = Path("config/cdspill_known_guests.json")
 
 _DEFAULT_COMMENT = (
     "Known guests with Podchaser profile data and name aliases. "
-    "Add new guests using: uv run python3 lookup_guest.py 'Guest Name'"
+    "Add new guests using: uv run python3 scripts/guests/lookup_guest.py 'Guest Name'"
 )
 
 

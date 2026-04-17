@@ -9,8 +9,13 @@ For each new guest:
 4. Guests already in the file are skipped (no re-lookup)
 
 Usage:
-    uv run python3 populate_guests.py
+    uv run python3 scripts/guests/populate_guests.py
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 import sys
 

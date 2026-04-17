@@ -9,9 +9,14 @@ Two types of appearances:
 Bonus episodes are excluded from all lists.
 
 Usage:
-    uv run python3 list_guest_episodes.py "Guest Name"
-    uv run python3 list_guest_episodes.py "Jostein Hakestad"
+    uv run python3 scripts/analysis/list_guest_episodes.py "Guest Name"
+    uv run python3 scripts/analysis/list_guest_episodes.py "Jostein Hakestad"
 """
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 import re
 import sys
@@ -196,7 +201,7 @@ def print_episodes(guest_name: str, episodes: List[Dict]):
 def main():
     """Main function."""
     if len(sys.argv) < 2:
-        print("Bruk: uv run python3 list_guest_episodes.py \"Gjestenavn\"")
+        print("Bruk: uv run python3 scripts/analysis/list_guest_episodes.py \"Gjestenavn\"")
         sys.exit(1)
 
     guest_name = sys.argv[1]

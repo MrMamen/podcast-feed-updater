@@ -16,13 +16,13 @@ Usage:
 Local cache:
     The --local-cache option uses a local copy of the feed for testing
     when the network is down or for faster development iterations.
-    Download the cache with: uv run python3 download_cdspill_cache.py
+    Download the cache with: uv run python3 scripts/download_cdspill_cache.py
 
 Person data:
     - Permanent staff: cdspill_permanent_staff.json (hosts and other permanent roles)
     - Known guests: cdspill_known_guests.json (profile images, URLs, name aliases)
     - Auto-detection: Guests detected from episode titles ("med [name]")
-    - Lookup new guests: uv run python3 lookup_guest.py "Guest Name"
+    - Lookup new guests: uv run python3 scripts/guests/lookup_guest.py "Guest Name"
 
 The script adds:
     - Permanent hosts at channel level (with profile images and URLs)
@@ -66,7 +66,7 @@ def main():
     # Determine source
     if args.local_cache:
         # For local testing, use the enriched feed that was generated
-        cache_file = "docs/cdspill-enriched.xml"
+        cache_file = "output/cdspill-enriched.xml"
         if not os.path.exists(cache_file):
             print(f"\n❌ Error: Enriched feed not found at {cache_file}")
             print("   Run enrich_cdspill.py first to generate the enriched feed")
@@ -81,7 +81,7 @@ def main():
     enricher = FeedEnricher(source)
 
     # Fetch already enriched feed from GitHub Pages
-    output_file = "docs/cdspill-youtube.xml"
+    output_file = "output/cdspill-youtube.xml"
     enricher.fetch_feed()
 
     print("\n📋 Source feed is already enriched with all Podcasting 2.0 tags")
@@ -110,7 +110,7 @@ def main():
     enricher.update_lastBuildDate()
 
     # Create output directory
-    os.makedirs("docs", exist_ok=True)
+    os.makedirs("output", exist_ok=True)
 
     # Write enriched feed
     enricher.write_feed(output_file)
@@ -118,7 +118,7 @@ def main():
     print("\n" + "="*60)
     print("DONE!")
     print("="*60)
-    print("\nYouTube feed: docs/cdspill-youtube.xml")
+    print("\nYouTube feed: output/cdspill-youtube.xml")
     print("\nBase feed includes all standard Podcasting 2.0 enrichments")
     print("\nYouTube-specific modifications applied:")
     print("  ✓ Episode numbers restored to titles (e.g., 'OutRun med Mats Lindh (#123)')")
@@ -127,9 +127,9 @@ def main():
     print("  ✓ Chapter tags removed (YouTube doesn't use them, saves space)")
     print("\nSource: Already enriched feed from GitHub Pages")
     print("Next steps:")
-    print("  1. Review docs/cdspill-youtube.xml")
-    print("  2. Verify episode titles: grep '<title>' docs/cdspill-youtube.xml | head")
-    print("  3. Verify timestamps: grep '0:00' docs/cdspill-youtube.xml | head")
+    print("  1. Review output/cdspill-youtube.xml")
+    print("  2. Verify episode titles: grep '<title>' output/cdspill-youtube.xml | head")
+    print("  3. Verify timestamps: grep '0:00' output/cdspill-youtube.xml | head")
     print("  4. Upload to YouTube when ready")
     print()
 
