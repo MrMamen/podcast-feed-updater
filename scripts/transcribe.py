@@ -196,10 +196,11 @@ def match_profiles(diar_segments: list, audio_wav, pipeline,
     for seg in diar_segments:
         by_speaker[seg["speaker"]].append(seg)
 
-    speaker_map: dict[str, str] = {}
     print(f"Matching {len(by_speaker)} clusters against "
           f"{len(profiles)} profiles...")
 
+    # Compute cluster embeddings and similarities against every profile
+    cluster_embs: dict[str, np.ndarray] = {}
     for spk, segs in sorted(by_speaker.items()):
         long_segs = sorted(segs, key=lambda s: s["end"] - s["start"],
                            reverse=True)[:30]
@@ -218,23 +219,41 @@ def match_profiles(diar_segments: list, audio_wav, pipeline,
                 continue
         if not embs:
             continue
-
         cluster_emb = np.mean(embs, axis=0)
         cluster_emb /= np.linalg.norm(cluster_emb) + 1e-8
+        cluster_embs[spk] = cluster_emb
 
-        sims = {}
+    # Compute all (cluster, profile, similarity) pairs
+    pairs = []
+    sim_table: dict[str, dict[str, float]] = {}
+    for spk, emb in cluster_embs.items():
+        sim_table[spk] = {}
         for name, prof_emb in profiles.items():
-            sims[name] = float(np.dot(cluster_emb, prof_emb))
+            sim = float(np.dot(emb, prof_emb))
+            sim_table[spk][name] = sim
+            pairs.append((sim, spk, name))
 
-        best_name = max(sims, key=sims.get)
-        best_sim = sims[best_name]
+    # Greedy 1:1 assignment — highest similarity first
+    speaker_map: dict[str, str] = {}
+    used_profiles: set[str] = set()
+    pairs.sort(reverse=True)
+    for sim, spk, name in pairs:
+        if spk in speaker_map or name in used_profiles:
+            continue
+        if sim < threshold:
+            break
+        speaker_map[spk] = name
+        used_profiles.add(name)
+
+    # Report assignments for each cluster
+    for spk in sorted(cluster_embs):
+        sims = sim_table[spk]
         sim_str = "  ".join(f"{n}={v:.3f}" for n, v in sorted(sims.items()))
-
-        if best_sim >= threshold:
-            speaker_map[spk] = best_name
-            print(f"  {spk} → {best_name} (sim={best_sim:.3f})  [{sim_str}]")
+        if spk in speaker_map:
+            print(f"  {spk} → {speaker_map[spk]} "
+                  f"(sim={sims[speaker_map[spk]]:.3f})  [{sim_str}]")
         else:
-            print(f"  {spk} → unknown (best {best_name}={best_sim:.3f})  [{sim_str}]")
+            print(f"  {spk} → unknown  [{sim_str}]")
 
     return speaker_map
 
