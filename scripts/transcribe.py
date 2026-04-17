@@ -122,7 +122,8 @@ def transcribe(audio_wav, *, model_name: str, language: str = "no",
 
     print(f"Transcribing ({len(audio_wav)/16000/60:.1f} min audio)...")
     t0 = time.time()
-    kwargs = dict(language=language, beam_size=beam_size, vad_filter=True)
+    kwargs = dict(language=language, beam_size=beam_size, vad_filter=True,
+                  word_timestamps=True)
     if initial_prompt:
         kwargs["initial_prompt"] = initial_prompt
     segments, info = model.transcribe(audio_wav, **kwargs)
@@ -408,6 +409,119 @@ def build_initial_prompt(meta: dict, project_root: Path,
 
 
 # --------------------------------------------------------------------------
+# Cue splitting (to keep cues under max_cue_seconds)
+# --------------------------------------------------------------------------
+def split_cue_by_words(words: list, max_dur: float = 8.0,
+                       max_chars: int = 120) -> list[tuple[float, float, str]]:
+    """Split using word-level timestamps from Whisper.
+
+    words: list of Word objects with .start, .end, .word
+    Returns list of (start, end, text) — cues end at natural word boundaries,
+    prefer ending after punctuation.
+    """
+    if not words:
+        return []
+
+    cues = []
+    cur_start = words[0].start
+    cur_words = []
+    cur_chars = 0
+
+    for i, w in enumerate(words):
+        word_text = w.word
+        cur_words.append(w)
+        cur_chars += len(word_text)
+        cur_dur = w.end - cur_start
+        stripped = word_text.strip()
+        ends_sentence = stripped and stripped[-1] in ".!?"
+        ends_phrase = stripped and stripped[-1] in ",;:"
+
+        should_split = False
+        is_last = (i == len(words) - 1)
+
+        # Must split if we'd exceed max duration or too many chars
+        if cur_dur >= max_dur or cur_chars >= max_chars:
+            should_split = True
+        # Prefer sentence end when cue is reasonably full
+        elif ends_sentence and cur_dur >= max_dur * 0.5:
+            should_split = True
+        # Prefer phrase end if close to max
+        elif ends_phrase and cur_dur >= max_dur * 0.8:
+            should_split = True
+
+        if should_split or is_last:
+            text = "".join(w.word for w in cur_words).strip()
+            cues.append((cur_start, w.end, text))
+            if not is_last:
+                cur_start = words[i + 1].start
+                cur_words = []
+                cur_chars = 0
+    return cues
+
+
+def split_long_cue(start: float, end: float, text: str,
+                   max_dur: float = 8.0) -> list[tuple[float, float, str]]:
+    """Split a cue into multiple shorter cues, preferring natural breaks.
+
+    Returns list of (start, end, text) tuples. Time is allocated
+    proportionally to character count of each chunk.
+    """
+    dur = end - start
+    if dur <= max_dur:
+        return [(start, end, text)]
+
+    # Pick a splitter that produces enough chunks
+    n_needed = int(dur / max_dur) + 1
+    chunks = None
+    for pattern in (
+        r"(?<=[.!?])\s+",          # sentence boundary
+        r"(?<=[.!?,;:])\s+",       # punctuation
+        r"\s+(?:og|men|så|eller|fordi|for|når|hvis)\s+",  # conjunctions
+        r"\s+",                     # whitespace fallback
+    ):
+        parts = re.split(pattern, text)
+        parts = [p.strip() for p in parts if p.strip()]
+        if len(parts) >= n_needed:
+            chunks = parts
+            break
+    if not chunks:
+        chunks = [text]
+
+    # Merge chunks into n_needed groups (roughly equal char count)
+    total_chars = sum(len(c) for c in chunks)
+    target = total_chars / n_needed
+    groups, current, current_len = [], [], 0
+    for c in chunks:
+        current.append(c)
+        current_len += len(c)
+        if current_len >= target and len(groups) < n_needed - 1:
+            groups.append(" ".join(current))
+            current, current_len = [], 0
+    if current:
+        groups.append(" ".join(current))
+
+    # Allocate time proportionally
+    total_chars = sum(len(g) for g in groups)
+    result = []
+    cursor = start
+    for g in groups[:-1]:
+        g_dur = dur * len(g) / total_chars
+        result.append((cursor, cursor + g_dur, g))
+        cursor += g_dur
+    result.append((cursor, end, groups[-1]))
+
+    # Recurse if any sub-cue is still too long AND we made progress
+    # (result has multiple chunks; if it's one big chunk, give up)
+    final = []
+    for (s, e, t) in result:
+        if e - s > max_dur and len(result) > 1 and len(t.split()) > 2:
+            final.extend(split_long_cue(s, e, t, max_dur))
+        else:
+            final.append((s, e, t))
+    return final
+
+
+# --------------------------------------------------------------------------
 # Correction pass (re-uses corrections.json schema)
 # --------------------------------------------------------------------------
 def apply_word_fixes(text: str, config: dict) -> str:
@@ -457,6 +571,12 @@ def main() -> int:
     parser.add_argument("--profiles", type=Path,
                         help="Speaker profiles .npy (built with build_speaker_profiles.py). "
                              "Auto-identifies known speakers after diarization.")
+    parser.add_argument("--line-width", type=int, default=42,
+                        help="Wrap cue text at this many characters "
+                             "(Apple Podcasts rejects unwrapped long lines). Default: 42")
+    parser.add_argument("--max-cue-seconds", type=float, default=8.0,
+                        help="Split cues longer than this many seconds "
+                             "(Apple Podcasts rejects long cues). Default: 8.0")
     parser.add_argument("--corrections", type=Path,
                         help="JSON with word/regex/post fixes to apply")
     parser.add_argument("--env", type=Path,
@@ -558,19 +678,46 @@ def main() -> int:
                     print(f"  {spk} → {speaker_map[spk]} (guest from metadata)")
 
     # Merge + render VTT -----------------------------------------------------
+    import textwrap
     print(f"\nWriting {args.output}...")
     lines = ["WEBVTT", ""]
+    split_count = 0
+    word_split = 0
     for seg in segs:
-        text = seg.text.strip()
-        text = apply_word_fixes(text, corrections)
         speaker = None
         if diar_segments:
             spk = speaker_for_range(diar_segments, seg.start, seg.end)
             speaker = speaker_map.get(spk, spk) if spk else None
 
-        lines.append(f"{format_ts(seg.start)} --> {format_ts(seg.end)}")
-        lines.append(f"<v {speaker}>{text}" if speaker else text)
-        lines.append("")
+        # Prefer word-level splitting when word timestamps are available
+        if getattr(seg, "words", None):
+            sub_cues = split_cue_by_words(seg.words,
+                                           max_dur=args.max_cue_seconds,
+                                           max_chars=args.line_width * 3)
+            sub_cues = [(s, e, apply_word_fixes(t, corrections))
+                         for (s, e, t) in sub_cues]
+            word_split += 1 if len(sub_cues) > 1 else 0
+        else:
+            text = apply_word_fixes(seg.text.strip(), corrections)
+            sub_cues = split_long_cue(seg.start, seg.end, text,
+                                       max_dur=args.max_cue_seconds)
+        if len(sub_cues) > 1:
+            split_count += len(sub_cues) - 1
+
+        for (cue_start, cue_end, cue_text) in sub_cues:
+            # Wrap text to keep individual lines short
+            wrapped = textwrap.wrap(cue_text, width=args.line_width,
+                                    break_long_words=False,
+                                    break_on_hyphens=False) or [""]
+            if speaker:
+                wrapped[0] = f"<v {speaker}>{wrapped[0]}"
+
+            lines.append(f"{format_ts(cue_start)} --> {format_ts(cue_end)}")
+            lines.extend(wrapped)
+            lines.append("")
+
+    if split_count:
+        print(f"  Split {split_count} cues ({word_split} via word-level timing)")
 
     args.output.write_text("\n".join(lines), encoding="utf-8")
 

@@ -174,7 +174,15 @@
     {"pattern": "\\bSigva\\b",     "replacement": "Sigve og"},
     {"pattern": "\\bSigge\\b",     "replacement": "Sigve"},
     {"pattern": "\\bSigv\\b",      "replacement": "Sigve"},
-    {"pattern": "\\bpåskelab\\b",  "replacement": "påskelabyrint"}
+    {"pattern": "\\bpåskelab\\b",  "replacement": "påskelabyrint"},
+    {"pattern": "\\bòg\\b",        "replacement": "og"},
+    {"pattern": "\\bÒg\\b",        "replacement": "Og"},
+    {"pattern": "[\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff]+", "replacement": ""},
+    {"pattern": "\\s*\\[[^\\]]*\\]\\s*",     "replacement": " "},
+    {"pattern": "\\s*\\.\\.\\.\\s*",     "replacement": " "},
+    {"pattern": "(?i)(^|[\\s.,!?])(eh|ehm|uhm|øh)\\b[,.]?", "replacement": "\\1"},
+    {"pattern": "\\s{2,}",                  "replacement": " "},
+    {"pattern": "^\\s+|\\s+$",              "replacement": ""}
   ],
 
   "phrase_fixes": [
