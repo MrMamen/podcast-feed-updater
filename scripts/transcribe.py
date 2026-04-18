@@ -470,9 +470,12 @@ def split_cue_by_words(words: list, max_dur: float = 8.0,
 
         if should_split or is_last:
             text = "".join(w.word for w in cur_words).strip()
-            cues.append((cur_start, w.end, text))
+            # Back-to-back: each cue ends exactly where the next one starts
+            # (carries through the silence until next word is spoken)
+            end = words[i + 1].start if not is_last else w.end
+            cues.append((cur_start, end, text))
             if not is_last:
-                cur_start = words[i + 1].start
+                cur_start = end
                 cur_words = []
                 cur_chars = 0
     return cues
@@ -702,6 +705,8 @@ def main() -> int:
     lines = ["WEBVTT", ""]
     split_count = 0
     word_split = 0
+    # First pass: collect all cues as (start, end, text, speaker)
+    all_cues = []
     for seg in segs:
         speaker = None
         if diar_segments:
@@ -724,16 +729,24 @@ def main() -> int:
             split_count += len(sub_cues) - 1
 
         for (cue_start, cue_end, cue_text) in sub_cues:
-            # Wrap text to keep individual lines short
-            wrapped = textwrap.wrap(cue_text, width=args.line_width,
-                                    break_long_words=False,
-                                    break_on_hyphens=False) or [""]
-            if speaker:
-                wrapped[0] = f"<v {speaker}>{wrapped[0]}"
+            all_cues.append([cue_start, cue_end, cue_text, speaker])
 
-            lines.append(f"{format_ts(cue_start)} --> {format_ts(cue_end)}")
-            lines.extend(wrapped)
-            lines.append("")
+    # Second pass: chain cues back-to-back (each cue's end = next cue's start).
+    # This mimics accepted-by-Apple transcripts where cues have no gaps
+    # — silence is carried by whichever cue precedes it.
+    for i in range(len(all_cues) - 1):
+        all_cues[i][1] = all_cues[i + 1][0]
+
+    # Render
+    for (cue_start, cue_end, cue_text, speaker) in all_cues:
+        wrapped = textwrap.wrap(cue_text, width=args.line_width,
+                                break_long_words=False,
+                                break_on_hyphens=False) or [""]
+        if speaker:
+            wrapped[0] = f"<v {speaker}>{wrapped[0]}"
+        lines.append(f"{format_ts(cue_start)} --> {format_ts(cue_end)}")
+        lines.extend(wrapped)
+        lines.append("")
 
     if split_count:
         print(f"  Split {split_count} cues ({word_split} via word-level timing)")

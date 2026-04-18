@@ -129,6 +129,7 @@
     ["Gjerløv",         "Gjerløw"],
     ["Gierløw",         "Gjerløw"],
     ["Jærløw",          "Gjerløw"],
+    ["Jærløv",          "Gjerløw"],
     ["Gerlaud",         "Gjerløw"],
     ["Jløv",            "Gjerløw"],
     ["doktorbobledaget", "Dr. Bobledrage"],
@@ -167,7 +168,20 @@
     ["starcraft",       "StarCraft"],
     ["zurgling",        "zergling"],
     ["Zurgling",        "zergling"],
-    ["MobyGym",         "MobyGames"]
+    ["MobyGym",         "MobyGames"],
+
+    ["Maymond",         "Mamen"],
+    ["Compact-PC",      "Compaq PC"],
+    ["Compact PC",      "Compaq PC"],
+    ["Pacman",          "Pac-Man"],
+    ["PacMan",          "Pac-Man"],
+    ["Synaps ",         "Synapse "],
+    ["Synaps.",         "Synapse."],
+    ["Synaps,",         "Synapse,"],
+    ["high memsys",     "himem.sys"],
+    ["autoaktiv date",  "autoexec.bat"],
+    ["525 floppy",      "5,25-tommer floppy"],
+    ["525 Floppy",      "5,25-tommer Floppy"]
   ],
 
   "regex_fixes": [
