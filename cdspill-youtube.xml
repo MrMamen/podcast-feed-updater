@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 13 Apr 2026 07:01:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Sun, 19 Apr 2026 09:30:37 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Sun, 19 Apr 2026 23:15:35 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -1428,7 +1428,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>12</itunes:season>
         <itunes:episode>122</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/xt24gr7ypqyhfmux/R6-hybrid-merge-capped.vtt" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/5ivuz39g5we9egh8/RainbowSix.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="4 (#122)">122</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm">Trond Sneås Skauge</podcast:person></item>
@@ -5859,15 +5859,61 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/03/27/langrenn-er-dritkjedelig/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+0:00 Intro
+0:49 Velkommen til cd SPILL
+2:01 Livepodcast på Tiltcast
+3:32 Kommentarer fra forrige episode
+13:36 Dagens spill: The Games Winter Challenge
+16:49 Hva går spillet ut på?
+19:32 Tech Specs
+22:10 Manualen
+26:37 Tournament mode og åpningsseremoni
+29:37 Luge og Bob
+35:23 Utfor og storslalåm
+41:25 Langrenn
+45:00 Skiskyting
+48:32 Skihopp
+52:19 Skøyteløp
+55:00 Teorien om den cracka versjonen
+57:53 Medaljer og hot seat
+1:01:54 Musikken
+1:06:07 Lignende spill
+1:10:47 Kommentarer fra sosiale medier
+1:16:27 Har det holdt seg?
+1:19:04 Avrunding og neste episode</description>
                                                             <content:encoded>&lt;p&gt;Spillet vi alle trodde helt Winter Games heter altså The Games: Winter Challenge og er tema i denne episoden. Men er dette 3D-spillet fra 1991 morsomt idag?&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/03/27/langrenn-er-dritkjedelig/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</content:encoded>
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+0:00 Intro
+0:49 Velkommen til cd SPILL
+2:01 Livepodcast på Tiltcast
+3:32 Kommentarer fra forrige episode
+13:36 Dagens spill: The Games Winter Challenge
+16:49 Hva går spillet ut på?
+19:32 Tech Specs
+22:10 Manualen
+26:37 Tournament mode og åpningsseremoni
+29:37 Luge og Bob
+35:23 Utfor og storslalåm
+41:25 Langrenn
+45:00 Skiskyting
+48:32 Skihopp
+52:19 Skøyteløp
+55:00 Teorien om den cracka versjonen
+57:53 Medaljer og hot seat
+1:01:54 Musikken
+1:06:07 Lignende spill
+1:10:47 Kommentarer fra sosiale medier
+1:16:27 Har det holdt seg?
+1:19:04 Avrunding og neste episode</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/6ann5s/theGames.mp3" length="77954163" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/6ann5s/theGames.mp3" length="84021472" type="audio/mpeg"/>
         <itunes:summary>Spillet vi alle trodde helt Winter Games heter altså The Games: Winter Challenge og er tema i denne episoden. Men er dette 3D-spillet fra 1991 morsomt idag?
  </itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
@@ -5877,7 +5923,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>7</itunes:season>
         <itunes:episode>72</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thegames.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thegames.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/efpt4zite36t9e7q/WinterChallenge.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="6 (#72)">72</podcast:episode></item>
     <item>
@@ -5893,7 +5939,30 @@ Les et flott &lt;a href='https://spillhistorie.no/2016/06/17/tilbakeblikk-sid-me
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/03/13/utforsk-en-ny-verden-i-sid-meiers-colonization/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+0:00 Intro
+0:34 Velkommen til cd SPILL
+2:04 Presentasjon av gjester: Eirik Gjerløw og Erlend Fiddan
+5:11 Nyhet: Chicago 2020 remake
+6:05 Kommentarer om forrige episode: DStroy
+10:45 Dagens spill: Sid Meier's Colonization (1994)
+12:28 Tech Specs
+13:50 Hva går spillet ut på?
+15:43 Første møte med spillet
+18:50 Kolonialisme som tema i spillet
+24:55 De fire nasjonene: Nederland, England, Frankrike, Spania
+38:30 Handelssystemet: varer, foredling, prissvingninger
+50:00 Koloniene og kolonister
+58:00 Continental Congress og Founding Fathers
+1:24:35 Krigføring: combat, soldater, enheter
+1:34:15 Endgame: erklære uavhengighet og slåss mot kongen
+1:46:40 Colonization (2008)
+1:49:40 FreeCol (open source remake)
+1:54:43 Kommentarer fra sosiale medier
+2:03:49 Har det holdt seg?
+2:07:32 Finnes det noe tilsvarende idag?
+2:08:29 Avrunding og neste episode: The Games Winter Challenge</description>
                                                             <content:encoded>&lt;p&gt;Sigve og MrMamen tar for seg Civilization-spinoffen, Sid Meier's Colonization. Er det enkelt å erobre den nye verden, eller er det rett og slett for komplisert? Med på laget har de fått Eirik Gjerløw og Erlend Fiddan som også har testet 2008-versjonen og FreeCol.&lt;/p&gt;
 &lt;p&gt;Relevante lenker:&lt;br&gt;
 Last ned &lt;a href='https://www.freecol.org'&gt;FreeCol her&lt;/a&gt;&lt;br&gt;
@@ -5902,9 +5971,32 @@ Les et flott &lt;a href='https://spillhistorie.no/2016/06/17/tilbakeblikk-sid-me
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/03/13/utforsk-en-ny-verden-i-sid-meiers-colonization/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</content:encoded>
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+0:00 Intro
+0:34 Velkommen til cd SPILL
+2:04 Presentasjon av gjester: Eirik Gjerløw og Erlend Fiddan
+5:11 Nyhet: Chicago 2020 remake
+6:05 Kommentarer om forrige episode: DStroy
+10:45 Dagens spill: Sid Meier's Colonization (1994)
+12:28 Tech Specs
+13:50 Hva går spillet ut på?
+15:43 Første møte med spillet
+18:50 Kolonialisme som tema i spillet
+24:55 De fire nasjonene: Nederland, England, Frankrike, Spania
+38:30 Handelssystemet: varer, foredling, prissvingninger
+50:00 Koloniene og kolonister
+58:00 Continental Congress og Founding Fathers
+1:24:35 Krigføring: combat, soldater, enheter
+1:34:15 Endgame: erklære uavhengighet og slåss mot kongen
+1:46:40 Colonization (2008)
+1:49:40 FreeCol (open source remake)
+1:54:43 Kommentarer fra sosiale medier
+2:03:49 Har det holdt seg?
+2:07:32 Finnes det noe tilsvarende idag?
+2:08:29 Avrunding og neste episode: The Games Winter Challenge</content:encoded>
                                     
-        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/tnabwi/colonization.mp3" length="132330838" type="audio/mpeg"/>
+        <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/tnabwi/colonization.mp3" length="137225106" type="audio/mpeg"/>
         <itunes:summary>Sigve og MrMamen tar for seg Civilization-spinoffen, Sid Meier's Colonization. Er det enkelt å erobre den nye verden, eller er det rett og slett for komplisert? Med på laget har de fått Eirik Gjerløw og Erlend Fiddan som også har testet 2008-versjonen og FreeCol.</itunes:summary>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
@@ -5913,7 +6005,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>7</itunes:season>
         <itunes:episode>71</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/jbczy6ets5kw8f7m/Colonization.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="5 (#71)">71</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
