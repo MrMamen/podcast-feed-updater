@@ -331,7 +331,7 @@ def wrap_text(text: str, width: int) -> str:
 
 def render_vtt(cues: list[tuple[str, str, str | None, str]],
                line_width: int, language: str) -> str:
-    out = ["WEBVTT", "Kind: captions", f"Language: {language}", ""]
+    out = ["WEBVTT", ""]
     for start, end, spk, text in cues:
         out.append(f"{start} --> {end}")
         body = wrap_text(text, line_width)
@@ -406,7 +406,7 @@ def main() -> int:
     parser.add_argument("--line-width", type=int,
                         help="Max chars per line (default: config value or 42)")
     parser.add_argument("--max-cue-seconds", type=float,
-                        help="Split cues longer than this (default: config or 8)")
+                        help="Split cues longer than this (default: config or 7)")
     parser.add_argument("--backup", action="store_true",
                         help="Save <input>.bak before overwriting")
     parser.add_argument("--keep-fillers", action="store_true",
@@ -430,7 +430,7 @@ def main() -> int:
         config = _merge_config(config, episode)
 
     line_width   = args.line_width   or config.get("line_width", 42)
-    max_cue_sec  = args.max_cue_seconds or config.get("max_cue_seconds", 8.0)
+    max_cue_sec  = args.max_cue_seconds or config.get("max_cue_seconds", 7.0)
     language     = config.get("language", "no")
     abbreviations= config.get("abbreviations", ["Mr.", "Dr."])
     fillers      = [] if args.keep_fillers else config.get("filler_words", ["eh", "ehm", "uhm", "øh"])

@@ -596,9 +596,9 @@ def main() -> int:
     parser.add_argument("--line-width", type=int, default=42,
                         help="Wrap cue text at this many characters "
                              "(Apple Podcasts rejects unwrapped long lines). Default: 42")
-    parser.add_argument("--max-cue-seconds", type=float, default=8.0,
-                        help="Split cues longer than this many seconds "
-                             "(Apple Podcasts rejects long cues). Default: 8.0")
+    parser.add_argument("--max-cue-seconds", type=float, default=7.0,
+                        help="Split cues longer than this many seconds. "
+                             "Default: 7.0 (see transcripts/TRANSCRIPT_GUIDELINES.md)")
     parser.add_argument("--corrections", type=Path,
                         help="JSON with word/regex/post fixes to apply")
     parser.add_argument("--env", type=Path,
