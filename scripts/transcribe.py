@@ -443,41 +443,64 @@ def split_cue_by_words(words: list, max_dur: float = 8.0,
 
     cues = []
     cur_start = words[0].start
-    cur_words = []
+    cur_words: list = []
     cur_chars = 0
 
+    def flush(next_word_start: float | None):
+        """Emit cue from cur_start to last word end (extended through short
+        pauses if a next word follows soon). Returns new cur_start."""
+        if not cur_words:
+            return next_word_start
+        text = "".join(w.word for w in cur_words).strip()
+        last_end = cur_words[-1].end
+        if next_word_start is not None:
+            gap = next_word_start - last_end
+            cue_end = next_word_start if gap < 1.0 else last_end
+        else:
+            cue_end = last_end
+        # Safeguard against Whisper word-timestamp outliers (e.g. a single
+        # word spanning a long musical passage): never exceed max_dur.
+        if cue_end - cur_start > max_dur:
+            cue_end = cur_start + max_dur
+        cues.append((cur_start, cue_end, text))
+        return next_word_start
+
     for i, w in enumerate(words):
-        word_text = w.word
+        # Peek: would adding this word push cur over max_dur or max_chars?
+        if cur_words:
+            would_dur = w.end - cur_start
+            would_chars = cur_chars + len(w.word)
+            # Allow a small overshoot when the next word completes a
+            # sentence, to avoid emitting orphan trailing cues like "and."
+            stripped = w.word.strip()
+            word_ends_sentence = bool(stripped) and stripped[-1] in ".!?"
+            dur_limit = max_dur + (1.0 if word_ends_sentence else 0)
+            if would_dur > dur_limit or would_chars > max_chars:
+                cur_start = flush(w.start)
+                cur_words = []
+                cur_chars = 0
+
         cur_words.append(w)
-        cur_chars += len(word_text)
+        cur_chars += len(w.word)
         cur_dur = w.end - cur_start
-        stripped = word_text.strip()
+        stripped = w.word.strip()
         ends_sentence = stripped and stripped[-1] in ".!?"
         ends_phrase = stripped and stripped[-1] in ",;:"
 
-        should_split = False
-        is_last = (i == len(words) - 1)
-
-        # Must split if we'd exceed max duration or too many chars
-        if cur_dur >= max_dur or cur_chars >= max_chars:
-            should_split = True
-        # Prefer sentence end when cue is reasonably full
-        elif ends_sentence and cur_dur >= max_dur * 0.5:
-            should_split = True
-        # Prefer phrase end if close to max
+        # Preferred split: at natural punctuation once cue is reasonably full
+        next_start = words[i + 1].start if i + 1 < len(words) else None
+        if ends_sentence and cur_dur >= max_dur * 0.5:
+            cur_start = flush(next_start)
+            cur_words = []
+            cur_chars = 0
         elif ends_phrase and cur_dur >= max_dur * 0.8:
-            should_split = True
+            cur_start = flush(next_start)
+            cur_words = []
+            cur_chars = 0
 
-        if should_split or is_last:
-            text = "".join(w.word for w in cur_words).strip()
-            # Back-to-back: each cue ends exactly where the next one starts
-            # (carries through the silence until next word is spoken)
-            end = words[i + 1].start if not is_last else w.end
-            cues.append((cur_start, end, text))
-            if not is_last:
-                cur_start = end
-                cur_words = []
-                cur_chars = 0
+    # Final flush
+    if cur_words:
+        flush(None)
     return cues
 
 
