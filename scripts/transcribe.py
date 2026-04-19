@@ -731,13 +731,6 @@ def main() -> int:
         for (cue_start, cue_end, cue_text) in sub_cues:
             all_cues.append([cue_start, cue_end, cue_text, speaker])
 
-    # Second pass: chain cues back-to-back (each cue's end = next cue's start).
-    # This mimics accepted-by-Apple transcripts where cues have no gaps
-    # — silence is carried by whichever cue precedes it.
-    for i in range(len(all_cues) - 1):
-        all_cues[i][1] = all_cues[i + 1][0]
-
-    # Render
     for (cue_start, cue_end, cue_text, speaker) in all_cues:
         wrapped = textwrap.wrap(cue_text, width=args.line_width,
                                 break_long_words=False,

@@ -192,9 +192,8 @@
     {"pattern": "\\bòg\\b",        "replacement": "og"},
     {"pattern": "\\bÒg\\b",        "replacement": "Og"},
     {"pattern": "[\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff]+", "replacement": ""},
-    {"pattern": "\\s*\\[[^\\]]*\\]\\s*",     "replacement": " "},
-    {"pattern": "\\s{2,}",                  "replacement": " "},
-    {"pattern": "^\\s+|\\s+$",              "replacement": ""}
+    {"pattern": "[ \\t]*\\[[^\\]\\n]*\\][ \\t]*", "replacement": " "},
+    {"pattern": "[ \\t]{2,}",               "replacement": " "}
   ],
 
   "phrase_fixes": [
