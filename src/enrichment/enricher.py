@@ -1681,13 +1681,19 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Trimmed itunes:summary to first paragraph on {updated_count} episodes")
         return self
 
-    def remove_itunes_summary(self) -> 'FeedEnricher':
+    def remove_itunes_summary(self, include_channel: bool = False) -> 'FeedEnricher':
         """
-        Remove <itunes:summary> from channel and all items.
+        Remove <itunes:summary> from items (and optionally the channel).
 
         Empirically verified that no tested client uses itunes:summary as its
         only source: MediaMonkey is the only one that prefers it, but falls
-        back to <description> when absent. Safe to drop for byte savings.
+        back to <description> when absent. Item-level removal is safe for byte
+        savings; channel-level is kept by default since it's a single element
+        and some feed validators expect it.
+
+        Args:
+            include_channel: If True, also remove the channel-level
+                <itunes:summary>
 
         Returns:
             Self for chaining
@@ -1698,10 +1704,11 @@ class FeedEnricher(BaseFeed):
         itunes_ns = 'http://www.itunes.com/dtds/podcast-1.0.dtd'
         removed = 0
 
-        channel_summary = self.channel.find(f'{{{itunes_ns}}}summary')
-        if channel_summary is not None:
-            self.channel.remove(channel_summary)
-            removed += 1
+        if include_channel:
+            channel_summary = self.channel.find(f'{{{itunes_ns}}}summary')
+            if channel_summary is not None:
+                self.channel.remove(channel_summary)
+                removed += 1
 
         for item in self.channel.findall('item'):
             summary = item.find(f'{{{itunes_ns}}}summary')
