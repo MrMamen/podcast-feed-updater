@@ -17,6 +17,7 @@ Usage:
 
 import os
 import sys
+import uuid
 import argparse
 from dotenv import load_dotenv
 from src.enrichment.enricher import FeedEnricher
@@ -25,26 +26,34 @@ load_dotenv()
 
 BASE_PUBLISH_URL = "https://mrmamen.github.io/podcast-feed-updater"
 
+# Distinct podcast:guid per variant so clients that dedupe by feed identity
+# (e.g. MediaMonkey) treat each test feed as a separate subscription.
+# Generated once via uuid5 so they are stable across runs.
+NAMESPACE = uuid.UUID("a550e4b5-6615-5a5d-b1d5-a371c01552a2")  # main feed guid
+
 VARIANTS = [
     {
         "slug": "no-description",
         "field_tag": "description",
         "title_suffix": " [TEST uten description]",
+        "strip_from_channel": False,  # <description> is required on RSS 2.0 channel
     },
     {
         "slug": "no-content",
         "field_tag": "{http://purl.org/rss/1.0/modules/content/}encoded",
         "title_suffix": " [TEST uten content:encoded]",
+        "strip_from_channel": True,
     },
     {
         "slug": "no-summary",
         "field_tag": "{http://www.itunes.com/dtds/podcast-1.0.dtd}summary",
         "title_suffix": " [TEST uten itunes:summary]",
+        "strip_from_channel": True,
     },
 ]
 
 
-def generate_variant(source: str, slug: str, field_tag: str, title_suffix: str):
+def generate_variant(source: str, slug: str, field_tag: str, title_suffix: str, strip_from_channel: bool):
     enricher = FeedEnricher(source)
     enricher.fetch_feed()
 
@@ -56,15 +65,30 @@ def generate_variant(source: str, slug: str, field_tag: str, title_suffix: str):
             item.remove(el)
             removed += 1
 
-    # Also strip from channel level so feed-level previews match
-    channel_el = enricher.channel.find(field_tag)
-    if channel_el is not None:
-        enricher.channel.remove(channel_el)
+    if strip_from_channel:
+        channel_el = enricher.channel.find(field_tag)
+        if channel_el is not None:
+            enricher.channel.remove(channel_el)
 
     # Distinguish in podcast apps by appending to <title>
     title_elem = enricher.channel.find('title')
     if title_elem is not None and title_elem.text:
         title_elem.text = title_elem.text + title_suffix
+
+    # Replace podcast:guid with a variant-specific one so clients that dedupe
+    # on feed identity treat this as a distinct subscription.
+    podcast_ns = 'https://podcastindex.org/namespace/1.0'
+    guid_elem = enricher.channel.find(f'{{{podcast_ns}}}guid')
+    variant_feed_guid = str(uuid.uuid5(NAMESPACE, slug))
+    if guid_elem is not None:
+        guid_elem.text = variant_feed_guid
+
+    # Suffix every episode <guid> so clients that dedupe on episode guid
+    # treat these as different episodes from the main feed.
+    for item in items:
+        item_guid = item.find('guid')
+        if item_guid is not None and item_guid.text:
+            item_guid.text = f"{item_guid.text}#{slug}"
 
     output_file = f"output/cdspill-test-{slug}.xml"
     feed_url = f"{BASE_PUBLISH_URL}/cdspill-test-{slug}.xml"
@@ -75,6 +99,7 @@ def generate_variant(source: str, slug: str, field_tag: str, title_suffix: str):
 
     enricher.write_feed(output_file)
     print(f"  → stripped {field_tag} from {removed} item(s), wrote {output_file}")
+    print(f"     podcast:guid = {variant_feed_guid}")
 
 
 def main():
