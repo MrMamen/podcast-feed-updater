@@ -80,7 +80,18 @@ def main():
     enricher.fetch_feed()
 
     print("\n📋 Source feed is already enriched with all Podcasting 2.0 tags")
-    print("   Updating metadata for Spotify variant...")
+    print("   Adding psc:chapters (Spotify-specific) and updating metadata...")
+
+    # Add psc:chapters inline (Spotify reads these; main feed omits them).
+    # Must run before removing podcast:chapters since the JSON URL is read from there.
+    enricher.convert_json_chapters_to_psc()
+
+    # Drop podcast:chapters — Spotify only reads psc:chapters, so the JSON
+    # reference is dead weight that only slows down parsing.
+    enricher.remove_chapter_tags(remove_podcast=True, remove_psc=False)
+
+    # Format podcast elements for better readability (call after all enrichment)
+    enricher.format_podcast_elements()
 
     # Update feed metadata to reflect Spotify-specific location
     enricher.update_atom_link("https://mrmamen.github.io/podcast-feed-updater/cdspill-spotify.xml")

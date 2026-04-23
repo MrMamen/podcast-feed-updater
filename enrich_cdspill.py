@@ -241,6 +241,11 @@ def main():
         ],
     )
 
+    # Temporary: append short markers to description/content:encoded/itunes:summary
+    # so we can tell which field each podcast client actually displays. Remove
+    # once the empirical test is done.
+    enricher.add_field_debug_markers()
+
     # Add OP3 analytics prefix for privacy-respecting download tracking
     enricher.add_op3_prefix()
 
@@ -252,8 +257,11 @@ def main():
         },
     )
 
-    # Convert JSON chapters to Podlove Simple Chapters format
-    enricher.convert_json_chapters_to_psc()
+    # Host chapter JSON files and rewrite podcast:chapters URLs to self-hosted.
+    # psc:chapters is NOT added here — it's Spotify-specific and added by
+    # enrich_cdspill_spotify.py so the main feed stays clean and Spotify can
+    # be re-run independently of this script.
+    enricher.convert_json_chapters_to_psc(include_psc_tags=False)
 
     # Format podcast elements for better readability (call after all enrichment)
     enricher.format_podcast_elements()
@@ -284,7 +292,7 @@ def main():
     print("  ✓ Podroll: 4 recommended podcasts")
     print("  ✓ Social interactions: Bluesky, Twitter/X, Facebook")
     print("  ✓ OP3 analytics: Privacy-respecting download tracking")
-    print("  ✓ Podlove Simple Chapters: Inline chapter markers")
+    print("  ✓ Self-hosted chapter JSON files (podcast:chapters URLs rewritten)")
     print("\nPerson data files:")
     print(f"  📋 Permanent staff: {permanent_staff_file}")
     print(f"  📦 Known guests: {known_guests_file}")

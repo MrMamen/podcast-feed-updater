@@ -95,6 +95,11 @@ def main():
     # Restore episode numbers to titles (YouTube displays these differently)
     enricher.restore_episode_numbers_to_titles()
 
+    # Generate psc:chapters inline so add_chapter_timestamps_to_description can read them.
+    # Main feed no longer carries psc:chapters, so we must reconstruct them here
+    # before extracting timestamps.
+    enricher.convert_json_chapters_to_psc()
+
     # Add chapter timestamps to descriptions (YouTube-compatible format)
     enricher.add_chapter_timestamps_to_description()
 

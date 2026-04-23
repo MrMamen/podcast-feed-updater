@@ -389,10 +389,12 @@ class FeedEnricher(BaseFeed):
                     )
                     person_elem.text = guest_name
 
-                    # Add additional info if available (check both original and normalized name)
-                    guest_info = known_guests.get(original_name, {})
+                    # Look up canonical name first (guest_name is already normalized
+                    # from any alias). Falling back to original_name would return
+                    # an alias stub ({"alias": ...}) and miss the real href/img.
+                    guest_info = known_guests.get(guest_name, {})
                     if not guest_info:
-                        guest_info = known_guests.get(guest_name, {})
+                        guest_info = known_guests.get(original_name, {})
 
                     has_href = False
                     if guest_info:
@@ -830,13 +832,17 @@ class FeedEnricher(BaseFeed):
         self,
         chapters_dir: str = "chapters",
         output_dir: str = "output/chapters",
-        base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters"
+        base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters",
+        include_psc_tags: bool = True
     ) -> 'FeedEnricher':
         """
-        Convert podcast:chapters JSON references to Podlove Simple Chapters (PSC) format.
+        Process chapter JSON files and optionally add Podlove Simple Chapters (PSC) tags.
+
+        Always performs: loads local JSON (with image injection, sorting, intro-fill),
+        saves enriched copy to output_dir, and rewrites podcast:chapters URL to base_url.
+        Optionally (include_psc_tags=True): inserts <psc:chapters> inline for Spotify.
 
         First attempts to load chapters from local JSON files matching Podbean filenames.
-        If found, copies to output directory and updates podcast:chapters URL.
         If not found, fetches from podcast:chapters URLs.
         Supports toc: false flag to exclude chapters from table of contents.
 
@@ -852,6 +858,8 @@ class FeedEnricher(BaseFeed):
             chapters_dir: Directory containing source chapter JSON files (default: "chapters")
             output_dir: Directory to copy chapter files for hosting (default: "output/chapters")
             base_url: Base URL for hosted chapter files (default: GitHub Pages URL)
+            include_psc_tags: If True, insert <psc:chapters> inline (for Spotify variant).
+                If False, only host JSON and rewrite URLs (for main feed).
 
         Returns:
             Self for chaining
@@ -859,9 +867,9 @@ class FeedEnricher(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        # Ensure PSC namespace is registered
+        # Ensure PSC namespace is registered (only needed when inserting PSC tags)
         psc_ns = "http://podlove.org/simple-chapters"
-        if psc_ns not in self.root.nsmap.values():
+        if include_psc_tags and psc_ns not in self.root.nsmap.values():
             # Add namespace to root element
             nsmap = self.root.nsmap.copy()
             nsmap['psc'] = psc_ns
@@ -1284,58 +1292,62 @@ class FeedEnricher(BaseFeed):
                             new_url = f"{base_url}/{filename}"
                             podcast_chapters.set('url', new_url)
 
-                        # Create PSC chapters element
-                        psc_chapters = etree.Element(
-                            f'{{{psc_ns}}}chapters',
-                            version="1.2"
-                        )
+                        if include_psc_tags:
+                            # Create PSC chapters element
+                            psc_chapters = etree.Element(
+                                f'{{{psc_ns}}}chapters',
+                                version="1.2"
+                            )
 
-                        # Convert chapters to PSC format (chapters are already sorted and have intro)
-                        if 'chapters' in chapters_data:
-                            # Use the already processed chapters from chapters_data
-                            processed_chapters = chapters_data['chapters']
+                            # Convert chapters to PSC format (chapters are already sorted and have intro)
+                            if 'chapters' in chapters_data:
+                                # Use the already processed chapters from chapters_data
+                                processed_chapters = chapters_data['chapters']
 
-                            for chapter in processed_chapters:
-                                # Skip hidden chapters (toc: false)
-                                if chapter.get('toc', True) is False:
-                                    continue
+                                for chapter in processed_chapters:
+                                    # Skip hidden chapters (toc: false)
+                                    if chapter.get('toc', True) is False:
+                                        continue
 
-                                start_time = chapter.get('startTime', 0)
-                                title = chapter.get('title', '')
+                                    start_time = chapter.get('startTime', 0)
+                                    title = chapter.get('title', '')
 
-                                # Convert seconds to HH:MM:SS format
-                                hours = int(start_time // 3600)
-                                minutes = int((start_time % 3600) // 60)
-                                seconds = int(start_time % 60)
-                                time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+                                    # Convert seconds to HH:MM:SS format
+                                    hours = int(start_time // 3600)
+                                    minutes = int((start_time % 3600) // 60)
+                                    seconds = int(start_time % 60)
+                                    time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
-                                # Create chapter element
-                                attrs = {
-                                    'start': time_str,
-                                    'title': title
-                                }
+                                    # Create chapter element
+                                    attrs = {
+                                        'start': time_str,
+                                        'title': title
+                                    }
 
-                                # Add optional attributes
-                                if 'url' in chapter:
-                                    attrs['href'] = chapter['url']
-                                # Only add image if it has a non-empty value
-                                # (null or "" in source file disables auto-matching; cleaned up before PSC)
-                                if 'img' in chapter and chapter['img']:
-                                    attrs['image'] = chapter['img']
+                                    # Add optional attributes
+                                    if 'url' in chapter:
+                                        attrs['href'] = chapter['url']
+                                    # Only add image if it has a non-empty value
+                                    # (null or "" in source file disables auto-matching; cleaned up before PSC)
+                                    if 'img' in chapter and chapter['img']:
+                                        attrs['image'] = chapter['img']
 
-                                psc_chapter = etree.SubElement(
-                                    psc_chapters,
-                                    f'{{{psc_ns}}}chapter',
-                                    **attrs
-                                )
+                                    psc_chapter = etree.SubElement(
+                                        psc_chapters,
+                                        f'{{{psc_ns}}}chapter',
+                                        **attrs
+                                    )
 
-                            # Add PSC chapters to item (after podcast:chapters)
-                            chapter_index = list(item).index(podcast_chapters)
-                            item.insert(chapter_index + 1, psc_chapters)
+                                # Add PSC chapters to item (after podcast:chapters)
+                                chapter_index = list(item).index(podcast_chapters)
+                                item.insert(chapter_index + 1, psc_chapters)
 
-                            # Add newline before psc:chapters for better readability
-                            self._add_newline_before_element(item, psc_chapters)
+                                # Add newline before psc:chapters for better readability
+                                self._add_newline_before_element(item, psc_chapters)
 
+                                converted_count += 1
+                        else:
+                            # URL rewrite + hosted JSON only; no PSC tags in output
                             converted_count += 1
 
                     except Exception as e:
@@ -1343,7 +1355,10 @@ class FeedEnricher(BaseFeed):
                         # Silently skip episodes with failed chapter conversions
                         continue
 
-        print(f"✓ Converted {converted_count} JSON chapters to Podlove Simple Chapters format")
+        if include_psc_tags:
+            print(f"✓ Converted {converted_count} JSON chapters to Podlove Simple Chapters format")
+        else:
+            print(f"✓ Hosted {converted_count} chapter JSON files and rewrote podcast:chapters URLs")
         if local_count > 0:
             print(f"  📁 {local_count} from local files (with toc: false support)")
         if failed_count > 0:
@@ -1666,6 +1681,57 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Trimmed itunes:summary to first paragraph on {updated_count} episodes")
         return self
 
+    def add_field_debug_markers(
+        self,
+        description_marker: str = "[DESC]",
+        content_marker: str = "[CONT]",
+        summary_marker: str = "[SUM]",
+    ) -> 'FeedEnricher':
+        """
+        Append distinguishing markers to description, content:encoded, and itunes:summary.
+
+        Useful for identifying which field each podcast client actually displays
+        (they often contain nearly-identical text). Markers are appended at the
+        very end to minimize visibility to regular listeners.
+
+        Args:
+            description_marker: Suffix for <description>
+            content_marker: Suffix for <content:encoded>
+            summary_marker: Suffix for <itunes:summary>
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        items = self.channel.findall('item')
+        updated = 0
+
+        for item in items:
+            touched = False
+
+            desc = item.find('description')
+            if desc is not None and desc.text:
+                desc.text = desc.text.rstrip() + f"\n\n{description_marker}"
+                touched = True
+
+            content = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
+            if content is not None and content.text:
+                content.text = content.text.rstrip() + f"\n\n{content_marker}"
+                touched = True
+
+            summary = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}summary')
+            if summary is not None and summary.text:
+                summary.text = summary.text.rstrip() + f" {summary_marker}"
+                touched = True
+
+            if touched:
+                updated += 1
+
+        print(f"✓ Added field debug markers to {updated} episodes")
+        return self
+
     def add_chapter_timestamps_to_description(self, separator: str = '\n\n') -> 'FeedEnricher':
         """
         Extract chapter timestamps from psc:chapters and append to episode descriptions.
@@ -1731,13 +1797,21 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Added chapter timestamps to {updated_count} episode descriptions")
         return self
 
-    def remove_chapter_tags(self) -> 'FeedEnricher':
+    def remove_chapter_tags(
+        self,
+        remove_podcast: bool = True,
+        remove_psc: bool = True,
+    ) -> 'FeedEnricher':
         """
-        Remove podcast:chapters and psc:chapters tags from episodes.
+        Remove podcast:chapters and/or psc:chapters tags from episodes.
 
-        This is useful for feeds like YouTube that don't support chapter tags
-        but use timestamps in descriptions instead. Removing these tags reduces
-        feed size without losing functionality.
+        Useful for variants that don't read one or both chapter formats:
+          - YouTube: remove both (uses timestamps in descriptions instead)
+          - Spotify: remove only podcast:chapters (reads psc:chapters inline)
+
+        Args:
+            remove_podcast: If True, remove <podcast:chapters> elements
+            remove_psc: If True, remove <psc:chapters> elements
 
         Returns:
             Self for chaining
@@ -1753,19 +1827,24 @@ class FeedEnricher(BaseFeed):
         removed_psc_chapters = 0
 
         for item in items:
-            # Remove podcast:chapters
-            podcast_chapters = item.find(f'{{{podcast_ns}}}chapters')
-            if podcast_chapters is not None:
-                item.remove(podcast_chapters)
-                removed_podcast_chapters += 1
+            if remove_podcast:
+                podcast_chapters = item.find(f'{{{podcast_ns}}}chapters')
+                if podcast_chapters is not None:
+                    item.remove(podcast_chapters)
+                    removed_podcast_chapters += 1
 
-            # Remove psc:chapters
-            psc_chapters = item.find(f'{{{psc_ns}}}chapters')
-            if psc_chapters is not None:
-                item.remove(psc_chapters)
-                removed_psc_chapters += 1
+            if remove_psc:
+                psc_chapters = item.find(f'{{{psc_ns}}}chapters')
+                if psc_chapters is not None:
+                    item.remove(psc_chapters)
+                    removed_psc_chapters += 1
 
-        print(f"✓ Removed {removed_podcast_chapters} podcast:chapters and {removed_psc_chapters} psc:chapters tags")
+        parts = []
+        if remove_podcast:
+            parts.append(f"{removed_podcast_chapters} podcast:chapters")
+        if remove_psc:
+            parts.append(f"{removed_psc_chapters} psc:chapters")
+        print(f"✓ Removed {' and '.join(parts)} tags")
         return self
 
     def update_atom_link(self, url: str) -> 'FeedEnricher':
