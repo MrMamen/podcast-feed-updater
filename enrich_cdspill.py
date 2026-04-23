@@ -220,8 +220,11 @@ def main():
         priority=9
     )
 
-    # Trim itunes:summary to first paragraph (before footer is added)
-    enricher.trim_itunes_summary(min_length=100)
+    # Drop redundant description-like fields. Empirical testing showed no
+    # client relies exclusively on itunes:summary or content:encoded — all
+    # tested clients either use <description> or fall back to it.
+    enricher.remove_itunes_summary()
+    enricher.remove_content_encoded()
 
     # Add episode article link and social footer to descriptions
     enricher.add_description_footer(
@@ -240,11 +243,6 @@ def main():
             {"name": "Podchaser", "url": "https://www.podchaser.com/cdSPILL"},
         ],
     )
-
-    # Temporary: append short markers to description/content:encoded/itunes:summary
-    # so we can tell which field each podcast client actually displays. Remove
-    # once the empirical test is done.
-    enricher.add_field_debug_markers()
 
     # Add OP3 analytics prefix for privacy-respecting download tracking
     enricher.add_op3_prefix()

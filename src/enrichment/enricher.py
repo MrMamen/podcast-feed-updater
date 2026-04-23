@@ -1681,6 +1681,64 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Trimmed itunes:summary to first paragraph on {updated_count} episodes")
         return self
 
+    def remove_itunes_summary(self) -> 'FeedEnricher':
+        """
+        Remove <itunes:summary> from channel and all items.
+
+        Empirically verified that no tested client uses itunes:summary as its
+        only source: MediaMonkey is the only one that prefers it, but falls
+        back to <description> when absent. Safe to drop for byte savings.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        itunes_ns = 'http://www.itunes.com/dtds/podcast-1.0.dtd'
+        removed = 0
+
+        channel_summary = self.channel.find(f'{{{itunes_ns}}}summary')
+        if channel_summary is not None:
+            self.channel.remove(channel_summary)
+            removed += 1
+
+        for item in self.channel.findall('item'):
+            summary = item.find(f'{{{itunes_ns}}}summary')
+            if summary is not None:
+                item.remove(summary)
+                removed += 1
+
+        print(f"✓ Removed {removed} itunes:summary element(s)")
+        return self
+
+    def remove_content_encoded(self) -> 'FeedEnricher':
+        """
+        Remove <content:encoded> from all items.
+
+        All clients tested either use <description> as their primary or fall
+        back to it when <content:encoded> is absent. Spotify's spec explicitly
+        lists <description> (or media:description) as the required element.
+        YouTube strips HTML from descriptions anyway.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        content_ns = 'http://purl.org/rss/1.0/modules/content/'
+        removed = 0
+
+        for item in self.channel.findall('item'):
+            content = item.find(f'{{{content_ns}}}encoded')
+            if content is not None:
+                item.remove(content)
+                removed += 1
+
+        print(f"✓ Removed {removed} content:encoded element(s)")
+        return self
+
     def add_field_debug_markers(
         self,
         description_marker: str = "[DESC]",
