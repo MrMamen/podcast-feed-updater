@@ -1,0 +1,45 @@
+name: Enrich cd SPILL Feed (Fallback Test)
+
+on:
+  # Manual trigger only - this publishes three test feeds used to probe
+  # podcast client fallback behavior when one description field is missing.
+  workflow_dispatch:
+
+jobs:
+  enrich-fallback-test:
+    runs-on: ubuntu-latest
+
+    # Grant write permissions for GitHub Pages deployment
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Run fallback-test feed generator
+      run: |
+        # Fetches the deployed enriched feed and generates three test
+        # variants, each missing one of description/content:encoded/itunes:summary.
+        uv run enrich_cdspill_fallback_test.py
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output
+        publish_branch: gh-pages
+        # Incremental update - merges with existing files (preserves main/Spotify/YouTube feeds)
+        keep_files: true
