@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 27 Apr 2026 07:53:32 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Mon, 27 Apr 2026 08:52:04 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Fri, 08 May 2026 20:52:48 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -920,7 +920,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>12</itunes:season>
         <itunes:episode>121</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Cyberdogs_2eu4rp.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Cyberdogs_2eu4rp.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/eympwjbarctb5vbx/CyberDogs.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="3 (#121)">121</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person></item>
@@ -1498,7 +1498,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>11</itunes:season>
         <itunes:episode>111</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/ynxez4mqh9ibjacj/Half-Life.srt" type="application/srt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/pf4srasbdepvnmxc/HalfLife.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="6 (#111)">111</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
@@ -1796,8 +1796,8 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
     <item>
-        <title>Ports of Call med Hans Arne Jacobsen (#105)</title>
-        <itunes:title>Ports of Call med Hans Arne Jacobsen (#105)</itunes:title>
+        <title>Ports of Call live med Hans Arne Jacobsen (#105)</title>
+        <itunes:title>Ports of Call live med Hans Arne Jacobsen (#105)</itunes:title>
         <link>https://spillhistorie.no/2024/11/25/en-verdensomseiling-i-ports-of-call/</link>        <pubDate>Mon, 25 Nov 2024 08:52:00 +0100</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/2bdb5f26-532e-327c-b72b-36a106d0018b</guid>
                                     <description>&lt;p&gt;Veldig mange Amiga-fans har et kjært forhold til Ports of Call. I den forbindelse har vi tatt en titt på både DOS, Amiga og Windows-versjonen av denne klassikeren. Har den tålt tidens tann?&lt;/p&gt;
