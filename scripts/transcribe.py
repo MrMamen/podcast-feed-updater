@@ -181,10 +181,17 @@ def diarize(audio_wav, *, num_speakers: int | None = None,
 
 
 def match_profiles(diar_segments: list, audio_wav, pipeline,
-                   profiles_path: Path, *, threshold: float = 0.5,
+                   profiles_path: Path, *, threshold: float = 0.65,
                    sample_rate: int = 16000) -> dict[str, str]:
     """Match SPEAKER_XX clusters against saved voice profiles.
-    Returns {speaker_id: name} for confident matches."""
+    Returns {speaker_id: name} for confident matches.
+
+    Threshold 0.65 chosen empirically: real matches are typically 0.83-0.94,
+    while false positives from voices that vaguely resemble a known profile
+    can land at 0.55-0.62. 0.65 leaves plenty of headroom for genuine
+    matches while rejecting borderline cases that would otherwise mislabel
+    new guests as known speakers.
+    """
     import numpy as np
     import torch
     from collections import defaultdict
@@ -199,7 +206,13 @@ def match_profiles(diar_segments: list, audio_wav, pipeline,
     print(f"Matching {len(by_speaker)} clusters against "
           f"{len(profiles)} profiles...")
 
-    # Compute cluster embeddings and similarities against every profile
+    # Compute cluster embeddings and similarities against every profile.
+    # Pyannote's pooling layer can return NaN on segments shorter than ~2 s
+    # (std() degree-of-freedom warning), so we require 2 s minimum and drop
+    # individual NaN embeddings before averaging. Without this filter, short
+    # caller cues ("Mhm", "Ja, riktig") poison the cluster embedding.
+    min_samples = max(emb_model.min_num_samples, int(2.0 * sample_rate))
+
     cluster_embs: dict[str, np.ndarray] = {}
     for spk, segs in sorted(by_speaker.items()):
         long_segs = sorted(segs, key=lambda s: s["end"] - s["start"],
@@ -208,28 +221,35 @@ def match_profiles(diar_segments: list, audio_wav, pipeline,
         for seg in long_segs:
             s_idx = int(seg["start"] * sample_rate)
             e_idx = int(seg["end"] * sample_rate)
-            if e_idx - s_idx < emb_model.min_num_samples:
+            if e_idx - s_idx < min_samples:
                 continue
             try:
                 chunk = audio_wav[s_idx:e_idx]
                 t = torch.from_numpy(chunk).unsqueeze(0).unsqueeze(0)
                 emb = np.array(emb_model(t)[0])
+                if np.isnan(emb).any():
+                    continue
                 embs.append(emb)
             except Exception:
                 continue
         if not embs:
+            print(f"  ⚠ {spk}: no usable embeddings (segments too short)")
             continue
         cluster_emb = np.mean(embs, axis=0)
         cluster_emb /= np.linalg.norm(cluster_emb) + 1e-8
         cluster_embs[spk] = cluster_emb
 
-    # Compute all (cluster, profile, similarity) pairs
+    # Compute all (cluster, profile, similarity) pairs.
+    # Skip NaN similarities — they break sort order and silently steal
+    # profile slots from valid clusters via greedy 1:1 matching.
     pairs = []
     sim_table: dict[str, dict[str, float]] = {}
     for spk, emb in cluster_embs.items():
         sim_table[spk] = {}
         for name, prof_emb in profiles.items():
             sim = float(np.dot(emb, prof_emb))
+            if np.isnan(sim):
+                continue
             sim_table[spk][name] = sim
             pairs.append((sim, spk, name))
 

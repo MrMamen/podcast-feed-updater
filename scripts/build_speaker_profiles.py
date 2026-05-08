@@ -143,6 +143,7 @@ def extract_embeddings(
     print(f"Extracting embeddings for {len(speakers)} speakers "
           f"from {len(segments)} cues...")
 
+    nan_skipped = 0
     for seg in segments:
         o_end = min(seg["end"], audio_dur)
         s_idx = int(seg["start"] * sample_rate)
@@ -156,13 +157,20 @@ def extract_embeddings(
             t = torch.from_numpy(chunk).unsqueeze(0).unsqueeze(0)
             emb = emb_model(t)           # → ndarray (1, dim)
             emb = np.array(emb[0])       # → (dim,)
+            # Pyannote pooling can return NaN on borderline-short or silent
+            # segments — drop those so they don't poison the mean.
+            if np.isnan(emb).any():
+                nan_skipped += 1
+                continue
             by_speaker.setdefault(seg["speaker"], []).append(emb)
             total += 1
         except Exception as exc:
             skipped += 1
             print(f"  WARN: skipped {seg['start']:.1f}-{o_end:.1f}: {exc}")
 
-    print(f"  {total} embeddings extracted, {skipped} skipped (< {min_duration}s)")
+    print(f"  {total} embeddings extracted, "
+          f"{skipped} skipped (< {min_duration}s), "
+          f"{nan_skipped} skipped (NaN embedding)")
     for spk, embs in sorted(by_speaker.items()):
         print(f"  {spk}: {len(embs)} embeddings")
 

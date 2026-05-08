@@ -76,3 +76,9 @@ transcripts/*.srt
 
 # Speaker voice profiles (biometric data — keep local only)
 transcripts/speaker_profiles.npy
+transcripts/speaker_profiles.npy.*
+transcripts/*.npy
+
+# Profile-build configs (contain local audio paths and speaker names)
+profile_tracks*.json
+*_profile_tracks.json
