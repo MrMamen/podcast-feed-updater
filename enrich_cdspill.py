@@ -269,6 +269,11 @@ def main():
     enricher.update_generator("podcast-feed-updater v1.0 (enriched from Podbean)")
     enricher.update_lastBuildDate()
 
+    # Experiment: shift newest episode's pubDate by +6h to see how clients react.
+    # Only the current newest item is touched; older items keep the original time.
+    # Likely reverted after a couple of episodes.
+    enricher.shift_latest_episode_pubdate(hours=6)
+
     # Create output directory
     os.makedirs("docs", exist_ok=True)
 

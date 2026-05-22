@@ -2037,6 +2037,36 @@ class FeedEnricher(BaseFeed):
 
         return self
 
+    def shift_latest_episode_pubdate(self, hours: int = 6) -> 'FeedEnricher':
+        """
+        Shift the pubDate of the newest episode (first <item>) by `hours` hours.
+
+        Experimental: probes how podcast clients react when the newest
+        episode's pubDate moves after publish. When the next episode lands,
+        the previously-shifted item falls back to its original time because
+        only the current newest item is touched on each run.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        from datetime import timedelta
+        from email.utils import parsedate_to_datetime, format_datetime
+
+        newest_item = self.channel.find('item')
+        pubdate_elem = newest_item.find('pubDate') if newest_item is not None else None
+        if pubdate_elem is None or not pubdate_elem.text:
+            print("⚠ Newest item has no pubDate, skipping pubDate shift")
+            return self
+
+        original = pubdate_elem.text
+        shifted = format_datetime(parsedate_to_datetime(original) + timedelta(hours=hours))
+        pubdate_elem.text = shifted
+        print(f"✓ Shifted newest episode pubDate by {hours}h: {original} → {shifted}")
+        return self
+
     def write_feed(self, output_file: str) -> None:
         """
         Write enriched feed to file.
