@@ -131,7 +131,59 @@ These match the guidelines above:
 - `--profiles transcripts/speaker_profiles.npy` (host auto-ID)
 - `--corrections transcripts/corrections.json` (shared ASR fixes)
 
-## 6. Language attribute in the RSS feed
+## 6. Tools
+
+### `scripts/transcribe.py`
+
+Main pipeline. Runs nb-whisper ASR, pyannote diarisation, and profile
+matching. Produces a tagged VTT.
+
+### `scripts/add_speakers.py`
+
+Re-tag speakers on an existing VTT *without re-transcribing*. Useful
+when the profile set has been updated, or when mix VTT has wrong
+speaker tags but text is correct. Keeps hand-corrections intact —
+only the `<v Speaker>` tag changes.
+
+```
+uv run python scripts/add_speakers.py <audio> <vtt> <num_speakers>
+```
+
+### `scripts/build_speaker_profiles.py`
+
+Build profiles from previously-labelled VTTs (extracts the long,
+clean segments and averages embeddings).
+
+### `scripts/build_profiles_clean.py`
+
+Build profiles from clean multitrack recordings (one speaker per
+file). Higher-quality alternative when you have isolated tracks for
+each host/guest. Takes a JSON config mapping speaker name → list of
+audio files.
+
+## 7. Multitrack / solo-track workflow
+
+For most episodes the mix is enough — profile matching is robust
+(typical sim 0.85-0.95) and the mix captures primary dialogue fine.
+
+Consider running solo tracks (one per speaker) through the pipeline
+separately when:
+
+1. **Heavy cross-talk / panel format** — multiple speakers competing
+   simultaneously, where the mix loses one speaker's words
+2. **Weak profile match** (sim < 0.75) — solo track can confirm or
+   correct the tagging
+3. **New guest without a profile** — solo track lets you build a
+   profile while you transcribe
+4. **Mic balance issues** — one speaker much quieter in the mix
+
+For solo tracks, run with `--no-diarization` (single speaker, no
+diarisation needed). The pipeline still applies VAD filtering so
+silent gaps don't hallucinate. Solo VTTs are best used as a
+*reference* during language pass, not auto-merged — they translate
+English passages to Norwegian and don't have speaker tags.
+
+## 8. Language attribute in the RSS feed
 
 The enrichment pipeline (`enrich_cdspill.py`) adds `language="no"` to
 `<podcast:transcript>` tags for all episodes, with a per-GUID override
