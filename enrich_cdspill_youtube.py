@@ -114,6 +114,10 @@ def main():
     enricher.update_generator("podcast-feed-updater v1.0 (YouTube variant)")
     enricher.update_lastBuildDate()
 
+    # Drop xmlns declarations on <rss> that nothing in the document uses
+    # (especially psc, which we added temporarily to extract chapter timestamps)
+    enricher.prune_unused_namespaces()
+
     # Create output directory
     os.makedirs("output", exist_ok=True)
 

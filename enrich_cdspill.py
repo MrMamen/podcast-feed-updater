@@ -274,6 +274,9 @@ def main():
     # Likely reverted after a couple of episodes.
     enricher.shift_latest_episode_pubdate(hours=6)
 
+    # Drop xmlns declarations on <rss> that nothing in the document uses
+    enricher.prune_unused_namespaces()
+
     # Create output directory
     os.makedirs("docs", exist_ok=True)
 

@@ -124,3 +124,51 @@ class BaseFeed:
                 new_root.append(child)
             self.root = new_root
             self.channel = self.root.find('channel')
+
+    def prune_unused_namespaces(self) -> 'BaseFeed':
+        """
+        Remove xmlns declarations on the root element that aren't used anywhere
+        in the document.
+
+        lxml's nsmap is immutable, so we rebuild the root element with a
+        filtered nsmap and re-parent all children. The default namespace
+        (key=None) is always preserved.
+
+        Returns:
+            Self for chaining
+        """
+        if self.root is None:
+            raise ValueError("No feed loaded")
+
+        used_uris = set()
+        for elem in self.root.iter():
+            if isinstance(elem.tag, str) and elem.tag.startswith('{'):
+                used_uris.add(elem.tag[1:].split('}', 1)[0])
+            for attr_key in elem.attrib:
+                if attr_key.startswith('{'):
+                    used_uris.add(attr_key[1:].split('}', 1)[0])
+
+        old_nsmap = self.root.nsmap
+        new_nsmap = {
+            prefix: uri
+            for prefix, uri in old_nsmap.items()
+            if prefix is None or uri in used_uris
+        }
+
+        removed = [
+            prefix for prefix, uri in old_nsmap.items()
+            if prefix is not None and uri not in used_uris
+        ]
+        if not removed:
+            return self
+
+        new_root = etree.Element(self.root.tag, attrib=self.root.attrib, nsmap=new_nsmap)
+        new_root.text = self.root.text
+        new_root.tail = self.root.tail
+        for child in self.root:
+            new_root.append(child)
+        self.root = new_root
+        self.channel = self.root.find('channel')
+
+        print(f"✓ Pruned {len(removed)} unused namespace(s): {', '.join(removed)}")
+        return self

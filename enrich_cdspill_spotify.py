@@ -98,6 +98,9 @@ def main():
     enricher.update_generator("podcast-feed-updater v1.0 (Spotify variant)")
     enricher.update_lastBuildDate()
 
+    # Drop xmlns declarations on <rss> that nothing in the document uses
+    enricher.prune_unused_namespaces()
+
     # Create output directory
     os.makedirs("output", exist_ok=True)
 
