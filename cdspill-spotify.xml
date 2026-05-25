@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:psc="http://podlove.org/simple-chapters" version="2.0">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:psc="http://podlove.org/simple-chapters" version="2.0">
 
 <channel>
     <title>cd SPILL</title>
@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 25 May 2026 06:04:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (Spotify variant)</generator>
-    <lastBuildDate>Mon, 25 May 2026 21:59:47 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 25 May 2026 22:55:07 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -38,7 +38,7 @@
         <itunes:title>Thexder</itunes:title>
         <link>https://spillhistorie.no/2026/05/25/klassisk-mech-action-fra-japan/</link>        <pubDate>Mon, 25 May 2026 12:04:00 +0200</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/bb4dee86-5e44-37cb-9fcd-62a431d4a0f7</guid>
-                                    <description>&lt;p&gt;Thexder er et platformsspill hvor du spiller en diger robot med lasere som kan transformere seg til en fighter-yet. Kan det blir bedre?&lt;/p&gt;
+                                    <description>&lt;p&gt;Thexder er et platformsspill hvor du spiller en diger robot med lasere som kan transformere seg til en fighter-yet. Kan det bli bedre?&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/05/25/klassisk-mech-action-fra-japan/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
