@@ -6,7 +6,7 @@
     <language>no</language>
     <description>Live-episoder fra Tiltcast 3.0 (lørdag 27. mai 2023).</description>
     <itunes:author>Tiltcast i Oslo</itunes:author>
-    <itunes:type>episodic</itunes:type>
+    <itunes:type>serial</itunes:type>
     <itunes:explicit>false</itunes:explicit>
     <itunes:image href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg"/>
     <image>
@@ -20,7 +20,7 @@
     <podcast:medium>podcast</podcast:medium>
     <podcast:guid>36efa21d-82cb-5797-944f-ede7de45cb95</podcast:guid>
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Tue, 02 Jun 2026 21:32:52 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2026 22:13:41 +0000</lastBuildDate>
     <generator>podcast-feed-updater list builder v1.0</generator>
     <item>
       <title>Bonus: Tiltcast 3.0</title>
@@ -41,7 +41,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tiltcast1.jpg"/>
       <itunes:duration>34:45</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
-      <itunes:episodeType>bonus</itunes:episodeType>
+      <itunes:episodeType>full</itunes:episodeType>
       <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">1</podcast:season>
       <itunes:season>1</itunes:season>
       <itunes:episode>1</itunes:episode>

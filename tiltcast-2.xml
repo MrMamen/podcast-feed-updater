@@ -6,8 +6,8 @@
     <language>no</language>
     <description>Live-episoder fra Tiltcast 2.0 (søndag 6. oktober 2019).</description>
     <itunes:author>Tiltcast i Oslo</itunes:author>
-    <itunes:type>episodic</itunes:type>
-    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>serial</itunes:type>
+    <itunes:explicit>true</itunes:explicit>
     <itunes:image href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg"/>
     <image>
       <url>https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg</url>
@@ -20,7 +20,7 @@
     <podcast:medium>podcast</podcast:medium>
     <podcast:guid>011fea74-fd30-5a67-9449-cf3e9bb44b3e</podcast:guid>
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Tue, 02 Jun 2026 21:32:52 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2026 22:13:41 +0000</lastBuildDate>
     <generator>podcast-feed-updater list builder v1.0</generator>
     <item>
       <title>E211 - Flipperspill Spesial Live fra TILT i Oslo</title>
