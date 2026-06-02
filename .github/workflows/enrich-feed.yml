@@ -39,7 +39,7 @@ jobs:
       run: |
         # Run main enrichment script
         # This generates the main cdspill-enriched.xml feed
-        uv run enrich_cdspill.py
+        uv run --no-dev enrich_cdspill.py
 
     - name: Run YouTube enrichment script
       env:
@@ -47,7 +47,7 @@ jobs:
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Generate YouTube variant from the freshly created enriched feed
-        uv run enrich_cdspill_youtube.py --local-cache
+        uv run --no-dev enrich_cdspill_youtube.py --local-cache
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

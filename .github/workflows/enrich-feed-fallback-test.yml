@@ -33,7 +33,7 @@ jobs:
       run: |
         # Fetches the deployed enriched feed and generates three test
         # variants, each missing one of description/content:encoded/itunes:summary.
-        uv run enrich_cdspill_fallback_test.py
+        uv run --no-dev enrich_cdspill_fallback_test.py
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
