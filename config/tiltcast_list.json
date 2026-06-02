@@ -1,0 +1,17 @@
+{
+  "list_id": "1959319",
+  "list_search_term": "episoder fra tiltcast",
+  "language": "no",
+  "author": "Tiltcast i Oslo",
+  "explicit": false,
+  "category": {
+    "text": "Leisure",
+    "sub": "Video Games"
+  },
+  "base_url": "https://mrmamen.github.io/podcast-feed-updater",
+  "min_remaining": 12000,
+  "combined": {
+    "slug": "tiltcast-all",
+    "title": "Episoder fra Tiltcast i Oslo"
+  }
+}

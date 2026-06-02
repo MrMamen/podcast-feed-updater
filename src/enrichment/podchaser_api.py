@@ -413,6 +413,42 @@ class PodchaserAPI:
 
         return episode.get("credits", {}).get("data", [])
 
+    def estimate_cost(self, query: str, variables: Optional[Dict] = None) -> Dict:
+        """
+        Estimate the query point cost WITHOUT spending points.
+
+        POSTs the same payload to the dedicated ``/graphql/cost`` endpoint.
+        GraphQL validation still runs there, so a malformed query (e.g. a field
+        that doesn't exist in the schema) shows up in ``errors`` before any
+        points are ever spent on the real ``/graphql`` endpoint.
+
+        Returns a dict: ``{"cost", "remaining", "errors"}`` where cost/remaining
+        are ints (or None if the headers are absent) and errors is the GraphQL
+        errors list (or None).
+        """
+        try:
+            response = requests.post(
+                self.BASE_URL + "/cost",
+                json={"query": query, "variables": variables or {}},
+                headers=self.headers,
+                timeout=15,
+            )
+        except requests.RequestException as e:
+            return {"cost": None, "remaining": None, "errors": [str(e)]}
+
+        cost = response.headers.get("X-Podchaser-Query-Cost")
+        remaining = response.headers.get("X-Podchaser-Points-Remaining")
+        try:
+            errors = response.json().get("errors")
+        except ValueError:
+            errors = None
+
+        return {
+            "cost": int(cost) if cost is not None else None,
+            "remaining": int(remaining) if remaining is not None else None,
+            "errors": errors,
+        }
+
 
 def from_env(*, required: bool = True) -> Optional[PodchaserAPI]:
     """
