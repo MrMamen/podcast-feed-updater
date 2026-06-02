@@ -85,6 +85,20 @@ image and prints a warning.
 
 ---
 
+## List-tailored tags (intentionally differ from the source)
+
+These are set for the *list*, not copied from each episode's original feed:
+
+- **`itunes:episodeType` is forced to `full`** for every item. A "bonus"/"trailer"
+  status was relative to its source show; here every entry is a first-class
+  episode.
+- **Channel `itunes:explicit`** reflects the feed's actual content (true if any
+  episode is explicit), computed per feed — not the config baseline alone.
+- **`itunes:type`** comes from config (`serial` for in-order chronological
+  presentation), not the source shows' types.
+- **`podcast:season` / `itunes:season` / `itunes:episode`** group by edition —
+  a list construct that doesn't exist in the source feeds.
+
 ## File map
 
 | File | Role |
@@ -103,7 +117,8 @@ image and prints a warning.
 |-----|---------|
 | `list_id` | Numeric Podchaser list id (`1959319`). Empty → resolve via search. |
 | `list_search_term` | Fallback search term used when `list_id` is empty. |
-| `language` / `author` / `explicit` | Channel metadata. |
+| `language` / `author` / `explicit` | Channel metadata. `explicit` is a baseline — the channel is also marked explicit if any episode is. |
+| `itunes_type` | Show type: `serial` (in-order, season 1 first) or `episodic` (newest first). |
 | `category` | iTunes category `{text, sub}` (Leisure › Video Games). |
 | `base_url` | Public host for feeds + cover images (GitHub Pages). |
 | `min_remaining` | Abort if a fetch would leave fewer than this many points. |

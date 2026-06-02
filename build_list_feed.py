@@ -76,6 +76,7 @@ def main():
         cfg = json.load(f)
     base_url = cfg["base_url"].rstrip("/")
     combined = cfg["combined"]
+    podcast_type = cfg.get("itunes_type", "episodic")
 
     api = from_env(required=True)
 
@@ -112,6 +113,7 @@ def main():
         generator=GENERATOR,
         last_build_raw=data.get("updatedAt"),
         sections=sections,
+        podcast_type=podcast_type,
         output_file=os.path.join(OUTPUT_DIR, f"{combined['slug']}.xml"),
     )
 
@@ -135,6 +137,7 @@ def main():
             generator=GENERATOR,
             last_build_raw=data.get("updatedAt"),
             sections=[section],
+            podcast_type=podcast_type,
             output_file=os.path.join(OUTPUT_DIR, f"{slug}.xml"),
         )
 

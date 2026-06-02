@@ -115,7 +115,9 @@ def _build_item(channel: etree._Element, ep: Dict, season_no: int,
 
     _text(item, _q(ITUNES, "duration"), _duration(ep.get("length")))
     _text(item, _q(ITUNES, "explicit"), "true" if ep.get("explicit") else "false")
-    _text(item, _q(ITUNES, "episodeType"), (ep.get("episodeType") or "full").lower())
+    # Normalize to "full": bonus/trailer status was relative to the source
+    # podcast; in this curated list every entry is a first-class episode.
+    _text(item, _q(ITUNES, "episodeType"), "full")
 
     season = etree.SubElement(item, _q(PODCAST, "season"))
     if season_name:
@@ -129,13 +131,21 @@ def build_feed(*, title: str, description: Optional[str], language: str,
                author: str, category: Dict, explicit: bool,
                image_url: Optional[str], self_url: str, link: str,
                generator: str, last_build_raw: Optional[str],
-               sections: List[Dict], output_file: str) -> int:
+               sections: List[Dict], output_file: str,
+               podcast_type: str = "episodic") -> int:
     """
     Build one RSS feed and write it to ``output_file``.
 
     Each entry in ``sections`` (``{"heading", "episodes"}``) becomes a season,
-    numbered in order. Returns the number of episodes written.
+    numbered in order. ``explicit`` is the configured baseline; the channel is
+    additionally marked explicit if any episode in the feed is. ``podcast_type``
+    is the iTunes show type ("episodic" or "serial"). Returns the episode count.
     """
+    # Channel explicit must reflect the actual content (Apple requirement).
+    any_explicit = any(ep.get("explicit")
+                       for section in sections
+                       for ep in section.get("episodes", []))
+
     rss = etree.Element("rss", nsmap=NSMAP)
     rss.set("version", "2.0")
     channel = etree.SubElement(rss, "channel")
@@ -145,8 +155,8 @@ def build_feed(*, title: str, description: Optional[str], language: str,
     _text(channel, "language", language)
     _text(channel, "description", description or title)
     _text(channel, _q(ITUNES, "author"), author)
-    _text(channel, _q(ITUNES, "type"), "episodic")
-    _text(channel, _q(ITUNES, "explicit"), "true" if explicit else "false")
+    _text(channel, _q(ITUNES, "type"), podcast_type)
+    _text(channel, _q(ITUNES, "explicit"), "true" if (explicit or any_explicit) else "false")
 
     if image_url:
         etree.SubElement(channel, _q(ITUNES, "image")).set("href", image_url)
