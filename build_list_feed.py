@@ -28,7 +28,7 @@ import sys
 from dotenv import load_dotenv
 
 from src.enrichment.podchaser_api import from_env
-from src.listfeed.feed_builder import build_feed
+from src.listfeed.feed_builder import assign_running_order_pubdates, build_feed
 from src.listfeed.podchaser_list import fetch_list, resolve_list_id
 
 load_dotenv()
@@ -93,6 +93,12 @@ def main():
           f"{len(sections)} section(s):")
     for idx, section in enumerate(sections, start=1):
         print(f"   {idx}. {section['heading']!r}: {len(section['episodes'])} episodes")
+
+    # Synthesize pubDates so apps show episodes in the curated running order.
+    print("\n🕒 Running-order pubDates (anchor per section):")
+    for entry in assign_running_order_pubdates(sections):
+        print(f"   {entry['anchor']:%Y-%m-%d} ({entry['source']:>20}) "
+              f"— {entry['count']} eps — {entry['heading']!r}")
 
     copy_assets()
     os.makedirs(OUTPUT_DIR, exist_ok=True)

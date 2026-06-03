@@ -9,13 +9,23 @@ Enclosure URLs are taken verbatim from Podchaser's ``audioUrl`` so any
 source-side op3 prefix (e.g. cd SPILL's) is preserved and none is added.
 """
 
+import re
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from typing import Dict, List, Optional
 from urllib.parse import urlsplit
 
 from lxml import etree
+
+# Norwegian month names, for parsing the event date out of a section heading
+# like "TILTcast 5.0 (lørdag 30. mai 2026)".
+_NO_MONTHS = {
+    "januar": 1, "februar": 2, "mars": 3, "april": 4, "mai": 5, "juni": 6,
+    "juli": 7, "august": 8, "september": 9, "oktober": 10, "november": 11,
+    "desember": 12,
+}
+_HEADING_DATE_RE = re.compile(r"(\d{1,2})\.?\s+([a-zæøå]+)\s+(\d{4})", re.IGNORECASE)
 
 ITUNES = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 PODCAST = "https://podcastindex.org/namespace/1.0"
@@ -68,6 +78,68 @@ def _rfc2822(value: Optional[str]) -> Optional[str]:
     return format_datetime(dt) if dt else None
 
 
+def _parse_heading_date(heading: Optional[str]) -> Optional[datetime]:
+    """Extract an event date (DD. <norwegian month> YYYY) from a section heading."""
+    if not heading:
+        return None
+    m = _HEADING_DATE_RE.search(heading)
+    if not m:
+        return None
+    day, month_name, year = m.group(1), m.group(2).lower(), m.group(3)
+    month = _NO_MONTHS.get(month_name)
+    if not month:
+        return None
+    try:
+        return datetime(int(year), month, int(day), tzinfo=timezone.utc)
+    except ValueError:
+        return None
+
+
+def assign_running_order_pubdates(sections: List[Dict], *, offset_minutes: int = 10,
+                                  base_hour: int = 12) -> List[Dict]:
+    """
+    Assign synthetic pubDates so podcast apps (which sort by pubDate) display
+    episodes in the curated running order rather than original publish order.
+
+    Each section is anchored to its event date, derived purely from the list:
+      1. the date in the section heading, else
+      2. the earliest episode airDate in the section, else
+      3. the previous section's anchor + 1 day.
+    Episodes are then spaced ``offset_minutes`` apart by their position within
+    the section, starting at ``base_hour``. Mutates each episode dict in place
+    (sets ``pubDateOverride``) so the same episode gets an identical pubDate in
+    every feed it appears in. Returns per-section info for logging.
+    """
+    log: List[Dict] = []
+    prev_anchor: Optional[datetime] = None
+
+    for section in sections:
+        heading = section.get("heading")
+        episodes = section.get("episodes", [])
+
+        anchor = _parse_heading_date(heading)
+        source = "heading date"
+        if anchor is None:
+            air_dts = [d for d in (_parse_dt(e.get("airDate")) for e in episodes) if d]
+            if air_dts:
+                anchor, source = min(air_dts), "earliest airDate"
+        if anchor is None:
+            if prev_anchor is not None:
+                anchor, source = prev_anchor + timedelta(days=1), "previous section +1d"
+            else:
+                anchor, source = datetime(2000, 1, 1, tzinfo=timezone.utc), "fallback epoch"
+
+        anchor = anchor.replace(hour=base_hour, minute=0, second=0, microsecond=0)
+        prev_anchor = anchor
+
+        for idx, ep in enumerate(episodes):
+            ep["pubDateOverride"] = anchor + timedelta(minutes=offset_minutes * idx)
+
+        log.append({"heading": heading, "anchor": anchor,
+                    "source": source, "count": len(episodes)})
+    return log
+
+
 def _duration(seconds) -> Optional[str]:
     if not seconds:
         return None
@@ -101,7 +173,9 @@ def _build_item(channel: etree._Element, ep: Dict, season_no: int,
     guid.set("isPermaLink", "false")
     guid.text = ep.get("guid") or f"podchaser-episode-{ep.get('id')}"
 
-    _text(item, "pubDate", _rfc2822(ep.get("airDate")))
+    override = ep.get("pubDateOverride")
+    _text(item, "pubDate",
+          format_datetime(override) if override else _rfc2822(ep.get("airDate")))
     _text(item, "link", ep.get("webUrl") or ep.get("url"))
     _text(item, "description", ep.get("htmlDescription"))
 

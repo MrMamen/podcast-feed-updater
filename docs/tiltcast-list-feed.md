@@ -98,6 +98,13 @@ These are set for the *list*, not copied from each episode's original feed:
   presentation), not the source shows' types.
 - **`podcast:season` / `itunes:season` / `itunes:episode`** group by edition —
   a list construct that doesn't exist in the source feeds.
+- **`pubDate` is synthetic, not the original publish date.** Most apps sort by
+  pubDate, so to make them show the curated *running order* each section is
+  anchored to its event date (parsed from the heading, falling back to the
+  earliest episode airDate, then previous section + 1 day) and episodes are
+  spaced 10 min apart by `position`. See `assign_running_order_pubdates`.
+  Consequence: inserting an episode mid-section re-times the episodes after it
+  (other editions are untouched, GUIDs stay stable, so apps don't lose state).
 
 ## File map
 
