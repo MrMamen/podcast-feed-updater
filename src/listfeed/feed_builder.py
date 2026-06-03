@@ -95,7 +95,7 @@ def _parse_heading_date(heading: Optional[str]) -> Optional[datetime]:
         return None
 
 
-def assign_running_order_pubdates(sections: List[Dict], *, offset_minutes: int = 10,
+def assign_running_order_pubdates(sections: List[Dict], *, offset_minutes: int = 60,
                                   base_hour: int = 12) -> List[Dict]:
     """
     Assign synthetic pubDates so podcast apps (which sort by pubDate) display
@@ -106,7 +106,8 @@ def assign_running_order_pubdates(sections: List[Dict], *, offset_minutes: int =
       2. the earliest episode airDate in the section, else
       3. the previous section's anchor + 1 day.
     Episodes are then spaced ``offset_minutes`` apart by their position within
-    the section, starting at ``base_hour``. Mutates each episode dict in place
+    the section (1 hour by default — episodes typically run longer than a few
+    minutes), starting at ``base_hour``. Mutates each episode dict in place
     (sets ``pubDateOverride``) so the same episode gets an identical pubDate in
     every feed it appears in. Returns per-section info for logging.
     """
