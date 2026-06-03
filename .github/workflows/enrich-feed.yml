@@ -1,12 +1,9 @@
 name: Enrich cd SPILL Feed
 
 on:
-  # Allow manual trigger
+  # Manual trigger only — runs the cd SPILL enrichment on demand instead of on
+  # every push to master (which was just noise).
   workflow_dispatch:
-
-  # Run on push to master
-  push:
-    branches: [ master ]
 
 jobs:
   enrich:
