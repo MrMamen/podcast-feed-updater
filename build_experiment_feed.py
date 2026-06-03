@@ -20,6 +20,8 @@ Knobs (no code changes between runs):
   --pin EPNUM    also include the source episode numbered EPNUM, forced to feed
                  position #2 — pick an OLDER one to test an out-of-order insert
                  that re-numbers the episodes below it
+  --fresh-pin    date the pinned episode to NOW — test whether a recent-dated new
+                 guid triggers push/download (vs an old-dated one that doesn't)
   --type         episodic | serial
 
 Example probe across runs:
@@ -33,7 +35,8 @@ Costs no query points (reads the public cd SPILL feed). Deploy via the
 import argparse
 import os
 import uuid
-from email.utils import parsedate_to_datetime
+from datetime import datetime, timezone
+from email.utils import format_datetime, parsedate_to_datetime
 
 import requests
 from lxml import etree
@@ -89,6 +92,9 @@ def main():
                         help="Number of NEWEST episodes to include")
     parser.add_argument("--pin", type=int, default=None,
                         help="Source episode number to include, pinned to feed position #2")
+    parser.add_argument("--fresh-pin", action="store_true",
+                        help="Date the pinned episode to now — test whether a recent-dated "
+                             "new guid triggers push/download (vs an old-dated one)")
     parser.add_argument("--type", choices=["episodic", "serial"], default="episodic")
     parser.add_argument("--image-url", default=None,
                         help="Channel cover image URL (default: the Tiltcast 4 cover)")
@@ -123,6 +129,15 @@ def main():
     if pin_item is not None and pin_item in ordered and len(ordered) > 1:
         ordered.remove(pin_item)
         ordered.insert(1, pin_item)
+
+    # --fresh-pin: re-date the pinned episode to now, so it's a recent (not old)
+    # new guid — isolates whether pubDate recency is what gates push/download.
+    if args.fresh_pin and pin_item is not None:
+        pd = pin_item.find("pubDate")
+        if pd is None:
+            pd = etree.SubElement(pin_item, "pubDate")
+        pd.text = format_datetime(datetime.now(timezone.utc))
+        print(f"  fresh-pin: dated pinned episode to {pd.text}")
 
     # Strip season tags and assign fictional, position-based episode numbers
     # (newest = 1). These shift whenever an episode is added/inserted above —
