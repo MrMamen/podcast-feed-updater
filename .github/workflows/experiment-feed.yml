@@ -22,6 +22,11 @@ on:
         description: 'Optional: source episode number to insert at feed position #2'
         required: false
         default: ''
+      fresh_pin:
+        description: 'Date the pinned episode to now (test recency vs old date)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -50,10 +55,12 @@ jobs:
       run: |
         PIN_ARG=""
         if [ -n "${{ inputs.pin }}" ]; then PIN_ARG="--pin ${{ inputs.pin }}"; fi
+        FRESH_ARG=""
+        if [ "${{ inputs.fresh_pin }}" = "true" ]; then FRESH_ARG="--fresh-pin"; fi
         uv run --no-dev build_experiment_feed.py \
           --episodes "${{ inputs.episodes }}" \
           --type "${{ inputs.type }}" \
-          $PIN_ARG
+          $PIN_ARG $FRESH_ARG
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
