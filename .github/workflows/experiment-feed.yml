@@ -1,0 +1,65 @@
+name: Build Experiment Feed
+
+on:
+  # Manual trigger. Set episode count and type per run to probe how podcast
+  # apps react to updates. No Podchaser secrets needed — reads the public
+  # cd SPILL feed, so it costs no query points.
+  workflow_dispatch:
+    inputs:
+      episodes:
+        description: 'Number of (oldest) cd SPILL episodes to include'
+        required: true
+        default: '3'
+      type:
+        description: 'itunes:type'
+        required: true
+        type: choice
+        options:
+          - episodic
+          - serial
+        default: episodic
+      pin:
+        description: 'Optional: source episode number to insert at feed position #2'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    - name: Build experiment feed
+      run: |
+        PIN_ARG=""
+        if [ -n "${{ inputs.pin }}" ]; then PIN_ARG="--pin ${{ inputs.pin }}"; fi
+        uv run --no-dev build_experiment_feed.py \
+          --episodes "${{ inputs.episodes }}" \
+          --type "${{ inputs.type }}" \
+          $PIN_ARG
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output
+        publish_branch: gh-pages
+        # Incremental — keeps the cd SPILL and Tiltcast feeds untouched.
+        keep_files: true

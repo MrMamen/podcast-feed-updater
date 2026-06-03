@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+"""
+Build an experimental podcast feed (Podchaser-free) for probing how podcast
+apps — Overcast in particular — react to feed updates, ordering and episode
+re-numbering.
+
+It republishes a subset of cd SPILL episodes under a separate feed identity
+(own title + podcast:guid, so apps treat it as a distinct subscription). Real
+enclosures, guids and pubDates are kept, so episodes download and are tracked
+stably across rebuilds.
+
+To mirror the Tiltcast risk (where inserting an episode re-numbers the others),
+the test feed carries **no season tags** and **fictional, position-based episode
+numbers** (newest = 1, counted from the top). So an episode's number shifts every
+time something is added/inserted above it: the one you just added is #1, then
+becomes #2 when a newer one arrives. If the app keys on guid it shouldn't care.
+
+Knobs (no code changes between runs):
+  --episodes N   include the N NEWEST episodes (newest first)
+  --pin EPNUM    also include the source episode numbered EPNUM, forced to feed
+                 position #2 — pick an OLDER one to test an out-of-order insert
+                 that re-numbers the episodes below it
+  --type         episodic | serial
+
+Example probe across runs:
+    uv run build_experiment_feed.py --episodes 4
+    uv run build_experiment_feed.py --episodes 4 --pin 100   # inserts an older one at #2
+
+Costs no query points (reads the public cd SPILL feed). Deploy via the
+"Build Experiment Feed" workflow.
+"""
+
+import argparse
+import uuid
+from email.utils import parsedate_to_datetime
+
+import requests
+from lxml import etree
+
+ITUNES = "http://www.itunes.com/dtds/podcast-1.0.dtd"
+PODCAST = "https://podcastindex.org/namespace/1.0"
+ATOM = "http://www.w3.org/2005/Atom"
+
+# Enriched feed has itunes:episode numbers, needed so --pin can find an episode.
+DEFAULT_SOURCE = "https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml"
+DEFAULT_TITLE = "Tiltcast feed-eksperiment (TEST)"
+# Stable, deterministic guid so every rebuild is recognized as the same feed.
+EXPERIMENT_GUID = str(uuid.uuid5(uuid.NAMESPACE_URL,
+                                 "podcast-feed-updater/experiment"))
+_EPOCH = parsedate_to_datetime("Thu, 01 Jan 1970 00:00:00 +0000")
+
+
+def load_source(source: str) -> etree._Element:
+    """Parse the source feed from a local path or URL into an <rss> element."""
+    if source.startswith(("http://", "https://")):
+        print(f"Fetching source feed: {source}")
+        content = requests.get(source, timeout=30).content
+    else:
+        print(f"Loading source feed: {source}")
+        with open(source, "rb") as f:
+            content = f.read()
+    return etree.fromstring(content)
+
+
+def _pubdate(item: etree._Element):
+    try:
+        return parsedate_to_datetime(item.findtext("pubDate"))
+    except (TypeError, ValueError):
+        return _EPOCH
+
+
+def _source_episode_no(item: etree._Element):
+    return item.findtext(f"{{{ITUNES}}}episode")
+
+
+def set_text(channel, qname, text):
+    """Set (or create) a channel child element's text."""
+    el = channel.find(qname)
+    if el is None:
+        el = etree.SubElement(channel, qname)
+    el.text = text
+    return el
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Build an experiment feed from cd SPILL")
+    parser.add_argument("--episodes", type=int, default=3,
+                        help="Number of NEWEST episodes to include")
+    parser.add_argument("--pin", type=int, default=None,
+                        help="Source episode number to include, pinned to feed position #2")
+    parser.add_argument("--type", choices=["episodic", "serial"], default="episodic")
+    parser.add_argument("--source", default=DEFAULT_SOURCE)
+    parser.add_argument("--output", default="output/experiment.xml")
+    parser.add_argument("--title", default=DEFAULT_TITLE)
+    parser.add_argument("--base-url",
+                        default="https://mrmamen.github.io/podcast-feed-updater")
+    args = parser.parse_args()
+
+    root = load_source(args.source)
+    channel = root.find("channel")
+    if channel is None:
+        raise SystemExit("No <channel> in source feed")
+
+    items = channel.findall("item")
+    by_date = sorted(items, key=_pubdate, reverse=True)  # newest first
+    selected = list(by_date[:args.episodes])
+
+    # --pin: ensure the numbered source episode is included.
+    pin_item = None
+    if args.pin is not None:
+        pin_item = next((it for it in items
+                         if _source_episode_no(it) == str(args.pin)), None)
+        if pin_item is None:
+            print(f"⚠ --pin {args.pin}: no episode with that number in source; skipping")
+        elif pin_item not in selected:
+            selected.append(pin_item)
+
+    # Order newest-first, then force the pinned episode to position #2.
+    ordered = sorted(selected, key=_pubdate, reverse=True)
+    if pin_item is not None and pin_item in ordered and len(ordered) > 1:
+        ordered.remove(pin_item)
+        ordered.insert(1, pin_item)
+
+    # Strip season tags and assign fictional, position-based episode numbers
+    # (newest = 1). These shift whenever an episode is added/inserted above —
+    # the point of the experiment.
+    for pos, it in enumerate(ordered, start=1):
+        for tag in (f"{{{ITUNES}}}season", f"{{{PODCAST}}}season"):
+            for el in it.findall(tag):
+                it.remove(el)
+        ep_el = it.find(f"{{{ITUNES}}}episode")
+        if ep_el is None:
+            ep_el = etree.SubElement(it, f"{{{ITUNES}}}episode")
+        ep_el.text = str(pos)
+
+    # Prune to the selected items and re-append in the desired order.
+    for it in items:
+        channel.remove(it)
+    for it in ordered:
+        channel.append(it)
+
+    # Rewrite the channel to a distinct experiment identity.
+    self_url = f"{args.base_url.rstrip('/')}/experiment.xml"
+    set_text(channel, "title", args.title)
+    set_text(channel, "description",
+             "Eksperimentell feed for å teste hvordan podkast-apper reagerer på "
+             "oppdateringer, rekkefølge og episodenummerering. Subset av "
+             "cd SPILL-episoder. Ikke en ekte podkast.")
+    set_text(channel, "link", self_url)
+    set_text(channel, f"{{{PODCAST}}}guid", EXPERIMENT_GUID)
+    set_text(channel, f"{{{ITUNES}}}type", args.type)
+    for link in channel.findall(f"{{{ATOM}}}link"):
+        if link.get("rel") == "self":
+            link.set("href", self_url)
+
+    etree.ElementTree(root).write(args.output, encoding="utf-8",
+                                  xml_declaration=True, pretty_print=True)
+
+    print(f"\n✓ {args.output}")
+    print(f"  type: {args.type}  |  episodes: {len(ordered)} (of {len(items)} in source)")
+    print("  feed order (pos = fictional itunes:episode):")
+    for pos, it in enumerate(ordered, start=1):
+        pin_mark = "  ← PINNED #2" if it is pin_item else ""
+        print(f"    ep {pos}. {it.findtext('title')[:36]:36} "
+              f"{it.findtext('pubDate')}{pin_mark}")
+    print(f"  identity: {args.title!r}  guid={EXPERIMENT_GUID}")
+
+
+if __name__ == "__main__":
+    main()
