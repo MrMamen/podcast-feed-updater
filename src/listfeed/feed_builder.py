@@ -159,7 +159,7 @@ def _audio_type(url: str) -> str:
 
 def _build_item(channel: etree._Element, ep: Dict, season_no: int,
                 season_name: Optional[str], ep_no: int,
-                channel_image: Optional[str]) -> None:
+                channel_image: Optional[str], include_season: bool = True) -> None:
     item = etree.SubElement(channel, "item")
     _text(item, "title", ep.get("title"))
 
@@ -194,11 +194,14 @@ def _build_item(channel: etree._Element, ep: Dict, season_no: int,
     # podcast; in this curated list every entry is a first-class episode.
     _text(item, _q(ITUNES, "episodeType"), "full")
 
-    season = etree.SubElement(item, _q(PODCAST, "season"))
-    if season_name:
-        season.set("name", season_name)
-    season.text = str(season_no)
-    _text(item, _q(ITUNES, "season"), str(season_no))
+    # Per-edition feeds are flat (a single edition) — season tags only make
+    # sense in the combined feed where each edition is a distinct season.
+    if include_season:
+        season = etree.SubElement(item, _q(PODCAST, "season"))
+        if season_name:
+            season.set("name", season_name)
+        season.text = str(season_no)
+        _text(item, _q(ITUNES, "season"), str(season_no))
     _text(item, _q(ITUNES, "episode"), str(ep_no))
 
 
@@ -207,7 +210,7 @@ def build_feed(*, title: str, description: Optional[str], language: str,
                image_url: Optional[str], self_url: str, link: str,
                generator: str, last_build_raw: Optional[str],
                sections: List[Dict], output_file: str,
-               podcast_type: str = "episodic") -> int:
+               podcast_type: str = "episodic", include_season: bool = True) -> int:
     """
     Build one RSS feed and write it to ``output_file``.
 
@@ -260,7 +263,8 @@ def build_feed(*, title: str, description: Optional[str], language: str,
     for season_no, section in enumerate(sections, start=1):
         season_name = section.get("heading")
         for ep_no, ep in enumerate(section.get("episodes", []), start=1):
-            _build_item(channel, ep, season_no, season_name, ep_no, image_url)
+            _build_item(channel, ep, season_no, season_name, ep_no, image_url,
+                        include_season=include_season)
             episode_count += 1
 
     etree.ElementTree(rss).write(

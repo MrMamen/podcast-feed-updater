@@ -94,10 +94,14 @@ These are set for the *list*, not copied from each episode's original feed:
   episode.
 - **Channel `itunes:explicit`** reflects the feed's actual content (true if any
   episode is explicit), computed per feed — not the config baseline alone.
-- **`itunes:type`** comes from config (`serial` for in-order chronological
-  presentation), not the source shows' types.
-- **`podcast:season` / `itunes:season` / `itunes:episode`** group by edition —
-  a list construct that doesn't exist in the source feeds.
+- **`itunes:type` is per feed.** The combined feed and the *newest* edition are
+  `episodic` so podcast apps auto-download new episodes; settled older editions
+  use the configured `itunes_type` (default `serial`, for in-order
+  presentation). `serial` suppresses auto-download in some apps (e.g. Overcast),
+  which is why the growing feeds stay `episodic`.
+- **Seasons: only the combined feed.** It uses `<podcast:season>` /
+  `<itunes:season>` (one per edition). Per-edition feeds are flat — a single
+  edition needs no season — but keep `<itunes:episode>` for ordering.
 - **`pubDate` is synthetic, not the original publish date.** Most apps sort by
   pubDate, so to make them show the curated *running order* each section is
   anchored to its event date (parsed from the heading, falling back to the
@@ -125,7 +129,7 @@ These are set for the *list*, not copied from each episode's original feed:
 | `list_id` | Numeric Podchaser list id (`1959319`). Empty → resolve via search. |
 | `list_search_term` | Fallback search term used when `list_id` is empty. |
 | `language` / `author` / `explicit` | Channel metadata. `explicit` is a baseline — the channel is also marked explicit if any episode is. |
-| `itunes_type` | Show type: `serial` (in-order, season 1 first) or `episodic` (newest first). |
+| `itunes_type` | iTunes type for *settled* edition feeds (default `serial`). The combined feed and the newest edition are always `episodic` so apps auto-download new episodes. |
 | `category` | iTunes category `{text, sub}` (Leisure › Video Games). |
 | `base_url` | Public host for feeds + cover images (GitHub Pages). |
 | `min_remaining` | Abort if a fetch would leave fewer than this many points. |

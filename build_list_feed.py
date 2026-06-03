@@ -76,7 +76,11 @@ def main():
         cfg = json.load(f)
     base_url = cfg["base_url"].rstrip("/")
     combined = cfg["combined"]
-    podcast_type = cfg.get("itunes_type", "episodic")
+    # The combined feed and the newest edition are always episodic so podcast
+    # apps auto-download new episodes; settled older editions can be serial
+    # (in-order presentation, no new episodes expected). Configurable via
+    # itunes_type (the type used for settled editions).
+    settled_type = cfg.get("itunes_type", "serial")
 
     api = from_env(required=True)
 
@@ -119,17 +123,22 @@ def main():
         generator=GENERATOR,
         last_build_raw=data.get("updatedAt"),
         sections=sections,
-        podcast_type=podcast_type,
+        podcast_type="episodic",
+        include_season=True,
         output_file=os.path.join(OUTPUT_DIR, f"{combined['slug']}.xml"),
     )
 
     # One feed per edition, in list order: tiltcast-1.xml ... tiltcast-N.xml.
+    newest_idx = len(sections)
     for idx, section in enumerate(sections, start=1):
         slug = f"tiltcast-{idx}"
         heading = section.get("heading")
         title = heading or f"{combined['title']} — del {idx}"
         description = (f"Live-episoder fra {heading}."
                        if heading else data.get("description"))
+        # Newest edition stays episodic for auto-download; older ones use the
+        # configured settled type.
+        edition_type = "episodic" if idx == newest_idx else settled_type
         build_feed(
             title=title,
             description=description,
@@ -143,7 +152,8 @@ def main():
             generator=GENERATOR,
             last_build_raw=data.get("updatedAt"),
             sections=[section],
-            podcast_type=podcast_type,
+            podcast_type=edition_type,
+            include_season=False,
             output_file=os.path.join(OUTPUT_DIR, f"{slug}.xml"),
         )
 
