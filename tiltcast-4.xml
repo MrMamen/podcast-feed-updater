@@ -95,8 +95,6 @@
       <itunes:duration>45:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
     <item>
@@ -113,8 +111,6 @@
       <itunes:duration>45:19</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
     <item>
@@ -131,8 +127,6 @@
       <itunes:duration>50:48</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
     <item>
@@ -149,8 +143,6 @@
       <itunes:duration>36:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
     <item>
@@ -166,8 +158,6 @@
       <itunes:duration>35:36</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
     <item>
@@ -184,8 +174,6 @@
       <itunes:duration>43:06</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>6</itunes:episode>
     </item>
     <item>
@@ -204,8 +192,6 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>51:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>7</itunes:episode>
     </item>
     <item>
@@ -222,8 +208,6 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>1:07:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>8</itunes:episode>
     </item>
   </channel>

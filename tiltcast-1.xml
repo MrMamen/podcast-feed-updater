@@ -36,8 +36,6 @@
       <itunes:duration>28:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
     <item>
@@ -73,8 +71,6 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>44:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
     <item>
@@ -91,8 +87,6 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>1:15:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
     <item>
@@ -107,8 +101,6 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>47:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
     <item>
@@ -125,8 +117,6 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>59:09</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
   </channel>

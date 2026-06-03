@@ -6,7 +6,7 @@
     <language>no</language>
     <description>Live-episoder fra TILTcast 5.0 (lørdag 30. mai 2026).</description>
     <itunes:author>Tiltcast i Oslo</itunes:author>
-    <itunes:type>serial</itunes:type>
+    <itunes:type>episodic</itunes:type>
     <itunes:explicit>true</itunes:explicit>
     <itunes:image href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png"/>
     <image>
@@ -36,8 +36,6 @@
       <itunes:duration>44:38</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
     <item>
@@ -56,8 +54,6 @@
       <itunes:duration>56:23</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
     <item>
@@ -72,8 +68,6 @@
       <itunes:duration>49:46</itunes:duration>
       <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
   </channel>

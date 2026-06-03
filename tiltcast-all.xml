@@ -6,7 +6,7 @@
     <language>no</language>
     <description>Forsøker å samle alle utgitte live-episoder fra Tiltcast igjennom årene</description>
     <itunes:author>Tiltcast i Oslo</itunes:author>
-    <itunes:type>serial</itunes:type>
+    <itunes:type>episodic</itunes:type>
     <itunes:explicit>true</itunes:explicit>
     <itunes:image href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.png"/>
     <image>

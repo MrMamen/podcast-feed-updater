@@ -39,8 +39,6 @@
       <itunes:duration>35:26</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
     <item>
@@ -57,8 +55,6 @@
       <itunes:duration>52:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
     <item>
@@ -77,8 +73,6 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>57:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
     <item>
@@ -93,8 +87,6 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>58:14</itunes:duration>
       <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
     <item>
@@ -115,8 +107,6 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>55:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
     <item>
@@ -131,8 +121,6 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>1:00:59</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>6</itunes:episode>
     </item>
     <item>
@@ -149,8 +137,6 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>1:22:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">1</podcast:season>
-      <itunes:season>1</itunes:season>
       <itunes:episode>7</itunes:episode>
     </item>
   </channel>
