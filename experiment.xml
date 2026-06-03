@@ -25,11 +25,11 @@
             </itunes:owner>
     	<itunes:block>No</itunes:block>
 	<itunes:explicit>false</itunes:explicit>
-    <itunes:image href="https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"/>
+    <itunes:image href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg"/>
     <podcast:person role="host" img="https://creator-images.podchaser.com/a375188d8b4f3ecd4aee14ca208d71d9.jpeg" href="https://www.podchaser.com/creators/erik-andr%C3%A9-vik-mamen-107tVQyeYv">Erik André Vik Mamen</podcast:person><podcast:person role="host" img="https://creator-images.podchaser.com/71bbd16436f94f6bc85f2bb97e13298c.jpeg" href="https://www.podchaser.com/creators/sigve-baar-digernes-107tVQyeYz">Sigve Baar Digernes</podcast:person><image>
-        <url>https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg</url>
-        <title>cd SPILL</title>
-        <link>https://spillhistorie.no/tag/cd-spill/</link>
+        <url>https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg</url>
+        <title>Tiltcast feed-eksperiment (TEST)</title>
+        <link>https://mrmamen.github.io/podcast-feed-updater/experiment.xml</link>
         <width>144</width>
         <height>144</height>
     </image>
