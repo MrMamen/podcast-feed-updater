@@ -31,6 +31,7 @@ Costs no query points (reads the public cd SPILL feed). Deploy via the
 """
 
 import argparse
+import os
 import uuid
 from email.utils import parsedate_to_datetime
 
@@ -153,6 +154,7 @@ def main():
         if link.get("rel") == "self":
             link.set("href", self_url)
 
+    os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
     etree.ElementTree(root).write(args.output, encoding="utf-8",
                                   xml_declaration=True, pretty_print=True)
 
