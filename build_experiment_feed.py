@@ -90,6 +90,8 @@ def main():
     parser.add_argument("--pin", type=int, default=None,
                         help="Source episode number to include, pinned to feed position #2")
     parser.add_argument("--type", choices=["episodic", "serial"], default="episodic")
+    parser.add_argument("--image-url", default=None,
+                        help="Channel cover image URL (default: the Tiltcast 4 cover)")
     parser.add_argument("--source", default=DEFAULT_SOURCE)
     parser.add_argument("--output", default="output/experiment.xml")
     parser.add_argument("--title", default=DEFAULT_TITLE)
@@ -141,7 +143,9 @@ def main():
         channel.append(it)
 
     # Rewrite the channel to a distinct experiment identity.
-    self_url = f"{args.base_url.rstrip('/')}/experiment.xml"
+    base = args.base_url.rstrip("/")
+    self_url = f"{base}/experiment.xml"
+    image_url = args.image_url or f"{base}/tiltcast-4.jpg"
     set_text(channel, "title", args.title)
     set_text(channel, "description",
              "Eksperimentell feed for å teste hvordan podkast-apper reagerer på "
@@ -153,6 +157,18 @@ def main():
     for link in channel.findall(f"{{{ATOM}}}link"):
         if link.get("rel") == "self":
             link.set("href", self_url)
+
+    # Override the channel cover (otherwise it shows the source's cd SPILL art).
+    itunes_img = channel.find(f"{{{ITUNES}}}image")
+    if itunes_img is None:
+        itunes_img = etree.SubElement(channel, f"{{{ITUNES}}}image")
+    itunes_img.set("href", image_url)
+    rss_img = channel.find("image")
+    if rss_img is None:
+        rss_img = etree.SubElement(channel, "image")
+    set_text(rss_img, "url", image_url)
+    set_text(rss_img, "title", args.title)
+    set_text(rss_img, "link", self_url)
 
     os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
     etree.ElementTree(root).write(args.output, encoding="utf-8",
@@ -166,6 +182,7 @@ def main():
         print(f"    ep {pos}. {it.findtext('title')[:36]:36} "
               f"{it.findtext('pubDate')}{pin_mark}")
     print(f"  identity: {args.title!r}  guid={EXPERIMENT_GUID}")
+    print(f"  cover: {image_url}")
 
 
 if __name__ == "__main__":
