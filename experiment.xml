@@ -54,26 +54,30 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Thexder_chapters.json" type="application/json"/>
         <podcast:episode display="10 (#133)">133</podcast:episode></item>
     <item>
-        <title>Diablo med Martin Gjesdal</title>
-        <itunes:title>Diablo med Martin Gjesdal</itunes:title>
-        <link>https://spillhistorie.no/2024/06/24/bli-med-ned-i-morket-under-tristram/</link>        <pubDate>Thu, 04 Jun 2026 10:28:49 +0000</pubDate>
-        <guid isPermaLink="false">cdspill.podbean.com/61dd83c5-5fd1-30fb-990f-5d7ca2ff58ce</guid>
-                                    <description>&lt;p&gt;Dette er omtrent en eksistensiell krise for cd SPILL, for verken Sigve eller MrMamen har spilt det legendariske rollespillet Diablo. Men frykt ikke, Martin Gjesdal kompenserer godt for vertenes manglende erfaring og kompetanse.&lt;/p&gt;
+        <title>Tex Murphy: Martian Memorandum</title>
+        <itunes:title>Tex Murphy: Martian Memorandum</itunes:title>
+        <link>https://spillhistorie.no/2024/06/10/dypdykk-i-tex-murphy-spillet-martian-memorandum/</link>        <pubDate>Tue, 02 Jun 2026 12:00:00 +0000</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/5d885f7b-7410-3096-a9fd-776b0b1b2ce4</guid>
+                                    <description>&lt;p&gt;Tex Murphy er tilbake! I denne oppfølgeren til Mean Streets får vi se hvordan Tex får en ny sak som involverer rikinger, Marsturer og date med sekretæren til arbeidsgiveren din.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;Les &lt;a href='https://spillhistorie.no/2024/05/22/en-hyllest-til-en-av-norges-viktigste-spillhistorikere/'&gt;hyllesten om Joachim Froholt&lt;/a&gt;
+Les litt &lt;a href='https://www.atarimagazines.com/compute/issue133/100_You_can_mix_multimed.php'&gt;mer om Msound&lt;/a&gt;
+Vi har også laget &lt;a href='https://spillhistorie.no/2021/11/08/mean-streets-introduserte-detektiven-tex-murphy/'&gt;en episode om det første spillet i serien Mean Streets.&lt;/a&gt;
+Se også &lt;a href='https://spillhistorie.no/2017/12/06/historien-tex-murphy/'&gt;historien om Tex Murphy&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/06/24/bli-med-ned-i-morket-under-tristram/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/06/10/dypdykk-i-tex-murphy-spillet-martian-memorandum/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
-                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/j4dvhhz3j3evjjsb/Diablo.mp3" length="132640413" type="audio/mpeg"/>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/7ytx9gd35e7kwrzy/MartianMemorandum.mp3" length="96785060" type="audio/mpeg"/>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
-        <itunes:duration>7646</itunes:duration>
+        <itunes:duration>5396</itunes:duration>
         <itunes:episode>2</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/diablo.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Diablo_chapters.json" type="application/json"/>
-        <podcast:episode display="12 (#99)">99</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person></item>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TexMurphy2_7z3e4m.jpg"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MartianMemorandum_chapters.json" type="application/json"/>
+        <podcast:episode display="11 (#98)">98</podcast:episode></item>
     <item>
         <title>The Hobbit live med Roar Granevang</title>
         <itunes:title>The Hobbit live med Roar Granevang</itunes:title>
@@ -139,108 +143,5 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/constructor_chapters.json" type="application/json"/>
         <podcast:episode display="7 (#130)">130</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
-    <item>
-        <title>Aleksikons sololabyrint 2026</title>
-        <itunes:title>Aleksikons sololabyrint 2026</itunes:title>
-        <link>https://spillhistorie.no/2026/03/30/aleksikons-paskelabyrint-2026/</link>        <pubDate>Mon, 30 Mar 2026 06:30:00 +0200</pubDate>
-        <guid isPermaLink="false">cdspill.podbean.com/fb48b146-ffe3-3e3e-921c-dd6d46e3c825</guid>
-                                    <description>&lt;p&gt;Aleksikon har mekka nok en påskelabyrint til dere! Denne episoden er kun spørsmål (med fasit på slutten), hvis du vil høre Sigve og MrMamen gjette så er det publisert samme dag.&lt;/p&gt;
-&lt;p&gt;Bildene i Oppgave 14 kan du ser her:
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-1.jpg'&gt;Bilde 1&lt;/a&gt;
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-2.jpg'&gt;Bilde 2&lt;/a&gt;
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-3.jpg'&gt;Bilde 3&lt;/a&gt;
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-4.jpg'&gt;Bilde 4&lt;/a&gt;
-Hvis du trenger enda et ekstra hint:
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-finale.jpg'&gt;Ekstra hint&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Takk til alle bidragsytere. God påske!&lt;/p&gt;
-
-&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/30/aleksikons-paskelabyrint-2026/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
-                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/e5x68vtv7q56n2a9/solop_ske202681qay.mp3" length="57709968" type="audio/mpeg"/>
-        <itunes:author>C:\SPILL＞</itunes:author>
-        <itunes:explicit>false</itunes:explicit>
-        <itunes:block>No</itunes:block>
-        <itunes:duration>2331</itunes:duration>
-        <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/solop_ske202681qay_chapters.json" type="application/json"/>
-        <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person><itunes:episode>6</itunes:episode></item>
-    <item>
-        <title>Aleksikons påskelabyrint 2026</title>
-        <itunes:title>Aleksikons påskelabyrint 2026</itunes:title>
-        <link>https://spillhistorie.no/2026/03/30/cd-spills-paskespesial-2026/</link>        <pubDate>Mon, 30 Mar 2026 06:21:00 +0200</pubDate>
-        <guid isPermaLink="false">cdspill.podbean.com/a255d53a-9d90-3a4e-ac0d-19d396360c40</guid>
-                                    <description>&lt;p&gt;Aleksikon har mekka nok en påskelabyrint til oss.  Dersom du vil gjette uten oss ligger det en egen episode i feeden for dette.&lt;/p&gt;
-&lt;p&gt;Bildene i Oppgave 14 kan du ser her:
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-1.jpg'&gt;Bilde 1&lt;/a&gt;
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-2.jpg'&gt;Bilde 2&lt;/a&gt;
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-3.jpg'&gt;Bilde 3&lt;/a&gt;
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-4.jpg'&gt;Bilde 4&lt;/a&gt;
-Hvis du trenger enda et ekstra hint:
-&lt;a href='https://spillhistorie.no/wp-content/uploads/2026/03/paskelabyrint-finale.jpg'&gt;Ekstra hint&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Takk til alle bidragsytere. God påske!&lt;/p&gt;
-
-&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/30/cd-spills-paskespesial-2026/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
-                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/uencjch8sbua9apm/p_ske2026br48c.mp3" length="99293249" type="audio/mpeg"/>
-        <itunes:author>C:\SPILL＞</itunes:author>
-        <itunes:explicit>false</itunes:explicit>
-        <itunes:block>No</itunes:block>
-        <itunes:duration>4194</itunes:duration>
-        <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wyps9img3vb52uz5/p_ske20268aj02.vtt" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/p_ske2026br48c_chapters.json" type="application/json"/>
-        <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person><itunes:episode>7</itunes:episode></item>
-    <item>
-        <title>Shufflepuck Cafe med Lasse Sørnes</title>
-        <itunes:title>Shufflepuck Cafe med Lasse Sørnes</itunes:title>
-        <link>https://spillhistorie.no/2026/03/16/universets-toffeste-shufflepuck-turnering/</link>        <pubDate>Mon, 16 Mar 2026 08:32:26 +0100</pubDate>
-        <guid isPermaLink="false">cdspill.podbean.com/9ea48a5a-0af6-3ad6-aa6d-845cdcff062b</guid>
-                                    <description>&lt;p&gt;Shufflepuck Cafe er et airhockey-spill med mange ulike og fargerike motstandere. Imponerende variert til å være et såpass enkelt premiss. NB! Rens kula på musa før du setter i gang! Takk til Lasse Sørnes som har guidet oss igjennom spillet og alle portene.&lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-&lt;p&gt;Les gjerne &lt;a href='https://spillhistorie.no/2026/01/19/shufflepuck-cafe-en-kald-krig-en-varm-bar-og-en-gris-ved-navn-eneg/'&gt;tilbakeblikket skrevet av Lasse&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Ta også en titt på &lt;a href='https://no.wikipedia.org/wiki/Tiki_100'&gt;Tiki-100&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/16/universets-toffeste-shufflepuck-turnering/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
-                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/szt5gqfpmdmxcqf5/Shufflepuck_cafe6mk4v.mp3" length="120957748" type="audio/mpeg"/>
-        <itunes:author>C:\SPILL＞</itunes:author>
-        <itunes:explicit>false</itunes:explicit>
-        <itunes:block>No</itunes:block>
-        <itunes:duration>5230</itunes:duration>
-        <itunes:episode>8</itunes:episode>
-        <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/u9f9ktwq7nb5a47v/SP.vtt" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Shufflepuck_cafe6mk4v_chapters.json" type="application/json"/>
-        <podcast:episode display="6 (#129)">129</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
-    <item>
-        <title>Boppin'</title>
-        <itunes:title>Boppin'</itunes:title>
-        <link>https://spillhistorie.no/2026/03/02/blodige-selvmord-og-intrikate-puslenotter/</link>        <pubDate>Mon, 02 Mar 2026 07:20:00 +0100</pubDate>
-        <guid isPermaLink="false">cdspill.podbean.com/d40c4241-4dc6-3e6c-b186-a46c74c3bd6d</guid>
-                                    <description>&lt;p&gt;Boppin' er at av mange spill som ble kjent på grunn av Apogees Shareware-modell. Men la deg ikke lure av det tilsynelatende barnevennlige 90-tallsspillet, eller det enkle matche-spilldesignet. Her er det grusomme selvmordscener og intrikate pusslenøtter.&lt;/p&gt;
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/02/blodige-selvmord-og-intrikate-puslenotter/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
-Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
-                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/5j2fmai4uxnnht75/Boppin.mp3" length="115692363" type="audio/mpeg"/>
-        <itunes:author>C:\SPILL＞</itunes:author>
-        <itunes:explicit>false</itunes:explicit>
-        <itunes:block>No</itunes:block>
-        <itunes:duration>5445</itunes:duration>
-        <itunes:episode>9</itunes:episode>
-        <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/9z4sn64mqnd8pmib/Boppin.vtt" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Boppin_chapters.json" type="application/json"/>
-        <podcast:episode display="5 (#128)">128</podcast:episode></item>
     </channel>
 </rss>
