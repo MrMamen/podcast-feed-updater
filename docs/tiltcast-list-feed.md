@@ -83,28 +83,6 @@ image and prints a warning.
 - **Episode ordering.** Items follow the curated `position` order (oldest
   edition first). Most podcast apps re-sort by `pubDate` anyway.
 
----
-
-## Overcast experiment feed
-
-`build_experiment_feed.py` is a Podchaser-free harness for probing how podcast
-apps (Overcast) react to feed updates, ordering and episode re-numbering — used
-to debug the auto-download question and the Tiltcast re-numbering risk. It
-republishes the *N newest* cd SPILL episodes under a separate feed identity
-(`output/experiment.xml`), keeping real enclosures/guids. The test feed carries
-**no season tags** and **fictional position-based episode numbers** (newest = 1),
-so numbers shift whenever an episode is added/inserted — if the app keys on guid
-it shouldn't care. `--pin EPNUM` injects an older source episode at feed position
-#2 (out-of-order insert that re-numbers those below). `--type episodic|serial`
-compares behaviors. Costs no query points (reads the public cd SPILL feed). Run
-via the **Build Experiment Feed** workflow (inputs for episode count + type) or
-locally:
-
-```bash
-uv run build_experiment_feed.py --episodes 4            # baseline
-uv run build_experiment_feed.py --episodes 4 --pin 100  # insert older at #2
-```
-
 ## List-tailored tags (intentionally differ from the source)
 
 These are set for the *list*, not copied from each episode's original feed:
