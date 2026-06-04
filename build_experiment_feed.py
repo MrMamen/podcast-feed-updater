@@ -48,9 +48,6 @@ ATOM = "http://www.w3.org/2005/Atom"
 # Enriched feed has itunes:episode numbers, needed so --pin can find an episode.
 DEFAULT_SOURCE = "https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml"
 DEFAULT_TITLE = "Tiltcast feed-eksperiment (TEST)"
-# Stable, deterministic guid so every rebuild is recognized as the same feed.
-EXPERIMENT_GUID = str(uuid.uuid5(uuid.NAMESPACE_URL,
-                                 "podcast-feed-updater/experiment"))
 _EPOCH = parsedate_to_datetime("Thu, 01 Jan 1970 00:00:00 +0000")
 
 
@@ -100,11 +97,17 @@ def main():
                         help="Date the pinned episode to YYYY-MM-DD (e.g. a recent event "
                              "day) — generalizes --fresh-pin to test the recency threshold")
     parser.add_argument("--type", choices=["episodic", "serial"], default="episodic")
+    parser.add_argument("--slug", default="experiment",
+                        help="Feed identity: sets output file, podcast:guid and self URL. "
+                             "Use a distinct slug (e.g. experiment-serial) for an "
+                             "independent subscription to compare against.")
     parser.add_argument("--image-url", default=None,
                         help="Channel cover image URL (default: the Tiltcast 4 cover)")
     parser.add_argument("--source", default=DEFAULT_SOURCE)
-    parser.add_argument("--output", default="output/experiment.xml")
-    parser.add_argument("--title", default=DEFAULT_TITLE)
+    parser.add_argument("--output", default=None,
+                        help="Output path (default: output/<slug>.xml)")
+    parser.add_argument("--title", default=None,
+                        help="Feed title (default derived from slug)")
     parser.add_argument("--base-url",
                         default="https://mrmamen.github.io/podcast-feed-updater")
     args = parser.parse_args()
@@ -172,17 +175,23 @@ def main():
     for it in ordered:
         channel.append(it)
 
-    # Rewrite the channel to a distinct experiment identity.
+    # Rewrite the channel to a distinct experiment identity, derived from --slug
+    # so each slug is an independent subscription (own guid/url/file).
     base = args.base_url.rstrip("/")
-    self_url = f"{base}/experiment.xml"
+    slug = args.slug
+    output_path = args.output or f"output/{slug}.xml"
+    self_url = f"{base}/{slug}.xml"
+    guid = str(uuid.uuid5(uuid.NAMESPACE_URL, f"podcast-feed-updater/{slug}"))
+    title = args.title or (DEFAULT_TITLE if slug == "experiment"
+                           else f"Tiltcast eksperiment ({slug})")
     image_url = args.image_url or f"{base}/tiltcast-4.jpg"
-    set_text(channel, "title", args.title)
+    set_text(channel, "title", title)
     set_text(channel, "description",
              "Eksperimentell feed for å teste hvordan podkast-apper reagerer på "
              "oppdateringer, rekkefølge og episodenummerering. Subset av "
              "cd SPILL-episoder. Ikke en ekte podkast.")
     set_text(channel, "link", self_url)
-    set_text(channel, f"{{{PODCAST}}}guid", EXPERIMENT_GUID)
+    set_text(channel, f"{{{PODCAST}}}guid", guid)
     set_text(channel, f"{{{ITUNES}}}type", args.type)
     for link in channel.findall(f"{{{ATOM}}}link"):
         if link.get("rel") == "self":
@@ -200,18 +209,18 @@ def main():
     set_text(rss_img, "title", args.title)
     set_text(rss_img, "link", self_url)
 
-    os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
-    etree.ElementTree(root).write(args.output, encoding="utf-8",
+    os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
+    etree.ElementTree(root).write(output_path, encoding="utf-8",
                                   xml_declaration=True, pretty_print=True)
 
-    print(f"\n✓ {args.output}")
+    print(f"\n✓ {output_path}")
     print(f"  type: {args.type}  |  episodes: {len(ordered)} (of {len(items)} in source)")
     print("  feed order (pos = fictional itunes:episode):")
     for pos, it in enumerate(ordered, start=1):
         pin_mark = "  ← PINNED" if it in pin_items else ""
         print(f"    ep {pos}. {it.findtext('title')[:36]:36} "
               f"{it.findtext('pubDate')}{pin_mark}")
-    print(f"  identity: {args.title!r}  guid={EXPERIMENT_GUID}")
+    print(f"  identity: {title!r}  slug={slug}  guid={guid}")
     print(f"  cover: {image_url}")
 
 

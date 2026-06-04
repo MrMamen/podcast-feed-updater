@@ -6,6 +6,10 @@ on:
   # cd SPILL feed, so it costs no query points.
   workflow_dispatch:
     inputs:
+      slug:
+        description: 'Feed identity (output file + guid). e.g. experiment or experiment-serial'
+        required: true
+        default: 'experiment'
       episodes:
         description: 'Number of (oldest) cd SPILL episodes to include'
         required: true
@@ -64,6 +68,7 @@ jobs:
         DATE_ARG=""
         if [ -n "${{ inputs.pin_date }}" ]; then DATE_ARG="--pin-date ${{ inputs.pin_date }}"; fi
         uv run --no-dev build_experiment_feed.py \
+          --slug "${{ inputs.slug }}" \
           --episodes "${{ inputs.episodes }}" \
           --type "${{ inputs.type }}" \
           $PIN_ARG $FRESH_ARG $DATE_ARG
