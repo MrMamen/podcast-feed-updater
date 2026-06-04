@@ -95,6 +95,9 @@ def main():
     parser.add_argument("--fresh-pin", action="store_true",
                         help="Date the pinned episode to now — test whether a recent-dated "
                              "new guid triggers push/download (vs an old-dated one)")
+    parser.add_argument("--pin-date", default=None,
+                        help="Date the pinned episode to YYYY-MM-DD (e.g. a recent event "
+                             "day) — generalizes --fresh-pin to test the recency threshold")
     parser.add_argument("--type", choices=["episodic", "serial"], default="episodic")
     parser.add_argument("--image-url", default=None,
                         help="Channel cover image URL (default: the Tiltcast 4 cover)")
@@ -130,14 +133,19 @@ def main():
         ordered.remove(pin_item)
         ordered.insert(1, pin_item)
 
-    # --fresh-pin: re-date the pinned episode to now, so it's a recent (not old)
-    # new guid — isolates whether pubDate recency is what gates push/download.
-    if args.fresh_pin and pin_item is not None:
+    # Re-date the pinned episode to isolate whether pubDate recency gates
+    # push/download. --pin-date sets a specific day; --fresh-pin uses now.
+    if pin_item is not None and (args.pin_date or args.fresh_pin):
+        if args.pin_date:
+            pin_dt = datetime.strptime(args.pin_date, "%Y-%m-%d").replace(
+                hour=12, tzinfo=timezone.utc)
+        else:
+            pin_dt = datetime.now(timezone.utc)
         pd = pin_item.find("pubDate")
         if pd is None:
             pd = etree.SubElement(pin_item, "pubDate")
-        pd.text = format_datetime(datetime.now(timezone.utc))
-        print(f"  fresh-pin: dated pinned episode to {pd.text}")
+        pd.text = format_datetime(pin_dt)
+        print(f"  pin date set to {pd.text}")
 
     # Strip season tags and assign fictional, position-based episode numbers
     # (newest = 1). These shift whenever an episode is added/inserted above —

@@ -27,6 +27,10 @@ on:
         required: false
         type: boolean
         default: false
+      pin_date:
+        description: 'Optional: date the pinned episode to YYYY-MM-DD (e.g. an event day)'
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -57,10 +61,12 @@ jobs:
         if [ -n "${{ inputs.pin }}" ]; then PIN_ARG="--pin ${{ inputs.pin }}"; fi
         FRESH_ARG=""
         if [ "${{ inputs.fresh_pin }}" = "true" ]; then FRESH_ARG="--fresh-pin"; fi
+        DATE_ARG=""
+        if [ -n "${{ inputs.pin_date }}" ]; then DATE_ARG="--pin-date ${{ inputs.pin_date }}"; fi
         uv run --no-dev build_experiment_feed.py \
           --episodes "${{ inputs.episodes }}" \
           --type "${{ inputs.type }}" \
-          $PIN_ARG $FRESH_ARG
+          $PIN_ARG $FRESH_ARG $DATE_ARG
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
