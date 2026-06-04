@@ -110,13 +110,24 @@ def assign_running_order_pubdates(sections: List[Dict], *, offset_minutes: int =
     minutes), starting at ``base_hour``. Mutates each episode dict in place
     (sets ``pubDateOverride``) so the same episode gets an identical pubDate in
     every feed it appears in. Returns per-section info for logging.
+
+    The newest (last) section is left untouched: its episodes keep their real
+    airDate so newly-added episodes are recent and get notified/auto-downloaded
+    by podcast apps. Only settled older editions are back-dated to running order.
     """
     log: List[Dict] = []
     prev_anchor: Optional[datetime] = None
+    newest_index = len(sections) - 1
 
-    for section in sections:
+    for index, section in enumerate(sections):
         heading = section.get("heading")
         episodes = section.get("episodes", [])
+
+        # Newest edition keeps real airDate (no override) so additions notify.
+        if index == newest_index:
+            log.append({"heading": heading, "anchor": None,
+                        "source": "real airDate (newest)", "count": len(episodes)})
+            continue
 
         anchor = _parse_heading_date(heading)
         source = "heading date"

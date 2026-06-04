@@ -98,10 +98,13 @@ def main():
     for idx, section in enumerate(sections, start=1):
         print(f"   {idx}. {section['heading']!r}: {len(section['episodes'])} episodes")
 
-    # Synthesize pubDates so apps show episodes in the curated running order.
-    print("\n🕒 Running-order pubDates (anchor per section):")
+    # Synthesize pubDates so apps show episodes in the curated running order,
+    # except the newest edition which keeps real airDate (so additions notify).
+    print("\n🕒 pubDate strategy per section:")
     for entry in assign_running_order_pubdates(sections):
-        print(f"   {entry['anchor']:%Y-%m-%d} ({entry['source']:>20}) "
+        anchor = entry["anchor"]
+        when = f"{anchor:%Y-%m-%d}" if anchor else "real airDate"
+        print(f"   {when:>12} ({entry['source']:>24}) "
               f"— {entry['count']} eps — {entry['heading']!r}")
 
     copy_assets()

@@ -122,13 +122,22 @@ These are set for the *list*, not copied from each episode's original feed:
 - **Seasons: only the combined feed.** It uses `<podcast:season>` /
   `<itunes:season>` (one per edition). Per-edition feeds are flat — a single
   edition needs no season — but keep `<itunes:episode>` for ordering.
-- **`pubDate` is synthetic, not the original publish date.** Most apps sort by
-  pubDate, so to make them show the curated *running order* each section is
-  anchored to its event date (parsed from the heading, falling back to the
-  earliest episode airDate, then previous section + 1 day) and episodes are
-  spaced 1 hour apart by `position`. See `assign_running_order_pubdates`.
-  Consequence: inserting an episode mid-section re-times the episodes after it
-  (other editions are untouched, GUIDs stay stable, so apps don't lose state).
+- **`pubDate` is hybrid — real for the newest edition, synthetic for settled
+  ones.** Podcast apps notify/auto-download only episodes newer than the newest
+  they've already seen (a recency "watermark"); they ignore feed order and
+  episode/season numbers (verified empirically against Overcast). So:
+  - **Newest edition keeps its real `airDate`** → newly-added episodes are
+    recent, stay above the watermark, and get notified/auto-downloaded. (During
+    its active phase it therefore displays in publish order, not running order.)
+  - **Settled older editions are back-dated to running order**: each section is
+    anchored to its event date (parsed from the heading, falling back to the
+    earliest airDate, then previous section + 1 day) and episodes spaced 1 hour
+    apart by `position`. They're years old, so they don't re-ping as new — and
+    they display in the curated running order. See `assign_running_order_pubdates`.
+
+  When the next edition starts, the previous one automatically becomes "settled"
+  (switches to running-order dates + serial type). GUIDs stay stable throughout,
+  so apps don't lose state when an edition's dates change.
 
 ## File map
 
