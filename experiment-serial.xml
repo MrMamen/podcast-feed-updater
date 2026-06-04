@@ -54,6 +54,34 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Thexder_chapters.json" type="application/json"/>
         <podcast:episode display="10 (#133)">133</podcast:episode></item>
     <item>
+        <title>Monkey Island 2: LeChuck's Revenge med C. Alexander Espeseth og Mattis Folkestad</title>
+        <itunes:title>Monkey Island 2: LeChuck's Revenge med C. Alexander Espeseth og Mattis Folkestad</itunes:title>
+        <link>https://spillhistorie.no/2024/02/05/lechuck-tar-hevn-i-monkey-island-2/</link>        <pubDate>Thu, 04 Jun 2026 14:07:41 +0000</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/18ae6002-1bfc-3254-9e81-5919a40e43f1</guid>
+                                    <description>&lt;p&gt;Er Monkey Island 2: LeChuck's Revenge det beste spillet i serien? Vi har fått besøk av Alexander Espeseth som har mastergrad som er relatert til dette spillet, og eventyrspildesigner Mattis Folkestad som kanskje har blitt inspirert av nettopp dette spillet. Vi kommer også innom Special Edition og hva vi synes om det. Etter en halvtimes tid spoiler vi også hele spillet hvor vi diskuterer den minneverdige avslutningen.&lt;/p&gt;
+&lt;p&gt;
+Sjekk ut podcasten til Alexander Espeseth og Sverre Dahlback: &lt;a href='https://www.podchaser.com/podcasts/bleeps-og-bloops-5461285'&gt;Bleeps og Bloops&lt;/a&gt;
+Sjekk ut spillene til &lt;a href='https://machineboy.com'&gt;Mattis Folkestad&lt;/a&gt;: &lt;a href='https://store.steampowered.com/app/544970/Milkmaid_of_the_Milky_Way/'&gt;Milkmaid_of_the_Milky_Way&lt;/a&gt; og &lt;a href='https://machineboy.com/embracelet/'&gt;Embracelet&lt;/a&gt;.
+
+
+&lt;/p&gt;
+
+&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/02/05/lechuck-tar-hevn-i-monkey-island-2/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/pb6dtd/mi2.mp3" length="108441802" type="audio/mpeg"/>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>6045</itunes:duration>
+        <itunes:episode>2</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MonkeyIsland2_color9dz4g.jpg"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/mi2_chapters_json_chapters.json" type="application/json"/>
+        <podcast:episode display="2 (#89)">89</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu">Mattis Folkestad</podcast:person></item>
+    <item>
         <title>The Hobbit live med Roar Granevang</title>
         <itunes:title>The Hobbit live med Roar Granevang</itunes:title>
         <link>https://spillhistorie.no/2026/05/11/cd-spill-tester-the-hobbit-live-med-roar-granevang/</link>        <pubDate>Mon, 11 May 2026 06:55:00 +0200</pubDate>
@@ -68,7 +96,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
         <itunes:duration>3811</itunes:duration>
-        <itunes:episode>2</itunes:episode>
+        <itunes:episode>3</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8j3j55mt3694iwc4/Hobbit.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/hobbit_chapters.json" type="application/json"/>
@@ -89,7 +117,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:explicit>true</itunes:explicit>
         <itunes:block>No</itunes:block>
         <itunes:duration>5988</itunes:duration>
-        <itunes:episode>3</itunes:episode>
+        <itunes:episode>4</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/close_combat_gjc49p.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/326atztcedngfrss/CloseCombat.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CloseCombat_chapters.json" type="application/json"/>
@@ -112,7 +140,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
         <itunes:duration>7375</itunes:duration>
-        <itunes:episode>4</itunes:episode>
+        <itunes:episode>5</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/6ieu8b77tqb2mjvp/constructor.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/constructor_chapters.json" type="application/json"/>
@@ -146,6 +174,6 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/solop_ske202681qay_chapters.json" type="application/json"/>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person><itunes:episode>5</itunes:episode></item>
+        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=69db85e9&amp;is=69da3469&amp;hm=44e9d14c6738b4882b7b147c710f581f2deda0d67c67f0184d2e55c5c81802ae&amp;=">Aleks Gisvold</podcast:person><itunes:episode>6</itunes:episode></item>
     </channel>
 </rss>
