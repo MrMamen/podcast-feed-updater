@@ -35,7 +35,7 @@ Costs no query points (reads the public cd SPILL feed). Deploy via the
 import argparse
 import os
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime, parsedate_to_datetime
 
 import requests
@@ -90,8 +90,9 @@ def main():
     parser = argparse.ArgumentParser(description="Build an experiment feed from cd SPILL")
     parser.add_argument("--episodes", type=int, default=3,
                         help="Number of NEWEST episodes to include")
-    parser.add_argument("--pin", type=int, default=None,
-                        help="Source episode number to include, pinned to feed position #2")
+    parser.add_argument("--pin", default=None,
+                        help="Comma-separated source episode number(s) to include, pinned "
+                             "from feed position #2 onward")
     parser.add_argument("--fresh-pin", action="store_true",
                         help="Date the pinned episode to now — test whether a recent-dated "
                              "new guid triggers push/download (vs an old-dated one)")
@@ -117,35 +118,41 @@ def main():
     by_date = sorted(items, key=_pubdate, reverse=True)  # newest first
     selected = list(by_date[:args.episodes])
 
-    # --pin: ensure the numbered source episode is included.
-    pin_item = None
-    if args.pin is not None:
-        pin_item = next((it for it in items
-                         if _source_episode_no(it) == str(args.pin)), None)
-        if pin_item is None:
-            print(f"⚠ --pin {args.pin}: no episode with that number in source; skipping")
-        elif pin_item not in selected:
-            selected.append(pin_item)
+    # --pin: ensure the numbered source episode(s) are included.
+    pin_items = []
+    if args.pin:
+        for num in [p.strip() for p in str(args.pin).split(",") if p.strip()]:
+            it = next((x for x in items if _source_episode_no(x) == num), None)
+            if it is None:
+                print(f"⚠ --pin {num}: no episode with that number in source; skipping")
+            else:
+                pin_items.append(it)
+                if it not in selected:
+                    selected.append(it)
 
-    # Order newest-first, then force the pinned episode to position #2.
+    # Order newest-first, then force the pinned episodes to positions #2, #3, ...
     ordered = sorted(selected, key=_pubdate, reverse=True)
-    if pin_item is not None and pin_item in ordered and len(ordered) > 1:
-        ordered.remove(pin_item)
-        ordered.insert(1, pin_item)
+    for it in pin_items:
+        if it in ordered:
+            ordered.remove(it)
+    for offset, it in enumerate(pin_items):
+        ordered.insert(min(1 + offset, len(ordered)), it)
 
-    # Re-date the pinned episode to isolate whether pubDate recency gates
-    # push/download. --pin-date sets a specific day; --fresh-pin uses now.
-    if pin_item is not None and (args.pin_date or args.fresh_pin):
+    # Re-date the pinned episode(s) to isolate whether pubDate recency gates
+    # push/download. --pin-date sets a specific day; --fresh-pin uses now. With
+    # several pins, stagger by a minute so they have distinct, descending dates.
+    if pin_items and (args.pin_date or args.fresh_pin):
         if args.pin_date:
-            pin_dt = datetime.strptime(args.pin_date, "%Y-%m-%d").replace(
+            base_dt = datetime.strptime(args.pin_date, "%Y-%m-%d").replace(
                 hour=12, tzinfo=timezone.utc)
         else:
-            pin_dt = datetime.now(timezone.utc)
-        pd = pin_item.find("pubDate")
-        if pd is None:
-            pd = etree.SubElement(pin_item, "pubDate")
-        pd.text = format_datetime(pin_dt)
-        print(f"  pin date set to {pd.text}")
+            base_dt = datetime.now(timezone.utc)
+        for i, it in enumerate(pin_items):
+            pd = it.find("pubDate")
+            if pd is None:
+                pd = etree.SubElement(it, "pubDate")
+            pd.text = format_datetime(base_dt - timedelta(minutes=i))
+            print(f"  pin date set: {it.findtext('title')[:30]!r} -> {pd.text}")
 
     # Strip season tags and assign fictional, position-based episode numbers
     # (newest = 1). These shift whenever an episode is added/inserted above —
@@ -201,7 +208,7 @@ def main():
     print(f"  type: {args.type}  |  episodes: {len(ordered)} (of {len(items)} in source)")
     print("  feed order (pos = fictional itunes:episode):")
     for pos, it in enumerate(ordered, start=1):
-        pin_mark = "  ← PINNED #2" if it is pin_item else ""
+        pin_mark = "  ← PINNED" if it in pin_items else ""
         print(f"    ep {pos}. {it.findtext('title')[:36]:36} "
               f"{it.findtext('pubDate')}{pin_mark}")
     print(f"  identity: {args.title!r}  guid={EXPERIMENT_GUID}")
