@@ -98,6 +98,11 @@ def main():
     enricher.update_generator("podcast-feed-updater v1.0 (Spotify variant)")
     enricher.update_lastBuildDate()
 
+    # Experiment: shift newest episode an extra day on top of the +6h already
+    # baked into the enriched source feed (Spotify-only; main feed stays at +6h).
+    # Likely reverted after a couple of episodes.
+    enricher.shift_latest_episode_pubdate(hours=24)
+
     # Drop xmlns declarations on <rss> that nothing in the document uses
     enricher.prune_unused_namespaces()
 
