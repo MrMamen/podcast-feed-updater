@@ -1,0 +1,327 @@
+{
+  "version": "1.2.0",
+  "chapters": [
+    {
+      "startTime": 0,
+      "title": "Velkommen til cd SPILL",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 99.462,
+      "title": "Tiltcast 5.0"
+    },
+    {
+      "startTime": 277.854,
+      "title": "Neverfjord"
+    },
+    {
+      "startTime": 375.964,
+      "title": "Kommentarer fra The Hobbit",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg"
+    },
+    {
+      "startTime": 854.7,
+      "title": "Kommentarer fra Thexder",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thexder.jpg"
+    },
+    {
+      "startTime": 1037.701,
+      "title": "Dagens spill: Magic Carpet",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 1146.39,
+      "title": "Hva går spillet ut på?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 1451.193,
+      "title": "Tech Specs",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 2011.607,
+      "title": "Introsekvensen"
+    },
+    {
+      "startTime": 2206.723,
+      "title": "Ulike spells"
+    },
+    {
+      "startTime": 2237.524,
+      "title": "Fireball",
+      "toc": false
+    },
+    {
+      "startTime": 2245.295,
+      "title": "Possess",
+      "toc": false
+    },
+    {
+      "startTime": 2261.889,
+      "title": "Castle",
+      "toc": false
+    },
+    {
+      "startTime": 2417.881,
+      "title": "Accelerate (forward)",
+      "toc": false
+    },
+    {
+      "startTime": 2434.456,
+      "title": "Heal",
+      "toc": false
+    },
+    {
+      "startTime": 2437.313,
+      "title": "Rebound",
+      "toc": false
+    },
+    {
+      "startTime": 2465.921,
+      "title": "Invisibility",
+      "toc": false
+    },
+    {
+      "startTime": 2477.33,
+      "title": "Shield",
+      "toc": false
+    },
+    {
+      "startTime": 2503.329,
+      "title": "Earthquake",
+      "toc": false,
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/quake.jpg"
+    },
+    {
+      "startTime": 2544.249,
+      "title": "Rapid fireball",
+      "toc": false
+    },
+    {
+      "startTime": 2561.58,
+      "title": "Accelerate (backwards)",
+      "toc": false
+    },
+    {
+      "startTime": 2567.735,
+      "title": "Beyond Sight",
+      "toc": false
+    },
+    {
+      "startTime": 2586.249,
+      "title": "Mana Magnet",
+      "toc": false
+    },
+    {
+      "startTime": 2639.312,
+      "title": "Lightning bolt",
+      "toc": false
+    },
+    {
+      "startTime": 2656.73,
+      "title": "Meteor",
+      "toc": false
+    },
+    {
+      "startTime": 2675.218,
+      "title": "Steal Mana",
+      "toc": false
+    },
+    {
+      "startTime": 2694.792,
+      "title": "Wall of Fire",
+      "toc": false
+    },
+    {
+      "startTime": 2706.204,
+      "title": "Teleport",
+      "toc": false
+    },
+    {
+      "startTime": 2756.7,
+      "title": "Create Castle",
+      "toc": false
+    },
+    {
+      "startTime": 2812.417,
+      "title": "Crater",
+      "toc": false
+    },
+    {
+      "startTime": 2838.717,
+      "title": "Undead Army",
+      "toc": false
+    },
+    {
+      "startTime": 2873.441,
+      "title": "Lightning Storm",
+      "toc": false
+    },
+    {
+      "startTime": 2893.422,
+      "title": "Vulcano",
+      "toc": false
+    },
+    {
+      "startTime": 2919.932,
+      "title": "Global Death",
+      "toc": false
+    },
+    {
+      "startTime": 3002.932,
+      "title": "Morsomt gameplay"
+    },
+    {
+      "startTime": 3363.43,
+      "title": "Fiender"
+    },
+    {
+      "startTime": 3398.854,
+      "title": "Apes",
+      "toc": false
+    },
+    {
+      "startTime": 3409.999,
+      "title": "Bees",
+      "toc": false
+    },
+    {
+      "startTime": 3417.296,
+      "title": "Crabs",
+      "toc": false
+    },
+    {
+      "startTime": 3423.754,
+      "title": "Dragons",
+      "toc": false
+    },
+    {
+      "startTime": 3457.396,
+      "title": "Emu Riders",
+      "toc": false
+    },
+    {
+      "startTime": 3492.486,
+      "title": "Genie",
+      "toc": false
+    },
+    {
+      "startTime": 3509.136,
+      "title": "Griffin",
+      "toc": false
+    },
+    {
+      "startTime": 3527.527,
+      "title": "Kraken",
+      "toc": false
+    },
+    {
+      "startTime": 3553.928,
+      "title": "Skeletons",
+      "toc": false
+    },
+    {
+      "startTime": 3599.54,
+      "title": "Trolls",
+      "toc": false
+    },
+    {
+      "startTime": 3616.483,
+      "title": "Vultures",
+      "toc": false
+    },
+    {
+      "startTime": 3650.564,
+      "title": "Worms",
+      "toc": false,
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/worms.jpg"
+    },
+    {
+      "startTime": 3661.22,
+      "title": "Wyvern",
+      "toc": false
+    },
+    {
+      "startTime": 3711.607,
+      "title": "Lydbildet"
+    },
+    {
+      "startTime": 3806.9,
+      "title": "Hi-res-mode"
+    },
+    {
+      "startTime": 3958.623,
+      "title": "Kontrollene"
+    },
+    {
+      "startTime": 4060.103,
+      "title": "Musikken",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 4302.453,
+      "title": "Lore fra manualen"
+    },
+    {
+      "startTime": 4854.182,
+      "title": "Selvskryt av Bullfrog"
+    },
+    {
+      "startTime": 5085.346,
+      "title": "3D-briller"
+    },
+    {
+      "startTime": 5200.823,
+      "title": "VFX1"
+    },
+    {
+      "startTime": 5266.2,
+      "title": "Manglende Brett"
+    },
+    {
+      "startTime": 5450.445,
+      "title": "Magic Carpet 2",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 5673.191,
+      "title": "Ingen Open Magic Carpet",
+      "url": "https://github.com/thobbsinteractive/magic-carpet-2-hd",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 5718.608,
+      "title": "Kommentarer fra sosiale medier",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 6011.188,
+      "title": "Har det holdt seg?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+    },
+    {
+      "startTime": 6268.69,
+      "title": "Finnes det noe tilsvarende idag?"
+    },
+    {
+      "startTime": 6440.816,
+      "title": "Terminal Velocity",
+      "toc": false
+    },
+    {
+      "startTime": 6466.599,
+      "title": "Populous: The beginning",
+      "toc": false,
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL_pop_square_f9j8r5.jpg"
+    },
+    {
+      "startTime": 6542.895,
+      "title": "Spørsmål fra Sigve"
+    },
+    {
+      "startTime": 6708.57,
+      "title": "Neste episode: Tiltcast 5.0"
+    }
+  ]
+}
