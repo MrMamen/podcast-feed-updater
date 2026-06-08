@@ -112,7 +112,8 @@ def load_audio(path: str, sample_rate: int = 16000):
 # Transcription (NB-Whisper)
 # --------------------------------------------------------------------------
 def transcribe(audio_wav, *, model_name: str, language: str = "no",
-               initial_prompt: str | None = None, beam_size: int = 5):
+               initial_prompt: str | None = None, beam_size: int = 5,
+               vad_threshold: float | None = 0.3):
     from faster_whisper import WhisperModel
 
     print(f"Loading Whisper: {model_name}")
@@ -122,8 +123,24 @@ def transcribe(audio_wav, *, model_name: str, language: str = "no",
 
     print(f"Transcribing ({len(audio_wav)/16000/60:.1f} min audio)...")
     t0 = time.time()
-    kwargs = dict(language=language, beam_size=beam_size, vad_filter=True,
+    kwargs = dict(language=language, beam_size=beam_size,
                   word_timestamps=True)
+    # VAD trims non-speech, but the Silero default (threshold 0.5) is
+    # aggressive enough to drop quiet or music-bedded speech entirely —
+    # which leaves gaps in the transcript and breaks audio alignment.
+    # Use a lower threshold plus generous padding so soft speech survives;
+    # vad_threshold=None disables VAD completely (may hallucinate in silence).
+    if vad_threshold is None:
+        kwargs["vad_filter"] = False
+        print("  VAD: disabled")
+    else:
+        kwargs["vad_filter"] = True
+        kwargs["vad_parameters"] = dict(
+            threshold=vad_threshold,
+            min_silence_duration_ms=2000,
+            speech_pad_ms=600,
+        )
+        print(f"  VAD: threshold={vad_threshold}, speech_pad_ms=600")
     if initial_prompt:
         kwargs["initial_prompt"] = initial_prompt
     segments, info = model.transcribe(audio_wav, **kwargs)
@@ -691,6 +708,12 @@ def main() -> int:
                              "Default: 7.0 (see transcripts/TRANSCRIPT_GUIDELINES.md)")
     parser.add_argument("--corrections", type=Path,
                         help="JSON with word/regex/post fixes to apply")
+    parser.add_argument("--vad-threshold", type=float, default=0.3,
+                        help="Silero VAD speech threshold (0-1). Lower keeps "
+                             "more quiet/music-bedded speech. Default: 0.3")
+    parser.add_argument("--no-vad", action="store_true",
+                        help="Disable VAD entirely (transcribe all audio; may "
+                             "hallucinate text during silence/music)")
     parser.add_argument("--env", type=Path,
                         help="Path to .env file (default: project root)")
     args = parser.parse_args()
@@ -751,6 +774,7 @@ def main() -> int:
     segs, duration = transcribe(
         wav, model_name=args.model, language=args.language,
         initial_prompt=initial_prompt,
+        vad_threshold=None if args.no_vad else args.vad_threshold,
     )
 
     diar_segments = None
