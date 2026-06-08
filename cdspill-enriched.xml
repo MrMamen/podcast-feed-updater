@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 08 Jun 2026 07:30:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Mon, 08 Jun 2026 09:25:19 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 08 Jun 2026 14:04:34 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -51,7 +51,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>134</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/z5qxkuiwcsxz94p5/MagicCarpet.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MagicCarpet_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="11 (#134)">134</podcast:episode>
