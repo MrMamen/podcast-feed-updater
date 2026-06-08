@@ -294,40 +294,87 @@ def speaker_for_range(segments, start: float, end: float) -> str | None:
 # --------------------------------------------------------------------------
 # Episode metadata lookup (RSS feed)
 # --------------------------------------------------------------------------
-def fetch_rss(project_root: Path, refresh: bool = False) -> str:
-    """Return CDspill feed XML.
+def iter_feed_sources(project_root: Path, refresh: bool = False):
+    """Yield (label, feed_xml) candidates in priority order.
+
+    Lazy: each source is only loaded when the generator is advanced, so we
+    avoid a network fetch when an earlier source already has the episode.
 
     Priority:
-      1. output/cdspill-enriched.xml (local enriched, has podcast:person guest tags)
-      2. .cache/cdspill_feed.xml   (cached Podbean original, refreshed every 24 h)
-      3. Live fetch from Podbean   (when cache is missing or --refresh-rss)
+      1. output/cdspill-enriched.xml      (local enriched, guest tags, no network)
+      2. GitHub Pages cdspill-enriched.xml (published enriched feed — current AND
+                                            has guest tags, independent of the
+                                            Podbean->Pages redirect being on)
+      3. .cache/cdspill_feed.xml          (cached Podbean original, 24 h)
+      4. Live fetch from Podbean          (raw; lacks guest tags when redirect off)
+
+    The local enriched feed is preferred for its guest metadata and zero
+    network cost, but it can lag behind for newly published episodes. The
+    GitHub Pages copy is the published enriched feed: always current and
+    always carries guest tags regardless of redirect state. Raw Podbean is a
+    last resort because it lacks podcast:person guest tags when the redirect
+    is off. Callers fall through to the next source when the episode isn't
+    found rather than treating the first source as authoritative.
     """
     import urllib.request
+
+    def _get(url):
+        req = urllib.request.Request(url, headers={"User-Agent": "cdspill-transcribe"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.read().decode("utf-8")
 
     # 1. Local enriched feed — richer metadata, no network needed
     enriched = project_root / "output" / "cdspill-enriched.xml"
     if enriched.exists():
-        print(f"Using local enriched feed: {enriched.relative_to(project_root)}")
-        return enriched.read_text(encoding="utf-8")
+        yield (
+            f"local enriched feed ({enriched.relative_to(project_root)})",
+            enriched.read_text(encoding="utf-8"),
+        )
 
-    # 2/3. Fall back to Podbean with local cache
+    # 2. Published enriched feed on GitHub Pages — current + guest tags,
+    #    works even when the Podbean->Pages redirect is off.
+    try:
+        yield (
+            "GitHub Pages enriched feed",
+            _get("https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml"),
+        )
+    except Exception as e:
+        print(f"  (GitHub Pages enriched feed unavailable: {e})")
+
+    # 3. Cached Podbean original (skipped on --refresh-rss or if >24 h old)
     cache_dir = project_root / ".cache"
     cache_dir.mkdir(exist_ok=True)
     cached = cache_dir / "cdspill_feed.xml"
-
     if not refresh and cached.exists():
         age_hours = (time.time() - cached.stat().st_mtime) / 3600
         if age_hours < 24:
-            print("Using cached Podbean feed (run enrich_cdspill.py for guest metadata)")
-            return cached.read_text(encoding="utf-8")
+            yield (
+                "cached Podbean feed (run enrich_cdspill.py for guest metadata)",
+                cached.read_text(encoding="utf-8"),
+            )
 
-    print("Fetching CDspill RSS feed from Podbean...")
-    url = "https://feed.podbean.com/cdspill/feed.xml"
-    req = urllib.request.Request(url, headers={"User-Agent": "cdspill-transcribe"})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        content = r.read().decode("utf-8")
+    # 4. Live fetch from Podbean (also refreshes the cache)
+    content = _get("https://feed.podbean.com/cdspill/feed.xml")
     cached.write_text(content, encoding="utf-8")
-    return content
+    yield ("live Podbean feed", content)
+
+
+def lookup_episode(project_root: Path, *, refresh: bool = False,
+                   number: int | None = None, guid: str | None = None,
+                   title_contains: str | None = None) -> dict | None:
+    """Find episode metadata, trying each feed source until a match is found.
+
+    A stale enriched feed no longer short-circuits the lookup: if the episode
+    isn't present there, we fall through to the cached/live Podbean feed.
+    """
+    for label, feed_xml in iter_feed_sources(project_root, refresh=refresh):
+        meta = find_episode(feed_xml, number=number, guid=guid,
+                            title_contains=title_contains)
+        if meta:
+            print(f"Found episode in {label}")
+            return meta
+        print(f"Episode not in {label}, trying next source...")
+    return None
 
 
 def find_episode(feed_xml: str, *, number: int | None = None,
@@ -679,13 +726,12 @@ def main() -> int:
     initial_prompt = args.initial_prompt
     meta = None
     if args.episode_number or args.episode_guid or args.episode_title:
-        feed = fetch_rss(project_root, refresh=args.refresh_rss)
-        meta = find_episode(feed,
-                            number=args.episode_number,
-                            guid=args.episode_guid,
-                            title_contains=args.episode_title)
+        meta = lookup_episode(project_root, refresh=args.refresh_rss,
+                              number=args.episode_number,
+                              guid=args.episode_guid,
+                              title_contains=args.episode_title)
         if not meta:
-            sys.stderr.write("Episode not found in RSS.\n")
+            sys.stderr.write("Episode not found in any RSS source.\n")
             return 1
         print(f"\nEpisode #{meta['number']}: {meta['title']}")
         if meta["people"]:

@@ -138,6 +138,54 @@ These match the guidelines above:
 Main pipeline. Runs nb-whisper ASR, pyannote diarisation, and profile
 matching. Produces a tagged VTT.
 
+**Running it for a newly published episode:**
+
+```bash
+uv run python scripts/transcribe.py "<path/to/Mix.mp3>" \
+  -o transcripts/<Name>.vtt \
+  --speakers <count> \
+  --profiles transcripts/speaker_profiles.npy \
+  --corrections transcripts/corrections.json \
+  --episode-number <N>
+```
+
+| Flag | Purpose |
+|---|---|
+| `<audio>` (positional) | Path to the finished mix MP3 |
+| `-o` | Output VTT path (required) |
+| `--speakers N` | Speaker count for diarisation — count hosts + guests, **not** game audio |
+| `--profiles` | Voice profiles for auto-tagging known people |
+| `--corrections` | Shared ASR fixes applied to every episode |
+| `--episode-number N` | Looks up title/guests/prompt in the RSS feed |
+
+Variants:
+- **Solo track (single speaker):** add `--no-diarization`, drop
+  `--speakers`/`--profiles`.
+- **Identify by title:** `--episode-title "Magic Carpet"` instead of
+  `--episode-number`.
+- **Force a fresh feed:** `--refresh-rss` skips the 24 h cache. Rarely
+  needed — see feed sources below.
+
+After transcribing: language pass as usual, and set the guest's name on
+the unmatched cluster manually (guests rarely have a profile). Use
+`scripts/add_speakers.py` to re-tag later if you build a guest profile.
+
+**Episode metadata feed sources** (tried in order, falling through when
+the episode isn't found — so a stale local feed no longer blocks a newly
+published episode):
+
+1. `output/cdspill-enriched.xml` — local enriched feed (guest tags, no
+   network), but can lag behind for brand-new episodes
+2. `https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml`
+   — published enriched feed on GitHub Pages: always current AND carries
+   guest tags, **regardless of whether the Podbean→Pages redirect is on**
+3. `.cache/cdspill_feed.xml` — cached raw Podbean (24 h)
+4. Live Podbean fetch — raw feed; lacks guest tags when redirect is off
+
+Because of source 2, transcribe finds newly published episodes with
+correct guest metadata even if you forgot to flip the redirect or
+regenerate the local enriched feed.
+
 ### `scripts/add_speakers.py`
 
 Re-tag speakers on an existing VTT *without re-transcribing*. Useful
