@@ -20,7 +20,7 @@
     <podcast:medium>podcast</podcast:medium>
     <podcast:guid>3d61aa24-e01e-50cd-9027-1dabfe13d8a3</podcast:guid>
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Wed, 10 Jun 2026 06:27:32 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2026 14:49:23 +0000</lastBuildDate>
     <generator>podcast-feed-updater list builder v1.0</generator>
     <item>
       <title>600 - Live på Tilt</title>
@@ -142,6 +142,25 @@
       <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
       <itunes:episode>4</itunes:episode>
+    </item>
+    <item>
+      <title>Spillmatic #633 - Tiltcast 5.0!</title>
+      <enclosure url="https://mcdn.podbean.com/mf/web/gsmpt7ed9ez9xgz2/spillmatic_633_tiltcast5_PodMastered_192kbps.mp3" type="audio/mpeg" length="75246580"/>
+      <guid isPermaLink="false">spillmatic.podbean.com/94e2c28e-2cc9-3483-91b1-e846c1dbd5f3</guid>
+      <pubDate>Sun, 14 Jun 2026 12:37:36 +0000</pubDate>
+      <link>https://spillmatic.podbean.com/e/spillmatic-633-tiltcast-50/</link>
+      <description>&lt;p&gt;Denne episoden er opptaket fra liveshowet vårt 30. mai.&lt;/p&gt;
+
+&lt;p&gt;Det er mye visuelt, som videoer, bannere, plakater mot publikum og sånt. Så hvis det er ting som ikke gir mening på lyd, så er det trolig et video- eller bildecue som passer til det som blir sagt.&lt;/p&gt;
+
+&lt;p&gt;Moralen: Du må være der live neste gang!&lt;/p&gt;
+</description>
+      <itunes:author>Spillmatic</itunes:author>
+      <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog15768001/Late_show_banner_livepdfak3et.png"/>
+      <itunes:duration>52:15</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:episode>5</itunes:episode>
     </item>
   </channel>
 </rss>
