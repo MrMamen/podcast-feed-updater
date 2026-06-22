@@ -6,9 +6,9 @@
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
-    <pubDate>Mon, 08 Jun 2026 07:30:00 +0200</pubDate>
+    <pubDate>Mon, 22 Jun 2026 06:00:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Mon, 08 Jun 2026 14:04:34 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 22 Jun 2026 05:20:39 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -34,9 +34,31 @@
         <height>144</height>
     </image>
     <item>
+        <title>cd SPÆLLEGAL (Live fra TILTcast 5.0)</title>
+        <itunes:title>cd SPÆLLEGAL (Live fra TILTcast 5.0)</itunes:title>
+        <link>https://spillhistorie.no/2026/06/02/cd-spaellegals-kuriositeter/</link>        <pubDate>Mon, 22 Jun 2026 12:00:00 +0200</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/31e1c081-5a3e-358c-a00a-6e0c5d23d008</guid>
+                                    <description>&lt;p&gt;MrMamen fra cd SPILL teamet opp med SPÆLL og spillegal. Temaet var kuriositeter i form av gammel hardware. Live fra TILT!&lt;/p&gt;
+&lt;p&gt;Konferansier: Filip Mauricio Fløgstad&lt;/p&gt;
+&lt;p&gt;Samtlige episoder fra Tiltcast som er utgitt kan abonneres på her: &lt;a href='https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.xml'&gt;https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.xml&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/06/02/cd-spaellegals-kuriositeter/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/su9mkqtan2nwd8aa/TILTcast5.mp3" length="66640748" type="audio/mpeg"/>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>3059</itunes:duration>
+        <itunes:season>13</itunes:season>
+                <itunes:episodeType>bonus</itunes:episodeType>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tiltcast5.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/pfkjhmqsag2wgtht/TILTcast5.vtt" type="text/vtt" language="no"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/TILTcast5_chapters.json" type="application/json"/>
+        <podcast:season name="Vår 2026">13</podcast:season></item>
+    <item>
         <title>Magic Carpet med Lasse Sørnes</title>
         <itunes:title>Magic Carpet med Lasse Sørnes</itunes:title>
-        <link>https://spillhistorie.no/2026/06/08/bullfrogs-unike-actionspill-magic-carpet/</link>        <pubDate>Mon, 08 Jun 2026 13:30:00 +0200</pubDate>
+        <link>https://spillhistorie.no/2026/06/08/bullfrogs-unike-actionspill-magic-carpet/</link>        <pubDate>Mon, 08 Jun 2026 07:30:00 +0200</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/9ba38309-9a2f-392b-a8d0-a8e06778beba</guid>
                                     <description>&lt;p&gt;Husker du Magic Carpet? Spillet hvor du spiller som trollmann på et flygende teppe og må bygge borg med luftballonger for å samle mana? Bullfrogs klassiker er ganske unikt og fikk en oppfølger, men finnes ikke mange tilsvarende spill idag. Vi har fått hjelp av Lasse Sørnes til å mimre om denne klassikeren.&lt;/p&gt;
 
@@ -54,7 +76,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/z5qxkuiwcsxz94p5/MagicCarpet.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MagicCarpet_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="11 (#134)">134</podcast:episode>
+        <podcast:episode display="12 (#134)">134</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
     <item>
         <title>Thexder</title>
@@ -77,7 +99,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thexder.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/dcwq5n3jj369532d/Thexder.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Thexder_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="10 (#133)">133</podcast:episode></item>
+        <podcast:episode display="11 (#133)">133</podcast:episode></item>
     <item>
         <title>The Hobbit live med Roar Granevang</title>
         <itunes:title>The Hobbit live med Roar Granevang</itunes:title>
@@ -99,7 +121,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8j3j55mt3694iwc4/Hobbit.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/hobbit_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="9 (#132)">132</podcast:episode>
+        <podcast:episode display="10 (#132)">132</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person></item>
     <item>
         <title>Close Combat med Hans Arne Jacobsen</title>
@@ -113,7 +135,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
                                                             <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/9xcqjgtdzwkj7qt3/CloseCombat.mp3" length="128351029" type="audio/mpeg"/>
         <itunes:author>C:\SPILL＞</itunes:author>
-        <itunes:explicit>true</itunes:explicit>
+        <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
         <itunes:duration>5988</itunes:duration>
         <itunes:season>13</itunes:season>
@@ -122,7 +144,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/close_combat_gjc49p.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/326atztcedngfrss/CloseCombat.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CloseCombat_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="8 (#131)">131</podcast:episode>
+        <podcast:episode display="9 (#131)">131</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person></item>
     <item>
         <title>Constructor med Eirik Gjerløw</title>
@@ -147,7 +169,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/6ieu8b77tqb2mjvp/constructor.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/constructor_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="7 (#130)">130</podcast:episode>
+        <podcast:episode display="8 (#130)">130</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
     <item>
         <title>Aleksikons sololabyrint 2026</title>
@@ -235,7 +257,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/u9f9ktwq7nb5a47v/SP.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Shufflepuck_cafe6mk4v_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="6 (#129)">129</podcast:episode>
+        <podcast:episode display="7 (#129)">129</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
     <item>
         <title>Boppin'</title>
@@ -259,7 +281,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/9z4sn64mqnd8pmib/Boppin.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Boppin_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="5 (#128)">128</podcast:episode></item>
+        <podcast:episode display="6 (#128)">128</podcast:episode></item>
     <item>
         <title>Stunt Car Racer med Terje Høiback</title>
         <itunes:title>Stunt Car Racer med Terje Høiback</itunes:title>
@@ -281,7 +303,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/63b47wyzv8pi4rgt/SCR.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/StuntCarRacer_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="4 (#127)">127</podcast:episode>
+        <podcast:episode display="5 (#127)">127</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>The Dig med Martin Gjesdal og Kent William Innholt</title>
@@ -306,7 +328,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/j6pyt3mkv7ngrph8/TheDig.vtt" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/The_Digbwlty_chapters.json" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="3 (#126)">126</podcast:episode>
+        <podcast:episode display="4 (#126)">126</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK">Kent William Innholt</podcast:person></item>
     <item>
