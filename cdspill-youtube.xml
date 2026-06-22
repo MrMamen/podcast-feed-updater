@@ -8,7 +8,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 22 Jun 2026 06:00:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Mon, 22 Jun 2026 08:21:10 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 22 Jun 2026 08:37:05 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -65,7 +65,10 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tiltcast5.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/pfkjhmqsag2wgtht/TILTcast5.vtt" type="text/vtt" language="no"/>
-        <podcast:season name="Vår 2026">13</podcast:season></item>
+        <podcast:season name="Vår 2026">13</podcast:season>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
     <item>
         <title>Magic Carpet med Lasse Sørnes (#134)</title>
         <itunes:title>Magic Carpet med Lasse Sørnes (#134)</itunes:title>
