@@ -1,115 +1,123 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "chapters": [
     {
       "startTime": 0,
       "title": "Intro"
     },
     {
-      "startTime": 32,
+      "startTime": 31.987,
       "title": "Velkommen til cd SPILL",
       "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
     },
     {
-      "startTime": 134,
+      "startTime": 133.598,
       "title": "Kommentarer fra Magic Carpet",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
     },
     {
-      "startTime": 514,
+      "startTime": 514.281,
       "title": "Dagens spill: Test Drive III: The Passion"
     },
     {
-      "startTime": 1103,
+      "startTime": 1102.918,
       "title": "Bilene"
     },
     {
-      "startTime": 1142,
+      "startTime": 1141.53,
       "title": "Lamborghini Diablo",
+      "toc": false,
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/diablo.jpg"
     },
     {
-      "startTime": 1159,
-      "title": "Pininfarina Mythos"
+      "startTime": 1158.813,
+      "title": "Pininfarina Mythos",
+      "toc": false
     },
     {
-      "startTime": 1172,
-      "title": "Chevrolet CERV III"
+      "startTime": 1171.927,
+      "title": "Chevrolet CERV III",
+      "toc": false
     },
     {
-      "startTime": 1238,
+      "startTime": 1238.357,
       "title": "En bane"
     },
     {
-      "startTime": 1304,
+      "startTime": 1303.911,
       "title": "Lett å kræsje"
     },
     {
-      "startTime": 1721,
+      "startTime": 1721.259,
       "title": "Tech Specs"
     },
     {
-      "startTime": 2026,
+      "startTime": 2026.159,
       "title": "Debugging i manualen"
     },
     {
-      "startTime": 2206,
+      "startTime": 2206.271,
       "title": "Spillesken"
     },
     {
-      "startTime": 2496,
+      "startTime": 2495.777,
       "title": "Imponerende miljøer"
     },
     {
-      "startTime": 2680,
+      "startTime": 2679.998,
       "title": "Add-On Disk"
     },
     {
-      "startTime": 2777,
-      "title": "Cape Cod Niagara Falls"
+      "startTime": 2777.201,
+      "title": "Cape Cod Niagara Falls",
+      "toc": false
     },
     {
-      "startTime": 2799,
-      "title": "Acura NSX"
+      "startTime": 2799.341,
+      "title": "Acura NSX",
+      "toc": false
     },
     {
-      "startTime": 2807,
-      "title": "Dodge Stealth RT Turbo"
+      "startTime": 2806.72,
+      "title": "Dodge Stealth RT Turbo",
+      "toc": false
     },
     {
-      "startTime": 2819,
-      "title": "Add-On Disk"
+      "startTime": 2819.25,
+      "title": "Add-On Disk",
+      "toc": false
     },
     {
-      "startTime": 2881,
+      "startTime": 2881.213,
       "title": "Noen sprites"
     },
     {
-      "startTime": 2965,
-      "title": "Sebastian Macke's website"
+      "startTime": 2964.883,
+      "title": "Sebastian Macke's website",
+      "url": "https://simulationcorner.net"
     },
     {
-      "startTime": 3080,
+      "startTime": 3080.336,
       "title": "Forløperne"
     },
     {
-      "startTime": 3323,
+      "startTime": 3323.353,
       "title": "Oppfølgere"
     },
     {
-      "startTime": 3561,
+      "startTime": 3560.67,
       "title": "Kommentarer fra sosiale medier"
     },
     {
-      "startTime": 3777,
+      "startTime": 3776.83,
       "title": "Har det holdt seg?"
     },
     {
-      "startTime": 3942,
+      "startTime": 3942.509,
       "title": "Finnes det noe tilsvarende idag?"
     },
     {
-      "startTime": 4021,
+      "startTime": 4020.57,
       "title": "God sommer"
     }
   ]
