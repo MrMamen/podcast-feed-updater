@@ -18,6 +18,8 @@ from urllib.parse import urlsplit
 
 from lxml import etree
 
+from src.common.stylesheet import attach_stylesheet_pi, copy_stylesheet
+
 # Norwegian month names, for parsing the event date out of a section heading
 # like "TILTcast 5.0 (lørdag 30. mai 2026)".
 _NO_MONTHS = {
@@ -278,8 +280,10 @@ def build_feed(*, title: str, description: Optional[str], language: str,
                         include_season=include_season)
             episode_count += 1
 
+    attach_stylesheet_pi(rss)
     etree.ElementTree(rss).write(
         output_file, encoding="utf-8", xml_declaration=True, pretty_print=True
     )
+    copy_stylesheet(output_file)
     print(f"  ✓ {output_file}  ({episode_count} episodes)")
     return episode_count

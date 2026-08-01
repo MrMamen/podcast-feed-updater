@@ -8,6 +8,8 @@ from lxml import etree
 from typing import Optional
 import os
 
+from src.common.stylesheet import attach_stylesheet_pi, copy_stylesheet
+
 
 class BaseFeed:
     """Base class for all feed operations."""
@@ -76,6 +78,7 @@ class BaseFeed:
         if self.root is None:
             raise ValueError("No feed loaded")
 
+        attach_stylesheet_pi(self.root)
         tree = etree.ElementTree(self.root)
         tree.write(
             output_file,
@@ -83,6 +86,7 @@ class BaseFeed:
             xml_declaration=True,
             pretty_print=True
         )
+        copy_stylesheet(output_file)
 
         print(f"✓ Feed written to: {output_file}")
 
