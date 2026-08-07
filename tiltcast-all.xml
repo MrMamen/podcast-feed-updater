@@ -20,7 +20,7 @@
     <podcast:medium>podcast</podcast:medium>
     <podcast:guid>b10ff851-e311-51d8-b1c7-5ac415541df6</podcast:guid>
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Sun, 05 Jul 2026 20:06:05 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 21:12:22 +0000</lastBuildDate>
     <generator>podcast-feed-updater list builder v1.0</generator>
     <item>
       <title>- 132 - Live med Level Up fra Tilt</title>
@@ -717,6 +717,24 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:episode>4</itunes:episode>
     </item>
     <item>
+      <title>Sidequest: LIVE fra TILTCAST 2026</title>
+      <enclosure url="https://sphinx.acast.com/p/open/s/5ca348a9314c8a654d93dcf5/e/6a33dd2cb5bd2ede10d5ad59/media.mp3" type="audio/mpeg" length="79286464"/>
+      <guid isPermaLink="false">6a33dd2cb5bd2ede10d5ad59</guid>
+      <pubDate>Fri, 07 Aug 2026 01:00:00 +0000</pubDate>
+      <link>https://shows.acast.com/nerdelandslaget/episodes/sidequest-live-fra-tiltcast-2026</link>
+      <description>&lt;p&gt;Endelig hadde vi muligheten til å ta turen tilbake til Norges koseligste festival: Spillpodcastfestivalen TILTCAST på Tilt i Oslo! Sammen med det som kan krype og gå av spillpodcaster i Norge lagde vi 50 minutter med livepod foran et stappa TILT fylt med et fantastisk publikum &amp;lt;3 Vi bestemte oss for å lage en slags "7 år med høydepunkter" fra Nerdelandslaget-sending, der vi tok for oss noen av de nøye utvalgte spaltene vi liker aller best fra 2019 og frem til nå. Det betyr at det ble både "Har det holdt seg", "Bit for Bit", "20 Quest Steps", "Tiers of The Spieldom" og "Blind Playdate" i én og samme podkast! Ja, også masse prat om spill da. God helg!&lt;/p&gt;
+
+&lt;p&gt; Hosted on Acast. See &lt;a href="https://acast.com/privacy"&gt;acast.com/privacy&lt;/a&gt; for more information.&lt;/p&gt;</description>
+      <itunes:author>Nerdelandslaget</itunes:author>
+      <itunes:image href="https://assets.pippa.io/shows/5ca348a9314c8a654d93dcf5/1754512233961-88701386-3398-4983-8ccf-9a50268687a5.jpeg"/>
+      <itunes:duration>55:03</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <itunes:season>5</itunes:season>
+      <itunes:episode>5</itunes:episode>
+    </item>
+    <item>
       <title>NerdCast: LIVE fra TILT 2026</title>
       <enclosure url="https://feeds.soundcloud.com/stream/2331103664-nerdalertpodcaster-nerdcast-live-fra-tilt-2026.mp3" type="audio/mpeg" length="71752896"/>
       <guid isPermaLink="false">tag:soundcloud,2010:tracks/2331103664</guid>
@@ -730,7 +748,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
       <itunes:season>5</itunes:season>
-      <itunes:episode>5</itunes:episode>
+      <itunes:episode>6</itunes:episode>
     </item>
     <item>
       <title>Spillmatic #633 - Tiltcast 5.0!</title>
@@ -751,7 +769,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:episodeType>full</itunes:episodeType>
       <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
       <itunes:season>5</itunes:season>
-      <itunes:episode>6</itunes:episode>
+      <itunes:episode>7</itunes:episode>
     </item>
   </channel>
 </rss>
