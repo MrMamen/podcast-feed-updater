@@ -112,6 +112,11 @@ def main():
 
     print("\n🛠  Building feeds:")
 
+    # Give each section its edition cover so the combined feed can show it
+    # at the season headers (rendered by feed.xsl).
+    for idx, section in enumerate(sections, start=1):
+        section["image"] = image_url_for(f"tiltcast-{idx}", base_url)
+
     # Combined feed: all editions, one season each.
     build_feed(
         title=combined["title"],

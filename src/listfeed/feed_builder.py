@@ -172,7 +172,8 @@ def _audio_type(url: str) -> str:
 
 def _build_item(channel: etree._Element, ep: Dict, season_no: int,
                 season_name: Optional[str], ep_no: int,
-                channel_image: Optional[str], include_season: bool = True) -> None:
+                channel_image: Optional[str], include_season: bool = True,
+                season_image: Optional[str] = None) -> None:
     item = etree.SubElement(channel, "item")
     _text(item, "title", ep.get("title"))
 
@@ -213,6 +214,11 @@ def _build_item(channel: etree._Element, ep: Dict, season_no: int,
         season = etree.SubElement(item, _q(PODCAST, "season"))
         if season_name:
             season.set("name", season_name)
+        if season_image:
+            # Non-standard attribute (the spec only defines "name"); parsers
+            # ignore it, and feed.xsl uses it to show edition covers at the
+            # season headers.
+            season.set("image", season_image)
         season.text = str(season_no)
         _text(item, _q(ITUNES, "season"), str(season_no))
     _text(item, _q(ITUNES, "episode"), str(ep_no))
@@ -277,7 +283,8 @@ def build_feed(*, title: str, description: Optional[str], language: str,
         season_name = section.get("heading")
         for ep_no, ep in enumerate(section.get("episodes", []), start=1):
             _build_item(channel, ep, season_no, season_name, ep_no, image_url,
-                        include_season=include_season)
+                        include_season=include_season,
+                        season_image=section.get("image"))
             episode_count += 1
 
     attach_stylesheet_pi(rss)
