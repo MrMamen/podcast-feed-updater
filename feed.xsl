@@ -25,6 +25,13 @@
   <xsl:variable name="hasPersons" select="boolean(//item/podcast:person)"/>
   <xsl:variable name="hasChapters" select="boolean(//item/podcast:chapters)"/>
 
+  <!-- Aggregated list feeds (built by the list builder, with one season per
+       event/edition) get a season-sectioned layout instead of a flat list.
+       Regular podcasts keep the flat reverse-chronological view. -->
+  <xsl:key name="items-by-season" match="item" use="podcast:season"/>
+  <xsl:variable name="listFeed" select="contains(/rss/channel/generator, 'list builder')"/>
+  <xsl:variable name="grouped" select="$listFeed and boolean(//item/podcast:season)"/>
+
   <xsl:template match="/">
     <html lang="no">
       <head>
@@ -48,7 +55,7 @@
           .episode { background: #fff; border: 1px solid #ddd; border-radius: 8px;
                      padding: 1rem 1.2rem; margin-bottom: 1rem; }
           .ep-head { display: flex; gap: .8rem; align-items: flex-start; }
-          .ep-head img { width: 64px; height: 64px; border-radius: 8px; object-fit: cover; }
+          .ep-head img { width: 120px; height: 120px; border-radius: 8px; object-fit: cover; }
           .meta { color: #555; font-size: .85rem; margin-bottom: .3rem; }
           .meta span + span:before { content: " · "; }
           .warn { color: #a33; font-size: .8rem; }
@@ -58,6 +65,12 @@
           .badge.guest { background: #d8f5d0; }
           .badge.missing { background: #ffd9d9; }
           .badge.explicit { background: #ffd9d9; }
+          .badge.source { background: #eadff7; }
+          .season-head { display: flex; align-items: center; gap: .8rem;
+                         font-size: 1.15rem; margin: 1.6rem 0 .6rem;
+                         padding-bottom: .35rem; border-bottom: 2px solid #ccc; }
+          .season-head img { width: 96px; height: 96px; border-radius: 10px;
+                             object-fit: cover; }
           .person { display: inline-flex; align-items: center; gap: .4rem; background: #fff;
                     border: 1px solid #ddd; border-radius: 999px; font-size: .85rem;
                     padding: .15rem .6rem .15rem .2rem; margin: 0 .4rem .4rem 0; }
@@ -143,7 +156,32 @@
       </table>
     </details>
     <p class="count"><xsl:value-of select="count(item)"/> episoder</p>
-    <xsl:apply-templates select="item"/>
+    <xsl:choose>
+      <xsl:when test="$grouped">
+        <!-- One section per distinct season, oldest event first;
+             episodes keep the curated running order within each section. -->
+        <xsl:for-each select="item[generate-id()
+            = generate-id(key('items-by-season', podcast:season)[1])]">
+          <xsl:sort select="podcast:season" data-type="number"/>
+          <h2 class="season-head">
+            <xsl:if test="podcast:season/@image">
+              <img src="{podcast:season/@image}" alt="" loading="lazy"/>
+            </xsl:if>
+            <xsl:choose>
+              <xsl:when test="podcast:season/@name">
+                <xsl:value-of select="podcast:season/@name"/>
+              </xsl:when>
+              <xsl:otherwise>Sesong <xsl:value-of select="podcast:season"/></xsl:otherwise>
+            </xsl:choose>
+          </h2>
+          <xsl:apply-templates select="key('items-by-season', podcast:season)"/>
+        </xsl:for-each>
+        <xsl:apply-templates select="item[not(podcast:season)]"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="item"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="item">
@@ -156,7 +194,10 @@
           <h2><xsl:value-of select="title"/></h2>
           <div class="meta">
             <span><xsl:value-of select="pubDate"/></span>
-            <xsl:if test="podcast:season">
+            <xsl:if test="$listFeed and itunes:author[. != /rss/channel/itunes:author]">
+              <span><span class="badge source"><xsl:value-of select="itunes:author"/></span></span>
+            </xsl:if>
+            <xsl:if test="podcast:season and not($grouped)">
               <span>
                 <xsl:text>Sesong </xsl:text>
                 <xsl:value-of select="podcast:season"/>

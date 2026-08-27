@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="feed.xsl"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Episoder fra Tiltcast i Oslo</title>
@@ -36,7 +37,7 @@
       <itunes:duration>28:55</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
+      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-1.jpg">1</podcast:season>
       <itunes:season>1</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
@@ -73,7 +74,7 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>44:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
+      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-1.jpg">1</podcast:season>
       <itunes:season>1</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
@@ -91,7 +92,7 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>1:15:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
+      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-1.jpg">1</podcast:season>
       <itunes:season>1</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
@@ -107,7 +108,7 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>47:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
+      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-1.jpg">1</podcast:season>
       <itunes:season>1</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
@@ -125,7 +126,7 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>59:09</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)">1</podcast:season>
+      <podcast:season name="TILTcast 2018 (onsdag 31. oktober 2018)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-1.jpg">1</podcast:season>
       <itunes:season>1</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
@@ -146,7 +147,7 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>35:26</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
@@ -164,7 +165,7 @@ Sjekk ut de andre podcastene som også var på scenen denne kvelden
       <itunes:duration>52:01</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
@@ -184,7 +185,7 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>57:24</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
@@ -200,7 +201,7 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>58:14</itunes:duration>
       <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
@@ -222,7 +223,7 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>55:53</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
@@ -238,7 +239,7 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>1:00:59</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>6</itunes:episode>
     </item>
@@ -256,7 +257,7 @@ En helt rå kveld - det snakkes mye om Fangene på Fortet, vi har med oss hjelpe
       <itunes:duration>1:22:21</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)">2</podcast:season>
+      <podcast:season name="Tiltcast 2.0 (søndag 6. oktober 2019)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-2.jpg">2</podcast:season>
       <itunes:season>2</itunes:season>
       <itunes:episode>7</itunes:episode>
     </item>
@@ -280,7 +281,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>34:45</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">3</podcast:season>
+      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg">3</podcast:season>
       <itunes:season>3</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
@@ -296,7 +297,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>32:25</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">3</podcast:season>
+      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg">3</podcast:season>
       <itunes:season>3</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
@@ -318,7 +319,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>40:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">3</podcast:season>
+      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg">3</podcast:season>
       <itunes:season>3</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
@@ -336,7 +337,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>39:32</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">3</podcast:season>
+      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg">3</podcast:season>
       <itunes:season>3</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
@@ -355,7 +356,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>50:28</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">3</podcast:season>
+      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg">3</podcast:season>
       <itunes:season>3</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
@@ -373,7 +374,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>50:47</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)">3</podcast:season>
+      <podcast:season name="Tiltcast 3.0 (lørdag 27. mai 2023)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-3.jpg">3</podcast:season>
       <itunes:season>3</itunes:season>
       <itunes:episode>6</itunes:episode>
     </item>
@@ -450,7 +451,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>45:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
@@ -468,7 +469,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>45:19</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
@@ -486,7 +487,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>50:48</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
@@ -504,7 +505,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>36:30</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
@@ -521,7 +522,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>35:36</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
@@ -539,7 +540,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>43:06</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>6</itunes:episode>
     </item>
@@ -559,7 +560,7 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>51:11</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>7</itunes:episode>
     </item>
@@ -577,7 +578,7 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>1:07:00</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)">4</podcast:season>
+      <podcast:season name="TILTcast 4.0 (lørdag 24. mai 2025)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-4.jpg">4</podcast:season>
       <itunes:season>4</itunes:season>
       <itunes:episode>8</itunes:episode>
     </item>
@@ -595,7 +596,7 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>44:38</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>1</itunes:episode>
     </item>
@@ -615,7 +616,7 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>56:23</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>2</itunes:episode>
     </item>
@@ -690,7 +691,7 @@ Det bare er enkelte ting som var visuelt basert, men resten er hyggelig og gøy,
       <itunes:duration>1:16:18</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>3</itunes:episode>
     </item>
@@ -712,7 +713,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>50:59</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>4</itunes:episode>
     </item>
@@ -730,7 +731,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>55:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>5</itunes:episode>
     </item>
@@ -746,7 +747,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>49:46</itunes:duration>
       <itunes:explicit>true</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>6</itunes:episode>
     </item>
@@ -767,7 +768,7 @@ Følg oss gjerne på &lt;a href="https://bsky.app/profile/cdspill.bsky.social"&g
       <itunes:duration>52:15</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <itunes:episodeType>full</itunes:episodeType>
-      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)">5</podcast:season>
+      <podcast:season name="TILTcast 5.0 (lørdag 30. mai 2026)" image="https://mrmamen.github.io/podcast-feed-updater/tiltcast-5.png">5</podcast:season>
       <itunes:season>5</itunes:season>
       <itunes:episode>7</itunes:episode>
     </item>
