@@ -2,6 +2,22 @@
 
 En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 
+## 🧭 Hva vil du gjøre?
+
+| Jeg vil … | Kjør |
+|---|---|
+| Legge til en ny gjest | `uv run guests.py` (meny) eller `uv run guests.py add "Navn"` / `add <podchaser-url>` |
+| Fylle inn manglende bilde/URL, eller hente oppdaterte bilder fra Podchaser | `uv run guests.py refresh [Navn]` |
+| Finne nye gjester fra episodetitler | `uv run guests.py sync` |
+| Registrere gjester på en episode der de ikke står i tittelen | `uv run guests.py episode "#106"` |
+| Se statistikk (rangering, episoder per gjest, varighet) | `uv run analyze.py` (meny) eller `analyze.py rank` / `guest "Navn"` / `length` |
+| Generere den berikede feeden lokalt | `uv run enrich_cdspill.py [--local-cache]` |
+| Generere Spotify-/YouTube-variantene | `uv run enrich_cdspill_spotify.py` / `enrich_cdspill_youtube.py` |
+| Bygge Tiltcast-listefeed | `uv run build_list_feed.py` |
+| Transkribere en episode | `uv run python scripts/transcribe.py …` (se [transcripts/README.md](transcripts/README.md)) |
+
+`guests.py` og `analyze.py` uten argumenter gir en piltast-meny; underkommandoene finnes for scripting. Begge har en `cache`-kommando som laster ned en lokal kopi av feeden (`.cache/`), og `analyze.py` laster den ned automatisk hvis den mangler.
+
 ## 🎯 Use Case: cd SPILL Feed Enrichment
 Berik en eksisterende feed med Podcasting 2.0 tags.
 
@@ -12,8 +28,8 @@ Berik en eksisterende feed med Podcasting 2.0 tags.
 uv run enrich_cdspill.py
 
 # Lokal testing med cached feed (for utvikling)
-uv run python3 scripts/download_cdspill_cache.py  # Last ned cache først
-uv run enrich_cdspill.py --local-cache             # Bruk lokal cache
+uv run guests.py cache                  # Last ned cache først
+uv run enrich_cdspill.py --local-cache  # Bruk lokal cache
 
 # Legger til:
 # - Hosts og gjester (podcast:person)
@@ -77,18 +93,22 @@ pip install -e .
 ```
 podcast-feed-updater/
 ├── src/
-│   ├── common/                # Felles utilities (feed, guests, utils)
-│   └── enrichment/            # FeedEnricher + Podchaser API
-├── enrich_cdspill.py          # Hovedscript (Podcasting 2.0 enrichment)
+│   ├── common/                # Felles utilities (feed_loader, guest_config, guest_store, episodes)
+│   ├── enrichment/            # FeedEnricher + Podchaser API
+│   └── listfeed/              # Tiltcast-listefeed
+├── enrich_cdspill.py          # Hovedscript (Podcasting 2.0 enrichment, kjøres av CI)
 ├── enrich_cdspill_spotify.py  # Spotify-variant (kjøres av CI)
 ├── enrich_cdspill_youtube.py  # YouTube-variant (kjøres av CI)
-├── config/                    # JSON-config (gjester, faste roller)
+├── enrich_cdspill_fallback_test.py  # Testfeeds for klient-fallback (kjøres av CI)
+├── build_list_feed.py         # Tiltcast-listefeed (kjøres av CI)
+├── guests.py                  # Gjestevedlikehold: meny + add/refresh/sync/episode/list/cache
+├── analyze.py                 # Rapporter: meny + rank/guest/length/cache
+├── config/                    # JSON-config (gjester, faste roller, tiltcast-liste)
 ├── chapters/                  # Kapittel-data per episode (kilde)
 ├── scripts/
-│   ├── guests/                # Podchaser-verktøy: lookup, populate, osv.
-│   ├── analysis/              # Ad hoc rapporter (rank, list, …)
-│   ├── download_cdspill_cache.py  # Dev-utility
-│   └── (transkribe-pipeline)
+│   ├── transcribe.py, diarize_chapters.py, normalize_transcript.py,
+│   │   add_speakers.py, build_speaker_profiles.py, build_profiles_clean.py  # Transkripsjon
+│   └── claude-tools/          # Hjelpescript for Claude-sesjoner (ikke podcast-relatert)
 ├── docs/                      # Markdown-dokumentasjon
 └── output/                    # Generert XML (publiseres til GitHub Pages)
 ```
@@ -121,18 +141,20 @@ podcast-feed-updater/
 
 ### Podchaser Integration
 
-Person data (hosts og gjester) vedlikeholdes i JSON-filer. Podchaser brukes for å berike med profil-URLs:
+Person data (hosts og gjester) vedlikeholdes i JSON-filer. Podchaser brukes for å berike med profilbilde og -URL. Alt gjøres via `guests.py`:
 
 ```bash
-# Auto-populate alle gjester fra episode-titler
-uv run python3 scripts/guests/populate_guests.py
-
-# Legg til gjest fra Podchaser URL (interaktiv matching med piltaster)
-uv run python3 scripts/guests/add_guest_from_url.py "https://www.podchaser.com/creators/name-id"
-
-# Legg til enkelt-gjest ved søk
-uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+uv run guests.py                       # interaktiv meny
+uv run guests.py add "Guest Name"      # søk, velg treff, legg til / fyll inn manglende felt
+uv run guests.py add "https://www.podchaser.com/creators/name-id"
+uv run guests.py add "Fullt Navn" --alias "Kort Navn"
+uv run guests.py refresh [Navn]        # fyll inn manglende bilde/URL, oppdater endrede bilder
+uv run guests.py sync                  # nye gjester fra episodetitler
+uv run guests.py episode "#106"        # gjester fra Podchaser-credits → extra_episodes
+uv run guests.py list
 ```
+
+En eksisterende gjest overskrives aldri – bare manglende `img`/`href` fylles inn.
 
 **Alias-system**: Offisielle navn fra Podchaser brukes som hovednavn.
 Navnevarianter fra episode-titler legges til som aliaser.

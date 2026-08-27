@@ -34,199 +34,58 @@ Names used in episode titles that differ should be added as aliases.
 
 ## Workflow
 
-### Option A: Auto-populate all guests (Recommended)
+Alt vedlikehold av gjester går gjennom `guests.py`. Uten argumenter får du en piltast-meny;
+underkommandoene under er for scripting.
 
 ```bash
-# 1. Automatically add all guests from episode titles
-uv run python3 scripts/guests/populate_guests.py
-
-# This will:
-# - Extract all guest names from episode titles
-# - Search Podchaser for each new guest
-# - Add with profile data if found
-# - Add without data if not found
-# - Skip guests already in known_guests.json
-
-# 2. Run enricher
-uv run enrich_cdspill.py
+uv run guests.py                                   # interaktiv meny
+uv run guests.py add "Guest Name"                  # søk Podchaser, velg treff
+uv run guests.py add "https://www.podchaser.com/creators/name-id"
+uv run guests.py add "Full Name" --alias "Short Name"
+uv run guests.py refresh [Name]                    # fyll inn manglende img/href
+uv run guests.py sync                              # nye gjester fra episodetitler
+uv run guests.py episode "#106"                    # gjester fra Podchaser-credits
+uv run guests.py list                              # oversikt med 📷/🔗-status
 ```
 
-### Option B: Add guest from Podchaser URL
+**Felles regel:** en gjest som allerede finnes overskrives aldri – bare manglende `img`/`href`
+fylles inn. Det gjelder uansett om du kommer inn via `add`, `refresh`, `sync` eller `episode`.
 
-```bash
-# Add guest using their Podchaser profile URL
-# Interactive menu lets you match with existing guests or add as new
-uv run python3 scripts/guests/add_guest_from_url.py "https://www.podchaser.com/creators/name-id"
-```
+### `add` – én gjest fra navn eller URL
 
-### Option C: Manual per-guest lookup
+1. Søker Podchaser (navn → inntil 5 treff å velge mellom; URL → treffet med matchende id).
+2. Finner ut om personen allerede finnes: på `href`, på Podchaser-navn, via alias, eller på navnet
+   du søkte på. Finner den ingen, foreslås lignende navn i en meny, med «Legg til som ny» som
+   alternativ.
+3. Hvis den eksisterende nøkkelen ikke er Podchaser-navnet, spørres det om å bruke Podchaser-navnet
+   som hovednavn (det gamle blir alias).
+4. Manglende `img`/`href` fylles inn. Hvis navnet du søkte på avviker fra hovednavnet, spørres det
+   om å legge det til som alias.
 
-```bash
-# 1. Run enricher to see warnings
-uv run enrich_cdspill.py
+### `refresh` – fyll inn det som mangler
 
-# 2. Add individual guests
-uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+Går gjennom alle gjester (eller én navngitt), slår opp på Podchaser og fyller inn manglende
+`img`/`href`. Har gjesten allerede et bilde men Podchaser viser en annen bilde-URL, vises begge og du
+får spørsmål om å oppdatere eller beholde. Eksakt navnetreff (eller samme `href`) godtas automatisk;
+andre treff må bekreftes. `--yes` hopper over usikre treff og godtar nye bilder uten å spørre.
+Koster ett Podchaser-oppslag per gjest.
 
-# With alias for name variations
-uv run python3 scripts/guests/lookup_guest.py "Full Name" --alias "Short Name"
+### `sync` – nye gjester fra episodetitler
 
-# 3. Re-run enricher
-uv run enrich_cdspill.py
-```
+Finner alle «med Navn»-gjester i feeden som ikke finnes i fila (verken som gjest eller alias) og
+legger dem til. Eksakt Podchaser-treff gir profildata; usikre treff må bekreftes; ikke funnet →
+legges til uten data (så `refresh` kan prøve igjen senere).
 
-## Examples
+### `episode` – gjester som ikke står i tittelen
 
-### Auto-populating all guests
-```bash
-$ uv run python3 scripts/guests/populate_guests.py
-
-============================================================
-POPULATE KNOWN GUESTS
-============================================================
-
-📦 Currently in config/cdspill_known_guests.json:
-   9 guests
-   3 aliases
-📡 Fetching cd SPILL feed...
-
-🔍 Found 37 unique guests in episode titles
-
-🆕 Found 28 new guests to add:
-   - Adrian Haugen
-   - Aksel M. Bjerke
-   - Anders Ekroll
-   ...
-
-🔑 Authenticating with Podchaser...
-✓ Authenticated successfully
-
-============================================================
-PROCESSING NEW GUESTS
-============================================================
-
-[1/28] Adrian Haugen
-  ✓ Found profile data
-    🔗 URL: ✓
-[2/28] Aksel M. Bjerke
-  ⚠ Not found in Podchaser
-...
-
-============================================================
-DONE!
-============================================================
-
-✓ Added 28 new guests:
-  📷 24 with profile data
-  ⚠ 4 without profile data
-
-📊 Total in config/cdspill_known_guests.json:
-   37 guests
-   3 aliases
-
-💡 Run 'uv run enrich_cdspill.py' to use the updated data
-```
-
-### Adding guest from Podchaser URL
-```bash
-$ uv run python3 scripts/guests/add_guest_from_url.py "https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3"
-
-============================================================
-ADD GUEST FROM PODCHASER URL
-============================================================
-
-📋 Creator ID: 107tZxOga3
-📋 Name from URL: Aleks Gisvold
-
-🔑 Authenticating with Podchaser...
-✓ Authenticated
-🔍 Searching for 'Aleks Gisvold'...
-
-✓ Found: Aleks Gisvold
-  🔗 URL: https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3
-
-🤔 Is 'Aleks Gisvold' the same person as any existing guest?
-
-[?] Select matching guest or add as new:
- > 🔗 Adrian Haugen
-   🔗 Aleksander Hakestad
-      Aleksikon
-   ...
-   --- Actions ---
-   ➕ Add as new guest (not a match)
-   ❌ Cancel
-
-# Use arrow keys to select existing guest or add as new
-# If matched with existing:
-#   - Podchaser name becomes the official name
-#   - Old name (from feed) becomes an alias
-#   - Example: "Aleksikon" in feed → "Alexander Gisvold" on Podchaser
-#             Result: guests["Alexander Gisvold"], aliases["Aleksikon" → "Alexander Gisvold"]
-```
-
-### Getting warnings about missing metadata
-```bash
-$ uv run enrich_cdspill.py
-
-✓ Auto-detected and added 96 guests from episode titles
-
-  Name normalizations applied:
-  'Anette Jøsendal' → 'Anette Vik Jøsendal'
-
-⚠ Found 34 guest(s) without Podchaser URL (href):
-  - Adrian Haugen (1 episode)
-  - Aksel M. Bjerke (4 episodes)
-  - Anders Ekroll (5 episodes)
-  - Joachim Froholt (9 episodes)
-  ...
-
-💡 Add Podchaser profile with:
-   uv run python3 scripts/guests/lookup_guest.py "Guest Name"
-
-💡 If name variations exist, add aliases with:
-   uv run python3 scripts/guests/lookup_guest.py "Full Name" --alias "Short Name"
-```
-
-**Note:** The enricher only warns about missing Podchaser URLs (href). Profile images (img) are nice to have but not critical.
-
-### Adding a new guest
-```bash
-$ uv run python3 scripts/guests/lookup_guest.py "Mats Lindh"
-
-🔍 Searching Podchaser for: Mats Lindh
-============================================================
-Query cost: 7
-Points remaining: 12621
-
-✓ Found 1 result(s):
-
-1. Mats Lindh
-   Image: ✓
-   URL: https://www.podchaser.com/creators/mats-lindh-...
-
-Auto-selecting the only result...
-
-✓ Added to config/cdspill_known_guests.json:
-   Name: Mats Lindh
-   Image: ✓
-   Profile: https://www.podchaser.com/creators/mats-lindh-...
-
-Next: Run 'uv run enrich_cdspill.py' to use the new guest data
-```
-
-### Adding with alias
-```bash
-$ uv run python3 scripts/guests/lookup_guest.py "Jan Anders Ekroll" --alias "Anders Ekroll"
-
-✓ Adding alias: 'Anders Ekroll' → 'Jan Anders Ekroll'
-```
-
-Now episode titles with "med Anders Ekroll" will match "Jan Anders Ekroll" and get his profile data.
+Slår opp episoden (nummer, tittel eller GUID), henter credits fra Podchaser, legger til gjester som
+mangler i fila, og registrerer episoden under `extra_episodes` for gjester som ikke står i tittelen.
 
 ## Podchaser API Usage
 
-**populate_guests.py cost**: ~7-10 points per new guest found
-**lookup_guest.py cost**: ~7-10 points per lookup
+**guests.py sync / refresh**: ~7-10 points per guest looked up
+**guests.py add**: ~7-10 points per lookup
+**guests.py episode**: one episode search + one credits fetch
 **enrich_cdspill.py cost**: 0 points (no API calls)
 
 The enricher runs offline using the JSON files. Podchaser is only used when adding new guests.
@@ -277,11 +136,10 @@ For guests not mentioned in episode titles, use `extra_episodes` with GUID-based
 }
 ```
 
-**Finding the GUID:**
+Normally you don't edit this by hand – `uv run guests.py episode "#106"` fills it from
+Podchaser credits. **Finding the GUID manually:**
 ```bash
-# Search feed for episode title
 curl -s https://feed.podbean.com/cdspill/feed.xml | grep -A 5 "Episode Title"
-# Look for the <guid> tag, e.g.: cdspill.podbean.com/053d7b0f-64f8-3a89-88cf-5ec2a8e6f95c
 ```
 
 The `note` field is optional but recommended for human readability. GUIDs are stable identifiers that won't change even if episode titles are modified.
@@ -302,7 +160,7 @@ This tells you that:
 3. An alias exists: `"Anette Jøsendal": "Anette Vik Jøsendal"`
 4. But the official entry is missing href
 
-To fix: Use `add_guest_from_url.py` with the Podchaser URL to add the href.
+To fix: `uv run guests.py refresh "Anette Vik Jøsendal"` (or `add` with the Podchaser URL).
 
 The enricher only warns about missing Podchaser URLs (href attribute), not missing images.
 

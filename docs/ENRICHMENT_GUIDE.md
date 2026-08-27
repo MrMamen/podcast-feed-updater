@@ -82,11 +82,13 @@ Dette vil:
 Hvis en ny gjest dukker opp og mangler profilbilde:
 
 ```bash
-# Slå opp gjest i Podchaser
-uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+# Interaktiv meny (legg til, fyll inn bilde/URL, sync, episode)
+uv run guests.py
 
-# Med alias for navnevarianter
-uv run python3 scripts/guests/lookup_guest.py "Full Name" --alias "Short Name"
+# Eller direkte:
+uv run guests.py add "Guest Name"
+uv run guests.py add "Full Name" --alias "Short Name"
+uv run guests.py refresh          # fyll inn manglende bilde/URL for alle
 ```
 
 Dette legger automatisk til gjesten i `config/cdspill_known_guests.json` med profilbilde og Podchaser-URL.
@@ -250,7 +252,7 @@ uv pip install lxml
 
 Hvis en gjest mangler profilbilde:
 ```bash
-uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+uv run guests.py refresh "Guest Name"
 ```
 
 ### Gjest har feil navn i episode-tittel

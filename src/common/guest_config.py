@@ -10,7 +10,9 @@ KNOWN_GUESTS_PATH = Path("config/cdspill_known_guests.json")
 
 _DEFAULT_COMMENT = (
     "Known guests with Podchaser profile data and name aliases. "
-    "Add new guests using: uv run python3 scripts/guests/lookup_guest.py 'Guest Name'"
+    "Maintain with: uv run guests.py (interactive menu) or uv run guests.py add 'Guest Name'. "
+    "Use 'extra_episodes' to manually add guests to specific episodes by GUID "
+    "(e.g., when guest is not mentioned in title)."
 )
 
 

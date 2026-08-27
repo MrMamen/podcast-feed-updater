@@ -455,14 +455,14 @@ class FeedEnricher(BaseFeed):
                     print(f"    (detected as '{info['original_name']}' in titles)")
 
             print(f"\n💡 Add Podchaser profile with:")
-            print(f"   uv run python3 scripts/guests/lookup_guest.py \"Guest Name\"")
+            print(f"   uv run guests.py add \"Guest Name\"   (or: uv run guests.py refresh)")
 
             # If there are guests that might need aliases
             detected_names = [info['original_name'] for info in unique_missing.values()
                             if info['original_name']]
             if detected_names:
                 print(f"\n💡 If name variations exist, add aliases with:")
-                print(f"   uv run python3 scripts/guests/lookup_guest.py \"Full Name\" --alias \"Short Name\"")
+                print(f"   uv run guests.py add \"Full Name\" --alias \"Short Name\"")
 
         return self
 

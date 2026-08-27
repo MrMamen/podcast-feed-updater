@@ -10,13 +10,13 @@ Usage:
 Local cache:
     The --local-cache option uses a local copy of the feed for testing
     when the network is down or for faster development iterations.
-    Download the cache with: uv run python3 scripts/download_cdspill_cache.py
+    Download the cache with: uv run guests.py cache
 
 Person data:
     - Permanent staff: cdspill_permanent_staff.json (hosts and other permanent roles)
     - Known guests: cdspill_known_guests.json (profile images, URLs, name aliases)
     - Auto-detection: Guests detected from episode titles ("med [name]")
-    - Lookup new guests: uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+    - Maintain guests: uv run guests.py
 
 The script adds:
     - Permanent hosts at channel level (with profile images and URLs)
@@ -124,7 +124,7 @@ def main():
     if not KNOWN_GUESTS_PATH.exists():
         print(f"⚠ File not found: {known_guests_file}")
         print(f"  Guests will not have profile images")
-        print(f"  Use 'uv run python3 scripts/guests/lookup_guest.py <name>' to add guest data")
+        print(f"  Use 'uv run guests.py add <name>' to add guest data")
     else:
         try:
             known_guests_data = load_known_guests_data()
@@ -309,7 +309,7 @@ def main():
         print(f"     → {len(guests)} guests ({guests_with_img} with images), {len(aliases)} aliases")
     print("\nNext steps:")
     print("  1. Review output/cdspill-enriched.xml")
-    print("  2. Add new guests: uv run python3 scripts/guests/lookup_guest.py 'Guest Name'")
+    print("  2. Add new guests: uv run guests.py")
     print("  3. Upload to hosting when ready")
     print()
 

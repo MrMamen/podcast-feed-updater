@@ -18,6 +18,11 @@ def is_bonus_episode(text: str) -> bool:
     return "bonus" in lowered
 
 
+def strip_episode_suffix(title: str) -> str:
+    """Remove a trailing ``(#123)`` / ``(123)`` episode marker from a title."""
+    return _EPISODE_SUFFIX_RE.sub('', title or '')
+
+
 def extract_guests_from_title(title: str) -> List[str]:
     """
     Return a list of guest names parsed from a title like

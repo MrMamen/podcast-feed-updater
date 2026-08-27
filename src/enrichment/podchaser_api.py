@@ -457,7 +457,7 @@ def from_env(*, required: bool = True) -> Optional[PodchaserAPI]:
 
     When ``required`` is True (default), exits the process with an error if
     credentials are missing. When False, returns ``None`` so callers can
-    degrade gracefully (e.g. populate_guests.py adding guests without data).
+    degrade gracefully (e.g. guests.py sync adding guests without data).
     """
     api_key = os.getenv("PODCHASER_API_KEY")
     api_secret = os.getenv("PODCHASER_API_SECRET")

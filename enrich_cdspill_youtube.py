@@ -16,13 +16,13 @@ Usage:
 Local cache:
     The --local-cache option uses a local copy of the feed for testing
     when the network is down or for faster development iterations.
-    Download the cache with: uv run python3 scripts/download_cdspill_cache.py
+    Download the cache with: uv run guests.py cache
 
 Person data:
     - Permanent staff: cdspill_permanent_staff.json (hosts and other permanent roles)
     - Known guests: cdspill_known_guests.json (profile images, URLs, name aliases)
     - Auto-detection: Guests detected from episode titles ("med [name]")
-    - Lookup new guests: uv run python3 scripts/guests/lookup_guest.py "Guest Name"
+    - Maintain guests: uv run guests.py
 
 The script adds:
     - Permanent hosts at channel level (with profile images and URLs)
@@ -37,9 +37,9 @@ The script adds:
 """
 
 import os
-import sys
 import argparse
 from dotenv import load_dotenv
+from src.common.feed_loader import resolve_enriched_source
 from src.enrichment.enricher import FeedEnricher
 
 # Load environment variables from .env
@@ -63,19 +63,8 @@ def main():
     print("CD SPILL YOUTUBE FEED ENRICHER")
     print("="*60)
 
-    # Determine source
-    if args.local_cache:
-        # For local testing, use the enriched feed that was generated
-        cache_file = "output/cdspill-enriched.xml"
-        if not os.path.exists(cache_file):
-            print(f"\n❌ Error: Enriched feed not found at {cache_file}")
-            print("   Run enrich_cdspill.py first to generate the enriched feed")
-            sys.exit(1)
-        print(f"\n📁 Using local enriched feed: {cache_file}")
-        source = cache_file
-    else:
-        # Fetch from already enriched feed (deployed on GitHub Pages)
-        source = "https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml"
+    # Local output/ copy with --local-cache, otherwise the published enriched feed
+    source = resolve_enriched_source(args.local_cache)
 
     # Initialize enricher
     enricher = FeedEnricher(source)

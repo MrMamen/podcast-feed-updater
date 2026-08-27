@@ -16,15 +16,14 @@ Usage:
 """
 
 import os
-import sys
 import uuid
 import argparse
 from dotenv import load_dotenv
+from src.common.feed_loader import PUBLISH_BASE_URL as BASE_PUBLISH_URL, resolve_enriched_source
 from src.enrichment.enricher import FeedEnricher
 
 load_dotenv()
 
-BASE_PUBLISH_URL = "https://mrmamen.github.io/podcast-feed-updater"
 
 # Distinct podcast:guid per variant so clients that dedupe by feed identity
 # (e.g. MediaMonkey) treat each test feed as a separate subscription.
@@ -117,16 +116,7 @@ def main():
     print("CD SPILL FALLBACK-TEST FEED GENERATOR")
     print("=" * 60)
 
-    if args.local_cache:
-        source = "output/cdspill-enriched.xml"
-        if not os.path.exists(source):
-            print(f"\n❌ Error: Enriched feed not found at {source}")
-            print("   Run enrich_cdspill.py first to generate the enriched feed")
-            sys.exit(1)
-        print(f"\n📁 Using local enriched feed: {source}")
-    else:
-        source = f"{BASE_PUBLISH_URL}/cdspill-enriched.xml"
-        print(f"\n🌐 Fetching enriched feed from: {source}")
+    source = resolve_enriched_source(args.local_cache)
 
     os.makedirs("output", exist_ok=True)
 
