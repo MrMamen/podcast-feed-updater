@@ -95,6 +95,49 @@ def t2s(ts: str) -> float:
 # --------------------------------------------------------------------------
 # Audio
 # --------------------------------------------------------------------------
+# Local episode library: one folder per episode named "<number> <title>",
+# holding the raw tracks (flac/wav) and the finished mix as an .mp3.
+DEFAULT_AUDIO_LIBRARY = Path(os.environ.get("CDSPILL_LIBRARY", "/mnt/t/MrMamen/CD SPILL"))
+
+
+def find_episode_audio(number: int, library: Path = DEFAULT_AUDIO_LIBRARY) -> Path:
+    """Locate the finished mix for an episode number in the local library.
+
+    Folders whose name starts with the number are candidates ("114 pickup"
+    style extras are ignored when a main folder exists). Inside, the mix is
+    the largest .mp3 that isn't an "_enriched" copy; if the folder has no
+    mp3 at all, the largest file with MIX in its name is used instead.
+    """
+    if not library.exists():
+        raise FileNotFoundError(f"Audio library not found: {library} "
+                                f"(set CDSPILL_LIBRARY or pass --library)")
+    pat = re.compile(rf"^{number}(\s|$)")
+    dirs = [d for d in library.iterdir() if d.is_dir() and pat.match(d.name)]
+    main = [d for d in dirs if "pickup" not in d.name.lower()]
+    dirs = main or dirs
+    if not dirs:
+        raise FileNotFoundError(f"No folder for episode {number} in {library}")
+
+    def biggest(files):
+        return max(files, key=lambda p: p.stat().st_size) if files else None
+
+    for d in dirs:
+        mp3s = [p for p in d.glob("*.mp3") if "enriched" not in p.name.lower()]
+        pick = biggest(mp3s)
+        if pick is None:
+            mixes = [p for p in d.iterdir()
+                     if p.suffix.lower() in (".flac", ".wav", ".mp3") and "mix" in p.name.lower()]
+            pick = biggest(mixes)
+        if pick is not None:
+            print(f"Episode {number} audio: {pick}")
+            return pick
+
+    listing = ", ".join(sorted(p.name for d in dirs for p in d.iterdir()
+                               if p.suffix.lower() in (".mp3", ".flac", ".wav", ".m4a")))
+    raise FileNotFoundError(f"No mix found in {[str(d) for d in dirs]}. "
+                            f"Audio files there: {listing or 'none'}")
+
+
 def load_audio(path: str | Path, sample_rate: int = SAMPLE_RATE):
     """Decode MP3/WAV/etc to a mono float32 numpy array via PyAV."""
     import av
