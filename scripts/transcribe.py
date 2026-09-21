@@ -96,7 +96,88 @@ def transcribe(audio_wav, *, model_name: str, language: str = "no",
     elapsed = time.time() - t0
     print(f"  {len(segs)} segments in {elapsed:.1f}s "
           f"({info.duration/elapsed:.1f}x realtime)")
-    return segs, info.duration
+    return segs, info.duration, model
+
+
+# --------------------------------------------------------------------------
+# Gap filling
+# --------------------------------------------------------------------------
+def fill_gaps(model, audio_wav, segs, *, language: str = "no",
+              initial_prompt: str | None = None, min_gap: float = 3.0,
+              min_speech: float = 1.5, substantive_words: int = 4,
+              substantive_seconds: float = 2.5, sample_rate: int = 16000):
+    """Re-transcribe stretches Whisper skipped but Silero VAD says contain speech.
+
+    Whisper decodes VAD chunks of up to 30 s independently and sometimes
+    stops early inside a chunk (speaker change, overlap) or never sees
+    quiet speech the chunking VAD dropped. On a full episode that lost
+    whole sentences. Running the model on just the gap, with no VAD and no
+    chunk boundary, recovers them reliably.
+
+    Returns (extra, review): ``extra`` are segment dicts worth inserting
+    (at least ``substantive_words`` words or ``substantive_seconds`` long);
+    ``review`` are short interjections ("Ja.", "Og ...") that the subtitle
+    style usually omits, returned for the operator to judge.
+    """
+    from faster_whisper.vad import VadOptions, get_speech_timestamps
+
+    sr = sample_rate
+    duration = len(audio_wav) / sr
+    speech = [(s["start"] / sr, s["end"] / sr) for s in get_speech_timestamps(
+        audio_wav, VadOptions(threshold=0.3, min_silence_duration_ms=500, speech_pad_ms=200))]
+
+    def speech_in(a, b):
+        return sum(max(0.0, min(e, b) - max(s, a)) for s, e in speech)
+
+    # Gap edges come from the actual first/last word times, not segment
+    # bounds: a segment's end often extends through a pause past its last
+    # word, which would hide the first word of a skipped passage.
+    def first_word(s):
+        w = getattr(s, "words", None)
+        return w[0].start if w else s.start
+
+    def last_word(s):
+        w = getattr(s, "words", None)
+        return w[-1].end if w else s.end
+
+    ordered = sorted(segs, key=lambda s: s.start)
+    bounds = [(0.0, first_word(ordered[0]))] if ordered else [(0.0, duration)]
+    bounds += [(last_word(a), first_word(b)) for a, b in zip(ordered, ordered[1:])]
+    if ordered:
+        bounds.append((last_word(ordered[-1]), duration))
+    cands = []
+    for a, b in bounds:
+        if b - a >= min_gap:
+            sp = speech_in(a, b)
+            if sp >= min_speech:
+                cands.append((a, b, sp))
+    print(f"Gap check: {len(cands)} gaps >= {min_gap:.0f}s with speech "
+          f"({sum(sp for _, _, sp in cands):.0f}s total)")
+
+    extra, review = [], []
+    for a, b, sp in cands:
+        pa, pb = max(0.0, a - 0.3), min(duration, b + 0.3)
+        clip = audio_wav[int(pa * sr):int(pb * sr)]
+        segments, _ = model.transcribe(clip, language=language, beam_size=5,
+                                       word_timestamps=True, vad_filter=False,
+                                       initial_prompt=initial_prompt)
+        words = []
+        for s in segments:
+            for w in (s.words or []):
+                ws, we = max(a, w.start + pa), min(b, w.end + pa)
+                if we > ws:
+                    words.append({"start": round(ws, 3), "end": round(we, 3), "word": w.word})
+        if not words:
+            continue
+        text = "".join(w["word"] for w in words).strip()
+        seg = {"start": words[0]["start"], "end": words[-1]["end"], "text": text,
+               "words": words, "gap": True}
+        span = seg["end"] - seg["start"]
+        if len(text.split()) >= substantive_words or span >= substantive_seconds:
+            extra.append(seg)
+        else:
+            review.append(seg)
+    return extra, review
 
 
 # --------------------------------------------------------------------------
@@ -537,6 +618,9 @@ def main() -> int:
     parser.add_argument("--no-vad", action="store_true",
                         help="Disable VAD entirely (transcribe all audio; may "
                              "hallucinate text during silence/music)")
+    parser.add_argument("--no-fill-gaps", action="store_true",
+                        help="Skip the pass that finds stretches with speech Whisper "
+                             "left untranscribed and re-transcribes them")
     parser.add_argument("--render-only", action="store_true",
                         help="Skip Whisper and pyannote; re-render the VTT from the raw "
                              "results cached by the previous run with the same -o "
@@ -608,7 +692,7 @@ def main() -> int:
     wav = load_audio(args.audio)
     print(f"  {len(wav)/16000/60:.1f} min decoded in {time.time()-t0:.1f}s")
 
-    segs, duration = transcribe(
+    segs, duration, model = transcribe(
         wav, model_name=args.model, language=args.language,
         initial_prompt=initial_prompt,
         vad_threshold=None if args.no_vad else args.vad_threshold,
@@ -650,6 +734,24 @@ def main() -> int:
                     speaker_map[spk] = guest_names.pop(0)
                     print(f"  {spk} → {speaker_map[spk]} (guest from metadata)")
 
+    # Fill gaps Whisper skipped (see fill_gaps); short interjections are
+    # only listed, in line with the subtitle style in TRANSCRIPT_GUIDELINES.
+    gap_review: list[dict] = []
+    if not args.no_fill_gaps:
+        extra, review = fill_gaps(model, wav, segs, language=args.language,
+                                  initial_prompt=initial_prompt)
+        for r in review:
+            spk = speaker_for_range(diar_segments, r["start"], r["end"]) if diar_segments else None
+            r["speaker"] = speaker_map.get(spk, spk) if spk else None
+        gap_review = review
+        if extra:
+            segs = sorted(segs + [_Seg(s) for s in extra], key=lambda s: s.start)
+            print(f"  inserted {len(extra)} skipped passages "
+                  f"({sum(s['end'] - s['start'] for s in extra):.0f}s):")
+            for s in extra:
+                print(f"    {format_ts(s['start'])}  {s['text'][:80]}")
+        print_gap_review(gap_review)
+
     # Cache raw results so --render-only can re-render without the GPU
     raw = {
         "audio": str(args.audio),
@@ -657,11 +759,13 @@ def main() -> int:
         "segments": [
             {"start": s.start, "end": s.end, "text": s.text,
              "words": [{"start": w.start, "end": w.end, "word": w.word}
-                       for w in (getattr(s, "words", None) or [])]}
+                       for w in (getattr(s, "words", None) or [])],
+             "gap": bool(getattr(s, "gap", False))}
             for s in segs
         ],
         "diarization": diar_segments,
         "speaker_map": speaker_map,
+        "gap_review": gap_review,
     }
     raw_path.parent.mkdir(parents=True, exist_ok=True)
     raw_path.write_text(json.dumps(raw, ensure_ascii=False), encoding="utf-8")
@@ -706,11 +810,22 @@ class _Word:
 
 
 class _Seg:
-    __slots__ = ("start", "end", "text", "words")
+    __slots__ = ("start", "end", "text", "words", "gap")
 
     def __init__(self, d):
         self.start, self.end, self.text = d["start"], d["end"], d["text"]
         self.words = [_Word(w) for w in d.get("words", [])]
+        self.gap = bool(d.get("gap", False))
+
+
+def print_gap_review(review: list[dict]) -> None:
+    if not review:
+        return
+    print(f"  {len(review)} short interjection(s) in gaps, not inserted "
+          f"(add by hand if they matter):")
+    for r in review:
+        who = f"{r['speaker']}: " if r.get("speaker") else ""
+        print(f"    {format_ts(r['start'])}  {who}{r['text']}")
 
 
 def render_from_raw(args, raw_path: Path) -> int:
@@ -727,6 +842,7 @@ def render_from_raw(args, raw_path: Path) -> int:
     print(f"Re-rendering from {raw_path} ({len(segs)} segments, "
           f"{len(diar_segments or [])} diarization turns)")
     render_vtt(args, segs, diar_segments, speaker_map, corrections)
+    print_gap_review(raw.get("gap_review") or [])
     print(f"  {args.output}")
     return 0
 
