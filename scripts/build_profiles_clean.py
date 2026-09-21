@@ -13,7 +13,7 @@ Strategy:
   5. L2-normalise and save profile
 
 Usage:
-    scripts/build_profiles_clean.py --config <path-to-config.json> \\
+    uv run python scripts/build_profiles_clean.py --config <path-to-config.json> \\
         -o <output.npy>
 
 The config file maps speaker labels to a list of clean audio tracks. Both
@@ -24,55 +24,28 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 import time
 from pathlib import Path
 
+from asr_common import (
+    DEFAULT_DIARIZATION_MODEL,
+    embed_chunk,
+    embedding_model,
+    load_audio,
+    load_diarization_pipeline,
+    load_hf_token,
+    load_profiles,
+    save_profiles,
+    setup_cuda_paths,
+)
 
-def _setup_cuda_paths() -> None:
-    script_dir = Path(__file__).resolve().parent
-    venv_site = script_dir.parent / ".venv" / "lib" / "python3.12" / "site-packages" / "nvidia"
-    if not venv_site.exists():
-        return
-    paths = []
-    for sub in ("cu13/lib", "cublas/lib", "cudnn/lib", "cuda_nvrtc/lib"):
-        p = venv_site / sub
-        if p.exists():
-            paths.append(str(p))
-    if not paths:
-        return
-    existing = os.environ.get("LD_LIBRARY_PATH", "")
-    if all(p in existing.split(":") for p in paths):
-        return
-    new_ld = ":".join(paths + ([existing] if existing else []))
-    env = {k: v for k, v in os.environ.items() if not k.startswith("BASH_FUNC_")}
-    env["LD_LIBRARY_PATH"] = new_ld
-    os.execve(sys.executable, [sys.executable] + sys.argv, env)
-
-
-_setup_cuda_paths()
-
-
-def load_audio(path: str, sample_rate: int = 16000):
-    import av
-    import numpy as np
-    container = av.open(path)
-    resampler = av.AudioResampler(format="s16", layout="mono", rate=sample_rate)
-    chunks = []
-    for frame in container.decode(audio=0):
-        for r in resampler.resample(frame):
-            chunks.append(r.to_ndarray())
-    container.close()
-    wav = np.concatenate(chunks, axis=-1).astype(np.float32) / 32768.0
-    if wav.ndim == 2:
-        wav = wav[0]
-    return wav
+setup_cuda_paths()
 
 
 def windows_with_voice(wav, sample_rate=16000, win_s=8.0, hop_s=4.0,
-                      energy_db_floor=-40.0, max_windows: int | None = None):
-    """Yield overlapping windows above an energy floor.
+                       energy_db_floor=-40.0, max_windows: int | None = None):
+    """Overlapping windows above an energy floor.
 
     Energy floor is dB relative to the file's peak — windows quieter than
     this are skipped (silence, breath gaps). -40 dB is conservative.
@@ -112,15 +85,12 @@ def main() -> int:
                         help="Skip windows below this RMS dB relative to peak")
     parser.add_argument("--merge", action="store_true",
                         help="Merge with existing profile file instead of overwriting")
+    parser.add_argument("--diarization-model", default=DEFAULT_DIARIZATION_MODEL,
+                        help="Pipeline whose embedding model to use")
     parser.add_argument("--env", type=Path)
     args = parser.parse_args()
 
-    project_root = Path(__file__).resolve().parent.parent
-    env_path = args.env or (project_root / ".env")
-    if env_path.exists():
-        from dotenv import load_dotenv
-        load_dotenv(env_path)
-    hf_token = os.environ.get("HF_TOKEN")
+    hf_token = load_hf_token(args.env)
     if not hf_token:
         sys.stderr.write("HF_TOKEN not set in .env\n")
         return 1
@@ -131,16 +101,10 @@ def main() -> int:
         print(f"  {name}: {len(paths)} track(s)")
 
     import numpy as np
-    import torch
-    from pyannote.audio import Pipeline
 
-    print("\nLoading pyannote/speaker-diarization-3.1...")
-    t0 = time.time()
-    pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization-3.1", token=hf_token)
-    pipeline.to(torch.device("cuda"))
-    emb_model = pipeline._embedding
-    print(f"  loaded in {time.time()-t0:.1f}s "
-          f"(dim={emb_model.dimension}, sr={emb_model.sample_rate})")
+    pipeline = load_diarization_pipeline(hf_token, args.diarization_model)
+    emb_model = embedding_model(pipeline)
+    print(f"  embedding dim={emb_model.dimension}, sr={emb_model.sample_rate}")
 
     profiles: dict[str, np.ndarray] = {}
     for name, paths in config.items():
@@ -153,7 +117,7 @@ def main() -> int:
                 continue
             print(f"  loading {p_path.name}...")
             t0 = time.time()
-            wav = load_audio(str(p_path))
+            wav = load_audio(p_path)
             wins = windows_with_voice(
                 wav, win_s=args.win_seconds, hop_s=args.hop_seconds,
                 energy_db_floor=args.energy_floor_db,
@@ -161,21 +125,15 @@ def main() -> int:
             )
             print(f"    {len(wav)/16000/60:.1f} min decoded, "
                   f"{len(wins)} usable windows ({time.time()-t0:.1f}s)")
-            nan_in_file = 0
+            dropped = 0
             for _ts, chunk in wins:
-                try:
-                    t = torch.from_numpy(chunk).unsqueeze(0).unsqueeze(0)
-                    emb = np.array(emb_model(t)[0])
-                    # Drop NaN embeddings (can happen on silent windows even
-                    # above energy floor if pooling-layer std() degenerates).
-                    if np.isnan(emb).any():
-                        nan_in_file += 1
-                        continue
-                    all_embs.append(emb)
-                except Exception as e:
-                    print(f"    skip window: {e}")
-            if nan_in_file:
-                print(f"    ⚠ dropped {nan_in_file} NaN window(s)")
+                emb = embed_chunk(emb_model, chunk)
+                if emb is None:
+                    dropped += 1
+                    continue
+                all_embs.append(emb)
+            if dropped:
+                print(f"    ⚠ dropped {dropped} NaN/failed window(s)")
         if not all_embs:
             print(f"  ✗ no embeddings extracted for {name}")
             continue
@@ -184,24 +142,20 @@ def main() -> int:
         profiles[name] = mean
         print(f"  {name}: {len(all_embs)} embeddings averaged")
 
-    # Optional merge with existing profile file
     if args.merge and args.output.exists():
         print(f"\nMerging with existing {args.output}...")
-        existing = np.load(args.output, allow_pickle=True).item()
+        existing = load_profiles(args.output)
         for name in existing:
             if name not in profiles:
                 profiles[name] = existing[name]
                 print(f"  kept existing: {name}")
 
-    # Save
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    np.save(args.output, profiles)
+    save_profiles(profiles, args.output)
     print(f"\n✓ Saved {len(profiles)} profiles to {args.output}")
 
-    # Sanity check
     if len(profiles) >= 2:
         print("\nCross-speaker similarities (should be < 0.5 for distinct):")
-        names = list(profiles.keys())
+        names = list(profiles)
         for i in range(len(names)):
             for j in range(i + 1, len(names)):
                 sim = float(np.dot(profiles[names[i]], profiles[names[j]]))

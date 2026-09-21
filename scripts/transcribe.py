@@ -1,15 +1,4 @@
 #!/usr/bin/env python3
-# /// script
-# requires-python = ">=3.10"
-# dependencies = [
-#     "faster-whisper>=1.2",
-#     "pyannote.audio>=4.0",
-#     "python-dotenv>=1.0",
-#     "av>=13",
-#     "torch",
-#     "numpy",
-# ]
-# ///
 """Transcribe a podcast MP3 with NB-Whisper + optional pyannote diarization.
 
 Output: WebVTT with sentence cues, optional <v Speaker> tags.
@@ -17,95 +6,42 @@ Output: WebVTT with sentence cues, optional <v Speaker> tags.
 Requires:
   - NVIDIA GPU with CUDA drivers
   - HF_TOKEN in .env (only for diarization; accept pyannote licenses)
-  - nvidia-cu13 pip wheels (bundled via this project's venv)
+  - the project venv (`uv sync`), which bundles the CUDA wheels
 
 Usage:
-    scripts/transcribe.py <audio.mp3> -o output.vtt
-    scripts/transcribe.py <audio.mp3> -o output.vtt --no-diarization
-    scripts/transcribe.py <audio.mp3> -o output.vtt \\
+    uv run python scripts/transcribe.py <audio.mp3> -o output.vtt
+    uv run python scripts/transcribe.py <audio.mp3> -o output.vtt --no-diarization
+    uv run python scripts/transcribe.py <audio.mp3> -o output.vtt \\
         --initial-prompt "Names and terms to bias ASR toward: ..."
-    scripts/transcribe.py <audio.mp3> -o output.vtt \\
+    uv run python scripts/transcribe.py <audio.mp3> -o output.vtt \\
         --speakers 3 --speaker-map "SPEAKER_01=Sigve,SPEAKER_00=Mr. Mamen"
 """
 from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import sys
 import time
 from pathlib import Path
 
+from asr_common import (
+    DEFAULT_DIARIZATION_MODEL,
+    PROFILE_THRESHOLD,
+    apply_corrections,
+    format_ts,
+    load_audio,
+    load_corrections,
+    load_diarization_pipeline,
+    load_hf_token,
+    match_profiles,
+    run_diarization,
+    setup_cuda_paths,
+    speaker_for_range,
+    speaker_totals,
+)
 
-# --------------------------------------------------------------------------
-# CUDA library path setup (before importing torch)
-# --------------------------------------------------------------------------
-def _setup_cuda_paths() -> None:
-    """Ensure bundled CUDA libs are on LD_LIBRARY_PATH.
-
-    Sets LD_LIBRARY_PATH and re-execs the process if the paths are missing,
-    so the dynamic linker sees them from process startup (os.environ alone is
-    not sufficient for libraries loaded lazily by ctranslate2).
-    """
-    script_dir = Path(__file__).resolve().parent
-    venv_site = script_dir.parent / ".venv" / "lib" / "python3.12" / "site-packages" / "nvidia"
-    if not venv_site.exists():
-        return
-    paths = []
-    for sub in ("cu13/lib", "cublas/lib", "cudnn/lib", "cuda_nvrtc/lib"):
-        p = venv_site / sub
-        if p.exists():
-            paths.append(str(p))
-    if not paths:
-        return
-    existing = os.environ.get("LD_LIBRARY_PATH", "")
-    existing_set = set(existing.split(":")) if existing else set()
-    if all(p in existing_set for p in paths):
-        return  # Already configured, no re-exec needed
-    # Re-exec with correct LD_LIBRARY_PATH so dynamic linker sees it at startup
-    import sys
-    new_ld = ":".join(paths + ([existing] if existing else []))
-    env = os.environ.copy()
-    env["LD_LIBRARY_PATH"] = new_ld
-    os.execve(sys.executable, [sys.executable] + sys.argv, env)
-
-
-_setup_cuda_paths()
-
-
-def format_ts(sec: float) -> str:
-    h = int(sec // 3600)
-    m = int((sec % 3600) // 60)
-    s = sec - h * 3600 - m * 60
-    return f"{h:02d}:{m:02d}:{s:06.3f}"
-
-
-def t2s(ts: str) -> float:
-    h, m, rest = ts.split(":")
-    s, ms = rest.split(".")
-    return int(h) * 3600 + int(m) * 60 + int(s) + int(ms) / 1000
-
-
-# --------------------------------------------------------------------------
-# Audio loading
-# --------------------------------------------------------------------------
-def load_audio(path: str, sample_rate: int = 16000):
-    """Decode MP3/WAV/etc to mono float32 numpy array via PyAV."""
-    import av
-    import numpy as np
-
-    container = av.open(path)
-    resampler = av.AudioResampler(format="s16", layout="mono", rate=sample_rate)
-    chunks = []
-    for frame in container.decode(audio=0):
-        for r in resampler.resample(frame):
-            chunks.append(r.to_ndarray())
-    container.close()
-    wav = np.concatenate(chunks, axis=-1).astype(np.float32) / 32768.0
-    if wav.ndim == 2:
-        wav = wav[0]  # mono: take first channel
-    return wav
+setup_cuda_paths()
 
 
 # --------------------------------------------------------------------------
@@ -113,7 +49,8 @@ def load_audio(path: str, sample_rate: int = 16000):
 # --------------------------------------------------------------------------
 def transcribe(audio_wav, *, model_name: str, language: str = "no",
                initial_prompt: str | None = None, beam_size: int = 5,
-               vad_threshold: float | None = 0.3):
+               vad_threshold: float | None = 0.3,
+               batched: bool = False, batch_size: int = 8):
     from faster_whisper import WhisperModel
 
     print(f"Loading Whisper: {model_name}")
@@ -143,169 +80,21 @@ def transcribe(audio_wav, *, model_name: str, language: str = "no",
         print(f"  VAD: threshold={vad_threshold}, speech_pad_ms=600")
     if initial_prompt:
         kwargs["initial_prompt"] = initial_prompt
-    segments, info = model.transcribe(audio_wav, **kwargs)
+
+    if batched:
+        # BatchedInferencePipeline decodes several VAD chunks in parallel;
+        # typically 3-4x faster on GPU at the cost of more VRAM.
+        from faster_whisper import BatchedInferencePipeline
+        print(f"  mode: batched (batch_size={batch_size})")
+        runner = BatchedInferencePipeline(model=model)
+        segments, info = runner.transcribe(audio_wav, batch_size=batch_size, **kwargs)
+    else:
+        segments, info = model.transcribe(audio_wav, **kwargs)
     segs = list(segments)
     elapsed = time.time() - t0
     print(f"  {len(segs)} segments in {elapsed:.1f}s "
           f"({info.duration/elapsed:.1f}x realtime)")
     return segs, info.duration
-
-
-# --------------------------------------------------------------------------
-# Diarization (pyannote)
-# --------------------------------------------------------------------------
-def diarize(audio_wav, *, num_speakers: int | None = None,
-            hf_token: str | None = None):
-    import torch
-    from pyannote.audio import Pipeline
-
-    if not hf_token:
-        raise RuntimeError("HF_TOKEN required for diarization (set in .env)")
-
-    print("Loading pyannote pipeline...")
-    t0 = time.time()
-    pipeline = Pipeline.from_pretrained(
-        "pyannote/speaker-diarization-3.1", token=hf_token
-    )
-    pipeline.to(torch.device("cuda"))
-    print(f"  loaded in {time.time()-t0:.1f}s")
-
-    print("Running diarization...")
-    t0 = time.time()
-    waveform = torch.from_numpy(audio_wav).unsqueeze(0)
-    kwargs = {}
-    if num_speakers:
-        kwargs["num_speakers"] = num_speakers
-    result = pipeline({"waveform": waveform, "sample_rate": 16000}, **kwargs)
-    ann = result.speaker_diarization if hasattr(result, "speaker_diarization") else result
-    elapsed = time.time() - t0
-
-    segments = []
-    for turn, _, speaker in ann.itertracks(yield_label=True):
-        segments.append({"start": turn.start, "end": turn.end, "speaker": speaker})
-    speakers = {s["speaker"] for s in segments}
-    print(f"  {len(speakers)} speakers, {len(segments)} turns in {elapsed:.1f}s")
-
-    # Stats
-    from collections import defaultdict
-    totals: dict[str, float] = defaultdict(float)
-    for s in segments:
-        totals[s["speaker"]] += s["end"] - s["start"]
-    for spk in sorted(totals, key=lambda x: -totals[x]):
-        print(f"    {spk}: {totals[spk]/60:.1f} min")
-
-    return segments, pipeline
-
-
-def match_profiles(diar_segments: list, audio_wav, pipeline,
-                   profiles_path: Path, *, threshold: float = 0.65,
-                   sample_rate: int = 16000) -> dict[str, str]:
-    """Match SPEAKER_XX clusters against saved voice profiles.
-    Returns {speaker_id: name} for confident matches.
-
-    Threshold 0.65 chosen empirically: real matches are typically 0.83-0.94,
-    while false positives from voices that vaguely resemble a known profile
-    can land at 0.55-0.62. 0.65 leaves plenty of headroom for genuine
-    matches while rejecting borderline cases that would otherwise mislabel
-    new guests as known speakers.
-    """
-    import numpy as np
-    import torch
-    from collections import defaultdict
-
-    profiles = np.load(profiles_path, allow_pickle=True).item()
-    emb_model = pipeline._embedding
-
-    by_speaker: dict[str, list] = defaultdict(list)
-    for seg in diar_segments:
-        by_speaker[seg["speaker"]].append(seg)
-
-    print(f"Matching {len(by_speaker)} clusters against "
-          f"{len(profiles)} profiles...")
-
-    # Compute cluster embeddings and similarities against every profile.
-    # Pyannote's pooling layer can return NaN on segments shorter than ~2 s
-    # (std() degree-of-freedom warning), so we require 2 s minimum and drop
-    # individual NaN embeddings before averaging. Without this filter, short
-    # caller cues ("Mhm", "Ja, riktig") poison the cluster embedding.
-    min_samples = max(emb_model.min_num_samples, int(2.0 * sample_rate))
-
-    cluster_embs: dict[str, np.ndarray] = {}
-    for spk, segs in sorted(by_speaker.items()):
-        long_segs = sorted(segs, key=lambda s: s["end"] - s["start"],
-                           reverse=True)[:30]
-        embs = []
-        for seg in long_segs:
-            s_idx = int(seg["start"] * sample_rate)
-            e_idx = int(seg["end"] * sample_rate)
-            if e_idx - s_idx < min_samples:
-                continue
-            try:
-                chunk = audio_wav[s_idx:e_idx]
-                t = torch.from_numpy(chunk).unsqueeze(0).unsqueeze(0)
-                emb = np.array(emb_model(t)[0])
-                if np.isnan(emb).any():
-                    continue
-                embs.append(emb)
-            except Exception:
-                continue
-        if not embs:
-            print(f"  ⚠ {spk}: no usable embeddings (segments too short)")
-            continue
-        cluster_emb = np.mean(embs, axis=0)
-        cluster_emb /= np.linalg.norm(cluster_emb) + 1e-8
-        cluster_embs[spk] = cluster_emb
-
-    # Compute all (cluster, profile, similarity) pairs.
-    # Skip NaN similarities — they break sort order and silently steal
-    # profile slots from valid clusters via greedy 1:1 matching.
-    pairs = []
-    sim_table: dict[str, dict[str, float]] = {}
-    for spk, emb in cluster_embs.items():
-        sim_table[spk] = {}
-        for name, prof_emb in profiles.items():
-            sim = float(np.dot(emb, prof_emb))
-            if np.isnan(sim):
-                continue
-            sim_table[spk][name] = sim
-            pairs.append((sim, spk, name))
-
-    # Greedy 1:1 assignment — highest similarity first
-    speaker_map: dict[str, str] = {}
-    used_profiles: set[str] = set()
-    pairs.sort(reverse=True)
-    for sim, spk, name in pairs:
-        if spk in speaker_map or name in used_profiles:
-            continue
-        if sim < threshold:
-            break
-        speaker_map[spk] = name
-        used_profiles.add(name)
-
-    # Report assignments for each cluster
-    for spk in sorted(cluster_embs):
-        sims = sim_table[spk]
-        sim_str = "  ".join(f"{n}={v:.3f}" for n, v in sorted(sims.items()))
-        if spk in speaker_map:
-            print(f"  {spk} → {speaker_map[spk]} "
-                  f"(sim={sims[speaker_map[spk]]:.3f})  [{sim_str}]")
-        else:
-            print(f"  {spk} → unknown  [{sim_str}]")
-
-    return speaker_map
-
-
-def speaker_for_range(segments, start: float, end: float) -> str | None:
-    """Speaker with most overlap in [start, end]."""
-    from collections import defaultdict
-    overlap: dict[str, float] = defaultdict(float)
-    for s in segments:
-        if s["end"] < start or s["start"] > end:
-            continue
-        ovl = min(s["end"], end) - max(s["start"], start)
-        if ovl > 0:
-            overlap[s["speaker"]] += ovl
-    return max(overlap, key=overlap.get) if overlap else None
 
 
 # --------------------------------------------------------------------------
@@ -651,22 +440,6 @@ def split_long_cue(start: float, end: float, text: str,
 
 
 # --------------------------------------------------------------------------
-# Correction pass (re-uses corrections.json schema)
-# --------------------------------------------------------------------------
-def apply_word_fixes(text: str, config: dict) -> str:
-    for old, new in config.get("word_fixes", []):
-        if old and old != new:
-            text = text.replace(old, new)
-    for fix in config.get("regex_fixes", []):
-        text = re.sub(fix["pattern"], fix["replacement"], text)
-    for fix in config.get("post_fixes", []):
-        text = text.replace(fix["from"], fix["to"])
-    for fix in config.get("error_fixes", []):
-        text = text.replace(fix["from"], fix["to"])
-    return text
-
-
-# --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
 def main() -> int:
@@ -679,12 +452,27 @@ def main() -> int:
     parser.add_argument("--no-diarization", action="store_true",
                         help="Skip pyannote diarization (faster, no <v> tags)")
     parser.add_argument("--speakers", type=int,
-                        help="Number of speakers hint for diarization")
+                        help="Exact number of speakers for diarization")
+    parser.add_argument("--min-speakers", type=int,
+                        help="Lower bound on speaker count (ignored with --speakers)")
+    parser.add_argument("--max-speakers", type=int,
+                        help="Upper bound on speaker count (ignored with --speakers)")
+    parser.add_argument("--diarization-model", default=DEFAULT_DIARIZATION_MODEL,
+                        help=f"pyannote pipeline (default: {DEFAULT_DIARIZATION_MODEL}; "
+                             "legacy: pyannote/speaker-diarization-3.1)")
+    parser.add_argument("--no-exclusive", action="store_true",
+                        help="Use the raw overlapping diarization instead of the "
+                             "pipeline's exclusive (one-speaker-at-a-time) output")
     parser.add_argument("--speaker-map", type=str,
                         help='Comma-separated mapping, e.g. "SPEAKER_00=Sigve,SPEAKER_01=Mamen"')
     parser.add_argument("--model", default="TheStigh/nb-whisper-large-ct2",
                         help="Whisper model name (HF repo or local CT2 dir)")
     parser.add_argument("--language", default="no")
+    parser.add_argument("--batched", action="store_true",
+                        help="Use faster-whisper's BatchedInferencePipeline "
+                             "(typically 3-4x faster; needs more VRAM)")
+    parser.add_argument("--batch-size", type=int, default=8,
+                        help="Batch size for --batched (default: 8)")
     parser.add_argument("--initial-prompt", type=str,
                         help="Bias ASR with names/terms (up to ~240 tokens). "
                              "Auto-built from --episode-* flags if not given.")
@@ -700,6 +488,9 @@ def main() -> int:
     parser.add_argument("--profiles", type=Path,
                         help="Speaker profiles .npy (built with build_speaker_profiles.py). "
                              "Auto-identifies known speakers after diarization.")
+    parser.add_argument("--profile-threshold", type=float, default=PROFILE_THRESHOLD,
+                        help=f"Minimum cosine similarity for a profile match "
+                             f"(default: {PROFILE_THRESHOLD})")
     parser.add_argument("--line-width", type=int, default=42,
                         help="Wrap cue text at this many characters "
                              "(Apple Podcasts rejects unwrapped long lines). Default: 42")
@@ -707,7 +498,8 @@ def main() -> int:
                         help="Split cues longer than this many seconds. "
                              "Default: 7.0 (see transcripts/TRANSCRIPT_GUIDELINES.md)")
     parser.add_argument("--corrections", type=Path,
-                        help="JSON with word/regex/post fixes to apply")
+                        help="JSON with word/regex/phrase/post fixes to apply "
+                             "(default: transcripts/corrections.json)")
     parser.add_argument("--vad-threshold", type=float, default=0.3,
                         help="Silero VAD speech threshold (0-1). Lower keeps "
                              "more quiet/music-bedded speech. Default: 0.3")
@@ -721,12 +513,7 @@ def main() -> int:
     script_dir = Path(__file__).resolve().parent
     project_root = script_dir.parent
 
-    # Load .env for HF_TOKEN
-    env_path = args.env or (project_root / ".env")
-    if env_path.exists():
-        from dotenv import load_dotenv
-        load_dotenv(env_path)
-    hf_token = os.environ.get("HF_TOKEN")
+    hf_token = load_hf_token(args.env)
 
     if not args.audio.exists():
         sys.stderr.write(f"Audio not found: {args.audio}\n")
@@ -739,11 +526,7 @@ def main() -> int:
             k, _, v = pair.partition("=")
             speaker_map[k.strip()] = v.strip()
 
-    # Load corrections (default: transcripts/corrections.json if present)
-    corrections: dict = {}
-    corr_path = args.corrections or (project_root / "transcripts" / "corrections.json")
-    if corr_path.exists():
-        corrections = json.loads(corr_path.read_text(encoding="utf-8"))
+    corrections = load_corrections(args.corrections)
 
     # Episode metadata lookup (if requested)
     initial_prompt = args.initial_prompt
@@ -768,13 +551,14 @@ def main() -> int:
 
     print(f"Decoding {args.audio.name}...")
     t0 = time.time()
-    wav = load_audio(str(args.audio))
+    wav = load_audio(args.audio)
     print(f"  {len(wav)/16000/60:.1f} min decoded in {time.time()-t0:.1f}s")
 
     segs, duration = transcribe(
         wav, model_name=args.model, language=args.language,
         initial_prompt=initial_prompt,
         vad_threshold=None if args.no_vad else args.vad_threshold,
+        batched=args.batched, batch_size=args.batch_size,
     )
 
     diar_segments = None
@@ -786,14 +570,18 @@ def main() -> int:
                 "Use --no-diarization to silence this warning.\n"
             )
         else:
-            diar_segments, pipeline = diarize(
-                wav, num_speakers=args.speakers, hf_token=hf_token
+            pipeline = load_diarization_pipeline(hf_token, args.diarization_model)
+            diar_segments = run_diarization(
+                pipeline, wav, num_speakers=args.speakers,
+                min_speakers=args.min_speakers, max_speakers=args.max_speakers,
+                exclusive=not args.no_exclusive,
             )
 
     # Auto-identify known speakers from profiles
     if diar_segments and args.profiles and not speaker_map:
         profile_map = match_profiles(
             diar_segments, wav, pipeline, args.profiles,
+            threshold=args.profile_threshold,
         )
         # Merge: profile matches for known hosts, guest names for the rest
         guest_names = [p for p in (meta.get("people", []) if meta else [])
@@ -802,11 +590,7 @@ def main() -> int:
         speaker_map.update(profile_map)
         # Assign guest names to unmatched speakers by talk-time (most → first guest)
         if guest_names and unmatched:
-            from collections import defaultdict as _dd
-            totals: dict[str, float] = _dd(float)
-            for s in diar_segments:
-                if s["speaker"] in unmatched:
-                    totals[s["speaker"]] += s["end"] - s["start"]
+            totals = speaker_totals([s for s in diar_segments if s["speaker"] in unmatched])
             for spk in sorted(totals, key=lambda x: -totals[x]):
                 if guest_names:
                     speaker_map[spk] = guest_names.pop(0)
@@ -831,11 +615,11 @@ def main() -> int:
             sub_cues = split_cue_by_words(seg.words,
                                            max_dur=args.max_cue_seconds,
                                            max_chars=args.line_width * 3)
-            sub_cues = [(s, e, apply_word_fixes(t, corrections))
+            sub_cues = [(s, e, apply_corrections(t, corrections))
                          for (s, e, t) in sub_cues]
             word_split += 1 if len(sub_cues) > 1 else 0
         else:
-            text = apply_word_fixes(seg.text.strip(), corrections)
+            text = apply_corrections(seg.text.strip(), corrections)
             sub_cues = split_long_cue(seg.start, seg.end, text,
                                        max_dur=args.max_cue_seconds)
         if len(sub_cues) > 1:

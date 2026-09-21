@@ -1,14 +1,4 @@
 #!/usr/bin/env python3
-# /// script
-# requires-python = ">=3.10"
-# dependencies = [
-#     "pyannote.audio>=4.0",
-#     "python-dotenv>=1.0",
-#     "av>=13",
-#     "torch",
-#     "numpy",
-# ]
-# ///
 """Chapter-guided diarization relabeler.
 
 Strategy:
@@ -28,86 +18,46 @@ Strategy:
      - caller window      → caller name (or 'Innringer')
      - overvakerne window → 'Overvåkerne'
      - anchor/regular     → diarization result mapped to host names
+
+Usage:
+    uv run python scripts/diarize_chapters.py <audio> \\
+        --chapters chapters/Episode_chapters.json \\
+        --apply-to-vtt transcripts/Episode.vtt [--hosts-only] [--profiles ...]
 """
 from __future__ import annotations
 
+import argparse
 import json
-import os
 import re
 import sys
 import time
-from collections import defaultdict
+from collections import Counter
 from pathlib import Path
 
+from asr_common import (
+    DEFAULT_DIARIZATION_MODEL,
+    PROFILE_THRESHOLD,
+    format_ts,
+    load_audio,
+    load_diarization_pipeline,
+    load_hf_token,
+    match_profiles,
+    project_root,
+    run_diarization,
+    setup_cuda_paths,
+    speaker_for_range,
+    t2s,
+)
 
-# --------------------------------------------------------------------------
-# CUDA path setup (same pattern as transcribe.py)
-# --------------------------------------------------------------------------
-def _setup_cuda_paths() -> None:
-    script_dir = Path(__file__).resolve().parent
-    venv_site = script_dir.parent / ".venv" / "lib" / "python3.12" / "site-packages" / "nvidia"
-    if not venv_site.exists():
-        return
-    paths = []
-    for sub in ("cu13/lib", "cublas/lib", "cudnn/lib", "cuda_nvrtc/lib"):
-        p = venv_site / sub
-        if p.exists():
-            paths.append(str(p))
-    if not paths:
-        return
-    existing = os.environ.get("LD_LIBRARY_PATH", "")
-    existing_set = set(existing.split(":")) if existing else set()
-    if all(p in existing_set for p in paths):
-        return
-    new_ld = ":".join(paths + ([existing] if existing else []))
-    env = os.environ.copy()
-    env["LD_LIBRARY_PATH"] = new_ld
-    os.execve(sys.executable, [sys.executable] + sys.argv, env)
-
-
-_setup_cuda_paths()
-
-
-# --------------------------------------------------------------------------
-# Helpers
-# --------------------------------------------------------------------------
-def format_ts(sec: float) -> str:
-    h = int(sec // 3600)
-    m = int((sec % 3600) // 60)
-    s = sec - h * 3600 - m * 60
-    return f"{h:02d}:{m:02d}:{s:06.3f}"
-
-
-def t2s(ts: str) -> float:
-    h, m, rest = ts.split(":")
-    s, ms = rest.split(".")
-    return int(h) * 3600 + int(m) * 60 + int(s) + int(ms) / 1000
-
-
-def load_audio(path: str, sample_rate: int = 16000):
-    import av
-    import numpy as np
-    container = av.open(path)
-    resampler = av.AudioResampler(format="s16", layout="mono", rate=sample_rate)
-    chunks = []
-    for frame in container.decode(audio=0):
-        for r in resampler.resample(frame):
-            chunks.append(r.to_ndarray())
-    container.close()
-    wav = np.concatenate(chunks, axis=-1).astype(np.float32) / 32768.0
-    if wav.ndim == 2:
-        wav = wav[0]
-    return wav
+setup_cuda_paths()
 
 
 # --------------------------------------------------------------------------
 # Chapter categorization
 # --------------------------------------------------------------------------
-
-
-def load_known_names(project_root: Path) -> set[str]:
+def load_known_names(root: Path) -> set[str]:
     """Load all guest names + aliases from cdspill_known_guests.json."""
-    path = project_root / "config" / "cdspill_known_guests.json"
+    path = root / "config" / "cdspill_known_guests.json"
     if not path.exists():
         return set()
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -191,151 +141,16 @@ def map_to_original(diar_segments: list[dict], segment_map: list) -> list[dict]:
     result = []
     for seg in diar_segments:
         hs, he = seg["start"], seg["end"]
-        for (mhs, mhe, os, oe) in segment_map:
+        for (mhs, mhe, orig_s, _orig_e) in segment_map:
             if he <= mhs or hs >= mhe:
                 continue
             ovl_s = max(hs, mhs)
             ovl_e = min(he, mhe)
-            offset = os - mhs
+            offset = orig_s - mhs
             result.append({"start": ovl_s + offset,
                             "end":   ovl_e + offset,
                             "speaker": seg["speaker"]})
     return result
-
-
-# --------------------------------------------------------------------------
-# Diarization
-# --------------------------------------------------------------------------
-def run_diarization(audio_wav, *, num_speakers: int, hf_token: str) -> list[dict]:
-    import torch
-    from pyannote.audio import Pipeline
-
-    print("Loading pyannote pipeline...")
-    t0 = time.time()
-    pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization-3.1", token=hf_token)
-    pipeline.to(torch.device("cuda"))
-    print(f"  loaded in {time.time()-t0:.1f}s")
-
-    print(f"Running diarization (hint: {num_speakers} speakers)...")
-    t0 = time.time()
-    waveform = torch.from_numpy(audio_wav).unsqueeze(0)
-    result = pipeline({"waveform": waveform, "sample_rate": 16000},
-                      num_speakers=num_speakers)
-    ann = result.speaker_diarization if hasattr(result, "speaker_diarization") else result
-    elapsed = time.time() - t0
-
-    segments = []
-    for turn, _, spk in ann.itertracks(yield_label=True):
-        segments.append({"start": turn.start, "end": turn.end, "speaker": spk})
-
-    totals: dict[str, float] = defaultdict(float)
-    for s in segments:
-        totals[s["speaker"]] += s["end"] - s["start"]
-    dur = len(audio_wav) / 16000
-    print(f"\n  {len({s['speaker'] for s in segments})} speakers, "
-          f"{len(segments)} turns in {elapsed:.1f}s")
-    for spk in sorted(totals, key=lambda x: -totals[x]):
-        print(f"    {spk}: {totals[spk]/60:.1f} min ({totals[spk]/dur*100:.0f}%)")
-
-    return segments, pipeline
-
-
-def speaker_for_range(segments: list[dict], start: float, end: float) -> str | None:
-    overlap: dict[str, float] = defaultdict(float)
-    for s in segments:
-        if s["end"] < start or s["start"] > end:
-            continue
-        ovl = min(s["end"], end) - max(s["start"], start)
-        if ovl > 0:
-            overlap[s["speaker"]] += ovl
-    return max(overlap, key=overlap.get) if overlap else None
-
-
-def dominant_speaker_in_window(segments: list[dict], start: float, end: float) -> str | None:
-    """Which diarization speaker dominates the [start, end] window?"""
-    overlap: dict[str, float] = defaultdict(float)
-    for s in segments:
-        if s["end"] < start or s["start"] > end:
-            continue
-        ovl = min(s["end"], end) - max(s["start"], start)
-        if ovl > 0:
-            overlap[s["speaker"]] += ovl
-    return max(overlap, key=overlap.get) if overlap else None
-
-
-# --------------------------------------------------------------------------
-# Profile-based speaker identification
-# --------------------------------------------------------------------------
-def identify_hosts_from_profiles(
-    diar_segments: list[dict],
-    audio_wav,
-    pipeline,
-    profiles_path: Path,
-    *,
-    sample_rate: int = 16000,
-    threshold: float = 0.5,
-) -> dict[str, str]:
-    """
-    Match each SPEAKER_XX cluster against saved voice profiles.
-    Returns {speaker_id: name} for confident matches (similarity > threshold).
-    """
-    import numpy as np
-    import torch
-
-    profiles: dict[str, np.ndarray] = np.load(profiles_path, allow_pickle=True).item()
-    emb_model = pipeline._embedding
-
-    # Group diarization segments by speaker
-    by_speaker: dict[str, list] = defaultdict(list)
-    for seg in diar_segments:
-        by_speaker[seg["speaker"]].append(seg)
-
-    speaker_map: dict[str, str] = {}
-    print(f"Matching {len(by_speaker)} diarization clusters against "
-          f"{len(profiles)} profiles...")
-
-    for spk, segs in sorted(by_speaker.items()):
-        # Sample up to 30 of the longest segments to build cluster embedding
-        min_s = emb_model.min_num_samples
-        long_segs = sorted(segs, key=lambda s: s["end"] - s["start"], reverse=True)
-        sample_segs = long_segs[:30]
-        embs = []
-        for seg in sample_segs:
-            s_idx = int(seg["start"] * sample_rate)
-            e_idx = int(seg["end"] * sample_rate)
-            min_s = emb_model.min_num_samples
-            if e_idx - s_idx < min_s:
-                continue
-            chunk = audio_wav[s_idx:e_idx]
-            try:
-                t = torch.from_numpy(chunk).unsqueeze(0).unsqueeze(0)
-                emb = np.array(emb_model(t)[0])
-                embs.append(emb)
-            except Exception:
-                continue
-        if not embs:
-            continue
-
-        cluster_emb = np.mean(embs, axis=0)
-        cluster_emb /= np.linalg.norm(cluster_emb) + 1e-8
-
-        # Compare against all profiles
-        sims = {}
-        for name, prof_emb in profiles.items():
-            sim = float(np.dot(cluster_emb, prof_emb))
-            sims[name] = sim
-
-        best_name = max(sims, key=sims.get)
-        best_sim = sims[best_name]
-
-        sim_str = "  ".join(f"{n}={v:.3f}" for n, v in sorted(sims.items()))
-        if best_sim >= threshold:
-            speaker_map[spk] = best_name
-            print(f"  {spk} → {best_name} (sim={best_sim:.3f})  [{sim_str}]")
-        else:
-            print(f"  {spk} → no match (best {best_name}={best_sim:.3f} < {threshold})  [{sim_str}]")
-
-    return speaker_map
 
 
 # --------------------------------------------------------------------------
@@ -350,7 +165,7 @@ def identify_hosts(windows: list[dict], diar_segments: list[dict]) -> dict[str, 
     for w in windows:
         if w["category"] not in ("mamen_anchor", "sigve_anchor"):
             continue
-        spk = dominant_speaker_in_window(diar_segments, w["start"], w["end"])
+        spk = speaker_for_range(diar_segments, w["start"], w["end"])
         if spk:
             name = w["label"]
             if spk not in speaker_map:
@@ -386,9 +201,8 @@ def relabel_vtt(vtt_path: Path, windows: list[dict],
 
                 # Determine label
                 win = category_for_time(windows, cue_start)
-                if win and win["category"] in ("caller", "overvakerne"):
-                    label = win["label"]
-                elif win and win["category"] in ("mamen_anchor", "sigve_anchor"):
+                if win and win["category"] in ("caller", "overvakerne",
+                                               "mamen_anchor", "sigve_anchor"):
                     label = win["label"]
                 else:
                     # Regular or unmatched: use diarization
@@ -409,7 +223,6 @@ def relabel_vtt(vtt_path: Path, windows: list[dict],
 # CLI
 # --------------------------------------------------------------------------
 def main() -> int:
-    import argparse
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("audio", type=Path)
@@ -419,29 +232,28 @@ def main() -> int:
                         help="VTT file to relabel in-place")
     parser.add_argument("--speakers", type=int, default=2,
                         help="Speaker count hint for pyannote (default: 2)")
+    parser.add_argument("--diarization-model", default=DEFAULT_DIARIZATION_MODEL)
+    parser.add_argument("--no-exclusive", action="store_true",
+                        help="Use raw overlapping diarization output")
     parser.add_argument("--hosts-only", action="store_true",
                         help="Diarize only host segments (strip callers/Overvåkerne from "
                              "audio before diarizing — helps separate similar-sounding hosts)")
     parser.add_argument("--profiles", type=Path,
                         help="Speaker profiles .npy file built with build_speaker_profiles.py. "
                              "Used instead of (or as fallback from) anchor chapters.")
+    parser.add_argument("--profile-threshold", type=float, default=PROFILE_THRESHOLD)
     parser.add_argument("--env", type=Path)
     args = parser.parse_args()
 
-    script_dir = Path(__file__).resolve().parent
-    project_root = script_dir.parent
-    env_path = args.env or (project_root / ".env")
-    if env_path.exists():
-        from dotenv import load_dotenv
-        load_dotenv(env_path)
-    hf_token = os.environ.get("HF_TOKEN")
+    root = project_root()
+    hf_token = load_hf_token(args.env)
     if not hf_token:
         sys.stderr.write("HF_TOKEN not set\n")
         return 1
 
     # Load and categorize chapters
     chapters = json.loads(args.chapters.read_text(encoding="utf-8"))["chapters"]
-    known_names = load_known_names(project_root)
+    known_names = load_known_names(root)
     windows = categorize_chapters(chapters, known_names)
 
     print(f"\nChapter windows ({len(windows)} total):")
@@ -458,7 +270,7 @@ def main() -> int:
     # Load audio + run diarization
     print(f"\nDecoding {args.audio.name}...")
     t0 = time.time()
-    wav = load_audio(str(args.audio))
+    wav = load_audio(args.audio)
     print(f"  {len(wav)/16000/60:.1f} min decoded in {time.time()-t0:.1f}s")
 
     segment_map = None
@@ -470,8 +282,9 @@ def main() -> int:
     else:
         diar_wav = wav
 
-    raw_segments, pipeline = run_diarization(diar_wav, num_speakers=args.speakers,
-                                              hf_token=hf_token)
+    pipeline = load_diarization_pipeline(hf_token, args.diarization_model)
+    raw_segments = run_diarization(pipeline, diar_wav, num_speakers=args.speakers,
+                                   exclusive=not args.no_exclusive)
 
     if segment_map is not None:
         diar_segments = map_to_original(raw_segments, segment_map)
@@ -487,9 +300,8 @@ def main() -> int:
     if len(host_map) < 2 and args.profiles:
         print(f"\nAnchor identification incomplete ({len(host_map)}/2 hosts). "
               f"Trying voice profiles...")
-        host_map = identify_hosts_from_profiles(
-            diar_segments, wav, pipeline, args.profiles,
-        )
+        host_map = match_profiles(diar_segments, wav, pipeline, args.profiles,
+                                  threshold=args.profile_threshold)
 
     if len(host_map) < 2:
         print(f"  WARN: Only identified {len(host_map)} host(s) — "
@@ -503,11 +315,9 @@ def main() -> int:
 
     # Summary
     print("\nFinal speaker distribution:")
-    from collections import Counter
-    import re as _re
     content = args.apply_to_vtt.read_text(encoding="utf-8")
-    tags = _re.findall(r"<v ([^>]+)>", content)
-    no_tag = len(_re.findall(r"^\d{2}:\d{2}:\d{2}", content, _re.MULTILINE)) - len(tags)
+    tags = re.findall(r"<v ([^>]+)>", content)
+    no_tag = len(re.findall(r"^\d{2}:\d{2}:\d{2}", content, re.MULTILINE)) - len(tags)
     for name, count in Counter(tags).most_common():
         print(f"  {name}: {count}")
     if no_tag > 0:
