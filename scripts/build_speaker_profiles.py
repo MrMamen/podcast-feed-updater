@@ -33,8 +33,10 @@ from asr_common import (
     load_audio,
     load_diarization_pipeline,
     load_hf_token,
+    load_corrections,
     load_profiles,
     parse_vtt,
+    resolve_full_name,
     save_profiles,
     setup_cuda_paths,
 )
@@ -113,7 +115,12 @@ def main() -> int:
         return 1
 
     print(f"Parsing {args.vtt.name}...")
-    segments = [{"start": c["start"], "end": c["end"], "speaker": c["speaker"]}
+    # Tags are short display names ("Jostein"); profiles are keyed by full
+    # name, so map back when the output file already knows the person.
+    known = list(load_profiles(args.output)) if args.output.exists() else []
+    corr = load_corrections()
+    segments = [{"start": c["start"], "end": c["end"],
+                 "speaker": resolve_full_name(c["speaker"], known, corr)}
                 for c in parse_vtt(args.vtt) if c["speaker"]]
     speakers = sorted({s["speaker"] for s in segments})
     print(f"  {len(segments)} labeled cues, speakers: {', '.join(speakers)}")

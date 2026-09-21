@@ -37,7 +37,9 @@ from pathlib import Path
 from asr_common import (
     DEFAULT_DIARIZATION_MODEL,
     PROFILE_THRESHOLD,
+    display_name,
     format_ts,
+    load_corrections,
     load_audio,
     load_diarization_pipeline,
     load_hf_token,
@@ -182,6 +184,7 @@ def identify_hosts(windows: list[dict], diar_segments: list[dict]) -> dict[str, 
 # --------------------------------------------------------------------------
 def relabel_vtt(vtt_path: Path, windows: list[dict],
                 diar_segments: list[dict], host_map: dict[str, str]) -> None:
+    corrections = load_corrections()
     lines = vtt_path.read_text(encoding="utf-8").splitlines()
     out = []
     i = 0
@@ -208,6 +211,7 @@ def relabel_vtt(vtt_path: Path, windows: list[dict],
                     # Regular or unmatched: use diarization
                     spk = speaker_for_range(diar_segments, cue_start, cue_end)
                     label = host_map.get(spk) if spk else None
+                label = display_name(label, corrections)
 
                 out.append(f"<v {label}>{text}" if label else text)
                 changed += 1

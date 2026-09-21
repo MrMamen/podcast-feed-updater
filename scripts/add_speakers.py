@@ -26,7 +26,9 @@ from pathlib import Path
 from asr_common import (
     DEFAULT_DIARIZATION_MODEL,
     PROFILE_THRESHOLD,
+    display_name,
     load_audio,
+    load_corrections,
     load_diarization_pipeline,
     load_hf_token,
     match_profiles,
@@ -90,11 +92,12 @@ def main() -> int:
     else:
         print(f"(no profiles at {args.profiles}; keeping SPEAKER_XX labels)")
 
+    corrections = load_corrections()
     tagged: Counter = Counter()
     untagged = 0
     for c in cues:
         spk = speaker_for_range(diar_segs, c["start"], c["end"])
-        c["speaker"] = speaker_map.get(spk, spk) if spk else None
+        c["speaker"] = display_name(speaker_map.get(spk, spk), corrections) if spk else None
         if c["speaker"]:
             tagged[c["speaker"]] += 1
         else:

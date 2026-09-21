@@ -370,6 +370,33 @@ def match_profiles(diar_segments: list[dict], wav, pipeline, profiles_path: Path
 
 
 # --------------------------------------------------------------------------
+# Speaker display names
+# --------------------------------------------------------------------------
+# Profiles and metadata use full names ("Jostein Hakestad", "Mr. Mamen");
+# the <v> tags in the VTT use short ones: hosts and guests by first name,
+# "Mr. Mamen" as "Mamen". Add exceptions (two guests sharing a first name,
+# a preferred nickname) under "speaker_names" in corrections.json.
+DEFAULT_SPEAKER_NAMES = {"Mr. Mamen": "Mamen"}
+
+
+def display_name(name: str | None, config: dict | None = None) -> str | None:
+    """Short tag name for a speaker; SPEAKER_XX and None pass through."""
+    if not name or name.startswith("SPEAKER_"):
+        return name
+    overrides = dict(DEFAULT_SPEAKER_NAMES)
+    overrides.update((config or {}).get("speaker_names", {}))
+    if name in overrides:
+        return overrides[name]
+    return name.split()[0]
+
+
+def resolve_full_name(short: str, known: list[str], config: dict | None = None) -> str:
+    """Map a tag name back to the full name it was rendered from, if unambiguous."""
+    matches = [n for n in known if display_name(n, config) == short]
+    return matches[0] if len(matches) == 1 else short
+
+
+# --------------------------------------------------------------------------
 # Corrections (transcripts/corrections.json)
 # --------------------------------------------------------------------------
 def load_corrections(path: Path | None = None) -> dict:

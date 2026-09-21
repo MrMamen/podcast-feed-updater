@@ -30,6 +30,7 @@ from asr_common import (
     DEFAULT_DIARIZATION_MODEL,
     PROFILE_THRESHOLD,
     apply_corrections,
+    display_name,
     find_episode_audio,
     format_ts,
     load_audio,
@@ -742,7 +743,7 @@ def main() -> int:
                                   initial_prompt=initial_prompt)
         for r in review:
             spk = speaker_for_range(diar_segments, r["start"], r["end"]) if diar_segments else None
-            r["speaker"] = speaker_map.get(spk, spk) if spk else None
+            r["speaker"] = display_name(speaker_map.get(spk, spk), corrections) if spk else None
         gap_review = review
         if extra:
             segs = sorted(segs + [_Seg(s) for s in extra], key=lambda s: s.start)
@@ -860,7 +861,7 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
         if not diar_segments:
             return None
         spk = speaker_for_range(diar_segments, start, end)
-        return speaker_map.get(spk, spk) if spk else None
+        return display_name(speaker_map.get(spk, spk), corrections) if spk else None
 
     for seg in segs:
         # Prefer word-level splitting when word timestamps are available
