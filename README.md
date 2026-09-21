@@ -106,6 +106,7 @@ podcast-feed-updater/
 ├── config/                    # JSON-config (gjester, faste roller, tiltcast-liste)
 ├── chapters/                  # Kapittel-data per episode (kilde)
 ├── scripts/
+│   ├── asr_common.py          # Felles kode for transkripsjonsscriptene
 │   ├── transcribe.py, diarize_chapters.py, normalize_transcript.py,
 │   │   add_speakers.py, build_speaker_profiles.py, build_profiles_clean.py  # Transkripsjon
 │   └── claude-tools/          # Hjelpescript for Claude-sesjoner (ikke podcast-relatert)
@@ -215,8 +216,8 @@ enricher.write_feed("output.xml")
 ## 🧪 Development
 
 ```bash
-# Install with dev dependencies
-uv pip install -e ".[dev]"
+# Install everything incl. dev tooling and the GPU transcription stack
+uv sync
 
 # Run tests
 pytest

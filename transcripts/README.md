@@ -26,12 +26,18 @@ Scriptet gjør:
 2. Henter episode-metadata fra RSS-feeden (cached lokalt i `.cache/`)
 3. Bygger automatisk `initial_prompt` fra episodetittel, gjesteliste, kapitler
 4. Transkriberer med **NB-Whisper large** (norsk-optimert)
-5. Kjører **pyannote speaker diarization** parallelt
-6. Merger: hver cue får `<v SPEAKER_XX>` basert på tidsoverlapp
+5. Kjører **pyannote speaker diarization** (community-1) og matcher mot stemmeprofiler
+6. Merger: hver cue får `<v Navn>` (eller `<v SPEAKER_XX>`) basert på tidsoverlapp
 7. Applikerer `corrections.json` (navn, terminologi)
 8. Skriver VTT og printer speaker-preview så du kan identifisere talere
 
-**Ytelse:** ~8x sanntid på GPU (en 90 min episode tar ~12 min).
+**Ytelse:** ~5x sanntid totalt på GPU (en 90 min episode tar ~18 min).
+Med `--batched` går selve transkripsjonen ca. dobbelt så fort.
+
+Felles kode for alle transkripsjonsscriptene (lydlasting, CUDA-stier,
+diarisering, profilmatching, rettelser, VTT-parsing) ligger i
+`scripts/asr_common.py`. Kjør alltid via `uv run python scripts/<script>.py`
+slik at prosjektets venv med CUDA-hjulene brukes.
 
 ## Typiske CLI-flagg
 
@@ -40,12 +46,19 @@ Scriptet gjør:
 | `--episode-number N` | Auto-henter metadata fra RSS for episode N |
 | `--episode-title "Stunt"` | Alternativt: match tittel-fragment |
 | `--episode-guid "abc..."` | Alternativt: match GUID-fragment |
-| `--speakers N` | Hint til diarization om antall talere |
+| `--speakers N` | Eksakt antall talere til diarization |
+| `--min-speakers N` / `--max-speakers N` | Grenser i stedet for eksakt antall (community-1 teller selv innenfor) |
+| `--profiles FILE` | Stemmeprofiler (`transcripts/speaker_profiles.npy`) for auto-navngiving |
+| `--profile-threshold 0.65` | Minste likhet for at en profil godtas |
 | `--speaker-map "SPEAKER_00=Sigve,..."` | Map talere til navn direkte |
 | `--no-diarization` | Hopp over pyannote (raskere, ingen `<v>`-tags) |
+| `--diarization-model` | pyannote-pipeline. Standard `pyannote/speaker-diarization-community-1`; `pyannote/speaker-diarization-3.1` er den gamle |
+| `--no-exclusive` | Bruk rå, overlappende diarisering i stedet for pipelinens én-taler-om-gangen-utgang |
+| `--batched` / `--batch-size 8` | faster-whisper BatchedInferencePipeline: ~2x raskere, fanger av og til opp tale VAD ellers dropper, men gir grovere cue-inndeling. Sammenlign før du bytter |
 | `--initial-prompt "..."` | Overstyr auto-prompt med egne termer |
 | `--refresh-rss` | Tving ny nedlasting av RSS (ellers brukes 24h cache) |
 | `--corrections FILE` | Bruk annen rettelsesordliste |
+| `--vad-threshold 0.3` / `--no-vad` | Silero VAD-følsomhet, eller skru VAD helt av |
 
 ## Etter transkripsjon: identifiser talere
 
@@ -58,17 +71,31 @@ Scriptet printer 3 eksempel-setninger per taler ved slutt:
   SPEAKER_02 [00:02:35]: Næfjord er jo fordi det er der jeg er fra.
 ```
 
-Kjør så på nytt med `--speaker-map` (audio re-dekodes ikke hvis samme kjøring),
-eller bare gjør en tekst-replace i VTT-filen.
+Kjør så på nytt med `--speaker-map`, bruk `scripts/add_speakers.py` for å
+re-tagge uten å transkribere på nytt, eller bare gjør en tekst-replace i
+VTT-filen.
+
+## Stemmeprofiler
+
+`transcripts/speaker_profiles.npy` (ikke i git) inneholder én embedding per
+kjent person. Profilene bygges med embedding-modellen inne i
+diariserings-pipelinen, og matching nekter å sammenligne profiler med en
+annen dimensjon enn pipelinen gir. 3.1 og community-1 bruker samme
+wespeaker-modell (256-dim), så eksisterende profiler fungerer med begge.
+Bytter du til en pipeline med annen embedding, bygg profilene på nytt med
+`build_profiles_clean.py` (rene enkeltspor) eller `build_speaker_profiles.py`
+(fra en ferdig tagget VTT).
 
 ## Prerequisites
 
-- **NVIDIA GPU** (CUDA 12+). CPU-fallback er veldig tregt.
+- **NVIDIA GPU**. CPU-fallback er veldig tregt.
 - **HF_TOKEN** i `.env`-fila (for pyannote). Godta lisens på:
-  - https://huggingface.co/pyannote/speaker-diarization-3.1
+  - https://huggingface.co/pyannote/speaker-diarization-community-1 (standard)
+  - https://huggingface.co/pyannote/speaker-diarization-3.1 (gammel, via `--diarization-model`)
   - https://huggingface.co/pyannote/segmentation-3.0
-  - https://huggingface.co/pyannote/speaker-diarization-community-1
 - Uten HF_TOKEN: bruk `--no-diarization` flagg
+- Systemets ffmpeg er ikke nødvendig: lyd dekodes med PyAV. pyannote
+  advarer om at torchcodec mangler libavutil, det kan ignoreres.
 
 ## corrections.json — hva som hører hjemme der
 

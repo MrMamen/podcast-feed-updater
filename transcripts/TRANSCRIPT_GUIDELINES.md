@@ -194,8 +194,11 @@ speaker tags but text is correct. Keeps hand-corrections intact —
 only the `<v Speaker>` tag changes.
 
 ```
-uv run python scripts/add_speakers.py <audio> <vtt> <num_speakers>
+uv run python scripts/add_speakers.py <audio> <vtt> --speakers <N> [--backup]
 ```
+
+Profiles default to `transcripts/speaker_profiles.npy`; `--min-speakers` /
+`--max-speakers` work as in `transcribe.py`.
 
 ### `scripts/build_speaker_profiles.py`
 
