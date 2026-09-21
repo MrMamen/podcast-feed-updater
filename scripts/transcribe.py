@@ -26,9 +26,11 @@ import time
 from pathlib import Path
 
 from asr_common import (
+    DEFAULT_AUDIO_LIBRARY,
     DEFAULT_DIARIZATION_MODEL,
     PROFILE_THRESHOLD,
     apply_corrections,
+    find_episode_audio,
     format_ts,
     load_audio,
     load_corrections,
@@ -349,9 +351,27 @@ def split_cue_by_words(words: list, max_dur: float = 8.0,
             word_ends_sentence = bool(stripped) and stripped[-1] in ".!?"
             dur_limit = max_dur + (1.0 if word_ends_sentence else 0)
             if would_dur > dur_limit or would_chars > max_chars:
-                cur_start = flush(w.start)
-                cur_words = []
-                cur_chars = 0
+                # Forced split. Rather than cutting right here, back up to
+                # the last punctuation inside the cue (if it leaves at least
+                # 1 s on both sides) so the break lands on a natural pause.
+                cut = None
+                for j in range(len(cur_words) - 2, -1, -1):
+                    wj = cur_words[j].word.strip()
+                    if wj and wj[-1] in ".!?,;:" \
+                            and cur_words[j].end - cur_start >= 1.0 \
+                            and w.end - cur_words[j + 1].start >= 1.0:
+                        cut = j
+                        break
+                if cut is not None:
+                    carry = cur_words[cut + 1:]
+                    cur_words = cur_words[:cut + 1]
+                    cur_start = flush(carry[0].start)
+                    cur_words = carry
+                    cur_chars = sum(len(x.word) for x in carry)
+                else:
+                    cur_start = flush(w.start)
+                    cur_words = []
+                    cur_chars = 0
 
         cur_words.append(w)
         cur_chars += len(w.word)
@@ -360,9 +380,12 @@ def split_cue_by_words(words: list, max_dur: float = 8.0,
         ends_sentence = stripped and stripped[-1] in ".!?"
         ends_phrase = stripped and stripped[-1] in ",;:"
 
-        # Preferred split: at natural punctuation once cue is reasonably full
+        # Preferred split: sentence end once the cue is >= 2 s (per
+        # TRANSCRIPT_GUIDELINES), phrase boundary once it is nearly full.
+        # Batched Whisper segments can be 30 s long, so without the
+        # sentence rule cues would run across sentence boundaries.
         next_start = words[i + 1].start if i + 1 < len(words) else None
-        if ends_sentence and cur_dur >= max_dur * 0.5:
+        if ends_sentence and cur_dur >= min(2.0, max_dur * 0.5):
             cur_start = flush(next_start)
             cur_words = []
             cur_chars = 0
@@ -446,9 +469,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("audio", type=Path, help="Input audio file")
+    parser.add_argument("audio", type=Path, nargs="?",
+                        help="Input audio file. Omit to pick the episode's mix from "
+                             "the local library using --episode-number.")
     parser.add_argument("-o", "--output", type=Path, required=True,
                         help="Output VTT path")
+    parser.add_argument("--library", type=Path, default=DEFAULT_AUDIO_LIBRARY,
+                        help=f"Episode folder root for audio lookup "
+                             f"(default: $CDSPILL_LIBRARY or {DEFAULT_AUDIO_LIBRARY})")
     parser.add_argument("--no-diarization", action="store_true",
                         help="Skip pyannote diarization (faster, no <v> tags)")
     parser.add_argument("--speakers", type=int,
@@ -468,11 +496,14 @@ def main() -> int:
     parser.add_argument("--model", default="TheStigh/nb-whisper-large-ct2",
                         help="Whisper model name (HF repo or local CT2 dir)")
     parser.add_argument("--language", default="no")
-    parser.add_argument("--batched", action="store_true",
-                        help="Use faster-whisper's BatchedInferencePipeline "
-                             "(typically 3-4x faster; needs more VRAM)")
+    parser.add_argument("--sequential", action="store_true",
+                        help="Use the classic sequential Whisper decoder instead of "
+                             "BatchedInferencePipeline. Batched is the default: about "
+                             "2x faster and, on a full episode, it kept ~10 min of "
+                             "speech the sequential decoder skipped.")
+    parser.add_argument("--batched", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--batch-size", type=int, default=8,
-                        help="Batch size for --batched (default: 8)")
+                        help="Batch size for batched decoding (default: 8)")
     parser.add_argument("--initial-prompt", type=str,
                         help="Bias ASR with names/terms (up to ~240 tokens). "
                              "Auto-built from --episode-* flags if not given.")
@@ -506,6 +537,11 @@ def main() -> int:
     parser.add_argument("--no-vad", action="store_true",
                         help="Disable VAD entirely (transcribe all audio; may "
                              "hallucinate text during silence/music)")
+    parser.add_argument("--render-only", action="store_true",
+                        help="Skip Whisper and pyannote; re-render the VTT from the raw "
+                             "results cached by the previous run with the same -o "
+                             "(.cache/raw/<name>.json). For tuning cue splitting, "
+                             "corrections and speaker maps without the GPU.")
     parser.add_argument("--env", type=Path,
                         help="Path to .env file (default: project root)")
     args = parser.parse_args()
@@ -515,6 +551,24 @@ def main() -> int:
 
     hf_token = load_hf_token(args.env)
 
+    raw_path = project_root / ".cache" / "raw" / (args.output.stem + ".json")
+    if args.render_only:
+        if not raw_path.exists():
+            sys.stderr.write(f"No cached raw results at {raw_path}; run without "
+                             f"--render-only first.\n")
+            return 1
+        return render_from_raw(args, raw_path)
+
+    if args.audio is None:
+        if not args.episode_number:
+            sys.stderr.write("Give an audio file, or --episode-number to find it "
+                             "in the local library.\n")
+            return 1
+        try:
+            args.audio = find_episode_audio(args.episode_number, args.library)
+        except FileNotFoundError as e:
+            sys.stderr.write(f"{e}\n")
+            return 1
     if not args.audio.exists():
         sys.stderr.write(f"Audio not found: {args.audio}\n")
         return 1
@@ -558,7 +612,7 @@ def main() -> int:
         wav, model_name=args.model, language=args.language,
         initial_prompt=initial_prompt,
         vad_threshold=None if args.no_vad else args.vad_threshold,
-        batched=args.batched, batch_size=args.batch_size,
+        batched=not args.sequential, batch_size=args.batch_size,
     )
 
     diar_segments = None
@@ -596,52 +650,24 @@ def main() -> int:
                     speaker_map[spk] = guest_names.pop(0)
                     print(f"  {spk} → {speaker_map[spk]} (guest from metadata)")
 
-    # Merge + render VTT -----------------------------------------------------
-    import textwrap
-    print(f"\nWriting {args.output}...")
-    lines = ["WEBVTT", ""]
-    split_count = 0
-    word_split = 0
-    # First pass: collect all cues as (start, end, text, speaker)
-    all_cues = []
-    for seg in segs:
-        speaker = None
-        if diar_segments:
-            spk = speaker_for_range(diar_segments, seg.start, seg.end)
-            speaker = speaker_map.get(spk, spk) if spk else None
+    # Cache raw results so --render-only can re-render without the GPU
+    raw = {
+        "audio": str(args.audio),
+        "duration": duration,
+        "segments": [
+            {"start": s.start, "end": s.end, "text": s.text,
+             "words": [{"start": w.start, "end": w.end, "word": w.word}
+                       for w in (getattr(s, "words", None) or [])]}
+            for s in segs
+        ],
+        "diarization": diar_segments,
+        "speaker_map": speaker_map,
+    }
+    raw_path.parent.mkdir(parents=True, exist_ok=True)
+    raw_path.write_text(json.dumps(raw, ensure_ascii=False), encoding="utf-8")
+    print(f"  raw results cached in {raw_path.relative_to(project_root)}")
 
-        # Prefer word-level splitting when word timestamps are available
-        if getattr(seg, "words", None):
-            sub_cues = split_cue_by_words(seg.words,
-                                           max_dur=args.max_cue_seconds,
-                                           max_chars=args.line_width * 3)
-            sub_cues = [(s, e, apply_corrections(t, corrections))
-                         for (s, e, t) in sub_cues]
-            word_split += 1 if len(sub_cues) > 1 else 0
-        else:
-            text = apply_corrections(seg.text.strip(), corrections)
-            sub_cues = split_long_cue(seg.start, seg.end, text,
-                                       max_dur=args.max_cue_seconds)
-        if len(sub_cues) > 1:
-            split_count += len(sub_cues) - 1
-
-        for (cue_start, cue_end, cue_text) in sub_cues:
-            all_cues.append([cue_start, cue_end, cue_text, speaker])
-
-    for (cue_start, cue_end, cue_text, speaker) in all_cues:
-        wrapped = textwrap.wrap(cue_text, width=args.line_width,
-                                break_long_words=False,
-                                break_on_hyphens=False) or [""]
-        if speaker:
-            wrapped[0] = f"<v {speaker}>{wrapped[0]}"
-        lines.append(f"{format_ts(cue_start)} --> {format_ts(cue_end)}")
-        lines.extend(wrapped)
-        lines.append("")
-
-    if split_count:
-        print(f"  Split {split_count} cues ({word_split} via word-level timing)")
-
-    args.output.write_text("\n".join(lines), encoding="utf-8")
+    render_vtt(args, segs, diar_segments, speaker_map, corrections)
 
     total_elapsed = time.time() - total_t
     print(f"\n✓ Done in {total_elapsed:.1f}s "
@@ -670,6 +696,92 @@ def main() -> int:
         print("Or edit the VTT file directly.")
 
     return 0
+
+
+class _Word:
+    __slots__ = ("start", "end", "word")
+
+    def __init__(self, d):
+        self.start, self.end, self.word = d["start"], d["end"], d["word"]
+
+
+class _Seg:
+    __slots__ = ("start", "end", "text", "words")
+
+    def __init__(self, d):
+        self.start, self.end, self.text = d["start"], d["end"], d["text"]
+        self.words = [_Word(w) for w in d.get("words", [])]
+
+
+def render_from_raw(args, raw_path: Path) -> int:
+    """--render-only: rebuild the VTT from cached Whisper/pyannote output."""
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    segs = [_Seg(s) for s in raw["segments"]]
+    diar_segments = raw.get("diarization")
+    speaker_map = dict(raw.get("speaker_map") or {})
+    if args.speaker_map:
+        for pair in args.speaker_map.split(","):
+            k, _, v = pair.partition("=")
+            speaker_map[k.strip()] = v.strip()
+    corrections = load_corrections(args.corrections)
+    print(f"Re-rendering from {raw_path} ({len(segs)} segments, "
+          f"{len(diar_segments or [])} diarization turns)")
+    render_vtt(args, segs, diar_segments, speaker_map, corrections)
+    print(f"  {args.output}")
+    return 0
+
+
+def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
+    """Split segments into cues, tag speakers, apply corrections, write VTT."""
+    import textwrap
+    print(f"\nWriting {args.output}...")
+    lines = ["WEBVTT", ""]
+    split_count = 0
+    word_split = 0
+    all_cues = []
+
+    def speaker_at(start: float, end: float) -> str | None:
+        if not diar_segments:
+            return None
+        spk = speaker_for_range(diar_segments, start, end)
+        return speaker_map.get(spk, spk) if spk else None
+
+    for seg in segs:
+        # Prefer word-level splitting when word timestamps are available
+        if getattr(seg, "words", None):
+            sub_cues = split_cue_by_words(seg.words,
+                                           max_dur=args.max_cue_seconds,
+                                           max_chars=args.line_width * 3)
+            sub_cues = [(s, e, apply_corrections(t, corrections))
+                         for (s, e, t) in sub_cues]
+            word_split += 1 if len(sub_cues) > 1 else 0
+        else:
+            text = apply_corrections(seg.text.strip(), corrections)
+            sub_cues = split_long_cue(seg.start, seg.end, text,
+                                       max_dur=args.max_cue_seconds)
+        if len(sub_cues) > 1:
+            split_count += len(sub_cues) - 1
+
+        # Speaker is decided per cue, not per Whisper segment: a segment can
+        # span a speaker change (especially in batched mode).
+        for (cue_start, cue_end, cue_text) in sub_cues:
+            all_cues.append([cue_start, cue_end, cue_text,
+                             speaker_at(cue_start, cue_end)])
+
+    for (cue_start, cue_end, cue_text, speaker) in all_cues:
+        wrapped = textwrap.wrap(cue_text, width=args.line_width,
+                                break_long_words=False,
+                                break_on_hyphens=False) or [""]
+        if speaker:
+            wrapped[0] = f"<v {speaker}>{wrapped[0]}"
+        lines.append(f"{format_ts(cue_start)} --> {format_ts(cue_end)}")
+        lines.extend(wrapped)
+        lines.append("")
+
+    if split_count:
+        print(f"  Split {split_count} cues ({word_split} via word-level timing)")
+
+    args.output.write_text("\n".join(lines), encoding="utf-8")
 
 
 if __name__ == "__main__":

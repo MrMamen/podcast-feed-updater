@@ -14,11 +14,16 @@ For å transkribere en ny episode fra audio:
 
 ```bash
 uv run python scripts/transcribe.py \
-  "/path/to/Episode.mp3" \
   -o transcripts/Episode.vtt \
   --episode-number 130 \
-  --speakers 3
+  --profiles transcripts/speaker_profiles.npy
 ```
+
+Uten lydfil som argument finner scriptet mixen selv i det lokale
+episodebiblioteket (`T:\MrMamen\CD SPILL\`, altså `/mnt/t/MrMamen/CD SPILL`
+fra WSL; overstyr med `--library` eller `CDSPILL_LIBRARY`): mappen som
+begynner med episodenummeret, og der den største `.mp3`-en som ikke heter
+`_enriched`. Gi en sti som første argument for å overstyre.
 
 Scriptet gjør:
 
@@ -31,8 +36,16 @@ Scriptet gjør:
 7. Applikerer `corrections.json` (navn, terminologi)
 8. Skriver VTT og printer speaker-preview så du kan identifisere talere
 
-**Ytelse:** ~5x sanntid totalt på GPU (en 90 min episode tar ~18 min).
-Med `--batched` går selve transkripsjonen ca. dobbelt så fort.
+**Ytelse:** ~12x sanntid totalt på GPU (en 83 min episode tok 7 min).
+Whisper kjører i batched-modus som standard. På episode 136 fanget den
+opp ~10 min tale som den sekvensielle dekoderen hoppet over, i tillegg
+til å være dobbelt så rask. `--sequential` gir den gamle oppførselen.
+
+**Rå-cache:** hver kjøring lagrer Whisper-segmenter, diarisering og
+talerkart i `.cache/raw/<navn>.json`. `--render-only` med samme `-o`
+bygger VTT-en på nytt derfra på et sekund, uten GPU. Bruk det til å
+prøve nye rettelser, `--speaker-map`, `--line-width` eller
+`--max-cue-seconds`.
 
 Felles kode for alle transkripsjonsscriptene (lydlasting, CUDA-stier,
 diarisering, profilmatching, rettelser, VTT-parsing) ligger i
@@ -54,7 +67,9 @@ slik at prosjektets venv med CUDA-hjulene brukes.
 | `--no-diarization` | Hopp over pyannote (raskere, ingen `<v>`-tags) |
 | `--diarization-model` | pyannote-pipeline. Standard `pyannote/speaker-diarization-community-1`; `pyannote/speaker-diarization-3.1` er den gamle |
 | `--no-exclusive` | Bruk rå, overlappende diarisering i stedet for pipelinens én-taler-om-gangen-utgang |
-| `--batched` / `--batch-size 8` | faster-whisper BatchedInferencePipeline: ~2x raskere, fanger av og til opp tale VAD ellers dropper, men gir grovere cue-inndeling. Sammenlign før du bytter |
+| `--sequential` | Gammel sekvensiell Whisper-dekoding i stedet for batched (standard) |
+| `--batch-size 8` | Batchstørrelse for batched dekoding |
+| `--render-only` | Bygg VTT på nytt fra `.cache/raw/` uten GPU |
 | `--initial-prompt "..."` | Overstyr auto-prompt med egne termer |
 | `--refresh-rss` | Tving ny nedlasting av RSS (ellers brukes 24h cache) |
 | `--corrections FILE` | Bruk annen rettelsesordliste |

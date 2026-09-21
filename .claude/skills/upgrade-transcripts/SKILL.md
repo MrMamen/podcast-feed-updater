@@ -16,10 +16,10 @@ request.
 
 ## 1. Baseline before changing anything
 
-1. Pick the newest episode from `.cache/cdspill-enriched.xml` (or
-   `output/`), preferably one whose guest has a profile. Read the
-   `<enclosure url>` and download it **without** the `op3.dev/e/` prefix so
-   the test doesn't count as a listen.
+1. Every episode mix lives locally under `/mnt/t/MrMamen/CD SPILL/<N> <title>/`
+   (Windows `T:\MrMamen\CD SPILL\`). `asr_common.find_episode_audio(N)`
+   picks the mix; use a recent episode whose guest has a profile. Do not
+   download from Podbean.
 2. Cut a 5-minute clip (skip the first minute of intro music) to 16 kHz
    mono WAV with PyAV via the project venv. `scripts/asr_common.load_audio`
    does the decoding.
