@@ -7,9 +7,9 @@
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-youtube.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
-    <pubDate>Mon, 06 Jul 2026 09:30:00 +0200</pubDate>
+    <pubDate>Mon, 21 Sep 2026 09:13:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Mon, 10 Aug 2026 07:30:46 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 21 Sep 2026 08:51:54 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -35,9 +35,67 @@
         <height>144</height>
     </image>
     <item>
+        <title>Star Trek: The Next Generation - A Final Unity med Jostein Hakestad (#136)</title>
+        <itunes:title>Star Trek: The Next Generation - A Final Unity med Jostein Hakestad (#136)</itunes:title>
+        <link>https://spillhistorie.no/2026/09/21/cd-spill-a-final-unity-med-jostein-hakestad/</link>        <pubDate>Mon, 21 Sep 2026 12:13:00 +0200</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/adb8cd8a-592e-38f4-9d23-c6a30d80d8a5</guid>
+                                    <description>&lt;p&gt;I den populære TNG-æraen av Star Trek har vi fått et eventyrspill med både kamp og diplomati på kjøpet. Et ganske ambisiøst spill med hele castet fra TV-serien. Med på mimringen har vi fått med oss Jostein Hakestad fra Rad Crew.&lt;/p&gt;
+
+&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/09/21/cd-spill-a-final-unity-med-jostein-hakestad/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+0:00 Intro
+0:45 Velkommen til cd SPILL
+3:24 Star Trek
+4:39 Dagens spill: Star Trek: The Next Generation – A Final Unity
+6:16 Tech Specs
+11:43 Dark Seed
+13:30 Hva går spillet ut på?
+15:15 Sigves forhold til Star Trek
+16:27 Josteins forhold til Star Trek
+22:09 The Doomsday Machine
+24:04 Hvor foregår A Final Unity?
+24:45 Sigve forsøker å oppsummere spillet
+26:06 Introen
+30:45 Castet fra TNG
+32:50 Beamdown til oppdrag
+41:30 Space combat
+42:54 Engineering
+43:45 Transporter
+45:23 Spoilers: Hva skjer i spillet?
+50:03 Star Trek Filmene
+51:38 Musikken
+54:32 Styrkene og svakhetene til spillet
+56:05 Sigves take
+58:18 Grafiske sammenligninger
+1:00:07 Konsepter fra serien
+1:05:53 Andre Star Trek-spill
+1:08:08 Kommentarer fra sosiale medier
+1:10:59 Kan ikke kjøpes
+1:13:07 Har det holdt seg?
+1:16:11 Finnes det noe tilsvarende idag?
+1:18:10 Tips fra Sigve
+1:19:14 Rad Crew Generations
+1:20:17 Pressfire
+1:20:54 Spillhistorie
+1:21:22 Neste episode</description>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/v5mwnf44kcmw2u2g/Unity.mp3" length="104728745" type="audio/mpeg"/>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>4979</itunes:duration>
+        <itunes:season>14</itunes:season>
+        <itunes:episode>136</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarTrekUnity-scaled.jpg"/>
+        <podcast:season name="Høst 2026">14</podcast:season>
+        <podcast:episode display="1 (#136)">136</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person></item>
+    <item>
         <title>Test Drive III: The Passion (#135)</title>
         <itunes:title>Test Drive III: The Passion (#135)</itunes:title>
-        <link>https://spillhistorie.no/2026/07/06/cd-spill-provekjorer-test-drive-iii/</link>        <pubDate>Mon, 06 Jul 2026 15:30:00 +0200</pubDate>
+        <link>https://spillhistorie.no/2026/07/06/cd-spill-provekjorer-test-drive-iii/</link>        <pubDate>Mon, 06 Jul 2026 09:30:00 +0200</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/b752e822-fd17-375e-a209-deecf61e8205</guid>
                                     <description>&lt;p&gt;Det tredje "Test Drive"-spillet skilte seg ut ved at det var helt åpent landskap fremfor en låst bane. Det byr på væreffekter og lys og mørke. Veldig morsom opplevelse, men er det et bra spill?&lt;/p&gt;
 &lt;p&gt;Sjekk ut TD3-kart og mye annet morsomt &lt;a href='https://simulationcorner.net'&gt;på Sebastian Mackes hjemmeside&lt;/a&gt;&lt;/p&gt;
@@ -430,9 +488,9 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                 <itunes:episodeType>bonus</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
+        <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
+        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Aleksikons påskelabyrint 2026</title>
         <itunes:title>Aleksikons påskelabyrint 2026</itunes:title>
@@ -517,9 +575,9 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                 <itunes:episodeType>bonus</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wyps9img3vb52uz5/p_ske20268aj02.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
-        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
+        <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
+        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Shufflepuck Cafe med Lasse Sørnes (#129)</title>
         <itunes:title>Shufflepuck Cafe med Lasse Sørnes (#129)</itunes:title>
@@ -877,7 +935,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSpill_spill_ret1995ae763.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/ytrn7g9xyg39jf3i/1995.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="7 (#125)">125</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ" img="https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg">Andreas Hedemann</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person>
@@ -1621,7 +1679,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                 <itunes:episodeType>bonus</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Tomb Raider med Anders Ekroll (#112)</title>
         <itunes:title>Tomb Raider med Anders Ekroll (#112)</itunes:title>
@@ -2311,7 +2369,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="1 (#100)">100</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/arne-digernes-107to8CFFp">Arne Digernes</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person>
@@ -3265,7 +3323,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CheatCodes.jpg"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="3 (#81)">81</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person></item>
     <item>
         <title>Star Wars: Dark Forces med Jostein Hakestad og Joachim Froholt (#80)</title>
@@ -3671,7 +3729,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BattleChess_v2b2eg3.jpg"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="8 (#74)">74</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Jagged Alliance med Roar Granevang (#73)</title>
         <itunes:title>Jagged Alliance med Roar Granevang (#73)</itunes:title>
@@ -4465,7 +4523,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2022">5</podcast:season>
         <podcast:episode display="3 (#47)">47</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Bubble Bobble med Anette Jøsendal (#46)</title>
         <itunes:title>Bubble Bobble med Anette Jøsendal (#46)</itunes:title>
@@ -4583,7 +4641,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/rayman.jpg"/>
         <podcast:season name="Høst 2021">4</podcast:season>
         <podcast:episode display="8 (#43)">43</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Doom med Jåddi (#42)</title>
         <itunes:title>Doom med Jåddi (#42)</itunes:title>
@@ -4975,7 +5033,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TIM_p56ctj.jpeg"/>
         <podcast:season name="Vår 2021">3</podcast:season>
         <podcast:episode display="5 (#26)">26</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
     <item>
         <title>Micro Machines med Jostein Hakestad (#25)</title>
         <itunes:title>Micro Machines med Jostein Hakestad (#25)</itunes:title>
@@ -5047,7 +5105,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/homm_phoenix_epu2qp.jpg"/>
         <podcast:season name="Vår 2021">3</podcast:season>
         <podcast:episode display="2 (#23)">23</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://media.discordapp.net/attachments/847909976646221855/1491766064290463845/Vismannen_i_klassisk_8-bit_stil.png?ex=6a7a62a9&amp;is=6a791129&amp;hm=57d84b054f5953ba42193f27e8feda012bfec2144caf62938212233815277356&amp;=">Aleks Gisvold</podcast:person>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
     <item>
         <title>Dune (#22)</title>
