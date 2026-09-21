@@ -192,6 +192,8 @@
     {"pattern": "\\bSigge\\b",     "replacement": "Sigve"},
     {"pattern": "\\bSigv\\b",      "replacement": "Sigve"},
     {"pattern": "\\bpåskelab\\b",  "replacement": "påskelabyrint"},
+    {"pattern": "\\bLucas Arts?\\b", "replacement": "LucasArts"},
+    {"pattern": "\\bHakstad\\b",   "replacement": "Hakestad"},
     {"pattern": "\\bòg\\b",        "replacement": "og"},
     {"pattern": "\\bÒg\\b",        "replacement": "Og"},
     {"pattern": "[\\u3040-\\u309f\\u30a0-\\u30ff\\u4e00-\\u9fff]+", "replacement": ""},
