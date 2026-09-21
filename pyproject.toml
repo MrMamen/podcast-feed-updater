@@ -13,21 +13,24 @@ dependencies = [
     "inquirer>=3.1.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=8.0.0",
-    "black>=24.0.0",
-    "ruff>=0.3.0",
-]
-
 [tool.black]
 line-length = 100
 
 [tool.ruff]
 line-length = 100
 
+# The `dev` group is installed by a plain `uv sync` / `uv run` locally and
+# skipped by CI (`uv run --no-dev`). It holds both the tooling and the GPU
+# transcription stack (scripts/transcribe.py and friends).
+#
+# CUDA note: ctranslate2 ships CUDA 12 wheels while torch ships CUDA 13, so
+# both nvidia-*-cu12 and the cu13 packages torch pulls in are installed side
+# by side; scripts/asr_common.py puts them on LD_LIBRARY_PATH at startup.
 [dependency-groups]
 dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "ruff>=0.3.0",
     "faster-whisper>=1.2.1",
     "nvidia-cublas-cu12>=12.9.2.10",
     "nvidia-cuda-nvrtc>=13.0.88",
