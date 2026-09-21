@@ -1,13 +1,15 @@
 # Transcript Guidelines
 
 These are the conventions used for cd SPILL podcast transcripts. They
-prioritize **reading experience** and **faithfulness to the actual
-episode** over conformance to any single distribution platform's rules.
+prioritize **reading experience** and **what the speakers meant** over
+verbatim reproduction and over any single distribution platform's rules.
 
 ## Principles
 
-1. **Faithfulness before polish** — preserve what was actually said,
-   including hesitations, dialect, and speaker voice.
+1. **Subtitles, not a court record** — the transcript is read, not
+   audited. Keep the speakers' own words and meaning, drop what only
+   adds noise (fillers, empty backchannel, one of two overlapping voices).
+   nb-whisper is trained on subtitles and already leans this way.
 2. **Readability before perfection** — split cues at natural pauses, not
    arbitrary durations.
 3. **Silence is data** — leave gaps when the audio is silent or purely
@@ -47,12 +49,27 @@ Never force 100% back-to-back timing. Silence is meaningful.
 
 ### What to preserve
 
-- Speaker voice: dialect, colloquialisms, register.
-- Meaningful hesitations: "eh", "hmm" when used as thinking markers.
-- Self-corrections and false starts — they're part of natural speech.
+- Speaker voice: dialect, colloquialisms, register. Condense, don't
+  rewrite.
 - Code-switching: English words or phrases spoken in the episode stay
-  in English (Norwegian speech stays Norwegian).
-- Ellipses (…) to indicate trailing off or significant pauses.
+  in English (Norwegian speech stays Norwegian). Game and film clips
+  are transcribed in their original language and tagged with the
+  character's name (`<v Picard>`).
+- Ellipses (…) to indicate trailing off.
+
+### What to drop or condense
+
+- **Filler words** (eh, ehm, øh, "altså" as a tic) — omit unless they
+  carry meaning in context.
+- **Empty backchannel** ("Ja.", "Mhm.", "Og …") standing on its own —
+  omit. The gap-filling pass in `transcribe.py` lists these instead of
+  inserting them, for exactly this reason.
+- **Long or clumsy phrasing** — shorten to what was meant, keeping the
+  speaker's own words as far as possible.
+- **False starts and self-corrections** — keep the corrected version
+  only, unless the slip itself is the point.
+- **Overlapping speech** — keep the voice that carries the content,
+  which is usually exactly one of them. Do not try to render both.
 
 ### What to fix
 
@@ -67,11 +84,10 @@ Never force 100% back-to-back timing. Silence is meaningful.
 
 ### What NOT to do
 
-- Do not "polish" text into literary prose. Readers should hear the
-  speakers.
-- Do not remove filler words wholesale (eh, ehm, øh) — they carry
-  rhythm and character.
+- Do not "polish" text into literary prose. Condensing is removal, not
+  rephrasing; readers should still hear the speakers.
 - Do not change meaning or word choice for style.
+- Do not invent text for passages you cannot hear. Leave a gap.
 
 ## 3. Cue segmentation
 
@@ -105,8 +121,14 @@ Use `<v Name>` voice tags when a speaker is identified.
 
 - Apply the tag to **every cue** from that speaker (not only on
   speaker changes). This aids screen readers and full-text search.
-- Use the same form throughout the episode (first + last name, or
-  short form if consistently used in-show).
+- Hosts and guests by first name: `<v Mamen>`, `<v Sigve>`,
+  `<v Jostein>`. The pipeline renders this from the full profile name
+  automatically; exceptions (two guests sharing a first name, a
+  preferred nickname) go under `"speaker_names"` in
+  `transcripts/corrections.json`.
+- Voices in game or film clips by character name: `<v Picard>`,
+  `<v Data>`, or a role when unnamed: `<v Garidiansk kaptein>`. These
+  are set by hand.
 - Unknown/unmatched speakers: no tag (do not invent names).
 
 ### Header
@@ -135,8 +157,17 @@ These match the guidelines above:
 
 ### `scripts/transcribe.py`
 
-Main pipeline. Runs nb-whisper ASR, pyannote diarisation, and profile
-matching. Produces a tagged VTT.
+Main pipeline. Runs nb-whisper ASR, pyannote diarisation, profile
+matching and a gap-filling pass. Produces a tagged VTT.
+
+**Gap filling.** Whisper decodes 30 s chunks independently and sometimes
+stops early inside one, or never sees quiet speech the chunking VAD
+dropped; on episode 136 that lost whole sentences. After transcription
+the script runs VAD over the audio, finds stretches of 3 s or more with
+speech but no transcript, and re-transcribes each one on its own.
+Passages of 4+ words or 2.5+ s are inserted; shorter interjections are
+printed for you to add by hand if they matter. `--no-fill-gaps` turns
+the pass off.
 
 **Running it for a newly published episode:**
 
