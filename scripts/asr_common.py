@@ -432,6 +432,37 @@ def apply_corrections(text: str, config: dict) -> str:
 # --------------------------------------------------------------------------
 # VTT
 # --------------------------------------------------------------------------
+MIN_CUE_SECONDS = 1.0
+CHARS_PER_SECOND = 17.0  # comfortable subtitle reading speed
+MAX_CUE_SECONDS = 7.0
+
+
+def extend_short_cues(cues: list[dict], *, min_seconds: float = MIN_CUE_SECONDS,
+                      chars_per_second: float = CHARS_PER_SECOND,
+                      max_seconds: float = MAX_CUE_SECONDS) -> int:
+    """Lengthen cues that are too short to read, into the silence after them.
+
+    A cue must last at least ``min_seconds`` and long enough to read its
+    text at ``chars_per_second``. When it doesn't, its end is pushed out,
+    but never past the next cue's start or ``max_seconds``. Cues that are
+    back-to-back with the next one are left alone. ``cues`` are dicts with
+    start/end/lines (as from parse_vtt); modified in place. Returns the
+    number of cues extended.
+    """
+    n = 0
+    for i, c in enumerate(cues):
+        text = " ".join(c["lines"])
+        need = max(min_seconds, len(text) / chars_per_second)
+        need = min(need, max_seconds)
+        limit = cues[i + 1]["start"] if i + 1 < len(cues) else c["end"] + need
+        new_end = min(c["start"] + need, limit)
+        if new_end > c["end"] + 0.01:
+            c["end"] = new_end
+            c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+            n += 1
+    return n
+
+
 TS_LINE_RE = re.compile(r"^(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})")
 V_TAG_RE = re.compile(r"^<v ([^>]+)>")
 
@@ -460,6 +491,104 @@ def parse_vtt(path: Path) -> list[dict]:
         cues.append({"ts_line": lines[idx], "start": t2s(m.group(1)),
                      "end": t2s(m.group(2)), "speaker": speaker, "lines": body})
     return cues
+
+
+def align_tokens(tokens: list[str], words: list[dict]) -> dict[int, dict]:
+    """Map token index -> ASR word (with start/end) using difflib on normalized forms."""
+    import difflib
+
+    def norm(t):
+        return re.sub(r"[^\wæøå]", "", t.lower())
+
+    sm = difflib.SequenceMatcher(a=[norm(t) for t in tokens],
+                                 b=[norm(w["word"]) for w in words], autojunk=False)
+    out: dict[int, dict] = {}
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag in ("equal", "replace") and (i2 - i1) == (j2 - j1):
+            for k in range(i2 - i1):
+                out[i1 + k] = words[j1 + k]
+    return out
+
+
+def cue_speaker_groups(cue: dict) -> list[tuple[str | None, str]]:
+    """[(speaker, text), ...] for a cue; more than one entry means several <v> tags."""
+    lines = list(cue["lines"])
+    if cue.get("speaker"):
+        lines = [f"<v {cue['speaker']}>" + lines[0]] + lines[1:]
+    groups: list[list] = []
+    for ln in lines:
+        m = V_TAG_RE.match(ln)
+        if m:
+            groups.append([m.group(1), V_TAG_RE.sub("", ln, count=1).strip()])
+        elif groups:
+            groups[-1][1] += " " + ln.strip()
+        else:
+            groups.append([None, ln.strip()])
+    return [(g[0], g[1]) for g in groups]
+
+
+def split_multi_speaker_cues(cues: list[dict], words: list[dict], *,
+                             min_seconds: float = 1.5, min_words: int = 3) -> tuple[list[dict], int, int]:
+    """Split cues that carry several <v> tags, when every part stays readable.
+
+    Timing comes from ``words`` (raw Whisper word timestamps). A cue is
+    split only if each speaker's part would last at least ``min_seconds``
+    and hold at least ``min_words`` words; otherwise the cue is kept with
+    both tags, which is the guideline for short overlapping exchanges.
+    Returns (cues, n_split, n_kept).
+    """
+    out: list[dict] = []
+    n_split = n_kept = 0
+    for idx, c in enumerate(cues):
+        groups = cue_speaker_groups(c)
+        if len(groups) < 2:
+            out.append(c)
+            continue
+        tokens, owner = [], []
+        for gi, (_, text) in enumerate(groups):
+            for tok in text.split():
+                tokens.append(tok)
+                owner.append(gi)
+        window = [w for w in words if w["start"] >= c["start"] - 0.5 and w["end"] <= c["end"] + 0.5]
+        amap = align_tokens(tokens, window)
+        starts = []
+        for gi in range(len(groups)):
+            idxs = [i for i, o in enumerate(owner) if o == gi]
+            starts.append(next((amap[i]["start"] for i in idxs if i in amap), None))
+        bounds = [c["start"]] + starts[1:] + [c["end"]]
+        readable = all(g[1].split().__len__() >= min_words for g in groups) and \
+            all(b is not None for b in bounds) and \
+            all(bounds[i + 1] - bounds[i] >= min_seconds for i in range(len(groups)))
+        if not readable:
+            n_kept += 1
+            out.append(c)
+            continue
+        for gi, (spk, text) in enumerate(groups):
+            out.append({"start": bounds[gi], "end": bounds[gi + 1], "speaker": spk,
+                        "lines": [text],
+                        "ts_line": f"{format_ts(bounds[gi])} --> {format_ts(bounds[gi + 1])}"})
+        n_split += 1
+    return out, n_split, n_kept
+
+
+def wrap_cue_lines(cue: dict, width: int = 42) -> None:
+    """Re-wrap a cue's text at ``width``; each <v>-tagged part is wrapped on its own."""
+    import textwrap
+    groups = cue_speaker_groups(cue)
+    if len(groups) <= 1:
+        text = groups[0][1] if groups else ""
+        cue["lines"] = textwrap.wrap(text, width, break_long_words=False,
+                                     break_on_hyphens=False) or [""]
+        return
+    lines: list[str] = []
+    for i, (spk, text) in enumerate(groups):
+        wrapped = textwrap.wrap(text, width, break_long_words=False,
+                                break_on_hyphens=False) or [""]
+        if i > 0 and spk:
+            wrapped[0] = f"<v {spk}>{wrapped[0]}"
+        lines.extend(wrapped)
+    cue["speaker"] = groups[0][0]
+    cue["lines"] = lines
 
 
 def render_vtt(cues: list[dict]) -> str:

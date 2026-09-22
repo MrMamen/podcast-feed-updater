@@ -30,8 +30,14 @@ from asr_common import (
     DEFAULT_DIARIZATION_MODEL,
     PROFILE_THRESHOLD,
     apply_corrections,
+    cue_speaker_groups,
     display_name,
+    extend_short_cues,
     find_episode_audio,
+    parse_vtt,
+    render_vtt as render_cues,
+    split_multi_speaker_cues,
+    wrap_cue_lines,
     format_ts,
     load_audio,
     load_corrections,
@@ -622,6 +628,12 @@ def main() -> int:
     parser.add_argument("--no-fill-gaps", action="store_true",
                         help="Skip the pass that finds stretches with speech Whisper "
                              "left untranscribed and re-transcribes them")
+    parser.add_argument("--polish", action="store_true",
+                        help="Tidy a hand-edited VTT (-o) in place: split cues you marked "
+                             "with a second <v> line when both parts stay readable, apply "
+                             "corrections.json, extend short cues, re-wrap at --line-width, "
+                             "and report anything over --max-cue-seconds. Uses the raw "
+                             "cache for word timing; no GPU.")
     parser.add_argument("--render-only", action="store_true",
                         help="Skip Whisper and pyannote; re-render the VTT from the raw "
                              "results cached by the previous run with the same -o "
@@ -637,6 +649,8 @@ def main() -> int:
     hf_token = load_hf_token(args.env)
 
     raw_path = project_root / ".cache" / "raw" / (args.output.stem + ".json")
+    if args.polish:
+        return polish_vtt(args, raw_path)
     if args.render_only:
         if not raw_path.exists():
             sys.stderr.write(f"No cached raw results at {raw_path}; run without "
@@ -829,6 +843,55 @@ def print_gap_review(review: list[dict]) -> None:
         print(f"    {format_ts(r['start'])}  {who}{r['text']}")
 
 
+def polish_vtt(args, raw_path: Path) -> int:
+    """--polish: post-edit pass over a hand-edited VTT, keeping the edits."""
+    vtt = args.output
+    if not vtt.exists():
+        sys.stderr.write(f"VTT not found: {vtt}\n")
+        return 1
+    corrections = load_corrections(args.corrections)
+    words: list[dict] = []
+    if raw_path.exists():
+        raw = json.loads(raw_path.read_text(encoding="utf-8"))
+        words = [w for s in raw["segments"] for w in s["words"]]
+    else:
+        print(f"(no raw cache at {raw_path}: marked cues can't be split by word time)")
+
+    cues = parse_vtt(vtt)
+    n_before = len(cues)
+    cues, n_split, n_kept = split_multi_speaker_cues(cues, words)
+
+    n_text = 0
+    for c in cues:
+        groups = cue_speaker_groups(c)
+        fixed = [(spk, apply_corrections(text, corrections)) for spk, text in groups]
+        if fixed != groups:
+            n_text += 1
+        c["speaker"] = fixed[0][0]
+        c["lines"] = [fixed[0][1]] + [f"<v {spk}>{text}" if spk else text
+                                      for spk, text in fixed[1:]]
+    n_ext = extend_short_cues(cues, max_seconds=args.max_cue_seconds)
+    for c in cues:
+        wrap_cue_lines(c, args.line_width)
+        c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+
+    vtt.write_text(render_cues(cues), encoding="utf-8")
+    print(f"Polished {vtt}: {n_before} -> {len(cues)} cues")
+    print(f"  split {n_split} marked cue(s); kept {n_kept} with two speakers "
+          f"(parts too short to stand alone)")
+    print(f"  corrections changed {n_text} cue(s); extended {n_ext} short cue(s)")
+    long = [c for c in cues if c["end"] - c["start"] > args.max_cue_seconds + 0.05]
+    if long:
+        print(f"  {len(long)} cue(s) over {args.max_cue_seconds:.0f}s (fine by hand if the "
+              f"split would be unnatural):")
+        for c in long:
+            print(f"    {c['ts_line']}  {c['end'] - c['start']:.1f}s  {' '.join(c['lines'])[:60]}")
+    overlaps = [(a, b) for a, b in zip(cues, cues[1:]) if b["start"] < a["end"] - 0.001]
+    for a, b in overlaps:
+        print(f"  ⚠ overlap: {a['ts_line']} / {b['ts_line']}")
+    return 0
+
+
 def render_from_raw(args, raw_path: Path) -> int:
     """--render-only: rebuild the VTT from cached Whisper/pyannote output."""
     raw = json.loads(raw_path.read_text(encoding="utf-8"))
@@ -885,18 +948,26 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
             all_cues.append([cue_start, cue_end, cue_text,
                              speaker_at(cue_start, cue_end)])
 
-    for (cue_start, cue_end, cue_text, speaker) in all_cues:
-        wrapped = textwrap.wrap(cue_text, width=args.line_width,
+    # Give short cues time to be read when there is silence after them
+    # (TRANSCRIPT_GUIDELINES "Reading time").
+    cue_dicts = [{"start": s, "end": e, "lines": [t], "speaker": spk}
+                 for (s, e, t, spk) in all_cues]
+    extended = extend_short_cues(cue_dicts)
+
+    for c in cue_dicts:
+        wrapped = textwrap.wrap(c["lines"][0], width=args.line_width,
                                 break_long_words=False,
                                 break_on_hyphens=False) or [""]
-        if speaker:
-            wrapped[0] = f"<v {speaker}>{wrapped[0]}"
-        lines.append(f"{format_ts(cue_start)} --> {format_ts(cue_end)}")
+        if c["speaker"]:
+            wrapped[0] = f"<v {c['speaker']}>{wrapped[0]}"
+        lines.append(f"{format_ts(c['start'])} --> {format_ts(c['end'])}")
         lines.extend(wrapped)
         lines.append("")
 
     if split_count:
         print(f"  Split {split_count} cues ({word_split} via word-level timing)")
+    if extended:
+        print(f"  Extended {extended} short cues for reading time")
 
     args.output.write_text("\n".join(lines), encoding="utf-8")
 
