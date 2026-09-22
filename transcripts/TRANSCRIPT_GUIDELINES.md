@@ -27,12 +27,22 @@ verbatim reproduction and over any single distribution platform's rules.
 | | Target | Allowed |
 |---|---|---|
 | Minimum duration | ≥ 1.0s | 0.3s absolute floor |
-| Maximum duration | ≤ 5.0s (ideal) | 7.0s hard ceiling |
+| Maximum duration | ≤ 5.0s (ideal) | 7.0s in the pipeline; up to ~8s by hand when the only alternative is an unnatural split |
 | Typical | 2–5s | |
 
 If a single word spans > 5s because of surrounding pauses, **extend the
 cue to cover the pause** rather than flashing the word briefly followed
 by dead air.
+
+### Reading time
+
+A cue must stay on screen long enough to read: at least 1 s, and about
+**17 characters per second** of text (a full 42-character line needs
+~2.5 s). When a cue is shorter than that and there is silence after it,
+extend its end into the silence, up to the next cue's start or the 7 s
+ceiling. Back-to-back cues cannot be helped this way; if one is far too
+short, merge it with its neighbour instead. The pipeline applies this
+rule automatically when rendering.
 
 ### Gaps between cues
 
@@ -91,6 +101,15 @@ Never force 100% back-to-back timing. Silence is meaningful.
 
 ## 3. Cue segmentation
 
+### One sentence per cue, condense before you split
+
+A sentence stays in one cue when it fits. When it does not, **shorten
+the text first**: a spoken sentence too long for 7 s is almost always
+too long as text too, and after dropping fillers and detours it often
+fits. Only then split, and only at a clause boundary. Never split
+mid-phrase, and do not accept a split that reads worse than a cue of
+8 s.
+
 ### Where to split
 
 Prefer splits at these boundaries, in priority order:
@@ -130,6 +149,25 @@ Use `<v Name>` voice tags when a speaker is identified.
   `<v Data>`, or a role when unnamed: `<v Garidiansk kaptein>`. These
   are set by hand.
 - Unknown/unmatched speakers: no tag (do not invent names).
+
+### Two speakers in one cue
+
+A quick exchange or overlap often gives two parts that are each too
+short to stand alone. Then keep them in **one cue with two tags**, each
+speaker on its own line:
+
+```
+00:04:12.480 --> 00:04:15.200
+<v Mamen>De husker jeg var morsomme.
+<v Jostein>Ja, de er kule.
+```
+
+Rule of thumb: split into two cues only when **both** parts would last
+at least 1.5 s and hold at least three words. `transcribe.py --polish`
+applies exactly this rule to cues you have marked with a second `<v>`
+line, using word timestamps from the raw cache, and leaves the rest as
+two-speaker cues. When one voice carries the content and the other is
+just noise, keep only the one that matters (see section 2).
 
 ### Header
 
@@ -216,6 +254,20 @@ published episode):
 Because of source 2, transcribe finds newly published episodes with
 correct guest metadata even if you forgot to flip the redirect or
 regenerate the local enriched feed.
+
+**Polish pass during the language edit.** While hand-editing the VTT,
+run
+
+```bash
+uv run python scripts/transcribe.py -o transcripts/<Name>.vtt --polish
+```
+
+as often as you like. It keeps your edits and: splits cues you marked
+with a second `<v>` line when both parts stay readable (else keeps them
+as two-speaker cues), applies `corrections.json`, extends cues that are
+too short to read into the silence after them, re-wraps at 42
+characters, and lists cues over 7 s and any overlaps. No GPU needed; it
+uses the raw cache from the transcription run for word timing.
 
 ### `scripts/add_speakers.py`
 

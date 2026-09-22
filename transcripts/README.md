@@ -70,6 +70,7 @@ slik at prosjektets venv med CUDA-hjulene brukes.
 | `--sequential` | Gammel sekvensiell Whisper-dekoding i stedet for batched (standard) |
 | `--batch-size 8` | Batchstørrelse for batched dekoding |
 | `--render-only` | Bygg VTT på nytt fra `.cache/raw/` uten GPU |
+| `--polish` | Rydd en håndredigert VTT på plass: del markerte to-taler-cues når begge deler er lesbare, kjør ordlista, forleng korte cues, brekk om, rapporter cues over 7 s. Uten GPU |
 | `--no-fill-gaps` | Dropp passet som finner tale Whisper hoppet over og transkriberer den på nytt (se TRANSCRIPT_GUIDELINES) |
 | `--initial-prompt "..."` | Overstyr auto-prompt med egne termer |
 | `--refresh-rss` | Tving ny nedlasting av RSS (ellers brukes 24h cache) |
