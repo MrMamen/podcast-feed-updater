@@ -106,6 +106,9 @@ def main() -> int:
                         help=f"Minimum cue duration in seconds to use (default: {MIN_EMBED_SECONDS})")
     parser.add_argument("--diarization-model", default=DEFAULT_DIARIZATION_MODEL,
                         help="Pipeline whose embedding model to use")
+    parser.add_argument("--speakers", type=str,
+                        help="Comma-separated tag names to include (default: all). Use it to "
+                             "skip game/film voices tagged in the VTT.")
     parser.add_argument("--env", type=Path)
     args = parser.parse_args()
 
@@ -119,9 +122,11 @@ def main() -> int:
     # name, so map back when the output file already knows the person.
     known = list(load_profiles(args.output)) if args.output.exists() else []
     corr = load_corrections()
+    only = {s.strip() for s in args.speakers.split(",")} if args.speakers else None
     segments = [{"start": c["start"], "end": c["end"],
                  "speaker": resolve_full_name(c["speaker"], known, corr)}
-                for c in parse_vtt(args.vtt) if c["speaker"]]
+                for c in parse_vtt(args.vtt)
+                if c["speaker"] and (only is None or c["speaker"] in only)]
     speakers = sorted({s["speaker"] for s in segments})
     print(f"  {len(segments)} labeled cues, speakers: {', '.join(speakers)}")
 
@@ -144,10 +149,11 @@ def main() -> int:
         existing = load_profiles(args.output)
         for name, emb in new_profiles.items():
             if name in existing:
+                sim = float(np.dot(existing[name], emb))
                 merged = (existing[name] + emb) / 2
                 merged /= np.linalg.norm(merged) + 1e-8
                 new_profiles[name] = merged
-                print(f"  Merged: {name}")
+                print(f"  Merged: {name}  (new vs existing profile: {sim:.3f})")
             else:
                 print(f"  Added:  {name}")
         for name in existing:
