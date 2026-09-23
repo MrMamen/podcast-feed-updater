@@ -82,3 +82,7 @@ transcripts/*.npy
 # Profile-build configs (contain local audio paths and speaker names)
 profile_tracks*.json
 *_profile_tracks.json
+
+# YouTube auto-captions used as transcription reference, and WSL download markers
+transcripts/*.sbv
+*:Zone.Identifier

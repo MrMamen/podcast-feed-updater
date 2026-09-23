@@ -90,7 +90,34 @@ Scriptet printer 3 eksempel-setninger per taler ved slutt:
 
 Kjør så på nytt med `--speaker-map`, bruk `scripts/add_speakers.py` for å
 re-tagge uten å transkribere på nytt, eller bare gjør en tekst-replace i
-VTT-filen.
+VTT-filen. Er talerne innsendte klipp som finnes som egne filer, se
+`align_clips.py` under.
+
+## Innsendte klipp: `scripts/align_clips.py`
+
+«Spillåret»-episodene har et dusin lytterbidrag som er spilt inn hver for
+seg og klippet inn i mixen. Diarisering av 16 stemmer over 150 minutter er
+upålitelig, og tagging etter kapittelstart blir feil når vertene prater
+rundt klippet. Ligger klippfilene i episodemappa, finner dette scriptet
+dem i mixen (krysskorrelasjon av bånd-energi, tåler gain/EQ/musikkseng),
+og skriver om rå-cachen fra `transcribe.py` slik at klippets talespenn får
+én diariseringstur med riktig navn og mixteksten der byttes ut med en
+transkripsjon av det rene klippet (kjøres automatisk med
+`--no-diarization` når den mangler).
+
+```bash
+uv run python scripts/transcribe.py -o transcripts/1995.vtt --episode-number 125 \
+  --profiles transcripts/speaker_profiles.npy --min-speakers 2 --max-speakers 20
+uv run python scripts/align_clips.py -o transcripts/1995.vtt --episode-number 125 \
+  --clips clips125.json          # {"worms_spruceman.wav": "Roar Granevang", ...}
+uv run python scripts/transcribe.py -o transcripts/1995.vtt --render-only
+```
+
+`--clip "fil=Navn"` kan gis i stedet for JSON. Bruk fullt profilnavn;
+rollenavn for figurer (`Kato`), og `Navn|en` for engelske innslag (sang)
+så klippet ikke blir oversatt. `--locate-only` viser bare hvor klippene
+ligger. Originalcachen bevares som `.cache/raw/<navn>.orig.json`, så
+scriptet kan kjøres om igjen med en rettet mapping.
 
 ## Talernavn
 
