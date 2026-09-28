@@ -70,7 +70,8 @@ slik at prosjektets venv med CUDA-hjulene brukes.
 | `--sequential` | Gammel sekvensiell Whisper-dekoding i stedet for batched (standard) |
 | `--batch-size 8` | Batchstørrelse for batched dekoding |
 | `--render-only` | Bygg VTT på nytt fra `.cache/raw/` uten GPU |
-| `--polish` | Rydd en håndredigert VTT på plass: del markerte to-taler-cues når begge deler er lesbare, kjør ordlista, forleng korte cues, brekk om, rapporter cues over 7 s. Uten GPU |
+| `--polish` | Rydd en håndredigert VTT på plass: del markerte to-taler-cues når begge deler er lesbare (eller slå en for kort del sammen med nabocuen til samme taler), kjør ordlista, skyv cue-slutter 0,5 s inn i pausen etter, forleng korte cues, brekk om, rapporter cues over 7 s, overlapp, tre linjer og over 25 tegn/s. Uten GPU |
+| `--tail-pad 0.5` | Sekunder hver cue-slutt skyves inn i pausen etter (Whisper slutter ordene for tidlig); 0 skrur av |
 | `--no-fill-gaps` | Dropp passet som finner tale Whisper hoppet over og transkriberer den på nytt (se TRANSCRIPT_GUIDELINES) |
 | `--initial-prompt "..."` | Overstyr auto-prompt med egne termer |
 | `--refresh-rss` | Tving ny nedlasting av RSS (ellers brukes 24h cache) |
@@ -112,6 +113,11 @@ uv run python scripts/align_clips.py -o transcripts/1995.vtt --episode-number 12
   --clips clips125.json          # {"worms_spruceman.wav": "Roar Granevang", ...}
 uv run python scripts/transcribe.py -o transcripts/1995.vtt --render-only
 ```
+
+Klipp som er spilt av litt raskere i mixen (Reaper-rate, opptil ~5 % sett i
+praksis) får tilpasset både offset og hastighet, så ordtidene stemmer helt til
+slutten; `--locate-only` viser `rate x0.956` når det skjer. Klipp under ~10 s
+finnes ikke av søket og må tagges for hånd.
 
 `--clip "fil=Navn"` kan gis i stedet for JSON. Bruk fullt profilnavn;
 rollenavn for figurer (`Kato`), og `Navn|en` for engelske innslag (sang)

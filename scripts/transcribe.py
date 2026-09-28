@@ -33,6 +33,7 @@ from asr_common import (
     cue_speaker_groups,
     display_name,
     extend_short_cues,
+    pad_cue_ends,
     find_episode_audio,
     parse_vtt,
     render_vtt as render_cues,
@@ -43,6 +44,8 @@ from asr_common import (
     load_corrections,
     load_diarization_pipeline,
     load_hf_token,
+    MAX_CHARS_PER_SECOND,
+    MAX_CUE_LINES,
     match_profiles,
     run_diarization,
     setup_cuda_paths,
@@ -503,8 +506,8 @@ def split_long_cue(start: float, end: float, text: str,
     n_needed = int(dur / max_dur) + 1
     chunks = None
     for pattern in (
-        r"(?<=[.!?])\s+",          # sentence boundary
-        r"(?<=[.!?,;:])\s+",       # punctuation
+        r"(?<=[.!?…])\s+",         # sentence boundary
+        r"(?<=[.!?…,;:])\s+",      # punctuation
         r"\s+(?:og|men|så|eller|fordi|for|når|hvis)\s+",  # conjunctions
         r"\s+",                     # whitespace fallback
     ):
@@ -610,6 +613,9 @@ def main() -> int:
     parser.add_argument("--profile-threshold", type=float, default=PROFILE_THRESHOLD,
                         help=f"Minimum cosine similarity for a profile match "
                              f"(default: {PROFILE_THRESHOLD})")
+    parser.add_argument("--tail-pad", type=float, default=0.5,
+                        help="Seconds to push each cue end into the following silence "
+                             "(Whisper word ends are early); 0 disables (default 0.5)")
     parser.add_argument("--line-width", type=int, default=42,
                         help="Wrap cue text at this many characters "
                              "(Apple Podcasts rejects unwrapped long lines). Default: 42")
@@ -859,7 +865,8 @@ def polish_vtt(args, raw_path: Path) -> int:
 
     cues = parse_vtt(vtt)
     n_before = len(cues)
-    cues, n_split, n_kept = split_multi_speaker_cues(cues, words)
+    cues, n_split, n_merged, n_kept = split_multi_speaker_cues(
+        cues, words, max_seconds=args.max_cue_seconds, max_chars=2 * args.line_width)
 
     n_text = 0
     for c in cues:
@@ -870,6 +877,7 @@ def polish_vtt(args, raw_path: Path) -> int:
         c["speaker"] = fixed[0][0]
         c["lines"] = [fixed[0][1]] + [f"<v {spk}>{text}" if spk else text
                                       for spk, text in fixed[1:]]
+    n_pad = pad_cue_ends(cues, words, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
     n_ext = extend_short_cues(cues, max_seconds=args.max_cue_seconds)
     for c in cues:
         wrap_cue_lines(c, args.line_width)
@@ -877,9 +885,10 @@ def polish_vtt(args, raw_path: Path) -> int:
 
     vtt.write_text(render_cues(cues), encoding="utf-8")
     print(f"Polished {vtt}: {n_before} -> {len(cues)} cues")
-    print(f"  split {n_split} marked cue(s); kept {n_kept} with two speakers "
-          f"(parts too short to stand alone)")
-    print(f"  corrections changed {n_text} cue(s); extended {n_ext} short cue(s)")
+    print(f"  split {n_split} marked cue(s); merged the short part of {n_merged} into the "
+          f"neighbouring cue; kept {n_kept} with two speakers")
+    print(f"  corrections changed {n_text} cue(s); padded the end of {n_pad} cue(s) by up to "
+          f"{args.tail_pad:.1f}s; extended {n_ext} short cue(s) for reading time")
     long = [c for c in cues if c["end"] - c["start"] > args.max_cue_seconds + 0.05]
     if long:
         print(f"  {len(long)} cue(s) over {args.max_cue_seconds:.0f}s (fine by hand if the "
@@ -889,6 +898,26 @@ def polish_vtt(args, raw_path: Path) -> int:
     overlaps = [(a, b) for a, b in zip(cues, cues[1:]) if b["start"] < a["end"] - 0.001]
     for a, b in overlaps:
         print(f"  ⚠ overlap: {a['ts_line']} / {b['ts_line']}")
+    tall = [c for c in cues if len(c["lines"]) > MAX_CUE_LINES]
+    if tall:
+        print(f"  {len(tall)} cue(s) with more than {MAX_CUE_LINES} lines (over "
+              f"{MAX_CUE_LINES * args.line_width} characters; shorten the text):")
+        for c in tall[:15]:
+            print(f"    {c['ts_line'][:12]}  {' '.join(c['lines'])[:70]}")
+        if len(tall) > 15:
+            print(f"    … and {len(tall) - 15} more")
+
+    def cps(c):
+        chars = sum(len(re.sub(r"<v [^>]*>", "", ln)) for ln in c["lines"])
+        return chars / max(c["end"] - c["start"], 0.1)
+    fast = [c for c in cues if cps(c) > MAX_CHARS_PER_SECOND]
+    if fast:
+        print(f"  {len(fast)} cue(s) over {MAX_CHARS_PER_SECOND:.0f} characters/second "
+              f"(too short to read; shorten the text or merge with a neighbour):")
+        for c in fast[:15]:
+            print(f"    {c['ts_line'][:12]}  {cps(c):.0f} cps  {' '.join(c['lines'])[:60]}")
+        if len(fast) > 15:
+            print(f"    … and {len(fast) - 15} more")
     return 0
 
 
@@ -952,7 +981,8 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
     # (TRANSCRIPT_GUIDELINES "Reading time").
     cue_dicts = [{"start": s, "end": e, "lines": [t], "speaker": spk}
                  for (s, e, t, spk) in all_cues]
-    extended = extend_short_cues(cue_dicts)
+    pad_cue_ends(cue_dicts, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
+    extended = extend_short_cues(cue_dicts, max_seconds=args.max_cue_seconds)
 
     for c in cue_dicts:
         wrapped = textwrap.wrap(c["lines"][0], width=args.line_width,

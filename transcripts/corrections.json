@@ -145,6 +145,7 @@
     ["Boblevdrage",     "Bobledrage"],
     ["Bowledrage",      "Bobledrage"],
     ["Bobleddragen",    "Bobledragen"],
+    ["Bobledag",        "Bobledrage"],
     ["Tarcoon",         "Tycoon"],
     ["Tacoon",          "Tycoon"],
 
@@ -237,7 +238,10 @@
   ],
 
   "cleanup_fixes": [
-    {"from": "AAleksikon", "to": "Aleksikon"}
+    {"from": "AAleksikon", "to": "Aleksikon"},
+    {"from": "....", "to": "…"},
+    {"from": "...", "to": "…"},
+    {"from": " …", "to": " …"}
   ],
 
   "filler_words": ["eh", "ehm", "uhm", "øh"],
@@ -249,6 +253,14 @@
     "E.",
     "no."
   ],
+
+  "speaker_names": {
+    "C. Alexander Espeseth": "Alex",
+    "Hans Arne Jacobsen": "Hans Arne",
+    "Jon Håvard": "Jon Håvard",
+    "Trond og Jo Bjørnar": "Trond og Jo Bjørnar",
+    "Jon Cato Lorentzen": "Jon Cato"
+  },
 
   "language": "no",
   "line_width": 42,

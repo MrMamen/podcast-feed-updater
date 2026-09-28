@@ -463,8 +463,76 @@ def extend_short_cues(cues: list[dict], *, min_seconds: float = MIN_CUE_SECONDS,
     return n
 
 
+TAIL_PAD_SECONDS = 0.5
+
+
+def pad_cue_ends(cues: list[dict], words: list[dict] | None = None, *,
+                 pad: float = TAIL_PAD_SECONDS,
+                 max_seconds: float = MAX_CUE_SECONDS) -> int:
+    """Let every cue run ``pad`` seconds past its last spoken word.
+
+    Whisper's word end times land a few hundred ms before the speaker has
+    actually finished, so a cue followed by a pause cuts off early. The
+    target end is the raw word that matches the cue's last token, plus
+    ``pad`` (with no ``words`` the cue's own end is taken as the last
+    word), never past the next cue's start or ``max_seconds`` of duration,
+    and never earlier than the end the cue already has. Matching on the
+    token keeps this idempotent: words that were dropped from the text
+    (fillers in the pause) do not push the end further on the next run.
+    Modified in place; returns the count.
+    """
+    import bisect
+
+    def norm(s):
+        return re.sub(r"[^\wæøå]", "", s.lower())
+
+    n = 0
+    starts = [w["start"] for w in words] if words else None
+    for i, c in enumerate(cues):
+        last_word = c["end"] if not words else None
+        if words:
+            tokens = [norm(tok) for tok in " ".join(re.sub(r"<v [^>]*>", "", ln)
+                                                    for ln in c["lines"]).split()]
+            tokens = [tok for tok in tokens if tok]
+            if not tokens:
+                continue
+            hi = bisect.bisect_right(starts, c["end"] + 0.05)
+            lo = bisect.bisect_left(starts, c["start"] - 0.05)
+            for w in reversed(words[lo:hi]):
+                if w["end"] <= c["end"] + 0.05 and norm(w["word"]) == tokens[-1]:
+                    last_word = w["end"]
+                    break
+            if last_word is None:
+                continue
+        limit = cues[i + 1]["start"] if i + 1 < len(cues) else last_word + pad
+        new_end = min(last_word + pad, limit, c["start"] + max_seconds)
+        if new_end > c["end"] + 0.01:
+            c["end"] = new_end
+            c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+            n += 1
+    return n
+
+
 TS_LINE_RE = re.compile(r"^(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})")
 V_TAG_RE = re.compile(r"^<v ([^>]+)>")
+_TAG_SPLIT_RE = re.compile(r"(<v [^>]*>)")
+MAX_CUE_LINES = 2
+MAX_CHARS_PER_SECOND = 25.0  # hard ceiling; CHARS_PER_SECOND is the target
+
+
+def unescape_text(line: str) -> str:
+    """Decode WebVTT/HTML entities in cue text, leaving <v> tags alone."""
+    import html
+    parts = _TAG_SPLIT_RE.split(line)
+    return "".join(p if p.startswith("<v ") else html.unescape(p) for p in parts)
+
+
+def escape_text(line: str) -> str:
+    """Escape &, < and > in cue text as the WebVTT spec requires; <v> tags stay."""
+    parts = _TAG_SPLIT_RE.split(line)
+    return "".join(p if p.startswith("<v ") else
+                   p.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                   for p in parts)
 
 
 def parse_vtt(path: Path) -> list[dict]:
@@ -473,10 +541,11 @@ def parse_vtt(path: Path) -> list[dict]:
     ``lines`` is the cue body with any leading <v> tag stripped from the
     first line; ``speaker`` is that tag's name or None.
     """
-    text = path.read_text(encoding="utf-8")
+    # Tolerate what other editors save: a BOM, CRLF line endings, entities.
+    text = path.read_text(encoding="utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
     cues = []
     for block in re.split(r"\n\n+", text):
-        lines = block.strip().split("\n")
+        lines = [unescape_text(ln) for ln in block.strip().split("\n")]
         idx = next((i for i, ln in enumerate(lines) if TS_LINE_RE.match(ln)), None)
         if idx is None:
             continue
@@ -486,7 +555,7 @@ def parse_vtt(path: Path) -> list[dict]:
         if body:
             v = V_TAG_RE.match(body[0])
             if v:
-                speaker = v.group(1)
+                speaker = v.group(1).strip()
                 body[0] = V_TAG_RE.sub("", body[0], count=1)
         cues.append({"ts_line": lines[idx], "start": t2s(m.group(1)),
                      "end": t2s(m.group(2)), "speaker": speaker, "lines": body})
@@ -527,18 +596,33 @@ def cue_speaker_groups(cue: dict) -> list[tuple[str | None, str]]:
     return [(g[0], g[1]) for g in groups]
 
 
+def _cue_text(c: dict) -> str:
+    return " ".join(text for _, text in cue_speaker_groups(c))
+
+
+def _make_cue(start: float, end: float, spk: str | None, text: str) -> dict:
+    return {"start": start, "end": end, "speaker": spk, "lines": [text],
+            "ts_line": f"{format_ts(start)} --> {format_ts(end)}"}
+
+
 def split_multi_speaker_cues(cues: list[dict], words: list[dict], *,
-                             min_seconds: float = 1.5, min_words: int = 3) -> tuple[list[dict], int, int]:
+                             min_seconds: float = 1.5, min_words: int = 3,
+                             max_seconds: float = 7.0, max_chars: int = 84,
+                             max_gap: float = 1.0) -> tuple[list[dict], int, int, int]:
     """Split cues that carry several <v> tags, when every part stays readable.
 
     Timing comes from ``words`` (raw Whisper word timestamps). A cue is
     split only if each speaker's part would last at least ``min_seconds``
-    and hold at least ``min_words`` words; otherwise the cue is kept with
-    both tags, which is the guideline for short overlapping exchanges.
-    Returns (cues, n_split, n_kept).
+    and hold at least ``min_words`` words. When exactly one part is too
+    short and the neighbouring cue on that side belongs to the same
+    speaker (at most ``max_gap`` s away), the short part is merged into
+    that neighbour instead, as long as the result stays under
+    ``max_seconds`` and ``max_chars``; the other part becomes its own cue.
+    Otherwise the cue is kept with both tags, which is the guideline for
+    short overlapping exchanges. Returns (cues, n_split, n_merged, n_kept).
     """
     out: list[dict] = []
-    n_split = n_kept = 0
+    n_split = n_merged = n_kept = 0
     for idx, c in enumerate(cues):
         groups = cue_speaker_groups(c)
         if len(groups) < 2:
@@ -556,10 +640,38 @@ def split_multi_speaker_cues(cues: list[dict], words: list[dict], *,
             idxs = [i for i, o in enumerate(owner) if o == gi]
             starts.append(next((amap[i]["start"] for i in idxs if i in amap), None))
         bounds = [c["start"]] + starts[1:] + [c["end"]]
-        readable = all(g[1].split().__len__() >= min_words for g in groups) and \
-            all(b is not None for b in bounds) and \
-            all(bounds[i + 1] - bounds[i] >= min_seconds for i in range(len(groups)))
-        if not readable:
+        timed = all(b is not None for b in bounds)
+        ok = [timed and len(groups[i][1].split()) >= min_words
+              and bounds[i + 1] - bounds[i] >= min_seconds for i in range(len(groups))]
+        if timed and len(groups) == 2 and ok.count(False) == 1:
+            short = ok.index(False)
+            spk_s, text_s = groups[short]
+            spk_o, text_o = groups[1 - short]
+            if short == 0 and out and out[-1].get("speaker") == spk_s \
+                    and len(cue_speaker_groups(out[-1])) == 1 \
+                    and c["start"] - out[-1]["end"] <= max_gap \
+                    and bounds[1] - out[-1]["start"] <= max_seconds \
+                    and len(_cue_text(out[-1])) + 1 + len(text_s) <= max_chars:
+                prev = out[-1]
+                prev["lines"] = [_cue_text(prev) + " " + text_s]
+                prev["end"] = bounds[1]
+                prev["ts_line"] = f"{format_ts(prev['start'])} --> {format_ts(prev['end'])}"
+                out.append(_make_cue(bounds[1], c["end"], spk_o, text_o))
+                n_merged += 1
+                continue
+            nxt = cues[idx + 1] if idx + 1 < len(cues) else None
+            if short == 1 and nxt is not None and nxt.get("speaker") == spk_s \
+                    and len(cue_speaker_groups(nxt)) == 1 \
+                    and nxt["start"] - c["end"] <= max_gap \
+                    and nxt["end"] - bounds[1] <= max_seconds \
+                    and len(text_s) + 1 + len(_cue_text(nxt)) <= max_chars:
+                out.append(_make_cue(c["start"], bounds[1], spk_o, text_o))
+                nxt["lines"] = [text_s + " " + _cue_text(nxt)]
+                nxt["start"] = bounds[1]
+                nxt["ts_line"] = f"{format_ts(nxt['start'])} --> {format_ts(nxt['end'])}"
+                n_merged += 1
+                continue
+        if not all(ok):
             n_kept += 1
             out.append(c)
             continue
@@ -568,7 +680,7 @@ def split_multi_speaker_cues(cues: list[dict], words: list[dict], *,
                         "lines": [text],
                         "ts_line": f"{format_ts(bounds[gi])} --> {format_ts(bounds[gi + 1])}"})
         n_split += 1
-    return out, n_split, n_kept
+    return out, n_split, n_merged, n_kept
 
 
 def wrap_cue_lines(cue: dict, width: int = 42) -> None:
@@ -598,6 +710,6 @@ def render_vtt(cues: list[dict]) -> str:
         if c.get("speaker"):
             lines[0] = f"<v {c['speaker']}>{lines[0]}"
         out.append(c["ts_line"])
-        out.extend(lines)
+        out.extend(escape_text(ln) for ln in lines)
         out.append("")
     return "\n".join(out)

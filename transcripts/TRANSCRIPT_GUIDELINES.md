@@ -44,6 +44,19 @@ ceiling. Back-to-back cues cannot be helped this way; if one is far too
 short, merge it with its neighbour instead. The pipeline applies this
 rule automatically when rendering.
 
+**Cue ends are padded 0.5 s into a following pause.** Whisper's word
+end times land a few hundred milliseconds before the speaker has finished
+the word, so a cue that is followed by silence would otherwise cut off
+early (measured on episode 87: hand corrections extended such cues by
+0.3–0.8 s). The pipeline and `--polish` push every end up to 0.5 s into
+the pause, never past the next cue or the 7 s ceiling (`--tail-pad 0`
+turns it off).
+
+**25 characters per second is the hard ceiling.** Above that the text is
+unreadable; shorten it or merge the cue with a neighbour. `--polish`
+lists cues over the ceiling (counting all characters, spaces included,
+tags excluded, like Subtitle Edit's "count all characters").
+
 ### Gaps between cues
 
 - **Short pause (< 1s)** between adjacent words in the same thought →
@@ -65,7 +78,12 @@ Never force 100% back-to-back timing. Silence is meaningful.
   in English (Norwegian speech stays Norwegian). Game and film clips
   are transcribed in their original language and tagged with the
   character's name (`<v Picard>`).
-- Ellipses (…) to indicate trailing off.
+- Ellipses to indicate trailing off, or a pause in the middle of a
+  sentence that continues in the next cue (on the end of the first cue
+  only, never on the start of the next). Use the single character «…»,
+  not three periods; `corrections.json` turns "..." into «…».
+- A sentence that simply continues in the next cue gets no marker at
+  all: no ellipsis, no dash.
 
 ### What to drop or condense
 
@@ -131,7 +149,8 @@ splits fall on actual word boundaries, not estimated positions.
 ### Line length and layout
 
 - **Max characters per line**: 42
-- **Max lines per cue**: 2
+- **Max lines per cue**: 2 (so at most 84 characters of text; `--polish`
+  lists cues that wrap to three lines, shorten those)
 - Break at word boundaries only; never split mid-word or mid-hyphen.
 
 ### Speaker labels
@@ -163,17 +182,23 @@ speaker on its own line:
 ```
 
 Rule of thumb: split into two cues only when **both** parts would last
-at least 1.5 s and hold at least three words. `transcribe.py --polish`
-applies exactly this rule to cues you have marked with a second `<v>`
-line, using word timestamps from the raw cache, and leaves the rest as
-two-speaker cues. When one voice carries the content and the other is
+at least 1.5 s and hold at least three words. When only one part is too
+short and the neighbouring cue on that side is the same speaker, merge
+the short part into that neighbour instead (if the result stays under
+7 s and two lines) and let the other part stand alone. `transcribe.py
+--polish` applies exactly these rules to cues you have marked with a
+second `<v>` line, using word timestamps from the raw cache, and leaves
+the rest as two-speaker cues. When one voice carries the content and the other is
 just noise, keep only the one that matters (see section 2).
 
-### Header
+### Header and file format
 
 Just the `WEBVTT` header followed by a blank line. No `Kind: captions`
 or `Language:` metadata lines — they are optional in the spec and some
-stricter parsers prefer them absent.
+stricter parsers prefer them absent. UTF-8 without BOM, LF line endings.
+`&`, `<` and `>` in cue text are written as `&amp;`, `&lt;` and `&gt;`
+as the spec requires; the pipeline escapes on write and decodes on read,
+and tolerates a BOM, CRLF and entities from other editors.
 
 ```
 WEBVTT
@@ -181,6 +206,32 @@ WEBVTT
 00:00:00.500 --> 00:00:03.200
 <v Sigve>Velkommen tilbake til cd SPILL.
 ```
+
+## 4b. Editing in Subtitle Edit
+
+Subtitle Edit keeps `<v>` tags intact and is fine for timing work. Use a
+custom rules profile that matches these guidelines, so its warnings mean
+something:
+
+| Setting | Value |
+|---|---|
+| Single line max length | 42 |
+| Optimal chars/sec | 17 |
+| Max chars/sec | 25 |
+| Max words/min | 400 (never triggers; chars/sec is the real check) |
+| Min duration | 1000 ms |
+| Max duration | 8000 ms |
+| Min gap | 0 ms (cues are back-to-back) |
+| Max number of lines | 2 |
+| Unbreak subtitles shorter than | 42 |
+| Dialog style | leave as is; do not use the dialog feature, tag each speaker with `<v>` on its own line |
+| Continuation style | None, ellipsis for pauses (trailing only) |
+| Cps/line-length | Count all characters |
+| Encoding | UTF-8 without BOM |
+| Line endings | LF if the option exists; `--polish` normalises otherwise |
+
+After saving, run `transcribe.py -o <file> --polish` and read its report
+(cues over 7 s, overlaps, three-line cues, cues over 25 cps).
 
 ## 5. Pipeline defaults
 
@@ -263,11 +314,13 @@ uv run python scripts/transcribe.py -o transcripts/<Name>.vtt --polish
 ```
 
 as often as you like. It keeps your edits and: splits cues you marked
-with a second `<v>` line when both parts stay readable (else keeps them
-as two-speaker cues), applies `corrections.json`, extends cues that are
-too short to read into the silence after them, re-wraps at 42
-characters, and lists cues over 7 s and any overlaps. No GPU needed; it
-uses the raw cache from the transcription run for word timing.
+with a second `<v>` line when both parts stay readable (or merges a
+too-short part into the neighbouring cue of the same speaker), applies
+`corrections.json`, extends cues that are too short to read into the
+silence after them, re-wraps at 42 characters, and lists cues over 7 s,
+overlaps, cues that wrap to three lines and cues over 25 characters per
+second. No GPU needed; it uses the raw cache from the transcription run
+for word timing.
 
 ### `scripts/add_speakers.py`
 

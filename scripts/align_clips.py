@@ -10,7 +10,8 @@ cross-correlation of log-band energy features (robust to gain, EQ and a
 music bed), then rewrites the raw cache from `transcribe.py` so that
 
   * the clip's speech span carries one diarization turn with the
-    contributor's name,
+    contributor's name (a clip played back faster in the mix gets a fitted
+    offset + rate so its word times still land right),
   * the mix transcript inside that span is replaced by a transcript of the
     clean clip (transcribe.py --no-diarization, run here when missing),
   * clusters that only spoke inside clips lose any stray turns elsewhere,
@@ -130,10 +131,71 @@ def locate(mix_f: np.ndarray, clip: np.ndarray, *, win_s: float = 6.0,
     good = [h for h in hits if h[2] > 0.5 and h[2] - h[3] > 0.1]
     if not good:
         return None
-    med = float(np.median([h[1] for h in good]))
-    agree = [h for h in hits if abs(h[1] - med) < 0.2]
-    return {"offset": med, "duration": dur, "windows": len(hits), "agree": len(agree),
-            "peak_min": min(h[2] for h in agree), "peak_max": max(h[2] for h in agree)}
+    # Clips are sometimes played back a few percent faster in the mix (Reaper
+    # item rate), so the start offset drifts linearly along the clip. Fit
+    # mix_pos = offset + rate * clip_t robustly: median pairwise slope, then a
+    # least-squares refit on the inliers of that line.
+    ts = np.array([h[0] for h in good])
+    pos = np.array([h[0] + h[1] for h in good])
+    rate = 1.0
+    if len(good) >= 3:
+        slopes = [(pos[j] - pos[i]) / (ts[j] - ts[i])
+                  for i in range(len(good)) for j in range(i + 1, len(good))
+                  if ts[j] - ts[i] >= 16.0]
+        if slopes:
+            rate = float(np.median(slopes))
+    offset = float(np.median(pos - rate * ts))
+    inl = [h for h in hits if abs(h[0] + h[1] - (offset + rate * h[0])) < 0.3]
+    if len(inl) >= 3:
+        A = np.array([[1.0, h[0]] for h in inl])
+        b = np.array([h[0] + h[1] for h in inl])
+        offset, rate = (np.linalg.lstsq(A, b, rcond=None)[0]).tolist()
+    if not 0.9 < rate < 1.1:          # implausible; fall back to a fixed offset
+        rate = 1.0
+        offsets = sorted(h[1] for h in good)
+        offset = float(offsets[len(offsets) // 2])
+    agree = [h for h in hits if abs(h[0] + h[1] - (offset + rate * h[0])) < 0.3]
+    if not agree:
+        agree = good
+    # A long clip is sometimes faded out early with the hosts talking over
+    # the rest. When the trailing windows all miss, cut the clip there so
+    # the merge does not paste unheard text over the hosts.
+    # A music bed or fade can also make trailing windows miss, so this is
+    # only a suspicion; merge() checks the words against the mix transcript.
+    cut = None
+    last_ok = max(h[0] for h in agree) + win_s
+    trailing = [h for h in hits if h[0] >= last_ok]
+    if len(trailing) >= 2:
+        cut = last_ok
+    return {"offset": offset, "rate": rate, "duration": dur, "windows": len(hits),
+            "agree": len(agree), "peak_min": min(h[2] for h in agree),
+            "peak_max": max(h[2] for h in agree), "cut": cut}
+
+
+def _norm_words(words, lo=None, hi=None):
+    import re
+    out = set()
+    for w in words:
+        if lo is not None and not (lo <= w["start"] <= hi):
+            continue
+        s = re.sub(r"[^\wæøå]", "", w["word"].lower())
+        if len(s) >= 3:
+            out.add(s)
+    return out
+
+
+def confirm_cut(clip_segs, mix_segs, tm, cut: float, dur: float) -> float | None:
+    """Return the clip time to cut at, or None when the tail is in the mix.
+
+    The tail of the clean clip is compared with what Whisper heard in the mix
+    over the same span; if most of the tail words are there, nothing was cut.
+    """
+    tail = _norm_words((w for s in clip_segs for w in s["words"]), cut, dur)
+    if len(tail) < 5:
+        return None
+    heard = _norm_words((w for s in mix_segs for w in s["words"]), tm(cut) - 2, tm(dur) + 2)
+    overlap = len(tail & heard) / len(tail)
+    return None if overlap >= 0.4 else cut
 
 
 # --------------------------------------------------------------------------
@@ -183,11 +245,30 @@ def merge(raw: dict, placements: list[dict], pad: float = 0.3) -> dict:
     spans = []
     for p in sorted(placements, key=lambda x: x["mix_start"]):
         who, off, clip_raw = p["speaker"], p["offset"], p["clip_raw"]
-        words = [w for s in clip_raw["segments"] for w in s["words"]]
+        rate = p.get("rate", 1.0)
+
+        def tm(t):                      # clip time -> mix time
+            return off + rate * t
+
+        clip_segs = clip_raw["segments"]
+        cut = None
+        if p.get("cut") is not None:
+            cut = confirm_cut(clip_segs, raw["segments"], tm, p["cut"],
+                              max(w["end"] for s in clip_segs for w in s["words"]))
+        if cut is not None:
+            print(f"  ✂ {who}: clip cut in the mix at clip {cut:.0f}s "
+                  f"(mix {format_ts(tm(cut))}); text after that dropped")
+            clip_segs = [s for s in ({**s, "words": [w for w in s["words"]
+                                                    if w["start"] < cut]}
+                                     for s in clip_segs) if s["words"]]
+            for s in clip_segs:
+                s["end"] = s["words"][-1]["end"]
+                s["text"] = "".join(w["word"] for w in s["words"]).strip()
+        words = [w for s in clip_segs for w in s["words"]]
         if not words:
             print(f"  {who}: clip transcript has no words, skipping")
             continue
-        lo, hi = words[0]["start"] + off - pad, words[-1]["end"] + off + pad
+        lo, hi = tm(words[0]["start"]) - pad, tm(words[-1]["end"]) + pad
         spans.append((lo, hi))
         diar = cut_turns(diar, lo, hi) + [{"start": lo, "end": hi, "speaker": who}]
         smap[who] = who
@@ -197,11 +278,11 @@ def merge(raw: dict, placements: list[dict], pad: float = 0.3) -> dict:
                 kept.append(s)
             elif (t := trim_segment(s, lo, hi)) is not None:
                 kept.append(t)
-        added = [{"start": s["start"] + off, "end": s["end"] + off, "text": s["text"],
-                  "words": [{**w, "start": w["start"] + off, "end": w["end"] + off}
+        added = [{"start": tm(s["start"]), "end": tm(s["end"]), "text": s["text"],
+                  "words": [{**w, "start": tm(w["start"]), "end": tm(w["end"])}
                             for w in s["words"]],
                   "gap": s.get("gap", False), "from_clip": who}
-                 for s in clip_raw["segments"]]
+                 for s in clip_segs]
         touched = len(segs) - len(kept)
         segs = kept + added
         print(f"  {who:22s} {format_ts(lo)} - {format_ts(hi)}  "
@@ -270,14 +351,20 @@ def main() -> int:
         if loc is None:
             print(f"  ✗ {who:22s} {path.name}: not found in the mix")
             continue
+        mix_end = loc["offset"] + loc["rate"] * loc["duration"]
         flag = "" if loc["agree"] == loc["windows"] else \
             f"  ⚠ only {loc['agree']}/{loc['windows']} windows agree (clip edited?)"
+        if abs(loc["rate"] - 1) > 0.003:
+            flag += f"  rate x{loc['rate']:.3f}"
+        if loc["cut"] is not None:
+            flag += f"  ? trailing windows miss from clip {loc['cut']:.0f}s (checked on merge)"
         print(f"  {who:22s} {path.name}: mix {format_ts(loc['offset'])} - "
-              f"{format_ts(loc['offset'] + loc['duration'])}  "
+              f"{format_ts(mix_end)}  "
               f"(ncc {loc['peak_min']:.2f}-{loc['peak_max']:.2f}){flag}")
         placements.append({"file": path, "speaker": who, "lang": lang or "no",
-                           "offset": loc["offset"], "mix_start": loc["offset"],
-                           "mix_end": loc["offset"] + loc["duration"]})
+                           "offset": loc["offset"], "rate": loc["rate"],
+                           "cut": loc["cut"],
+                           "mix_start": loc["offset"], "mix_end": mix_end})
     if args.locate_only or not placements:
         return 0
 
