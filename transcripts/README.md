@@ -153,7 +153,9 @@ Sporene gjenkjennes på navn: vertenes spor («Mamen», «Sigve»), et spor med
 navnet til en gjest fra episodens `podcast:person`-liste eller stemmeprofilene
 (fornavn holder), eller eksplisitt `--track "Roar=Roar Granevang"`. Spor som
 ikke matcher noen regnes som musikk/effekter. `--list` viser spor og filer og
-stopper. Målt på episode 120: pyannote satte feil taler på 8 % av cuene selv
+stopper. Klipp på andre språk enn norsk transkriberes med `--item-model`
+(standard `Systran/faster-whisper-large-v3`): NB-Whisper oversetter engelske
+klipp til norsk selv med `--language en`. Målt på episode 120: pyannote satte feil taler på 8 % av cuene selv
 med profil-likhet over 0,93; solosporene fanget 6 % flere ord enn mixen.
 
 ## Talernavn

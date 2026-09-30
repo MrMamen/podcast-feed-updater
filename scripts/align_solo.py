@@ -58,6 +58,7 @@ HOST_TRACKS = {"mamen": "Mr. Mamen", "mr. mamen": "Mr. Mamen", "mr mamen": "Mr. 
                "sigve": "Sigve"}
 NON_SPEECH_HINTS = ("musikk", "music", "intro", "outro", "sfx", "effekt", "lyd", "jingle",
                     "spill", "game", "klipp", "clip", "voices", "master")
+DEFAULT_ITEM_MODEL = "Systran/faster-whisper-large-v3"   # multilingual, for --item clips
 MIN_GAP = 2.5        # seconds of mix silence before solo words are inserted
 MIN_GAP_WORDS = 4
 WORD_PAD = 1.0       # items only count as fallback this far from any solo word
@@ -192,7 +193,7 @@ def map_tracks(tracks: list[dict], people: list[str], overrides: dict[str, str])
 # Transcription of clean files
 # --------------------------------------------------------------------------
 def ensure_cache(project: Path, audio: Path, tag: str, lang: str, episode: int | None,
-                 no_transcribe: bool) -> dict:
+                 no_transcribe: bool, model: str | None = None) -> dict:
     raw_dir = project / ".cache" / "raw"
     cache = raw_dir / f"{audio.stem}.{tag}.json"
     if not cache.exists():
@@ -204,6 +205,8 @@ def ensure_cache(project: Path, audio: Path, tag: str, lang: str, episode: int |
                "--language", lang]
         if episode is not None:
             cmd += ["--episode-number", str(episode)]
+        if model:
+            cmd += ["--model", model]
         r = subprocess.run(cmd, capture_output=True, text=True)
         if r.returncode:
             sys.stderr.write(r.stderr[-2000:])
@@ -412,6 +415,10 @@ def main() -> int:
     ap.add_argument("--item", action="append", default=[],
                     help='"<file on a non-speaker track>=<Tag>[|lang]": transcribe the clean '
                          'file and put its text in the mix with that tag (repeatable)')
+    ap.add_argument("--item-model", default=DEFAULT_ITEM_MODEL,
+                    help="Whisper model for --item files in another language than Norwegian "
+                         f"(default: {DEFAULT_ITEM_MODEL}). NB-Whisper translates English "
+                         "clips into Norwegian even with --language en.")
     ap.add_argument("--list", action="store_true", help="Print tracks, items and files; stop")
     ap.add_argument("--no-transcribe", action="store_true",
                     help="Fail instead of transcribing solo files whose cache is missing")
@@ -451,6 +458,25 @@ def main() -> int:
             else:
                 non_speech.append((span["start"], span["end"]))
     non_speech = merge_spans(non_speech)
+    # A recording belongs to one microphone. When a file also appears on another
+    # speaker's track (an item dragged onto the wrong track), tag those items with
+    # the owner, i.e. the speaker whose track uses the file most.
+    use: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    for (role, fname), items in files_by_speaker.items():
+        use[fname][role] += sum(i["len"] for i in items)
+    for fname, by_role in use.items():
+        if len(by_role) < 2:
+            continue
+        owner = max(by_role, key=by_role.get)
+        for role in [r for r in by_role if r != owner]:
+            moved = files_by_speaker.pop((role, fname))
+            files_by_speaker[(owner, fname)] += moved
+            for i in moved:
+                for si in speaker_items:
+                    if si["speaker"] == role and si["start"] == i["pos"]:
+                        si["speaker"] = owner
+            print(f"  ⚠ {fname}: {len(moved)} item(s) ({sum(i['len'] for i in moved):.0f} s) on the "
+                  f"{role!r} track belong to {owner}'s microphone; tagged {owner}")
     if args.list:
         return 0
     if not who:
@@ -484,7 +510,8 @@ def main() -> int:
         if not occurrences:
             print(f"  ⚠ --item {fname}: no item with that file on a non-speaker track")
             continue
-        raw = ensure_cache(project, path, "item", lang, args.episode_number, args.no_transcribe)
+        raw = ensure_cache(project, path, "item", lang, args.episode_number, args.no_transcribe,
+                           model=None if lang == "no" else args.item_model)
         for it in occurrences:
             words, _ = map_words(raw, [it], tag)
             if not words:
