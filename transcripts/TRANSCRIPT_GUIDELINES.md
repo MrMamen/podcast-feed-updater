@@ -322,6 +322,14 @@ overlaps, cues that wrap to three lines and cues over 25 characters per
 second. No GPU needed; it uses the raw cache from the transcription run
 for word timing.
 
+### `scripts/align_solo.py`
+
+Speaker tags and gap filling from the solo tracks, using the Reaper project
+as the map between solo time and mix time. Preferred over pyannote whenever
+the episode folder has the `.rpp` and one recording per microphone (see
+README). Run `transcribe.py --no-diarization` first, then this, then
+`--render-only`.
+
 ### `scripts/add_speakers.py`
 
 Re-tag speakers on an existing VTT *without re-transcribing*. Useful

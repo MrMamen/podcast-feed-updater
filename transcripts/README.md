@@ -125,6 +125,37 @@ så klippet ikke blir oversatt. `--locate-only` viser bare hvor klippene
 ligger. Originalcachen bevares som `.cache/raw/<navn>.orig.json`, så
 scriptet kan kjøres om igjen med en rettet mapping.
 
+## Solospor og Reaper-prosjektet: `scripts/align_solo.py`
+
+Episoder som er klippet i Reaper har `.rpp`-fila og ett opptak per mikrofon
+i mappa. Prosjektfila lister hvert klipp på hvert spor med posisjon i mixen,
+lengde og offset i kildefila, og er dermed en eksakt fasit for hvem som
+høres når, og for hvilke sekunder av hvert solospor som overlevde klippingen.
+Dette scriptet transkriberer solosporene hver for seg (uten diarisering),
+flytter ordene inn i mix-tid via klippene, og skriver om rå-cachen slik at
+
+- talertaggene kommer fra soloordene (pyannote brukes ikke; Reaper-klippet
+  er reserve der ingen soloord finnes),
+- tale mixen hoppet over fylles fra soloordene (samme regel som gap-fyllet),
+- rene filer på andre spor gitt med `--item` (spillintro, filmklipp)
+  transkriberes på sitt eget språk og erstatter mixteksten i sitt spenn,
+- den kartlagte soloteksten lagres som `solo_segments` i cachen, som
+  referanse for språkvasken.
+
+```bash
+uv run python scripts/transcribe.py -o transcripts/TA.vtt --episode-number 120 --no-diarization
+uv run python scripts/align_solo.py -o transcripts/TA.vtt --episode-number 120 \
+  --item "Total Annihilation - Intro Cinematic.wav=Forteller|en"
+uv run python scripts/transcribe.py -o transcripts/TA.vtt --render-only
+```
+
+Sporene gjenkjennes på navn: vertenes spor («Mamen», «Sigve»), et spor med
+navnet til en gjest fra episodens `podcast:person`-liste eller stemmeprofilene
+(fornavn holder), eller eksplisitt `--track "Roar=Roar Granevang"`. Spor som
+ikke matcher noen regnes som musikk/effekter. `--list` viser spor og filer og
+stopper. Målt på episode 120: pyannote satte feil taler på 8 % av cuene selv
+med profil-likhet over 0,93; solosporene fanget 6 % flere ord enn mixen.
+
 ## Talernavn
 
 Profiler og RSS-metadata bruker fullt navn, men `<v>`-taggene i VTT-en
