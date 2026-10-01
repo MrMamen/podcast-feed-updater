@@ -20,8 +20,13 @@ uv run python scripts/align_solo.py  -o transcripts/Episode.vtt --episode-number
 uv run python scripts/transcribe.py -o transcripts/Episode.vtt --render-only
 ```
 
-Deretter språkvask (se retningslinjene) og `transcribe.py --polish` etter
-hver runde med håndredigering. Detaljer om hvert steg under.
+Deretter språkvasken: `scripts/claude-tools/language_pass.py split` deler
+VTT-en i ti-minutters biter ved nærmeste pause, med soloteksten og nabocuene
+som referanse og en ferdig instruks per bit; én subagent redigerer hver bit;
+`join` setter sammen igjen, `measure` sier hva som ble endret, og `names`
+lister navn som er stavet ulikt i ulike biter. Til slutt `transcribe.py
+--polish`, og det samme etter hver runde med håndredigering. Detaljer om
+hvert steg under.
 
 ## `scripts/transcribe.py`
 

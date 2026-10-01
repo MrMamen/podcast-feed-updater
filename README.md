@@ -109,7 +109,7 @@ podcast-feed-updater/
 │   ├── asr_common.py          # Felles kode for transkripsjonsscriptene
 │   ├── transcribe.py, align_solo.py, align_clips.py, add_speakers.py,
 │   │   build_speaker_profiles.py, build_profiles_clean.py  # Transkripsjon (se transcripts/README.md)
-│   └── claude-tools/          # Hjelpescript for Claude-sesjoner (ikke podcast-relatert)
+│   └── claude-tools/          # Hjelpescript for Claude-sesjoner (språkvask-biter, minne)
 ├── docs/                      # Markdown-dokumentasjon
 └── output/                    # Generert XML (publiseres til GitHub Pages)
 ```
