@@ -22,6 +22,8 @@ raw cache from `transcribe.py` so that
     (NB-Whisper would translate them), and replace the mix text inside
     their span, tagged "Spillklipp". --item sets the tag (a character
     name) and optionally the language for a file: "file.wav=Gabriel|en".
+    A produced clip on a speaker's track (an intro, a sketch) counts as
+    that microphone unless it is given with --item.
   * mix words that lie inside music/effects spans with no microphone
     item or solo word near them are dropped as hallucinations,
   * spans where a microphone item exists but the solo track gave no
@@ -488,8 +490,8 @@ def main() -> int:
     ap.add_argument("--track", action="append", default=[],
                     help='"<track name>=<Full speaker name>" (repeatable)')
     ap.add_argument("--item", action="append", default=[],
-                    help='"<file on a non-speaker track>=<Tag>[|lang]": tag (and language) for '
-                         'a clip; files not listed are still found automatically and tagged '
+                    help='"<file>=<Tag>[|lang]": tag (and language) for a clip, also for a '
+                         'produced clip on a speaker track (not that microphone); files not listed are still found automatically and tagged '
                          '"Spillklipp" with the language detected (repeatable)')
     ap.add_argument("--no-auto-items", action="store_true",
                     help="Only transcribe the clips given with --item")
@@ -523,6 +525,11 @@ def main() -> int:
     speaker_items: list[dict] = []
     non_speech: list[tuple[float, float]] = []
     files_by_speaker: dict[tuple[str, str], list[dict]] = defaultdict(list)
+    specs: dict[str, tuple[str, str]] = {}          # file -> (tag, lang)
+    for spec in args.item:
+        fname, _, tag = spec.partition("=")
+        tag, _, lang = tag.partition("|")
+        specs[_nfc(fname.strip()).lower()] = (tag.strip() or "Spillklipp", lang.strip() or "auto")
     for t in tracks:
         if not t["items"]:
             continue
@@ -533,7 +540,7 @@ def main() -> int:
               f"-> {role or 'non-speech'}   files: {', '.join(files)[:90]}")
         for i in t["items"]:
             span = {"start": i["pos"], "end": i["pos"] + i["len"]}
-            if role:
+            if role and _nfc(basename(i["file"])).lower() not in specs:
                 speaker_items.append({**span, "speaker": role})
                 files_by_speaker[(role, basename(i["file"]))].append(i)
             else:
@@ -576,18 +583,14 @@ def main() -> int:
         speaker_words += words
         print(f"  {role:22s} {path.name}: {len(words)} words in the mix, {dropped} cut out")
 
-    # clips: files on non-speaker tracks that contain speech
-    specs: dict[str, tuple[str, str]] = {}          # file -> (tag, lang)
-    for spec in args.item:
-        fname, _, tag = spec.partition("=")
-        tag, _, lang = tag.partition("|")
-        specs[_nfc(fname.strip()).lower()] = (tag.strip() or "Spillklipp", lang.strip() or "auto")
+    # clips: files on non-speaker tracks that contain speech, and --item files
+    # wherever they lie
     ns_files: dict[str, list[dict]] = defaultdict(list)
     for t in tracks:
-        if who.get(t["name"]):
-            continue
         for i in t["items"]:
-            ns_files[_nfc(basename(i["file"])).lower()].append(i)
+            key = _nfc(basename(i["file"])).lower()
+            if not who.get(t["name"]) or key in specs:
+                ns_files[key].append(i)
     if not args.no_auto_items:
         for key, items in sorted(ns_files.items()):
             if key in specs:
@@ -607,7 +610,7 @@ def main() -> int:
             else:
                 print(f"  music/effects {path.name}: {speech:.0f} s speech of {dur:.0f} s, skipped")
     for key in [k for k in specs if k not in ns_files]:
-        print(f"  ⚠ --item {key}: no item with that file on a non-speaker track")
+        print(f"  ⚠ --item {key}: no item with that file in the project")
     inserts: list[dict] = []
     for key, (tag, lang) in specs.items():
         occurrences = ns_files.get(key)

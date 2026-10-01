@@ -163,7 +163,9 @@ flytter ordene inn i mix-tid via klippene, og skriver om rå-cachen slik at
   Silero VAD; de som inneholder tale transkriberes fra den rene fila med
   en flerspråklig modell og automatisk språkgjenkjenning, og erstatter
   mixteksten i sitt spenn med taggen `Spillklipp`. `--item "fil.wav=Gabriel"`
-  setter rollenavn (og eventuelt språk, `|en`) på et klipp,
+  setter rollenavn (og eventuelt språk, `|en`) på et klipp. Et produsert
+  innslag som ligger på en talers spor (intro, sketsj) regnes som den
+  mikrofonen med mindre det gis med `--item`,
 - mixord som ligger i musikk-/effektspenn uten mikrofon-item eller soloord
   i nærheten fjernes som hallusinasjoner,
 - spenn der et mikrofon-item finnes men solosporet ikke ga ord (dropout)
