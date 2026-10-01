@@ -73,6 +73,7 @@ slik at prosjektets venv med CUDA-hjulene brukes.
 | `--polish` | Rydd en håndredigert VTT på plass: del markerte to-taler-cues når begge deler er lesbare (eller slå en for kort del sammen med nabocuen til samme taler), kjør ordlista, skyv cue-slutter 0,5 s inn i pausen etter, forleng korte cues, brekk om, rapporter cues over 7 s, overlapp, tre linjer og over 25 tegn/s. Uten GPU |
 | `--tail-pad 0.5` | Sekunder hver cue-slutt skyves inn i pausen etter (Whisper slutter ordene for tidlig); 0 skrur av |
 | `--no-fill-gaps` | Dropp passet som finner tale Whisper hoppet over og transkriberer den på nytt (se TRANSCRIPT_GUIDELINES) |
+| `--language auto` | La modellen gjenkjenne språket (bruk med flerspråklig `--model`; NB-Whisper oversetter andre språk til norsk) |
 | `--initial-prompt "..."` | Overstyr auto-prompt med egne termer |
 | `--refresh-rss` | Tving ny nedlasting av RSS (ellers brukes 24h cache) |
 | `--corrections FILE` | Bruk annen rettelsesordliste |
@@ -137,15 +138,22 @@ flytter ordene inn i mix-tid via klippene, og skriver om rå-cachen slik at
 - talertaggene kommer fra soloordene (pyannote brukes ikke; Reaper-klippet
   er reserve der ingen soloord finnes),
 - tale mixen hoppet over fylles fra soloordene (samme regel som gap-fyllet),
-- rene filer på andre spor gitt med `--item` (spillintro, filmklipp)
-  transkriberes på sitt eget språk og erstatter mixteksten i sitt spenn,
+- filene på de andre sporene (musikk, effekter, spillklipp) sjekkes med
+  Silero VAD; de som inneholder tale transkriberes fra den rene fila med
+  en flerspråklig modell og automatisk språkgjenkjenning, og erstatter
+  mixteksten i sitt spenn med taggen `Spillklipp`. `--item "fil.wav=Gabriel"`
+  setter rollenavn (og eventuelt språk, `|en`) på et klipp,
+- mixord som ligger i musikk-/effektspenn uten mikrofon-item eller soloord
+  i nærheten fjernes som hallusinasjoner,
+- spenn der et mikrofon-item finnes men solosporet ikke ga ord (dropout)
+  listes, siden taggen der kommer fra klippet og ikke fra ordene,
 - den kartlagte soloteksten lagres som `solo_segments` i cachen, som
   referanse for språkvasken.
 
 ```bash
 uv run python scripts/transcribe.py -o transcripts/TA.vtt --episode-number 120 --no-diarization
 uv run python scripts/align_solo.py -o transcripts/TA.vtt --episode-number 120 \
-  --item "Total Annihilation - Intro Cinematic.wav=Forteller|en"
+  --item "Total Annihilation - Intro Cinematic.wav=Forteller"
 uv run python scripts/transcribe.py -o transcripts/TA.vtt --render-only
 ```
 
@@ -153,9 +161,10 @@ Sporene gjenkjennes på navn: vertenes spor («Mamen», «Sigve»), et spor med
 navnet til en gjest fra episodens `podcast:person`-liste eller stemmeprofilene
 (fornavn holder), eller eksplisitt `--track "Roar=Roar Granevang"`. Spor som
 ikke matcher noen regnes som musikk/effekter. `--list` viser spor og filer og
-stopper. Klipp på andre språk enn norsk transkriberes med `--item-model`
-(standard `Systran/faster-whisper-large-v3`): NB-Whisper oversetter engelske
-klipp til norsk selv med `--language en`. Målt på episode 120: pyannote satte feil taler på 8 % av cuene selv
+stopper. Klippene transkriberes med `--item-model` (standard
+`Systran/faster-whisper-large-v3`) og `--language auto`: NB-Whisper oversetter
+engelske klipp til norsk selv med `--language en`. `--no-auto-items` tar bare
+klippene gitt med `--item`. Målt på episode 120: pyannote satte feil taler på 8 % av cuene selv
 med profil-likhet over 0,93; solosporene fanget 6 % flere ord enn mixen.
 
 ## Talernavn

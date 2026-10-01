@@ -16,11 +16,16 @@ raw cache from `transcribe.py` so that
   * speech the mix transcript skipped is filled from the solo words
     (stretches of >= 2.5 s with 4+ words, the same rule as the built-in
     gap fill),
-  * items on other tracks given with --item (a game intro, a film clip)
-    are transcribed from the clean file, in their own language, and
-    replace the mix text inside their span with the given tag,
-  * spans covered only by non-speaker tracks (music, effects, game audio)
-    are listed so hallucinated cues there can be checked,
+  * files on the other tracks (music, effects, game audio) are checked
+    with Silero VAD; those that contain speech are transcribed from the
+    clean file with a multilingual model and automatic language detection
+    (NB-Whisper would translate them), and replace the mix text inside
+    their span, tagged "Spillklipp". --item sets the tag (a character
+    name) and optionally the language for a file: "file.wav=Gabriel|en".
+  * mix words that lie inside music/effects spans with no microphone
+    item or solo word near them are dropped as hallucinations,
+  * spans where a microphone item exists but the solo track gave no
+    words (a dropout) are listed for review,
   * the mapped solo text is kept in the cache under "solo_segments" as
     reference material for the language pass.
 
@@ -58,7 +63,9 @@ HOST_TRACKS = {"mamen": "Mr. Mamen", "mr. mamen": "Mr. Mamen", "mr mamen": "Mr. 
                "sigve": "Sigve"}
 NON_SPEECH_HINTS = ("musikk", "music", "intro", "outro", "sfx", "effekt", "lyd", "jingle",
                     "spill", "game", "klipp", "clip", "voices", "master")
-DEFAULT_ITEM_MODEL = "Systran/faster-whisper-large-v3"   # multilingual, for --item clips
+DEFAULT_ITEM_MODEL = "Systran/faster-whisper-large-v3"   # multilingual, for clips
+MIN_CLIP_SPEECH = 2.0    # seconds of VAD speech before a non-speaker file counts as a clip
+MIN_CLIP_RATIO = 0.15    # ... and at least this share of the file
 MIN_GAP = 2.5        # seconds of mix silence before solo words are inserted
 MIN_GAP_WORDS = 4
 WORD_PAD = 1.0       # items only count as fallback this far from any solo word
@@ -214,6 +221,16 @@ def ensure_cache(project: Path, audio: Path, tag: str, lang: str, episode: int |
     return json.loads(cache.read_text(encoding="utf-8"))
 
 
+def speech_seconds(path: Path) -> tuple[float, float]:
+    """(seconds of speech per Silero VAD, file duration)."""
+    from faster_whisper.vad import VadOptions, get_speech_timestamps
+    from asr_common import load_audio, SAMPLE_RATE
+    wav = load_audio(path)
+    ts = get_speech_timestamps(wav, VadOptions(threshold=0.5, min_speech_duration_ms=500,
+                                               min_silence_duration_ms=1000))
+    return sum(s["end"] - s["start"] for s in ts) / SAMPLE_RATE, len(wav) / SAMPLE_RATE
+
+
 # --------------------------------------------------------------------------
 # Mapping solo words into the mix
 # --------------------------------------------------------------------------
@@ -304,7 +321,56 @@ def build(raw: dict, speaker_words: list[dict], speaker_items: list[dict],
     segs = [dict(s) for s in raw["segments"]]
     diar: list[dict] = []
 
-    # 1) clean non-speaker items (game intro etc.) replace the mix text in their span
+    # 0) words the mix ASR produced inside music/effects spans, with no microphone
+    #    item and no solo word within 1 s, are hallucinations or game audio
+    sw_all = sorted(speaker_words, key=lambda w: w["start"])
+    support = merge_spans([(w["start"] - 1.0, w["end"] + 1.0) for w in sw_all]
+                          + [(i["start"] - 1.0, i["end"] + 1.0) for i in speaker_items], gap=0)
+    def supported(t):
+        return any(a <= t <= b for a, b in support)
+    def in_non_speech(t):
+        return any(a <= t <= b for a, b in non_speech)
+    dropped_words = []
+    kept = []
+    for s in segs:
+        words = s.get("words") or []
+        good = [w for w in words if not (in_non_speech((w["start"] + w["end"]) / 2)
+                                         and not supported((w["start"] + w["end"]) / 2))]
+        if len(good) == len(words):
+            kept.append(s)
+            continue
+        dropped_words += [w for w in words if w not in good]
+        if good:
+            kept.append({**s, "start": good[0]["start"], "end": good[-1]["end"],
+                         "text": "".join(w["word"] for w in good).strip(), "words": good})
+    segs = kept
+    if dropped_words:
+        print(f"  dropped {len(dropped_words)} mix word(s) inside music/effects spans with no "
+              f"microphone support (hallucination or game audio):")
+        run: list[dict] = []
+        for w in dropped_words + [None]:
+            if w is None or (run and w["start"] - run[-1]["end"] > 2.0):
+                if run:
+                    print(f"    {format_ts(run[0]['start'])} "
+                          f"{''.join(x['word'] for x in run).strip()[:80]}")
+                run = []
+            if w is not None:
+                run.append(w)
+
+    # 1) clean non-speaker items (game intro etc.) replace the mix text in their span;
+    #    two clips that overlap in the mix: the earlier one is cut where the next starts
+    inserts.sort(key=lambda i: i["start"])
+    for prev, nxt in zip(inserts, inserts[1:]):
+        if prev["end"] > nxt["start"]:
+            cut = nxt["start"]
+            prev["segments"] = [
+                {**s, "words": [w for w in s["words"] if w["start"] < cut]}
+                for s in prev["segments"] if s["start"] < cut]
+            for s in prev["segments"]:
+                s["end"] = min(s["end"], cut)
+                s["text"] = "".join(w["word"] for w in s["words"]).strip()
+            prev["segments"] = [s for s in prev["segments"] if s["words"]]
+            prev["end"] = cut
     for ins in inserts:
         lo, hi = ins["start"] - 0.5, ins["end"] + 0.5
         n0 = len(segs)
@@ -325,12 +391,20 @@ def build(raw: dict, speaker_words: list[dict], speaker_items: list[dict],
     covered += [(i["start"] - 0.5, i["end"] + 0.5) for i in inserts]
     covered = merge_spans(covered, gap=0)
     n_fb = 0
+    dropouts = []
     for it in speaker_items:
         for a, b in subtract((it["start"], it["end"]), covered):
             if b - a > 0.3:
                 diar.append({"start": a, "end": b, "speaker": it["speaker"]})
                 n_fb += 1
+                if b - a >= 3.0:
+                    dropouts.append((a, b, it["speaker"]))
     diar.sort(key=lambda d: d["start"])
+    if dropouts:
+        print(f"  {len(dropouts)} microphone item span(s) >= 3 s without solo words "
+              f"(solo-track dropout; tags there come from the item, check them):")
+        for a, b, who in sorted(dropouts):
+            print(f"    {format_ts(a)} - {format_ts(b)} {who}")
 
     # 4) gaps in the mix text filled from solo words
     mw = sorted((w for s in segs for w in s.get("words", [])), key=lambda w: w["start"])
@@ -413,8 +487,14 @@ def main() -> int:
     ap.add_argument("--track", action="append", default=[],
                     help='"<track name>=<Full speaker name>" (repeatable)')
     ap.add_argument("--item", action="append", default=[],
-                    help='"<file on a non-speaker track>=<Tag>[|lang]": transcribe the clean '
-                         'file and put its text in the mix with that tag (repeatable)')
+                    help='"<file on a non-speaker track>=<Tag>[|lang]": tag (and language) for '
+                         'a clip; files not listed are still found automatically and tagged '
+                         '"Spillklipp" with the language detected (repeatable)')
+    ap.add_argument("--no-auto-items", action="store_true",
+                    help="Only transcribe the clips given with --item")
+    ap.add_argument("--min-clip-speech", type=float, default=MIN_CLIP_SPEECH,
+                    help=f"Seconds of VAD speech for a non-speaker file to count as a clip "
+                         f"(default {MIN_CLIP_SPEECH}, and at least {MIN_CLIP_RATIO:.0%} of it)")
     ap.add_argument("--item-model", default=DEFAULT_ITEM_MODEL,
                     help="Whisper model for --item files in another language than Norwegian "
                          f"(default: {DEFAULT_ITEM_MODEL}). NB-Whisper translates English "
@@ -495,23 +575,52 @@ def main() -> int:
         speaker_words += words
         print(f"  {role:22s} {path.name}: {len(words)} words in the mix, {dropped} cut out")
 
-    # clean non-speaker items
-    inserts: list[dict] = []
+    # clips: files on non-speaker tracks that contain speech
+    specs: dict[str, tuple[str, str]] = {}          # file -> (tag, lang)
     for spec in args.item:
         fname, _, tag = spec.partition("=")
         tag, _, lang = tag.partition("|")
-        fname, tag, lang = fname.strip(), tag.strip(), (lang.strip() or "no")
-        path = resolve(folder, fname)
-        if path is None:
-            print(f"  ⚠ --item {fname}: not in {folder}")
+        specs[_nfc(fname.strip()).lower()] = (tag.strip() or "Spillklipp", lang.strip() or "auto")
+    ns_files: dict[str, list[dict]] = defaultdict(list)
+    for t in tracks:
+        if who.get(t["name"]):
             continue
-        occurrences = [i for t in tracks if not who.get(t["name"]) for i in t["items"]
-                       if _nfc(basename(i["file"])).lower() == _nfc(fname).lower()]
+        for i in t["items"]:
+            ns_files[_nfc(basename(i["file"])).lower()].append(i)
+    if not args.no_auto_items:
+        for key, items in sorted(ns_files.items()):
+            if key in specs:
+                continue
+            path = resolve(folder, key)
+            if path is None:
+                continue
+            try:
+                speech, dur = speech_seconds(path)
+            except Exception as e:
+                print(f"  ⚠ {path.name}: VAD failed ({e})")
+                continue
+            if speech >= args.min_clip_speech and speech / max(dur, 0.1) >= MIN_CLIP_RATIO:
+                specs[key] = ("Spillklipp", "auto")
+                print(f"  clip {path.name}: {speech:.0f} s speech of {dur:.0f} s "
+                      f"({len(items)} item(s))")
+            else:
+                print(f"  music/effects {path.name}: {speech:.0f} s speech of {dur:.0f} s, skipped")
+    for key in [k for k in specs if k not in ns_files]:
+        print(f"  ⚠ --item {key}: no item with that file on a non-speaker track")
+    inserts: list[dict] = []
+    for key, (tag, lang) in specs.items():
+        occurrences = ns_files.get(key)
         if not occurrences:
-            print(f"  ⚠ --item {fname}: no item with that file on a non-speaker track")
+            continue
+        path = resolve(folder, key)
+        if path is None:
+            print(f"  ⚠ {key}: not in {folder}")
             continue
         raw = ensure_cache(project, path, "item", lang, args.episode_number, args.no_transcribe,
                            model=None if lang == "no" else args.item_model)
+        detected = raw.get("language") or lang
+        nwords = sum(len(s["words"]) for s in raw["segments"])
+        print(f"  {tag:14s} {path.name}: {nwords} words, language {detected}")
         for it in occurrences:
             words, _ = map_words(raw, [it], tag)
             if not words:

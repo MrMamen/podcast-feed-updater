@@ -59,7 +59,7 @@ setup_cuda_paths()
 # --------------------------------------------------------------------------
 # Transcription (NB-Whisper)
 # --------------------------------------------------------------------------
-def transcribe(audio_wav, *, model_name: str, language: str = "no",
+def transcribe(audio_wav, *, model_name: str, language: str | None = "no",
                initial_prompt: str | None = None, beam_size: int = 5,
                vad_threshold: float | None = 0.3,
                batched: bool = False, batch_size: int = 8):
@@ -74,6 +74,8 @@ def transcribe(audio_wav, *, model_name: str, language: str = "no",
     t0 = time.time()
     kwargs = dict(language=language, beam_size=beam_size,
                   word_timestamps=True)
+    if language is None:
+        print("  language: auto-detect")
     # VAD trims non-speech, but the Silero default (threshold 0.5) is
     # aggressive enough to drop quiet or music-bedded speech entirely —
     # which leaves gaps in the transcript and breaks audio alignment.
@@ -106,7 +108,9 @@ def transcribe(audio_wav, *, model_name: str, language: str = "no",
     elapsed = time.time() - t0
     print(f"  {len(segs)} segments in {elapsed:.1f}s "
           f"({info.duration/elapsed:.1f}x realtime)")
-    return segs, info.duration, model
+    if language is None:
+        print(f"  detected language: {info.language} (p={info.language_probability:.2f})")
+    return segs, info.duration, model, info.language
 
 
 # --------------------------------------------------------------------------
@@ -586,7 +590,10 @@ def main() -> int:
                         help='Comma-separated mapping, e.g. "SPEAKER_00=Sigve,SPEAKER_01=Mamen"')
     parser.add_argument("--model", default="TheStigh/nb-whisper-large-ct2",
                         help="Whisper model name (HF repo or local CT2 dir)")
-    parser.add_argument("--language", default="no")
+    parser.add_argument("--language", default="no",
+                        help='Spoken language code, or "auto" to let the model detect it '
+                             '(use with a multilingual --model; NB-Whisper translates '
+                             'other languages into Norwegian)')
     parser.add_argument("--sequential", action="store_true",
                         help="Use the classic sequential Whisper decoder instead of "
                              "BatchedInferencePipeline. Batched is the default: about "
@@ -713,8 +720,9 @@ def main() -> int:
     wav = load_audio(args.audio)
     print(f"  {len(wav)/16000/60:.1f} min decoded in {time.time()-t0:.1f}s")
 
-    segs, duration, model = transcribe(
-        wav, model_name=args.model, language=args.language,
+    language = None if args.language.lower() == "auto" else args.language
+    segs, duration, model, detected = transcribe(
+        wav, model_name=args.model, language=language,
         initial_prompt=initial_prompt,
         vad_threshold=None if args.no_vad else args.vad_threshold,
         batched=not args.sequential, batch_size=args.batch_size,
@@ -759,7 +767,7 @@ def main() -> int:
     # only listed, in line with the subtitle style in TRANSCRIPT_GUIDELINES.
     gap_review: list[dict] = []
     if not args.no_fill_gaps:
-        extra, review = fill_gaps(model, wav, segs, language=args.language,
+        extra, review = fill_gaps(model, wav, segs, language=language or detected,
                                   initial_prompt=initial_prompt)
         for r in review:
             spk = speaker_for_range(diar_segments, r["start"], r["end"]) if diar_segments else None
@@ -777,6 +785,7 @@ def main() -> int:
     raw = {
         "audio": str(args.audio),
         "duration": duration,
+        "language": language or detected,
         "segments": [
             {"start": s.start, "end": s.end, "text": s.text,
              "words": [{"start": w.start, "end": w.end, "word": w.word}

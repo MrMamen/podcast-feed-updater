@@ -31,6 +31,17 @@
     ["Sedspill",      "DOS-spill"],
     ["silllytter",    "spillytter"],
 
+    ["Schottenjäger", "Schattenjäger"],
+    ["Shattenjäger",  "Schattenjäger"],
+    ["shatterjeger",  "Schattenjäger"],
+    ["Skattenjeger",  "Schattenjäger"],
+    ["Cabris sans corps", "Cabrit sans cor"],
+    ["Cabri sans cor", "Cabrit sans cor"],
+    ["Caprice Encore", "Cabrit sans cor"],
+    ["Gunther Ritter", "Günter Ritter"],
+    ["Gunter Ritter",  "Günter Ritter"],
+    ["Ogun Badakri",   "Ogoun Badagris"],
+
     ["berlinebolle",  "berlinerbolle"],
     ["aksang",        "aksent"],
     ["kruse",         "cruise"],
