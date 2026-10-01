@@ -4,13 +4,29 @@ Publiserbare VTT-transcripts for podcast-episoder, og verktøy for å lage nye.
 
 ## Innhold
 
-- `*.vtt` — publiserbare transcripts (én per episode)
+- `*.vtt` — publiserbare transcripts (én per episode, ikke i git)
 - `corrections.json` — permanent rettelsesordliste (egennavn, terminologi) som gjelder alle episoder
-- `<episode>.config.json` — episode-spesifikk config (arver fra `corrections.json`)
+- `TRANSCRIPT_GUIDELINES.md` — stilreglene transkriptene følger
+- `<episode>.review.md` — midlertidige sjekklister etter en språkvask (ikke i git)
 
-## Primær workflow: `scripts/transcribe.py`
+## Arbeidsflyt for en episode du har klippet selv
 
-For å transkribere en ny episode fra audio:
+Episodemappa har Reaper-prosjektet og ett opptak per mikrofon. Da er
+dette hele løpet, uten pyannote:
+
+```bash
+uv run python scripts/transcribe.py -o transcripts/Episode.vtt --episode-number 130 --no-diarization
+uv run python scripts/align_solo.py  -o transcripts/Episode.vtt --episode-number 130
+uv run python scripts/transcribe.py -o transcripts/Episode.vtt --render-only
+```
+
+Deretter språkvask (se retningslinjene) og `transcribe.py --polish` etter
+hver runde med håndredigering. Detaljer om hvert steg under.
+
+## `scripts/transcribe.py`
+
+For å transkribere en episode fra audio, med pyannote-diarisering når det
+ikke finnes solospor:
 
 ```bash
 uv run python scripts/transcribe.py \
@@ -207,10 +223,9 @@ Legg **permanente** korrigeringer her (ord/navn som går igjen på tvers av epis
 - Terminologi: CD-spillytter, pek-og-klikk, CRT-skjerm
 - Norske vanlige ord: hodene, berlinerbolle, marihuana osv.
 
-For **episode-spesifikke** rettelser (ett bestemt spill/gjest som kun nevnes
-én gang), rediger VTT-en direkte etter generering, eller bruk en
-`<episode>.config.json` hvis det er gjentakende for flere relaterte episoder
-(f.eks. påskelabyrint-serien).
+Spillterminologi som kommer igjen i flere episoder (Schattenjäger, Cabrit
+sans cor) hører også hjemme her. **Episode-spesifikke** rettelser (ett
+bestemt ord som kun nevnes én gang) gjøres direkte i VTT-en.
 
 ## Publisering
 
@@ -219,10 +234,3 @@ Etter du har en ferdig `.vtt`:
 1. Last opp til din hosting-provider (podbean el.l.)
 2. Legg til `<podcast:transcript url="..." type="text/vtt" language="nb"/>` i RSS-feeden for episoden
 3. Apple Podcasts, Podverse, Fountain og andre podcasting-2.0-spillere vil vise transkripsjonen din fremfor auto-genererte
-
-## Legacy: `scripts/normalize_transcript.py`
-
-Dette er det gamle scriptet som normaliserer YouTube karaoke-VTT til
-setnings-baserte kuer. Fortsatt nyttig hvis du har eksisterende
-YouTube-transcripts å konvertere, men `transcribe.py` er primærveien for
-nye episoder.

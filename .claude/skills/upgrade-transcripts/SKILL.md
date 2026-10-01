@@ -34,7 +34,7 @@ request.
    (`grep -o "<v [^>]*>" file.vtt | sort | uniq -c`).
 
 Healthy numbers on the RTX 3060 (Sept 2026): Whisper ~9x realtime
-sequential, ~18x with `--batched`; ~5x realtime end to end; known voices
+with the default batched decoder, ~9x with `--sequential`; ~5x realtime end to end; known voices
 match their profile at 0.85–0.95; other profiles stay below ~0.5.
 
 ## 2. See what is outdated

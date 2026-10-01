@@ -246,8 +246,9 @@ def map_words(raw: dict, items: list[dict], speaker: str) -> tuple[list[dict], i
             if it is None:
                 dropped += 1
                 continue
-            f = lambda t, it=it: it["pos"] + (t - it["soffs"]) / it["rate"]
-            out.append({"start": f(w["start"]), "end": f(w["end"]), "word": w["word"],
+            def to_mix(t: float, it: dict = it) -> float:
+                return it["pos"] + (t - it["soffs"]) / it["rate"]
+            out.append({"start": to_mix(w["start"]), "end": to_mix(w["end"]), "word": w["word"],
                         "speaker": speaker, "_item": id(it)})
     return out, dropped
 

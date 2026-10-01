@@ -495,68 +495,6 @@ def split_cue_by_words(words: list, max_dur: float = 8.0,
     return cues
 
 
-def split_long_cue(start: float, end: float, text: str,
-                   max_dur: float = 8.0) -> list[tuple[float, float, str]]:
-    """Split a cue into multiple shorter cues, preferring natural breaks.
-
-    Returns list of (start, end, text) tuples. Time is allocated
-    proportionally to character count of each chunk.
-    """
-    dur = end - start
-    if dur <= max_dur:
-        return [(start, end, text)]
-
-    # Pick a splitter that produces enough chunks
-    n_needed = int(dur / max_dur) + 1
-    chunks = None
-    for pattern in (
-        r"(?<=[.!?…])\s+",         # sentence boundary
-        r"(?<=[.!?…,;:])\s+",      # punctuation
-        r"\s+(?:og|men|så|eller|fordi|for|når|hvis)\s+",  # conjunctions
-        r"\s+",                     # whitespace fallback
-    ):
-        parts = re.split(pattern, text)
-        parts = [p.strip() for p in parts if p.strip()]
-        if len(parts) >= n_needed:
-            chunks = parts
-            break
-    if not chunks:
-        chunks = [text]
-
-    # Merge chunks into n_needed groups (roughly equal char count)
-    total_chars = sum(len(c) for c in chunks)
-    target = total_chars / n_needed
-    groups, current, current_len = [], [], 0
-    for c in chunks:
-        current.append(c)
-        current_len += len(c)
-        if current_len >= target and len(groups) < n_needed - 1:
-            groups.append(" ".join(current))
-            current, current_len = [], 0
-    if current:
-        groups.append(" ".join(current))
-
-    # Allocate time proportionally
-    total_chars = sum(len(g) for g in groups)
-    result = []
-    cursor = start
-    for g in groups[:-1]:
-        g_dur = dur * len(g) / total_chars
-        result.append((cursor, cursor + g_dur, g))
-        cursor += g_dur
-    result.append((cursor, end, groups[-1]))
-
-    # Recurse if any sub-cue is still too long AND we made progress
-    # (result has multiple chunks; if it's one big chunk, give up)
-    final = []
-    for (s, e, t) in result:
-        if e - s > max_dur and len(result) > 1 and len(t.split()) > 2:
-            final.extend(split_long_cue(s, e, t, max_dur))
-        else:
-            final.append((s, e, t))
-    return final
-
-
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
@@ -599,7 +537,6 @@ def main() -> int:
                              "BatchedInferencePipeline. Batched is the default: about "
                              "2x faster and, on a full episode, it kept ~10 min of "
                              "speech the sequential decoder skipped.")
-    parser.add_argument("--batched", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--batch-size", type=int, default=8,
                         help="Batch size for batched decoding (default: 8)")
     parser.add_argument("--initial-prompt", type=str,
@@ -951,12 +888,9 @@ def render_from_raw(args, raw_path: Path) -> int:
 
 def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
     """Split segments into cues, tag speakers, apply corrections, write VTT."""
-    import textwrap
     print(f"\nWriting {args.output}...")
-    lines = ["WEBVTT", ""]
     split_count = 0
-    word_split = 0
-    all_cues = []
+    cues: list[dict] = []
 
     def speaker_at(start: float, end: float) -> str | None:
         if not diar_segments:
@@ -965,50 +899,29 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
         return display_name(speaker_map.get(spk, spk), corrections) if spk else None
 
     for seg in segs:
-        # Prefer word-level splitting when word timestamps are available
-        if getattr(seg, "words", None):
-            sub_cues = split_cue_by_words(seg.words,
-                                           max_dur=args.max_cue_seconds,
-                                           max_chars=args.line_width * 3)
-            sub_cues = [(s, e, apply_corrections(t, corrections))
-                         for (s, e, t) in sub_cues]
-            word_split += 1 if len(sub_cues) > 1 else 0
-        else:
-            text = apply_corrections(seg.text.strip(), corrections)
-            sub_cues = split_long_cue(seg.start, seg.end, text,
-                                       max_dur=args.max_cue_seconds)
-        if len(sub_cues) > 1:
-            split_count += len(sub_cues) - 1
-
+        sub_cues = split_cue_by_words(seg.words, max_dur=args.max_cue_seconds,
+                                      max_chars=args.line_width * 3)
+        split_count += max(0, len(sub_cues) - 1)
         # Speaker is decided per cue, not per Whisper segment: a segment can
         # span a speaker change (especially in batched mode).
         for (cue_start, cue_end, cue_text) in sub_cues:
-            all_cues.append([cue_start, cue_end, cue_text,
-                             speaker_at(cue_start, cue_end)])
+            cues.append({"start": cue_start, "end": cue_end,
+                         "lines": [apply_corrections(cue_text, corrections)],
+                         "speaker": speaker_at(cue_start, cue_end)})
 
     # Give short cues time to be read when there is silence after them
     # (TRANSCRIPT_GUIDELINES "Reading time").
-    cue_dicts = [{"start": s, "end": e, "lines": [t], "speaker": spk}
-                 for (s, e, t, spk) in all_cues]
-    pad_cue_ends(cue_dicts, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
-    extended = extend_short_cues(cue_dicts, max_seconds=args.max_cue_seconds)
-
-    for c in cue_dicts:
-        wrapped = textwrap.wrap(c["lines"][0], width=args.line_width,
-                                break_long_words=False,
-                                break_on_hyphens=False) or [""]
-        if c["speaker"]:
-            wrapped[0] = f"<v {c['speaker']}>{wrapped[0]}"
-        lines.append(f"{format_ts(c['start'])} --> {format_ts(c['end'])}")
-        lines.extend(wrapped)
-        lines.append("")
+    pad_cue_ends(cues, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
+    extended = extend_short_cues(cues, max_seconds=args.max_cue_seconds)
+    for c in cues:
+        wrap_cue_lines(c, args.line_width)
+        c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+    args.output.write_text(render_cues(cues), encoding="utf-8")
 
     if split_count:
-        print(f"  Split {split_count} cues ({word_split} via word-level timing)")
+        print(f"  Split {split_count} cues at word boundaries")
     if extended:
         print(f"  Extended {extended} short cues for reading time")
-
-    args.output.write_text("\n".join(lines), encoding="utf-8")
 
 
 if __name__ == "__main__":

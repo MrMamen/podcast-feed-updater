@@ -3,7 +3,7 @@
 
 Extracts speaker embeddings for each <v Speaker> in the VTT and saves the
 mean embedding per speaker to a .npy file. These profiles are used by
-transcribe.py / add_speakers.py / diarize_chapters.py to auto-identify
+transcribe.py / add_speakers.py to auto-identify
 known speakers in new episodes.
 
 The embedding model is taken from the diarization pipeline, so profiles

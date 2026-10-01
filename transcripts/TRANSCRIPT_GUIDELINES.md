@@ -244,139 +244,36 @@ These match the guidelines above:
 
 ## 6. Tools
 
-### `scripts/transcribe.py`
+The tools are documented in `transcripts/README.md`; this section only
+says which rule each one enforces.
 
-Main pipeline. Runs nb-whisper ASR, pyannote diarisation, profile
-matching and a gap-filling pass. Produces a tagged VTT.
+- `scripts/transcribe.py` renders cues from word timestamps (sections 1
+  and 3), applies `corrections.json`, pads cue ends 0.5 s into the pause,
+  extends cues that are too short to read, and fills stretches Whisper
+  skipped (passages of 4+ words or 2.5+ s are inserted, shorter
+  interjections only listed, section 2).
+- `scripts/align_solo.py` takes speaker tags and missed speech from the
+  solo tracks through the Reaper project, and transcribes game and film
+  clips from the clean files in their own language (section 2,
+  code-switching). Use it for every episode that has the `.rpp` and one
+  recording per microphone; pyannote is only for episodes without them.
+- `transcribe.py --polish` is the pass to run after every round of hand
+  editing: it splits or merges cues marked with a second `<v>` line by
+  the rules in section 4, applies the word list, re-wraps at 42
+  characters, and lists cues over 7 s, overlaps, three-line cues and cues
+  over 25 characters per second. No GPU.
+- `scripts/add_speakers.py` re-tags an existing VTT with pyannote and the
+  profiles without touching the text; `build_speaker_profiles.py` and
+  `build_profiles_clean.py` build those profiles.
 
-**Gap filling.** Whisper decodes 30 s chunks independently and sometimes
-stops early inside one, or never sees quiet speech the chunking VAD
-dropped; on episode 136 that lost whole sentences. After transcription
-the script runs VAD over the audio, finds stretches of 3 s or more with
-speech but no transcript, and re-transcribes each one on its own.
-Passages of 4+ words or 2.5+ s are inserted; shorter interjections are
-printed for you to add by hand if they matter. `--no-fill-gaps` turns
-the pass off.
+## 7. Solo tracks
 
-**Running it for a newly published episode:**
-
-```bash
-uv run python scripts/transcribe.py "<path/to/Mix.mp3>" \
-  -o transcripts/<Name>.vtt \
-  --speakers <count> \
-  --profiles transcripts/speaker_profiles.npy \
-  --corrections transcripts/corrections.json \
-  --episode-number <N>
-```
-
-| Flag | Purpose |
-|---|---|
-| `<audio>` (positional) | Path to the finished mix MP3 |
-| `-o` | Output VTT path (required) |
-| `--speakers N` | Speaker count for diarisation — count hosts + guests, **not** game audio |
-| `--profiles` | Voice profiles for auto-tagging known people |
-| `--corrections` | Shared ASR fixes applied to every episode |
-| `--episode-number N` | Looks up title/guests/prompt in the RSS feed |
-
-Variants:
-- **Solo track (single speaker):** add `--no-diarization`, drop
-  `--speakers`/`--profiles`.
-- **Identify by title:** `--episode-title "Magic Carpet"` instead of
-  `--episode-number`.
-- **Force a fresh feed:** `--refresh-rss` skips the 24 h cache. Rarely
-  needed — see feed sources below.
-
-After transcribing: language pass as usual, and set the guest's name on
-the unmatched cluster manually (guests rarely have a profile). Use
-`scripts/add_speakers.py` to re-tag later if you build a guest profile.
-
-**Episode metadata feed sources** (tried in order, falling through when
-the episode isn't found — so a stale local feed no longer blocks a newly
-published episode):
-
-1. `output/cdspill-enriched.xml` — local enriched feed (guest tags, no
-   network), but can lag behind for brand-new episodes
-2. `https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml`
-   — published enriched feed on GitHub Pages: always current AND carries
-   guest tags, **regardless of whether the Podbean→Pages redirect is on**
-3. `.cache/cdspill_feed.xml` — cached raw Podbean (24 h)
-4. Live Podbean fetch — raw feed; lacks guest tags when redirect is off
-
-Because of source 2, transcribe finds newly published episodes with
-correct guest metadata even if you forgot to flip the redirect or
-regenerate the local enriched feed.
-
-**Polish pass during the language edit.** While hand-editing the VTT,
-run
-
-```bash
-uv run python scripts/transcribe.py -o transcripts/<Name>.vtt --polish
-```
-
-as often as you like. It keeps your edits and: splits cues you marked
-with a second `<v>` line when both parts stay readable (or merges a
-too-short part into the neighbouring cue of the same speaker), applies
-`corrections.json`, extends cues that are too short to read into the
-silence after them, re-wraps at 42 characters, and lists cues over 7 s,
-overlaps, cues that wrap to three lines and cues over 25 characters per
-second. No GPU needed; it uses the raw cache from the transcription run
-for word timing.
-
-### `scripts/align_solo.py`
-
-Speaker tags and gap filling from the solo tracks, using the Reaper project
-as the map between solo time and mix time. Preferred over pyannote whenever
-the episode folder has the `.rpp` and one recording per microphone (see
-README). Run `transcribe.py --no-diarization` first, then this, then
-`--render-only`.
-
-### `scripts/add_speakers.py`
-
-Re-tag speakers on an existing VTT *without re-transcribing*. Useful
-when the profile set has been updated, or when mix VTT has wrong
-speaker tags but text is correct. Keeps hand-corrections intact —
-only the `<v Speaker>` tag changes.
-
-```
-uv run python scripts/add_speakers.py <audio> <vtt> --speakers <N> [--backup]
-```
-
-Profiles default to `transcripts/speaker_profiles.npy`; `--min-speakers` /
-`--max-speakers` work as in `transcribe.py`.
-
-### `scripts/build_speaker_profiles.py`
-
-Build profiles from previously-labelled VTTs (extracts the long,
-clean segments and averages embeddings).
-
-### `scripts/build_profiles_clean.py`
-
-Build profiles from clean multitrack recordings (one speaker per
-file). Higher-quality alternative when you have isolated tracks for
-each host/guest. Takes a JSON config mapping speaker name → list of
-audio files.
-
-## 7. Multitrack / solo-track workflow
-
-For most episodes the mix is enough — profile matching is robust
-(typical sim 0.85-0.95) and the mix captures primary dialogue fine.
-
-Consider running solo tracks (one per speaker) through the pipeline
-separately when:
-
-1. **Heavy cross-talk / panel format** — multiple speakers competing
-   simultaneously, where the mix loses one speaker's words
-2. **Weak profile match** (sim < 0.75) — solo track can confirm or
-   correct the tagging
-3. **New guest without a profile** — solo track lets you build a
-   profile while you transcribe
-4. **Mic balance issues** — one speaker much quieter in the mix
-
-For solo tracks, run with `--no-diarization` (single speaker, no
-diarisation needed). The pipeline still applies VAD filtering so
-silent gaps don't hallucinate. Solo VTTs are best used as a
-*reference* during language pass, not auto-merged — they translate
-English passages to Norwegian and don't have speaker tags.
+Solo tracks are the authority on who said what. The mix transcript stays
+the text (nb-whisper condenses it the way section 2 asks), the solo words
+decide the speaker of each cue and fill what the mix skipped, and the
+Reaper project is the map between the two. Cross-talk therefore needs no
+special handling in the pipeline; the language pass keeps the voice that
+carries the content, as section 2 says.
 
 ## 8. Language attribute in the RSS feed
 

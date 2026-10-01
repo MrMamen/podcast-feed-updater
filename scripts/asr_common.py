@@ -409,11 +409,9 @@ def load_corrections(path: Path | None = None) -> dict:
 def apply_corrections(text: str, config: dict) -> str:
     """Apply every fix type from corrections.json to plain cue text.
 
-    Same order as normalize_transcript.py: error_fixes, word_fixes,
-    regex_fixes, phrase_fixes, cleanup_fixes, then post_fixes.
+    In order: word_fixes (substring pairs), regex_fixes, phrase_fixes,
+    cleanup_fixes, then post_fixes.
     """
-    for fix in config.get("error_fixes", []):
-        text = text.replace(fix["from"], fix["to"])
     for old, new in config.get("word_fixes", []):
         if old and old != new:
             text = text.replace(old, new)

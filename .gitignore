@@ -86,3 +86,6 @@ profile_tracks*.json
 # YouTube auto-captions used as transcription reference, and WSL download markers
 transcripts/*.sbv
 *:Zone.Identifier
+
+# Temporary per-episode review checklists
+transcripts/*.review.md

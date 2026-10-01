@@ -107,8 +107,8 @@ podcast-feed-updater/
 ├── chapters/                  # Kapittel-data per episode (kilde)
 ├── scripts/
 │   ├── asr_common.py          # Felles kode for transkripsjonsscriptene
-│   ├── transcribe.py, diarize_chapters.py, normalize_transcript.py,
-│   │   add_speakers.py, build_speaker_profiles.py, build_profiles_clean.py  # Transkripsjon
+│   ├── transcribe.py, align_solo.py, align_clips.py, add_speakers.py,
+│   │   build_speaker_profiles.py, build_profiles_clean.py  # Transkripsjon (se transcripts/README.md)
 │   └── claude-tools/          # Hjelpescript for Claude-sesjoner (ikke podcast-relatert)
 ├── docs/                      # Markdown-dokumentasjon
 └── output/                    # Generert XML (publiseres til GitHub Pages)

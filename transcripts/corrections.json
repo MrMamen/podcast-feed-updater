@@ -1,5 +1,5 @@
 {
-  "_comment": "Permanent corrections for CDspill podcast transcripts. Apply to every episode. Add episode-specific corrections in a per-episode config with 'extends': 'corrections.json'.",
+  "_comment": "Permanent corrections for CDspill podcast transcripts, applied to every episode by transcribe.py (render and --polish). Episode-specific fixes go straight into the VTT.",
 
   "_comment_order": "word_fixes are applied in list order (substring replace). Put longer/more-specific patterns FIRST to avoid collisions (e.g. 'Alexicons' before 'Alexicon' before 'Alex').",
 
