@@ -511,6 +511,65 @@ def pad_cue_ends(cues: list[dict], words: list[dict] | None = None, *,
     return n
 
 
+MAX_TURN_EVIDENCE = 2.5  # longer turns are Reaper items / pyannote spans, not words
+
+
+def extend_into_own_speech(cues: list[dict], turns: list[dict], *,
+                           pad: float = TAIL_PAD_SECONDS) -> int:
+    """Stretch cues over the silence between them while their speaker still talks.
+
+    A cue is better too long than too short. When the cue's own speaker has
+    speech turns (word-level, from the solo tracks) after its end, the end
+    moves to the last of them plus ``pad``; when they come before its start,
+    the start moves back to the first of them. Never past the neighbouring
+    cue, and never into speech by another speaker: a turn by someone else in
+    between stops the stretch, and one already running at the cue's edge
+    blocks it. ``turns`` are dicts with start/end/speaker, speaker in the
+    cues' display form. Modified in place; returns the number of cues changed.
+    """
+    import bisect
+    turns = sorted((t for t in turns if t.get("speaker")), key=lambda t: t["start"])
+    starts = [t["start"] for t in turns]
+
+    def window(a: float, b: float) -> list[dict]:
+        return turns[bisect.bisect_left(starts, a - 30.0):bisect.bisect_right(starts, b)]
+
+    changed: set[int] = set()
+    for i, c in enumerate(cues):
+        groups = cue_speaker_groups(c)
+        last_spk, first_spk = groups[-1][0], groups[0][0]
+        # end, into the silence after
+        nxt = cues[i + 1]["start"] if i + 1 < len(cues) else c["end"] + 10.0
+        if last_spk and nxt > c["end"]:
+            near = [t for t in window(c["end"], nxt) if t["end"] > c["end"] and t["start"] < nxt]
+            other = [t["start"] for t in near if t["speaker"] != last_spk]
+            barrier = max(c["end"], min(other)) if other else nxt
+            own = [t["end"] for t in near if t["speaker"] == last_spk and t["start"] < barrier
+                   and t["end"] - t["start"] <= MAX_TURN_EVIDENCE]
+            if own:
+                new_end = min(max(own) + pad, barrier)
+                if new_end > c["end"] + 0.01:
+                    c["end"] = new_end
+                    changed.add(i)
+        # start, into the silence before
+        prv = cues[i - 1]["end"] if i else 0.0
+        if first_spk and prv < c["start"]:
+            near = [t for t in window(prv, c["start"]) if t["end"] > prv and t["start"] < c["start"]]
+            other = [t["end"] for t in near if t["speaker"] != first_spk]
+            barrier = min(c["start"], max(other)) if other else prv
+            own = [t["start"] for t in near if t["speaker"] == first_spk and t["end"] > barrier
+                   and t["end"] - t["start"] <= MAX_TURN_EVIDENCE]
+            if own:
+                new_start = max(min(own), barrier)
+                if new_start < c["start"] - 0.01:
+                    c["start"] = new_start
+                    changed.add(i)
+    for i in changed:
+        c = cues[i]
+        c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+    return len(changed)
+
+
 TS_LINE_RE = re.compile(r"^(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})")
 V_TAG_RE = re.compile(r"^<v ([^>]+)>")
 _TAG_SPLIT_RE = re.compile(r"(<v [^>]*>)")

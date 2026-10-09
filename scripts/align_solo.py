@@ -316,6 +316,81 @@ def merge_spans(spans: list[tuple[float, float]], gap: float = 0.5) -> list[tupl
     return [(a, b) for a, b in out]
 
 
+TAIL_MAX_PAUSE = 0.7  # solo words this close after the last mix word continue its sentence
+
+
+def _norm_word(s: str) -> str:
+    return re.sub(r"[^\wæøå]", "", s.lower())
+
+
+def fill_tails(segs: list[dict], sw: list[dict]) -> list[tuple[dict, list[dict]]]:
+    """Append to each segment the solo words that continue its last word's speaker.
+
+    The last mix word's speaker is the solo word overlapping it most. From
+    there, solo words of that speaker are taken while each starts within
+    TAIL_MAX_PAUSE of the previous one, no other speaker's word comes in
+    between, and they end before the next mix word starts. A solo word that
+    is the mix word itself (same text, overlapping) is skipped. Segments are
+    modified in place; returns [(segment, added words)].
+    """
+    import bisect
+    starts = [w["start"] for w in sw]
+    order = sorted(segs, key=lambda s: s["start"])
+    next_seg = {id(s): n for s, n in zip(order, order[1:] + [None])}
+    next_start = {k: (n["start"] if n is not None else float("inf")) for k, n in next_seg.items()}
+    added = []
+    for s in order:
+        words = s.get("words") or []
+        real = [w for w in words if _norm_word(w["word"])]
+        if not real:
+            continue
+        last = real[-1]
+        lo = bisect.bisect_left(starts, last["start"] - 2.0)
+        near = sw[lo:bisect.bisect_left(starts, last["end"] + 0.5)]
+        over = [(min(w["end"], last["end"]) - max(w["start"], last["start"]), w) for w in near]
+        over = [o for o in over if o[0] > 0]
+        if not over:
+            continue
+        spk = max(over, key=lambda o: o[0])[1]["speaker"]
+        limit = min(next_start[id(s)], words[-1]["end"] + 30)
+        run: list[dict] = []
+        prev_end = words[-1]["end"]
+        for w in sw[bisect.bisect_left(starts, words[-1]["end"] - 0.3):]:
+            if w["start"] >= limit or w["end"] > limit + 0.1:
+                break
+            if w["end"] <= words[-1]["end"] + 0.05:
+                continue
+            if w["speaker"] != spk:
+                break
+            if w["start"] - prev_end > TAIL_MAX_PAUSE:
+                break
+            if (not run and w["start"] < last["end"]
+                    and _norm_word(w["word"]) == _norm_word(last["word"])):
+                prev_end = max(prev_end, w["end"])
+                continue
+            run.append(w)
+            prev_end = w["end"]
+        # the solo and mix clocks differ by a few hundred ms, so the tail can be the
+        # next segment's opening words heard early: drop that overlap
+        nxt = next_seg[id(s)]
+        if run and nxt is not None:
+            head = [t for t in (_norm_word(w["word"]) for w in nxt.get("words") or []) if t]
+            toks = [_norm_word(w["word"]) for w in run]
+            for k in range(len(run), 0, -1):
+                tail = [t for t in toks[-k:] if t]
+                if tail and head[:len(tail)] == tail:
+                    run = run[:-k]
+                    break
+        if not [w for w in run if _norm_word(w["word"])]:
+            continue
+        s["words"] = words + [{"start": w["start"], "end": w["end"], "word": w["word"]}
+                              for w in run]
+        s["end"] = run[-1]["end"]
+        s["text"] = "".join(w["word"] for w in s["words"]).strip()
+        added.append((s, run))
+    return added
+
+
 # --------------------------------------------------------------------------
 # Build
 # --------------------------------------------------------------------------
@@ -409,7 +484,21 @@ def build(raw: dict, speaker_words: list[dict], speaker_items: list[dict],
         for a, b, who in sorted(dropouts):
             print(f"    {format_ts(a)} - {format_ts(b)} {who}")
 
-    # 4) gaps in the mix text filled from solo words
+    # 4a) tails: the mix ASR often stops a sentence early ("… grid" with the solo
+    #     track going on "to prefectures"). Solo words that continue the speaker of
+    #     the last mix word without a pause belong to that segment, however short
+    #     the gap is.
+    tails = fill_tails(segs, sw)
+    if tails:
+        print(f"  sentence tails added from solo: {len(tails)} "
+              f"({sum(len(t[1]) for t in tails)} words)")
+        for s, run in tails[:15]:
+            print(f"    {format_ts(run[0]['start'])} {run[0]['speaker'][:12]:12s} "
+                  f"…{s['text'][-30:]}")
+        if len(tails) > 15:
+            print(f"    … and {len(tails) - 15} more")
+
+    # 4b) gaps in the mix text filled from solo words
     mw = sorted((w for s in segs for w in s.get("words", [])), key=lambda w: w["start"])
     bounds = [(0.0, mw[0]["start"])] + [(a["end"], b["start"]) for a, b in zip(mw, mw[1:])]
     bounds.append((mw[-1]["end"], raw.get("duration", mw[-1]["end"] + 1)))

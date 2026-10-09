@@ -32,6 +32,7 @@ from asr_common import (
     apply_corrections,
     cue_speaker_groups,
     display_name,
+    extend_into_own_speech,
     extend_short_cues,
     pad_cue_ends,
     find_episode_audio,
@@ -795,6 +796,15 @@ def print_gap_review(review: list[dict]) -> None:
         print(f"    {format_ts(r['start'])}  {who}{r['text']}")
 
 
+def display_turns(diar: list[dict] | None, speaker_map: dict | None,
+                  corrections: dict) -> list[dict]:
+    """Diarization turns with speakers in the display form the cues use."""
+    smap = speaker_map or {}
+    return [{"start": t["start"], "end": t["end"],
+             "speaker": display_name(smap.get(t["speaker"], t["speaker"]), corrections)}
+            for t in diar or [] if t.get("speaker")]
+
+
 def polish_vtt(args, raw_path: Path) -> int:
     """--polish: post-edit pass over a hand-edited VTT, keeping the edits."""
     vtt = args.output
@@ -803,9 +813,11 @@ def polish_vtt(args, raw_path: Path) -> int:
         return 1
     corrections = load_corrections(args.corrections)
     words: list[dict] = []
+    turns: list[dict] = []
     if raw_path.exists():
         raw = json.loads(raw_path.read_text(encoding="utf-8"))
         words = [w for s in raw["segments"] for w in s["words"]]
+        turns = display_turns(raw.get("diarization"), raw.get("speaker_map"), corrections)
     else:
         print(f"(no raw cache at {raw_path}: marked cues can't be split by word time)")
 
@@ -824,6 +836,7 @@ def polish_vtt(args, raw_path: Path) -> int:
         c["lines"] = [fixed[0][1]] + [f"<v {spk}>{text}" if spk else text
                                       for spk, text in fixed[1:]]
     n_pad = pad_cue_ends(cues, words, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
+    n_own = extend_into_own_speech(cues, turns, pad=args.tail_pad)
     n_ext = extend_short_cues(cues, max_seconds=args.max_cue_seconds)
     for c in cues:
         wrap_cue_lines(c, args.line_width)
@@ -835,6 +848,7 @@ def polish_vtt(args, raw_path: Path) -> int:
           f"neighbouring cue; kept {n_kept} with two speakers")
     print(f"  corrections changed {n_text} cue(s); padded the end of {n_pad} cue(s) by up to "
           f"{args.tail_pad:.1f}s; extended {n_ext} short cue(s) for reading time")
+    print(f"  stretched {n_own} cue(s) over silence where their speaker still talks")
     long = [c for c in cues if c["end"] - c["start"] > args.max_cue_seconds + 0.05]
     if long:
         print(f"  {len(long)} cue(s) over {args.max_cue_seconds:.0f}s (fine by hand if the "
@@ -912,6 +926,8 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
     # Give short cues time to be read when there is silence after them
     # (TRANSCRIPT_GUIDELINES "Reading time").
     pad_cue_ends(cues, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
+    extend_into_own_speech(cues, display_turns(diar_segments, speaker_map, corrections),
+                           pad=args.tail_pad)
     extended = extend_short_cues(cues, max_seconds=args.max_cue_seconds)
     for c in cues:
         wrap_cue_lines(c, args.line_width)

@@ -91,7 +91,7 @@ slik at prosjektets venv med CUDA-hjulene brukes.
 | `--sequential` | Gammel sekvensiell Whisper-dekoding i stedet for batched (standard) |
 | `--batch-size 8` | Batchstørrelse for batched dekoding |
 | `--render-only` | Bygg VTT på nytt fra `.cache/raw/` uten GPU |
-| `--polish` | Rydd en håndredigert VTT på plass: del markerte to-taler-cues når begge deler er lesbare (eller slå en for kort del sammen med nabocuen til samme taler), kjør ordlista, skyv cue-slutter 0,5 s inn i pausen etter, forleng korte cues, brekk om, rapporter cues over 7 s, overlapp, tre linjer og over 25 tegn/s. Uten GPU |
+| `--polish` | Rydd en håndredigert VTT på plass: del markerte to-taler-cues når begge deler er lesbare (eller slå en for kort del sammen med nabocuen til samme taler), kjør ordlista, skyv cue-slutter 0,5 s inn i pausen etter, strekk cues over stillheten der taleren fortsatt snakker på solosporet (aldri inn i neste/forrige cue eller en annen talers tale), forleng korte cues, brekk om, rapporter cues over 7 s, overlapp, tre linjer og over 25 tegn/s. Uten GPU |
 | `--tail-pad 0.5` | Sekunder hver cue-slutt skyves inn i pausen etter (Whisper slutter ordene for tidlig); 0 skrur av |
 | `--no-fill-gaps` | Dropp passet som finner tale Whisper hoppet over og transkriberer den på nytt (se TRANSCRIPT_GUIDELINES) |
 | `--language auto` | La modellen gjenkjenne språket (bruk med flerspråklig `--model`; NB-Whisper oversetter andre språk til norsk) |
@@ -159,6 +159,9 @@ flytter ordene inn i mix-tid via klippene, og skriver om rå-cachen slik at
 - talertaggene kommer fra soloordene (pyannote brukes ikke; Reaper-klippet
   er reserve der ingen soloord finnes),
 - tale mixen hoppet over fylles fra soloordene (samme regel som gap-fyllet),
+- ord på solosporet som fortsetter samme taler rett etter at mixteksten
+  stopper (setningshaler som «… grid to prefectures»), legges til
+  segmentet uansett hvor kort hullet er,
 - filene på de andre sporene (musikk, effekter, spillklipp) sjekkes med
   Silero VAD; de som inneholder tale transkriberes fra den rene fila med
   en flerspråklig modell og automatisk språkgjenkjenning, og erstatter
