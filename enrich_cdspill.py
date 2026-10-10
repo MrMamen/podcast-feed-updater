@@ -220,6 +220,12 @@ def main():
         priority=9
     )
 
+    # Per-episode Bluesky post (comment thread), matched via the article link
+    enricher.add_bluesky_episode_social_interact(
+        handle="cdspill.bsky.social",
+        article_domain="spillhistorie.no",
+    )
+
     # Drop redundant description-like fields. Empirical testing showed no
     # client relies exclusively on itunes:summary or content:encoded — all
     # tested clients either use <description> or fall back to it.
@@ -231,6 +237,7 @@ def main():
         episode_article_domain="spillhistorie.no",
         episode_article_prefix="Spillhistorie har skrevet",
         episode_article_text="en artikkel om episoden",
+        discussion_text="Diskuter episoden på",
         funding={
             "name": "Patreon",
             "url": "https://www.patreon.com/cdSPILL",

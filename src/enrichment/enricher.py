@@ -41,7 +41,7 @@ class FeedEnricher(BaseFeed):
         ]
 
         # Tags we check at item level
-        item_tags_to_check = ['season', 'episode', 'person']
+        item_tags_to_check = ['season', 'episode', 'person', 'socialInteract']
 
         conflicts = []
 
@@ -595,6 +595,129 @@ class FeedEnricher(BaseFeed):
 
         self.channel.append(social_elem)
         print(f"✓ Added social interact: {protocol} ({uri})")
+        return self
+
+    @staticmethod
+    def bluesky_post_url(at_uri: str) -> str:
+        """Turn at://<did>/app.bsky.feed.post/<rkey> into a bsky.app web URL."""
+        did, _, rkey = at_uri.removeprefix('at://').split('/')
+        return f"https://bsky.app/profile/{did}/post/{rkey}"
+
+    def add_bluesky_episode_social_interact(
+        self,
+        handle: str,
+        article_domain: str,
+        timezone: str = "Europe/Oslo",
+    ) -> 'FeedEnricher':
+        """
+        Add item-level podcast:socialInteract (atproto) pointing to the
+        Bluesky post announcing each episode.
+
+        Posts are fetched from the public Bluesky API (no auth). A post is
+        matched to an episode when it links to the episode's <link> article.
+        Remaining posts linking to article_domain are matched by date when
+        exactly one unmatched post and one unmatched episode share a day
+        (catches ?p= short links in <link>). A failed fetch only warns.
+
+        Args:
+            handle: Bluesky handle, e.g. "cdspill.bsky.social"
+            article_domain: Domain the posts link to, e.g. "spillhistorie.no"
+            timezone: Timezone used to compare post and episode dates
+
+        Returns:
+            Self for chaining
+        """
+        from datetime import datetime
+        from email.utils import parsedate_to_datetime
+        from zoneinfo import ZoneInfo
+
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        api = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed"
+        posts = []  # (at_uri, local_date, article_urls)
+        tz = ZoneInfo(timezone)
+        cursor = None
+        try:
+            while True:
+                params = {"actor": handle, "limit": 100, "filter": "posts_no_replies"}
+                if cursor:
+                    params["cursor"] = cursor
+                response = requests.get(api, params=params, timeout=15)
+                response.raise_for_status()
+                data = response.json()
+                for entry in data.get("feed", []):
+                    if entry.get("reason"):  # repost
+                        continue
+                    post = entry["post"]
+                    record = post["record"]
+                    urls = [post.get("embed", {}).get("external", {}).get("uri")]
+                    for facet in record.get("facets", []):
+                        urls += [f.get("uri") for f in facet.get("features", [])]
+                    urls = {u.rstrip('/') for u in urls if u and article_domain in u}
+                    if not urls:
+                        continue
+                    created = datetime.fromisoformat(record["createdAt"].replace('Z', '+00:00'))
+                    posts.append((post["uri"], created.astimezone(tz).date(), urls))
+                cursor = data.get("cursor")
+                if not cursor or not data.get("feed"):
+                    break
+        except (requests.RequestException, KeyError, ValueError) as e:
+            print(f"⚠️  Could not fetch Bluesky posts for {handle}, skipping: {e}")
+            return self
+
+        def add_tag(item, at_uri):
+            etree.SubElement(
+                item,
+                '{https://podcastindex.org/namespace/1.0}socialInteract',
+                protocol="atproto",
+                uri=at_uri,
+                accountId=f"@{handle}",
+                accountUrl=f"https://bsky.app/profile/{handle}",
+                priority="1",
+            )
+
+        # Oldest post first, so a later re-share doesn't win over the announcement
+        posts.reverse()
+        by_url = {}
+        for at_uri, _, urls in posts:
+            for url in urls:
+                by_url.setdefault(url, at_uri)
+
+        used = set()
+        unmatched_items = []
+        link_matches = 0
+        for item in self.channel.findall('item'):
+            link = (item.findtext('link') or '').strip().rstrip('/')
+            at_uri = by_url.get(link)
+            if at_uri and at_uri not in used:
+                add_tag(item, at_uri)
+                used.add(at_uri)
+                link_matches += 1
+            else:
+                unmatched_items.append(item)
+
+        def item_date(item):
+            try:
+                return parsedate_to_datetime(item.findtext('pubDate')).astimezone(tz).date()
+            except (TypeError, ValueError):
+                return None
+
+        date_matches = 0
+        free_posts = [p for p in posts if p[0] not in used]
+        for item in unmatched_items:
+            day = item_date(item)
+            if day is None:
+                continue
+            same_day_posts = [p for p in free_posts if p[1] == day]
+            same_day_items = [i for i in unmatched_items if item_date(i) == day]
+            if len(same_day_posts) == 1 and len(same_day_items) == 1:
+                add_tag(item, same_day_posts[0][0])
+                free_posts.remove(same_day_posts[0])
+                date_matches += 1
+
+        print(f"✓ Added Bluesky socialInteract to {link_matches + date_matches} episodes "
+              f"({link_matches} by article link, {date_matches} by date)")
         return self
 
     def add_guid(
@@ -1501,13 +1624,16 @@ class FeedEnricher(BaseFeed):
         episode_article_domain: Optional[str] = None,
         episode_article_text: str = "en artikkel om episoden",
         episode_article_prefix: Optional[str] = None,
+        discussion_text: Optional[str] = None,
     ) -> 'FeedEnricher':
         """
         Append a standardized footer to episode descriptions.
 
         Adds an episode article link (derived from the item's <link> tag if it
-        matches episode_article_domain) and social/funding links to both
-        <description> and <content:encoded>.
+        matches episode_article_domain), a link to the episode's Bluesky post
+        (from item-level atproto podcast:socialInteract, so run
+        add_bluesky_episode_social_interact first) and social/funding links to
+        both <description> and <content:encoded>.
 
         Args:
             social_links: List of dicts with 'name' and 'url' keys
@@ -1516,6 +1642,7 @@ class FeedEnricher(BaseFeed):
             episode_article_domain: Domain to match in <link> tag (e.g. "spillhistorie.no")
             episode_article_text: Anchor text for the article link
             episode_article_prefix: Text before the link (e.g. "Spillhistorie har skrevet")
+            discussion_text: Text before the Bluesky post link (e.g. "Diskuter episoden på")
 
         Returns:
             Self for chaining
@@ -1525,6 +1652,7 @@ class FeedEnricher(BaseFeed):
 
         items = self.channel.findall('item')
         article_count = 0
+        discussion_count = 0
         footer_count = 0
 
         # Build social footer HTML
@@ -1560,6 +1688,17 @@ class FeedEnricher(BaseFeed):
                         )
                         article_count += 1
 
+            if discussion_text:
+                social = item.find(
+                    '{https://podcastindex.org/namespace/1.0}socialInteract[@protocol="atproto"]'
+                )
+                if social is not None:
+                    post_url = self.bluesky_post_url(social.get('uri'))
+                    footer_parts.append(
+                        f"<p>{discussion_text} <a href='{post_url}'>Bluesky</a>.</p>"
+                    )
+                    discussion_count += 1
+
             if social_footer:
                 footer_parts.append(f"<p>{social_footer}</p>")
 
@@ -1580,7 +1719,8 @@ class FeedEnricher(BaseFeed):
 
             footer_count += 1
 
-        print(f"✓ Added description footer to {footer_count} episodes ({article_count} with article links)")
+        print(f"✓ Added description footer to {footer_count} episodes "
+              f"({article_count} with article links, {discussion_count} with Bluesky posts)")
         return self
 
     def trim_itunes_summary(self, min_length: int = 100) -> 'FeedEnricher':
