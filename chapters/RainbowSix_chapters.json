@@ -94,6 +94,7 @@
     {
       "startTime": 3958.916,
       "title": "Musikken",
+      "url": "https://music.apple.com/no/artist/bill-brown/1453600407",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"
     },
     {
@@ -145,7 +146,8 @@
     {
       "startTime": 5571.754,
       "title": "Neste episode",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/outrun-med-mats-lindh/id1502143710?i=1000738078522"
     }
   ]
 }

@@ -17,12 +17,14 @@
     {
       "startTime": 375.964,
       "title": "Kommentarer fra The Hobbit",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/the-hobbit-live-med-roar-granevang/id1502143710?i=1000767162703"
     },
     {
       "startTime": 854.7,
       "title": "Kommentarer fra Thexder",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thexder.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thexder.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/thexder/id1502143710?i=1000769436991"
     },
     {
       "startTime": 1037.701,
@@ -91,7 +93,8 @@
       "startTime": 2503.329,
       "title": "Earthquake",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/quake.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/quake.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/quake-med-ketil-espen%C3%A6s/id1502143710?i=1000523620558"
     },
     {
       "startTime": 2544.249,
@@ -235,7 +238,8 @@
       "startTime": 3650.564,
       "title": "Worms",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/worms.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/worms.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/worms-med-h%C3%A5kon-puntervold-og-aleksikon/id1502143710?i=1000551742978"
     },
     {
       "startTime": 3661.22,
@@ -257,6 +261,7 @@
     {
       "startTime": 4060.103,
       "title": "Musikken",
+      "url": "https://music.apple.com/no/artist/russell-shaw/281071067",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
     },
     {
@@ -313,7 +318,8 @@
       "startTime": 6466.599,
       "title": "Populous: The beginning",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL_pop_square_f9j8r5.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL_pop_square_f9j8r5.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/populous-the-beginning-med-aksel-m-bjerke/id1502143710?i=1000564489898"
     },
     {
       "startTime": 6542.895,
@@ -322,7 +328,8 @@
     {
       "startTime": 6708.57,
       "title": "Neste episode: Tiltcast 5.0",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tiltcast5.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tiltcast5.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/cd-sp%C3%A6llegal-live-fra-tiltcast-5-0/id1502143710?i=1000773678215"
     }
   ]
 }

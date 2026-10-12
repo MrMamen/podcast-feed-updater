@@ -87,6 +87,7 @@
     {
       "startTime": 1673.193,
       "title": "Musikken",
+      "url": "https://music.apple.com/no/artist/michael-land/274812775",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg"
     },
     {
@@ -132,7 +133,8 @@
       "startTime": 3226.992,
       "title": "Grim Fandango",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Grim_7dfzdw.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Grim_7dfzdw.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/grim-fandango-med-c-alexander-espeseth-og-einar-johan/id1502143710?i=1000553145421"
     },
     {
       "startTime": 3321.674,
@@ -195,19 +197,22 @@
       "startTime": 5271.752,
       "title": "Simon the Sorcerer",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Simon_square2.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Simon_square2.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/simon-the-sorcerer-med-martin-gjesdal-og-joachim-froholt/id1502143710?i=1000631447049"
     },
     {
       "startTime": 5306.369,
       "title": "Fate of Atlantis",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Indy_atlantis_9jhqt9.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Indy_atlantis_9jhqt9.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/indiana-jones-and-the-fate-of-atlantis-med-eirik-gjerl%C3%B8w/id1502143710?i=1000634591502"
     },
     {
       "startTime": 5314.216,
       "title": "Secret of Monkey Island",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MI1.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MI1.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/the-secret-of-monkey-island-med-torbj%C3%B8rn-preus-schou/id1502143710?i=1000538186616"
     },
     {
       "startTime": 5425.775,
@@ -228,7 +233,8 @@
     {
       "startTime": 5643.739,
       "title": "Sammenligning med Simon the Sorcerer",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Simon_square2.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Simon_square2.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/simon-the-sorcerer-med-martin-gjesdal-og-joachim-froholt/id1502143710?i=1000631447049"
     },
     {
       "startTime": 5741.183,
@@ -309,7 +315,8 @@
     {
       "startTime": 8278.679,
       "title": "Neste episode",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/stunt-car-racer-med-terje-h%C3%B8iback/id1502143710?i=1000749935760"
     }
   ]
 }

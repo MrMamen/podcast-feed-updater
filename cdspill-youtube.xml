@@ -9,7 +9,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 12 Oct 2026 09:09:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Mon, 12 Oct 2026 11:09:07 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 12 Oct 2026 23:53:39 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -88,7 +88,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 1:51:24 Finnes det noe tilsvarende idag?
 1:55:45 Et tips fra Sigve: Zero Hour Reforged
 1:58:05 Neste episode</description>
-                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/aukverrhj5d8np69/CaesarIII.mp3" length="151427114" type="audio/mpeg"/>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/aukverrhj5d8np69/CaesarIII.mp3" length="152115074" type="audio/mpeg"/>
         <itunes:author>C:\SPILL＞</itunes:author>
         <itunes:explicit>false</itunes:explicit>
         <itunes:block>No</itunes:block>
@@ -99,7 +99,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:transcript url="https://mcdn.podbean.com/mf/web/umbtfksjqtb4kq4q/CaesarIII.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="2 (#137)">137</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mxo4o3dgis2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY" img="https://creator-images.podchaser.com/89bd64cfae550b51f3e4e8a15294938f.jpeg">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mxo4o3dgis2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Star Trek: The Next Generation - A Final Unity med Jostein Hakestad (#136)</title>
         <itunes:title>Star Trek: The Next Generation - A Final Unity med Jostein Hakestad (#136)</itunes:title>
@@ -812,7 +812,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>13</itunes:season>
         <itunes:episode>127</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/63b47wyzv8pi4rgt/SCR.vtt" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/24td5t389g6bcymm/StuntCarRacer.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="5 (#127)">127</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mexrqrfrcc2p" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1491,7 +1491,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>11</itunes:season>
         <itunes:episode>117</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/rnjm46bf24uak8vw/Ignition.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="12 (#117)">117</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lsbctmclqk23" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -3330,7 +3330,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="6 (#84)">84</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kcxjntfjdb2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY" img="https://creator-images.podchaser.com/89bd64cfae550b51f3e4e8a15294938f.jpeg">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kcxjntfjdb2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Simon the Sorcerer med Martin Gjesdal og Joachim Froholt (#83)</title>
         <itunes:title>Simon the Sorcerer med Martin Gjesdal og Joachim Froholt (#83)</itunes:title>
@@ -4132,17 +4132,52 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
 0:00 Intro
-6:44 C. Alexander Espeseth
-18:00 Eirik Gjerløw
-26:55 Torbjørn Preus Schou
+6:36 C. Alexander Espeseth
+8:44 Putt-Putt Joins the Parade
+10:50 The Adventures of Willy Beamish
+12:05 Alone in the Dark
+14:44 Commander Keen 4: Secret of the Oracle
+16:02 Battle Chess 4000
+17:35 Bible Builder
+17:55 Eirik Gjerløw
+20:27 Indiana Jones and the Fate of Atlantis
+22:32 Minesweeper
+24:07 Gunship 2000
+25:59 Moonstone: A Hard Day's Night
+26:50 Torbjørn Preus Schou
+29:01 Dune + Dune II
+30:59 Grand Prix Unlimited
+32:15 The Island of Dr. Brain
+34:00 Home Alone 2
 36:15 Joachim Froholt
-44:25 Terje Høiback
-52:00 Yngve Vindal Eriksen
-58:25 Spæll
+38:05 Star Control II
+39:26 Jill of the Jungle
+40:05 J.R.R. Tolkien's The Lord of the Rings, Vol. II: The Two Towers
+41:54 King's Quest VI: Heir Today, Gone Tomorrow
+43:06 Secret Agent
+44:22 Terje Høiback
+46:30 3D Pinball: Space Cadet
+47:21 Epic Pinball
+48:17 SimLife
+49:22 Mario is Missing!
+50:50 Where in the World Is Carmen Sandiego?
+52:05 Yngve Vindal Eriksen / 90-tallspodden
+54:19 Wolfenstein 3D
+55:17 The Games: Winter Challenge
+57:07 Ultima VII: The Black Gate
+58:27 Spæll
+59:54 The Legend of Zelda: A Link to the Past
+1:01:25 Windows 3.1: Minesweeper, Solitaire, Hearts
+1:02:31 F-117A Nighthawk Stealth Fighter 2.0
+1:03:46 Holiday/Christmas Lemmings
 1:04:40 Jostein Hakestad
 1:07:42 Lytternes kommentarer
-1:15:47 Vi kårer beste spill fra 1992
-1:21:13 Kårer beste episoder av cd SPILL</description>
+1:11:12 Twitter-kommentarer
+1:15:54 Vi kårer beste spill fra 1992
+1:21:20 Kårer beste episoder av cd SPILL
+1:23:13 Sigve kårer beste spill vi pratet om i 2022
+1:25:45 Mamen kårer beste spill + årets episode
+1:27:20 Takk for i år!</description>
                                                             <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/yqp45a/1992.mp3" length="102404150" type="audio/mpeg"/>
         <itunes:author>cd SPILL</itunes:author>
         <itunes:explicit>false</itunes:explicit>

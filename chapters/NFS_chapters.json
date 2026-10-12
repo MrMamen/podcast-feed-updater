@@ -150,6 +150,7 @@
     {
       "startTime": 4738.931,
       "title": "Musikken",
+      "url": "https://music.apple.com/no/artist/jeff-van-dyck/430859336",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"
     },
     {
@@ -189,7 +190,8 @@
     {
       "startTime": 6367.838,
       "title": "Neste episode",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/wackyWheels_square_2xrdqe.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/wackyWheels_square_2xrdqe.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/wacky-wheels-med-anette-j%C3%B8sendal/id1502143710?i=1000688456436"
     }
   ]
 }

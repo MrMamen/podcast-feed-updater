@@ -54,7 +54,8 @@
     {
       "startTime": 1329.478,
       "title": "The Doomsday Machine",
-      "img": "https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg"
+      "img": "https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/doom-med-j%C3%A5ddi/id1502143710?i=1000542680223"
     },
     {
       "startTime": 1444.283,
@@ -100,6 +101,7 @@
     {
       "startTime": 3098.795,
       "title": "Musikken",
+      "url": "https://music.apple.com/us/artist/jerry-goldsmith/504767",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarTrekUnity-scaled.jpg"
     },
     {
@@ -144,7 +146,8 @@
       "startTime": 4657.978,
       "title": "The Dig",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/the-dig-med-martin-gjesdal-og-kent-william-innholt/id1502143710?i=1000747661049"
     },
     {
       "startTime": 4690.629,

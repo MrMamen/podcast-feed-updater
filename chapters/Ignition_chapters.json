@@ -84,6 +84,7 @@
     {
       "startTime": 2116.199,
       "title": "Musikken Mamen hørte",
+      "url": "https://music.apple.com/no/album/rice-curry/72058164",
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"
     },
     {
@@ -124,7 +125,8 @@
     {
       "startTime": 3304.897,
       "title": "Neste episode",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/duke-nukem-3d-med-%C3%B8ystein-henriksen-og-thorbj%C3%B8rn-hope/id1502143710?i=1000716091644"
     }
   ]
 }

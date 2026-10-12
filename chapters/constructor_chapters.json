@@ -14,12 +14,14 @@
     {
       "startTime": 240.408,
       "title": "Kommentarer fra Boppin'",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/boppin/id1502143710?i=1000752406336"
     },
     {
       "startTime": 595.874,
       "title": "Kommentarer fra Shufflepuck Cafe",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/shufflepuck-cafe-med-lasse-s%C3%B8rnes/id1502143710?i=1000755529066"
     },
     {
       "startTime": 792.95,
@@ -47,7 +49,8 @@
     {
       "startTime": 2688.605,
       "title": "Sammenligning med StarCraft",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/starcraft_square.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/starcraft_square.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/starcraft-med-aksel-m-bjerke-og-tor-andre-kiil-m%C3%B8rkved/id1502143710?i=1000633050293"
     },
     {
       "startTime": 2827.468,
@@ -145,7 +148,8 @@
     {
       "startTime": 7248.532,
       "title": "Neste episode",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/close_combat_gjc49p.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/close_combat_gjc49p.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/close-combat-med-hans-arne-jacobsen/id1502143710?i=1000763762747"
     }
   ]
 }

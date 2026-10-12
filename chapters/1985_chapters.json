@@ -49,7 +49,8 @@
     {
       "startTime": 1098.569,
       "title": "Frogger Jr.",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/frogger_c7kygq.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/frogger_c7kygq.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/frogger-med-joachim-froholt/id1502143710?i=1000586072882"
     },
     {
       "startTime": 1174.874,
@@ -78,13 +79,15 @@
     {
       "startTime": 1812.181,
       "title": "Star Trek: The Kobayashi Alternative",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarTrekUnity-scaled.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarTrekUnity-scaled.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/star-trek-the-next-generation-a-final-unity-med/id1502143710?i=1000790896558"
     },
     {
       "startTime": 1954.945,
       "title": "EGA Trek",
       "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg",
+      "url": "https://podcasts.apple.com/no/podcast/ega-trek-the-mongol-invasion/id1502143710?i=1000673000346"
     },
     {
       "startTime": 1999.408,
@@ -192,8 +195,7 @@
     },
     {
       "startTime": 4232.254,
-      "title": "Indiana Jones and the Temple of Doom",
-      "img": "https://mcdn.podbean.com/mf/web/89ghnn/DOOM_square_downsize.jpg"
+      "title": "Indiana Jones and the Temple of Doom"
     },
     {
       "startTime": 4274.911,
