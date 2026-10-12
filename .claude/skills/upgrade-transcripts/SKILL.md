@@ -33,9 +33,11 @@ request.
    found, profile similarities, and the `<v>` tag counts
    (`grep -o "<v [^>]*>" file.vtt | sort | uniq -c`).
 
-Healthy numbers on the RTX 3060 (Sept 2026): Whisper ~9x realtime
-with the default batched decoder, ~9x with `--sequential`; ~5x realtime end to end; known voices
-match their profile at 0.85–0.95; other profiles stay below ~0.5.
+Healthy numbers on the RTX 3060 (Oct 2026, driver 615/CUDA 13.4): Whisper
+~20x realtime on the 5-min clip with the default batched decoder (~9x with
+`--sequential`), ~5x end to end (diarization dominates a short clip); a
+full mix runs 13–20x. Known voices match their profile at 0.85–0.95; other
+profiles stay below ~0.55.
 
 ## 2. See what is outdated
 
