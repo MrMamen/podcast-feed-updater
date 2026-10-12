@@ -46,6 +46,13 @@ jobs:
         # Generate YouTube variant from the freshly created enriched feed
         uv run --no-dev enrich_cdspill_youtube.py --local-cache
 
+    - name: Fetch currently published feed
+      run: |
+        # Kept outside output/ so it isn't deployed; lets pubnotify skip
+        # unchanged feeds. A missing file just means "notify anyway".
+        curl -fsS "https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml?cb=$(date +%s)" \
+          -o previous-cdspill-enriched.xml || true
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -54,3 +61,11 @@ jobs:
         publish_branch: gh-pages
         # Incremental update - merges with existing files (preserves Spotify feed)
         keep_files: true
+
+    - name: Notify Podcast Index (pubnotify)
+      run: |
+        # Waits until Pages serves the new build, then asks Podcast Index to
+        # re-crawl. Only the enriched feed; the variants aren't in the index.
+        uv run --no-dev pubnotify.py output/cdspill-enriched.xml \
+          --url https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml \
+          --previous previous-cdspill-enriched.xml
