@@ -951,12 +951,52 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Added language attribute to {count} podcast:transcript tags")
         return self
 
+    @staticmethod
+    def _fetch_apple_episode_urls(apple_podcast_id: int, country: str = "no") -> Dict[str, str]:
+        """
+        Fetch Apple Podcasts episode URLs keyed by episode GUID via the iTunes lookup API.
+
+        Returns an empty dict if the lookup fails, so chapter links are skipped
+        without affecting the rest of the enrichment.
+        """
+        limit = 200  # Maximum the lookup API returns
+        try:
+            response = requests.get(
+                "https://itunes.apple.com/lookup",
+                params={"id": apple_podcast_id, "entity": "podcastEpisode",
+                        "limit": limit, "country": country},
+                timeout=20,
+            )
+            response.raise_for_status()
+            results = response.json().get('results', [])
+        except Exception as e:
+            print(f"  ⚠️  Could not fetch Apple Podcasts episodes: {e}")
+            return {}
+
+        urls = {}
+        for result in results:
+            if result.get('wrapperType') != 'podcastEpisode':
+                continue
+            guid = result.get('episodeGuid')
+            track_url = result.get('trackViewUrl')
+            if guid and track_url:
+                # Drop tracking parameter (&uo=4) and use the Norwegian storefront
+                track_url = track_url.split('&uo=')[0]
+                track_url = track_url.replace('podcasts.apple.com/us/', f'podcasts.apple.com/{country}/')
+                urls[guid] = track_url
+
+        if len(urls) >= limit - 20:
+            print(f"  ⚠️  Apple lookup returned {len(urls)} episodes (API max {limit}); "
+                  f"older episodes will soon lack chapter links")
+        return urls
+
     def convert_json_chapters_to_psc(
         self,
         chapters_dir: str = "chapters",
-        output_dir: str = "output/chapters",
+        output_dir: Optional[str] = "output/chapters",
         base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters",
-        include_psc_tags: bool = True
+        include_psc_tags: bool = True,
+        apple_podcast_id: Optional[int] = None
     ) -> 'FeedEnricher':
         """
         Process chapter JSON files and optionally add Podlove Simple Chapters (PSC) tags.
@@ -979,10 +1019,15 @@ class FeedEnricher(BaseFeed):
 
         Args:
             chapters_dir: Directory containing source chapter JSON files (default: "chapters")
-            output_dir: Directory to copy chapter files for hosting (default: "output/chapters")
+            output_dir: Directory to copy chapter files for hosting (default: "output/chapters").
+                None skips hosting and leaves podcast:chapters URLs as they are, so variant
+                feeds don't overwrite the chapter files the main feed publishes.
             base_url: Base URL for hosted chapter files (default: GitHub Pages URL)
             include_psc_tags: If True, insert <psc:chapters> inline (for Spotify variant).
                 If False, only host JSON and rewrite URLs (for main feed).
+            apple_podcast_id: If set, chapters whose image refers to another episode
+                also get a "url" to that episode in Apple Podcasts. A "url" already in
+                the chapter file is kept; "url": null disables the automatic link.
 
         Returns:
             Self for chaining
@@ -1011,10 +1056,12 @@ class FeedEnricher(BaseFeed):
         converted_count = 0
         failed_count = 0
         local_count = 0
+        total_links = 0
         used_local_files = set()  # Track which local files are used
 
         # Create output directory for hosted chapter files
-        os.makedirs(output_dir, exist_ok=True)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
 
         # Helper function for word-based matching
         def normalize_words(text):
@@ -1029,15 +1076,30 @@ class FeedEnricher(BaseFeed):
         if channel_image is not None:
             podcast_logo = channel_image.get('href')
 
+        apple_urls = self._fetch_apple_episode_urls(apple_podcast_id) if apple_podcast_id else {}
+
         # Build episode index for previous/next episode cover art
         # Also build a mapping from game names to their episode cover art
         episode_covers = []
         episode_titles_to_covers = {}
+        # Cover art -> Apple Podcasts URL, for linking chapters that match another episode.
+        # Covers shared by several episodes are ambiguous and get no link.
+        cover_to_apple_url = {}
+        ambiguous_covers = set()
 
         for item in items:
             itunes_image = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
             cover_url = itunes_image.get('href') if itunes_image is not None else None
             episode_covers.append(cover_url)
+
+            guid_elem = item.find('guid')
+            apple_url = apple_urls.get(guid_elem.text) if guid_elem is not None else None
+            if cover_url:
+                if cover_url in cover_to_apple_url or cover_url in ambiguous_covers:
+                    ambiguous_covers.add(cover_url)
+                    cover_to_apple_url.pop(cover_url, None)
+                elif apple_url:
+                    cover_to_apple_url[cover_url] = apple_url
 
             # Extract game name from episode title for cross-referencing
             title_elem = item.find('title')
@@ -1168,6 +1230,7 @@ class FeedEnricher(BaseFeed):
 
                             # Inject images for standard chapters (for ALL episodes, not just local)
                             images_injected = 0
+                            links_injected = 0
                             for chapter in sorted_chapters:
                                 chapter_title = chapter.get('title', '').strip()
 
@@ -1400,20 +1463,31 @@ class FeedEnricher(BaseFeed):
                                     chapter['img'] = image_to_inject
                                     images_injected += 1
 
-                            # Clean up empty img fields before saving (both "" and null)
+                                # Link to the matched episode in Apple Podcasts, unless the
+                                # image is this episode's own cover or the podcast logo
+                                if (image_to_inject and 'url' not in chapter
+                                        and image_to_inject not in (cover_art_url, podcast_logo)
+                                        and image_to_inject in cover_to_apple_url):
+                                    chapter['url'] = cover_to_apple_url[image_to_inject]
+                                    links_injected += 1
+                            total_links += links_injected
+
+                            # Clean up empty img and url fields before saving (both "" and null)
                             # This follows Podbean's practice of omitting the field entirely
                             for chapter in sorted_chapters:
-                                if 'img' in chapter and not chapter['img']:
-                                    del chapter['img']
+                                for field in ('img', 'url'):
+                                    if field in chapter and not chapter[field]:
+                                        del chapter[field]
 
-                            # Save enriched JSON to output directory (for ALL episodes)
-                            output_file = os.path.join(output_dir, filename)
-                            with open(output_file, 'w', encoding='utf-8') as f:
-                                json.dump(chapters_data, f, indent=2, ensure_ascii=False)
+                            if output_dir:
+                                # Save enriched JSON to output directory (for ALL episodes)
+                                output_file = os.path.join(output_dir, filename)
+                                with open(output_file, 'w', encoding='utf-8') as f:
+                                    json.dump(chapters_data, f, indent=2, ensure_ascii=False)
 
-                            # Update podcast:chapters URL to point to our hosted version (for ALL episodes)
-                            new_url = f"{base_url}/{filename}"
-                            podcast_chapters.set('url', new_url)
+                                # Update podcast:chapters URL to point to our hosted version (for ALL episodes)
+                                new_url = f"{base_url}/{filename}"
+                                podcast_chapters.set('url', new_url)
 
                         if include_psc_tags:
                             # Create PSC chapters element
@@ -1484,6 +1558,8 @@ class FeedEnricher(BaseFeed):
             print(f"✓ Hosted {converted_count} chapter JSON files and rewrote podcast:chapters URLs")
         if local_count > 0:
             print(f"  📁 {local_count} from local files (with toc: false support)")
+        if apple_podcast_id:
+            print(f"  🔗 {total_links} chapter links to other episodes in Apple Podcasts")
         if failed_count > 0:
             print(f"  ⚠ {failed_count} episodes failed to convert (JSON not accessible)")
 

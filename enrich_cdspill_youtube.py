@@ -87,7 +87,8 @@ def main():
     # Generate psc:chapters inline so add_chapter_timestamps_to_description can read them.
     # Main feed no longer carries psc:chapters, so we must reconstruct them here
     # before extracting timestamps.
-    enricher.convert_json_chapters_to_psc()
+    # output_dir=None: chapter JSON files (with Apple links) are hosted by the main feed
+    enricher.convert_json_chapters_to_psc(output_dir=None)
 
     # Add chapter timestamps to descriptions (YouTube-compatible format)
     enricher.add_chapter_timestamps_to_description()

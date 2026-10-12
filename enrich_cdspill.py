@@ -266,7 +266,7 @@ def main():
     # psc:chapters is NOT added here — it's Spotify-specific and added by
     # enrich_cdspill_spotify.py so the main feed stays clean and Spotify can
     # be re-run independently of this script.
-    enricher.convert_json_chapters_to_psc(include_psc_tags=False)
+    enricher.convert_json_chapters_to_psc(include_psc_tags=False, apple_podcast_id=1502143710)
 
     # Format podcast elements for better readability (call after all enrichment)
     enricher.format_podcast_elements()

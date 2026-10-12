@@ -73,7 +73,8 @@ def main():
 
     # Add psc:chapters inline (Spotify reads these; main feed omits them).
     # Must run before removing podcast:chapters since the JSON URL is read from there.
-    enricher.convert_json_chapters_to_psc()
+    # output_dir=None: chapter JSON files (with Apple links) are hosted by the main feed
+    enricher.convert_json_chapters_to_psc(output_dir=None)
 
     # Drop podcast:chapters — Spotify only reads psc:chapters, so the JSON
     # reference is dead weight that only slows down parsing.
