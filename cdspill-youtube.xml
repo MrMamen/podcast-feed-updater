@@ -7,9 +7,9 @@
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-youtube.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
-    <pubDate>Mon, 21 Sep 2026 09:13:00 +0200</pubDate>
+    <pubDate>Mon, 12 Oct 2026 09:09:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Thu, 01 Oct 2026 16:58:00 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 12 Oct 2026 09:42:42 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -35,13 +35,80 @@
         <height>144</height>
     </image>
     <item>
+        <title>Caesar III med Tor-Andre Kiil Mørkved (#137)</title>
+        <itunes:title>Caesar III med Tor-Andre Kiil Mørkved (#137)</itunes:title>
+        <link>https://spillhistorie.no/2026/10/12/bygg-byer-i-romertiden-i-legendariske-caesar-iii/</link>        <pubDate>Mon, 12 Oct 2026 12:09:00 +0200</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/24e9c269-291e-31ea-ac6e-8ab69e4c4ae5</guid>
+                                    <description>&lt;p&gt;Caesar III var for mange høydepunktet i bybyggerspillserien. Hvordan bygge byer i antikke Roma uten at hverken gudene eller keiseren blir sint på deg? Tor-Andre Kiil Mørkved hjelper oss med alle tipsene!&lt;/p&gt;
+
+&lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/10/12/bygg-byer-i-romertiden-i-legendariske-caesar-iii/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mxo4o3dgis2w'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
+
+0:00 Intro
+0:50 Velkommen til cd SPILL
+2:25 Velkommen til Tor-André
+4:36 Kommentarer fra Star Trek: A Final Unity
+8:49 Dagens spill: Caesar III
+11:23 Hva går spillet ut på?
+13:36 Hvorfor brenner husene?
+15:16 9x9-griden
+18:18 Veier og walkers
+20:34 Markeder
+25:28 Advisors og en hektisk start
+29:41 Hvordan får man vann?
+33:10 Industri og luksusvarer
+35:40 Arbeidskraft og prioriteringer
+37:35 Varehus og kornmagasiner
+40:17 Rive og bygge om
+41:38 Reservoarer og fontener
+43:02 Senatet, forum og skatt
+46:21 Handel
+51:07 Gatehouses
+54:53 Hager som snarvei?
+56:21 Underholdning
+1:00:38 Hvordan vinner man?
+1:04:04 Krig og forsvar
+1:05:47 Fredelig eller militær vei?
+1:07:42 Tech Specs
+1:10:58 Hvordan spille idag?
+1:16:51 Våre erfaringer med spillet
+1:19:23 Hva var vanskelig i 1998?
+1:20:53 Manualen
+1:22:34 Romaniserte kjendiser
+1:23:48 Innbyggere som sier ifra
+1:26:05 Musikken
+1:30:34 Caesar I og II
+1:32:59 Oppfølger
+1:34:33 Hvordan ble spillet til?
+1:37:26 Siste tips fra Tor-André
+1:44:34 Kommentarer fra sosiale medier
+1:48:19 Har det holdt seg?
+1:51:24 Finnes det noe tilsvarende idag?
+1:55:45 Et tips fra Sigve: Zero Hour Reforged
+1:58:05 Neste episode</description>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/aukverrhj5d8np69/CaesarIII.mp3" length="151427114" type="audio/mpeg"/>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>7232</itunes:duration>
+        <itunes:season>14</itunes:season>
+        <itunes:episode>137</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <podcast:transcript url="https://mcdn.podbean.com/mf/web/umbtfksjqtb4kq4q/CaesarIII.vtt" type="text/vtt" language="no"/>
+        <podcast:season name="Høst 2026">14</podcast:season>
+        <podcast:episode display="2 (#137)">137</podcast:episode>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mxo4o3dgis2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
+    <item>
         <title>Star Trek: The Next Generation - A Final Unity med Jostein Hakestad (#136)</title>
         <itunes:title>Star Trek: The Next Generation - A Final Unity med Jostein Hakestad (#136)</itunes:title>
-        <link>https://spillhistorie.no/2026/09/21/cd-spill-a-final-unity-med-jostein-hakestad/</link>        <pubDate>Mon, 21 Sep 2026 12:13:00 +0200</pubDate>
+        <link>https://spillhistorie.no/2026/09/21/cd-spill-a-final-unity-med-jostein-hakestad/</link>        <pubDate>Mon, 21 Sep 2026 09:13:00 +0200</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/adb8cd8a-592e-38f4-9d23-c6a30d80d8a5</guid>
                                     <description>&lt;p&gt;I den populære TNG-æraen av Star Trek har vi fått et eventyrspill med både kamp og diplomati på kjøpet. Et ganske ambisiøst spill med hele castet fra TV-serien. Med på mimringen har vi fått med oss Jostein Hakestad fra Rad Crew.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/09/21/cd-spill-a-final-unity-med-jostein-hakestad/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mvzlnps5b22q'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -91,7 +158,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarTrekUnity-scaled.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/nvezmnpuf2dtjzg9/Unity.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="1 (#136)">136</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mvzlnps5b22q" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Test Drive III: The Passion (#135)</title>
         <itunes:title>Test Drive III: The Passion (#135)</itunes:title>
@@ -101,6 +168,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Sjekk ut TD3-kart og mye annet morsomt &lt;a href='https://simulationcorner.net'&gt;på Sebastian Mackes hjemmeside&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/07/06/cd-spill-provekjorer-test-drive-iii/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mpxnn7xbbs2r'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -134,7 +202,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <podcast:transcript url="https://mcdn.podbean.com/mf/web/vszgmj4mne7avyds/TestDrive3.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="13 (#135)">135</podcast:episode></item>
+        <podcast:episode display="13 (#135)">135</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mpxnn7xbbs2r" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>cd SPÆLLEGAL (Live fra TILTcast 5.0)</title>
         <itunes:title>cd SPÆLLEGAL (Live fra TILTcast 5.0)</itunes:title>
@@ -145,6 +213,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Samtlige episoder fra Tiltcast som er utgitt kan abonneres på her: &lt;a href='https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.xml'&gt;https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.xml&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/06/02/cd-spaellegals-kuriositeter/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mougaqrsws2p'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -170,7 +239,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mougaqrsws2p" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Magic Carpet med Lasse Sørnes (#134)</title>
         <itunes:title>Magic Carpet med Lasse Sørnes (#134)</itunes:title>
@@ -179,6 +248,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Husker du Magic Carpet? Spillet hvor du spiller som trollmann på et flygende teppe og må bygge borg med luftballonger for å samle mana? Bullfrogs klassiker er ganske unikt og fikk en oppfølger, men finnes ikke mange tilsvarende spill idag. Vi har fått hjelp av Lasse Sørnes til å mimre om denne klassikeren.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/06/08/bullfrogs-unike-actionspill-magic-carpet/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mnrdwuhyzc2h'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -221,7 +291,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/dbhzayvyme2gt8zn/Magic_Carpet.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="12 (#134)">134</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mnrdwuhyzc2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Thexder (#133)</title>
         <itunes:title>Thexder (#133)</itunes:title>
@@ -230,6 +300,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Thexder er et plattformspill hvor du spiller en diger robot med lasere som kan transformere seg til et jagerfly. Kan det bli bedre?&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/05/25/klassisk-mech-action-fra-japan/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mmoi2ku2f22l'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -264,7 +335,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thexder.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/dcwq5n3jj369532d/Thexder.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="11 (#133)">133</podcast:episode></item>
+        <podcast:episode display="11 (#133)">133</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mmoi2ku2f22l" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>The Hobbit live med Roar Granevang (#132)</title>
         <itunes:title>The Hobbit live med Roar Granevang (#132)</itunes:title>
@@ -273,6 +344,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Det ble laget et spill av The Hobbit av typen teksteventyrspill allerede i 1982. Sigve og MrMamen har litt ufrivillig blitt dratt inn i studio av Roar for å teste og prate om dette spillet. Både ZX Spectrum og PC-Booter-versjonen skal til pers.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/05/11/cd-spill-tester-the-hobbit-live-med-roar-granevang/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mlkvaxaa2s2n'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -310,7 +382,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8j3j55mt3694iwc4/Hobbit.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="10 (#132)">132</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mlkvaxaa2s2n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Close Combat med Hans Arne Jacobsen (#131)</title>
         <itunes:title>Close Combat med Hans Arne Jacobsen (#131)</itunes:title>
@@ -319,6 +391,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;I 1996 startet spillserien Close Combat som har gått under radaren på mange. Spillet handler om kampanjen som startet med D-Dagen i Normandie, og man kan spille som både amerikanere og tyskere. En med god kjennskap til serien, Hans Arne Jacobsen hjelper oss denne gangen!&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/04/27/bli-med-til-invasjonen-av-normandie-i-microsoft-klassikeren-close-combat/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mkhlr2f4rs2b'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -356,7 +429,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/close_combat_gjc49p.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/326atztcedngfrss/CloseCombat.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="9 (#131)">131</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mkhlr2f4rs2b" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Constructor med Eirik Gjerløw (#130)</title>
         <itunes:title>Constructor med Eirik Gjerløw (#130)</itunes:title>
@@ -367,6 +440,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Spillet er fullt av mørk humor, og skilter med en rimelig distinkt presentasjon der figurene … vel, de er ikke direkte pene. Men det er kanskje også poenget.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/04/13/tjen-deg-rik-i-lugubre-constructor/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mjeidgiauk23'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -411,7 +485,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/6ieu8b77tqb2mjvp/constructor.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="8 (#130)">130</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mjeidgiauk23" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Aleksikons sololabyrint 2026</title>
         <itunes:title>Aleksikons sololabyrint 2026</itunes:title>
@@ -507,6 +581,7 @@ Hvis du trenger enda et ekstra hint:
 &lt;p&gt;Takk til alle bidragsytere. God påske!&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/30/cd-spills-paskespesial-2026/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mibqswrgg22y'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -577,7 +652,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
-        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="author" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mibqswrgg22y" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Shufflepuck Cafe med Lasse Sørnes (#129)</title>
         <itunes:title>Shufflepuck Cafe med Lasse Sørnes (#129)</itunes:title>
@@ -589,6 +664,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Ta også en titt på &lt;a href='https://no.wikipedia.org/wiki/Tiki_100'&gt;Tiki-100&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/16/universets-toffeste-shufflepuck-turnering/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mh6kfzd72k2u'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -637,7 +713,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/u9f9ktwq7nb5a47v/SP.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="7 (#129)">129</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mh6kfzd72k2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Boppin' (#128)</title>
         <itunes:title>Boppin' (#128)</itunes:title>
@@ -647,6 +723,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/03/02/blodige-selvmord-og-intrikate-puslenotter/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mg2yecta522y'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -682,7 +759,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/9z4sn64mqnd8pmib/Boppin.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
-        <podcast:episode display="6 (#128)">128</podcast:episode></item>
+        <podcast:episode display="6 (#128)">128</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mg2yecta522y" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Stunt Car Racer med Terje Høiback (#127)</title>
         <itunes:title>Stunt Car Racer med Terje Høiback (#127)</itunes:title>
@@ -691,6 +768,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Stunt Car Racer er et tidlig eksempel på TrackMania-aktig racing med sprøe baner. Å holde seg på sporet er det viktigste så man ikke må vente i evigheter med å bli heist inn på banen igjen. I MrMamens fravær har Terje Høiback tatt steget opp som vert for å fortelle om alt han har gravd frem om denne klassikeren.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/02/16/se-for-deg-at-trackmania-ble-laget-15-ar-tidligere/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mexrqrfrcc2p'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -737,7 +815,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/63b47wyzv8pi4rgt/SCR.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="5 (#127)">127</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mexrqrfrcc2p" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>The Dig med Martin Gjesdal og Kent William Innholt (#126)</title>
         <itunes:title>The Dig med Martin Gjesdal og Kent William Innholt (#126)</itunes:title>
@@ -748,6 +826,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=69038'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mduiln45h22c'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -807,7 +886,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="4 (#126)">126</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK">Kent William Innholt</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK">Kent William Innholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mduiln45h22c" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Spillåret 1995 (#125)</title>
         <itunes:title>Spillåret 1995 (#125)</itunes:title>
@@ -957,6 +1036,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Vi nærmer oss slutten av året, og da tar vi turen tilbake til spillåret 1985 for å finne hva som var de beste PC-spillene dette året. Mange kjente stemmer leverer også sine personlige favoritter. Til slutt kårer vi også de beste episodene vi selv har laget i 2025. I neste episode tar vi for oss 1995.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/12/08/spillaret-1985-med-cd-spill/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3m7hqfcbdok2w'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1035,7 +1115,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v">Thorbjørn Hope Andersen</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm">Øystein Henriksen</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm">Øystein Henriksen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m7hqfcbdok2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>OutRun med Mats Lindh (#123)</title>
         <itunes:title>OutRun med Mats Lindh (#123)</itunes:title>
@@ -1047,6 +1127,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Vil du prøve deg på &lt;a href='https://sk1ds.itch.io/outrun-clone'&gt;Turbo OutRun: Reimagined&lt;/a&gt;?&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/11/24/har-pc-versjonen-av-out-run-talt-tidens-tann/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3m6ek64kfzc25'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1095,7 +1176,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/skcqvburt53chuq6/Outrun.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="5 (#123)">123</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/mats-lindh-107u25OzEC">Mats Lindh</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/mats-lindh-107u25OzEC">Mats Lindh</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m6ek64kfzc25" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Tom Clancy's Rainbow Six med Trond Sneås Skauge (#122)</title>
         <itunes:title>Tom Clancy's Rainbow Six med Trond Sneås Skauge (#122)</itunes:title>
@@ -1104,6 +1185,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;cd SPILL har tatt et dypdykk i Tom Clancy’s Rainbow Six, spillet som var med å forme en hel sjanger. Rainbow Six skulle bli en lang serie av militærtaktiske førstepersonskytere. Vi har tatt en titt på det første spillet i serien. Vi har fått hjelp av Trond Sneås Skauge som både har lest bøkene og spilt spillet.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/11/10/slik-startet-rainbow-six-serien/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3m5be22semc2x'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1148,7 +1230,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/5ivuz39g5we9egh8/RainbowSix.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="4 (#122)">122</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm">Trond Sneås Skauge</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm">Trond Sneås Skauge</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m5be22semc2x" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Cyberdogs og C-Dogs med Anette Jøsendal (#121)</title>
         <itunes:title>Cyberdogs og C-Dogs med Anette Jøsendal (#121)</itunes:title>
@@ -1157,6 +1239,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Cyberdogs og oppfølgeren C-Dogs er noen enkle 2D-skytespill, men kunne være ganske morsomme spesielt med coop-modus og et rikt utvalg våpen og fiender. Selveste Dr. Bobledrage aka Anette Jøsendal har tatt kontakt med utvikleren Ronny Wester og fått tak i litt bakgrunnsinformasjon.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/10/27/samarbeidsaction-i-c-dogs-og-cyberdogs/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3m464gw2mys2h'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1201,7 +1284,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Cyberdogs_2eu4rp.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/eympwjbarctb5vbx/CyberDogs.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="3 (#121)">121</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m464gw2mys2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Total Annihilation med Roar Granevang (#120)</title>
         <itunes:title>Total Annihilation med Roar Granevang (#120)</itunes:title>
@@ -1210,6 +1293,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Total Annihilation er et sanntidsstrategispill som hadde 3D-enheter som ga et flott visuelt preg. Roar Granevang har kommet inn som ekspert for å hjelpe oss å forklare om den evige kampen mellom Arm og Core.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/10/13/total-odeleggelse-med-cd-spill/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3m32sekkko22s'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1248,7 +1332,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TotalAn_ttpqnw.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/zpmph4wwmwniy9gd/TA.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="2 (#120)">120</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m32sekkko22s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Gabriel Knight: Sins of the Fathers med Jostein Hakestad og Kent William Innholt (#119)</title>
         <itunes:title>Gabriel Knight: Sins of the Fathers med Jostein Hakestad og Kent William Innholt (#119)</itunes:title>
@@ -1259,6 +1343,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 Kent William har tidligere &lt;a href='https://www.gamer.no/artikler/kampen-mot-det-onde/140939'&gt;skrevet et tilbakeblikk om spillet&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=66189'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lzxl3y4vms24'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1313,7 +1398,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="1 (#119)">119</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK">Kent William Innholt</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/kent-william-innholt-107txWh3uK">Kent William Innholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lzxl3y4vms24" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Duke Nukem 3D med Øystein Henriksen og Thorbjørn Hope Andersen (#118)</title>
         <itunes:title>Duke Nukem 3D med Øystein Henriksen og Thorbjørn Hope Andersen (#118)</itunes:title>
@@ -1323,6 +1408,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Sjekk ut &lt;a href='https://oldmangames.no'&gt;hjemmesiden til Old Man Games&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/07/07/duke-nukem-3d-en-videreutvikling-av-sjangeren/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lteh6h2hwk2d'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1363,7 +1449,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="13 (#118)">118</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm">Øystein Henriksen</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v">Thorbjørn Hope Andersen</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/thorbjorn-hope-andersen-107txTHb1v">Thorbjørn Hope Andersen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lteh6h2hwk2d" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Ignition (#117)</title>
         <itunes:title>Ignition (#117)</itunes:title>
@@ -1373,6 +1459,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 Sjekk ut &lt;a href='https://oldmangames.no'&gt;hjemmesiden til Old Man Games&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=64574'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lsbctmclqk23'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1406,7 +1493,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
-        <podcast:episode display="12 (#117)">117</podcast:episode></item>
+        <podcast:episode display="12 (#117)">117</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lsbctmclqk23" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Mortal Kombat med Terje Høiback (#116)</title>
         <itunes:title>Mortal Kombat med Terje Høiback (#116)</itunes:title>
@@ -1415,6 +1502,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Mortal Kombat: Det ultimate voldelige slåssepillet, ble så beryktet at det havnet i den amerikanske kongressen og førte til aldersbegrensinger på spill. Vi har fått med Terje Høiback til å diskutere denne kultklassikeren.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/06/09/mortal-kombat-med-terje-hoiback/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lr6cxcayus2x'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1456,7 +1544,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="11 (#116)">116</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lr6cxcayus2x" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Lode Runner med Roar Granevang (#115)</title>
         <itunes:title>Lode Runner med Roar Granevang (#115)</itunes:title>
@@ -1466,6 +1554,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Ny fan-remake av &lt;a href='https://en.wikipedia.org/wiki/Lode_Runner_Online:_The_Mad_Monks%27_Revenge'&gt;Lode Runner Online: The Mad Monks' Revenge&lt;/a&gt;, finner du her: &lt;a href='https://mmr.quarkrobot.com'&gt;https://mmr.quarkrobot.com&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/05/26/lode-runner-med-roar-granevang/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lq2q6yzivk22'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1506,7 +1595,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/LodeRunner2_215013_8ae9m6.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="10 (#115)">115</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lq2q6yzivk22" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Quest for Glory med Joachim Froholt og David Skaufjord (#114)</title>
         <itunes:title>Quest for Glory med Joachim Froholt og David Skaufjord (#114)</itunes:title>
@@ -1516,6 +1605,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les om &lt;a href='https://www.nrk.no/anmeldelser/anmeldelse_-_spreadcheat_-1.17390997'&gt;SpreadCheat hos NRK&lt;/a&gt; eller &lt;a href='https://store.steampowered.com/app/2966550/SpreadCheat/'&gt;kjøp på Steam&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/05/12/bli-med-oss-til-fantastiske-spielburg/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3loxpwvmntc2k'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1561,7 +1651,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="9 (#114)">114</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/david-skaufjord-107tssHm8i" img="https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg">David Skaufjord</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/david-skaufjord-107tssHm8i" img="https://creator-images.podchaser.com/bd46ce44ee7dc7e8bfe0edf0cdb18d89.jpeg">David Skaufjord</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3loxpwvmntc2k" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>The Legend of Kyrandia: Hand of Fate med Erling Rostvåg (#113)</title>
         <itunes:title>The Legend of Kyrandia: Hand of Fate med Erling Rostvåg (#113)</itunes:title>
@@ -1570,6 +1660,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Det er noen gode eventyrspill gullklumper som ikke er laget av hverken Sierra eller LucasArts. Westwood lagde en litt mindre kjent serie med navnet Legend of Kyrandia. Vi tar for oss oppfølgeren Hand of Fate. Vi har fått med oss den rutinerte Erling Rostvåg kjent fra bl.a. den 18-år gamle podcasten Spillmatic.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/04/28/bli-med-til-kyrandia-i-eventyrspillet-hand-of-fate/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lnue67cnis2k'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1613,7 +1704,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/HoF_ny.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="8 (#113)">113</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/erling-rostvag-107ta6VV6W" img="https://creator-images.podchaser.com/74ab51c992d9c7709aedabb276a4c7aa.jpeg">Erling Rostvåg</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erling-rostvag-107ta6VV6W" img="https://creator-images.podchaser.com/74ab51c992d9c7709aedabb276a4c7aa.jpeg">Erling Rostvåg</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lnue67cnis2k" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Kor ska vi reis hen? - en påskespesial med Aleksikon</title>
         <itunes:title>Kor ska vi reis hen? - en påskespesial med Aleksikon</itunes:title>
@@ -1622,6 +1713,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Aleksikon har laget en påskespesial til oss. En variant av påskelabyrinten. Hvem vinner av Sigve og MrMamen, men dere er kanskje enda råere enn oss?&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/04/14/her-er-cd-spills-paskespesial/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lmr6mikkz22n'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1679,7 +1771,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                 <itunes:episodeType>bonus</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_skeapnm4.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lmr6mikkz22n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Tomb Raider med Anders Ekroll (#112)</title>
         <itunes:title>Tomb Raider med Anders Ekroll (#112)</itunes:title>
@@ -1688,6 +1780,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Ikoniske Lara Croft started med Tomb Raider. Det var faktisk ikke gitt at hovedpersonen engang skulle være en kvinne. Vi har fått med oss Anders Ekroll for å mimre om dette revolusjonerende action-platform-eventyr-spillet. &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=63024'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3llnzi4hups2r'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1728,7 +1821,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tomb_raider9qsqd.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="7 (#112)">112</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3llnzi4hups2r" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Half-Life med Aksel M. Bjerke (#111)</title>
         <itunes:title>Half-Life med Aksel M. Bjerke (#111)</itunes:title>
@@ -1737,6 +1830,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Valves debut spill Half-Life skulle virkelig endre skytespillsjangeren. Plutselig var det en historiefortelling midt i all skytingen. Og hva er greia med den mystiske G-man? Vi har fått med oss Aksel Bjerke for å finne svaret!&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/03/17/half-life-endret-skytespillsjangeren/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lkkve3322k2a'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1779,7 +1873,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/pf4srasbdepvnmxc/HalfLife.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="6 (#111)">111</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lkkve3322k2a" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Zaxxon med Roar Granevang og Terje Høiback (#110)</title>
         <itunes:title>Zaxxon med Roar Granevang og Terje Høiback (#110)</itunes:title>
@@ -1792,6 +1886,7 @@ Se &lt;a href='https://www.youtube.com/watch?v=Z0bxTjxqwxg'&gt;TV-reklamen på y
 &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/03/03/zaxxon-var-grensesprengende-i-1982/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3ljho7wvb6c25'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1828,7 +1923,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="5 (#110)">110</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3ljho7wvb6c25" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Beneath a Steel Sky med Jåddi (#109)</title>
         <itunes:title>Beneath a Steel Sky med Jåddi (#109)</itunes:title>
@@ -1841,6 +1936,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Se kortfilmen &lt;a href='https://www.youtube.com/watch?v=Gl2hTmgG18k'&gt;Solstice 5: Forgotten archives&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=61851'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lieltqm2g22s'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1882,7 +1978,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BASS.png"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/qsez6m3vjqgxzcxn/BASS.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="4 (#109)">109</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/jorn-inge-henriksen-107tZxOPnZ">Jørn Inge Henriksen</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jorn-inge-henriksen-107tZxOPnZ">Jørn Inge Henriksen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lieltqm2g22s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Wacky Wheels med Anette Jøsendal (#108)</title>
         <itunes:title>Wacky Wheels med Anette Jøsendal (#108)</itunes:title>
@@ -1892,6 +1988,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les mer om &lt;a href='https://spillhistorie.no/2025/02/03/pc-ens-svar-pa-mario-kart-wacky-wheels/'&gt;episoden/spillet hos spillhistorie.no&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/02/03/pc-ens-svar-pa-mario-kart-wacky-wheels/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lhbda2qfgk2u'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1926,7 +2023,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/wackyWheels_square_2xrdqe.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="3 (#108)">108</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lhbda2qfgk2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>The Need For Speed med Erlend Fiddan (#107)</title>
         <itunes:title>The Need For Speed med Erlend Fiddan (#107)</itunes:title>
@@ -1936,6 +2033,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les mer om&lt;a href='https://spillhistorie.no/2025/01/20/finn-ditt-indre-fartsmonster-i-the-need-for-speed/'&gt; episoden/spillet hos spillhistorie.no&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2025/01/20/finn-ditt-indre-fartsmonster-i-the-need-for-speed/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lg62mftguk2c'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -1974,7 +2072,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="2 (#107)">107</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lg62mftguk2c" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Spillåret 1994 (#106)</title>
         <itunes:title>Spillåret 1994 (#106)</itunes:title>
@@ -1984,6 +2082,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=60009'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lcuhzbrv2c25'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2072,7 +2171,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu">Mattis Folkestad</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lcuhzbrv2c25" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Ports of Call live med Hans Arne Jacobsen (#105)</title>
         <itunes:title>Ports of Call live med Hans Arne Jacobsen (#105)</itunes:title>
@@ -2083,6 +2182,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/11/25/en-verdensomseiling-i-ports-of-call/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3lbrdgfnqcs2t'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2117,7 +2217,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/ports_of_call_vx2huz.jpg"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="6 (#105)">105</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lbrdgfnqcs2t" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>I Have No Mouth, and I Must Scream med C. Alexander Espeseth (#104)</title>
         <itunes:title>I Have No Mouth, and I Must Scream med C. Alexander Espeseth (#104)</itunes:title>
@@ -2129,6 +2229,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/11/11/i-have-no-mouth-and-i-must-scream/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3laoa535uis2n'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2174,7 +2275,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I_have_no_mouth_and_i_must_scream_rtu8f8.jpg"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="5 (#104)">104</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3laoa535uis2n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>James Pond 2: Codename: RoboCod med Terje Høiback (#103)</title>
         <itunes:title>James Pond 2: Codename: RoboCod med Terje Høiback (#103)</itunes:title>
@@ -2183,6 +2284,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;James Pond 2: Codename: RoboCod har blitt utgitt til en hel haug med plattformer. Men hva er unike med dette plattformspillet? For å finne svaret har vi huket inn Amiga-mannen Terje Høiback, kjent fra blant annet Spillegal.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/?p=59082'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3l7kxqzbd4k2g'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2225,7 +2327,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RoboCod_x4xjfz.jpg"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="4 (#103)">103</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l7kxqzbd4k2g" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>EGA Trek: The Mongol Invasion (#102)</title>
         <itunes:title>EGA Trek: The Mongol Invasion (#102)</itunes:title>
@@ -2234,6 +2336,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Har du hørt om EGA Trek? Dette DOS-eksklusive spillet har sine røtter fra et Star Trek-spill fra 1971 for stormaskiner, men her altså i en PC-versjon.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/10/14/bli-romskipkaptein-i-ega-trek/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3l6i3tasagy2p'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2262,7 +2365,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/vkhbjhfscvph6dpp/EGATrek.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Høst 2024">10</podcast:season>
-        <podcast:episode display="3 (#102)">102</podcast:episode></item>
+        <podcast:episode display="3 (#102)">102</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l6i3tasagy2p" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Leisure Suit Larry in the Land of the Lounge Lizards (#101)</title>
         <itunes:title>Leisure Suit Larry in the Land of the Lounge Lizards (#101)</itunes:title>
@@ -2271,6 +2374,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Vi er en uke forsinket, men nå er vi omsider tilbake med Leisure Suit Larry. Jakten på damene er i gang. Vi finner ut om det faktisk er nakenhet i Larry, og om hvor vanskelig det er å komme igjennom Age Verification Quizen.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/10/07/bli-med-larry-pa-livsfarlig-damejakt/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3l5vvyp3shn2q'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2313,7 +2417,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"/>
         <podcast:season name="Høst 2024">10</podcast:season>
-        <podcast:episode display="2 (#101)">101</podcast:episode></item>
+        <podcast:episode display="2 (#101)">101</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l5vvyp3shn2q" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Liveepisode (#100)</title>
         <itunes:title>Liveepisode (#100)</itunes:title>
@@ -2322,6 +2426,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Vi ferier oss selv, men en liten gjeng sammen på discord. Med livechat, AI-sanger og hilsener ble det en hyggelig aften. Takk til Jon Håvard Gundersen som lagde massevis av AI-genererte sanger og fortalte kort om hvordan han har gjort det.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/09/16/cd-spill-feirer-sin-episode-nummer-100/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3l4b62fwj6d2t'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2380,7 +2485,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/svein-erik-vik-107to8CFFo">Svein-Erik Vik</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l4b62fwj6d2t" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Diablo med Martin Gjesdal (#99)</title>
         <itunes:title>Diablo med Martin Gjesdal (#99)</itunes:title>
@@ -2389,6 +2494,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Dette er omtrent en eksistensiell krise for cd SPILL, for verken Sigve eller MrMamen har spilt det legendariske rollespillet Diablo. Men frykt ikke, Martin Gjesdal kompenserer godt for vertenes manglende erfaring og kompetanse.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/06/24/bli-med-ned-i-morket-under-tristram/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kvnvvplzfw2o'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2437,7 +2543,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/diablo.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="12 (#99)">99</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kvnvvplzfw2o" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Tex Murphy: Martian Memorandum (#98)</title>
         <itunes:title>Tex Murphy: Martian Memorandum (#98)</itunes:title>
@@ -2451,6 +2557,7 @@ Vi har også laget &lt;a href='https://spillhistorie.no/2021/11/08/mean-streets-
 Se også &lt;a href='https://spillhistorie.no/2017/12/06/historien-tex-murphy/'&gt;historien om Tex Murphy&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/06/10/dypdykk-i-tex-murphy-spillet-martian-memorandum/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kukqfqhp2t2u'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2491,7 +2598,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TexMurphy2_7z3e4m.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
-        <podcast:episode display="11 (#98)">98</podcast:episode></item>
+        <podcast:episode display="11 (#98)">98</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kukqfqhp2t2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Duke Nukem med Anders Ekroll (#97)</title>
         <itunes:title>Duke Nukem med Anders Ekroll (#97)</itunes:title>
@@ -2501,6 +2608,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;På spillhistorie.no &lt;a href='https://spillhistorie.no/2024/05/22/en-hyllest-til-en-av-norges-viktigste-spillhistorikere/'&gt;ligger det nå også en hyllest av Joackim Froholt&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/05/27/husker-du-duke-nukems-forste-spill/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kthlfepiyh24'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2543,7 +2651,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke_8r3yx7.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="10 (#97)">97</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kthlfepiyh24" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Moonstone: A Hard Days Knight med Torbjørn Preus Schou (#96)</title>
         <itunes:title>Moonstone: A Hard Days Knight med Torbjørn Preus Schou (#96)</itunes:title>
@@ -2552,6 +2660,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Etter utallige oppfordringer har tiden endelig kommet for at Mr.Moonstone aka Torbjørn Preus Schou skal prate om sitt favorittspill Moonstone: A Hard Days Knight. Er det virkelig et kult spill, eller bare noe han er indoktrinert til å si? cd SPILL finner ut av det!&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/05/13/endelig-moonstone-med-cd-spill/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3ksefro4le327'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2593,7 +2702,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Moonstone_kontrast.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="9 (#96)">96</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3ksefro4le327" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>The Settlers II: Veni, Vidi, Vici med Erlend Fiddan (#95)</title>
         <itunes:title>The Settlers II: Veni, Vidi, Vici med Erlend Fiddan (#95)</itunes:title>
@@ -2604,6 +2713,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Du kan laste ned &lt;a href='https://www.siedler25.org'&gt;Return to the roots her&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/04/29/er-the-settlers-ii-seriens-beste-spill/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3krb36sxjor25'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2647,7 +2757,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Settlers.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="8 (#95)">95</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3krb36sxjor25" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Legend (#94)</title>
         <itunes:title>Legend (#94)</itunes:title>
@@ -2656,6 +2766,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Legend var et rollespill som virkelig Mamen elsket i sin barndom. Den legendariske musikken kommer ut av bildet når han ser det. Men er det bare nostalgi eller er dette rollespillet unikt med sin Runemaster som må mikse sine egne spells?&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/04/15/legend-har-et-saeregent-magisystem/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kq5wky7knf2r'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2693,7 +2804,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Legends_saturated.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
-        <podcast:episode display="7 (#94)">94</podcast:episode></item>
+        <podcast:episode display="7 (#94)">94</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kq5wky7knf2r" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Aprilsnarr: I med Anders Ekroll (#93)</title>
         <itunes:title>Aprilsnarr: I med Anders Ekroll (#93)</itunes:title>
@@ -2705,6 +2816,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/04/01/cd-spill-i-med-anders-ekroll/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kp2nstw6vs2y'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2729,7 +2841,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/rthmchy5gsh5r7jx/Aprilsnarr.vtt" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="6 (#93)">93</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kp2nstw6vs2y" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Another World med Joachim Froholt (#92)</title>
         <itunes:title>Another World med Joachim Froholt (#92)</itunes:title>
@@ -2749,6 +2861,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt; &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/03/18/cd-spill-utforsker-utrolige-another-world/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3knxmshlrge2j'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2788,7 +2901,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Another_world7uwfs.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="5 (#92)">92</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3knxmshlrge2j" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Double Dragon (#91)</title>
         <itunes:title>Double Dragon (#91)</itunes:title>
@@ -2797,6 +2910,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Det er lenge siden vi har pratet om noen slåssespill. Faktisk ikke siden første episode. Da er det på tide å sjekke ut serien med det legendariske navnet Double Dragon. Vi har også fått med oss at det har kommet en film med samme navn.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/03/04/cd-spill-banker-banditter-i-double-dragon/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kmuhm247j32m'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2829,7 +2943,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DoubleDragon.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
-        <podcast:episode display="4 (#91)">91</podcast:episode></item>
+        <podcast:episode display="4 (#91)">91</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kmuhm247j32m" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Raptor: Call of the Shadows med Roar Granevang (#90)</title>
         <itunes:title>Raptor: Call of the Shadows med Roar Granevang (#90)</itunes:title>
@@ -2838,6 +2952,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Bli med på shoot em up moro i Raptor: Call of the Shadows. Roar Granevang er tilbake for å skryte av utstyret sitt. Altså sin X-Arcade Tankstick.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/02/19/skyt-alt-i-dos-klassikeren-raptor-call-of-the-shadows/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3klrqd54iwv2q'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2871,7 +2986,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Raptor_square.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="3 (#90)">90</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3klrqd54iwv2q" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Monkey Island 2: LeChuck's Revenge med C. Alexander Espeseth og Mattis Folkestad (#89)</title>
         <itunes:title>Monkey Island 2: LeChuck's Revenge med C. Alexander Espeseth og Mattis Folkestad (#89)</itunes:title>
@@ -2886,6 +3001,7 @@ Sjekk ut spillene til &lt;a href='https://machineboy.com'&gt;Mattis Folkestad&lt
 &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/02/05/lechuck-tar-hevn-i-monkey-island-2/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kkosttbeqb22'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2926,7 +3042,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="2 (#89)">89</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu">Mattis Folkestad</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/mattis-folkestad-107tjUwSnu">Mattis Folkestad</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kkosttbeqb22" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Dungeon Keeper med Anders Ekroll (#88)</title>
         <itunes:title>Dungeon Keeper med Anders Ekroll (#88)</itunes:title>
@@ -2937,6 +3053,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Last ned: &lt;a href='https://keeperfx.net'&gt;KeeperFX&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2024/01/22/bli-ond-hersker-i-dungeon-keeper/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kjkul62ais2s'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -2975,7 +3092,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DungeonKeeper_square.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="1 (#88)">88</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kjkul62ais2s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Spillåret 1993 (#87)</title>
         <itunes:title>Spillåret 1993 (#87)</itunes:title>
@@ -2984,6 +3101,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Vi har fullført nok et år, og da avslutter vi som vanlig med et tilbakeblikk på spillåret for 30 år siden. 1993 var et usedvanlig godt år så her er det mange godbiter. Var har fått massevis av innsendte bidrag fra tidligere gjester som krydrer episoden med sine egne nostalgiske tanker. Vi avslutter det hele med kåringer over de beste spillene fra 1993, de beste spillene cd SPILL har pratet om i 2023, og de beste episodene av cd SPILL fra i år.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/12/11/bli-med-til-spillaret-1993/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kgb72o7x3v27'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3076,7 +3194,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:person role="guest" href="https://www.podchaser.com/creators/maurice-adams-107tjTnmu1">Maurice Adams</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm">Trond Sneås Skauge</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm">Trond Sneås Skauge</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kgb72o7x3v27" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>SimTower med Anette Jøsendal (#86)</title>
         <itunes:title>SimTower med Anette Jøsendal (#86)</itunes:title>
@@ -3085,6 +3203,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Sim-serien har fått mange innslag igjennom årene. I 1994 skulle byen bygges vertikalt som høyblokker. Med merkelige begrensinger på antall trapper og heiser og en god porsjon "lagging" blir det vanskeligere enn man skulle tro. Heldigvis har vi med oss Dr. Bobledrage, eller Anette Jøsendal som hun egentlig heter. &lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/11/27/bygg-din-egen-skyskraper-i-simtower/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kf65eglxys2n'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3115,7 +3234,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/SimTower.jpg"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="8 (#86)">86</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kf65eglxys2n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Indiana Jones and the Fate of Atlantis med Eirik Gjerløw (#85)</title>
         <itunes:title>Indiana Jones and the Fate of Atlantis med Eirik Gjerløw (#85)</itunes:title>
@@ -3125,6 +3244,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Hjemmesiden til fan-remaken: https://remakeofatlantis.blogspot.com&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/11/13/bli-med-cd-spill-pa-jakt-etter-sagnomsuste-atlantis/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3ke2tnrxdrs2b'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3165,7 +3285,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Indy_atlantis_9jhqt9.jpg"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="7 (#85)">85</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3ke2tnrxdrs2b" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>StarCraft med Aksel M. Bjerke og Tor-Andre Kiil Mørkved (#84)</title>
         <itunes:title>StarCraft med Aksel M. Bjerke og Tor-Andre Kiil Mørkved (#84)</itunes:title>
@@ -3174,6 +3294,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Blizzard revolusjonerte RTS-sjangeren med StarCraft. Hør oss mimre om klassikeren sammen med Aksel M. Bjerke og Tor-Andre Kiil Mørkved!&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/10/30/starcraft-ble-et-av-tidenes-storste-pc-spill/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kcxjntfjdb2h'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3209,7 +3330,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="6 (#84)">84</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY">Tor-Andre Kiil Mørkved</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kcxjntfjdb2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Simon the Sorcerer med Martin Gjesdal og Joachim Froholt (#83)</title>
         <itunes:title>Simon the Sorcerer med Martin Gjesdal og Joachim Froholt (#83)</itunes:title>
@@ -3220,6 +3341,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Les et tilbakeblikk og se bilder her: &lt;a href='https://spillhistorie.no/2023/10/06/gode-gamle-spill-simon-the-sorcerer/'&gt;https://spillhistorie.no/2023/10/06/gode-gamle-spill-simon-the-sorcerer/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/10/16/har-simon-the-sorcerer-talt-tidens-tann/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3kbudj3ryfa2w'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3252,7 +3374,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="5 (#83)">83</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kbudj3ryfa2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Railroad Tycoon med Erlend Fiddan og Joachim Froholt (#82)</title>
         <itunes:title>Railroad Tycoon med Erlend Fiddan og Joachim Froholt (#82)</itunes:title>
@@ -3262,6 +3384,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Podcasten Video Game History Hour har &lt;a href='https://www.podchaser.com/podcasts/video-game-history-hour-1583700/episodes/ep-116-the-first-cd-rom-game-182918249?fbclid=IwAR3_vrKgez4RKCxqZcJseY5J_nh7ZlU2Mtwjg65zrkzYCRINnxk0NvFBINo'&gt;en episode om det første CD-ROM-spillet&lt;/a&gt;. Det finnes også en &lt;a href='https://cdrom.ca/games/2023/06/29/first-cdrom-games.html'&gt;bloggpost om researchen&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/10/02/railroad-tycoon-la-grunnlaget-for-en-ny-sjanger/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3karqgn5iea2u'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3293,7 +3416,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="4 (#82)">82</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3karqgn5iea2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Juksekoder med Aleksikon og Håkon Puntervold (#81)</title>
         <itunes:title>Juksekoder med Aleksikon og Håkon Puntervold (#81)</itunes:title>
@@ -3302,6 +3425,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Idag går vi litt utenfor det vanlige formatet og prater om juksekoder i spill. Aleksikon er vikar for Sigve, mens Håkon Puntervold er gjest.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/09/18/hva-betyr-iddqd-for-deg/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3k7nwovusof2g'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3324,7 +3448,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="3 (#81)">81</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3k7nwovusof2g" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Star Wars: Dark Forces med Jostein Hakestad og Joachim Froholt (#80)</title>
         <itunes:title>Star Wars: Dark Forces med Jostein Hakestad og Joachim Froholt (#80)</itunes:title>
@@ -3333,6 +3457,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
                                     <description>&lt;p&gt;Sigve glimrer fortsatt med sitt fravær, men med Jostein og Joachim som vikarer er det enkelt å fylle tiden med tilbakeblikk på LucasArts' spillet Star Wars: Dark Forces&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2023/09/04/star-wars-dark-forces-er-fortsatt-verdt-a-spille/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3k6km4g7i6v26'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;
 
@@ -3368,7 +3493,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="2 (#80)">80</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3k6km4g7i6v26" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Freddi Fisk og Humongous Entertainment med C. Alexander Espeseth (#79)</title>
         <itunes:title>Freddi Fisk og Humongous Entertainment med C. Alexander Espeseth (#79)</itunes:title>
@@ -5069,6 +5194,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 &lt;p&gt;Terje Høibacks kommentar om Dune II: &lt;a href='https://spillhistorie.no/2021/01/11/dune-har-holdt-seg-mye-bedre-enn-dune-ii/#comment-3194'&gt;https://spillhistorie.no/2021/01/11/dune-har-holdt-seg-mye-bedre-enn-dune-ii/#comment-3194&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2021/02/08/bli-med-bak-kulissene-i-scummvm/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mp6zoqv6xk2g'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
                                                             <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/wtwaw2/ScummVM.mp3" length="59151539" type="audio/mpeg"/>
@@ -5082,7 +5208,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CD_SPILL_-_SCUM_VM_-_Square8dfw3.png"/>
         <podcast:season name="Vår 2021">3</podcast:season>
         <podcast:episode display="3 (#24)">24</podcast:episode>
-        <podcast:person role="guest" href="https://www.podchaser.com/creators/einar-johan-troan-somaen-107tZxOPjN">Einar Johan Trøan Sømåen</podcast:person></item>
+        <podcast:person role="guest" href="https://www.podchaser.com/creators/einar-johan-troan-somaen-107tZxOPjN">Einar Johan Trøan Sømåen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mp6zoqv6xk2g" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Heroes of Might &amp; Magic med Aleksikon og Torbjørn Preus Schou (#23)</title>
         <itunes:title>Heroes of Might &amp; Magic med Aleksikon og Torbjørn Preus Schou (#23)</itunes:title>

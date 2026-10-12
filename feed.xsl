@@ -260,6 +260,11 @@
         <xsl:if test="podcast:chapters">
           <a href="{podcast:chapters/@url}">Kapitler</a>
         </xsl:if>
+        <xsl:for-each select="podcast:socialInteract[@protocol = 'atproto']">
+          <!-- at://<did>/app.bsky.feed.post/<rkey> → bsky.app/profile/<did>/post/<rkey> -->
+          <xsl:variable name="path" select="substring-after(@uri, 'at://')"/>
+          <a href="https://bsky.app/profile/{substring-before($path, '/')}/post/{substring-after($path, 'app.bsky.feed.post/')}">Bluesky</a>
+        </xsl:for-each>
         <xsl:for-each select="podcast:transcript">
           <a href="{@url}">
             <xsl:text>Transkript</xsl:text>
