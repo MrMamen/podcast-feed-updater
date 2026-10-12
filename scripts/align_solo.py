@@ -586,7 +586,7 @@ def main() -> int:
                     help="Only transcribe the clips given with --item")
     ap.add_argument("--min-clip-speech", type=float, default=MIN_CLIP_SPEECH,
                     help=f"Seconds of VAD speech for a non-speaker file to count as a clip "
-                         f"(default {MIN_CLIP_SPEECH}, and at least {MIN_CLIP_RATIO:.0%} of it)")
+                         f"(default {MIN_CLIP_SPEECH}, and at least {MIN_CLIP_RATIO * 100:.0f}%% of it)")
     ap.add_argument("--item-model", default=DEFAULT_ITEM_MODEL,
                     help="Whisper model for --item files in another language than Norwegian "
                          f"(default: {DEFAULT_ITEM_MODEL}). NB-Whisper translates English "
