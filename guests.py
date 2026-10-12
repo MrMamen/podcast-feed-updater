@@ -285,11 +285,12 @@ def cmd_refresh(args) -> None:
     changes: List[str] = []
     for name in targets:
         entry = guests[name]
-        creator = best_creator_match(client, name)
+        aliases = [a for a, target in data["aliases"].items() if target == name]
+        creator = best_creator_match(client, name, aliases=aliases)
         if creator is None:
             print(f"— {name}: ⚠ ikke funnet på Podchaser")
             continue
-        exact = normalize_name(creator["name"]) == normalize_name(name)
+        exact = normalize_name(creator["name"]) in {normalize_name(n) for n in (name, *aliases)}
         same_href = bool(creator.get("url")) and creator["url"] == entry.get("href")
         if not (exact or same_href):
             if args.yes or not confirm(

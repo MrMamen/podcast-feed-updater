@@ -10,7 +10,7 @@ The key rule: an existing guest is never overwritten, only *filled in* where
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 from urllib.parse import unquote
 
 from src.enrichment.podchaser_api import PodchaserAPI
@@ -28,23 +28,30 @@ def creator_fields(creator: Dict) -> Dict[str, str]:
     return fields
 
 
-def best_creator_match(client: Optional[PodchaserAPI], name: str, first: int = 5) -> Optional[Dict]:
+def best_creator_match(
+    client: Optional[PodchaserAPI], name: str, first: int = 5, aliases: Sequence[str] = ()
+) -> Optional[Dict]:
     """
     Search Podchaser for ``name`` and return the best creator match, or None.
 
     An exact (case-insensitive) name match wins; otherwise the first result.
+    If ``name`` gives no hits, each of ``aliases`` is tried in turn (our name
+    can differ from Podchaser's, e.g. a middle initial).
     """
     if client is None:
         return None
-    try:
-        creators = client.search_creator(name, first=first)
-    except Exception as e:  # network / API errors should not abort batch runs
-        print(f"  ⚠ Feil ved søk etter {name}: {e}")
-        return None
-    for creator in creators:
-        if creator.get("name", "").lower() == name.lower():
-            return creator
-    return creators[0] if creators else None
+    for query in (name, *aliases):
+        try:
+            creators = client.search_creator(query, first=first)
+        except Exception as e:  # network / API errors should not abort batch runs
+            print(f"  ⚠ Feil ved søk etter {query}: {e}")
+            return None
+        for creator in creators:
+            if creator.get("name", "").lower() in (name.lower(), query.lower()):
+                return creator
+        if creators:
+            return creators[0]
+    return None
 
 
 def parse_podchaser_url(url: str) -> Tuple[Optional[str], Optional[str]]:
