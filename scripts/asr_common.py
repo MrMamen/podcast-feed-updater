@@ -570,6 +570,84 @@ def extend_into_own_speech(cues: list[dict], turns: list[dict], *,
     return len(changed)
 
 
+def retime_cue_boundaries(cues: list[dict], words: list[dict], *,
+                          min_shift: float = 0.5, reach: float = 4.0,
+                          slack: float = 0.3, min_cue: float = 0.8) -> list[tuple[float, float]]:
+    """Move the boundary between two touching cues into the pause between their words.
+
+    When text is moved from one cue to the next (by the language pass or by
+    hand) the timestamps stay, so a phrase is shown seconds before or after
+    it is spoken. The cue text is aligned to ``words`` (best: the solo-track
+    words, whose times are the truth) for the whole file at once; where the
+    last word of a cue and the first word of the next one are matched, and
+    the boundary lies more than ``slack`` seconds outside the pause between
+    them, it moves to the edge of that pause: just before the next cue's
+    first word, or ``TAIL_PAD_SECONDS`` after the cue's last word. Left alone:
+    cues with a gap between them, crosstalk (no pause between the two words),
+    shifts under ``min_shift`` or over ``reach`` seconds, and moves that leave
+    a cue shorter than ``min_cue``.
+    Modified in place; returns (old, new) boundary times.
+    """
+    import difflib
+
+    def norm(s):
+        return re.sub(r"[^\wæøå]", "", s.lower())
+
+    words = sorted((w for w in words if norm(w["word"])), key=lambda w: w["start"])
+    toks: list[str] = []
+    owner: list[tuple[int, int]] = []  # (cue index, token index in the cue)
+    n_toks = []
+    for i, c in enumerate(cues):
+        cue_toks = [norm(t) for t in " ".join(re.sub(r"<v [^>]*>", "", ln)
+                                              for ln in c["lines"]).split()]
+        cue_toks = [t for t in cue_toks if t]
+        n_toks.append(len(cue_toks))
+        for k, t in enumerate(cue_toks):
+            toks.append(t)
+            owner.append((i, k))
+    sm = difflib.SequenceMatcher(None, toks, [norm(w["word"]) for w in words], autojunk=False)
+    matched: dict[int, list[tuple[int, dict]]] = {}
+    for a, b, n in sm.get_matching_blocks():
+        for k in range(n):
+            i, tok_idx = owner[a + k]
+            matched.setdefault(i, []).append((tok_idx, words[b + k]))
+
+    moves = []
+    for i in range(len(cues) - 1):
+        a, b = cues[i], cues[i + 1]
+        if b["start"] - a["end"] > 0.05 or i not in matched or i + 1 not in matched:
+            continue
+        last_idx, last_w = matched[i][-1]
+        first_idx, first_w = matched[i + 1][0]
+        # the cue's own edge tokens (or the one next to them) must be matched
+        if last_idx < n_toks[i] - 2 or first_idx > 1:
+            continue
+        # and backed by the word next to them, so one stray match ("i", "ja")
+        # far from the rest of the phrase can't drag the boundary
+        if len(matched[i]) < 2 or len(matched[i + 1]) < 2:
+            continue
+        if (last_w["start"] - matched[i][-2][1]["end"] > 1.0
+                or matched[i + 1][1][1]["start"] - first_w["end"] > 1.0):
+            continue
+        a_end, b_start, bound = last_w["end"], first_w["start"], a["end"]
+        if b_start < a_end or max(abs(a_end - bound), abs(b_start - bound)) > reach:
+            continue
+        if bound > b_start + slack:    # next cue shown after its words have started
+            new = max(b_start - 0.1, a_end)
+        elif bound < a_end - slack:    # cue gone before its last words are spoken
+            new = max(min(a_end + TAIL_PAD_SECONDS, b_start - 0.1), a_end)
+        else:
+            continue
+        new = round(new, 3)
+        if abs(new - bound) < min_shift or new - a["start"] < min_cue or b["end"] - new < min_cue:
+            continue
+        a["end"] = b["start"] = new
+        for c in (a, b):
+            c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+        moves.append((bound, new))
+    return moves
+
+
 TS_LINE_RE = re.compile(r"^(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})")
 V_TAG_RE = re.compile(r"^<v ([^>]+)>")
 _TAG_SPLIT_RE = re.compile(r"(<v [^>]*>)")

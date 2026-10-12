@@ -15,7 +15,7 @@ What to do, cue by cue:
    A later automatic pass splits or merges these. You may retag a whole cue only when the reference shows every word in it is another speaker's. If you truly cannot tell, use `<v ?>`. Allowed tags: {TAGS}.
    {CLIPS}
 4. The first and last cues of the chunk may continue a sentence from the context cues in the reference. Edit them so the sentence reads correctly across the boundary; do not repeat text that the neighbouring chunk already has.
-5. Do not change any timestamp, do not add new cues, do not reorder. Text lines only, plus deleting whole cues. Lines wrap automatically later; you may write a cue's text on one line. Use the single character … for trailing off, never "...".
+5. Do not change any timestamp, do not add new cues, do not reorder. Text lines only, plus deleting whole cues. Do not move words from one cue into another, not even to complete a sentence: the timestamps belong to the words, and a moved phrase is shown seconds before or after it is spoken. A sentence may run over two cues. Lines wrap automatically later; you may write a cue's text on one line. Use the single character … for trailing off, never "...".
 6. A cue whose text you cannot make sense of from any source: leave it as is and list it in the report.
 
 When done:

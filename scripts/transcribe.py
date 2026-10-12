@@ -38,6 +38,7 @@ from asr_common import (
     find_episode_audio,
     parse_vtt,
     render_vtt as render_cues,
+    retime_cue_boundaries,
     split_multi_speaker_cues,
     wrap_cue_lines,
     format_ts,
@@ -813,10 +814,12 @@ def polish_vtt(args, raw_path: Path) -> int:
         return 1
     corrections = load_corrections(args.corrections)
     words: list[dict] = []
+    solo_words: list[dict] = []
     turns: list[dict] = []
     if raw_path.exists():
         raw = json.loads(raw_path.read_text(encoding="utf-8"))
         words = [w for s in raw["segments"] for w in s["words"]]
+        solo_words = [w for s in raw.get("solo_segments") or [] for w in s.get("words", [])]
         turns = display_turns(raw.get("diarization"), raw.get("speaker_map"), corrections)
     else:
         print(f"(no raw cache at {raw_path}: marked cues can't be split by word time)")
@@ -835,6 +838,7 @@ def polish_vtt(args, raw_path: Path) -> int:
         c["speaker"] = fixed[0][0]
         c["lines"] = [fixed[0][1]] + [f"<v {spk}>{text}" if spk else text
                                       for spk, text in fixed[1:]]
+    moves = retime_cue_boundaries(cues, solo_words or words) if words else []
     n_pad = pad_cue_ends(cues, words, pad=args.tail_pad, max_seconds=args.max_cue_seconds)
     n_own = extend_into_own_speech(cues, turns, pad=args.tail_pad)
     n_ext = extend_short_cues(cues, max_seconds=args.max_cue_seconds)
@@ -849,6 +853,10 @@ def polish_vtt(args, raw_path: Path) -> int:
     print(f"  corrections changed {n_text} cue(s); padded the end of {n_pad} cue(s) by up to "
           f"{args.tail_pad:.1f}s; extended {n_ext} short cue(s) for reading time")
     print(f"  stretched {n_own} cue(s) over silence where their speaker still talks")
+    print(f"  moved {len(moves)} boundary(ies) between two cues to the pause between their words"
+          f" ({'solo' if solo_words else 'mix'} word times)")
+    for old, new in moves:
+        print(f"    {format_ts(old)} -> {format_ts(new)}  ({new - old:+.1f}s)")
     long = [c for c in cues if c["end"] - c["start"] > args.max_cue_seconds + 0.05]
     if long:
         print(f"  {len(long)} cue(s) over {args.max_cue_seconds:.0f}s (fine by hand if the "
