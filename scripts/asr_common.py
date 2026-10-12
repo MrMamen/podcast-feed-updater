@@ -512,6 +512,7 @@ def pad_cue_ends(cues: list[dict], words: list[dict] | None = None, *,
 
 
 MAX_TURN_EVIDENCE = 2.5  # longer turns are Reaper items / pyannote spans, not words
+MAX_STRETCH_PAUSE = 2.0  # a longer pause in the speaker's own speech ends the stretch
 
 
 def extend_into_own_speech(cues: list[dict], turns: list[dict], *,
@@ -521,7 +522,9 @@ def extend_into_own_speech(cues: list[dict], turns: list[dict], *,
     A cue is better too long than too short. When the cue's own speaker has
     speech turns (word-level, from the solo tracks) after its end, the end
     moves to the last of them plus ``pad``; when they come before its start,
-    the start moves back to the first of them. Never past the neighbouring
+    the start moves back to the first of them. Only speech that runs on from
+    the cue counts: a pause over ``MAX_STRETCH_PAUSE`` ends the stretch, so a
+    cue before a music bed doesn't reach the next cue's first word. Never past the neighbouring
     cue, and never into speech by another speaker: a turn by someone else in
     between stops the stretch, and one already running at the cue's edge
     blocks it. ``turns`` are dicts with start/end/speaker, speaker in the
@@ -544,10 +547,16 @@ def extend_into_own_speech(cues: list[dict], turns: list[dict], *,
             near = [t for t in window(c["end"], nxt) if t["end"] > c["end"] and t["start"] < nxt]
             other = [t["start"] for t in near if t["speaker"] != last_spk]
             barrier = max(c["end"], min(other)) if other else nxt
-            own = [t["end"] for t in near if t["speaker"] == last_spk and t["start"] < barrier
-                   and t["end"] - t["start"] <= MAX_TURN_EVIDENCE]
-            if own:
-                new_end = min(max(own) + pad, barrier)
+            own = sorted((t["start"], t["end"]) for t in near
+                         if t["speaker"] == last_spk and t["start"] < barrier
+                         and t["end"] - t["start"] <= MAX_TURN_EVIDENCE)
+            reach = c["end"]
+            for s, e in own:  # only speech that runs on from the cue, no long pause
+                if s - reach > MAX_STRETCH_PAUSE:
+                    break
+                reach = max(reach, e)
+            if reach > c["end"]:
+                new_end = min(reach + pad, barrier)
                 if new_end > c["end"] + 0.01:
                     c["end"] = new_end
                     changed.add(i)
@@ -557,10 +566,17 @@ def extend_into_own_speech(cues: list[dict], turns: list[dict], *,
             near = [t for t in window(prv, c["start"]) if t["end"] > prv and t["start"] < c["start"]]
             other = [t["end"] for t in near if t["speaker"] != first_spk]
             barrier = min(c["start"], max(other)) if other else prv
-            own = [t["start"] for t in near if t["speaker"] == first_spk and t["end"] > barrier
-                   and t["end"] - t["start"] <= MAX_TURN_EVIDENCE]
-            if own:
-                new_start = max(min(own), barrier)
+            own = sorted(((t["start"], t["end"]) for t in near
+                          if t["speaker"] == first_spk and t["end"] > barrier
+                          and t["end"] - t["start"] <= MAX_TURN_EVIDENCE),
+                         key=lambda se: -se[1])
+            reach = c["start"]
+            for s, e in own:
+                if reach - e > MAX_STRETCH_PAUSE:
+                    break
+                reach = min(reach, s)
+            if reach < c["start"]:
+                new_start = max(reach, barrier)
                 if new_start < c["start"] - 0.01:
                     c["start"] = new_start
                     changed.add(i)
