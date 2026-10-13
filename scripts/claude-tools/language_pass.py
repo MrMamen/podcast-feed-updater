@@ -100,7 +100,7 @@ def chapter_titles(meta: dict) -> list[str]:
     url = meta.get("chapters_url")
     if not url:
         return []
-    name = url.split("/")[-1]
+    name = url.split("?")[0].split("/")[-1]
     for p in (PROJECT / "docs" / "chapters" / name, PROJECT / "chapters" / name):
         if p.exists():
             data = json.loads(p.read_text(encoding="utf-8"))

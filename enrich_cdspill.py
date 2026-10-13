@@ -262,6 +262,9 @@ def main():
         },
     )
 
+    # Version Podbean transcript URLs by ETag so replaced transcripts change the feed
+    enricher.add_transcript_versions()
+
     # Host chapter JSON files and rewrite podcast:chapters URLs to self-hosted.
     # psc:chapters is NOT added here — it's Spotify-specific and added by
     # enrich_cdspill_spotify.py so the main feed stays clean and Spotify can

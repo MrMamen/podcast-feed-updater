@@ -5,7 +5,9 @@ Preserves all original content while adding new metadata.
 
 from lxml import etree
 from typing import List, Dict, Optional
+from concurrent.futures import ThreadPoolExecutor
 import requests
+import hashlib
 import json
 import os
 import shutil
@@ -951,6 +953,58 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Added language attribute to {count} podcast:transcript tags")
         return self
 
+    def add_transcript_versions(self, workers: int = 8) -> 'FeedEnricher':
+        """
+        Append ?v=<ETag> to podcast:transcript URLs hosted on Podbean.
+
+        Podbean keeps the same URL when a transcript is replaced, so the feed
+        doesn't change and clients that cache transcripts by URL never see the
+        new version. The ETag changes with the file, so the URL now does too.
+        Podbean ignores unknown query parameters. URLs whose ETag can't be
+        fetched are left unchanged.
+
+        Args:
+            workers: Number of parallel HEAD requests.
+
+        Returns:
+            Self for chaining
+        """
+        if self.channel is None:
+            raise ValueError("Must fetch feed first")
+
+        transcripts = [
+            t for t in self.channel.iter('{https://podcastindex.org/namespace/1.0}transcript')
+            if 'podbean.com' in urlparse(t.get('url', '')).netloc
+        ]
+        session = requests.Session()
+        session.headers['User-Agent'] = 'cdspill-feed-updater/1.0 (+https://github.com/MrMamen/podcast-feed-updater)'
+
+        def fetch_etag(url: str) -> Optional[str]:
+            try:
+                response = session.head(url, allow_redirects=True, timeout=10)
+                response.raise_for_status()
+            except Exception:
+                return None
+            etag = response.headers.get('ETag', '')
+            etag = etag.removeprefix('W/').strip('"')
+            return etag or None
+
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            etags = list(executor.map(fetch_etag, [t.get('url') for t in transcripts]))
+
+        versioned = 0
+        for transcript, etag in zip(transcripts, etags):
+            if etag:
+                url = transcript.get('url').split('?v=')[0]
+                separator = '&' if '?' in url else '?'
+                transcript.set('url', f"{url}{separator}v={etag}")
+                versioned += 1
+
+        print(f"✓ Added version to {versioned} of {len(transcripts)} Podbean transcript URLs")
+        if versioned < len(transcripts):
+            print(f"  ⚠️  {len(transcripts) - versioned} without ETag, left unversioned")
+        return self
+
     @staticmethod
     def _fetch_apple_episode_urls(apple_podcast_id: int, country: str = "no") -> Dict[str, str]:
         """
@@ -1124,7 +1178,7 @@ class FeedEnricher(BaseFeed):
 
             if podcast_chapters is not None:
                 json_url = podcast_chapters.get('url')
-                if json_url and json_url.endswith('.json'):
+                if json_url and urlparse(json_url).path.endswith('.json'):
                     try:
                         chapters_data = None
                         source_type = "remote"
@@ -1481,12 +1535,16 @@ class FeedEnricher(BaseFeed):
 
                             if output_dir:
                                 # Save enriched JSON to output directory (for ALL episodes)
+                                content = json.dumps(chapters_data, indent=2, ensure_ascii=False)
                                 output_file = os.path.join(output_dir, filename)
                                 with open(output_file, 'w', encoding='utf-8') as f:
-                                    json.dump(chapters_data, f, indent=2, ensure_ascii=False)
+                                    f.write(content)
 
-                                # Update podcast:chapters URL to point to our hosted version (for ALL episodes)
-                                new_url = f"{base_url}/{filename}"
+                                # Update podcast:chapters URL to point to our hosted version (for ALL episodes).
+                                # The content hash changes the URL only when the file changes, so clients
+                                # that cache chapters by URL fetch the new version.
+                                version = hashlib.sha256(content.encode('utf-8')).hexdigest()[:8]
+                                new_url = f"{base_url}/{filename}?v={version}"
                                 podcast_chapters.set('url', new_url)
 
                         if include_psc_tags:

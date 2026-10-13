@@ -356,7 +356,7 @@ def build_initial_prompt(meta: dict, project_root: Path,
 
     # Chapter titles often contain specific game/person names
     if meta.get("chapters_url"):
-        chapters_file = meta["chapters_url"].split("/")[-1]
+        chapters_file = meta["chapters_url"].split("?")[0].split("/")[-1]
         local_path = project_root / "docs" / "chapters" / chapters_file
         if not local_path.exists():
             local_path = project_root / "chapters" / chapters_file
