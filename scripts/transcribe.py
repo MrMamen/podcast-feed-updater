@@ -929,8 +929,9 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
         # Speaker is decided per cue, not per Whisper segment: a segment can
         # span a speaker change (especially in batched mode). Segments from a
         # speaker's own track (align_solo.py) carry their speaker.
-        own = display_name(speaker_map.get(seg.speaker, seg.speaker), corrections) \
-            if seg.speaker else None
+        seg_spk = getattr(seg, "speaker", None)
+        own = display_name(speaker_map.get(seg_spk, seg_spk), corrections) \
+            if seg_spk else None
         for (cue_start, cue_end, cue_text) in sub_cues:
             cues.append({"start": cue_start, "end": cue_end,
                          "lines": [apply_corrections(cue_text, corrections)],
