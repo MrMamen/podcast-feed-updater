@@ -834,6 +834,45 @@ def split_multi_speaker_cues(cues: list[dict], words: list[dict], *,
     return out, n_split, n_merged, n_kept
 
 
+def resolve_overlaps(cues: list[dict], *, min_seconds: float = 1.0) -> dict[str, int]:
+    """Remove time overlaps between consecutive cues, in place.
+
+    Cues from separate microphone tracks overlap when people talk over each
+    other. Clipping the earlier cue at the next start leaves 0.1 s cues that
+    nobody can read, so each overlap is resolved by the first option that
+    keeps both cues at least ``min_seconds`` long: clip the earlier cue, or
+    delay the later one; otherwise the two become one cue with a <v> line
+    per speaker (the guideline for short overlapping exchanges). Expects
+    cues with "start", "end", "speaker", "lines"; returns counts per action.
+    """
+    cues.sort(key=lambda c: c["start"])
+    out: list[dict] = []
+    n = {"clipped": 0, "delayed": 0, "combined": 0}
+    for c in cues:
+        p = out[-1] if out else None
+        if p is None or c["start"] >= p["end"] - 0.001:
+            out.append(c)
+        elif c["start"] - p["start"] >= min_seconds:
+            p["end"] = c["start"]
+            out.append(c)
+            n["clipped"] += 1
+        elif c["end"] - p["end"] >= min_seconds:
+            c["start"] = p["end"]
+            out.append(c)
+            n["delayed"] += 1
+        else:
+            groups = cue_speaker_groups(p) + cue_speaker_groups(c)
+            p["end"] = max(p["end"], c["end"])
+            p["speaker"] = groups[0][0]
+            p["lines"] = [groups[0][1]] + [f"<v {spk}>{text}" if spk else text
+                                           for spk, text in groups[1:]]
+            n["combined"] += 1
+    for c in out:
+        c["ts_line"] = f"{format_ts(c['start'])} --> {format_ts(c['end'])}"
+    cues[:] = out
+    return n
+
+
 def wrap_cue_lines(cue: dict, width: int = 42) -> None:
     """Re-wrap a cue's text at ``width``; each <v>-tagged part is wrapped on its own."""
     import textwrap

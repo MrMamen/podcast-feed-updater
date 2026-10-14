@@ -7,26 +7,30 @@ Publiserbare VTT-transcripts for podcast-episoder, og verktøy for å lage nye.
 - `*.vtt` — publiserbare transcripts (én per episode, ikke i git)
 - `corrections.json` — permanent rettelsesordliste (egennavn, terminologi) som gjelder alle episoder
 - `TRANSCRIPT_GUIDELINES.md` — stilreglene transkriptene følger
-- `<episode>.review.md` — midlertidige sjekklister etter en språkvask (ikke i git)
+- `<episode>.review.md` — midlertidige sjekklister etter en språkvask (ikke i git; slettes når episoden er ferdig)
 
 ## Arbeidsflyt for en episode du har klippet selv
 
-Episodemappa har Reaper-prosjektet og ett opptak per mikrofon. Da er
-dette hele løpet, uten pyannote:
+Episodemappa har Reaper-prosjektet og ett opptak per mikrofon. Da lages
+teksten fra hver talers eget spor, slik det ligger i den ferdige episoden
+(se `align_solo.py` under). Miksen transkriberes ikke, og pyannote brukes
+ikke:
 
 ```bash
-uv run python scripts/transcribe.py -o transcripts/Episode.vtt --episode-number 130 --no-diarization
 uv run python scripts/align_solo.py  -o transcripts/Episode.vtt --episode-number 130
 uv run python scripts/transcribe.py -o transcripts/Episode.vtt --render-only
 ```
 
 Deretter språkvasken: `scripts/claude-tools/language_pass.py split` deler
-VTT-en i ti-minutters biter ved nærmeste pause, med soloteksten og nabocuene
-som referanse og en ferdig instruks per bit; én subagent redigerer hver bit;
-`join` setter sammen igjen, `measure` sier hva som ble endret, og `names`
-lister navn som er stavet ulikt i ulike biter. Til slutt `transcribe.py
---polish`, og det samme etter hver runde med håndredigering. Detaljer om
-hvert steg under.
+VTT-en i ti-minutters biter ved nærmeste pause, med nabocuene som kontekst
+og en ferdig instruks per bit (`--reference` gir agentene en eldre versjon,
+f.eks. den publiserte, for navn og engelske uttrykk); én subagent redigerer
+hver bit; `join` setter sammen igjen, `measure` sier hva som ble endret, og
+`names` lister navn som er stavet ulikt i ulike biter. Så `transcribe.py
+--polish`, og til slutt `language_pass.py check`, som lister cuer der
+talerens spor er stille, og cuer med tekst som ikke finnes på talerens spor
+(hentet fra en referanse, eller tale som er klippet bort). Polish på nytt
+etter hver runde med håndredigering. Detaljer om hvert steg under.
 
 ## `scripts/transcribe.py`
 
@@ -151,37 +155,50 @@ scriptet kan kjøres om igjen med en rettet mapping.
 
 Episoder som er klippet i Reaper har `.rpp`-fila og ett opptak per mikrofon
 i mappa. Prosjektfila lister hvert klipp på hvert spor med posisjon i mixen,
-lengde og offset i kildefila, og er dermed en eksakt fasit for hvem som
-høres når, og for hvilke sekunder av hvert solospor som overlevde klippingen.
-Dette scriptet transkriberer solosporene hver for seg (uten diarisering),
-flytter ordene inn i mix-tid via klippene, og skriver om rå-cachen slik at
+lengde og offset i kildefila. Scriptet bygger ut fra den ett spor per taler
+(en *stem*): bare den mikrofonens klipp, hvert på sin plass i episoden, altså
+det Reaper ville rendret med sporet solo. Hver stem transkriberes for seg med
+NB-Whisper, så
 
-- talertaggene kommer fra soloordene (pyannote brukes ikke; Reaper-klippet
-  er reserve der ingen soloord finnes),
-- tale mixen hoppet over fylles fra soloordene (samme regel som gap-fyllet),
-- ord på solosporet som fortsetter samme taler rett etter at mixteksten
-  stopper (setningshaler som «… grid to prefectures»), legges til
-  segmentet uansett hvor kort hullet er,
-- filene på de andre sporene (musikk, effekter, spillklipp) sjekkes med
-  Silero VAD; de som inneholder tale transkriberes fra den rene fila med
-  en flerspråklig modell og automatisk språkgjenkjenning, og erstatter
-  mixteksten i sitt spenn med taggen `Spillklipp`. `--item "fil.wav=Gabriel"`
-  setter rollenavn (og eventuelt språk, `|en`) på et klipp. Et produsert
-  innslag som ligger på en talers spor (intro, sketsj) regnes som den
-  mikrofonen med mindre det gis med `--item`,
-- mixord som ligger i musikk-/effektspenn uten mikrofon-item eller soloord
-  i nærheten fjernes som hallusinasjoner,
-- spenn der et mikrofon-item finnes men solosporet ikke ga ord (dropout)
-  listes, siden taggen der kommer fra klippet og ikke fra ordene,
-- den kartlagte soloteksten lagres som `solo_segments` i cachen, som
-  referanse for språkvasken.
+- teksten kommer fra én ren stemme (bedre enn miksen, særlig der folk
+  snakker i munnen på hverandre),
+- taleren er gitt for hvert ord, og tidene er episodetid direkte,
+- ingenting som er klippet bort kommer med.
+
+Whisper hopper over tale i lange filer, i begge dekodingsmodusene, så hver
+stem kjøres i tre runder: sekvensiell (best tekst), batched (fyller ordløp
+den første gikk glipp av) og til slutt hvert strekk på minst 2 s som Silero
+VAD kaller tale men som fortsatt ikke har ord, transkribert alene. Resultatet
+caches i `.cache/raw/<navn>.stems.json` (gjøres om når `.rpp` endres, eller
+med `--redo-stems`) og skrives som rå-cache med taler på hvert segment.
+`--render-only` løser overlapp mellom talere: forrige cue klippes eller neste
+skyves når begge blir minst 1 s, ellers blir de én cue med to `<v>`-linjer.
+
+Filene på de andre sporene (musikk, effekter, spillklipp) sjekkes med Silero
+VAD; de som inneholder tale transkriberes fra den rene fila med en
+flerspråklig modell og automatisk språkgjenkjenning og tagges `Spillklipp`.
+`--item "fil.wav=Game|en"` setter tagg og språk på et klipp. Et produsert
+innslag som ligger på en talers spor (intro, sketsj) regnes som den
+mikrofonen med mindre det gis med `--item`. Et klipp med både norsk og
+engelsk (en sketsj med spillreplikker) blir gjenkjent som norsk og får de
+engelske replikkene oversatt; rett dem for hånd.
 
 ```bash
-uv run python scripts/transcribe.py -o transcripts/TA.vtt --episode-number 120 --no-diarization
-uv run python scripts/align_solo.py -o transcripts/TA.vtt --episode-number 120 \
-  --item "Total Annihilation - Intro Cinematic.wav=Forteller"
-uv run python scripts/transcribe.py -o transcripts/TA.vtt --render-only
+uv run python scripts/align_solo.py -o transcripts/HalfLife.vtt --episode-number 111 \
+  --item "letsmoveit.wav=Game|en"
+uv run python scripts/transcribe.py -o transcripts/HalfLife.vtt --render-only
 ```
+
+Målt på episode 111 (87 min, tre talere): 16 min på GPU, 14 000 ord; de to
+ekstra rundene ga 1 300 ord den første gikk glipp av (Mamens Craig-spor
+mistet hele avsnitt). Teksten gjenskapte rettelsene brukeren hadde gjort for
+hånd i den publiserte versjonen.
+
+`--mix-text` er den gamle måten: `transcribe.py --no-diarization` på miksen
+først, så transkriberes de rå solofilene, ordene flyttes til miks-tid og
+brukes bare til talertagger og til å fylle hull i miksteksten. Den er
+dårligere (råfilene har med prat som er klippet bort, og miksteksten roter
+der folk snakker samtidig) og beholdes for sammenligning.
 
 Sporene gjenkjennes på navn: vertenes spor («Mamen», «Sigve»), et spor med
 navnet til en gjest fra episodens `podcast:person`-liste eller stemmeprofilene
@@ -190,8 +207,7 @@ ikke matcher noen regnes som musikk/effekter. `--list` viser spor og filer og
 stopper. Klippene transkriberes med `--item-model` (standard
 `Systran/faster-whisper-large-v3`) og `--language auto`: NB-Whisper oversetter
 engelske klipp til norsk selv med `--language en`. `--no-auto-items` tar bare
-klippene gitt med `--item`. Målt på episode 120: pyannote satte feil taler på 8 % av cuene selv
-med profil-likhet over 0,93; solosporene fanget 6 % flere ord enn mixen.
+klippene gitt med `--item`.
 
 ## Talernavn
 

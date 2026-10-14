@@ -11,13 +11,18 @@ tool does the mechanical parts around that:
            boundary, plus the neighbouring cues as read-only context) and a
            ready prompt from language_pass_prompt.md. A copy of the chunks
            is kept in <out>/before for `measure`.
-  join     Concatenate the edited chunks back into one VTT, in time order,
-           with overlapping cue ends clipped. Run transcribe.py --polish on
+  join     Concatenate the edited chunks back into one VTT, in time order.
+           Overlapping cues are clipped, delayed or combined into one
+           two-speaker cue so that none ends up too short to read. Run transcribe.py --polish on
            the result afterwards.
   measure  Report what the pass changed: cues deleted, cues with changed
            text, two-speaker splits, word edit rate.
   names    List capitalised words that occur in several spellings (two
            agents choosing differently across chunks: Gunther / Gunter).
+  check    For a transcript made from speaker stems (align_solo.py): list
+           cues where the speaker's own track is silent, and cues whose
+           words are mostly not on that track (text from a reference, or
+           speech that was cut). Run it before handing the VTT over.
 
 Usage:
     uv run python scripts/claude-tools/language_pass.py split transcripts/GK.vtt \\
@@ -42,10 +47,11 @@ from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT / "scripts"))
-from asr_common import (display_name, escape_text, format_ts, load_corrections,  # noqa: E402
-                        parse_vtt)
+from asr_common import (cue_speaker_groups, display_name, escape_text, format_ts,  # noqa: E402
+                        load_corrections, parse_vtt, resolve_overlaps)
 
 TEMPLATE = Path(__file__).with_name("language_pass_prompt.md")
+TEMPLATE_STEMS = Path(__file__).with_name("language_pass_prompt_stems.md")
 HOSTS = ["Sigve", "Mamen"]
 
 
@@ -113,8 +119,10 @@ def cmd_split(args) -> int:
     cues = parse_vtt(vtt)
     raw_path = Path(args.raw) if args.raw else PROJECT / ".cache" / "raw" / (vtt.stem + ".json")
     raw = json.loads(raw_path.read_text(encoding="utf-8")) if raw_path.exists() else {}
-    solo = raw.get("solo_segments") or []
-    if not solo:
+    stems = bool(raw.get("stems"))
+    solo = [] if stems else raw.get("solo_segments") or []
+    reference = parse_vtt(Path(args.reference)) if args.reference else []
+    if not solo and not stems:
         print(f"(no solo_segments in {raw_path}; reference files will only carry context cues)")
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -133,7 +141,7 @@ def cmd_split(args) -> int:
                  "film, transcribed from the clean clip files in their own language. Keep that "
                  "language. For a cue tagged Spillklipp, replace the tag with the character's "
                  "name when the line makes it clear, otherwise leave Spillklipp.")
-    template = TEMPLATE.read_text(encoding="utf-8")
+    template = (TEMPLATE_STEMS if stems else TEMPLATE).read_text(encoding="utf-8")
 
     starts = chunk_bounds(cues, args.minutes, args.min_pause, args.search)
     starts.append(len(cues))
@@ -151,11 +159,25 @@ def cmd_split(args) -> int:
         if after:
             ref += ["## First cues of the next chunk (context, handled there)", ""]
             ref += [render_cue(c) for c in after] + [""]
-        ref += ["## Solo tracks (each speaker's own microphone, words in mix time; the speaker is certain)", ""]
-        ref += [f"{format_ts(s['start'])} <v {s['speaker']}> {s['text']}"
-                for s in solo if t0 - args.slack <= s["start"] < t1 + args.slack]
+        if solo:
+            ref += ["## Solo tracks (each speaker's own microphone, words in mix time; the speaker is certain)", ""]
+            ref += [f"{format_ts(s['start'])} <v {s['speaker']}> {s['text']}"
+                    for s in solo if t0 - args.slack <= s["start"] < t1 + args.slack]
         (out / f"chunk{n:02d}.ref.md").write_text("\n".join(ref) + "\n", encoding="utf-8")
-        prompt = template
+        ref_line = ""
+        if reference:
+            # kept in a subdirectory: join only reads chunkNN.vtt in <out>
+            rdir = out / "reference"
+            rdir.mkdir(exist_ok=True)
+            rpath = rdir / f"chunk{n:02d}.vtt"
+            span = [c for c in reference if t0 - 30 <= c["start"] <= t1 + 30]
+            rpath.write_text("WEBVTT\n\n" + "\n\n".join(render_cue(c) for c in span) + "\n",
+                             encoding="utf-8")
+            ref_line = (f"- Reference (read only): {rpath.resolve()} — an earlier transcript of the "
+                        f"same time span (timestamps line up). Use it for names, terms and English "
+                        f"phrases; its speaker tags may be wrong and it may contain speech that was "
+                        f"cut from the episode.\n")
+        prompt = template.replace("{REFERENCE}", ref_line)
         for k, v in {
             "EPISODE": meta.get("title") or vtt.stem,
             "SPEAKERS": ", ".join(speakers),
@@ -187,18 +209,13 @@ def cmd_split(args) -> int:
 def cmd_join(args) -> int:
     d = Path(args.dir)
     cues: list[dict] = []
-    for f in sorted(d.glob("chunk*.vtt")):
+    for f in sorted(d.glob("chunk[0-9][0-9].vtt")):
         cues += parse_vtt(f)
-    cues.sort(key=lambda c: c["start"])
-    clipped = 0
-    for a, b in zip(cues, cues[1:]):
-        if a["end"] > b["start"]:
-            a["end"] = b["start"]
-            clipped += 1
-    cues = [c for c in cues if c["end"] - c["start"] >= 0.05]
+    n = resolve_overlaps(cues)
     Path(args.output).write_text(
         "WEBVTT\n\n" + "\n\n".join(render_cue(c) for c in cues) + "\n", encoding="utf-8")
-    print(f"joined {len(cues)} cues -> {args.output} (clipped {clipped} overlapping end(s)); "
+    print(f"joined {len(cues)} cues -> {args.output} (overlaps: clipped {n['clipped']}, "
+          f"delayed {n['delayed']}, combined {n['combined']}); "
           f"now run: uv run python scripts/transcribe.py -o {args.output} --polish")
     return 0
 
@@ -253,6 +270,62 @@ def cmd_measure(args) -> int:
     nb = max(1, tot["cues_before"])
     print(f"  cues touched {100 * (tot['deleted'] + tot['changed']) / nb:.1f} %, "
           f"word edit rate {100 * tot['word_edits'] / max(1, tot['words_before']):.1f} %")
+    return 0
+
+
+# --------------------------------------------------------------------------
+# check
+# --------------------------------------------------------------------------
+STOP = set("ja nei og det er jo så du jeg da at i på en et som har de vi man med for men ikke "
+           "der den liksom bare litt sånn".split())
+
+
+def _norm(w: str) -> str:
+    return re.sub(r"[^\wæøå]", "", w.lower())
+
+
+def cmd_check(args) -> int:
+    """Cues whose text or timing does not match the speaker's own track."""
+    vtt = Path(args.vtt)
+    raw_path = Path(args.raw) if args.raw else PROJECT / ".cache" / "raw" / (vtt.stem + ".json")
+    raw = json.loads(raw_path.read_text(encoding="utf-8"))
+    if not raw.get("stems"):
+        sys.stderr.write(f"{raw_path} is not from align_solo.py's stems; nothing to check against.\n")
+        return 1
+    corrections = load_corrections()
+    disp = {display_name(k, corrections): k for k in raw["stem_envelope"]}
+    env = {disp_name: raw["stem_envelope"][full] for disp_name, full in disp.items()}
+    step = raw.get("envelope_step", 0.1)
+    words: dict[str, list[tuple[float, str]]] = defaultdict(list)
+    for s in raw["solo_segments"]:
+        for w in s["words"]:
+            words[display_name(s["speaker"], corrections)].append((w["start"], _norm(w["word"])))
+    for v in words.values():
+        v.sort()
+    silent, foreign = [], []
+    for c in parse_vtt(vtt):
+        for spk, text in cue_speaker_groups(c):
+            if spk not in env:
+                continue
+            e = env[spk][int(c["start"] / step):int(c["end"] / step) + 1]
+            if max(e, default=0.0) < args.silence:
+                silent.append((c, spk, text))
+                continue
+            toks = [t for t in (_norm(x) for x in text.split()) if len(t) >= 3 and t not in STOP]
+            if len(toks) < 3:
+                continue
+            bag = {w for t, w in words[spk] if c["start"] - 2 <= t <= c["end"] + 2}
+            hit = sum(any(t == b or (len(t) >= 4 and t[:4] == b[:4]) for b in bag) for t in toks)
+            if hit / len(toks) < args.min_match:
+                foreign.append((c, spk, text, hit / len(toks)))
+    print(f"{len(silent)} cue(s) where the speaker's track is silent (wrong time, wrong tag, "
+          f"or text that is not in the episode):")
+    for c, spk, text in silent:
+        print(f"  {format_ts(c['start'])} {spk:8s} {text[:80]}")
+    print(f"{len(foreign)} cue(s) whose words are mostly not on the speaker's track (text taken "
+          f"from a reference, or a heavy rewrite):")
+    for c, spk, text, m in foreign:
+        print(f"  {format_ts(c['start'])} {spk:8s} {m:.0%}  {text[:80]}")
     return 0
 
 
@@ -322,7 +395,18 @@ def main() -> int:
                    help="how far from the N-minute mark to look for a pause (default 60 s)")
     s.add_argument("--context", type=int, default=3, help="neighbouring cues shown as context")
     s.add_argument("--slack", type=float, default=20.0, help="solo reference overlap in seconds")
+    s.add_argument("--reference", help="an earlier transcript (e.g. the published one) given to "
+                                       "the agents for names, terms and English phrases")
     s.set_defaults(fn=cmd_split)
+    k = sub.add_parser("check", help="cues that do not match the speaker's own track "
+                                     "(raw cache from align_solo.py)")
+    k.add_argument("vtt")
+    k.add_argument("--raw", help="raw cache (default .cache/raw/<stem>.json)")
+    k.add_argument("--silence", type=float, default=0.01,
+                   help="loudest 0.1 s of the speaker's track under the cue below this = silent")
+    k.add_argument("--min-match", type=float, default=0.3,
+                   help="share of the cue's content words found on the speaker's track")
+    k.set_defaults(fn=cmd_check)
     j = sub.add_parser("join", help="concatenate edited chunks into one VTT")
     j.add_argument("dir")
     j.add_argument("-o", "--output", required=True)

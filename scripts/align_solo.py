@@ -1,45 +1,47 @@
 #!/usr/bin/env python3
-"""Use the Reaper project and the solo tracks as speaker ground truth.
+"""Transcribe each speaker's microphone as it plays in the edited episode.
 
 Every self-edited episode folder has the Reaper project (`.rpp`) and one
 recording per microphone. The project lists every item on every track with
-its position in the mix, its length and its offset into the source file, so
-it is an exact map of who is audible when, and of which seconds of each
-solo track survived the edit. This script reads that map and rewrites the
-raw cache from `transcribe.py` so that
+its position in the mix, its length and its offset into the source file. This
+script uses that map to build one "stem" per speaker: a track holding only
+that microphone's items, each at its mix position, i.e. what Reaper would
+render with that track soloed. Each stem is transcribed on its own, so
 
-  * speaker tags come from the solo tracks: each solo recording is
-    transcribed on its own (transcribe.py --no-diarization, run here when
-    the cache is missing), its words are moved into mix time through the
-    items, and those words become the diarization. Where no solo word
-    exists the Reaper item itself is the fallback. pyannote is not used.
-  * speech the mix transcript skipped is filled from the solo words
-    (stretches of >= 2.5 s with 4+ words, the same rule as the built-in
-    gap fill),
-  * files on the other tracks (music, effects, game audio) are checked
-    with Silero VAD; those that contain speech are transcribed from the
-    clean file with a multilingual model and automatic language detection
-    (NB-Whisper would translate them), and replace the mix text inside
-    their span, tagged "Spillklipp". --item sets the tag (a character
-    name) and optionally the language for a file: "file.wav=Gabriel|en".
-    A produced clip on a speaker's track (an intro, a sketch) counts as
-    that microphone unless it is given with --item.
-  * mix words that lie inside music/effects spans with no microphone
-    item or solo word near them are dropped as hallucinations,
-  * spans where a microphone item exists but the solo track gave no
-    words (a dropout) are listed for review,
-  * the mapped solo text is kept in the cache under "solo_segments" as
-    reference material for the language pass.
+  * the text comes from a clean single voice (better than the mixed audio),
+  * the speaker of every word is certain (no pyannote, no guessing),
+  * timestamps are mix time directly, and nothing that was cut is included.
 
-Then re-render with `transcribe.py -o <vtt> --render-only`. Runs from the
-`.orig.json` copy of the cache, so it can be repeated with a better mapping.
+Whisper drops stretches of speech in long files, in both decoding modes, so
+each stem is transcribed in three passes: sequential (best text), batched
+(fills runs the first pass missed), and every >= 2 s stretch that Silero VAD
+calls speech but still has no word, transcribed on its own. The result is
+cached in .cache/raw/<stem>.stems.json (redone when the .rpp changes or with
+--redo-stems), and written as the raw cache .cache/raw/<stem>.json with a
+speaker on every segment, ready for `transcribe.py --render-only`. The mix
+transcript from transcribe.py is not needed.
+
+Files on the other tracks (music, effects, game audio) are checked with
+Silero VAD; those that contain speech are transcribed from the clean file
+with a multilingual model and automatic language detection (NB-Whisper would
+translate them) and tagged "Spillklipp". --item sets the tag (a character
+name) and optionally the language for a file: "file.wav=Game|en". A produced
+clip on a speaker's track (an intro, a sketch) counts as that microphone
+unless it is given with --item.
+
+The stem text and a 0.1 s loudness envelope per speaker are kept in the
+cache (solo_segments, stem_envelope) for `language_pass.py check`.
 
 Usage:
-    uv run python scripts/transcribe.py -o transcripts/TA.vtt --episode-number 120 \\
-        --no-diarization
     uv run python scripts/align_solo.py -o transcripts/TA.vtt --episode-number 120 \\
         --item "Total Annihilation - Intro Cinematic.wav=Forteller|en"
     uv run python scripts/transcribe.py -o transcripts/TA.vtt --render-only
+
+--mix-text is the earlier mode: run `transcribe.py --no-diarization` on the
+mix first; this script then transcribes the raw solo files, moves their words
+into mix time and uses them only for speaker tags and to fill gaps in the mix
+text. It is worse (raw files include speech that was cut, and the mix text
+garbles overlaps) and is kept for comparison.
 
 Speaker tracks are recognised by name: the hosts' tracks ("Mamen", "Sigve"),
 a track named like a person in the episode's <podcast:person> list or in the
@@ -56,10 +58,10 @@ import shutil
 import subprocess
 import sys
 import unicodedata
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
-from asr_common import DEFAULT_AUDIO_LIBRARY, find_episode_audio, format_ts
+from asr_common import DEFAULT_AUDIO_LIBRARY, find_episode_audio, format_ts, setup_cuda_paths
 
 HOST_TRACKS = {"mamen": "Mr. Mamen", "mr. mamen": "Mr. Mamen", "mr mamen": "Mr. Mamen",
                "sigve": "Sigve"}
@@ -234,7 +236,219 @@ def speech_seconds(path: Path) -> tuple[float, float]:
 
 
 # --------------------------------------------------------------------------
-# Mapping solo words into the mix
+# Speaker stems: each microphone as heard in the mix
+# --------------------------------------------------------------------------
+STEM_MODEL = "TheStigh/nb-whisper-large-ct2"     # transcribe.py's default
+STEM_VAD = dict(threshold=0.3, min_silence_duration_ms=2000, speech_pad_ms=600)
+ENVELOPE_STEP = 0.1      # seconds per RMS value kept in the cache
+
+
+def build_stems(folder: Path, files_by_speaker: dict) -> dict:
+    """One mono 16 kHz track per speaker, every item placed at its mix position.
+
+    This is the speaker's microphone exactly as it plays in the edited
+    episode (fades and item volume aside), so its transcript needs no
+    mapping and contains nothing that was cut.
+    """
+    import numpy as np
+    from asr_common import SAMPLE_RATE, load_audio
+    by_role: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
+    for (role, fname), items in files_by_speaker.items():
+        path = resolve(folder, fname)
+        if path is None:
+            print(f"  ⚠ {role}: {fname} not in {folder}; its items are left out")
+            continue
+        by_role[role] += [(path, i) for i in items]
+    stems = {}
+    for role, placed in by_role.items():
+        end = max(i["pos"] + i["len"] for _, i in placed)
+        stem = np.zeros(int(end * SAMPLE_RATE) + SAMPLE_RATE, dtype=np.float32)
+        cache: dict[Path, np.ndarray] = {}
+        for path, i in placed:
+            if path not in cache:
+                cache[path] = load_audio(path)
+            src = cache[path]
+            a = int(i["soffs"] * SAMPLE_RATE)
+            n_out = int(i["len"] * SAMPLE_RATE)
+            seg = src[a:a + int(i["len"] * i["rate"] * SAMPLE_RATE)]
+            if i["rate"] != 1.0 and len(seg):
+                seg = np.interp(np.linspace(0, len(seg) - 1, n_out), np.arange(len(seg)), seg)
+            o = int(i["pos"] * SAMPLE_RATE)
+            seg = seg[:len(stem) - o]
+            stem[o:o + len(seg)] += seg
+        stems[role] = stem
+        print(f"  stem {role:22s} {len(placed):4d} items from "
+              f"{', '.join(sorted({p.name for p, _ in placed}))[:70]}")
+    return stems
+
+
+def _segments(segs, offset: float = 0.0, tag: str = "") -> list[dict]:
+    out = []
+    for s in segs:
+        if "<|" in s.text or not s.words:
+            continue
+        out.append({"start": s.start + offset, "end": s.end + offset, "text": s.text.strip(),
+                    "words": [{"start": w.start + offset, "end": w.end + offset, "word": w.word}
+                              for w in s.words], "pass": tag})
+    return out
+
+
+def transcribe_stem(model, wav) -> list[dict]:
+    """Transcribe one stem in three passes; Whisper drops speech in long files.
+
+    1. sequential decoding (best text);
+    2. batched decoding, keeping only runs of words the first pass has
+       nothing for within 1 s (4+ words or 2.5+ s);
+    3. every stretch of >= 2 s that Silero VAD calls speech and that still
+       has no word is transcribed on its own.
+    """
+    import bisect
+    from faster_whisper import BatchedInferencePipeline
+    from faster_whisper.vad import VadOptions, get_speech_timestamps
+    from asr_common import SAMPLE_RATE
+    kw = dict(language="no", beam_size=5, word_timestamps=True, vad_filter=True,
+              vad_parameters=STEM_VAD)
+    segs = _segments(model.transcribe(wav, **kw)[0], tag="seq")
+
+    have = sorted(w["start"] for s in segs for w in s["words"])
+    def near(t: float, pad: float) -> bool:
+        i = bisect.bisect_left(have, t - pad)
+        return i < len(have) and have[i] <= t + pad
+    batched = _segments(BatchedInferencePipeline(model=model).transcribe(wav, batch_size=8, **kw)[0])
+    runs, cur = [], []
+    for w in (w for s in batched for w in s["words"]):
+        if near(w["start"], 1.0):
+            if cur:
+                runs.append(cur)
+            cur = []
+        else:
+            cur.append(w)
+    if cur:
+        runs.append(cur)
+    for r in runs:
+        if len(r) >= 4 or r[-1]["end"] - r[0]["start"] >= 2.5:
+            segs.append({"start": r[0]["start"], "end": r[-1]["end"],
+                         "text": "".join(w["word"] for w in r).strip(), "words": r,
+                         "pass": "batched"})
+
+    have = sorted(w["start"] for s in segs for w in s["words"])
+    spans = get_speech_timestamps(wav, VadOptions(threshold=0.5, min_silence_duration_ms=700,
+                                                  speech_pad_ms=200))
+    todo = []
+    for sp in spans:
+        a, e = sp["start"] / SAMPLE_RATE, sp["end"] / SAMPLE_RATE
+        if e - a < 1.5:
+            continue
+        run = None
+        for b in range(int(a), int(e) + 1):
+            miss = not near(b + 0.5, 1.0)
+            if miss:
+                run = [b, b + 1] if run is None else [run[0], b + 1]
+            if (not miss or b == int(e)) and run is not None:
+                if run[1] - run[0] >= 2:
+                    todo.append((max(a, run[0]), min(e, run[1])))
+                run = None
+    for a, e in todo:
+        lo = max(0.0, a - 0.3)
+        piece = wav[int(lo * SAMPLE_RATE):int((e + 0.3) * SAMPLE_RATE)]
+        segs += _segments(model.transcribe(piece, language="no", beam_size=5, word_timestamps=True,
+                                           vad_filter=True,
+                                           vad_parameters=dict(threshold=0.3, speech_pad_ms=300))[0],
+                          offset=lo, tag="span")
+    segs.sort(key=lambda s: s["start"])
+    return segs
+
+
+def envelope(wav) -> list[float]:
+    import numpy as np
+    from asr_common import SAMPLE_RATE
+    h = int(ENVELOPE_STEP * SAMPLE_RATE)
+    x = wav[:len(wav) // h * h].reshape(-1, h)
+    return [round(float(v), 4) for v in np.sqrt((x ** 2).mean(axis=1))]
+
+
+def stem_transcripts(project: Path, folder: Path, rpp: Path, files_by_speaker: dict,
+                     out_stem: str, redo: bool) -> dict:
+    """{speaker: {"segments", "envelope"}}, cached in .cache/raw/<stem>.stems.json."""
+    cache = project / ".cache" / "raw" / f"{out_stem}.stems.json"
+    key = {"rpp": rpp.name, "rpp_mtime": rpp.stat().st_mtime,
+           "files": sorted(f"{r}|{f}|{len(i)}" for (r, f), i in files_by_speaker.items())}
+    if cache.exists() and not redo:
+        data = json.loads(cache.read_text(encoding="utf-8"))
+        if data.get("key") == key:
+            print(f"  using {cache.relative_to(project)} (--redo-stems to transcribe again)")
+            return data["speakers"]
+        print(f"  {cache.name} is from another project state; transcribing again")
+    from faster_whisper import WhisperModel
+    stems = build_stems(folder, files_by_speaker)
+    model = WhisperModel(STEM_MODEL, device="cuda", compute_type="float16")
+    speakers = {}
+    for role, wav in stems.items():
+        segs = transcribe_stem(model, wav)
+        per = Counter(s["pass"] for s in segs)
+        words = Counter()
+        for s in segs:
+            words[s["pass"]] += len(s["words"])
+        print(f"  {role:22s} {sum(words.values()):5d} words "
+              f"(sequential {words['seq']}, batched fill {words['batched']}, "
+              f"speech spans {words['span']} in {per['span']} spans)")
+        speakers[role] = {"segments": segs, "envelope": envelope(wav)}
+    cache.write_text(json.dumps({"key": key, "speakers": speakers}, ensure_ascii=False),
+                     encoding="utf-8")
+    return speakers
+
+
+def build_from_stems(mix_path: Path, speakers: dict, speaker_items: list[dict],
+                     inserts: list[dict], non_speech: list[tuple[float, float]]) -> dict:
+    """Raw cache whose text comes from the stems; every segment carries its speaker."""
+    import av
+    with av.open(str(mix_path)) as c:
+        duration = (c.duration or 0) / 1_000_000
+    segs, diar = [], []
+    for role, d in speakers.items():
+        for s in d["segments"]:
+            segs.append({**s, "speaker": role})
+            diar.append({"start": s["start"], "end": s["end"], "speaker": role})
+    for ins in inserts:
+        for s in ins["segments"]:
+            segs.append({**s, "speaker": ins["speaker"]})
+        diar.append({"start": ins["start"], "end": ins["end"], "speaker": ins["speaker"]})
+        print(f"  {ins['speaker']:22s} {format_ts(ins['start'])} - {format_ts(ins['end'])}: "
+              f"{len(ins['segments'])} segment(s) from the clean file")
+    segs.sort(key=lambda s: s["start"])
+    diar.sort(key=lambda d: d["start"])
+    # microphone items with no word at all: a dropout or speech the passes missed
+    words = sorted(w["start"] for s in segs for w in s["words"])
+    import bisect
+    silent = []
+    for it in speaker_items:
+        if it["end"] - it["start"] < 3.0:
+            continue
+        i = bisect.bisect_left(words, it["start"])
+        if i >= len(words) or words[i] > it["end"]:
+            env = speakers.get(it["speaker"], {}).get("envelope") or []
+            a, b = int(it["start"] / ENVELOPE_STEP), int(it["end"] / ENVELOPE_STEP)
+            loud = max(env[a:b], default=0.0)
+            if loud > 0.02:
+                silent.append((it["start"], it["end"], it["speaker"], loud))
+    if silent:
+        print(f"  {len(silent)} microphone item(s) >= 3 s with sound but no words "
+              f"(listen; laughter, or speech every pass missed):")
+        for a, b, who, loud in silent:
+            print(f"    {format_ts(a)} - {format_ts(b)} {who}")
+    names = {s["speaker"] for s in segs}
+    return {"audio": str(mix_path), "duration": duration, "language": "no", "stems": True,
+            "segments": segs, "diarization": diar, "speaker_map": {n: n for n in names},
+            "gap_review": [],
+            "solo_segments": [{**s, "speaker": role} for role, d in speakers.items()
+                              for s in d["segments"]],
+            "stem_envelope": {role: d["envelope"] for role, d in speakers.items()},
+            "envelope_step": ENVELOPE_STEP,
+            "non_speech_spans": [[a, b] for a, b in non_speech]}
+
+
+# --------------------------------------------------------------------------
+# Mapping solo words into the mix (--mix-text)
 # --------------------------------------------------------------------------
 def map_words(raw: dict, items: list[dict], speaker: str) -> tuple[list[dict], int]:
     """Solo words -> mix time through the items of their file. Returns (words, dropped)."""
@@ -594,7 +808,15 @@ def main() -> int:
     ap.add_argument("--list", action="store_true", help="Print tracks, items and files; stop")
     ap.add_argument("--no-transcribe", action="store_true",
                     help="Fail instead of transcribing solo files whose cache is missing")
+    ap.add_argument("--mix-text", action="store_true",
+                    help="Old mode: keep the mix transcript from transcribe.py and only take "
+                         "speakers and gap fills from the raw solo files")
+    ap.add_argument("--redo-stems", action="store_true",
+                    help="Transcribe the speaker stems again even if .cache/raw/<stem>.stems.json "
+                         "matches the project")
     args = ap.parse_args()
+    if not args.list and not args.mix_text:
+        setup_cuda_paths()          # re-execs once so ctranslate2 finds the CUDA libraries
 
     project = Path(__file__).resolve().parent.parent
     mix_path = find_episode_audio(args.episode_number, args.library)
@@ -660,9 +882,9 @@ def main() -> int:
         sys.stderr.write("No speaker tracks recognised; give --track NAME=Full Name.\n")
         return 1
 
-    # solo tracks
+    # solo tracks (--mix-text only; the stems are built further down)
     speaker_words: list[dict] = []
-    for (role, fname), items in sorted(files_by_speaker.items()):
+    for (role, fname), items in sorted(files_by_speaker.items() if args.mix_text else []):
         path = resolve(folder, fname)
         if path is None:
             print(f"  ⚠ {role}: {fname} not in {folder}; using Reaper items only for it")
@@ -726,6 +948,21 @@ def main() -> int:
 
     raw_dir = project / ".cache" / "raw"
     raw_path = raw_dir / (args.output.stem + ".json")
+    if not args.mix_text:
+        print("Speaker stems...")
+        speakers = stem_transcripts(project, folder, rpp, files_by_speaker, args.output.stem,
+                                    args.redo_stems)
+        if raw_path.exists():
+            old = json.loads(raw_path.read_text(encoding="utf-8"))
+            if not old.get("stems"):
+                keep = raw_path.with_suffix(".mix.json")
+                shutil.copy(raw_path, keep)
+                print(f"  kept the earlier mix-based cache as {keep.name}")
+        out = build_from_stems(mix_path, speakers, speaker_items, inserts, non_speech)
+        raw_path.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+        print(f"Wrote {raw_path.relative_to(project)}. Render with:\n"
+              f"  uv run python scripts/transcribe.py -o {args.output} --render-only")
+        return 0
     if not raw_path.exists():
         sys.stderr.write(f"No raw cache {raw_path}; run transcribe.py -o {args.output} first.\n")
         return 1

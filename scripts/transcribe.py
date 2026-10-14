@@ -38,6 +38,7 @@ from asr_common import (
     find_episode_audio,
     parse_vtt,
     render_vtt as render_cues,
+    resolve_overlaps,
     retime_cue_boundaries,
     split_multi_speaker_cues,
     wrap_cue_lines,
@@ -779,12 +780,13 @@ class _Word:
 
 
 class _Seg:
-    __slots__ = ("start", "end", "text", "words", "gap")
+    __slots__ = ("start", "end", "text", "words", "gap", "speaker")
 
     def __init__(self, d):
         self.start, self.end, self.text = d["start"], d["end"], d["text"]
         self.words = [_Word(w) for w in d.get("words", [])]
         self.gap = bool(d.get("gap", False))
+        self.speaker = d.get("speaker")     # set when the text comes from one speaker's own track
 
 
 def print_gap_review(review: list[dict]) -> None:
@@ -925,11 +927,16 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
                                       max_chars=args.line_width * 3)
         split_count += max(0, len(sub_cues) - 1)
         # Speaker is decided per cue, not per Whisper segment: a segment can
-        # span a speaker change (especially in batched mode).
+        # span a speaker change (especially in batched mode). Segments from a
+        # speaker's own track (align_solo.py) carry their speaker.
+        own = display_name(speaker_map.get(seg.speaker, seg.speaker), corrections) \
+            if seg.speaker else None
         for (cue_start, cue_end, cue_text) in sub_cues:
             cues.append({"start": cue_start, "end": cue_end,
                          "lines": [apply_corrections(cue_text, corrections)],
-                         "speaker": speaker_at(cue_start, cue_end)})
+                         "speaker": own or speaker_at(cue_start, cue_end)})
+    # Per-speaker tracks overlap where people talk over each other
+    overlaps = resolve_overlaps(cues)
 
     # Give short cues time to be read when there is silence after them
     # (TRANSCRIPT_GUIDELINES "Reading time").
@@ -944,6 +951,9 @@ def render_vtt(args, segs, diar_segments, speaker_map, corrections) -> None:
 
     if split_count:
         print(f"  Split {split_count} cues at word boundaries")
+    if any(overlaps.values()):
+        print(f"  Overlapping speech: clipped {overlaps['clipped']}, delayed "
+              f"{overlaps['delayed']}, combined {overlaps['combined']} into two-speaker cues")
     if extended:
         print(f"  Extended {extended} short cues for reading time")
 
