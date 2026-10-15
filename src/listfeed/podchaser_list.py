@@ -12,7 +12,6 @@ list). Resolve the numeric id with :func:`resolve_list_id` when you only have a
 search term / slug.
 """
 
-import sys
 from typing import Dict, List, Optional
 
 import requests

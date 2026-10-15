@@ -42,7 +42,6 @@ from src.common.guest_store import (
     add_alias,
     add_extra_episode,
     best_creator_match,
-    creator_fields,
     find_guest_by_href,
     find_guests_matching,
     find_similar_guests,
@@ -415,7 +414,7 @@ def cmd_episode(args) -> None:
             note = f"{note} (#{episode.episode_num})"
         if add_extra_episode(data, key, episode.guid, note):
             changes.append(f"extra_episodes: {key} ← {note}")
-            print(f"  ✓ Lagt til i extra_episodes")
+            print("  ✓ Lagt til i extra_episodes")
         else:
             print("  ✓ Har allerede episoden i extra_episodes")
     sort_extra_episodes(data)

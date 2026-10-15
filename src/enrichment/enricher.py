@@ -10,7 +10,6 @@ import requests
 import hashlib
 import json
 import os
-import shutil
 import string
 from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
@@ -427,7 +426,7 @@ class FeedEnricher(BaseFeed):
 
         # Report normalizations if any
         if normalizations:
-            print(f"\n  Name normalizations applied:")
+            print("\n  Name normalizations applied:")
             for norm in sorted(set(normalizations)):
                 print(norm)
 
@@ -456,15 +455,15 @@ class FeedEnricher(BaseFeed):
                 if info['original_name']:
                     print(f"    (detected as '{info['original_name']}' in titles)")
 
-            print(f"\n💡 Add Podchaser profile with:")
-            print(f"   uv run guests.py add \"Guest Name\"   (or: uv run guests.py refresh)")
+            print("\n💡 Add Podchaser profile with:")
+            print("   uv run guests.py add \"Guest Name\"   (or: uv run guests.py refresh)")
 
             # If there are guests that might need aliases
             detected_names = [info['original_name'] for info in unique_missing.values()
                             if info['original_name']]
             if detected_names:
-                print(f"\n💡 If name variations exist, add aliases with:")
-                print(f"   uv run guests.py add \"Full Name\" --alias \"Short Name\"")
+                print("\n💡 If name variations exist, add aliases with:")
+                print("   uv run guests.py add \"Full Name\" --alias \"Short Name\"")
 
         return self
 
@@ -908,7 +907,7 @@ class FeedEnricher(BaseFeed):
                     prefixed_count += 1
 
         print(f"✓ Added OP3 analytics prefix to {prefixed_count} episode enclosures")
-        print(f"  Stats will be available at: https://op3.dev/show/[your-show-guid]")
+        print("  Stats will be available at: https://op3.dev/show/[your-show-guid]")
         return self
 
     def add_language_to_transcripts(
@@ -1212,7 +1211,7 @@ class FeedEnricher(BaseFeed):
                                         print(f"  ⚠️  Chapter count mismatch: {episode_title}")
                                         print(f"      Local file: {local_chapter_count} chapters ({filename})")
                                         print(f"      Podbean:    {podbean_chapter_count} chapters")
-                                        print(f"      Check if the local file needs updating")
+                                        print("      Check if the local file needs updating")
 
                                 except Exception:
                                     # If we can't fetch Podbean version for comparison, that's okay
@@ -1605,7 +1604,7 @@ class FeedEnricher(BaseFeed):
                             # URL rewrite + hosted JSON only; no PSC tags in output
                             converted_count += 1
 
-                    except Exception as e:
+                    except Exception:
                         failed_count += 1
                         # Silently skip episodes with failed chapter conversions
                         continue

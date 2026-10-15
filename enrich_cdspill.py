@@ -101,7 +101,7 @@ def main():
 
     except FileNotFoundError:
         print(f"⚠ Config file not found: {permanent_staff_file}")
-        print(f"  Using empty host list")
+        print("  Using empty host list")
     except Exception as e:
         print(f"⚠ Error loading config: {e}")
 
@@ -123,8 +123,8 @@ def main():
     print(f"\n📦 Loading known guests from: {known_guests_file}")
     if not KNOWN_GUESTS_PATH.exists():
         print(f"⚠ File not found: {known_guests_file}")
-        print(f"  Guests will not have profile images")
-        print(f"  Use 'uv run guests.py add <name>' to add guest data")
+        print("  Guests will not have profile images")
+        print("  Use 'uv run guests.py add <name>' to add guest data")
     else:
         try:
             known_guests_data = load_known_guests_data()

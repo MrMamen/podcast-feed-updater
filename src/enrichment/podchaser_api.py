@@ -127,7 +127,7 @@ class PodchaserAPI:
 
             if not podcasts:
                 print(f"No podcasts found for search term: '{podcast_name}'")
-                print(f"Try searching on https://www.podchaser.com/ first")
+                print("Try searching on https://www.podchaser.com/ first")
 
             return podcasts[0] if podcasts else None
 
@@ -258,17 +258,17 @@ class PodchaserAPI:
 
         if not podcast:
             print(f"⚠ Podcast '{podcast_name}' not found on Podchaser")
-            print(f"  Try different search terms or check https://www.podchaser.com/cdspill")
+            print("  Try different search terms or check https://www.podchaser.com/cdspill")
             return []
 
         print(f"✓ Found podcast: {podcast.get('title')} (ID: {podcast.get('id')})")
         podcast_id = podcast["id"]
 
-        print(f"Fetching credits for podcast...")
+        print("Fetching credits for podcast...")
         creators = self.get_podcast_creators(podcast_id)
 
         if not creators:
-            print(f"⚠ No credits found for this podcast")
+            print("⚠ No credits found for this podcast")
 
         return creators
 
