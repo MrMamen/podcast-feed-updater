@@ -14,7 +14,6 @@ En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 | Generere den berikede feeden lokalt | `uv run enrich_cdspill.py [--local-cache]` |
 | Generere Spotify-/YouTube-variantene | `uv run enrich_cdspill_spotify.py` / `enrich_cdspill_youtube.py` |
 | Bygge Tiltcast-listefeed | `uv run build_list_feed.py` |
-| Transkribere en episode | `uv run python scripts/transcribe.py …` (se [transcripts/README.md](transcripts/README.md)) |
 
 `guests.py` og `analyze.py` uten argumenter gir en piltast-meny; underkommandoene finnes for scripting. Begge har en `cache`-kommando som laster ned en lokal kopi av feeden (`.cache/`), og `analyze.py` laster den ned automatisk hvis den mangler.
 
@@ -106,10 +105,7 @@ podcast-feed-updater/
 ├── config/                    # JSON-config (gjester, faste roller, tiltcast-liste)
 ├── chapters/                  # Kapittel-data per episode (kilde)
 ├── scripts/
-│   ├── asr_common.py          # Felles kode for transkripsjonsscriptene
-│   ├── transcribe.py, align_solo.py, align_clips.py, add_speakers.py,
-│   │   build_speaker_profiles.py, build_profiles_clean.py  # Transkripsjon (se transcripts/README.md)
-│   └── claude-tools/          # Hjelpescript for Claude-sesjoner (språkvask-biter, minne)
+│   └── claude-tools/          # Hjelpescript for Claude-sesjoner (minne, øktlogger)
 ├── docs/                      # Markdown-dokumentasjon
 └── output/                    # Generert XML (publiseres til GitHub Pages)
 ```
@@ -216,7 +212,7 @@ enricher.write_feed("output.xml")
 ## 🧪 Development
 
 ```bash
-# Install everything incl. dev tooling and the GPU transcription stack
+# Install everything incl. dev tooling
 uv sync
 
 # Run tests
