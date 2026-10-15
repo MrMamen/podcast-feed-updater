@@ -23,7 +23,6 @@ line-length = 100
 # skipped by CI (`uv run --no-dev`).
 [dependency-groups]
 dev = [
-    "pytest>=8.0.0",
     "black>=24.0.0",
     "ruff>=0.3.0",
 ]

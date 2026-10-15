@@ -1,74 +1,29 @@
-.devcontainer/devcontainer.env
-.transcripts/
-.memories/
-.tmp/
-
 # Python
 __pycache__/
 *.py[cod]
-*.pyc
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
+build/
+dist/
 
-# Virtual environments
+# Virtual environments and secrets
 .venv/
-venv/
-env/
-ENV/
 .env
 
 # IDE
 .vscode/
 .idea/
 *.swp
-*.swo
 
-# Output files
+# Generated feeds and chapters (GitHub Actions generates these)
 output/
 *.xml
-!example*.xml
 
-# Config with secrets
-config.yaml
-!example_config.yaml
+# Local caches
+.cache/
+.pytest_cache/
+.ruff_cache/
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Logs
-*.log
-
-# Local Netlify folder
-.netlify
-
-# Generated feeds (GitHub Actions generates these)
-# (output/ already ignored above)
-*.backup
-
-# Local cache for development/testing
-.cache/
-
-# WSL download markers
 *:Zone.Identifier

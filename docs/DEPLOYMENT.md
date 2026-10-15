@@ -84,75 +84,6 @@ For å oppdatere feeden:
 
 ---
 
-## 🔄 Alternative løsninger
-
-### 2. Netlify (Også gratis)
-
-**Fordeler:**
-- ✅ Gratis hosting
-- ✅ Automatisk HTTPS
-- ✅ Custom domain støtte
-- ✅ Build hooks for triggering
-
-**Oppsett:**
-
-1. Opprett `netlify.toml`:
-
-```toml
-[build]
-  command = "uv run enrich_cdspill.py"
-  publish = "docs"
-
-[[redirects]]
-  from = "/"
-  to = "/cdspill-enriched.xml"
-  status = 200
-```
-
-2. Koble GitHub repo til Netlify
-3. Sett opp **Build hooks** for periodisk kjøring (krever ekstern cron service)
-
-**Feed URL:**
-```
-https://[your-site].netlify.app/cdspill-enriched.xml
-```
-
-### 3. Cloudflare Pages + Workers (Gratis)
-
-**Fordeler:**
-- ✅ Gratis hosting
-- ✅ Raskere global distribusjon (CDN)
-- ✅ Scheduled Workers for cron
-
-**Oppsett:**
-- Similar til Netlify, men med Cloudflare Pages
-- Bruk Cloudflare Workers Cron Triggers for scheduling
-
-### 4. Egen server (VPS/Docker)
-
-**Fordeler:**
-- ✅ Full kontroll
-- ✅ Kan kjøre oftere enn hver 6. time
-
-**Oppsett:**
-
-1. Sett opp cron job:
-
-```bash
-# Rediger crontab
-crontab -e
-
-# Kjør hver time
-0 * * * * cd /path/to/podcast-feed-updater && /usr/local/bin/uv run enrich_cdspill.py
-
-# Kjør hver 15. minutt
-*/15 * * * * cd /path/to/podcast-feed-updater && /usr/local/bin/uv run enrich_cdspill.py
-```
-
-2. Serve feeden med nginx/Apache/Caddy
-
----
-
 ## 📊 Overvåkning
 
 ### GitHub Actions
@@ -204,39 +135,6 @@ fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested U
 2. Sjekk at GitHub Pages er aktivert i Settings
 3. Vent 2-3 minutter etter første deploy
 4. Verifiser at Source er satt til `gh-pages` branch
-
----
-
-## 🎯 Anbefaling for cd SPILL
-
-**Bruk GitHub Actions + GitHub Pages fordi:**
-
-1. **Gratis** - Ingen kostnader
-2. **Pålitelig** - GitHub infrastruktur
-3. **Enkelt** - Alt er allerede satt opp i `.github/workflows/`
-4. **Transparent** - Se historikk og logs i Actions tab
-
-**URL du kan bruke:**
-```
-https://[ditt-github-brukernavn].github.io/podcast-feed-updater/cdspill-enriched.xml
-```
-
-Denne kan du:
-- Legge inn i podcast directories
-- Dele med lyttere
-- Bruke som "offisiell" feed med alle enrichments
-
----
-
-## 📝 Neste steg
-
-1. ✅ Push koden til GitHub
-2. ✅ Aktiver GitHub Pages
-3. ✅ Test workflow manuelt
-4. ✅ Verifiser feed på GitHub Pages URL
-5. ✅ Valider feeden på podba.se
-6. ✅ (Valgfritt) Legg til custom domain
-7. ✅ (Valgfritt) Submit til podcast directories
 
 ---
 

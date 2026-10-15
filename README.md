@@ -41,28 +41,13 @@ uv run enrich_cdspill.py --local-cache  # Bruk lokal cache
 # - Podlove Simple Chapters (inline chapter markers)
 ```
 
-## 🚀 Deployment (Automatisk kjøring)
+## 🚀 Deployment
 
-For å sette opp automatisk feed-enrichment og hosting:
+Feeden bygges av GitHub Actions og publiseres på GitHub Pages:
+`https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml`
 
-**Quick start (5 minutter):**
-```bash
-# 1. Push til GitHub
-git push origin master
-
-# 2. Aktiver GitHub Pages i repo settings
-
-# 3. Trigger workflow i Actions tab
-```
-
-Se **[docs/QUICKSTART_DEPLOYMENT.md](docs/QUICKSTART_DEPLOYMENT.md)** for steg-for-steg guide.
-
-**Resultat:**
-- ✅ Automatisk kjøring på mandager (kl 07:00, 09:00, 11:00, 13:00 UTC)
-- ✅ Gratis hosting på GitHub Pages
-- ✅ Feed URL: `https://[username].github.io/podcast-feed-updater/cdspill-enriched.xml`
-
-Se **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for full dokumentasjon og alternative løsninger.
+Workflowene kjøres manuelt (Actions → «Enrich cd SPILL Feed» → Run workflow) etter at en episode er publisert.
+Se **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for oppsett, secrets og feilsøking.
 
 ---
 
@@ -102,10 +87,9 @@ podcast-feed-updater/
 ├── build_list_feed.py         # Tiltcast-listefeed (kjøres av CI)
 ├── guests.py                  # Gjestevedlikehold: meny + add/refresh/sync/episode/list/cache
 ├── analyze.py                 # Rapporter: meny + rank/guest/length/cache
+├── pubnotify.py               # Podping-varsel via pubnotify etter publisering
 ├── config/                    # JSON-config (gjester, faste roller, tiltcast-liste)
 ├── chapters/                  # Kapittel-data per episode (kilde)
-├── scripts/
-│   └── claude-tools/          # Hjelpescript for Claude-sesjoner (minne, øktlogger)
 ├── docs/                      # Markdown-dokumentasjon
 └── output/                    # Generert XML (publiseres til GitHub Pages)
 ```
@@ -214,9 +198,6 @@ enricher.write_feed("output.xml")
 ```bash
 # Install everything incl. dev tooling
 uv sync
-
-# Run tests
-pytest
 
 # Format code
 black .

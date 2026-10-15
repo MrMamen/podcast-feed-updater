@@ -95,31 +95,6 @@ Dette legger automatisk til gjesten i `config/cdspill_known_guests.json` med pro
 
 **Se [PERSON_DATA_README.md](PERSON_DATA_README.md)** for fullstendig dokumentasjon av person-data systemet.
 
-### Tilpass for din podcast
-
-```python
-# 1. Kopier scriptet
-cp enrich_cdspill.py enrich_yourpodcast.py
-
-# 2. Lag permanent staff config
-{
-  "hosts": [
-    {
-      "name": "Your Name",
-      "role": "host",
-      "img": "https://example.com/photo.jpg",
-      "href": "https://example.com/profile"
-    }
-  ]
-}
-
-# 3. Lag known guests fil (start tom)
-{
-  "guests": {},
-  "aliases": {}
-}
-```
-
 ## 📊 Resultat
 
 Etter enrichment:
@@ -204,23 +179,6 @@ enricher.convert_json_chapters_to_psc()
 
 Mer info: https://podlove.org/simple-chapters/
 
-### Legge til flere Podcasting 2.0 tags
-
-Du kan enkelt utvide `FeedEnricher`-klassen:
-
-```python
-# I src/feed_enricher.py
-
-def add_value_tag(self, ...):
-    """Add podcast:value for Bitcoin payments"""
-
-def add_transcript(self, url: str, type: str = "text/vtt"):
-    """Add podcast:transcript"""
-
-def add_location(self, geo: str, osm: str):
-    """Add podcast:location"""
-```
-
 ## 📚 Ressurser
 
 - **Person Data System:** [PERSON_DATA_README.md](PERSON_DATA_README.md)
@@ -288,14 +246,6 @@ uv run guests.py refresh "Guest Name"
 - 🌐 Bredere distribusjon
 - 🎨 Rikere metadata
 - 🤝 Krediter alle som bidrar
-
-## 🚦 Neste steg
-
-1. ✅ Kjør `enrich_cdspill.py` og test resultatet
-2. ✅ Last opp `output/cdspill-enriched.xml` til Netlify
-3. ✅ Test i en Podcasting 2.0-app (f.eks. Fountain, Podverse)
-4. ✅ Legg til flere gjester over tid
-5. ✅ Vurder andre tags (chapters, transcripts, value)
 
 ---
 
