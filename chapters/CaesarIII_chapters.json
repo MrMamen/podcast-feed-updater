@@ -3,7 +3,8 @@
   "chapters": [
     {
       "startTime": 0,
-      "title": "Intro"
+      "title": "Intro",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 50.384,
@@ -22,11 +23,13 @@
     },
     {
       "startTime": 529.894,
-      "title": "Dagens spill: Caesar III"
+      "title": "Dagens spill: Caesar III",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 683.753,
-      "title": "Hva går spillet ut på?"
+      "title": "Hva går spillet ut på?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 816.955,
@@ -106,7 +109,8 @@
     },
     {
       "startTime": 4062.167,
-      "title": "Tech Specs"
+      "title": "Tech Specs",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 4258.298,
@@ -135,7 +139,8 @@
     {
       "startTime": 5165.8,
       "title": "Musikken",
-      "url": "https://music.apple.com/no/artist/keith-zizza/203957010"
+      "url": "https://music.apple.com/no/artist/keith-zizza/203957010",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 5434.306,
@@ -155,11 +160,13 @@
     },
     {
       "startTime": 6274.722,
-      "title": "Kommentarer fra sosiale medier"
+      "title": "Kommentarer fra sosiale medier",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 6499.139,
-      "title": "Har det holdt seg?"
+      "title": "Har det holdt seg?",
+      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
     },
     {
       "startTime": 6684.91,
