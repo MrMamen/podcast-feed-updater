@@ -10,9 +10,15 @@ import requests
 import hashlib
 import json
 import os
+import shutil
 import string
+from pathlib import Path
 from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
+
+# Images for recurring chapters (Musikken, Tech Specs, sosiale medier),
+# hosted next to the chapter files
+CHAPTER_IMAGES_DIR = Path(__file__).resolve().parents[2] / 'assets' / 'chapters'
 
 
 class FeedEnricher(BaseFeed):
@@ -1112,9 +1118,14 @@ class FeedEnricher(BaseFeed):
         total_links = 0
         used_local_files = set()  # Track which local files are used
 
-        # Create output directory for hosted chapter files
+        # Create output directory for hosted chapter files, with the images for
+        # recurring chapters (the same ones cdspill-produksjon embeds in the MP3)
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
+            shutil.copytree(CHAPTER_IMAGES_DIR, os.path.join(output_dir, 'images'), dirs_exist_ok=True)
+        music_image = f"{base_url}/images/music.jpg"
+        tech_image = f"{base_url}/images/tech.jpg"
+        social_media_image = f"{base_url}/images/social_media.jpg"
 
         # Helper function for word-based matching
         def normalize_words(text):
@@ -1322,14 +1333,17 @@ class FeedEnricher(BaseFeed):
                                     chapter_title_lower.startswith("idag:") or
                                     chapter_title.startswith("Episodens") or
                                     chapter_title == "Hva går spillet ut på?" or
-                                    chapter_title == "Har det holdt seg?" or
-                                    chapter_title == "Kommentarer fra sosiale medier" or
-                                    "fra sosiale medier" in chapter_title_lower or
+                                    chapter_title == "Har det holdt seg?"
+                                ):
+                                    image_to_inject = cover_art_url
+                                # Social media comments
+                                elif (
+                                    "sosiale medier" in chapter_title_lower or
                                     "facebook" in chapter_title_lower or
                                     "twitter" in chapter_title_lower or
                                     "bluesky" in chapter_title_lower
                                 ):
-                                    image_to_inject = cover_art_url
+                                    image_to_inject = social_media_image
 
                                 # Podcast logo patterns
                                 elif podcast_logo and "cd spill" in chapter_title_lower:
@@ -1348,15 +1362,11 @@ class FeedEnricher(BaseFeed):
                                 ):
                                     image_to_inject = next_cover_url
 
-                                # Music and tech chapters (using episode cover for now)
-                                # TODO: Replace with dedicated images when available:
-                                #   - "Musikken" -> music note icon
-                                #   - "Tech Specs" -> technical icon
-                                elif cover_art_url and (
-                                    "musikk" in chapter_title_lower or
-                                    "tech" in chapter_title_lower
-                                ):
-                                    image_to_inject = cover_art_url
+                                # Music and tech chapters
+                                elif "musikk" in chapter_title_lower:
+                                    image_to_inject = music_image
+                                elif "tech" in chapter_title_lower:
+                                    image_to_inject = tech_image
 
                                 # Cross-reference: Match chapter title against episode game names
                                 # Example: "Home Alone" chapter in OutRun episode gets Home Alone episode cover
