@@ -203,6 +203,30 @@ The enricher automatically adds images to standard chapters that don't already h
 - ✅ **Controllable** - Disable auto-matching per chapter with `"img": null`
 - ✅ **Future-ready** - Music and tech chapters ready for dedicated icons when available
 
+### Covers from Game Links
+
+A chapter that links to a game on Steam, GOG or Wikipedia gets that game's cover automatically:
+
+```json
+{
+  "startTime": 1500,
+  "title": "Syndicate Wars",
+  "url": "https://www.gog.com/en/game/syndicate_wars"
+}
+```
+
+| Link | Image |
+|------|-------|
+| `store.steampowered.com/app/<id>/...` | Portrait library cover (600×900) |
+| `www.gog.com/en/game/<slug>` | Box art from GOG's games API |
+| `<lang>.wikipedia.org/wiki/<article>` | The article's lead image (usually the box art) |
+
+- The image is linked at its source, not downloaded
+- The link cover takes precedence over matching the chapter title against episode names
+- Links to other sites (MobyGames, IMDb, ...) get no automatic image
+- Check that GOG links open the game page: a wrong slug silently redirects to the store front, and the enricher prints a warning
+- `"img": null` disables the link cover too
+
 ### Disabling Auto-Matching
 
 To prevent auto-matching for specific chapters (e.g., when automatic matching is incorrect):

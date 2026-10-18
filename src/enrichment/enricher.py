@@ -1049,6 +1049,63 @@ class FeedEnricher(BaseFeed):
                   f"older episodes will soon lack chapter links")
         return urls
 
+    @staticmethod
+    def _fetch_link_cover(url: str) -> Optional[str]:
+        """
+        Find a game cover for a chapter link to Steam, GOG or Wikipedia.
+
+        Returns the image URL at the source (hotlinked, not downloaded), or None
+        for other sites or when the lookup fails.
+        """
+        import re
+
+        # Wikimedia requires contact info in the User-Agent
+        headers = {"User-Agent": "cdspill-feed-enricher/1.0 (https://github.com/MrMamen/podcast-feed-updater)"}
+        parsed = urlparse(url)
+        host = parsed.netloc.lower()
+
+        try:
+            # Steam: portrait library cover, built from the app id in the link
+            if host.endswith("steampowered.com"):
+                match = re.search(r"/app/(\d+)", parsed.path)
+                if not match:
+                    return None
+                base = f"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{match.group(1)}"
+                for name in ("library_600x900_2x.jpg", "library_600x900.jpg"):
+                    if requests.head(f"{base}/{name}", timeout=10).status_code == 200:
+                        return f"{base}/{name}"
+                return None
+
+            # GOG: product id from the store page, then box art from the games API.
+            # A wrong slug redirects to the store front, which has no product id.
+            if host.endswith("gog.com") and "/game/" in parsed.path:
+                page = requests.get(url, headers=headers, timeout=15)
+                match = re.search(r'card-product="(\d+)"', page.text)
+                if not match:
+                    print(f"  ⚠️  No GOG product found for chapter link: {url}")
+                    return None
+                game = requests.get(f"https://api.gog.com/v2/games/{match.group(1)}", timeout=15).json()
+                return game.get('_links', {}).get('boxArtImage', {}).get('href')
+
+            # Wikipedia: the article's lead image. Box art is non-free, so allow any license.
+            if host.endswith("wikipedia.org") and parsed.path.startswith("/wiki/"):
+                from urllib.parse import unquote
+                response = requests.get(
+                    f"https://{host}/w/api.php",
+                    params={"action": "query", "titles": unquote(parsed.path[len("/wiki/"):]),
+                            "prop": "pageimages", "piprop": "original", "pilicense": "any",
+                            "redirects": 1, "format": "json"},
+                    headers=headers, timeout=15,
+                )
+                pages = response.json().get('query', {}).get('pages', {})
+                source = next(iter(pages.values()), {}).get('original', {}).get('source')
+                # Drop Wikimedia's utm tracking parameters
+                return source.split('?')[0] if source else None
+        except Exception as e:
+            print(f"  ⚠️  Could not fetch cover for chapter link {url}: {e}")
+
+        return None
+
     def convert_json_chapters_to_psc(
         self,
         chapters_dir: str = "chapters",
@@ -1152,6 +1209,13 @@ class FeedEnricher(BaseFeed):
             podcast_logo = channel_image.get('href')
 
         apple_urls = self._fetch_apple_episode_urls(apple_podcast_id) if apple_podcast_id else {}
+        # Chapter link -> cover image, so a link used in several chapters is looked up once
+        link_covers = {}
+
+        def link_cover(url):
+            if url not in link_covers:
+                link_covers[url] = self._fetch_link_cover(url)
+            return link_covers[url]
 
         # Build episode index for previous/next episode cover art
         # Also build a mapping from game names to their episode cover art
@@ -1367,6 +1431,12 @@ class FeedEnricher(BaseFeed):
                                     image_to_inject = music_image
                                 elif "tech" in chapter_title_lower:
                                     image_to_inject = tech_image
+
+                                # Chapter links to Steam, GOG or Wikipedia: use the game's cover.
+                                # Takes precedence over episode matching, so "Syndicate Wars" linked
+                                # to GOG doesn't get the Syndicate episode cover.
+                                elif chapter.get('url') and link_cover(chapter['url']):
+                                    image_to_inject = link_cover(chapter['url'])
 
                                 # Cross-reference: Match chapter title against episode game names
                                 # Example: "Home Alone" chapter in OutRun episode gets Home Alone episode cover
