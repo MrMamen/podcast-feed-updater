@@ -1123,6 +1123,17 @@ class FeedEnricher(BaseFeed):
             clean_text = text.translate(translator)
             return set(clean_text.lower().split())
 
+        # Whole-word prefix/suffix checks, so "doom" doesn't match "doomsday machine"
+        # and "spillåret 1993" doesn't match "eventyrspillåret 1993"
+        def starts_with_word(text, prefix):
+            return text.startswith(prefix) and (
+                len(text) == len(prefix) or not text[len(prefix)].isalnum()
+            )
+
+        def ends_with_word(text, suffix):
+            start = len(text) - len(suffix)
+            return text.endswith(suffix) and (start == 0 or not text[start - 1].isalnum())
+
         # Get podcast logo for standard chapters
         podcast_logo = None
         channel_image = self.channel.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
@@ -1370,7 +1381,7 @@ class FeedEnricher(BaseFeed):
                                             if ' ' in without_the:  # Must have at least 2 words after removing "the"
                                                 episode_normalized = without_the
 
-                                        if chapter_title_lower.endswith(episode_normalized):
+                                        if ends_with_word(chapter_title_lower, episode_normalized):
                                             image_to_inject = cover
                                             break
 
@@ -1378,27 +1389,27 @@ class FeedEnricher(BaseFeed):
                                 # Example: "Doom II" → "Doom", "Transport Tycoon Deluxe" → "Transport Tycoon"
                                 # Choose LONGEST matching prefix to avoid false matches
                                 # (e.g., "Legend of Kyrandia" should match "the legend of kyrandia: hand of fate" not just "legend")
-                                # Also normalize "the " prefix for better matching
+                                # Also normalize "the " prefix for better matching, but only strip it from
+                                # the chapter when the episode name has it too
+                                # (so "The Legend of Zelda" doesn't match "Legend")
                                 if not image_to_inject:
                                     best_prefix_match = None
                                     best_prefix_length = 0
-
-                                    # Normalize chapter title by removing "the " prefix
-                                    chapter_normalized = chapter_title_lower
-                                    if chapter_normalized.startswith("the "):
-                                        chapter_normalized = chapter_normalized[4:]
 
                                     for episode_name, cover in episode_titles_to_covers.items():
                                         if len(episode_name) <= 3:
                                             continue
 
-                                        # Normalize episode name by removing "the " prefix
+                                        # Normalize both by removing "the " prefix
                                         episode_normalized = episode_name
+                                        chapter_normalized = chapter_title_lower
                                         if episode_normalized.startswith("the "):
                                             episode_normalized = episode_normalized[4:]
+                                            if chapter_normalized.startswith("the "):
+                                                chapter_normalized = chapter_normalized[4:]
 
                                         # Check if chapter starts with episode name (using normalized versions)
-                                        if chapter_normalized.startswith(episode_normalized):
+                                        if starts_with_word(chapter_normalized, episode_normalized):
                                             # Keep the longest match (use normalized length for comparison)
                                             if len(episode_normalized) > best_prefix_length:
                                                 best_prefix_match = cover
@@ -1415,7 +1426,7 @@ class FeedEnricher(BaseFeed):
                                     best_reverse_length = 0
 
                                     for episode_name, cover in episode_titles_to_covers.items():
-                                        if len(chapter_title_lower) > 3 and episode_name.startswith(chapter_title_lower):
+                                        if len(chapter_title_lower) > 3 and starts_with_word(episode_name, chapter_title_lower):
                                             # Keep the longest episode name match
                                             if len(episode_name) > best_reverse_length:
                                                 best_reverse_match = cover
