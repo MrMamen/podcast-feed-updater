@@ -27,7 +27,7 @@ Published to GitHub Pages, e.g. `https://mrmamen.github.io/podcast-feed-updater/
 **Locally** (uses keys from `.env`):
 
 ```bash
-uv run build_list_feed.py
+uv run build_list_feed.py --list tiltcast
 ```
 
 Writes `tiltcast-*.xml` and copies cover images into `output/` (gitignored).
@@ -64,7 +64,7 @@ image and prints a warning.
 ## Things that are easy to forget
 
 - **List id is the numeric internal id, NOT the URL hashid.** The list is
-  `1959319` (in `podcasts/tiltcast/list.json`). The `...-11SK7Mk5jl` tail in the
+  `1959319` (in `podcasts/tiltcast/list.toml`). The `...-11SK7Mk5jl` tail in the
   URL is a hashid that resolves a *different* list if passed to the API. If the
   id ever needs re-resolving, clear `list_id` in the config and the builder
   falls back to searching by `list_search_term`.
@@ -122,14 +122,14 @@ These are set for the *list*, not copied from each episode's original feed:
 | File | Role |
 |------|------|
 | `build_list_feed.py` | Entry point / orchestration |
-| `podcasts/tiltcast/list.json` | List id, search term, language, category, base URL, point floor |
+| `podcasts/tiltcast/list.toml` | List id, search term, language, category, base URL, point floor |
 | `src/listfeed/podchaser_list.py` | Fetch + structure the list into sections (cost guard, point logging) |
 | `src/listfeed/feed_builder.py` | Build the RSS XML (lxml) — channel + items + seasons |
 | `src/enrichment/podchaser_api.py` | Podchaser client; `estimate_cost()` = free `/cost` check |
 | `podcasts/tiltcast/images/` | Cover art (`tiltcast-all` + `tiltcast-1..N`), square ≥1400 px |
 | `.github/workflows/build-list-feed.yml` | Manual workflow → builds + deploys to gh-pages |
 
-## Config (`podcasts/tiltcast/list.json`)
+## Config (`podcasts/tiltcast/list.toml`)
 
 | Key | Meaning |
 |-----|---------|
@@ -141,3 +141,7 @@ These are set for the *list*, not copied from each episode's original feed:
 | `base_url` | Public host for feeds + cover images (GitHub Pages). |
 | `min_remaining` | Abort if a fetch would leave fewer than this many points. |
 | `combined` | `{slug, title}` for the all-editions feed. |
+| `section_prefix` | File name prefix for the per-section feeds and covers (`tiltcast-` → `tiltcast-1.xml`, `images/tiltcast-1.jpg`). Default `<id>-`. |
+| `section_description` | Description of a per-section feed, `{heading}` is the section heading. Unset: the list's description. |
+| `section_title_fallback` | Title of a section without heading; `{title}` is the combined title, `{index}` the section number. |
+| `images_dir` | Cover image directory, relative to the list's folder (default `images`). |

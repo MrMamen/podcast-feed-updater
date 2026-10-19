@@ -1,5 +1,6 @@
 """
-Per-podcast configuration, read from ``podcasts/<id>/podcast.toml``.
+Per-podcast configuration, read from ``podcasts/<id>/podcast.toml``, and the
+list feed configuration in ``podcasts/<id>/list.toml``.
 
 Everything that is specific to one podcast (feed URLs, guid, funding, social
 accounts, title conventions, chapter rules, variants) lives in that file, so
@@ -13,6 +14,7 @@ import argparse
 import os
 import sys
 import tomllib
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -20,6 +22,7 @@ from src.common.podcast_utils import TitleRules
 
 PODCASTS_DIR = Path("podcasts")
 CONFIG_NAME = "podcast.toml"
+LIST_CONFIG_NAME = "list.toml"
 OUTPUT_DIR = Path("output")
 CACHE_DIR = Path(".cache")
 
@@ -136,11 +139,48 @@ class PodcastConfig:
         return variants[name]
 
 
-def podcast_ids() -> List[str]:
-    """Ids of all podcasts with a podcast.toml, sorted."""
+def _config_ids(config_name: str) -> List[str]:
     if not PODCASTS_DIR.is_dir():
         return []
-    return sorted(p.parent.name for p in PODCASTS_DIR.glob(f"*/{CONFIG_NAME}"))
+    return sorted(p.parent.name for p in PODCASTS_DIR.glob(f"*/{config_name}"))
+
+
+def podcast_ids() -> List[str]:
+    """Ids of all podcasts with a podcast.toml, sorted."""
+    return _config_ids(CONFIG_NAME)
+
+
+def list_ids() -> List[str]:
+    """Ids of all list feeds with a list.toml, sorted."""
+    return _config_ids(LIST_CONFIG_NAME)
+
+
+def _load_toml(config_id: Optional[str], config_name: str, option: str, env: str):
+    """
+    Find and parse ``podcasts/<config_id>/<config_name>``. Without an id, uses
+    the ``env`` environment variable, or the only one there is.
+    Returns ``(id, data, directory)``.
+    """
+    config_id = config_id or os.environ.get(env)
+    available = _config_ids(config_name)
+    if not config_id:
+        if len(available) != 1:
+            raise ConfigError(
+                f"Velg med {option} <id> (eller {env}=<id>). "
+                f"Tilgjengelige: {', '.join(available) or 'ingen'}"
+            )
+        config_id = available[0]
+
+    directory = PODCASTS_DIR / config_id
+    config_path = directory / config_name
+    if not config_path.is_file():
+        raise ConfigError(f"Fant ikke {config_path}. Tilgjengelige: {', '.join(available) or 'ingen'}")
+    try:
+        with config_path.open("rb") as f:
+            data = tomllib.load(f)
+    except tomllib.TOMLDecodeError as e:
+        raise ConfigError(f"{config_path}: {e}") from e
+    return config_id, data, directory
 
 
 def load_podcast(podcast_id: Optional[str] = None) -> PodcastConfig:
@@ -150,26 +190,25 @@ def load_podcast(podcast_id: Optional[str] = None) -> PodcastConfig:
     Without an id, uses the ``PODCAST`` environment variable, or the only
     configured podcast if there is exactly one.
     """
-    podcast_id = podcast_id or os.environ.get("PODCAST")
-    available = podcast_ids()
-    if not podcast_id:
-        if len(available) != 1:
-            raise ConfigError(
-                "Velg podcast med --podcast <id> (eller PODCAST=<id>). "
-                f"Tilgjengelige: {', '.join(available) or 'ingen'}"
-            )
-        podcast_id = available[0]
+    return PodcastConfig(*_load_toml(podcast_id, CONFIG_NAME, "--podcast", "PODCAST"))
 
-    directory = PODCASTS_DIR / podcast_id
-    config_path = directory / CONFIG_NAME
-    if not config_path.is_file():
-        raise ConfigError(f"Fant ikke {config_path}. Tilgjengelige: {', '.join(available) or 'ingen'}")
-    try:
-        with config_path.open("rb") as f:
-            data = tomllib.load(f)
-    except tomllib.TOMLDecodeError as e:
-        raise ConfigError(f"{config_path}: {e}") from e
-    return PodcastConfig(podcast_id, data, directory)
+
+@dataclass
+class ListConfig:
+    """Parsed list.toml for a list feed (see build_list_feed.py)."""
+
+    id: str
+    data: Dict[str, Any]
+    dir: Path
+
+    @property
+    def images_dir(self) -> Path:
+        return self.dir / self.data.get("images_dir", "images")
+
+
+def load_list(list_id: Optional[str] = None) -> ListConfig:
+    """Load ``podcasts/<list_id>/list.toml`` (default: ``LIST`` env var, or the only one)."""
+    return ListConfig(*_load_toml(list_id, LIST_CONFIG_NAME, "--list", "LIST"))
 
 
 def add_podcast_argument(parser: argparse.ArgumentParser) -> None:

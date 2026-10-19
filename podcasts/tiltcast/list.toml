@@ -1,0 +1,32 @@
+# Listefeed fra Podchaser-lista «Episoder fra Tiltcast i Oslo»: én samlet feed
+# (én sesong per seksjon) og én feed per seksjon, i listas rekkefølge.
+#
+#   uv run build_list_feed.py --list tiltcast
+#
+# Se docs/tiltcast-list-feed.md.
+
+# Numerisk Podchaser-id (IKKE hashid-en i URL-en). Tom: søk med list_search_term.
+list_id = "1959319"
+list_search_term = "episoder fra tiltcast"
+language = "no"
+author = "Tiltcast i Oslo"
+explicit = false
+# itunes:type for avsluttede seksjoner; samlet feed og nyeste seksjon er alltid episodic
+itunes_type = "serial"
+base_url = "https://mrmamen.github.io/podcast-feed-updater"
+# Avbryt hvis spørringen ville gitt færre Podchaser-poeng igjen enn dette
+min_remaining = 12000
+
+# Feed per seksjon: <section_prefix><nr>.xml, cover <section_prefix><nr>.jpg|png i images/
+section_prefix = "tiltcast-"
+section_description = "Live-episoder fra {heading}."
+# Tittel når seksjonen mangler overskrift ({title} er den samlede feedens tittel)
+section_title_fallback = "{title} — del {index}"
+
+[category]
+text = "Leisure"
+sub = "Video Games"
+
+[combined]
+slug = "tiltcast-all"
+title = "Episoder fra Tiltcast i Oslo"

@@ -1,66 +1,64 @@
 #!/usr/bin/env python3
 """
-Build self-updating RSS feeds from the "Episoder fra Tiltcast i Oslo" Podchaser
-list.
+Build self-updating RSS feeds from a Podchaser list, configured in
+podcasts/<id>/list.toml (e.g. podcasts/tiltcast/ for "Episoder fra Tiltcast i
+Oslo").
 
 Generates one combined feed (all editions) plus one feed per edition/section,
-hosting cover art from podcasts/tiltcast/images/ on GitHub Pages. Run manually whenever
-the list is updated:
+hosting cover art from podcasts/<id>/images/ on GitHub Pages. Run manually
+whenever the list is updated:
 
-    uv run build_list_feed.py
+    uv run build_list_feed.py [--list tiltcast]
 
 Cost-aware: it counts the list (cheap), estimates the full query cost via the
 free /cost endpoint, aborts if it would drop below the configured point floor,
 and logs remaining points throughout. Source audio URLs are kept verbatim, so
 cd SPILL's op3 prefix is preserved and no op3 is added to the others.
 
-Outputs (in output/, deployed to gh-pages alongside the cd SPILL feeds):
-    tiltcast-all.xml          all editions, one season per edition
-    tiltcast-1.xml .. N.xml   one feed per edition, in list order
+Outputs (in output/, deployed to gh-pages alongside the enriched feeds):
+    <combined slug>.xml              all editions, one season per edition
+    <section_prefix>1.xml .. N.xml   one feed per edition, in list order
 """
 
-import glob
-import json
+import argparse
 import os
 import shutil
 import sys
 
 from dotenv import load_dotenv
 
+from src.config import OUTPUT_DIR, ConfigError, load_list
 from src.enrichment.podchaser_api import from_env
 from src.listfeed.feed_builder import assign_running_order_pubdates, build_feed
 from src.listfeed.podchaser_list import fetch_list, resolve_list_id
 
 load_dotenv()
 
-CONFIG_PATH = "podcasts/tiltcast/list.json"
-ASSETS_DIR = "podcasts/tiltcast/images"
-OUTPUT_DIR = "output"
 GENERATOR = "podcast-feed-updater list builder v1.0"
 
 
-def find_image_filename(slug: str):
+def find_image_filename(images_dir, slug: str):
     """Return the basename of the cover image for a slug, or None if missing."""
     for ext in ("png", "jpg", "jpeg"):
-        if os.path.isfile(os.path.join(ASSETS_DIR, f"{slug}.{ext}")):
+        if os.path.isfile(os.path.join(images_dir, f"{slug}.{ext}")):
             return f"{slug}.{ext}"
     return None
 
 
-def copy_assets():
+def copy_assets(images_dir):
     """Copy cover images into output/ so they deploy to GitHub Pages."""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     copied = 0
-    for path in glob.glob(os.path.join(ASSETS_DIR, "tiltcast-*")):
-        if os.path.isfile(path):
+    for path in sorted(images_dir.iterdir()) if images_dir.is_dir() else []:
+        if path.is_file():
             shutil.copy2(path, OUTPUT_DIR)
             copied += 1
     print(f"📷 Copied {copied} cover image(s) to {OUTPUT_DIR}/")
 
 
-def image_url_for(slug: str, base_url: str):
+def image_url_for(images_dir, slug: str, base_url: str):
     """Resolve the public cover URL for a slug, warning if the file is absent."""
-    filename = find_image_filename(slug)
+    filename = find_image_filename(images_dir, slug)
     if not filename:
         print(f"  ⚠ No cover image for {slug} — channel image will be omitted")
         return None
@@ -68,14 +66,23 @@ def image_url_for(slug: str, base_url: str):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Build RSS feeds from a Podchaser list")
+    parser.add_argument("--list", metavar="ID",
+                        help="List under podcasts/<ID>/list.toml (default: LIST env var, or the only one)")
+    args = parser.parse_args()
+    try:
+        list_cfg = load_list(args.list)
+    except ConfigError as e:
+        sys.exit(f"❌ {e}")
+    cfg, images_dir = list_cfg.data, list_cfg.images_dir
+
     print("=" * 60)
-    print("TILTCAST LIST FEED BUILDER")
+    print(f"LIST FEED BUILDER: {list_cfg.id}")
     print("=" * 60)
 
-    with open(CONFIG_PATH, encoding="utf-8") as f:
-        cfg = json.load(f)
     base_url = cfg["base_url"].rstrip("/")
     combined = cfg["combined"]
+    section_prefix = cfg.get("section_prefix", f"{list_cfg.id}-")
     # The combined feed and the newest edition are always episodic so podcast
     # apps auto-download new episodes; settled older editions can be serial
     # (in-order presentation, no new episodes expected). Configurable via
@@ -107,7 +114,7 @@ def main():
         print(f"   {when:>12} ({entry['source']:>24}) "
               f"— {entry['count']} eps — {entry['heading']!r}")
 
-    copy_assets()
+    copy_assets(images_dir)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     print("\n🛠  Building feeds:")
@@ -115,7 +122,7 @@ def main():
     # Give each section its edition cover so the combined feed can show it
     # at the season headers (rendered by feed.xsl).
     for idx, section in enumerate(sections, start=1):
-        section["image"] = image_url_for(f"tiltcast-{idx}", base_url)
+        section["image"] = image_url_for(images_dir, f"{section_prefix}{idx}", base_url)
 
     # Combined feed: all editions, one season each.
     build_feed(
@@ -125,7 +132,7 @@ def main():
         author=cfg["author"],
         category=cfg["category"],
         explicit=cfg.get("explicit", False),
-        image_url=image_url_for(combined["slug"], base_url),
+        image_url=image_url_for(images_dir, combined["slug"], base_url),
         self_url=f"{base_url}/{combined['slug']}.xml",
         link=data.get("url") or base_url,
         generator=GENERATOR,
@@ -136,14 +143,16 @@ def main():
         output_file=os.path.join(OUTPUT_DIR, f"{combined['slug']}.xml"),
     )
 
-    # One feed per edition, in list order: tiltcast-1.xml ... tiltcast-N.xml.
+    # One feed per edition, in list order: <prefix>1.xml ... <prefix>N.xml.
     newest_idx = len(sections)
+    title_fallback = cfg.get("section_title_fallback", "{title} — {index}")
+    section_description = cfg.get("section_description")
     for idx, section in enumerate(sections, start=1):
-        slug = f"tiltcast-{idx}"
+        slug = f"{section_prefix}{idx}"
         heading = section.get("heading")
-        title = heading or f"{combined['title']} — del {idx}"
-        description = (f"Live-episoder fra {heading}."
-                       if heading else data.get("description"))
+        title = heading or title_fallback.format(title=combined["title"], index=idx)
+        description = (section_description.format(heading=heading)
+                       if heading and section_description else data.get("description"))
         # Newest edition stays episodic for auto-download; older ones use the
         # configured settled type.
         edition_type = "episodic" if idx == newest_idx else settled_type
@@ -154,7 +163,7 @@ def main():
             author=cfg["author"],
             category=cfg["category"],
             explicit=cfg.get("explicit", False),
-            image_url=image_url_for(slug, base_url),
+            image_url=image_url_for(images_dir, slug, base_url),
             self_url=f"{base_url}/{slug}.xml",
             link=data.get("url") or base_url,
             generator=GENERATOR,

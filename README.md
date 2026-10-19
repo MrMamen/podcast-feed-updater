@@ -13,7 +13,7 @@ En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 | Se statistikk (rangering, episoder per gjest, varighet) | `uv run analyze.py` (meny) eller `analyze.py rank` / `guest "Navn"` / `length` |
 | Generere den berikede feeden lokalt | `uv run enrich.py [--local-cache]` |
 | Generere Spotify-/YouTube-variantene | `uv run enrich.py --variant spotify` / `--variant youtube` |
-| Bygge Tiltcast-listefeed | `uv run build_list_feed.py` |
+| Bygge Tiltcast-listefeed | `uv run build_list_feed.py --list tiltcast` |
 
 `guests.py` og `analyze.py` uten argumenter gir en piltast-meny; underkommandoene finnes for scripting. Begge har en `cache`-kommando som laster ned en lokal kopi av feeden (`.cache/`), og `analyze.py` laster den ned automatisk hvis den mangler.
 
@@ -82,7 +82,7 @@ podcast-feed-updater/
 │   ├── enrichment/            # FeedEnricher (enricher.py + ett modul per tema), pipeline, varianter, Podchaser API
 │   └── listfeed/              # Listefeeder fra Podchaser-lister
 ├── enrich.py                  # Berik feed etter podcasts/<id>/podcast.toml, også --variant (kjøres av CI)
-├── build_list_feed.py         # Tiltcast-listefeed (kjøres av CI)
+├── build_list_feed.py         # Listefeeder fra podcasts/<id>/list.toml, f.eks. Tiltcast (kjøres av CI)
 ├── guests.py                  # Gjestevedlikehold: meny + add/refresh/sync/episode/list/cache
 ├── analyze.py                 # Rapporter: meny + rank/guest/length/cache
 ├── pubnotify.py               # Podping-varsel via pubnotify etter publisering

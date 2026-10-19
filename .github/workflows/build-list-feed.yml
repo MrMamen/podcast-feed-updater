@@ -37,7 +37,7 @@ jobs:
         # Generates tiltcast-all.xml + tiltcast-1..N.xml and copies cover art
         # into output/. --no-dev skips the heavy whisper/CUDA dev group this
         # script doesn't need.
-        uv run --no-dev build_list_feed.py
+        uv run --no-dev build_list_feed.py --list tiltcast
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
