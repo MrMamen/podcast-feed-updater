@@ -1,259 +1,30 @@
-# Chapter JSON Files
+# Kapittelfiler
 
-This directory contains chapter metadata files exported from [mp3chapters.github.io](https://mp3chapters.github.io).
+Egne kapittelfiler for cd SPILL. De går foran Podbeans egne, fordi Podbean fjerner skjulte
+kapitler (`toc: false`) og lenker, og runder av tidskodene.
 
-## Purpose
-
-These files provide enhanced chapter data that isn't available from Podbean's auto-generated JSON chapters:
-
-- **Hidden chapters** (`toc: false`) - Chapters excluded from table of contents
-- **Chapter URLs** - Links to external resources referenced in chapters
-- **Precise timestamps** - Millisecond precision vs Podbean's whole seconds
-- **Complete metadata** - All chapter data as defined in the source MP3 file
-
-## Naming Convention
-
-**IMPORTANT:** Files must use the **exact same filename** as Podbean's chapter JSON.
-
-To find the correct filename:
-1. Look at Podbean's RSS feed
-2. Find the `<podcast:chapters url="...">` tag
-3. Extract the filename from the URL
-
-Example:
-```xml
-<podcast:chapters url="https://mcdn.podbean.com/mf/web/888tat6a7imp5kuy/Outrun_chapters.json" />
-```
-Save as: `podcasts/cdspill/chapters/Outrun_chapters.json` (not `episode_123.json`)
-
-## Format
+**Filnavnet må være det samme som i Podbeans `<podcast:chapters url="…">`,** f.eks.
+`Outrun_chapters.json`. Lag fila med `chapters/export_chapters.py` i `../cdspill-produksjon`,
+eller eksporter «Podcast Namespace JSON (without images)» fra
+[mp3chapters.github.io](https://mp3chapters.github.io).
 
 ```json
 {
   "version": "1.2.0",
   "chapters": [
-    {
-      "startTime": 0,
-      "title": "Intro"
-    },
-    {
-      "startTime": 2024.502,
-      "title": "Vineyard",
-      "toc": false
-    },
-    {
-      "startTime": 1944.116,
-      "title": "Ulike endings",
-      "url": "https://www.vgmuseum.com/end/arcade/c/out.htm"
-    }
+    {"startTime": 0, "title": "Intro"},
+    {"startTime": 1944.116, "title": "Ulike endings", "url": "https://www.vgmuseum.com/end/arcade/c/out.htm"},
+    {"startTime": 2024.502, "title": "Vineyard", "toc": false},
+    {"startTime": 2100, "title": "Star Wars: Rebel Assault II", "img": null}
   ]
 }
 ```
 
-## Workflow
+- `toc: false`: med i MP3-en og JSON-en, men ikke i innholdslista (`psc:chapters`, YouTube).
+- `url`: lenke. Peker den til Steam, GOG eller Wikipedia, får kapittelet spillets cover.
+- `img`: utelat det, så velges bilde automatisk etter reglene i [`../podcast.toml`](../podcast.toml).
+  `"img": null` slår det av når den automatiske matchingen bommer.
 
-1. **Edit chapters** in [mp3chapters.github.io](https://mp3chapters.github.io)
-2. **Export** as "Podcast Namespace JSON (without images)"
-3. **Find filename** from Podbean RSS feed's `<podcast:chapters url="...">`
-4. **Save** as `podcasts/cdspill/chapters/{filename}` (e.g., `podcasts/cdspill/chapters/Outrun_chapters.json`)
-5. **Commit** the file to the repository
-6. **Run enricher** - it will automatically:
-   - Load local file instead of fetching from Podbean
-   - **Inject episode cover art** for standard chapters (Intro, Dagens spill)
-   - Copy enhanced JSON to `output/chapters/` for GitHub Pages hosting
-   - Update `podcast:chapters` URL to point to GitHub Pages
-   - Filter out hidden chapters from PSC XML and YouTube timestamps
-   - Preserve chapter URLs and precise timestamps
-
-## What Happens During Enrichment
-
-For each episode with chapters:
-1. **Check:** Does `podcasts/cdspill/chapters/{filename}` exist?
-2. **If YES:**
-   - Load local JSON file
-   - Copy to `output/chapters/{filename}` (for hosting)
-   - Update `<podcast:chapters url="...">` to GitHub Pages URL
-   - Generate PSC with hidden chapters filtered out (34 vs 57 for OutRun)
-3. **If NO:**
-   - Fetch from Podbean (original behavior)
-   - No hidden chapter support
-   - Rounded timestamps
-   - No chapter URLs
-
-## Benefits
-
-### Hidden Chapters Support
-
-Hide detail chapters from the table of contents while keeping them in the MP3 file for ID3-capable players:
-
-- Individual game endings or routes (e.g., "Vineyard", "Death Valley")
-- Platform-specific ports (e.g., "C64-port", "Amiga-port")
-- Sequels and spin-offs (e.g., "Out Run 3-D", "Turbo Out Run")
-- Technical details
-
-**Example:** OutRun episode
-- **Source:** 57 total chapters (23 hidden)
-- **PSC output:** 34 visible chapters
-- **Result:** Clean TOC with detailed info for players that support it
-
-### Enhanced Metadata vs Podbean
-
-| Feature | Local JSON | Podbean JSON |
-|---------|-----------|--------------|
-| Hidden chapters (`toc: false`) | ✅ 23 chapters | ❌ 0 (stripped) |
-| Chapter URLs | ✅ 6 URLs | ❌ 0 (stripped) |
-| Timestamp precision | ✅ 41.97s | ❌ 42s (rounded) |
-| Hosted URL | ✅ GitHub Pages | ⚠️ Podbean |
-
-### Consistent Experience
-
-Both JSON and PSC chapters now contain the same information:
-- Same visible chapters (hidden ones excluded)
-- Same chapter URLs
-- Same metadata
-
-Apps that only support JSON chapters get the same quality as apps that support PSC.
-
-## Automatic Image Injection
-
-The enricher automatically adds images to standard chapters that don't already have them.
-
-### Rules
-
-The rules live in `[[chapters.image_rules]]` and `[[chapters.cross_references]]` in
-[`../podcast.toml`](../podcast.toml); the order and the generic matching are described in
-[docs/CONFIGURATION.md](../../../docs/CONFIGURATION.md#kapittelbilder). For cd SPILL:
-
-- **Episode cover:** the first chapter, "Dagens …", "Idag: …", "Episodens …",
-  "Hva går spillet ut på?", "Har det holdt seg?"
-- **Social media image** (`chapter-images/social_media.jpg`): titles mentioning
-  sosiale medier, Facebook, Twitter or Bluesky
-- **Podcast logo:** "Velkommen til cd SPILL" (any title containing "cd spill")
-- **Previous episode's cover:** "Kommentarer fra sist" / "… fra forrige episode"
-- **Next episode's cover** (if published): "Neste episode"
-- **Music / tech images** (`chapter-images/`): "Musikken", "Tech Specs"
-- **Another episode's cover:** chapter titles naming another episode's game
-  ("Doom II", "Historien i Duke Nukem"), "Ligner på X", "I forhold til X", "Mer X",
-  "Kommentarer fra X"
-
-### How It Works
-
-1. The enricher builds an index of all episodes with their cover art and what they are
-   about (title before " med ")
-2. For each chapter without an `img` field, the first matching rule decides the image
-3. Chapters showing another episode's cover link to that episode in Apple Podcasts
-4. Saves the enhanced JSON to `output/chapters/`, which the feed points to
-
-### Example
-
-**Before (source file):**
-```json
-{
-  "startTime": 0,
-  "title": "Intro"
-},
-{
-  "startTime": 41.97,
-  "title": "Velkommen til cd SPILL"
-},
-{
-  "startTime": 241.514,
-  "title": "Kommentarer fra forrige episode"
-}
-```
-
-**After (hosted file):**
-```json
-{
-  "startTime": 0,
-  "title": "Intro",
-  "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"
-},
-{
-  "startTime": 41.97,
-  "title": "Velkommen til cd SPILL",
-  "img": "https://pbcdn1.podbean.com/imglogo/image-logo/7653866/cdSPILL_qsiy74.jpg"
-},
-{
-  "startTime": 241.514,
-  "title": "Kommentarer fra forrige episode",
-  "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"
-}
-```
-
-### Benefits
-
-- ✅ **No manual work** - 10 standard chapters get images automatically
-- ✅ **Consistent across episodes** - Same pattern = same image type
-- ✅ **Contextual images** - Previous/next episode chapters show correct covers
-- ✅ **All Podbean-hosted** - No extra hosting needed
-- ✅ **Works everywhere** - JSON chapters, PSC chapters, and podcast apps
-- ✅ **Source files stay clean** - No `img` fields needed in `podcasts/cdspill/chapters/`
-- ✅ **Non-destructive** - Existing images are never overwritten
-- ✅ **Controllable** - Disable auto-matching per chapter with `"img": null`
-- ✅ **Configurable** - Patterns and images per podcast in `podcast.toml`
-
-### Covers from Game Links
-
-A chapter that links to a game on Steam, GOG or Wikipedia gets that game's cover automatically:
-
-```json
-{
-  "startTime": 1500,
-  "title": "Syndicate Wars",
-  "url": "https://www.gog.com/en/game/syndicate_wars"
-}
-```
-
-| Link | Image |
-|------|-------|
-| `store.steampowered.com/app/<id>/...` | Portrait library cover (600×900) |
-| `www.gog.com/en/game/<slug>` | Box art from GOG's games API |
-| `<lang>.wikipedia.org/wiki/<article>` | The article's lead image (usually the box art) |
-
-- The image is linked at its source, not downloaded
-- The link cover takes precedence over matching the chapter title against episode names
-- Links to other sites (MobyGames, IMDb, ...) get no automatic image
-- Check that GOG links open the game page: a wrong slug silently redirects to the store front, and the enricher prints a warning
-- `"img": null` disables the link cover too
-
-### Disabling Auto-Matching
-
-To prevent auto-matching for specific chapters (e.g., when automatic matching is incorrect):
-
-```json
-{
-  "startTime": 100,
-  "title": "Star Wars: Rebel Assault II",
-  "img": null
-}
-```
-
-This tells the enricher to:
-- ✅ Skip this chapter during auto-matching
-- ✅ Not add any image to the output (null/empty values are removed before saving)
-- 💡 Useful when automatic matching picks the wrong episode
-- 💡 Useful when you want no image for a specific chapter
-
-**Why `null`?** It's semantically correct for "intentionally no value" and follows JSON best practices. The enricher automatically removes `null` and empty `img` fields from the output, following Podbean's convention of omitting the field entirely.
-
-### Coverage
-
-Based on chapter analysis across 56 episodes:
-- **"Intro"** (51.8%) → Episode cover ✓
-- **"Velkommen til cd SPILL"** (76.8%) → Podcast logo ✓
-- **"Dagens spill: [Game]"** (83.9%) → Episode cover ✓
-- **"Kommentarer fra forrige episode"** (46.4%) → Previous cover ✓
-- **"Kommentarer fra sosiale medier"** (73.2%) → Social media image ✓
-- **"Har det holdt seg?"** (82.1%) → Episode cover ✓
-- **"Neste episode"** (51.8%) → Next cover ✓
-
-This covers the most common structural chapters, automatically providing images for approximately 70-80% of each episode's chapters.
-
-## Notes
-
-- **Images:** Chapter images in source files are preserved. Images can also be automatically injected for standard chapters (see Automatic Image Injection above). Images in MP3 ID3 tags remain there for ID3-capable players.
-- **Podbean fallback:** Episodes without local chapter files use Podbean's auto-generated JSON (no enhancements, no image injection).
-- **File matching:** Enricher extracts filename from podcast:chapters URL and checks if it exists locally.
-- **Hosting:** Generated files are in `output/chapters/` (ignored by git, generated by enricher).
-- **Image injection:** Only adds images to chapters that don't already have them - existing images are never overwritten.
+Berikingen sorterer kapitlene, legger til «Intro» ved 00:00 hvis det mangler, setter inn
+bilder og lenker, og publiserer fila under `chapters/` på GitHub Pages. Den advarer når
+antallet kapitler avviker fra Podbeans, og når en fil her ikke matcher noen episode.

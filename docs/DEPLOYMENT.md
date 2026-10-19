@@ -1,166 +1,31 @@
-# Deployment Guide - Feed Enrichment Hosting
+# Publisering
 
-Guide for å sette opp hosting av den berikede feeden.
+Feedene bygges av GitHub Actions og publiseres fra `output/` til `gh-pages`-branchen
+(GitHub Pages). Alle workflows kjøres manuelt: Actions → velg workflow → **Run workflow**,
+eller `gh workflow run <fil>`.
 
-## 🎯 Anbefalt løsning: GitHub Actions + GitHub Pages
+| Workflow | Gjør |
+|----------|------|
+| `enrich-feed.yml` | Beriket feed og YouTube-variant for cd SPILL, deretter varsles Podcast Index (`pubnotify.py`) |
+| `enrich-feed-spotify.yml` | Spotify-varianten, bygd fra den publiserte feeden |
+| `enrich-feed-fallback-test.yml` | Testfeedene uten description, content:encoded eller itunes:summary |
+| `build-list-feed.yml` | Tiltcast-listefeedene (bruker Podchaser-poeng) |
 
-### Fordeler:
-- ✅ Helt gratis
-- ✅ Gratis hosting via GitHub Pages
-- ✅ Manuell oppdatering via Actions
-- ✅ Versjonskontroll og historikk
+Alle deployer med `keep_files: true`, så de overskriver ikke hverandres filer.
 
----
+## Oppsett for et nytt repo
 
-## 📋 Oppsett (Steg-for-steg)
+1. **Settings → Actions → General → Workflow permissions:** Read and write.
+2. **Settings → Pages:** Source `gh-pages`, mappe `/ (root)`. Feeden havner på
+   `https://<bruker>.github.io/<repo>/<feed>`. Sett denne adressen (uten filnavn) som
+   `[publish] base_url`.
+3. **Secrets** (bare for listefeeden): `PODCHASER_API_KEY` og `PODCHASER_API_SECRET`.
 
-### 1. Push koden til GitHub
+For en annen podcast: kopier `enrich-feed.yml`, og bytt `--podcast cdspill` og
+`cdspill-enriched.xml`. Bruker flere podcaster samme Pages, må de ha ulik `[chapters] publish_path`.
 
-```bash
-# Hvis du ikke allerede har et GitHub repo:
-gh repo create podcast-feed-updater --public --source=. --remote=origin --push
+## Feilsøking
 
-# Eller hvis du allerede har repo:
-git push origin master
-```
-
-### 2. Gi GitHub Actions write-tilgang
-
-GitHub Actions trenger tillatelse til å pushe til repo og deploye til Pages:
-
-1. Gå til repository **Settings**
-2. Klikk **Actions** → **General** (venstre meny)
-3. Scroll ned til **Workflow permissions**
-4. Velg **Read and write permissions**
-5. Kryss av **Allow GitHub Actions to create and approve pull requests**
-6. Klikk **Save**
-
-### 3. Aktiver GitHub Pages
-
-1. Fortsatt i **Settings**, naviger til **Pages** (venstre meny)
-2. Under **Source**, velg:
-   - Branch: `gh-pages`
-   - Folder: `/ (root)`
-3. Klikk **Save**
-
-Din feed vil være tilgjengelig på:
-```
-https://[ditt-github-brukernavn].github.io/podcast-feed-updater/<feed>
-```
-
-der `<feed>` er `[publish] feed` i `podcasts/<id>/podcast.toml` (cd SPILL: `cdspill-enriched.xml`).
-Sett `[publish] base_url` til denne adressen (uten filnavn); den brukes i `atom:link` og
-for kapittelfilene.
-
-### Workflows for en annen podcast
-
-Workflowene i `.github/workflows/` kjører cd SPILL (`enrich.py --podcast cdspill`). For en
-annen podcast: kopier `enrich-feed.yml`, bytt `--podcast cdspill` og filnavnene
-(`cdspill-enriched.xml` i pubnotify-steget). Alle workflowene deployer med `keep_files: true`,
-så flere podcaster kan dele samme `gh-pages`. Sett ulik `[chapters] publish_path` per podcast.
-
-### 4. Legg til Podchaser API secrets (Valgfritt)
-
-Hvis du vil bruke Podchaser API:
-
-1. Gå til repository **Settings** → **Secrets and variables** → **Actions**
-2. Klikk **New repository secret**
-3. Legg til:
-   - Name: `PODCHASER_API_KEY`
-   - Value: [din API key]
-4. Klikk **Add secret**
-5. Gjenta for:
-   - Name: `PODCHASER_API_SECRET`
-   - Value: [din API secret]
-
-### 5. Test workflow
-
-1. Gå til **Actions** tab i GitHub
-2. Velg "Enrich cd SPILL Feed"
-3. Klikk **Run workflow** → **Run workflow**
-4. Vent på at jobben er ferdig (ca. 1-2 min)
-5. Sjekk at feeden er tilgjengelig på GitHub Pages URL
-
----
-
-## 🔄 Oppdatering av feed
-
-For å oppdatere feeden:
-1. Gå til **Actions** tab i GitHub
-2. Velg "Enrich cd SPILL Feed"
-3. Klikk **Run workflow** → **Run workflow**
-4. Vent på at jobben er ferdig (ca. 1-2 min)
-
-**Anbefaling:** Kjør workflow manuelt når nye episoder publiseres.
-
----
-
-## 📊 Overvåkning
-
-### GitHub Actions
-
-Se workflow status:
-```
-https://github.com/[username]/podcast-feed-updater/actions
-```
-
-### E-postvarsler
-
-GitHub sender automatisk e-post ved workflow failures.
-
-### Feed validering
-
-Valider feeden regelmessig:
-- https://podba.se/validate/
-- https://castfeedvalidator.com/
-
----
-
-## 🔧 Feilsøking
-
-### Permission denied (403) feil
-
-**Feilmelding:**
-```
-remote: Permission to [repo].git denied to github-actions[bot].
-fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested URL returned error: 403
-```
-
-**Løsning:**
-1. Gå til **Settings** → **Actions** → **General**
-2. Under **Workflow permissions**, velg **Read and write permissions**
-3. Kryss av **Allow GitHub Actions to create and approve pull requests**
-4. Klikk **Save**
-5. Re-run workflow
-
-### Workflow feiler
-
-1. Sjekk **Actions** tab for error logs
-2. Test lokalt først: `uv run enrich.py`
-3. Sjekk at alle dependencies er i `pyproject.toml`
-4. Verifiser at workflow har `permissions: contents: write`
-
-### GitHub Pages ikke tilgjengelig
-
-1. Sjekk at `gh-pages` branch eksisterer
-2. Sjekk at GitHub Pages er aktivert i Settings
-3. Vent 2-3 minutter etter første deploy
-4. Verifiser at Source er satt til `gh-pages` branch
-
----
-
-## 💡 Tips
-
-- **Custom domain:** Kan legge til via GitHub Pages settings (f.eks. `podcast.cdspill.no`)
-- **Monitoring:** Sett opp UptimeRobot for å overvåke feed-tilgjengelighet
-- **Backup:** GitHub Pages history fungerer som backup
-
----
-
-## 🆘 Hjelp
-
-Hvis du støter på problemer:
-1. Sjekk GitHub Actions logs
-2. Test lokalt: `uv run enrich.py`
-3. Valider XML: `xmllint --noout output/<feed>`
-4. Åpne issue i repo eller spør i Podcasting 2.0 community
+- **403 ved deploy:** workflowen mangler skrivetilgang (punkt 1).
+- **Feilen kommer bare i CI:** kjør lokalt med `uv run enrich.py --local-cache`, og les loggen i Actions.
+- **Valider feeden:** <https://podba.se/validate/>.
