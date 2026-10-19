@@ -1,0 +1,74 @@
+# Mal for en ny podcast. Kopier til podcasts/<id>/podcast.toml og fyll inn.
+# <id> er et kort navn uten mellomrom (brukes i filnavn og --podcast <id>).
+# Alle valg er beskrevet i docs/CONFIGURATION.md; podcasts/cdspill/podcast.toml
+# er et fullt eksempel. Seksjoner som er kommentert ut, slås av.
+
+[podcast]
+name = "Min podcast"
+source_feed = "https://example.com/feed.xml"
+# podcast:guid. Lag en med uuid5 av feed-URL-en uten protokoll, se
+# https://podcasting2.org/docs/podcast-namespace/tags/guid
+guid = "00000000-0000-0000-0000-000000000000"
+medium = "podcast"
+timezone = "Europe/Oslo"
+# episode_article_domain = "example.com"   # nettsted med en artikkel per episode (<link>)
+# apple_podcast_id = 123456789
+# apple_country = "no"
+# podchaser_id = "123456"                   # for guests.py episode
+
+[publish]
+# Der output/ publiseres, f.eks. GitHub Pages
+base_url = "https://<bruker>.github.io/podcast-feed-updater"
+feed = "minpodcast-enriched.xml"
+op3 = true
+
+# [titles]
+# remove_episode_numbers = true              # fjern "(#123)" fra titlene
+# guest_pattern = 'with (.+?)(?:\s*\(|$)'    # gruppe 1 = gjest(er): "Tema with Ann and Bob"
+# guest_separator = ["and", "&"]
+# subject_separator = " with "
+
+# [seasons]
+# naming = "format"
+# name_format = "Season {season}"
+
+# [funding]
+# name = "Patreon"
+# url = "https://www.patreon.com/minpodcast"
+# message = "Support the show on Patreon"
+
+# [update_frequency]
+# complete = false
+# frequency = 1
+# dtstart = "2024-01-01T00:00:00Z"
+# rrule = "FREQ=WEEKLY"
+
+# [[podroll]]
+# title = "En annen podcast"
+# url = "https://example.org/feed.xml"
+# feed_guid = "..."
+
+# [[social_interact]]
+# protocol = "disabled"
+# uri = "https://bsky.app/profile/minpodcast.bsky.social"
+# account_id = "@minpodcast.bsky.social"
+# account_url = "https://bsky.app/profile/minpodcast.bsky.social"
+# priority = 1
+
+# [bluesky]
+# handle = "minpodcast.bsky.social"           # krever episode_article_domain
+
+# [description_footer]
+# funding_text = "Support us on"
+# follow_text = "Follow us on"
+# and_word = "and"
+# social_links = [{ name = "Bluesky", url = "https://bsky.app/profile/minpodcast.bsky.social" }]
+
+# [transcripts]
+# language = "en"
+
+# [chapters]
+# publish_path = "chapters/minpodcast"
+
+# [variants.youtube]
+# [variants.spotify]

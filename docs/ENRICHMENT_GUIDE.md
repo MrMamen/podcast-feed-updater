@@ -21,7 +21,8 @@ Mer info:
 
 ## 📝 Eksempel: cd SPILL
 
-Vi har laget et komplett eksempel for cd SPILL-podcasten:
+cd SPILL er satt opp i `podcasts/cdspill/podcast.toml`. Andre podcaster settes opp på
+samme måte, se [CONFIGURATION.md](CONFIGURATION.md):
 
 ### Før:
 ```xml
@@ -64,16 +65,16 @@ Vi har laget et komplett eksempel for cd SPILL-podcasten:
 ### Steg 1: Kjør enrichment-scriptet
 
 ```bash
-uv run enrich.py
+uv run enrich.py                       # --podcast cdspill velges automatisk når den er alene
 ```
 
-Dette vil:
+Hva som legges til styres av `podcasts/cdspill/podcast.toml`. For cd SPILL vil det:
 - ✅ Legge til permanent hosts fra `podcasts/cdspill/permanent_staff.json`
-- ✅ Auto-detektere gjester fra episode-titler ("med [Name]")
+- ✅ Auto-detektere gjester fra episode-titler ("med [Name]", `[titles]` i podcast.toml)
 - ✅ Berike med profil-bilder og URLs fra `podcasts/cdspill/known_guests.json`
 - ✅ Legge til funding link (Patreon)
 - ✅ Legge til social interact (Bluesky, Twitter/X, Facebook)
-- ✅ Legge til season/episode tags
+- ✅ Legge til season/episode tags (sesongnavn fra `[seasons]`)
 - ✅ OP3 analytics for nedlastingssporing
 - ✅ Podlove Simple Chapters
 
@@ -153,8 +154,8 @@ Mer info: https://op3.dev
 Konverterer eksisterende JSON-chapters til Podlove Simple Chapters format for bedre kompatibilitet:
 
 ```python
-# Konverterer automatisk fra podcast:chapters JSON
-enricher.convert_json_chapters_to_psc()
+# Konverterer automatisk fra podcast:chapters JSON (Spotify-varianten gjør dette)
+enricher.convert_json_chapters_to_psc(base_url="https://example.com/chapters")
 
 # JSON format (podcast:chapters):
 # {"chapters": [{"startTime": 0, "title": "Intro"}]}
@@ -198,7 +199,7 @@ uv pip install lxml
 ```
 
 ### Gjester blir ikke funnet
-**Løsning:** Gjester detekteres automatisk fra episode-titler med mønsteret "med [Name]":
+**Løsning:** Gjester detekteres automatisk fra episode-titler med mønsteret i `[titles] guest_pattern`. For cd SPILL er det "med [Name]":
 ```python
 # Eksempel:
 # Episode: "Total Annihilation med Roar Granevang (#120)"
@@ -226,7 +227,7 @@ uv run guests.py refresh "Guest Name"
 ## 💡 Tips
 
 1. **Start enkelt:** Legg først til hosts, så funding, så gjester
-2. **Test lokalt:** Sjekk `docs/`-filen før du publiserer
+2. **Test lokalt:** Sjekk fila i `output/` før du publiserer
 3. **Valider:** Bruk https://podba.se/validate/ til å sjekke at XML er riktig
 4. **Iterer:** Legg til flere gjester over tid etter hvert som du finner dem
 5. **Podchaser:** Oppdater din Podchaser-side - det hjelper andre også!

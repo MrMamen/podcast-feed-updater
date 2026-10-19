@@ -118,41 +118,31 @@ Apps that only support JSON chapters get the same quality as apps that support P
 
 The enricher automatically adds images to standard chapters that don't already have them.
 
-### Current Patterns
+### Rules
 
-**Episode Cover Art** (from episode's `itunes:image`) is automatically injected for:
-- **"Intro"** - Episode introduction
-- **"Dagens spill: [Game Name]"** - Today's game announcement
-- **"Hva går spillet ut på?"** - "What is the game about?" explanation
-- **"Har det holdt seg?"** - "Has it aged well?" evaluation
-- **"Kommentarer fra sosiale medier"** - Social media comments
-- **"Musikken"** - Music discussion (TODO: replace with music icon)
-- **"Tech Specs"** - Technical specifications (TODO: replace with tech icon)
+The rules live in `[[chapters.image_rules]]` and `[[chapters.cross_references]]` in
+[`../podcast.toml`](../podcast.toml); the order and the generic matching are described in
+[docs/CONFIGURATION.md](../../../docs/CONFIGURATION.md#kapittelbilder). For cd SPILL:
 
-**Podcast Logo** (from channel `itunes:image`) is automatically injected for:
-- **"Velkommen til cd SPILL"** - Welcome segment
-- Variations: "Velkommen til CD Spill" (case-insensitive)
-
-**Previous Episode Cover Art** (from previous episode's `itunes:image`) is automatically injected for:
-- **"Kommentarer fra forrige episode"** - Comments from previous episode
-- **"Kommentarer fra sist"** - Comments from last episode
-
-**Next Episode Cover Art** (from next episode's `itunes:image`, if published) is automatically injected for:
-- **"Neste episode"** - Next episode preview
+- **Episode cover:** the first chapter, "Dagens …", "Idag: …", "Episodens …",
+  "Hva går spillet ut på?", "Har det holdt seg?"
+- **Social media image** (`chapter-images/social_media.jpg`): titles mentioning
+  sosiale medier, Facebook, Twitter or Bluesky
+- **Podcast logo:** "Velkommen til cd SPILL" (any title containing "cd spill")
+- **Previous episode's cover:** "Kommentarer fra sist" / "… fra forrige episode"
+- **Next episode's cover** (if published): "Neste episode"
+- **Music / tech images** (`chapter-images/`): "Musikken", "Tech Specs"
+- **Another episode's cover:** chapter titles naming another episode's game
+  ("Doom II", "Historien i Duke Nukem"), "Ligner på X", "I forhold til X", "Mer X",
+  "Kommentarer fra X"
 
 ### How It Works
 
-1. Enricher builds an index of all episodes with their cover art URLs
-2. For the current episode:
-   - Reads episode's own cover art (`itunes:image`)
-   - Reads podcast logo (channel `itunes:image`)
-   - Identifies previous episode's cover art (next in feed)
-   - Identifies next episode's cover art (previous in feed, if exists)
-3. For each chapter without an `img` field:
-   - Checks if title matches a pattern
-   - If match: injects appropriate image URL
-4. Saves enhanced JSON to `output/chapters/`
-5. PSC chapters in RSS include all images
+1. The enricher builds an index of all episodes with their cover art and what they are
+   about (title before " med ")
+2. For each chapter without an `img` field, the first matching rule decides the image
+3. Chapters showing another episode's cover link to that episode in Apple Podcasts
+4. Saves the enhanced JSON to `output/chapters/`, which the feed points to
 
 ### Example
 
@@ -201,7 +191,7 @@ The enricher automatically adds images to standard chapters that don't already h
 - ✅ **Source files stay clean** - No `img` fields needed in `podcasts/cdspill/chapters/`
 - ✅ **Non-destructive** - Existing images are never overwritten
 - ✅ **Controllable** - Disable auto-matching per chapter with `"img": null`
-- ✅ **Future-ready** - Music and tech chapters ready for dedicated icons when available
+- ✅ **Configurable** - Patterns and images per podcast in `podcast.toml`
 
 ### Covers from Game Links
 
@@ -254,7 +244,7 @@ Based on chapter analysis across 56 episodes:
 - **"Velkommen til cd SPILL"** (76.8%) → Podcast logo ✓
 - **"Dagens spill: [Game]"** (83.9%) → Episode cover ✓
 - **"Kommentarer fra forrige episode"** (46.4%) → Previous cover ✓
-- **"Kommentarer fra sosiale medier"** (73.2%) → Episode cover ✓
+- **"Kommentarer fra sosiale medier"** (73.2%) → Social media image ✓
 - **"Har det holdt seg?"** (82.1%) → Episode cover ✓
 - **"Neste episode"** (51.8%) → Next cover ✓
 

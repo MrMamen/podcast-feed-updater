@@ -1,4 +1,7 @@
-# Person Data System for cd SPILL
+# Person Data System
+
+Each podcast keeps its person data in `podcasts/<id>/` (cd SPILL: `podcasts/cdspill/`).
+File names can be changed in `[guests]` in `podcast.toml`.
 
 ## Overview
 
@@ -6,14 +9,14 @@ Simple, manually maintained system for person data (hosts and guests) with optio
 
 ## Files
 
-### `podcasts/cdspill/permanent_staff.json`
+### `podcasts/<id>/permanent_staff.json`
 Permanent roles that appear at channel level or across many episodes:
 - **Hosts**: Appear on every episode (channel-level tags)
 - **Other roles**: Production staff like cover art designers, music composers, etc.
 
 Edit this file directly to add/update permanent staff.
 
-### `podcasts/cdspill/known_guests.json`
+### `podcasts/<id>/known_guests.json`
 Guest data with profile images and URLs:
 ```json
 {

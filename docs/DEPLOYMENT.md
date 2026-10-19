@@ -45,8 +45,19 @@ GitHub Actions trenger tillatelse til å pushe til repo og deploye til Pages:
 
 Din feed vil være tilgjengelig på:
 ```
-https://[ditt-github-brukernavn].github.io/podcast-feed-updater/cdspill-enriched.xml
+https://[ditt-github-brukernavn].github.io/podcast-feed-updater/<feed>
 ```
+
+der `<feed>` er `[publish] feed` i `podcasts/<id>/podcast.toml` (cd SPILL: `cdspill-enriched.xml`).
+Sett `[publish] base_url` til denne adressen (uten filnavn); den brukes i `atom:link` og
+for kapittelfilene.
+
+### Workflows for en annen podcast
+
+Workflowene i `.github/workflows/` kjører cd SPILL (`enrich.py --podcast cdspill`). For en
+annen podcast: kopier `enrich-feed.yml`, bytt `--podcast cdspill` og filnavnene
+(`cdspill-enriched.xml` i pubnotify-steget). Alle workflowene deployer med `keep_files: true`,
+så flere podcaster kan dele samme `gh-pages`. Sett ulik `[chapters] publish_path` per podcast.
 
 ### 4. Legg til Podchaser API secrets (Valgfritt)
 
@@ -151,5 +162,5 @@ fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested U
 Hvis du støter på problemer:
 1. Sjekk GitHub Actions logs
 2. Test lokalt: `uv run enrich.py`
-3. Valider XML: `xmllint --noout output/cdspill-enriched.xml`
+3. Valider XML: `xmllint --noout output/<feed>`
 4. Åpne issue i repo eller spør i Podcasting 2.0 community

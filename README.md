@@ -2,6 +2,12 @@
 
 En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 
+Alt som er spesifikt for én podcast – feed-URL, verter og gjester, funding, sosiale
+kontoer, tittelkonvensjoner, kapittelregler og varianter – ligger i
+`podcasts/<id>/podcast.toml`. Koden er generell. cd SPILL (`podcasts/cdspill/`) er
+podcasten repoet er laget for, og fungerer som et fullstendig eksempel.
+**Ny podcast:** se [docs/CONFIGURATION.md](docs/CONFIGURATION.md#ny-podcast).
+
 ## 🧭 Hva vil du gjøre?
 
 | Jeg vil … | Kjør |
@@ -14,11 +20,15 @@ En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 | Generere den berikede feeden lokalt | `uv run enrich.py [--local-cache]` |
 | Generere Spotify-/YouTube-variantene | `uv run enrich.py --variant spotify` / `--variant youtube` |
 | Bygge Tiltcast-listefeed | `uv run build_list_feed.py --list tiltcast` |
+| Endre hva som legges til i feeden | Rediger `podcasts/cdspill/podcast.toml` ([alle valg](docs/CONFIGURATION.md)) |
+| Sette opp en annen podcast | Kopier [docs/podcast.example.toml](docs/podcast.example.toml) til `podcasts/<id>/podcast.toml` |
 
 `guests.py` og `analyze.py` uten argumenter gir en piltast-meny; underkommandoene finnes for scripting. Begge har en `cache`-kommando som laster ned en lokal kopi av feeden (`.cache/`), og `analyze.py` laster den ned automatisk hvis den mangler.
 
-## 🎯 Use Case: cd SPILL Feed Enrichment
-Berik en eksisterende feed med Podcasting 2.0 tags.
+Alle kommandoene tar `--podcast <id>`. Så lenge det bare finnes én `podcast.toml`, velges den automatisk.
+
+## 🎯 Eksempel: cd SPILL
+Berik en eksisterende feed med Podcasting 2.0 tags, slik `podcasts/cdspill/podcast.toml` beskriver.
 
 **Se [docs/ENRICHMENT_GUIDE.md](docs/ENRICHMENT_GUIDE.md)** for komplett dokumentasjon.
 
@@ -145,6 +155,8 @@ Navnevarianter fra episode-titler legges til som aliaser.
 
 ### Basic Example - Feed Enrichment
 
+Vanligvis styres alt av `podcast.toml` og `enrich.py`. `FeedEnricher` kan også brukes direkte:
+
 ```python
 from src.enrichment.enricher import FeedEnricher
 
@@ -182,7 +194,7 @@ enricher.add_update_frequency(
 # Add podroll
 enricher.add_podroll([
     {
-        "feedTitle": "Another Podcast",
+        "title": "Another Podcast",
         "url": "https://example.com/feed.xml",
         "feedGuid": "guid-here"
     }
@@ -210,7 +222,8 @@ ruff check .
 - **lxml** - XML processing (preserves namespaces)
 - **requests** - HTTP client
 - **python-dotenv** - Environment variables
-- **pyyaml** - Config files
+- **inquirer** - Piltast-menyer i `guests.py` / `analyze.py`
+- **tomllib** (standardbibliotek, Python 3.11+) - `podcast.toml`
 
 ## 🤝 Contributing
 
