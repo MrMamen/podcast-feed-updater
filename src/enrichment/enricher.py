@@ -18,7 +18,7 @@ from src.common.base_feed import BaseFeed
 
 # Images for recurring chapters (Musikken, Tech Specs, sosiale medier),
 # hosted next to the chapter files
-CHAPTER_IMAGES_DIR = Path(__file__).resolve().parents[2] / 'assets' / 'chapters'
+CHAPTER_IMAGES_DIR = Path(__file__).resolve().parents[2] / 'podcasts' / 'cdspill' / 'chapter-images'
 
 
 class FeedEnricher(BaseFeed):
@@ -1109,7 +1109,7 @@ class FeedEnricher(BaseFeed):
 
     def convert_json_chapters_to_psc(
         self,
-        chapters_dir: str = "chapters",
+        chapters_dir: str = "podcasts/cdspill/chapters",
         output_dir: Optional[str] = "output/chapters",
         base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters",
         include_psc_tags: bool = True,
@@ -1135,7 +1135,7 @@ class FeedEnricher(BaseFeed):
             </psc:chapters>
 
         Args:
-            chapters_dir: Directory containing source chapter JSON files (default: "chapters")
+            chapters_dir: Directory containing source chapter JSON files (default: "podcasts/cdspill/chapters")
             output_dir: Directory to copy chapter files for hosting (default: "output/chapters").
                 None skips hosting and leaves podcast:chapters URLs as they are, so variant
                 feeds don't overwrite the chapter files the main feed publishes.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Vedlikehold av gjester i config/cdspill_known_guests.json.
+Vedlikehold av gjester i podcasts/cdspill/known_guests.json.
 
 Én inngangsport for alt som har med gjester å gjøre. Uten argumenter får du en
 interaktiv meny; med underkommando kan det scriptes:

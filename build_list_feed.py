@@ -4,7 +4,7 @@ Build self-updating RSS feeds from the "Episoder fra Tiltcast i Oslo" Podchaser
 list.
 
 Generates one combined feed (all editions) plus one feed per edition/section,
-hosting cover art from assets/tiltcast/ on GitHub Pages. Run manually whenever
+hosting cover art from podcasts/tiltcast/images/ on GitHub Pages. Run manually whenever
 the list is updated:
 
     uv run build_list_feed.py
@@ -33,8 +33,8 @@ from src.listfeed.podchaser_list import fetch_list, resolve_list_id
 
 load_dotenv()
 
-CONFIG_PATH = "config/tiltcast_list.json"
-ASSETS_DIR = "assets/tiltcast"
+CONFIG_PATH = "podcasts/tiltcast/list.json"
+ASSETS_DIR = "podcasts/tiltcast/images"
 OUTPUT_DIR = "output"
 GENERATOR = "podcast-feed-updater list builder v1.0"
 

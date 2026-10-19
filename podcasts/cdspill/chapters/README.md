@@ -24,7 +24,7 @@ Example:
 ```xml
 <podcast:chapters url="https://mcdn.podbean.com/mf/web/888tat6a7imp5kuy/Outrun_chapters.json" />
 ```
-Save as: `chapters/Outrun_chapters.json` (not `episode_123.json`)
+Save as: `podcasts/cdspill/chapters/Outrun_chapters.json` (not `episode_123.json`)
 
 ## Format
 
@@ -55,7 +55,7 @@ Save as: `chapters/Outrun_chapters.json` (not `episode_123.json`)
 1. **Edit chapters** in [mp3chapters.github.io](https://mp3chapters.github.io)
 2. **Export** as "Podcast Namespace JSON (without images)"
 3. **Find filename** from Podbean RSS feed's `<podcast:chapters url="...">`
-4. **Save** as `chapters/{filename}` (e.g., `chapters/Outrun_chapters.json`)
+4. **Save** as `podcasts/cdspill/chapters/{filename}` (e.g., `podcasts/cdspill/chapters/Outrun_chapters.json`)
 5. **Commit** the file to the repository
 6. **Run enricher** - it will automatically:
    - Load local file instead of fetching from Podbean
@@ -68,7 +68,7 @@ Save as: `chapters/Outrun_chapters.json` (not `episode_123.json`)
 ## What Happens During Enrichment
 
 For each episode with chapters:
-1. **Check:** Does `chapters/{filename}` exist?
+1. **Check:** Does `podcasts/cdspill/chapters/{filename}` exist?
 2. **If YES:**
    - Load local JSON file
    - Copy to `output/chapters/{filename}` (for hosting)
@@ -198,7 +198,7 @@ The enricher automatically adds images to standard chapters that don't already h
 - ✅ **Contextual images** - Previous/next episode chapters show correct covers
 - ✅ **All Podbean-hosted** - No extra hosting needed
 - ✅ **Works everywhere** - JSON chapters, PSC chapters, and podcast apps
-- ✅ **Source files stay clean** - No `img` fields needed in `chapters/` directory
+- ✅ **Source files stay clean** - No `img` fields needed in `podcasts/cdspill/chapters/`
 - ✅ **Non-destructive** - Existing images are never overwritten
 - ✅ **Controllable** - Disable auto-matching per chapter with `"img": null`
 - ✅ **Future-ready** - Music and tech chapters ready for dedicated icons when available

@@ -6,14 +6,14 @@ Simple, manually maintained system for person data (hosts and guests) with optio
 
 ## Files
 
-### `config/cdspill_permanent_staff.json`
+### `podcasts/cdspill/permanent_staff.json`
 Permanent roles that appear at channel level or across many episodes:
 - **Hosts**: Appear on every episode (channel-level tags)
 - **Other roles**: Production staff like cover art designers, music composers, etc.
 
 Edit this file directly to add/update permanent staff.
 
-### `config/cdspill_known_guests.json`
+### `podcasts/cdspill/known_guests.json`
 Guest data with profile images and URLs:
 ```json
 {
@@ -92,7 +92,7 @@ The enricher runs offline using the JSON files. Podchaser is only used when addi
 
 ## Manual Editing
 
-You can also manually edit `config/cdspill_known_guests.json`:
+You can also manually edit `podcasts/cdspill/known_guests.json`:
 
 ```json
 {

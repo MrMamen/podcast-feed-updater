@@ -88,8 +88,9 @@ podcast-feed-updater/
 ├── guests.py                  # Gjestevedlikehold: meny + add/refresh/sync/episode/list/cache
 ├── analyze.py                 # Rapporter: meny + rank/guest/length/cache
 ├── pubnotify.py               # Podping-varsel via pubnotify etter publisering
-├── config/                    # JSON-config (gjester, faste roller, tiltcast-liste)
-├── chapters/                  # Kapittel-data per episode (kilde)
+├── podcasts/                  # Data per podcast/feed
+│   ├── cdspill/               # gjester, faste roller, kapittel-JSON (chapters/), kapittelbilder
+│   └── tiltcast/              # listekonfig og coverbilder for Tiltcast-listefeeden
 ├── docs/                      # Markdown-dokumentasjon
 └── output/                    # Generert XML (publiseres til GitHub Pages)
 ```

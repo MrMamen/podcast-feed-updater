@@ -46,7 +46,7 @@ Sections are **not** hardcoded — they come from the list itself. To add 6.0:
 
 1. On Podchaser, add a new **section heading** (`ListHeading`) + the episodes to
    the list, as usual.
-2. Drop a cover image at `assets/tiltcast/tiltcast-6.{jpg|png}`
+2. Drop a cover image at `podcasts/tiltcast/images/tiltcast-6.{jpg|png}`
    (**square, 1400–3000 px, RGB** — Apple rejects anything smaller or
    non-square).
 3. Re-run the build (locally or via the workflow).
@@ -64,7 +64,7 @@ image and prints a warning.
 ## Things that are easy to forget
 
 - **List id is the numeric internal id, NOT the URL hashid.** The list is
-  `1959319` (in `config/tiltcast_list.json`). The `...-11SK7Mk5jl` tail in the
+  `1959319` (in `podcasts/tiltcast/list.json`). The `...-11SK7Mk5jl` tail in the
   URL is a hashid that resolves a *different* list if passed to the API. If the
   id ever needs re-resolving, clear `list_id` in the config and the builder
   falls back to searching by `list_search_term`.
@@ -122,14 +122,14 @@ These are set for the *list*, not copied from each episode's original feed:
 | File | Role |
 |------|------|
 | `build_list_feed.py` | Entry point / orchestration |
-| `config/tiltcast_list.json` | List id, search term, language, category, base URL, point floor |
+| `podcasts/tiltcast/list.json` | List id, search term, language, category, base URL, point floor |
 | `src/listfeed/podchaser_list.py` | Fetch + structure the list into sections (cost guard, point logging) |
 | `src/listfeed/feed_builder.py` | Build the RSS XML (lxml) — channel + items + seasons |
 | `src/enrichment/podchaser_api.py` | Podchaser client; `estimate_cost()` = free `/cost` check |
-| `assets/tiltcast/` | Cover art (`tiltcast-all` + `tiltcast-1..N`), square ≥1400 px |
+| `podcasts/tiltcast/images/` | Cover art (`tiltcast-all` + `tiltcast-1..N`), square ≥1400 px |
 | `.github/workflows/build-list-feed.yml` | Manual workflow → builds + deploys to gh-pages |
 
-## Config (`config/tiltcast_list.json`)
+## Config (`podcasts/tiltcast/list.json`)
 
 | Key | Meaning |
 |-----|---------|

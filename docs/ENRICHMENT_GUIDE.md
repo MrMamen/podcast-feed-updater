@@ -68,9 +68,9 @@ uv run enrich_cdspill.py
 ```
 
 Dette vil:
-- ✅ Legge til permanent hosts fra `config/cdspill_permanent_staff.json`
+- ✅ Legge til permanent hosts fra `podcasts/cdspill/permanent_staff.json`
 - ✅ Auto-detektere gjester fra episode-titler ("med [Name]")
-- ✅ Berike med profil-bilder og URLs fra `config/cdspill_known_guests.json`
+- ✅ Berike med profil-bilder og URLs fra `podcasts/cdspill/known_guests.json`
 - ✅ Legge til funding link (Patreon)
 - ✅ Legge til social interact (Bluesky, Twitter/X, Facebook)
 - ✅ Legge til season/episode tags
@@ -91,7 +91,7 @@ uv run guests.py add "Full Name" --alias "Short Name"
 uv run guests.py refresh          # fyll inn manglende bilde/URL for alle
 ```
 
-Dette legger automatisk til gjesten i `config/cdspill_known_guests.json` med profilbilde og Podchaser-URL.
+Dette legger automatisk til gjesten i `podcasts/cdspill/known_guests.json` med profilbilde og Podchaser-URL.
 
 **Se [PERSON_DATA_README.md](PERSON_DATA_README.md)** for fullstendig dokumentasjon av person-data systemet.
 
@@ -214,7 +214,7 @@ uv run guests.py refresh "Guest Name"
 ```
 
 ### Gjest har feil navn i episode-tittel
-**Løsning:** Legg til alias i `config/cdspill_known_guests.json`:
+**Løsning:** Legg til alias i `podcasts/cdspill/known_guests.json`:
 ```json
 {
   "aliases": {

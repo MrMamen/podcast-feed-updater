@@ -78,7 +78,7 @@ def main():
     # Load permanent staff (hosts and other permanent roles)
     import json
 
-    permanent_staff_file = "config/cdspill_permanent_staff.json"
+    permanent_staff_file = "podcasts/cdspill/permanent_staff.json"
     known_guests_file = str(KNOWN_GUESTS_PATH)
 
     hosts = []
