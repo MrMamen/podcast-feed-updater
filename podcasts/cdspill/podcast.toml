@@ -136,6 +136,56 @@ publish_path = "chapters"
 # Kapitler som viser en annen episodes cover lenker til den episoden i Apple Podcasts
 apple_links = true
 
+# Bilder til kapitler uten "img" (sett "img": null i kapittelfila for å slå av).
+# Første kapittel får alltid episodens cover. Så prøves reglene under i rekkefølge;
+# første regel som treffer tittelen og har et bilde vinner (store/små bokstaver likt).
+# image: "episode_cover", "previous_cover", "next_cover", "podcast_logo" eller en fil i images_dir.
+[[chapters.image_rules]]
+image = "episode_cover"
+starts_with = ["Dagens", "idag:", "Episodens"]
+equals = ["Hva går spillet ut på?", "Har det holdt seg?"]
+
+[[chapters.image_rules]]
+image = "social_media.jpg"
+contains = ["sosiale medier", "facebook", "twitter", "bluesky"]
+
+[[chapters.image_rules]]
+image = "podcast_logo"
+contains = ["cd spill"]
+
+[[chapters.image_rules]]
+image = "previous_cover"
+contains = ["fra sist", "fra forrige"]
+
+[[chapters.image_rules]]
+image = "next_cover"
+contains = ["neste"]
+
+[[chapters.image_rules]]
+image = "music.jpg"
+contains = ["musikk"]
+
+[[chapters.image_rules]]
+image = "tech.jpg"
+contains = ["tech"]
+
+# Deretter: kapittellenker til Steam/GOG/Wikipedia gir spillets cover, og titler som
+# matcher det en annen episode handler om ("Doom II" → Doom-episoden) gir den episodens
+# cover. Til slutt disse frasene, der resten av tittelen er navnet på en annen episode.
+# match: "exact" (hele navnet), "contains" (inneholder navnet) eller "words" (felles ord).
+[[chapters.cross_references]]
+contains = ["i forhold til", "ligner på"]  # "Ligner på Doom"
+match = "exact"
+
+[[chapters.cross_references]]
+starts_with = ["mer "]  # "Mer Warcraft II" → Warcraft-episoden
+match = "contains"
+
+[[chapters.cross_references]]
+starts_with = ["kommentarer fra "]  # "Kommentarer fra Freddi Fisk"
+match = "words"
+unless_contains = ["sosiale medier", "forrige", "sist", "facebook", "twitter", "bluesky"]
+
 [variants.youtube]
 feed = "cdspill-youtube.xml"
 

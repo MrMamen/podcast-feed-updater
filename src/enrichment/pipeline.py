@@ -68,6 +68,8 @@ def chapter_options(cfg: PodcastConfig) -> dict:
         "output_dir": str(OUTPUT_DIR / publish_path),
         "base_url": f"{cfg.base_url}/{publish_path}",
         "title_rules": cfg.title_rules,
+        "image_rules": chapters.get("image_rules", []),
+        "cross_references": chapters.get("cross_references", []),
     }
 
 

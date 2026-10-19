@@ -11,11 +11,13 @@ import hashlib
 import json
 import os
 import shutil
-import string
 from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
 from src.common.http import USER_AGENT
 from src.common.podcast_utils import DEFAULT_EPISODE_NUMBER_SUFFIX, TitleRules
+from src.enrichment.chapter_images import (
+    EPISODE_COVER, NEXT_COVER, PODCAST_LOGO, PREVIOUS_COVER, ChapterImageMatcher,
+)
 
 
 class FeedEnricher(BaseFeed):
@@ -1086,6 +1088,8 @@ class FeedEnricher(BaseFeed):
         apple_podcast_id: Optional[int] = None,
         apple_country: str = "us",
         title_rules: Optional[TitleRules] = None,
+        image_rules: Optional[List[Dict]] = None,
+        cross_references: Optional[List[Dict]] = None,
     ) -> 'FeedEnricher':
         """
         Process chapter JSON files and optionally add Podlove Simple Chapters (PSC) tags.
@@ -1114,7 +1118,7 @@ class FeedEnricher(BaseFeed):
                 and leaves podcast:chapters URLs as they are, so variant feeds don't
                 overwrite the chapter files the main feed publishes.
             images_dir: Directory with images for recurring chapters, copied to
-                output_dir/images
+                output_dir/images and published at base_url/images
             include_psc_tags: If True, insert <psc:chapters> inline (for Spotify variant).
                 If False, only host JSON and rewrite URLs (for main feed).
             apple_podcast_id: If set, chapters whose image refers to another episode
@@ -1123,6 +1127,8 @@ class FeedEnricher(BaseFeed):
             apple_country: Apple Podcasts storefront for those links (e.g. "no")
             title_rules: Title conventions, so chapters can be matched against what
                 other episodes are about ("Rainbow Six med Jostein" → "Rainbow Six")
+            image_rules, cross_references: Podcast-specific rules for chapter images,
+                see chapter_images.ChapterImageMatcher
 
         Returns:
             Self for chaining
@@ -1160,27 +1166,6 @@ class FeedEnricher(BaseFeed):
             os.makedirs(output_dir, exist_ok=True)
             if images_dir:
                 shutil.copytree(images_dir, os.path.join(output_dir, 'images'), dirs_exist_ok=True)
-        music_image = f"{base_url}/images/music.jpg"
-        tech_image = f"{base_url}/images/tech.jpg"
-        social_media_image = f"{base_url}/images/social_media.jpg"
-
-        # Helper function for word-based matching
-        def normalize_words(text):
-            """Remove punctuation and split into words for fuzzy matching."""
-            translator = str.maketrans('', '', string.punctuation)
-            clean_text = text.translate(translator)
-            return set(clean_text.lower().split())
-
-        # Whole-word prefix/suffix checks, so "doom" doesn't match "doomsday machine"
-        # and "spillåret 1993" doesn't match "eventyrspillåret 1993"
-        def starts_with_word(text, prefix):
-            return text.startswith(prefix) and (
-                len(text) == len(prefix) or not text[len(prefix)].isalnum()
-            )
-
-        def ends_with_word(text, suffix):
-            start = len(text) - len(suffix)
-            return text.endswith(suffix) and (start == 0 or not text[start - 1].isalnum())
 
         # Get podcast logo for standard chapters
         podcast_logo = None
@@ -1238,6 +1223,14 @@ class FeedEnricher(BaseFeed):
                 if ':' in game_name_normalized:
                     base_name = game_name_normalized.split(':')[0].strip()
                     episode_titles_to_covers[base_name.lower()] = cover_url
+
+        matcher = ChapterImageMatcher(
+            episode_titles_to_covers,
+            image_rules=image_rules,
+            cross_references=cross_references,
+            images_base_url=f"{base_url}/images" if images_dir else None,
+            link_cover=link_cover,
+        )
 
         for item_index, item in enumerate(items):
             # Find podcast:chapters element
@@ -1353,236 +1346,18 @@ class FeedEnricher(BaseFeed):
                             images_injected = 0
                             links_injected = 0
                             for chapter in sorted_chapters:
-                                chapter_title = chapter.get('title', '').strip()
-
                                 # Skip if chapter already has an image (including null to disable auto-matching)
                                 # You can use "img": null in chapter file to prevent auto-matching
                                 # (empty/null values are cleaned up before saving output)
                                 if 'img' in chapter:
                                     continue
 
-                                # Normalize apostrophes for consistent matching
-                                chapter_title_normalized = chapter_title.replace('\u2019', "'")
-                                chapter_title_lower = chapter_title_normalized.lower()
-                                start_time = chapter.get('startTime', 0)
-
-                                # Match patterns for image injection
-                                image_to_inject = None
-
-                                # FIRST CHAPTER: Always gets episode cover (regardless of title)
-                                if start_time == 0 and cover_art_url:
-                                    image_to_inject = cover_art_url
-
-                                # Episode cover art patterns
-                                elif cover_art_url and (
-                                    chapter_title.startswith("Dagens") or
-                                    chapter_title_lower.startswith("idag:") or
-                                    chapter_title.startswith("Episodens") or
-                                    chapter_title == "Hva går spillet ut på?" or
-                                    chapter_title == "Har det holdt seg?"
-                                ):
-                                    image_to_inject = cover_art_url
-                                # Social media comments
-                                elif (
-                                    "sosiale medier" in chapter_title_lower or
-                                    "facebook" in chapter_title_lower or
-                                    "twitter" in chapter_title_lower or
-                                    "bluesky" in chapter_title_lower
-                                ):
-                                    image_to_inject = social_media_image
-
-                                # Podcast logo patterns
-                                elif podcast_logo and "cd spill" in chapter_title_lower:
-                                    image_to_inject = podcast_logo
-
-                                # Previous episode cover art patterns
-                                elif prev_cover_url and (
-                                    "fra sist" in chapter_title_lower or
-                                    "fra forrige" in chapter_title_lower
-                                ):
-                                    image_to_inject = prev_cover_url
-
-                                # Next episode cover art patterns
-                                elif next_cover_url and (
-                                    "neste" in chapter_title_lower
-                                ):
-                                    image_to_inject = next_cover_url
-
-                                # Music and tech chapters
-                                elif "musikk" in chapter_title_lower:
-                                    image_to_inject = music_image
-                                elif "tech" in chapter_title_lower:
-                                    image_to_inject = tech_image
-
-                                # Chapter links to Steam, GOG or Wikipedia: use the game's cover.
-                                # Takes precedence over episode matching, so "Syndicate Wars" linked
-                                # to GOG doesn't get the Syndicate episode cover.
-                                elif chapter.get('url') and link_cover(chapter['url']):
-                                    image_to_inject = link_cover(chapter['url'])
-
-                                # Cross-reference: Match chapter title against episode game names
-                                # Example: "Home Alone" chapter in OutRun episode gets Home Alone episode cover
-                                elif chapter_title_lower in episode_titles_to_covers:
-                                    image_to_inject = episode_titles_to_covers[chapter_title_lower]
-
-                                # Exact suffix matching: Chapter ends with episode name
-                                # Example: "Historien i Duke Nukem" → Duke Nukem episode
-                                # Also normalize "the " prefix for better matching
-                                # Example: "Oppsummering av Secret of Monkey Island" → "The Secret of Monkey Island"
-                                # Only normalize if result has multiple words (to avoid "the games" → "games" false matches)
-                                if not image_to_inject:
-                                    for episode_name, cover in episode_titles_to_covers.items():
-                                        if len(episode_name) <= 3:
-                                            continue
-
-                                        # Normalize episode name by removing "the " prefix
-                                        # Only if result still has multiple words (contains space)
-                                        episode_normalized = episode_name
-                                        if episode_normalized.startswith("the "):
-                                            without_the = episode_normalized[4:]
-                                            if ' ' in without_the:  # Must have at least 2 words after removing "the"
-                                                episode_normalized = without_the
-
-                                        if ends_with_word(chapter_title_lower, episode_normalized):
-                                            image_to_inject = cover
-                                            break
-
-                                # PREFIX matching: Chapter starts with episode name
-                                # Example: "Doom II" → "Doom", "Transport Tycoon Deluxe" → "Transport Tycoon"
-                                # Choose LONGEST matching prefix to avoid false matches
-                                # (e.g., "Legend of Kyrandia" should match "the legend of kyrandia: hand of fate" not just "legend")
-                                # Also normalize "the " prefix for better matching, but only strip it from
-                                # the chapter when the episode name has it too
-                                # (so "The Legend of Zelda" doesn't match "Legend")
-                                if not image_to_inject:
-                                    best_prefix_match = None
-                                    best_prefix_length = 0
-
-                                    for episode_name, cover in episode_titles_to_covers.items():
-                                        if len(episode_name) <= 3:
-                                            continue
-
-                                        # Normalize both by removing "the " prefix
-                                        episode_normalized = episode_name
-                                        chapter_normalized = chapter_title_lower
-                                        if episode_normalized.startswith("the "):
-                                            episode_normalized = episode_normalized[4:]
-                                            if chapter_normalized.startswith("the "):
-                                                chapter_normalized = chapter_normalized[4:]
-
-                                        # Check if chapter starts with episode name (using normalized versions)
-                                        if starts_with_word(chapter_normalized, episode_normalized):
-                                            # Keep the longest match (use normalized length for comparison)
-                                            if len(episode_normalized) > best_prefix_length:
-                                                best_prefix_match = cover
-                                                best_prefix_length = len(episode_normalized)
-
-                                    if best_prefix_match:
-                                        image_to_inject = best_prefix_match
-
-                                # Reverse PREFIX matching: Episode name starts with chapter
-                                # Example: "Backpacker" → "Backpacker 2"
-                                # Choose LONGEST matching episode name to avoid false matches
-                                if not image_to_inject:
-                                    best_reverse_match = None
-                                    best_reverse_length = 0
-
-                                    for episode_name, cover in episode_titles_to_covers.items():
-                                        if len(chapter_title_lower) > 3 and starts_with_word(episode_name, chapter_title_lower):
-                                            # Keep the longest episode name match
-                                            if len(episode_name) > best_reverse_length:
-                                                best_reverse_match = cover
-                                                best_reverse_length = len(episode_name)
-
-                                    if best_reverse_match:
-                                        image_to_inject = best_reverse_match
-
-                                # "I forhold til [game]" - cross-reference to that game's episode
-                                if not image_to_inject and "i forhold til" in chapter_title_lower:
-                                    game_name = chapter_title_lower.split("i forhold til", 1)[1].strip()
-                                    if game_name in episode_titles_to_covers:
-                                        image_to_inject = episode_titles_to_covers[game_name]
-
-                                # "Ligner på [game]" - cross-reference to that game's episode
-                                if not image_to_inject and "ligner på" in chapter_title_lower:
-                                    game_name = chapter_title_lower.split("ligner på", 1)[1].strip()
-                                    if game_name in episode_titles_to_covers:
-                                        image_to_inject = episode_titles_to_covers[game_name]
-
-                                # CONTAINS matching for "Mer [game]" pattern
-                                # Example: "Mer Warcraft II" → contains "warcraft"
-                                if not image_to_inject and chapter_title_lower.startswith("mer "):
-                                    for episode_name, cover in episode_titles_to_covers.items():
-                                        if len(episode_name) > 3 and episode_name in chapter_title_lower:
-                                            image_to_inject = cover
-                                            break
-
-                                # "Kommentarer fra [episode]" - match episode name (not previous, not social media)
-                                if not image_to_inject and chapter_title_lower.startswith("kommentarer fra "):
-                                    # Skip if it's social media or previous episode (already handled above)
-                                    if not any(x in chapter_title_lower for x in ["sosiale medier", "forrige", "sist", "facebook", "twitter", "bluesky"]):
-                                        # Extract potential episode name
-                                        potential_name = chapter_title_lower.replace("kommentarer fra ", "").strip()
-
-                                        # Skip very short extracted names (≤3 chars) to avoid false matches
-                                        # Example: "Kommentarer fra I" would incorrectly match "I Have No Mouth..."
-                                        if len(potential_name) <= 3:
-                                            continue
-
-                                        # Try word-based matching for better partial matches
-                                        # This helps match "Kommentarer fra Freddi Fisk" to "freddi fisk og humongous entertainment"
-                                        potential_words = normalize_words(potential_name)
-
-                                        best_match = None
-                                        best_match_score = 0
-
-                                        for episode_name, cover in episode_titles_to_covers.items():
-                                            if len(episode_name) <= 3:  # Skip very short episode names
-                                                continue
-
-                                            episode_words = normalize_words(episode_name)
-                                            common_words = potential_words & episode_words
-
-                                            # Calculate match score: number of overlapping words
-                                            match_score = len(common_words)
-
-                                            # Good match if:
-                                            # - At least 2 words overlap, OR
-                                            # - All words from potential_name are found in episode_name
-                                            if match_score >= 2 or (len(potential_words) > 0 and match_score == len(potential_words)):
-                                                if match_score > best_match_score:
-                                                    best_match = cover
-                                                    best_match_score = match_score
-
-                                        if best_match:
-                                            image_to_inject = best_match
-
-                                # Fuzzy word-based matching as last resort for multi-word titles
-                                # Example: "Heroes of Might and Magic" → "Heroes of Might & Magic"
-                                if not image_to_inject:
-                                    chapter_words = normalize_words(chapter_title_lower)
-
-                                    # Only apply to chapters with at least 3 words to avoid false positives
-                                    if len(chapter_words) >= 3:
-                                        best_match = None
-                                        best_match_score = 0
-
-                                        for episode_name, cover in episode_titles_to_covers.items():
-                                            if len(episode_name) <= 3:
-                                                continue
-
-                                            episode_words = normalize_words(episode_name)
-                                            common_words = chapter_words & episode_words
-                                            match_score = len(common_words)
-
-                                            # Strong match if most words overlap (at least 80% of chapter words)
-                                            if len(chapter_words) > 0 and match_score >= len(chapter_words) * 0.8:
-                                                if match_score > best_match_score:
-                                                    best_match = cover
-                                                    best_match_score = match_score
-
-                                        if best_match:
-                                            image_to_inject = best_match
+                                image_to_inject = matcher.image_for(chapter, {
+                                    EPISODE_COVER: cover_art_url,
+                                    PREVIOUS_COVER: prev_cover_url,
+                                    NEXT_COVER: next_cover_url,
+                                    PODCAST_LOGO: podcast_logo,
+                                })
 
                                 # Inject the image
                                 if image_to_inject:
