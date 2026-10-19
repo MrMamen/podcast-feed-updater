@@ -28,7 +28,7 @@ from src.common.episodes import Episode, iter_episodes, parse_duration
 from src.common.feed_loader import download_cache, load_feed
 from src.common.guest_config import load_known_guests, load_known_guests_data, resolve_alias
 from src.common.guest_store import episode_number_from_note, find_guests_matching
-from src.common.podcast_utils import extract_guests_from_title, is_bonus_episode
+from src.common.podcast_utils import is_bonus_episode
 from src.config import PodcastConfig, add_podcast_argument, load_podcast_or_exit
 
 CANCEL = "❌ Avbryt"
@@ -49,7 +49,7 @@ def count_title_appearances(episodes: List[Episode], aliases: Dict) -> Dict[str,
     for ep in episodes:
         if is_bonus_episode(ep.title):
             continue
-        for guest in extract_guests_from_title(ep.title):
+        for guest in cfg.title_rules.extract_guests(ep.title):
             counter[resolve_alias(guest, aliases)] += 1
     return dict(counter)
 
@@ -120,7 +120,7 @@ def cmd_guest(args) -> None:
     for ep in episodes:
         if is_bonus_episode(ep.title):
             continue
-        guests = {resolve_alias(g, aliases) for g in extract_guests_from_title(ep.title)}
+        guests = {resolve_alias(g, aliases) for g in cfg.title_rules.extract_guests(ep.title)}
         if canonical in guests:
             full.append((ep.episode_num, ep.title))
             seen.add(ep.guid)

@@ -23,8 +23,9 @@ import time
 
 import requests
 
+from src.common.http import USER_AGENT
+
 PUBNOTIFY_URL = "https://api.podcastindex.org/api/1.0/hub/pubnotify"
-USER_AGENT = "cdspill-feed-updater/1.0 (+https://github.com/MrMamen/podcast-feed-updater)"
 LAST_BUILD_RE = re.compile(r"<lastBuildDate>([^<]*)</lastBuildDate>")
 
 

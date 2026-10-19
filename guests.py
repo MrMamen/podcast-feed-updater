@@ -54,7 +54,6 @@ from src.common.guest_store import (
     status_icons,
     upsert_guest,
 )
-from src.common.podcast_utils import extract_guests_from_title, strip_episode_suffix
 from src.config import PodcastConfig, add_podcast_argument, load_podcast_or_exit
 from src.enrichment.podchaser_api import PodchaserAPI, from_env
 
@@ -329,7 +328,7 @@ def cmd_sync(args) -> None:
     known = set(data["guests"]) | set(data["aliases"])
     feed_xml = load_feed(cfg, use_cache=False)
 
-    in_titles = sorted({g for ep in iter_episodes(feed_xml) for g in extract_guests_from_title(ep.title)})
+    in_titles = sorted({g for ep in iter_episodes(feed_xml) for g in cfg.title_rules.extract_guests(ep.title)})
     new = [g for g in in_titles if g not in known]
     print(f"\n📦 {len(data['guests'])} gjester, {len(data['aliases'])} alias i fila")
     print(f"🔍 {len(in_titles)} unike gjester i episodetitler, {len(new)} nye")
@@ -375,7 +374,7 @@ def cmd_episode(args) -> None:
         print(f"❌ Mangler podchaser_id under [podcast] i {cfg.config_path}")
         sys.exit(1)
     client = from_env(required=True)
-    clean_title = strip_episode_suffix(episode.title)
+    clean_title = cfg.title_rules.strip_episode_suffix(episode.title)
     pc_episode = client.search_episode(podchaser_id, clean_title, first=5)
     if not pc_episode:
         print("❌ Fant ikke episoden på Podchaser")
@@ -400,7 +399,7 @@ def cmd_episode(args) -> None:
         return
 
     changes: List[str] = []
-    title_guests = {resolve_alias(g, data["aliases"]) for g in extract_guests_from_title(episode.title)}
+    title_guests = {resolve_alias(g, data["aliases"]) for g in cfg.title_rules.extract_guests(episode.title)}
     for creator in guests:
         name = creator["name"]
         print(f"\n— {name}")

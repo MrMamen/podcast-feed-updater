@@ -35,7 +35,7 @@ def build_youtube(cfg: PodcastConfig, *, use_local: bool = False) -> str:
     enricher = FeedEnricher(resolve_enriched_source(cfg, use_local))
     enricher.fetch_feed()
 
-    enricher.restore_episode_numbers_to_titles()
+    enricher.restore_episode_numbers_to_titles(variant.get("episode_number_format", " (#{episode})"))
 
     # psc:chapters are only needed to extract the timestamps from
     _chapters_for_variant(enricher, cfg)
@@ -132,7 +132,7 @@ def _build_fallback_test(cfg: PodcastConfig, source: str, feed_prefix: str, slug
     feed_file = f"{feed_prefix}{slug}.xml"
     enricher.update_atom_link(f"{cfg.base_url}/{feed_file}")
     enricher.update_generator(f"podcast-feed-updater v1.0 (fallback test: {slug})")
-    enricher.update_lastBuildDate()
+    enricher.update_lastBuildDate(cfg.timezone)
 
     output_file = str(OUTPUT_DIR / feed_file)
     enricher.write_feed(output_file)

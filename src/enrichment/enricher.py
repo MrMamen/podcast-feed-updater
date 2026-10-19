@@ -4,7 +4,7 @@ Preserves all original content while adding new metadata.
 """
 
 from lxml import etree
-from typing import List, Dict, Optional
+from typing import Callable, List, Dict, Optional
 from concurrent.futures import ThreadPoolExecutor
 import requests
 import hashlib
@@ -14,6 +14,8 @@ import shutil
 import string
 from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
+from src.common.http import USER_AGENT
+from src.common.podcast_utils import DEFAULT_EPISODE_NUMBER_SUFFIX, TitleRules
 
 
 class FeedEnricher(BaseFeed):
@@ -90,7 +92,9 @@ class FeedEnricher(BaseFeed):
         print("✓ Validation passed: No conflicting Podcasting 2.0 tags found")
         return self
 
-    def remove_episode_numbers_from_titles(self, pattern: str = r'\s*\(#?\d+\)$') -> 'FeedEnricher':
+    def remove_episode_numbers_from_titles(
+        self, pattern: str = DEFAULT_EPISODE_NUMBER_SUFFIX
+    ) -> 'FeedEnricher':
         """
         Remove episode numbers from episode titles.
 
@@ -172,33 +176,25 @@ class FeedEnricher(BaseFeed):
         print(f"✓ Added {len(persons)} default host(s) to channel")
         return self
 
-    def add_podcast_season_episode(self) -> 'FeedEnricher':
+    def add_podcast_season_episode(
+        self, season_name: Optional[Callable[[int], str]] = None
+    ) -> 'FeedEnricher':
         """
         Add podcast:season and podcast:episode tags to all episodes.
         Uses itunes:season and itunes:episode as source.
-        For cd SPILL: Season 1 = Vår 2020, Season 2 = Høst 2020, etc.
 
         The podcast:episode tag includes a display attribute showing both
         the season episode number and total episode number (e.g., "2 (#80)").
+
+        Args:
+            season_name: Function from season number to the podcast:season name
+                attribute (see podcast_utils.season_namer); None adds no name
 
         Returns:
             Self for chaining
         """
         if self.channel is None:
             raise ValueError("Must fetch feed first")
-
-        # Season name mapping (S1 = Vår 2020, S2 = Høst 2020, etc.)
-        def get_season_name(season_num: int) -> str:
-            """Generate season name from number."""
-            if season_num <= 0:
-                return f"Sesong {season_num}"
-
-            # Calculate year and season
-            year = 2020 + (season_num - 1) // 2
-            is_spring = (season_num % 2) == 1
-
-            season_name = "Vår" if is_spring else "Høst"
-            return f"{season_name} {year}"
 
         items = self.channel.findall('item')
 
@@ -223,13 +219,11 @@ class FeedEnricher(BaseFeed):
 
             if season_elem is not None and season_elem.text:
                 season_num = int(season_elem.text)
-                season_name = get_season_name(season_num)
 
                 # Add podcast:season
-                podcast_season = etree.Element(
-                    '{https://podcastindex.org/namespace/1.0}season',
-                    name=season_name
-                )
+                podcast_season = etree.Element('{https://podcastindex.org/namespace/1.0}season')
+                if season_name:
+                    podcast_season.set('name', season_name(season_num))
                 podcast_season.text = str(season_num)
                 item.append(podcast_season)
 
@@ -274,34 +268,32 @@ class FeedEnricher(BaseFeed):
 
     def auto_detect_guests_from_titles(
         self,
-        pattern: Optional[str] = None,
+        title_rules: Optional[TitleRules] = None,
         known_guests: Optional[Dict[str, Dict[str, str]]] = None,
-        split_multiple: bool = True
     ) -> 'FeedEnricher':
         """
         Automatically detect and add guests from episode titles.
 
         Args:
-            pattern: Regex whose group 1 is the guest name(s), e.g. r'med (.+?)(?:\s*\(|$)'
-                     for "Game med Guest Name". None: only extra_episodes are added.
+            title_rules: How guests are named in titles ("Game med Guest A og Guest B").
+                         None: only extra_episodes are added.
             known_guests: Optional dict mapping guest names to additional info
                          Example: {"Roar Granevang": {"href": "https://...", "img": "..."}}
                          Can include 'alias' key to normalize name variations:
                          {"Aksel Bjerke": {"alias": "Aksel M. Bjerke"}}
                          Can include 'extra_episodes' list to add guest to specific episodes by GUID:
                          {"Terje Høiback": {"href": "...", "extra_episodes": [{"guid": "...", "note": "..."}]}}
-            split_multiple: If True, split multiple guests separated by " og " (default: True)
 
         Returns:
             Self for chaining
         """
-        import re
-
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
         if known_guests is None:
             known_guests = {}
+        if title_rules is None:
+            title_rules = TitleRules()
 
         items = self.channel.findall('item')
         guest_count = 0
@@ -358,66 +350,47 @@ class FeedEnricher(BaseFeed):
 
             title = title_elem.text
 
-            # Try to extract guest name(s) from title
-            match = re.search(pattern, title, re.IGNORECASE) if pattern else None
-            if match:
-                guest_names_raw = match.group(1).strip()
+            # Create person element for each guest named in the title
+            for guest_name in title_rules.extract_guests(title):
+                # Check for alias/normalization
+                original_name = guest_name
+                if guest_name in known_guests and 'alias' in known_guests[guest_name]:
+                    normalized_name = known_guests[guest_name]['alias']
+                    normalizations.append(f"  '{original_name}' → '{normalized_name}'")
+                    guest_name = normalized_name
 
-                # Remove episode number if present (e.g., " (#120)")
-                guest_names_raw = re.sub(r'\s*\(#?\d+\)$', '', guest_names_raw)
+                person_elem = etree.Element(
+                    '{https://podcastindex.org/namespace/1.0}person',
+                    role='guest'
+                )
+                person_elem.text = guest_name
 
-                # Split multiple guests if enabled
-                if split_multiple and ' og ' in guest_names_raw.lower():
-                    # Split on " og " (case insensitive)
-                    guest_names = re.split(r'\s+og\s+', guest_names_raw, flags=re.IGNORECASE)
-                else:
-                    guest_names = [guest_names_raw]
+                # Look up canonical name first (guest_name is already normalized
+                # from any alias). Falling back to original_name would return
+                # an alias stub ({"alias": ...}) and miss the real href/img.
+                guest_info = known_guests.get(guest_name, {})
+                if not guest_info:
+                    guest_info = known_guests.get(original_name, {})
 
-                # Create person element for each guest
-                for guest_name in guest_names:
-                    guest_name = guest_name.strip()
-                    if not guest_name:
-                        continue
+                has_href = False
+                if guest_info:
+                    if 'href' in guest_info:
+                        person_elem.set('href', guest_info['href'])
+                        has_href = True
+                    if 'img' in guest_info:
+                        person_elem.set('img', guest_info['img'])
 
-                    # Check for alias/normalization
-                    original_name = guest_name
-                    if guest_name in known_guests and 'alias' in known_guests[guest_name]:
-                        normalized_name = known_guests[guest_name]['alias']
-                        normalizations.append(f"  '{original_name}' → '{normalized_name}'")
-                        guest_name = normalized_name
+                # Track guests without href (Podchaser URL)
+                # img is nice to have but not critical
+                if not has_href:
+                    missing_metadata.append({
+                        'name': guest_name,
+                        'original_name': original_name if original_name != guest_name else None,
+                        'episode': title
+                    })
 
-                    person_elem = etree.Element(
-                        '{https://podcastindex.org/namespace/1.0}person',
-                        role='guest'
-                    )
-                    person_elem.text = guest_name
-
-                    # Look up canonical name first (guest_name is already normalized
-                    # from any alias). Falling back to original_name would return
-                    # an alias stub ({"alias": ...}) and miss the real href/img.
-                    guest_info = known_guests.get(guest_name, {})
-                    if not guest_info:
-                        guest_info = known_guests.get(original_name, {})
-
-                    has_href = False
-                    if guest_info:
-                        if 'href' in guest_info:
-                            person_elem.set('href', guest_info['href'])
-                            has_href = True
-                        if 'img' in guest_info:
-                            person_elem.set('img', guest_info['img'])
-
-                    # Track guests without href (Podchaser URL)
-                    # img is nice to have but not critical
-                    if not has_href:
-                        missing_metadata.append({
-                            'name': guest_name,
-                            'original_name': original_name if original_name != guest_name else None,
-                            'episode': title
-                        })
-
-                    item.append(person_elem)
-                    guest_count += 1
+                item.append(person_elem)
+                guest_count += 1
 
         # Report summary
         total_added = guest_count + extra_episodes_count
@@ -978,7 +951,7 @@ class FeedEnricher(BaseFeed):
             if 'podbean.com' in urlparse(t.get('url', '')).netloc
         ]
         session = requests.Session()
-        session.headers['User-Agent'] = 'cdspill-feed-updater/1.0 (+https://github.com/MrMamen/podcast-feed-updater)'
+        session.headers['User-Agent'] = USER_AGENT
 
         def fetch_etag(url: str) -> Optional[str]:
             try:
@@ -1007,7 +980,7 @@ class FeedEnricher(BaseFeed):
         return self
 
     @staticmethod
-    def _fetch_apple_episode_urls(apple_podcast_id: int, country: str = "no") -> Dict[str, str]:
+    def _fetch_apple_episode_urls(apple_podcast_id: int, country: str = "us") -> Dict[str, str]:
         """
         Fetch Apple Podcasts episode URLs keyed by episode GUID via the iTunes lookup API.
 
@@ -1035,7 +1008,7 @@ class FeedEnricher(BaseFeed):
             guid = result.get('episodeGuid')
             track_url = result.get('trackViewUrl')
             if guid and track_url:
-                # Drop tracking parameter (&uo=4) and use the Norwegian storefront
+                # Drop tracking parameter (&uo=4) and use the podcast's storefront
                 track_url = track_url.split('&uo=')[0]
                 track_url = track_url.replace('podcasts.apple.com/us/', f'podcasts.apple.com/{country}/')
                 urls[guid] = track_url
@@ -1056,7 +1029,7 @@ class FeedEnricher(BaseFeed):
         import re
 
         # Wikimedia requires contact info in the User-Agent
-        headers = {"User-Agent": "cdspill-feed-enricher/1.0 (https://github.com/MrMamen/podcast-feed-updater)"}
+        headers = {"User-Agent": USER_AGENT}
         parsed = urlparse(url)
         host = parsed.netloc.lower()
 
@@ -1110,7 +1083,9 @@ class FeedEnricher(BaseFeed):
         output_dir: Optional[str] = None,
         images_dir: Optional[str] = None,
         include_psc_tags: bool = True,
-        apple_podcast_id: Optional[int] = None
+        apple_podcast_id: Optional[int] = None,
+        apple_country: str = "us",
+        title_rules: Optional[TitleRules] = None,
     ) -> 'FeedEnricher':
         """
         Process chapter JSON files and optionally add Podlove Simple Chapters (PSC) tags.
@@ -1145,6 +1120,9 @@ class FeedEnricher(BaseFeed):
             apple_podcast_id: If set, chapters whose image refers to another episode
                 also get a "url" to that episode in Apple Podcasts. A "url" already in
                 the chapter file is kept; "url": null disables the automatic link.
+            apple_country: Apple Podcasts storefront for those links (e.g. "no")
+            title_rules: Title conventions, so chapters can be matched against what
+                other episodes are about ("Rainbow Six med Jostein" → "Rainbow Six")
 
         Returns:
             Self for chaining
@@ -1210,7 +1188,10 @@ class FeedEnricher(BaseFeed):
         if channel_image is not None:
             podcast_logo = channel_image.get('href')
 
-        apple_urls = self._fetch_apple_episode_urls(apple_podcast_id) if apple_podcast_id else {}
+        if title_rules is None:
+            title_rules = TitleRules()
+        apple_urls = (self._fetch_apple_episode_urls(apple_podcast_id, apple_country)
+                      if apple_podcast_id else {})
         # Chapter link -> cover image, so a link used in several chapters is looked up once
         link_covers = {}
 
@@ -1245,9 +1226,8 @@ class FeedEnricher(BaseFeed):
             # Extract game name from episode title for cross-referencing
             title_elem = item.find('title')
             if title_elem is not None and cover_url:
-                full_title = title_elem.text or ''
                 # Remove guest names: "Rainbow Six med Jostein Hakestad" -> "Rainbow Six"
-                game_name = full_title.split(' med ')[0].strip()
+                game_name = title_rules.subject(title_elem.text)
                 # Normalize apostrophes: replace curly quotes (U+2019) with straight quotes (U+0027)
                 # This ensures matching with chapter files that use straight quotes
                 game_name_normalized = game_name.replace('\u2019', "'")
@@ -1848,9 +1828,11 @@ class FeedEnricher(BaseFeed):
         social_links: List[Dict[str, str]],
         funding: Optional[Dict[str, str]] = None,
         episode_article_domain: Optional[str] = None,
-        episode_article_text: str = "en artikkel om episoden",
+        episode_article_text: str = "an article about the episode",
         episode_article_prefix: Optional[str] = None,
         discussion_text: Optional[str] = None,
+        follow_text: str = "Follow us on",
+        and_word: str = "and",
     ) -> 'FeedEnricher':
         """
         Append a standardized footer to episode descriptions.
@@ -1869,6 +1851,8 @@ class FeedEnricher(BaseFeed):
             episode_article_text: Anchor text for the article link
             episode_article_prefix: Text before the link (e.g. "Spillhistorie har skrevet")
             discussion_text: Text before the Bluesky post link (e.g. "Diskuter episoden på")
+            follow_text: Text before the social links (e.g. "Følg oss gjerne på")
+            and_word: Word before the last social link (e.g. "og")
 
         Returns:
             Self for chaining
@@ -1892,10 +1876,10 @@ class FeedEnricher(BaseFeed):
             for i, link in enumerate(social_links):
                 name_html = f"<a href='{link['url']}'>{link['name']}</a>"
                 if i == len(social_links) - 1 and len(social_links) > 1:
-                    names.append(f"og {name_html}")
+                    names.append(f"{and_word} {name_html}")
                 else:
                     names.append(name_html)
-            social_parts.append("Følg oss gjerne på " + ", ".join(names) + ".")
+            social_parts.append(f"{follow_text} " + ", ".join(names) + ".")
 
         social_footer = "<br>\n".join(social_parts)
 
@@ -2357,12 +2341,16 @@ class FeedEnricher(BaseFeed):
 
         return self
 
-    def update_lastBuildDate(self) -> 'FeedEnricher':
+    def update_lastBuildDate(self, timezone: str = "UTC") -> 'FeedEnricher':
         """
         Update or add lastBuildDate with current timestamp.
 
         lastBuildDate indicates when the feed was last generated/updated.
         This is useful for feed readers to know when to check for updates.
+
+        Args:
+            timezone: IANA timezone for the timestamp (e.g. "Europe/Oslo"), so it
+                matches the pubDates regardless of where the script runs
 
         Returns:
             Self for chaining
@@ -2370,14 +2358,11 @@ class FeedEnricher(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        from datetime import datetime, timezone, timedelta
+        from datetime import datetime
         from email.utils import format_datetime
+        from zoneinfo import ZoneInfo
 
-        # Generate RFC 2822 formatted date with Norwegian timezone (+0100)
-        # This ensures consistency with pubDate regardless of where the script runs
-        norway_tz = timezone(timedelta(hours=1))
-        now = datetime.now(norway_tz)
-        timestamp = format_datetime(now)
+        timestamp = format_datetime(datetime.now(ZoneInfo(timezone)))
 
         lastbuilddate = self.channel.find('lastBuildDate')
         if lastbuilddate is not None:

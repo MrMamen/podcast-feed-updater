@@ -258,7 +258,7 @@ class PodchaserAPI:
 
         if not podcast:
             print(f"⚠ Podcast '{podcast_name}' not found on Podchaser")
-            print("  Try different search terms or check https://www.podchaser.com/cdspill")
+            print("  Try different search terms or check the podcast on https://www.podchaser.com")
             return []
 
         print(f"✓ Found podcast: {podcast.get('title')} (ID: {podcast.get('id')})")

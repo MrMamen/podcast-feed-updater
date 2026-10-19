@@ -16,6 +16,8 @@ import tomllib
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from src.common.podcast_utils import TitleRules
+
 PODCASTS_DIR = Path("podcasts")
 CONFIG_NAME = "podcast.toml"
 OUTPUT_DIR = Path("output")
@@ -84,6 +86,11 @@ class PodcastConfig:
     @property
     def timezone(self) -> str:
         return self.section("podcast").get("timezone", "UTC")
+
+    @property
+    def title_rules(self) -> TitleRules:
+        """Episode title conventions from [titles]."""
+        return TitleRules.from_config(self.section("titles"))
 
     # --- Files in the podcast directory ---
 

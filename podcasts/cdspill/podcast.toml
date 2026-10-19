@@ -15,6 +15,7 @@ timezone = "Europe/Oslo"
 # Nettsted med en artikkel per episode (episodens <link>), brukt av Bluesky og fotnoten
 episode_article_domain = "spillhistorie.no"
 apple_podcast_id = 1502143710
+apple_country = "no"
 # Podchaser-id, brukt av guests.py episode
 podchaser_id = "1540724"
 
@@ -35,6 +36,16 @@ shift_latest_pubdate_hours = 3
 remove_episode_numbers = true
 # Gjester hentes fra titler som "Spill med Gjest A og Gjest B (#123)"
 guest_pattern = 'med (.+?)(?:\s*\(|$)'
+guest_separator = "og"
+# Det episoden handler om ("Spill"), brukt til å finne kapitler som viser til andre episoder
+subject_separator = " med "
+
+# Navn på podcast:season: S1 = Vår 2020, S2 = Høst 2020, ...
+[seasons]
+naming = "half_year"
+first_year = 2020
+half_year_names = ["Vår", "Høst"]
+name_format = "Sesong {season}"
 
 [funding]
 name = "Patreon"
@@ -98,6 +109,8 @@ article_prefix = "Spillhistorie har skrevet"
 article_text = "en artikkel om episoden"
 discussion_text = "Diskuter episoden på"
 funding_text = "Støtt oss gjerne på"
+follow_text = "Følg oss gjerne på"
+and_word = "og"
 social_links = [
     { name = "Bluesky", url = "https://bsky.app/profile/cdspill.bsky.social" },
     { name = "X", url = "https://x.com/cd_SPILL" },

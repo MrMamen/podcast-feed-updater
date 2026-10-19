@@ -13,6 +13,7 @@ import os
 
 from src.common.feed_loader import resolve_feed_source
 from src.common.guest_config import flatten_for_enricher, load_known_guests_data, load_permanent_staff
+from src.common.podcast_utils import season_namer
 from src.config import OUTPUT_DIR, PodcastConfig
 from src.enrichment.enricher import FeedEnricher
 
@@ -66,6 +67,7 @@ def chapter_options(cfg: PodcastConfig) -> dict:
         "images_dir": str(cfg.path(images_dir)) if images_dir else None,
         "output_dir": str(OUTPUT_DIR / publish_path),
         "base_url": f"{cfg.base_url}/{publish_path}",
+        "title_rules": cfg.title_rules,
     }
 
 
@@ -76,7 +78,7 @@ def finish_feed(enricher: FeedEnricher, cfg: PodcastConfig, *, feed_file: str, g
 
     enricher.update_atom_link(f"{cfg.base_url}/{feed_file}")
     enricher.update_generator(generator)
-    enricher.update_lastBuildDate()
+    enricher.update_lastBuildDate(cfg.timezone)
 
     if shift_hours:
         enricher.shift_latest_episode_pubdate(hours=shift_hours)
@@ -95,6 +97,7 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
     podcast = cfg.section("podcast")
     publish = cfg.section("publish")
     titles = cfg.section("titles")
+    title_rules = cfg.title_rules
 
     source = resolve_feed_source(cfg, use_cache)
     if use_cache:
@@ -107,22 +110,19 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
     enricher.validate_no_conflicts()
 
     if titles.get("remove_episode_numbers"):
-        enricher.remove_episode_numbers_from_titles()
+        enricher.remove_episode_numbers_from_titles(title_rules.episode_number_suffix)
 
     enricher.add_channel_persons(_load_hosts(cfg))
 
     if cfg.guid:
         enricher.add_guid(cfg.guid)
 
-    enricher.add_podcast_season_episode()
+    enricher.add_podcast_season_episode(season_namer(cfg.section("seasons")))
 
     # Guests from episode titles plus extra_episodes from known_guests.json
     known_guests = _load_known_guests(cfg)
     if titles.get("guest_pattern") or known_guests:
-        enricher.auto_detect_guests_from_titles(
-            pattern=titles.get("guest_pattern", r"(?!)"),  # (?!) never matches
-            known_guests=known_guests,
-        )
+        enricher.auto_detect_guests_from_titles(title_rules=title_rules, known_guests=known_guests)
 
     funding = cfg.section("funding")
     if funding:
@@ -184,13 +184,18 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
                 "url": funding["url"],
                 "text": footer["funding_text"],
             }
+        texts = {param: footer[key] for key, param in [
+            ("article_prefix", "episode_article_prefix"),
+            ("article_text", "episode_article_text"),
+            ("discussion_text", "discussion_text"),
+            ("follow_text", "follow_text"),
+            ("and_word", "and_word"),
+        ] if key in footer}
         enricher.add_description_footer(
             episode_article_domain=article_domain,
-            episode_article_prefix=footer.get("article_prefix"),
-            episode_article_text=footer.get("article_text", "en artikkel om episoden"),
-            discussion_text=footer.get("discussion_text"),
             funding=footer_funding,
             social_links=footer.get("social_links", []),
+            **texts,
         )
 
     if publish.get("op3"):
@@ -212,7 +217,10 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
     if chapters:
         apple_id = podcast.get("apple_podcast_id") if chapters.get("apple_links") else None
         enricher.convert_json_chapters_to_psc(
-            include_psc_tags=False, apple_podcast_id=apple_id, **chapter_options(cfg)
+            include_psc_tags=False,
+            apple_podcast_id=apple_id,
+            apple_country=podcast.get("apple_country", "us"),
+            **chapter_options(cfg),
         )
 
     return finish_feed(
