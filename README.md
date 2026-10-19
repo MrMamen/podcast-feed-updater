@@ -11,8 +11,8 @@ En Python-tjeneste for å berike podcast RSS feeds med Podcasting 2.0 tags.
 | Finne nye gjester fra episodetitler | `uv run guests.py sync` |
 | Registrere gjester på en episode der de ikke står i tittelen | `uv run guests.py episode "#106"` |
 | Se statistikk (rangering, episoder per gjest, varighet) | `uv run analyze.py` (meny) eller `analyze.py rank` / `guest "Navn"` / `length` |
-| Generere den berikede feeden lokalt | `uv run enrich_cdspill.py [--local-cache]` |
-| Generere Spotify-/YouTube-variantene | `uv run enrich_cdspill_spotify.py` / `enrich_cdspill_youtube.py` |
+| Generere den berikede feeden lokalt | `uv run enrich.py [--local-cache]` |
+| Generere Spotify-/YouTube-variantene | `uv run enrich.py --variant spotify` / `--variant youtube` |
 | Bygge Tiltcast-listefeed | `uv run build_list_feed.py` |
 
 `guests.py` og `analyze.py` uten argumenter gir en piltast-meny; underkommandoene finnes for scripting. Begge har en `cache`-kommando som laster ned en lokal kopi av feeden (`.cache/`), og `analyze.py` laster den ned automatisk hvis den mangler.
@@ -24,11 +24,11 @@ Berik en eksisterende feed med Podcasting 2.0 tags.
 
 ```bash
 # Normal bruk (henter fra nettet)
-uv run enrich_cdspill.py
+uv run enrich.py
 
 # Lokal testing med cached feed (for utvikling)
 uv run guests.py cache                  # Last ned cache først
-uv run enrich_cdspill.py --local-cache  # Bruk lokal cache
+uv run enrich.py --local-cache          # Bruk lokal cache
 
 # Legger til:
 # - Hosts og gjester (podcast:person)
@@ -59,7 +59,7 @@ Se **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for oppsett, secrets og feilsøk
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 2. Kjør script (uv håndterer alt automatisk)
-uv run enrich_cdspill.py
+uv run enrich.py
 ```
 
 ### Med pip
@@ -80,10 +80,7 @@ podcast-feed-updater/
 │   ├── common/                # Felles utilities (feed_loader, guest_config, guest_store, episodes)
 │   ├── enrichment/            # FeedEnricher + Podchaser API
 │   └── listfeed/              # Tiltcast-listefeed
-├── enrich_cdspill.py          # Hovedscript (Podcasting 2.0 enrichment, kjøres av CI)
-├── enrich_cdspill_spotify.py  # Spotify-variant (kjøres av CI)
-├── enrich_cdspill_youtube.py  # YouTube-variant (kjøres av CI)
-├── enrich_cdspill_fallback_test.py  # Testfeeds for klient-fallback (kjøres av CI)
+├── enrich.py                  # Berik feed etter podcasts/<id>/podcast.toml, også --variant (kjøres av CI)
 ├── build_list_feed.py         # Tiltcast-listefeed (kjøres av CI)
 ├── guests.py                  # Gjestevedlikehold: meny + add/refresh/sync/episode/list/cache
 ├── analyze.py                 # Rapporter: meny + rank/guest/length/cache

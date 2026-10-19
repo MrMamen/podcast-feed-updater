@@ -86,7 +86,7 @@ mangler i fila, og registrerer episoden under `extra_episodes` for gjester som i
 **guests.py sync / refresh**: ~7-10 points per guest looked up
 **guests.py add**: ~7-10 points per lookup
 **guests.py episode**: one episode search + one credits fetch
-**enrich_cdspill.py cost**: 0 points (no API calls)
+**enrich.py cost**: 0 points (no API calls)
 
 The enricher runs offline using the JSON files. Podchaser is only used when adding new guests.
 
@@ -170,4 +170,4 @@ The enricher only warns about missing Podchaser URLs (href attribute), not missi
 **Known guests**: 9 with profile images
 **Aliases**: 3 name normalizations
 
-Run `uv run enrich_cdspill.py` to see current counts.
+Run `uv run enrich.py` to see current counts.

@@ -36,7 +36,7 @@ jobs:
       run: |
         # Run main enrichment script
         # This generates the main cdspill-enriched.xml feed
-        uv run --no-dev enrich_cdspill.py
+        uv run --no-dev enrich.py --podcast cdspill
 
     - name: Run YouTube enrichment script
       env:
@@ -44,7 +44,7 @@ jobs:
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Generate YouTube variant from the freshly created enriched feed
-        uv run --no-dev enrich_cdspill_youtube.py --local-cache
+        uv run --no-dev enrich.py --podcast cdspill --variant youtube --local-cache
 
     - name: Fetch currently published feed
       run: |

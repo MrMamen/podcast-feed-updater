@@ -125,7 +125,7 @@ fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested U
 ### Workflow feiler
 
 1. Sjekk **Actions** tab for error logs
-2. Test lokalt først: `uv run enrich_cdspill.py`
+2. Test lokalt først: `uv run enrich.py`
 3. Sjekk at alle dependencies er i `pyproject.toml`
 4. Verifiser at workflow har `permissions: contents: write`
 
@@ -150,6 +150,6 @@ fatal: unable to access 'https://github.com/[user]/[repo].git/': The requested U
 
 Hvis du støter på problemer:
 1. Sjekk GitHub Actions logs
-2. Test lokalt: `uv run enrich_cdspill.py`
+2. Test lokalt: `uv run enrich.py`
 3. Valider XML: `xmllint --noout output/cdspill-enriched.xml`
 4. Åpne issue i repo eller spør i Podcasting 2.0 community

@@ -12,13 +12,8 @@ import json
 import os
 import shutil
 import string
-from pathlib import Path
 from urllib.parse import urlparse
 from src.common.base_feed import BaseFeed
-
-# Images for recurring chapters (Musikken, Tech Specs, sosiale medier),
-# hosted next to the chapter files
-CHAPTER_IMAGES_DIR = Path(__file__).resolve().parents[2] / 'podcasts' / 'cdspill' / 'chapter-images'
 
 
 class FeedEnricher(BaseFeed):
@@ -85,8 +80,8 @@ class FeedEnricher(BaseFeed):
                 error_msg += f"  ❌ {conflict}\n"
             error_msg += (
                 "\nThis is intentional to prevent silent conflicts.\n"
-                "Update enrich_cdspill.py to either:\n"
-                "  1. Stop adding these tags (remove method calls)\n"
+                "Update the podcast's podcast.toml or the pipeline to either:\n"
+                "  1. Stop adding these tags (remove the config section)\n"
                 "  2. Modify the enricher to handle existing tags\n"
                 "  3. Add explicit override logic if needed\n"
             )
@@ -279,7 +274,7 @@ class FeedEnricher(BaseFeed):
 
     def auto_detect_guests_from_titles(
         self,
-        pattern: str = r'med (.+?)(?:\s*\(|$)',
+        pattern: Optional[str] = None,
         known_guests: Optional[Dict[str, Dict[str, str]]] = None,
         split_multiple: bool = True
     ) -> 'FeedEnricher':
@@ -287,7 +282,8 @@ class FeedEnricher(BaseFeed):
         Automatically detect and add guests from episode titles.
 
         Args:
-            pattern: Regex pattern to extract guest names (default: "med Guest Name")
+            pattern: Regex whose group 1 is the guest name(s), e.g. r'med (.+?)(?:\s*\(|$)'
+                     for "Game med Guest Name". None: only extra_episodes are added.
             known_guests: Optional dict mapping guest names to additional info
                          Example: {"Roar Granevang": {"href": "https://...", "img": "..."}}
                          Can include 'alias' key to normalize name variations:
@@ -363,7 +359,7 @@ class FeedEnricher(BaseFeed):
             title = title_elem.text
 
             # Try to extract guest name(s) from title
-            match = re.search(pattern, title, re.IGNORECASE)
+            match = re.search(pattern, title, re.IGNORECASE) if pattern else None
             if match:
                 guest_names_raw = match.group(1).strip()
 
@@ -1109,9 +1105,10 @@ class FeedEnricher(BaseFeed):
 
     def convert_json_chapters_to_psc(
         self,
-        chapters_dir: str = "podcasts/cdspill/chapters",
-        output_dir: Optional[str] = "output/chapters",
-        base_url: str = "https://mrmamen.github.io/podcast-feed-updater/chapters",
+        base_url: str,
+        chapters_dir: str = "chapters",
+        output_dir: Optional[str] = None,
+        images_dir: Optional[str] = None,
         include_psc_tags: bool = True,
         apple_podcast_id: Optional[int] = None
     ) -> 'FeedEnricher':
@@ -1135,11 +1132,14 @@ class FeedEnricher(BaseFeed):
             </psc:chapters>
 
         Args:
-            chapters_dir: Directory containing source chapter JSON files (default: "podcasts/cdspill/chapters")
-            output_dir: Directory to copy chapter files for hosting (default: "output/chapters").
-                None skips hosting and leaves podcast:chapters URLs as they are, so variant
-                feeds don't overwrite the chapter files the main feed publishes.
-            base_url: Base URL for hosted chapter files (default: GitHub Pages URL)
+            base_url: Public URL that output_dir is published at
+            chapters_dir: Directory containing local chapter JSON files, named like the
+                files in the source feed; they take precedence over the source's
+            output_dir: Directory to copy chapter files to for hosting. None skips hosting
+                and leaves podcast:chapters URLs as they are, so variant feeds don't
+                overwrite the chapter files the main feed publishes.
+            images_dir: Directory with images for recurring chapters, copied to
+                output_dir/images
             include_psc_tags: If True, insert <psc:chapters> inline (for Spotify variant).
                 If False, only host JSON and rewrite URLs (for main feed).
             apple_podcast_id: If set, chapters whose image refers to another episode
@@ -1177,10 +1177,11 @@ class FeedEnricher(BaseFeed):
         used_local_files = set()  # Track which local files are used
 
         # Create output directory for hosted chapter files, with the images for
-        # recurring chapters (the same ones cdspill-produksjon embeds in the MP3)
+        # recurring chapters
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
-            shutil.copytree(CHAPTER_IMAGES_DIR, os.path.join(output_dir, 'images'), dirs_exist_ok=True)
+            if images_dir:
+                shutil.copytree(images_dir, os.path.join(output_dir, 'images'), dirs_exist_ok=True)
         music_image = f"{base_url}/images/music.jpg"
         tech_image = f"{base_url}/images/tech.jpg"
         social_media_image = f"{base_url}/images/social_media.jpg"

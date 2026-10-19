@@ -1,0 +1,135 @@
+# cd SPILL: beriker Podbean-feeden med Podcasting 2.0-tagger.
+#
+#   uv run enrich.py --podcast cdspill                    # hovedfeeden
+#   uv run enrich.py --podcast cdspill --variant youtube  # varianter, se [variants]
+#
+# Stier er relative til denne mappen. Alle valg er beskrevet i docs/CONFIGURATION.md.
+# Et steg kjøres bare når seksjonen (eller valget) finnes.
+
+[podcast]
+name = "cd SPILL"
+source_feed = "https://feed.podbean.com/cdspill/feed.xml"
+guid = "a550e4b5-6615-5a5d-b1d5-a371c01552a2"
+medium = "podcast"
+timezone = "Europe/Oslo"
+# Nettsted med en artikkel per episode (episodens <link>), brukt av Bluesky og fotnoten
+episode_article_domain = "spillhistorie.no"
+apple_podcast_id = 1502143710
+# Podchaser-id, brukt av guests.py episode
+podchaser_id = "1540724"
+
+[publish]
+base_url = "https://mrmamen.github.io/podcast-feed-updater"
+feed = "cdspill-enriched.xml"
+generator = "podcast-feed-updater v1.0 (enriched from Podbean)"
+# OP3-prefiks på lydfilene (personvernvennlig nedlastingsstatistikk)
+op3 = true
+# Ingen testet klient bruker disse alene; alle faller tilbake til <description>
+remove_itunes_summary = true
+remove_content_encoded = true
+# Eksperiment: flytt nyeste episodes pubDate for å se hvordan klienter reagerer
+shift_latest_pubdate_hours = 3
+
+[titles]
+# Fjern "(#123)" fra slutten av episodetitlene (YouTube-varianten legger dem tilbake)
+remove_episode_numbers = true
+# Gjester hentes fra titler som "Spill med Gjest A og Gjest B (#123)"
+guest_pattern = 'med (.+?)(?:\s*\(|$)'
+
+[funding]
+name = "Patreon"
+url = "https://www.patreon.com/cdSPILL"
+message = "Støtt cd SPILL på Patreon"
+
+# Annenhver uke siden mars 2020. Sett complete = true når podcasten er ferdig.
+[update_frequency]
+complete = false
+frequency = 2
+dtstart = "2020-03-09T00:00:00Z"
+rrule = "FREQ=WEEKLY;INTERVAL=2"
+
+[[podroll]]
+title = "Spæll"
+url = "https://feed.podbean.com/spaell/feed.xml"
+feed_guid = "ea5e71e4-fb02-51f7-936d-5acdb482be40"
+
+[[podroll]]
+title = "Retro Crew"
+url = "https://radcrew.netlify.app/radcrew-retro.xml"
+feed_guid = "a1324b88-c003-56a1-9de2-9160e28f2094"
+
+[[podroll]]
+title = "Retropodden"
+url = "https://feeds.soundcloud.com/users/soundcloud:users:622595196/sounds.rss"
+feed_guid = "7b33030d-fae9-54e1-a5fb-73da19ff901e"
+
+[[podroll]]
+title = "The Upper Memory Block"
+url = "https://rss.libsyn.com/shows/327911/destinations/2668616.xml"
+feed_guid = "56989d48-fc1a-5f62-8451-25f71b234b97"
+
+[[social_interact]]
+protocol = "disabled"
+uri = "https://bsky.app/profile/cdspill.bsky.social"
+account_id = "@cdspill.bsky.social"
+account_url = "https://bsky.app/profile/cdspill.bsky.social"
+priority = 8
+
+[[social_interact]]
+protocol = "disabled"
+uri = "https://x.com/cd_SPILL"
+account_id = "@cd_SPILL"
+account_url = "https://x.com/cd_SPILL"
+priority = 10
+
+[[social_interact]]
+protocol = "disabled"
+uri = "https://www.facebook.com/cdSPILL"
+account_url = "https://www.facebook.com/cdSPILL"
+priority = 9
+
+# Kobler hver episode til Bluesky-posten som lenker til episodeartikkelen
+[bluesky]
+handle = "cdspill.bsky.social"
+
+# Fotnote i episodebeskrivelsen: artikkel, Bluesky-tråd, funding og sosiale lenker
+[description_footer]
+article_prefix = "Spillhistorie har skrevet"
+article_text = "en artikkel om episoden"
+discussion_text = "Diskuter episoden på"
+funding_text = "Støtt oss gjerne på"
+social_links = [
+    { name = "Bluesky", url = "https://bsky.app/profile/cdspill.bsky.social" },
+    { name = "X", url = "https://x.com/cd_SPILL" },
+    { name = "Facebook", url = "https://www.facebook.com/cdSPILL" },
+    { name = "Podchaser", url = "https://www.podchaser.com/cdSPILL" },
+]
+
+[transcripts]
+# language-attributt på podcast:transcript (påkrevd av Apple Podcasts)
+language = "no"
+# Unntak, nøkkel er (en del av) episodens guid
+language_overrides = { "0c247448-5242-370f-a0ba-775ad8c94ca4" = "en" }  # Martin Alper-intervjuet
+# ?v=<ETag> på Podbean-URL-er, så erstattede transkripsjoner endrer feeden
+version_podbean_urls = true
+
+[chapters]
+# Lokale kapittelfiler med samme filnavn som i kildefeeden går foran kildens
+source_dir = "chapters"
+# Bilder for faste kapitler, publiseres under <publish_path>/images/
+images_dir = "chapter-images"
+# Publiseres til output/<publish_path>/ og <base_url>/<publish_path>/
+publish_path = "chapters"
+# Kapitler som viser en annen episodes cover lenker til den episoden i Apple Podcasts
+apple_links = true
+
+[variants.youtube]
+feed = "cdspill-youtube.xml"
+
+[variants.spotify]
+feed = "cdspill-spotify.xml"
+# Eksperiment: nyeste episode en uke frem i Spotify-feeden
+shift_latest_pubdate_hours = 168
+
+[variants.fallback-test]
+feed_prefix = "cdspill-test-"

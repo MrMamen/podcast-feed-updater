@@ -1,12 +1,10 @@
-"""Shared helpers for reading and writing cdspill_known_guests.json."""
+"""Shared helpers for reading and writing a podcast's known_guests.json."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Dict, Tuple
-
-KNOWN_GUESTS_PATH = Path("podcasts/cdspill/known_guests.json")
+from typing import Dict, List, Tuple
 
 _DEFAULT_COMMENT = (
     "Known guests with Podchaser profile data and name aliases. "
@@ -16,7 +14,7 @@ _DEFAULT_COMMENT = (
 )
 
 
-def load_known_guests_data(path: Path = KNOWN_GUESTS_PATH) -> Dict:
+def load_known_guests_data(path: Path) -> Dict:
     """
     Return the full known_guests JSON structure (with `guests` and `aliases`).
 
@@ -32,13 +30,13 @@ def load_known_guests_data(path: Path = KNOWN_GUESTS_PATH) -> Dict:
     return data
 
 
-def load_known_guests(path: Path = KNOWN_GUESTS_PATH) -> Tuple[Dict, Dict]:
+def load_known_guests(path: Path) -> Tuple[Dict, Dict]:
     """Return ``(guests, aliases)`` from known_guests.json."""
     data = load_known_guests_data(path)
     return data.get("guests", {}), data.get("aliases", {})
 
 
-def save_known_guests(data: Dict, path: Path = KNOWN_GUESTS_PATH) -> None:
+def save_known_guests(data: Dict, path: Path) -> None:
     """
     Write known_guests data back to disk, sorting guests and aliases
     alphabetically and adding a trailing newline.
@@ -54,3 +52,22 @@ def save_known_guests(data: Dict, path: Path = KNOWN_GUESTS_PATH) -> None:
 def resolve_alias(name: str, aliases: Dict[str, str]) -> str:
     """Return the canonical name for ``name``, following aliases if present."""
     return aliases.get(name, name)
+
+
+def flatten_for_enricher(data: Dict) -> Dict[str, Dict]:
+    """
+    Merge guests and aliases into the single dict the enricher expects:
+    guests keep their profile data, aliases become ``{"alias": canonical}``.
+    """
+    flat = dict(data.get("guests", {}))
+    for alias, real_name in data.get("aliases", {}).items():
+        flat[alias] = {"alias": real_name}
+    return flat
+
+
+def load_permanent_staff(path: Path) -> List[Dict]:
+    """Hosts and other permanent roles from permanent_staff.json ([] if missing)."""
+    if not path.exists():
+        return []
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f).get("hosts", [])

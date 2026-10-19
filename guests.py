@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Vedlikehold av gjester i podcasts/cdspill/known_guests.json.
+Vedlikehold av gjester i podcasts/<id>/known_guests.json.
 
 Én inngangsport for alt som har med gjester å gjøre. Uten argumenter får du en
 interaktiv meny; med underkommando kan det scriptes:
@@ -15,6 +15,7 @@ interaktiv meny; med underkommando kan det scriptes:
     uv run guests.py episode "#106"           # hent gjester for en episode fra Podchaser
     uv run guests.py list                     # vis alle gjester med status
     uv run guests.py cache                    # last ned lokal kopi av feeden
+    uv run guests.py --podcast <id> ...       # velg podcast (trengs når det er flere)
 
 Felles regel: en eksisterende gjest overskrives aldri – bare manglende
 ``img``/``href`` fylles inn. Offisielt Podchaser-navn brukes som nøkkel,
@@ -33,7 +34,6 @@ from dotenv import load_dotenv
 from src.common.episodes import find_episode, iter_episodes
 from src.common.feed_loader import download_cache, load_feed
 from src.common.guest_config import (
-    KNOWN_GUESTS_PATH,
     load_known_guests_data,
     resolve_alias,
     save_known_guests,
@@ -55,12 +55,15 @@ from src.common.guest_store import (
     upsert_guest,
 )
 from src.common.podcast_utils import extract_guests_from_title, strip_episode_suffix
+from src.config import PodcastConfig, add_podcast_argument, load_podcast_or_exit
 from src.enrichment.podchaser_api import PodchaserAPI, from_env
 
 load_dotenv()
 
-CDSPILL_PODCAST_ID = "1540724"
 CANCEL = "❌ Avbryt"
+
+# Podcast whose guests are maintained, set in main() from --podcast
+cfg: PodcastConfig
 
 
 # --- Small interactive helpers -------------------------------------------------
@@ -94,9 +97,9 @@ def report(changes: List[str]) -> None:
 
 def save(data: Dict, changes: List[str]) -> None:
     if changes:
-        save_known_guests(data)
-        print(f"\n💾 Lagret {len(changes)} endring(er) til {KNOWN_GUESTS_PATH}")
-        print("💡 Kjør 'uv run enrich_cdspill.py' for å bruke oppdaterte data")
+        save_known_guests(data, cfg.known_guests_path)
+        print(f"\n💾 Lagret {len(changes)} endring(er) til {cfg.known_guests_path}")
+        print(f"💡 Kjør 'uv run enrich.py --podcast {cfg.id}' for å bruke oppdaterte data")
     else:
         print("\n(ingen endringer)")
 
@@ -255,7 +258,7 @@ def add_guest(
 
 
 def cmd_add(args) -> None:
-    data = load_known_guests_data()
+    data = load_known_guests_data(cfg.known_guests_path)
     client = from_env(required=True)
     changes = add_guest(data, client, args.query, alias=args.alias)
     save(data, changes)
@@ -266,7 +269,7 @@ def cmd_refresh(args) -> None:
     Walk through guests and (a) fill in missing img/href, (b) detect that the
     Podchaser image has changed and offer to update it.
     """
-    data = load_known_guests_data()
+    data = load_known_guests_data(cfg.known_guests_path)
     guests = data["guests"]
     if args.name:
         key = resolve_guest(data, args.name)
@@ -322,9 +325,9 @@ def cmd_refresh(args) -> None:
 
 
 def cmd_sync(args) -> None:
-    data = load_known_guests_data()
+    data = load_known_guests_data(cfg.known_guests_path)
     known = set(data["guests"]) | set(data["aliases"])
-    feed_xml = load_feed(use_cache=False)
+    feed_xml = load_feed(cfg, use_cache=False)
 
     in_titles = sorted({g for ep in iter_episodes(feed_xml) for g in extract_guests_from_title(ep.title)})
     new = [g for g in in_titles if g not in known]
@@ -358,8 +361,8 @@ def cmd_sync(args) -> None:
 
 
 def cmd_episode(args) -> None:
-    data = load_known_guests_data()
-    feed_xml = load_feed(use_cache=False)
+    data = load_known_guests_data(cfg.known_guests_path)
+    feed_xml = load_feed(cfg, use_cache=False)
     episode = find_episode(feed_xml, args.query)
     if episode is None:
         print(f"❌ Fant ikke episode: {args.query}")
@@ -367,9 +370,13 @@ def cmd_episode(args) -> None:
     label = f"#{episode.episode_num} " if episode.episode_num else ""
     print(f"✓ {label}{episode.title}\n  {episode.guid}")
 
+    podchaser_id = cfg.section("podcast").get("podchaser_id")
+    if not podchaser_id:
+        print(f"❌ Mangler podchaser_id under [podcast] i {cfg.config_path}")
+        sys.exit(1)
     client = from_env(required=True)
     clean_title = strip_episode_suffix(episode.title)
-    pc_episode = client.search_episode(CDSPILL_PODCAST_ID, clean_title, first=5)
+    pc_episode = client.search_episode(podchaser_id, clean_title, first=5)
     if not pc_episode:
         print("❌ Fant ikke episoden på Podchaser")
         sys.exit(1)
@@ -422,7 +429,7 @@ def cmd_episode(args) -> None:
 
 
 def cmd_list(args) -> None:
-    data = load_known_guests_data()
+    data = load_known_guests_data(cfg.known_guests_path)
     print(f"\n{'📷 🔗':<6} Navn")
     print("-" * 60)
     for name in sorted(data["guests"]):
@@ -437,7 +444,7 @@ def cmd_list(args) -> None:
 
 
 def cmd_cache(args) -> None:
-    download_cache()
+    download_cache(cfg)
 
 
 # --- Interactive menu -----------------------------------------------------------
@@ -474,12 +481,13 @@ def menu(parser: argparse.ArgumentParser) -> None:
         name = ask_text("Gjestenavn (tom = alle)")
         if name:
             argv.append(name)
-    args = parser.parse_args(argv)
+    args = parser.parse_args(["--podcast", cfg.id, *argv])
     args.func(args)
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Vedlikehold gjester i cdspill_known_guests.json")
+    parser = argparse.ArgumentParser(description="Vedlikehold gjester i podcasts/<id>/known_guests.json")
+    add_podcast_argument(parser)
     sub = parser.add_subparsers(dest="command")
 
     p = sub.add_parser("add", help="Legg til / fyll inn én gjest fra navn eller Podchaser-URL")
@@ -506,8 +514,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
+    global cfg
     parser = build_parser()
     args = parser.parse_args()
+    cfg = load_podcast_or_exit(args.podcast)
     if args.command is None:
         menu(parser)
     else:

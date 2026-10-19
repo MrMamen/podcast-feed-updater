@@ -64,7 +64,7 @@ Vi har laget et komplett eksempel for cd SPILL-podcasten:
 ### Steg 1: Kjør enrichment-scriptet
 
 ```bash
-uv run enrich_cdspill.py
+uv run enrich.py
 ```
 
 Dette vil:

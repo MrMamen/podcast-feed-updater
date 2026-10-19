@@ -16,7 +16,7 @@ It produces:
 
 Published to GitHub Pages, e.g. `https://mrmamen.github.io/podcast-feed-updater/tiltcast-all.xml`.
 
-> **Unlike `enrich_cdspill.py`**, this does *not* mutate an existing feed. It
+> **Unlike `enrich.py`**, this does *not* mutate an existing feed. It
 > generates feeds from scratch and aggregates episodes from many different
 > podcasts (Spillmatic, LOLbua, cd SPILL, NerdCast, …) into one feed.
 

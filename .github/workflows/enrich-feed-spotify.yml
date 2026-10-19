@@ -34,7 +34,7 @@ jobs:
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Run Spotify script only (fetches from already deployed enriched feed)
-        uv run --no-dev enrich_cdspill_spotify.py
+        uv run --no-dev enrich.py --podcast cdspill --variant spotify
 
     - name: Remove main enriched feed before publishing
       run: |

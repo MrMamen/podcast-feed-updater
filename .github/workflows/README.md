@@ -3,7 +3,7 @@
 ## Enrich cd SPILL Feed
 
 Workflow som:
-1. Kjører `enrich_cdspill.py` når manuelt triggeret
+1. Kjører `enrich.py --podcast cdspill` når manuelt triggeret
 2. Genererer beriket feed med Podcasting 2.0 tags
 3. Deployer til GitHub Pages
 

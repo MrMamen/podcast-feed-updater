@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-Rapporter og statistikk over cd SPILL-feeden.
+Rapporter og statistikk over en podcast-feed.
 
     uv run analyze.py                     # interaktiv meny
     uv run analyze.py rank                # gjester rangert etter antall opptredener
     uv run analyze.py guest "Navn"        # alle episoder en gjest har vært med i (delvis navn ok)
     uv run analyze.py length [--asc|--no-sort] [--no-bonus]   # episoder etter varighet
     uv run analyze.py cache               # last ned / oppdater lokal kopi av feeden
+    uv run analyze.py --podcast <id> ...  # velg podcast (trengs når det er flere)
 
-Rapportene leser fra den lokale cachen (.cache/cdspill-original.xml) og laster
+Rapportene leser fra den lokale cachen (.cache/<id>-original.xml) og laster
 den ned automatisk hvis den mangler. Bonusepisoder ekskluderes fra gjestetall.
 """
 
@@ -28,12 +29,16 @@ from src.common.feed_loader import download_cache, load_feed
 from src.common.guest_config import load_known_guests, load_known_guests_data, resolve_alias
 from src.common.guest_store import episode_number_from_note, find_guests_matching
 from src.common.podcast_utils import extract_guests_from_title, is_bonus_episode
+from src.config import PodcastConfig, add_podcast_argument, load_podcast_or_exit
 
 CANCEL = "❌ Avbryt"
 
+# Podcast the reports are about, set in main() from --podcast
+cfg: PodcastConfig
+
 
 def feed() -> List[Episode]:
-    return list(iter_episodes(load_feed(use_cache=True, auto_download=True, quiet=True)))
+    return list(iter_episodes(load_feed(cfg, use_cache=True, auto_download=True, quiet=True)))
 
 
 # --- rank -----------------------------------------------------------------------
@@ -60,7 +65,7 @@ def count_contributions(known_guests: Dict, aliases: Dict) -> Dict[str, int]:
 
 
 def cmd_rank(args) -> None:
-    known_guests, aliases = load_known_guests()
+    known_guests, aliases = load_known_guests(cfg.known_guests_path)
     episodes = feed()
     full = count_title_appearances(episodes, aliases)
     contrib = count_contributions(known_guests, aliases)
@@ -96,7 +101,7 @@ def cmd_rank(args) -> None:
 
 
 def cmd_guest(args) -> None:
-    data = load_known_guests_data()
+    data = load_known_guests_data(cfg.known_guests_path)
     known_guests, aliases = data["guests"], data["aliases"]
     name = args.name
     hits = find_guests_matching(name, data)
@@ -195,7 +200,7 @@ def cmd_length(args) -> None:
 
     longest, shortest = max(rows, key=lambda r: r[1]), min(rows, key=lambda r: r[1])
     print("\n" + "=" * 95)
-    print(f"CD SPILL EPISODER {heading}")
+    print(f"{cfg.name.upper()} EPISODER {heading}")
     print("=" * 95)
     print(f"{'#':<5} {'Varighet':<10} {'Type':<7} Tittel")
     print("-" * 95)
@@ -221,7 +226,7 @@ def cmd_length(args) -> None:
 
 
 def cmd_cache(args) -> None:
-    download_cache()
+    download_cache(cfg)
 
 
 # --- menu / CLI -----------------------------------------------------------------
@@ -257,12 +262,13 @@ def menu(parser: argparse.ArgumentParser) -> None:
         answers = inquirer.prompt([inquirer.Confirm("x", message="Ekskluder bonusepisoder?", default=False)])
         if answers and answers["x"]:
             argv.append("--no-bonus")
-    args = parser.parse_args(argv)
+    args = parser.parse_args(["--podcast", cfg.id, *argv])
     args.func(args)
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Rapporter over cd SPILL-feeden")
+    parser = argparse.ArgumentParser(description="Rapporter over en podcast-feed")
+    add_podcast_argument(parser)
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("rank", help="Gjester rangert etter opptredener").set_defaults(func=cmd_rank)
 
@@ -282,8 +288,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
+    global cfg
     parser = build_parser()
     args = parser.parse_args()
+    cfg = load_podcast_or_exit(args.podcast)
     if args.command is None:
         menu(parser)
     else:
