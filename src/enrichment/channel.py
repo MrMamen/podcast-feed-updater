@@ -1,10 +1,14 @@
 """Channel-level metadata (guid, funding, podroll, ...) and feed housekeeping."""
 
+from datetime import datetime, timedelta
+from email.utils import format_datetime, parsedate_to_datetime
 from typing import Dict, List, Optional, Self
+from zoneinfo import ZoneInfo
 
 from lxml import etree
 
 from src.common.base_feed import BaseFeed
+from src.common.namespaces import ATOM, PODCAST
 
 
 class ChannelMixin(BaseFeed):
@@ -29,7 +33,7 @@ class ChannelMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         funding_elem = etree.Element(
-            '{https://podcastindex.org/namespace/1.0}funding',
+            f'{PODCAST}funding',
             url=url
         )
         funding_elem.text = message
@@ -60,12 +64,12 @@ class ChannelMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         # Remove existing guid if present
-        existing = self.channel.find('{https://podcastindex.org/namespace/1.0}guid')
+        existing = self.channel.find(f'{PODCAST}guid')
         if existing is not None:
             self.channel.remove(existing)
 
         guid_elem = etree.Element(
-            '{https://podcastindex.org/namespace/1.0}guid'
+            f'{PODCAST}guid'
         )
         guid_elem.text = guid
 
@@ -90,7 +94,7 @@ class ChannelMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         medium_elem = etree.Element(
-            '{https://podcastindex.org/namespace/1.0}medium'
+            f'{PODCAST}medium'
         )
         medium_elem.text = medium
 
@@ -118,7 +122,7 @@ class ChannelMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         podroll_elem = etree.Element(
-            '{https://podcastindex.org/namespace/1.0}podroll'
+            f'{PODCAST}podroll'
         )
 
         for podcast in podcasts:
@@ -134,7 +138,7 @@ class ChannelMixin(BaseFeed):
 
             etree.SubElement(
                 podroll_elem,
-                '{https://podcastindex.org/namespace/1.0}remoteItem',
+                f'{PODCAST}remoteItem',
                 **attrs
             )
 
@@ -165,7 +169,7 @@ class ChannelMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         freq_elem = etree.Element(
-            '{https://podcastindex.org/namespace/1.0}updateFrequency'
+            f'{PODCAST}updateFrequency'
         )
 
         if complete:
@@ -243,17 +247,17 @@ class ChannelMixin(BaseFeed):
         items = self.channel.findall('item')
         for item in items:
             # Add newline before all podcast:season elements
-            seasons = item.findall('{https://podcastindex.org/namespace/1.0}season')
+            seasons = item.findall(f'{PODCAST}season')
             for season in seasons:
                 self._add_newline_before_element(item, season)
 
             # Add newline before all podcast:episode elements
-            episodes = item.findall('{https://podcastindex.org/namespace/1.0}episode')
+            episodes = item.findall(f'{PODCAST}episode')
             for episode in episodes:
                 self._add_newline_before_element(item, episode)
 
             # Add newline before all podcast:person elements
-            persons = item.findall('{https://podcastindex.org/namespace/1.0}person')
+            persons = item.findall(f'{PODCAST}person')
             for person in persons:
                 self._add_newline_before_element(item, person)
 
@@ -277,10 +281,8 @@ class ChannelMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        atom_ns = '{http://www.w3.org/2005/Atom}'
-
         # Find atom:link with rel="self"
-        for link in self.channel.findall(f'{atom_ns}link'):
+        for link in self.channel.findall(f'{ATOM}link'):
             if link.get('rel') == 'self':
                 old_url = link.get('href')
                 link.set('href', url)
@@ -289,7 +291,7 @@ class ChannelMixin(BaseFeed):
 
         # If no atom:link exists, create one
         atom_link = etree.Element(
-            f'{atom_ns}link',
+            f'{ATOM}link',
             href=url,
             rel='self',
             type='application/rss+xml'
@@ -356,10 +358,6 @@ class ChannelMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        from datetime import datetime
-        from email.utils import format_datetime
-        from zoneinfo import ZoneInfo
-
         timestamp = format_datetime(datetime.now(ZoneInfo(timezone)))
 
         lastbuilddate = self.channel.find('lastBuildDate')
@@ -400,9 +398,6 @@ class ChannelMixin(BaseFeed):
         """
         if self.channel is None:
             raise ValueError("Must fetch feed first")
-
-        from datetime import timedelta
-        from email.utils import format_datetime, parsedate_to_datetime
 
         newest_item = self.channel.find('item')
         pubdate_elem = newest_item.find('pubDate') if newest_item is not None else None

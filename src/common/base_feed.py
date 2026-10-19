@@ -3,11 +3,13 @@ Base class for feed operations using lxml.
 Provides common functionality for fetching and writing RSS feeds.
 """
 
+import os
+from typing import Dict, Optional
+
 import requests
 from lxml import etree
-from typing import Optional
-import os
 
+from src.common.namespaces import PODCAST, PODCAST_NS
 from src.common.stylesheet import attach_stylesheet_pi, copy_stylesheet
 
 
@@ -99,7 +101,7 @@ class BaseFeed:
         """
         for item in items:
             # Find podcast:chapters element
-            chapters = item.find('{https://podcastindex.org/namespace/1.0}chapters')
+            chapters = item.find(f'{PODCAST}chapters')
             if chapters is not None:
                 self._add_newline_before_element(item, chapters)
 
@@ -117,17 +119,27 @@ class BaseFeed:
             prev_elem = children[idx - 1]
             prev_elem.tail = '\n        '
 
+    def _replace_root_nsmap(self, nsmap: Dict[Optional[str], str]) -> None:
+        """
+        Rebuild the root element with ``nsmap``: lxml's nsmap is read-only, so
+        the children are moved to a new root with the same tag and attributes.
+        """
+        new_root = etree.Element(self.root.tag, attrib=self.root.attrib, nsmap=nsmap)
+        new_root.text = self.root.text
+        new_root.tail = self.root.tail
+        for child in self.root:
+            new_root.append(child)
+        self.root = new_root
+        self.channel = self.root.find('channel')
+
+    def _ensure_namespace(self, prefix: str, uri: str) -> None:
+        """Declare ``xmlns:prefix="uri"`` on the root element unless the uri already is."""
+        if uri not in self.root.nsmap.values():
+            self._replace_root_nsmap({**self.root.nsmap, prefix: uri})
+
     def _ensure_podcast_namespace(self) -> None:
         """Ensure podcast namespace is registered in root element."""
-        nsmap = self.root.nsmap.copy()
-        if 'podcast' not in nsmap:
-            nsmap['podcast'] = 'https://podcastindex.org/namespace/1.0'
-            # Recreate root with new nsmap
-            new_root = etree.Element(self.root.tag, attrib=self.root.attrib, nsmap=nsmap)
-            for child in self.root:
-                new_root.append(child)
-            self.root = new_root
-            self.channel = self.root.find('channel')
+        self._ensure_namespace('podcast', PODCAST_NS)
 
     def prune_unused_namespaces(self) -> 'BaseFeed':
         """
@@ -166,13 +178,7 @@ class BaseFeed:
         if not removed:
             return self
 
-        new_root = etree.Element(self.root.tag, attrib=self.root.attrib, nsmap=new_nsmap)
-        new_root.text = self.root.text
-        new_root.tail = self.root.tail
-        for child in self.root:
-            new_root.append(child)
-        self.root = new_root
-        self.channel = self.root.find('channel')
+        self._replace_root_nsmap(new_nsmap)
 
         print(f"✓ Pruned {len(removed)} unused namespace(s): {', '.join(removed)}")
         return self

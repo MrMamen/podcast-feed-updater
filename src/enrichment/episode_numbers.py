@@ -1,10 +1,12 @@
 """Episode numbers in titles, and podcast:season / podcast:episode."""
 
+import re
 from typing import Callable, Optional, Self
 
 from lxml import etree
 
 from src.common.base_feed import BaseFeed
+from src.common.namespaces import ITUNES, PODCAST
 from src.common.podcast_utils import DEFAULT_EPISODE_NUMBER_SUFFIX
 
 
@@ -23,8 +25,6 @@ class EpisodeNumbersMixin(BaseFeed):
         Returns:
             Self for chaining
         """
-        import re
-
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
@@ -41,7 +41,7 @@ class EpisodeNumbersMixin(BaseFeed):
                     removed_count += 1
 
             # Also update <itunes:title> if present
-            itunes_title = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}title')
+            itunes_title = item.find(f'{ITUNES}title')
             if itunes_title is not None and itunes_title.text:
                 itunes_title.text = re.sub(pattern, '', itunes_title.text).strip()
 
@@ -73,7 +73,7 @@ class EpisodeNumbersMixin(BaseFeed):
         # First pass: count episodes per season (feed is in reverse chronological order)
         season_episode_counts = {}
         for item in items:
-            season_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}season')
+            season_elem = item.find(f'{ITUNES}season')
             if season_elem is not None and season_elem.text:
                 season_num = int(season_elem.text)
                 if season_num not in season_episode_counts:
@@ -86,14 +86,14 @@ class EpisodeNumbersMixin(BaseFeed):
 
         for item in items:
             # Find itunes:season and itunes:episode
-            season_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}season')
-            episode_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}episode')
+            season_elem = item.find(f'{ITUNES}season')
+            episode_elem = item.find(f'{ITUNES}episode')
 
             if season_elem is not None and season_elem.text:
                 season_num = int(season_elem.text)
 
                 # Add podcast:season
-                podcast_season = etree.Element('{https://podcastindex.org/namespace/1.0}season')
+                podcast_season = etree.Element(f'{PODCAST}season')
                 if season_name:
                     podcast_season.set('name', season_name(season_num))
                 podcast_season.text = str(season_num)
@@ -119,7 +119,7 @@ class EpisodeNumbersMixin(BaseFeed):
 
                     # Add podcast:episode with display attribute
                     podcast_episode = etree.Element(
-                        '{https://podcastindex.org/namespace/1.0}episode',
+                        f'{PODCAST}episode',
                         display=display_value
                     )
                     podcast_episode.text = str(total_episode_num)
@@ -127,7 +127,7 @@ class EpisodeNumbersMixin(BaseFeed):
                 else:
                     # No season info, just use total episode number
                     podcast_episode = etree.Element(
-                        '{https://podcastindex.org/namespace/1.0}episode'
+                        f'{PODCAST}episode'
                     )
                     podcast_episode.text = str(total_episode_num)
                     item.append(podcast_episode)
@@ -162,12 +162,12 @@ class EpisodeNumbersMixin(BaseFeed):
 
         for item in items:
             # Skip bonus episodes (they should not have episode numbers in titles)
-            episode_type = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}episodeType')
+            episode_type = item.find(f'{ITUNES}episodeType')
             if episode_type is not None and episode_type.text == 'bonus':
                 skipped_bonus += 1
                 continue
 
-            episode_elem = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}episode')
+            episode_elem = item.find(f'{ITUNES}episode')
             if episode_elem is None or not episode_elem.text:
                 continue
 
@@ -182,7 +182,7 @@ class EpisodeNumbersMixin(BaseFeed):
                     restored_count += 1
 
             # Update <itunes:title> if present
-            itunes_title = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}title')
+            itunes_title = item.find(f'{ITUNES}title')
             if itunes_title is not None and itunes_title.text:
                 if suffix not in itunes_title.text:
                     itunes_title.text = itunes_title.text + suffix

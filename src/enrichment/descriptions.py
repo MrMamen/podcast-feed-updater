@@ -3,6 +3,7 @@
 from typing import Dict, List, Optional, Self
 
 from src.common.base_feed import BaseFeed
+from src.common.namespaces import CONTENT, ITUNES, PODCAST
 
 
 class DescriptionsMixin(BaseFeed):
@@ -85,7 +86,7 @@ class DescriptionsMixin(BaseFeed):
 
             if discussion_text:
                 social = item.find(
-                    '{https://podcastindex.org/namespace/1.0}socialInteract[@protocol="atproto"]'
+                    f'{PODCAST}socialInteract[@protocol="atproto"]'
                 )
                 if social is not None:
                     post_url = self.bluesky_post_url(social.get('uri'))
@@ -108,7 +109,7 @@ class DescriptionsMixin(BaseFeed):
                 desc_elem.text = desc_elem.text.rstrip() + "\n\n" + footer_html
 
             # Update <content:encoded>
-            content_elem = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
+            content_elem = item.find(f'{CONTENT}encoded')
             if content_elem is not None and content_elem.text:
                 content_elem.text = content_elem.text.rstrip() + "\n\n" + footer_html
 
@@ -138,17 +139,16 @@ class DescriptionsMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        itunes_ns = 'http://www.itunes.com/dtds/podcast-1.0.dtd'
         removed = 0
 
         if include_channel:
-            channel_summary = self.channel.find(f'{{{itunes_ns}}}summary')
+            channel_summary = self.channel.find(f'{ITUNES}summary')
             if channel_summary is not None:
                 self.channel.remove(channel_summary)
                 removed += 1
 
         for item in self.channel.findall('item'):
-            summary = item.find(f'{{{itunes_ns}}}summary')
+            summary = item.find(f'{ITUNES}summary')
             if summary is not None:
                 item.remove(summary)
                 removed += 1
@@ -171,11 +171,10 @@ class DescriptionsMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        content_ns = 'http://purl.org/rss/1.0/modules/content/'
         removed = 0
 
         for item in self.channel.findall('item'):
-            content = item.find(f'{{{content_ns}}}encoded')
+            content = item.find(f'{CONTENT}encoded')
             if content is not None:
                 item.remove(content)
                 removed += 1

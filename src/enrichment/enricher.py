@@ -9,6 +9,7 @@ methods return self, so they can be chained.
 
 from typing import Self
 
+from src.common.namespaces import PODCAST
 from src.enrichment.channel import ChannelMixin
 from src.enrichment.chapters import ChaptersMixin
 from src.enrichment.descriptions import DescriptionsMixin
@@ -44,8 +45,6 @@ class FeedEnricher(
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        PODCAST_NS = 'https://podcastindex.org/namespace/1.0'
-
         # Tags we check at channel level
         channel_tags_to_check = [
             'guid', 'funding', 'medium', 'updateFrequency',
@@ -59,7 +58,7 @@ class FeedEnricher(
 
         # Check channel level
         for tag in channel_tags_to_check:
-            found = self.channel.findall(f'{{{PODCAST_NS}}}{tag}')
+            found = self.channel.findall(f'{PODCAST}{tag}')
             if found:
                 conflicts.append(f"podcast:{tag} (found {len(found)} at channel level)")
 
@@ -68,7 +67,7 @@ class FeedEnricher(
         item_conflicts = {}
         for tag in item_tags_to_check:
             for item in items:
-                found = item.findall(f'{{{PODCAST_NS}}}{tag}')
+                found = item.findall(f'{PODCAST}{tag}')
                 if found:
                     if tag not in item_conflicts:
                         item_conflicts[tag] = 0

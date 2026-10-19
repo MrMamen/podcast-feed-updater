@@ -13,7 +13,8 @@ import os
 import uuid
 
 from src.common.feed_loader import resolve_enriched_source
-from src.config import OUTPUT_DIR, PodcastConfig
+from src.common.namespaces import CONTENT, ITUNES, PODCAST
+from src.config import KNOWN_VARIANTS, OUTPUT_DIR, PodcastConfig
 from src.enrichment.enricher import FeedEnricher
 from src.enrichment.pipeline import chapter_options, finish_feed
 
@@ -80,13 +81,13 @@ FALLBACK_TESTS = [
     },
     {
         "slug": "no-content",
-        "field_tag": "{http://purl.org/rss/1.0/modules/content/}encoded",
+        "field_tag": f"{CONTENT}encoded",
         "title_suffix": " [TEST uten content:encoded]",
         "strip_from_channel": True,
     },
     {
         "slug": "no-summary",
-        "field_tag": "{http://www.itunes.com/dtds/podcast-1.0.dtd}summary",
+        "field_tag": f"{ITUNES}summary",
         "title_suffix": " [TEST uten itunes:summary]",
         "strip_from_channel": True,
     },
@@ -117,8 +118,7 @@ def _build_fallback_test(cfg: PodcastConfig, source: str, feed_prefix: str, slug
     # Distinct podcast:guid per variant (uuid5 of the main guid, so stable across
     # runs) so clients that dedupe by feed identity (e.g. MediaMonkey) treat each
     # test feed as a separate subscription.
-    podcast_ns = 'https://podcastindex.org/namespace/1.0'
-    guid_elem = enricher.channel.find(f'{{{podcast_ns}}}guid')
+    guid_elem = enricher.channel.find(f'{PODCAST}guid')
     if guid_elem is not None and cfg.guid:
         guid_elem.text = str(uuid.uuid5(uuid.UUID(cfg.guid), slug))
 
@@ -153,3 +153,5 @@ VARIANTS = {
     "spotify": build_spotify,
     "fallback-test": build_fallback_test,
 }
+# podcast.toml is validated against config.KNOWN_VARIANTS when it is loaded
+assert VARIANTS.keys() == KNOWN_VARIANTS

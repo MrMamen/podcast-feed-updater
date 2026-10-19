@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Self
 from lxml import etree
 
 from src.common.base_feed import BaseFeed
+from src.common.namespaces import PODCAST
 from src.common.podcast_utils import TitleRules
 
 
@@ -33,7 +34,7 @@ class PersonsMixin(BaseFeed):
         # Add persons to channel
         for person_data in persons:
             person_elem = etree.Element(
-                '{https://podcastindex.org/namespace/1.0}person',
+                f'{PODCAST}person',
                 role=person_data.get('role', 'host')
             )
             person_elem.text = person_data['name']
@@ -119,7 +120,7 @@ class PersonsMixin(BaseFeed):
 
                         for role in roles:
                             person_elem = etree.Element(
-                                '{https://podcastindex.org/namespace/1.0}person',
+                                f'{PODCAST}person',
                                 role=role
                             )
                             person_elem.text = guest_name
@@ -152,7 +153,7 @@ class PersonsMixin(BaseFeed):
                     guest_name = normalized_name
 
                 person_elem = etree.Element(
-                    '{https://podcastindex.org/namespace/1.0}person',
+                    f'{PODCAST}person',
                     role='guest'
                 )
                 person_elem.text = guest_name

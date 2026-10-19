@@ -1,11 +1,15 @@
 """podcast:socialInteract, including per-episode Bluesky posts."""
 
+from datetime import datetime
+from email.utils import parsedate_to_datetime
 from typing import Optional, Self
+from zoneinfo import ZoneInfo
 
 import requests
 from lxml import etree
 
 from src.common.base_feed import BaseFeed
+from src.common.namespaces import PODCAST
 
 
 class SocialMixin(BaseFeed):
@@ -36,7 +40,7 @@ class SocialMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         social_elem = etree.Element(
-            '{https://podcastindex.org/namespace/1.0}socialInteract',
+            f'{PODCAST}socialInteract',
             protocol=protocol,
             uri=uri
         )
@@ -81,10 +85,6 @@ class SocialMixin(BaseFeed):
         Returns:
             Self for chaining
         """
-        from datetime import datetime
-        from email.utils import parsedate_to_datetime
-        from zoneinfo import ZoneInfo
-
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
@@ -123,7 +123,7 @@ class SocialMixin(BaseFeed):
         def add_tag(item, at_uri):
             etree.SubElement(
                 item,
-                '{https://podcastindex.org/namespace/1.0}socialInteract',
+                f'{PODCAST}socialInteract',
                 protocol="atproto",
                 uri=at_uri,
                 accountId=f"@{handle}",

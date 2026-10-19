@@ -7,7 +7,7 @@ from typing import Iterator, Optional
 
 from lxml import etree
 
-ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
+from src.common.namespaces import ITUNES
 
 
 @dataclass
@@ -32,9 +32,9 @@ def iter_episodes(feed_xml: str) -> Iterator[Episode]:
             guid=_text(item, "guid"),
             title=_text(item, "title"),
             link=_text(item, "link"),
-            episode_num=_text(item, f"{{{ITUNES_NS}}}episode"),
-            duration=_text(item, f"{{{ITUNES_NS}}}duration"),
-            episode_type=_text(item, f"{{{ITUNES_NS}}}episodeType") or "full",
+            episode_num=_text(item, f"{ITUNES}episode"),
+            duration=_text(item, f"{ITUNES}duration"),
+            episode_type=_text(item, f"{ITUNES}episodeType") or "full",
         )
 
 

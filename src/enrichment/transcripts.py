@@ -8,6 +8,7 @@ import requests
 
 from src.common.base_feed import BaseFeed
 from src.common.http import USER_AGENT
+from src.common.namespaces import PODCAST
 
 
 class TranscriptsMixin(BaseFeed):
@@ -31,12 +32,11 @@ class TranscriptsMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         overrides = overrides or {}
-        ns = "https://podcastindex.org/namespace/1.0"
         items = self.channel.findall('item')
         count = 0
 
         for item in items:
-            transcript = item.find(f'{{{ns}}}transcript')
+            transcript = item.find(f'{PODCAST}transcript')
             if transcript is None:
                 continue
 
@@ -75,7 +75,7 @@ class TranscriptsMixin(BaseFeed):
             raise ValueError("Must fetch feed first")
 
         transcripts = [
-            t for t in self.channel.iter('{https://podcastindex.org/namespace/1.0}transcript')
+            t for t in self.channel.iter(f'{PODCAST}transcript')
             if 'podbean.com' in urlparse(t.get('url', '')).netloc
         ]
         session = requests.Session()

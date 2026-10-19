@@ -3,15 +3,17 @@
 import hashlib
 import json
 import os
+import re
 import shutil
 from typing import Dict, List, Optional, Self
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 import requests
 from lxml import etree
 
 from src.common.base_feed import BaseFeed
 from src.common.http import USER_AGENT
+from src.common.namespaces import CONTENT, ITUNES, PODCAST, PSC, PSC_NS
 from src.common.podcast_utils import TitleRules
 from src.enrichment.chapter_images import (
     EPISODE_COVER,
@@ -19,6 +21,7 @@ from src.enrichment.chapter_images import (
     PODCAST_LOGO,
     PREVIOUS_COVER,
     ChapterImageMatcher,
+    normalize_title,
 )
 
 
@@ -72,8 +75,6 @@ class ChaptersMixin(BaseFeed):
         Returns the image URL at the source (hotlinked, not downloaded), or None
         for other sites or when the lookup fails.
         """
-        import re
-
         # Wikimedia requires contact info in the User-Agent
         headers = {"User-Agent": USER_AGENT}
         parsed = urlparse(url)
@@ -105,7 +106,6 @@ class ChaptersMixin(BaseFeed):
 
             # Wikipedia: the article's lead image. Box art is non-free, so allow any license.
             if host.endswith("wikipedia.org") and parsed.path.startswith("/wiki/"):
-                from urllib.parse import unquote
                 response = requests.get(
                     f"https://{host}/w/api.php",
                     params={"action": "query", "titles": unquote(parsed.path[len("/wiki/"):]),
@@ -136,23 +136,18 @@ class ChaptersMixin(BaseFeed):
         cross_references: Optional[List[Dict]] = None,
     ) -> Self:
         """
-        Process chapter JSON files and optionally add Podlove Simple Chapters (PSC) tags.
+        Process the chapter JSON of every episode and optionally add Podlove
+        Simple Chapters (PSC) tags.
 
-        Always performs: loads local JSON (with image injection, sorting, intro-fill),
-        saves enriched copy to output_dir, and rewrites podcast:chapters URL to base_url.
-        Optionally (include_psc_tags=True): inserts <psc:chapters> inline for Spotify.
+        For each episode with a podcast:chapters JSON: load it (a file with the
+        same name in chapters_dir takes precedence over the source feed's), sort
+        it, add an intro chapter at 00:00 if missing, add images and links (see
+        chapter_images.ChapterImageMatcher), and with output_dir save it there
+        and point podcast:chapters at the hosted copy. With include_psc_tags,
+        also insert the visible chapters as <psc:chapters> (Spotify).
 
-        First attempts to load chapters from local JSON files matching Podbean filenames.
-        If not found, fetches from podcast:chapters URLs.
-        Supports toc: false flag to exclude chapters from table of contents.
-
-        JSON format (Podcasting 2.0):
-            {"version": "1.2.0", "chapters": [{"startTime": 0, "title": "Intro", "toc": false}]}
-
-        PSC format (Podlove Simple Chapters):
-            <psc:chapters version="1.2">
-                <psc:chapter start="00:00:00" title="Intro" />
-            </psc:chapters>
+        Chapter files support "toc": false (hidden from the table of contents),
+        and "img": null / "url": null to disable the automatic image or link.
 
         Args:
             base_url: Public URL that output_dir is published at
@@ -180,47 +175,24 @@ class ChaptersMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        # Ensure PSC namespace is registered (only needed when inserting PSC tags)
-        psc_ns = "http://podlove.org/simple-chapters"
-        if include_psc_tags and psc_ns not in self.root.nsmap.values():
-            # Add namespace to root element
-            nsmap = self.root.nsmap.copy()
-            nsmap['psc'] = psc_ns
-            # Create new root with updated namespaces
-            new_root = etree.Element(self.root.tag, nsmap=nsmap)
-            new_root.text = self.root.text
-            new_root.tail = self.root.tail
-            for key, value in self.root.attrib.items():
-                new_root.set(key, value)
-            for child in self.root:
-                new_root.append(child)
-            self.root = new_root
-            self.channel = self.root.find('channel')
+        if include_psc_tags:
+            self._ensure_namespace('psc', PSC_NS)
 
-        items = self.channel.findall('item')
-        converted_count = 0
-        failed_count = 0
-        local_count = 0
-        total_links = 0
-        used_local_files = set()  # Track which local files are used
-
-        # Create output directory for hosted chapter files, with the images for
-        # recurring chapters
         if output_dir:
             os.makedirs(output_dir, exist_ok=True)
             if images_dir:
                 shutil.copytree(images_dir, os.path.join(output_dir, 'images'), dirs_exist_ok=True)
 
-        # Get podcast logo for standard chapters
-        podcast_logo = None
-        channel_image = self.channel.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
-        if channel_image is not None:
-            podcast_logo = channel_image.get('href')
+        channel_image = self.channel.find(f'{ITUNES}image')
+        podcast_logo = channel_image.get('href') if channel_image is not None else None
 
-        if title_rules is None:
-            title_rules = TitleRules()
+        items = self.channel.findall('item')
         apple_urls = (self._fetch_apple_episode_urls(apple_podcast_id, apple_country)
                       if apple_podcast_id else {})
+        episode_covers, subject_covers, cover_to_apple_url = self._index_episode_covers(
+            items, title_rules or TitleRules(), apple_urls
+        )
+
         # Chapter link -> cover image, so a link used in several chapters is looked up once
         link_covers = {}
 
@@ -229,277 +201,66 @@ class ChaptersMixin(BaseFeed):
                 link_covers[url] = self._fetch_link_cover(url)
             return link_covers[url]
 
-        # Build episode index for previous/next episode cover art
-        # Also build a mapping from game names to their episode cover art
-        episode_covers = []
-        episode_titles_to_covers = {}
-        # Cover art -> Apple Podcasts URL, for linking chapters that match another episode.
-        # Covers shared by several episodes are ambiguous and get no link.
-        cover_to_apple_url = {}
-        ambiguous_covers = set()
-
-        for item in items:
-            itunes_image = item.find('{http://www.itunes.com/dtds/podcast-1.0.dtd}image')
-            cover_url = itunes_image.get('href') if itunes_image is not None else None
-            episode_covers.append(cover_url)
-
-            guid_elem = item.find('guid')
-            apple_url = apple_urls.get(guid_elem.text) if guid_elem is not None else None
-            if cover_url:
-                if cover_url in cover_to_apple_url or cover_url in ambiguous_covers:
-                    ambiguous_covers.add(cover_url)
-                    cover_to_apple_url.pop(cover_url, None)
-                elif apple_url:
-                    cover_to_apple_url[cover_url] = apple_url
-
-            # Extract game name from episode title for cross-referencing
-            title_elem = item.find('title')
-            if title_elem is not None and cover_url:
-                # Remove guest names: "Rainbow Six med Jostein Hakestad" -> "Rainbow Six"
-                game_name = title_rules.subject(title_elem.text)
-                # Normalize apostrophes: replace curly quotes (U+2019) with straight quotes (U+0027)
-                # This ensures matching with chapter files that use straight quotes
-                game_name_normalized = game_name.replace('\u2019', "'")
-                # Store both exact case and lowercase for matching
-                episode_titles_to_covers[game_name_normalized.lower()] = cover_url
-                # Also store with colon variations for better matching
-                # "Rainbow Six: Rogue Spear" -> also match "Rainbow Six"
-                if ':' in game_name_normalized:
-                    base_name = game_name_normalized.split(':')[0].strip()
-                    episode_titles_to_covers[base_name.lower()] = cover_url
-
         matcher = ChapterImageMatcher(
-            episode_titles_to_covers,
+            subject_covers,
             image_rules=image_rules,
             cross_references=cross_references,
             images_base_url=f"{base_url}/images" if images_dir else None,
             link_cover=link_cover,
         )
 
+        converted_count = failed_count = local_count = total_links = 0
+        used_local_files = set()
+
         for item_index, item in enumerate(items):
-            # Find podcast:chapters element
-            podcast_chapters = item.find('{https://podcastindex.org/namespace/1.0}chapters')
+            podcast_chapters = item.find(f'{PODCAST}chapters')
+            json_url = podcast_chapters.get('url') if podcast_chapters is not None else None
+            if not json_url or not urlparse(json_url).path.endswith('.json'):
+                continue
+            # e.g. "Outrun_chapters.json"
+            filename = os.path.basename(urlparse(json_url).path)
+            episode_title = item.findtext('title') or 'Unknown'
 
-            if podcast_chapters is not None:
-                json_url = podcast_chapters.get('url')
-                if json_url and urlparse(json_url).path.endswith('.json'):
-                    try:
-                        chapters_data = None
-                        source_type = "remote"
+            try:
+                chapters_data = self._load_chapter_file(
+                    json_url, os.path.join(chapters_dir, filename), episode_title
+                )
+                is_local = chapters_data is not None
+                if is_local:
+                    local_count += 1
+                    used_local_files.add(filename)
+                else:
+                    response = requests.get(json_url, timeout=10)
+                    response.raise_for_status()
+                    chapters_data = response.json()
 
-                        # Extract filename from URL (e.g., "Outrun_chapters.json")
-                        url_path = urlparse(json_url).path
-                        filename = os.path.basename(url_path)
-                        local_file = os.path.join(chapters_dir, filename)
+                if 'chapters' in chapters_data:
+                    chapters = self._sorted_with_intro(
+                        chapters_data['chapters'], episode_title,
+                        "local file" if is_local else json_url, json_url,
+                    )
+                    chapters_data['chapters'] = chapters
+                    total_links += self._add_images_and_links(chapters, matcher, cover_to_apple_url, {
+                        EPISODE_COVER: episode_covers[item_index],
+                        PREVIOUS_COVER: (episode_covers[item_index + 1]
+                                         if item_index + 1 < len(episode_covers) else None),
+                        NEXT_COVER: episode_covers[item_index - 1] if item_index > 0 else None,
+                        PODCAST_LOGO: podcast_logo,
+                    })
+                    if output_dir:
+                        podcast_chapters.set(
+                            'url', self._host_chapter_file(chapters_data, output_dir, filename, base_url)
+                        )
 
-                        # Try to load local chapter file first
-                        if os.path.exists(local_file):
-                            try:
-                                with open(local_file, 'r', encoding='utf-8') as f:
-                                    chapters_data = json.load(f)
-                                source_type = "local"
-                                local_count += 1
-                                used_local_files.add(filename)
+                if not include_psc_tags:
+                    converted_count += 1
+                elif 'chapters' in chapters_data:
+                    self._insert_psc_chapters(item, podcast_chapters, chapters_data['chapters'])
+                    converted_count += 1
 
-                                # Validate against Podbean version
-                                try:
-                                    response = requests.get(json_url, timeout=10)
-                                    response.raise_for_status()
-                                    podbean_data = response.json()
-
-                                    local_chapter_count = len(chapters_data.get('chapters', []))
-                                    podbean_chapter_count = len(podbean_data.get('chapters', []))
-
-                                    if local_chapter_count != podbean_chapter_count:
-                                        title_elem = item.find('title')
-                                        episode_title = title_elem.text if title_elem is not None else 'Unknown'
-                                        print(f"  ⚠️  Chapter count mismatch: {episode_title}")
-                                        print(f"      Local file: {local_chapter_count} chapters ({filename})")
-                                        print(f"      Podbean:    {podbean_chapter_count} chapters")
-                                        print("      Check if the local file needs updating")
-
-                                except Exception:
-                                    # If we can't fetch Podbean version for comparison, that's okay
-                                    pass
-
-                            except Exception as e:
-                                # Fall back to remote if local file is invalid
-                                print(f"  ⚠️  Failed to load local file {filename}: {e}")
-                                pass
-
-                        # Fall back to fetching from URL if no local file
-                        if chapters_data is None:
-                            response = requests.get(json_url, timeout=10)
-                            response.raise_for_status()
-                            chapters_data = response.json()
-
-                        # Process chapters data (sorting, intro, images) before saving and PSC conversion
-                        if 'chapters' in chapters_data:
-                            original_chapters = chapters_data['chapters']
-
-                            # Get episode title for reporting
-                            title_elem = item.find('title')
-                            episode_title = title_elem.text if title_elem is not None else 'Unknown'
-
-                            # Detect if chapters are unsorted in source JSON
-                            is_unsorted = any(
-                                original_chapters[i].get('startTime', 0) > original_chapters[i+1].get('startTime', 0)
-                                for i in range(len(original_chapters) - 1)
-                            )
-
-                            if is_unsorted:
-                                source_label = "local file" if source_type == "local" else json_url
-                                print(f"  ⚠️  Unsorted chapters detected: {episode_title}")
-                                print(f"      Source: {source_label}")
-
-                            # Sort chapters by startTime to ensure chronological order
-                            sorted_chapters = sorted(
-                                original_chapters,
-                                key=lambda ch: ch.get('startTime', 0)
-                            )
-
-                            # Check if first chapter starts at 0:00 (excluding hidden chapters)
-                            visible_chapters = [ch for ch in sorted_chapters if ch.get('toc', True)]
-                            missing_intro = (
-                                len(visible_chapters) > 0 and
-                                visible_chapters[0].get('startTime', 0) > 0
-                            )
-
-                            if missing_intro:
-                                print(f"  ⚠️  Missing 00:00 intro chapter: {episode_title}")
-                                print(f"      Source JSON: {json_url}")
-
-                                # Add intro chapter at 00:00
-                                intro_chapter = {
-                                    'startTime': 0,
-                                    'title': 'Intro'
-                                }
-                                sorted_chapters.insert(0, intro_chapter)
-
-                            # Update chapters_data with sorted (and possibly intro-added) chapters
-                            chapters_data['chapters'] = sorted_chapters
-
-                            # Get episode cover art for image injection
-                            cover_art_url = episode_covers[item_index]
-
-                            # Get previous and next episode cover art
-                            prev_cover_url = episode_covers[item_index + 1] if item_index + 1 < len(episode_covers) else None
-                            next_cover_url = episode_covers[item_index - 1] if item_index > 0 else None
-
-                            # Inject images for standard chapters (for ALL episodes, not just local)
-                            images_injected = 0
-                            links_injected = 0
-                            for chapter in sorted_chapters:
-                                # Skip if chapter already has an image (including null to disable auto-matching)
-                                # You can use "img": null in chapter file to prevent auto-matching
-                                # (empty/null values are cleaned up before saving output)
-                                if 'img' in chapter:
-                                    continue
-
-                                image_to_inject = matcher.image_for(chapter, {
-                                    EPISODE_COVER: cover_art_url,
-                                    PREVIOUS_COVER: prev_cover_url,
-                                    NEXT_COVER: next_cover_url,
-                                    PODCAST_LOGO: podcast_logo,
-                                })
-
-                                # Inject the image
-                                if image_to_inject:
-                                    chapter['img'] = image_to_inject
-                                    images_injected += 1
-
-                                # Link to the matched episode in Apple Podcasts, unless the
-                                # image is this episode's own cover or the podcast logo
-                                if (image_to_inject and 'url' not in chapter
-                                        and image_to_inject not in (cover_art_url, podcast_logo)
-                                        and image_to_inject in cover_to_apple_url):
-                                    chapter['url'] = cover_to_apple_url[image_to_inject]
-                                    links_injected += 1
-                            total_links += links_injected
-
-                            # Clean up empty img and url fields before saving (both "" and null)
-                            # This follows Podbean's practice of omitting the field entirely
-                            for chapter in sorted_chapters:
-                                for field in ('img', 'url'):
-                                    if field in chapter and not chapter[field]:
-                                        del chapter[field]
-
-                            if output_dir:
-                                # Save enriched JSON to output directory (for ALL episodes)
-                                content = json.dumps(chapters_data, indent=2, ensure_ascii=False)
-                                output_file = os.path.join(output_dir, filename)
-                                with open(output_file, 'w', encoding='utf-8') as f:
-                                    f.write(content)
-
-                                # Update podcast:chapters URL to point to our hosted version (for ALL episodes).
-                                # The content hash changes the URL only when the file changes, so clients
-                                # that cache chapters by URL fetch the new version.
-                                version = hashlib.sha256(content.encode('utf-8')).hexdigest()[:8]
-                                new_url = f"{base_url}/{filename}?v={version}"
-                                podcast_chapters.set('url', new_url)
-
-                        if include_psc_tags:
-                            # Create PSC chapters element
-                            psc_chapters = etree.Element(
-                                f'{{{psc_ns}}}chapters',
-                                version="1.2"
-                            )
-
-                            # Convert chapters to PSC format (chapters are already sorted and have intro)
-                            if 'chapters' in chapters_data:
-                                # Use the already processed chapters from chapters_data
-                                processed_chapters = chapters_data['chapters']
-
-                                for chapter in processed_chapters:
-                                    # Skip hidden chapters (toc: false)
-                                    if chapter.get('toc', True) is False:
-                                        continue
-
-                                    start_time = chapter.get('startTime', 0)
-                                    title = chapter.get('title', '')
-
-                                    # Convert seconds to HH:MM:SS format
-                                    hours = int(start_time // 3600)
-                                    minutes = int((start_time % 3600) // 60)
-                                    seconds = int(start_time % 60)
-                                    time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-
-                                    # Create chapter element
-                                    attrs = {
-                                        'start': time_str,
-                                        'title': title
-                                    }
-
-                                    # Add optional attributes
-                                    if 'url' in chapter:
-                                        attrs['href'] = chapter['url']
-                                    # Only add image if it has a non-empty value
-                                    # (null or "" in source file disables auto-matching; cleaned up before PSC)
-                                    if 'img' in chapter and chapter['img']:
-                                        attrs['image'] = chapter['img']
-
-                                    etree.SubElement(
-                                        psc_chapters,
-                                        f'{{{psc_ns}}}chapter',
-                                        **attrs
-                                    )
-
-                                # Add PSC chapters to item (after podcast:chapters)
-                                chapter_index = list(item).index(podcast_chapters)
-                                item.insert(chapter_index + 1, psc_chapters)
-
-                                # Add newline before psc:chapters for better readability
-                                self._add_newline_before_element(item, psc_chapters)
-
-                                converted_count += 1
-                        else:
-                            # URL rewrite + hosted JSON only; no PSC tags in output
-                            converted_count += 1
-
-                    except Exception:
-                        failed_count += 1
-                        # Silently skip episodes with failed chapter conversions
-                        continue
+            except Exception as e:
+                failed_count += 1
+                print(f"  ⚠️  Could not process chapters for {episode_title}: {e}")
 
         if include_psc_tags:
             print(f"✓ Converted {converted_count} JSON chapters to Podlove Simple Chapters format")
@@ -510,22 +271,166 @@ class ChaptersMixin(BaseFeed):
         if apple_podcast_id:
             print(f"  🔗 {total_links} chapter links to other episodes in Apple Podcasts")
         if failed_count > 0:
-            print(f"  ⚠ {failed_count} episodes failed to convert (JSON not accessible)")
+            print(f"  ⚠ {failed_count} episodes failed to convert")
 
-        # Check for unused local chapter files
-        if os.path.exists(chapters_dir):
-            all_local_files = set()
-            for filename in os.listdir(chapters_dir):
-                if filename.endswith('.json') and not filename.startswith('.'):
-                    all_local_files.add(filename)
-
-            unused_files = all_local_files - used_local_files
+        if os.path.isdir(chapters_dir):
+            unused_files = {
+                f for f in os.listdir(chapters_dir) if f.endswith('.json') and not f.startswith('.')
+            } - used_local_files
             if unused_files:
                 print(f"  ⚠️  Found {len(unused_files)} unused chapter file(s) in {chapters_dir}/")
                 for filename in sorted(unused_files):
-                    print(f"      - {filename} (check filename matches Podbean URL)")
+                    print(f"      - {filename} (check filename matches the source feed's URL)")
 
         return self
+
+    @staticmethod
+    def _index_episode_covers(items: list, title_rules: TitleRules, apple_urls: Dict[str, str]):
+        """
+        Returns ``(episode_covers, subject_covers, cover_to_apple_url)``:
+
+        - each item's cover URL, in feed order (for previous/next episode covers)
+        - what each episode is about → its cover, normalized for matching
+          ("Rainbow Six med Jostein Hakestad" → "rainbow six"; "Rainbow Six:
+          Rogue Spear" also as "rainbow six")
+        - cover → Apple Podcasts URL, for linking chapters that show another
+          episode's cover. Covers shared by several episodes are ambiguous and
+          get no link.
+        """
+        episode_covers = []
+        subject_covers = {}
+        cover_to_apple_url = {}
+        ambiguous_covers = set()
+
+        for item in items:
+            itunes_image = item.find(f'{ITUNES}image')
+            cover_url = itunes_image.get('href') if itunes_image is not None else None
+            episode_covers.append(cover_url)
+            if not cover_url:
+                continue
+
+            apple_url = apple_urls.get(item.findtext('guid'))
+            if cover_url in cover_to_apple_url or cover_url in ambiguous_covers:
+                ambiguous_covers.add(cover_url)
+                cover_to_apple_url.pop(cover_url, None)
+            elif apple_url:
+                cover_to_apple_url[cover_url] = apple_url
+
+            title_elem = item.find('title')
+            if title_elem is not None:
+                subject = normalize_title(title_rules.subject(title_elem.text))
+                subject_covers[subject] = cover_url
+                if ':' in subject:
+                    subject_covers[subject.split(':')[0].strip()] = cover_url
+
+        return episode_covers, subject_covers, cover_to_apple_url
+
+    @staticmethod
+    def _load_chapter_file(json_url: str, local_file: str, episode_title: str) -> Optional[Dict]:
+        """
+        The local chapter file, or None if there is none (or it is invalid).
+        Warns when it has a different number of chapters than the source's copy.
+        """
+        if not os.path.exists(local_file):
+            return None
+        try:
+            with open(local_file, 'r', encoding='utf-8') as f:
+                chapters_data = json.load(f)
+        except Exception as e:
+            print(f"  ⚠️  Failed to load local file {os.path.basename(local_file)}: {e}")
+            return None
+
+        try:
+            response = requests.get(json_url, timeout=10)
+            response.raise_for_status()
+            source_count = len(response.json().get('chapters', []))
+        except Exception:
+            return chapters_data  # The comparison is only a hint
+        local_count = len(chapters_data.get('chapters', []))
+        if local_count != source_count:
+            print(f"  ⚠️  Chapter count mismatch: {episode_title}")
+            print(f"      Local file:  {local_count} chapters ({os.path.basename(local_file)})")
+            print(f"      Source feed: {source_count} chapters")
+            print("      Check if the local file needs updating")
+        return chapters_data
+
+    @staticmethod
+    def _sorted_with_intro(chapters: List[Dict], episode_title: str, source_label: str,
+                           json_url: str) -> List[Dict]:
+        """Chapters sorted by startTime, with an "Intro" at 00:00 if the first visible one starts later."""
+        if any(a.get('startTime', 0) > b.get('startTime', 0) for a, b in zip(chapters, chapters[1:])):
+            print(f"  ⚠️  Unsorted chapters detected: {episode_title}")
+            print(f"      Source: {source_label}")
+        chapters = sorted(chapters, key=lambda ch: ch.get('startTime', 0))
+
+        visible = [ch for ch in chapters if ch.get('toc', True)]
+        if visible and visible[0].get('startTime', 0) > 0:
+            print(f"  ⚠️  Missing 00:00 intro chapter: {episode_title}")
+            print(f"      Source JSON: {json_url}")
+            chapters.insert(0, {'startTime': 0, 'title': 'Intro'})
+        return chapters
+
+    @staticmethod
+    def _add_images_and_links(chapters: List[Dict], matcher: ChapterImageMatcher,
+                              cover_to_apple_url: Dict[str, str], covers: Dict) -> int:
+        """
+        Give chapters without "img" an image, and those showing another episode's
+        cover a "url" to it in Apple Podcasts. Then drops empty "img"/"url"
+        values (null disables the automatic one). Returns the number of links added.
+        """
+        links_added = 0
+        for chapter in chapters:
+            if 'img' in chapter:
+                continue
+            image = matcher.image_for(chapter, covers)
+            if not image:
+                continue
+            chapter['img'] = image
+            # Not for this episode's own cover or the podcast logo
+            if ('url' not in chapter and image not in (covers[EPISODE_COVER], covers[PODCAST_LOGO])
+                    and image in cover_to_apple_url):
+                chapter['url'] = cover_to_apple_url[image]
+                links_added += 1
+
+        for chapter in chapters:
+            for field in ('img', 'url'):
+                if field in chapter and not chapter[field]:
+                    del chapter[field]
+        return links_added
+
+    @staticmethod
+    def _host_chapter_file(chapters_data: Dict, output_dir: str, filename: str, base_url: str) -> str:
+        """
+        Write the chapter file to output_dir and return its public URL. The
+        content hash in the URL changes only when the file does, so clients that
+        cache chapters by URL fetch the new version.
+        """
+        content = json.dumps(chapters_data, indent=2, ensure_ascii=False)
+        with open(os.path.join(output_dir, filename), 'w', encoding='utf-8') as f:
+            f.write(content)
+        version = hashlib.sha256(content.encode('utf-8')).hexdigest()[:8]
+        return f"{base_url}/{filename}?v={version}"
+
+    def _insert_psc_chapters(self, item, podcast_chapters, chapters: List[Dict]) -> None:
+        """Insert the visible chapters as <psc:chapters> right after podcast:chapters."""
+        psc_chapters = etree.Element(f'{PSC}chapters', version="1.2")
+        for chapter in chapters:
+            if chapter.get('toc', True) is False:
+                continue
+            start_time = chapter.get('startTime', 0)
+            attrs = {
+                'start': (f"{int(start_time // 3600):02d}:{int((start_time % 3600) // 60):02d}:"
+                          f"{int(start_time % 60):02d}"),
+                'title': chapter.get('title', ''),
+            }
+            if 'url' in chapter:
+                attrs['href'] = chapter['url']
+            if chapter.get('img'):
+                attrs['image'] = chapter['img']
+            etree.SubElement(psc_chapters, f'{PSC}chapter', **attrs)
+
+        item.insert(list(item).index(podcast_chapters) + 1, psc_chapters)
+        self._add_newline_before_element(item, psc_chapters)
 
     def _format_youtube_timestamp(self, time_str: str) -> str:
         """
@@ -575,18 +480,17 @@ class ChaptersMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        psc_ns = "http://podlove.org/simple-chapters"
         items = self.channel.findall('item')
         updated_count = 0
 
         for item in items:
             # Find psc:chapters element (must be present from convert_json_chapters_to_psc)
-            psc_chapters = item.find(f'{{{psc_ns}}}chapters')
+            psc_chapters = item.find(f'{PSC}chapters')
             if psc_chapters is None:
                 continue
 
             # Extract all chapter elements
-            chapters = psc_chapters.findall(f'{{{psc_ns}}}chapter')
+            chapters = psc_chapters.findall(f'{PSC}chapter')
             if not chapters:
                 continue
 
@@ -612,7 +516,7 @@ class ChaptersMixin(BaseFeed):
                     desc_elem.text = desc_elem.text + separator + timestamp_text
 
             # Update <content:encoded>
-            content_elem = item.find('{http://purl.org/rss/1.0/modules/content/}encoded')
+            content_elem = item.find(f'{CONTENT}encoded')
             if content_elem is not None and content_elem.text:
                 if timestamp_text not in content_elem.text:
                     content_elem.text = content_elem.text + separator + timestamp_text
@@ -644,8 +548,6 @@ class ChaptersMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        podcast_ns = 'https://podcastindex.org/namespace/1.0'
-        psc_ns = "http://podlove.org/simple-chapters"
         items = self.channel.findall('item')
 
         removed_podcast_chapters = 0
@@ -653,13 +555,13 @@ class ChaptersMixin(BaseFeed):
 
         for item in items:
             if remove_podcast:
-                podcast_chapters = item.find(f'{{{podcast_ns}}}chapters')
+                podcast_chapters = item.find(f'{PODCAST}chapters')
                 if podcast_chapters is not None:
                     item.remove(podcast_chapters)
                     removed_podcast_chapters += 1
 
             if remove_psc:
-                psc_chapters = item.find(f'{{{psc_ns}}}chapters')
+                psc_chapters = item.find(f'{PSC}chapters')
                 if psc_chapters is not None:
                     item.remove(psc_chapters)
                     removed_psc_chapters += 1
