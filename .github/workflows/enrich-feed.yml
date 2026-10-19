@@ -30,18 +30,12 @@ jobs:
         echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
     - name: Run main enrichment script
-      env:
-        PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
-        PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Run main enrichment script
         # This generates the main cdspill-enriched.xml feed
         uv run --no-dev enrich.py --podcast cdspill
 
     - name: Run YouTube enrichment script
-      env:
-        PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
-        PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Generate YouTube variant from the freshly created enriched feed
         uv run --no-dev enrich.py --podcast cdspill --variant youtube --local-cache

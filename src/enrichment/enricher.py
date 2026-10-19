@@ -67,7 +67,7 @@ class FeedEnricher(
         items = self.channel.findall('item')
         item_conflicts = {}
         for tag in item_tags_to_check:
-            for i, item in enumerate(items):
+            for item in items:
                 found = item.findall(f'{{{PODCAST_NS}}}{tag}')
                 if found:
                     if tag not in item_conflicts:

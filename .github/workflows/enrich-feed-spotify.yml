@@ -29,9 +29,6 @@ jobs:
         echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
     - name: Run Spotify enrichment script
-      env:
-        PODCHASER_API_KEY: ${{ secrets.PODCHASER_API_KEY }}
-        PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Run Spotify script only (fetches from already deployed enriched feed)
         uv run --no-dev enrich.py --podcast cdspill --variant spotify

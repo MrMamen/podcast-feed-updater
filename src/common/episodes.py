@@ -1,4 +1,4 @@
-"""Helpers for iterating over and locating episodes in the cd SPILL feed XML."""
+"""Helpers for iterating over and locating episodes in a podcast feed's XML."""
 
 from __future__ import annotations
 

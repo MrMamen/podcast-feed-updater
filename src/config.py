@@ -145,16 +145,6 @@ def _config_ids(config_name: str) -> List[str]:
     return sorted(p.parent.name for p in PODCASTS_DIR.glob(f"*/{config_name}"))
 
 
-def podcast_ids() -> List[str]:
-    """Ids of all podcasts with a podcast.toml, sorted."""
-    return _config_ids(CONFIG_NAME)
-
-
-def list_ids() -> List[str]:
-    """Ids of all list feeds with a list.toml, sorted."""
-    return _config_ids(LIST_CONFIG_NAME)
-
-
 def _load_toml(config_id: Optional[str], config_name: str, option: str, env: str):
     """
     Find and parse ``podcasts/<config_id>/<config_name>``. Without an id, uses

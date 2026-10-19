@@ -1,5 +1,5 @@
 """
-Higher-level operations on cdspill_known_guests.json.
+Higher-level operations on a podcast's known_guests.json.
 
 All mutations of the guests/aliases structure go through here so that every
 entry point (guests.py subcommands, interactive menu) behaves the same way.

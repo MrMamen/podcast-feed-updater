@@ -1,20 +1,14 @@
 [project]
 name = "podcast-feed-updater"
 version = "0.1.0"
-description = "A tool to filter and enrich podcast RSS feeds"
+description = "Enrich podcast RSS feeds with Podcasting 2.0 tags, configured per podcast"
 requires-python = ">=3.11"
 dependencies = [
-    "feedparser>=6.0.11",
-    "feedgen>=1.0.0",
     "requests>=2.31.0",
-    "pyyaml>=6.0.1",
     "python-dotenv>=1.0.0",
     "lxml>=5.0.0",
     "inquirer>=3.1.0",
 ]
-
-[tool.black]
-line-length = 100
 
 [tool.ruff]
 line-length = 100
@@ -23,6 +17,5 @@ line-length = 100
 # skipped by CI (`uv run --no-dev`).
 [dependency-groups]
 dev = [
-    "black>=24.0.0",
     "ruff>=0.3.0",
 ]

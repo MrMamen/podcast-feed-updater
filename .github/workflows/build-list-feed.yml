@@ -35,8 +35,7 @@ jobs:
         PODCHASER_API_SECRET: ${{ secrets.PODCHASER_API_SECRET }}
       run: |
         # Generates tiltcast-all.xml + tiltcast-1..N.xml and copies cover art
-        # into output/. --no-dev skips the heavy whisper/CUDA dev group this
-        # script doesn't need.
+        # into output/.
         uv run --no-dev build_list_feed.py --list tiltcast
 
     - name: Deploy to GitHub Pages
