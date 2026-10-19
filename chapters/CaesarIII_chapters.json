@@ -110,7 +110,7 @@
     {
       "startTime": 4062.167,
       "title": "Tech Specs",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/tech.jpg"
     },
     {
       "startTime": 4258.298,
@@ -140,7 +140,7 @@
       "startTime": 5165.8,
       "title": "Musikken",
       "url": "https://music.apple.com/no/artist/keith-zizza/203957010",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/music.jpg"
     },
     {
       "startTime": 5434.306,
@@ -161,7 +161,7 @@
     {
       "startTime": 6274.722,
       "title": "Kommentarer fra sosiale medier",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/social_media.jpg"
     },
     {
       "startTime": 6499.139,
@@ -175,17 +175,23 @@
     {
       "startTime": 6727.747,
       "title": "The Fertile Crescent",
-      "toc": false
+      "url": "https://www.gog.com/en/game/tfc_the_fertile_crescent",
+      "toc": false,
+      "img": "https://images.gog-statics.com/7439b9c7bb29c46a988983305e157377af991277d3cba4ace1404a4649a08b97.jpg"
     },
     {
       "startTime": 6773.351,
       "title": "Anno 117: Pax Romana",
-      "toc": false
+      "url": "https://store.steampowered.com/app/3274580/Anno_117_Pax_Romana/",
+      "toc": false,
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3274580/library_600x900_2x.jpg"
     },
     {
       "startTime": 6881.864,
       "title": "Tropico",
-      "toc": false
+      "url": "https://store.steampowered.com/app/492720/Tropico_6/",
+      "toc": false,
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/492720/library_600x900_2x.jpg"
     },
     {
       "startTime": 6945.572,

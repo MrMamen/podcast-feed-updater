@@ -9,7 +9,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 12 Oct 2026 09:09:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (YouTube variant)</generator>
-    <lastBuildDate>Thu, 15 Oct 2026 23:14:04 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 19 Oct 2026 21:33:42 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -272,7 +272,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
 1:20:54 Selvskryt av Bullfrog
 1:24:45 3D-briller
 1:26:40 VFX1
-1:27:46 Manglende Brett
+1:27:46 Manglende brett
 1:30:50 Magic Carpet 2
 1:34:33 Ingen Open Magic Carpet
 1:35:18 Kommentarer fra sosiale medier
@@ -560,7 +560,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>2331</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt?v=69e22a5d-ca9d" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt6o4jf.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt?v=69e22a5d-ca9d" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
@@ -3089,7 +3089,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>9</itunes:season>
         <itunes:episode>88</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DungeonKeeper_square.jpg"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Dungeon_Keeper_wcvzry.jpg"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="1 (#88)">88</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kjkul62ais2s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -5590,7 +5590,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>1</itunes:season>
         <itunes:episode>9</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/drago_mickp7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8gqbmfsuckrg5i9j/Drago.vtt?v=69e20916-b4d2" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/drago.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8gqbmfsuckrg5i9j/Drago.vtt?v=69e20916-b4d2" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2020">1</podcast:season>
         <podcast:episode display="9 (#9)">9</podcast:episode></item>
     <item>

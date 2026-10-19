@@ -9,7 +9,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 12 Oct 2026 09:09:00 +0200</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Thu, 15 Oct 2026 23:13:53 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 19 Oct 2026 21:33:24 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -54,7 +54,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>137</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/umbtfksjqtb4kq4q/CaesarIII.vtt?v=6acd53e0-263f4" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaesarIII_chapters.json?v=82212bb4" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaesarIII_chapters.json?v=e61d4e70" type="application/json"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="2 (#137)">137</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY" img="https://creator-images.podchaser.com/89bd64cfae550b51f3e4e8a15294938f.jpeg">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mxo4o3dgis2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -78,7 +78,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>136</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarTrekUnity-scaled.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/nvezmnpuf2dtjzg9/Unity.vtt?v=6ab43b3e-1a971" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Unity_chapters.json?v=6b22ace1" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Unity_chapters.json?v=50f12648" type="application/json"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="1 (#136)">136</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mvzlnps5b22q" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -103,7 +103,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>135</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/test-drive-iii-the-passion.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/vszgmj4mne7avyds/TestDrive3.vtt?v=6a441977-14972" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/td3_chapters.json?v=142345f1" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/td3_chapters.json?v=5bbcc36b" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="13 (#135)">135</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mpxnn7xbbs2r" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -152,7 +152,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>134</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/dbhzayvyme2gt8zn/Magic_Carpet.vtt?v=6a3a47ca-2314f" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MagicCarpet_chapters.json?v=c93ed655" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MagicCarpet_chapters.json?v=f8e15843" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="12 (#134)">134</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mnrdwuhyzc2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -176,7 +176,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>133</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thexder.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/dcwq5n3jj369532d/Thexder.vtt?v=6a0e122d-1749e" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Thexder_chapters.json?v=53bb3341" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Thexder_chapters.json?v=61ebd761" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="11 (#133)">133</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mmoi2ku2f22l" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -199,7 +199,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>132</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheHobbit_94kjjc.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8j3j55mt3694iwc4/Hobbit.vtt?v=69fd7d4a-11528" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/hobbit_chapters.json?v=71078fa5" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/hobbit_chapters.json?v=ae7ca784" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="10 (#132)">132</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mlkvaxaa2s2n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -223,7 +223,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>131</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/close_combat_gjc49p.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/326atztcedngfrss/CloseCombat.vtt?v=69fdb3ab-1fef3" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CloseCombat_chapters.json?v=539e8f96" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CloseCombat_chapters.json?v=a2296a12" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="9 (#131)">131</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mkhlr2f4rs2b" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -249,7 +249,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>130</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/constructor.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/6ieu8b77tqb2mjvp/constructor.vtt?v=69e12581-2379e" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/constructor_chapters.json?v=867a5829" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/constructor_chapters.json?v=2acb1ba6" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="8 (#130)">130</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mjeidgiauk23" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -278,8 +278,8 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:duration>2331</itunes:duration>
         <itunes:season>13</itunes:season>
                 <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt9picl.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt?v=69e22a5d-ca9d" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/solop_ske202681qay_chapters.json?v=2e477c84" type="application/json"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/p_ske-alt6o4jf.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/sbwvegh8bffrnbzb/solo-captions.vtt?v=69e22a5d-ca9d" type="text/vtt" language="no"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/solop_ske202681qay_chapters.json?v=120b743c" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:person role="guest host" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
         <podcast:person role="narrator" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
@@ -339,7 +339,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>129</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/u9f9ktwq7nb5a47v/SP.vtt?v=69e246b1-1b61f" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Shufflepuck_cafe6mk4v_chapters.json?v=358c797c" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Shufflepuck_cafe6mk4v_chapters.json?v=71382187" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="7 (#129)">129</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/lasse-sornes-107u2Fbid9">Lasse Sørnes</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mh6kfzd72k2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -364,7 +364,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>128</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Boppin.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/9z4sn64mqnd8pmib/Boppin.vtt?v=69e12636-1b56c" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Boppin_chapters.json?v=0548814a" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Boppin_chapters.json?v=3eed31ed" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="6 (#128)">128</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mg2yecta522y" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -387,7 +387,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>127</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/stunt_car_racer8j1ee.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/24td5t389g6bcymm/StuntCarRacer.vtt?v=6acd6186-1d5c7" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/StuntCarRacer_chapters.json?v=5dcb1ebf" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/StuntCarRacer_chapters.json?v=fe3ca095" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="5 (#127)">127</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mexrqrfrcc2p" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -413,7 +413,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>126</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TheDig.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/j6pyt3mkv7ngrph8/TheDig.vtt?v=69dff14e-2c444" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/The_Digbwlty_chapters.json?v=f31ee89a" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/The_Digbwlty_chapters.json?v=eb819071" type="application/json"/>
         <podcast:season name="Vår 2026">13</podcast:season>
         <podcast:episode display="4 (#126)">126</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
@@ -438,7 +438,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>125</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSpill_spill_ret1995ae763.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/ytrn7g9xyg39jf3i/1995.vtt?v=6ab4539e-2fc86" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1995_chapters.json?v=d76a4caf" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1995_chapters.json?v=8a15ea5f" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="7 (#125)">125</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
@@ -475,7 +475,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>124</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wuw64fvqeaj7sxj7/1985.vtt?v=6ab4539f-1da74" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1985_chapters.json?v=840d0767" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1985_chapters.json?v=13e4cabd" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="6 (#124)">124</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
@@ -510,7 +510,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>123</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/OutRun_fjiib8.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/skcqvburt53chuq6/Outrun.vtt?v=6abb3883-1d44d" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Outrun_chapters.json?v=b39bdb12" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Outrun_chapters.json?v=34e18fed" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="5 (#123)">123</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/mats-lindh-107u25OzEC">Mats Lindh</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m6ek64kfzc25" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -534,7 +534,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>122</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Rainbox6.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/5ivuz39g5we9egh8/RainbowSix.vtt?v=69e4adf6-1cc58" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/RainbowSix_chapters.json?v=5c395c36" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/RainbowSix_chapters.json?v=da1490a1" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="4 (#122)">122</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/trond-sneas-skauge-107tZzfTkm">Trond Sneås Skauge</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m5be22semc2x" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -558,7 +558,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>121</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Cyberdogs_2eu4rp.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/eympwjbarctb5vbx/CyberDogs.vtt?v=69fe2682-18bb0" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CyberDogs_chapters.json?v=151a53f6" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CyberDogs_chapters.json?v=e96b229c" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="3 (#121)">121</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m464gw2mys2h" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -582,7 +582,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>120</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TotalAn_ttpqnw.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/zpmph4wwmwniy9gd/TA.vtt?v=6abd6735-23005" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/TA_chapters.json?v=1e6d97bd" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/TA_chapters.json?v=44c4d820" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="2 (#120)">120</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3m32sekkko22s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -608,7 +608,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>119</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Gabriel_Knight8pfk0.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/d7ei4fcjsxh2cjz5/GabrielKnight.vtt?v=6acd53e6-2dbb7" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/GabrielKnight_chapters.json?v=a5e9e4a1" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/GabrielKnight_chapters.json?v=6e8a6cd1" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="1 (#119)">119</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
@@ -634,7 +634,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>118</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke3D.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/udx6zz6dcn2gp8v9/DukeNukem3D.vtt?v=6acd61fe-21ef1" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/duke_nukem_3d78xh2_chapters.json?v=9768f475" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/duke_nukem_3d78xh2_chapters.json?v=4445a3df" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="13 (#118)">118</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/oystein-sakspapir-wear-henriksen-107txPsxIm">Øystein Henriksen</podcast:person>
@@ -660,7 +660,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>117</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Ignition_6rgrt8.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/rnjm46bf24uak8vw/Ignition.vtt?v=6acd5286-123b7" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Ignition_chapters.json?v=b2bb7608" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Ignition_chapters.json?v=09ff2f67" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="12 (#117)">117</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lsbctmclqk23" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -683,7 +683,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>116</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MortalKombat_2r4kh7.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Mortal_Kombatbrsci_chapters.json?v=6b5b4747" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Mortal_Kombatbrsci_chapters.json?v=2160bafb" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="11 (#116)">116</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lr6cxcayus2x" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -708,7 +708,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>115</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/LodeRunner2_215013_8ae9m6.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Lode_Runner_chapters.json?v=3991baa3" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Lode_Runner_chapters.json?v=04f6f388" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="10 (#115)">115</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lq2q6yzivk22" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -733,7 +733,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>114</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/QuestForGlory.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Quest_for_Glory90qgg_chapters.json?v=4d788ace" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Quest_for_Glory90qgg_chapters.json?v=68ed4868" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="9 (#114)">114</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person>
@@ -758,7 +758,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>113</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/HoF_ny.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Hand_of_Fate9tego_chapters.json?v=8d2ed73d" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Hand_of_Fate9tego_chapters.json?v=91e87163" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="8 (#113)">113</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erling-rostvag-107ta6VV6W" img="https://creator-images.podchaser.com/74ab51c992d9c7709aedabb276a4c7aa.jpeg">Erling Rostvåg</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lnue67cnis2k" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -804,7 +804,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>112</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/tomb_raider9qsqd.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Tomb_Raidera7imc_chapters.json?v=57da15f7" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Tomb_Raidera7imc_chapters.json?v=3f3d6b70" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="7 (#112)">112</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3llnzi4hups2r" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -828,7 +828,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>111</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Half_Life_27wck7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/pf4srasbdepvnmxc/HalfLife.vtt?v=6acf73ae-1d4c8" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Half-Life_chapters.json?v=8a7c2bbb" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Half-Life_chapters.json?v=44744284" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="6 (#111)">111</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lkkve3322k2a" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -856,7 +856,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>110</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/zaxxon_wbtkha.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/gt8kxduiamyyct9u/Zaxxon.vtt?v=6acff7de-1e843" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/zaxxon_chapters.json?v=0bdafdd0" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/zaxxon_chapters.json?v=f1f5647f" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="5 (#110)">110</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person>
@@ -885,7 +885,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>109</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BASS.png"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/qsez6m3vjqgxzcxn/BASS.vtt?v=6acf8f55-2f50c" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/BASS_chapters.json?v=d0910d91" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/BASS_chapters.json?v=a313663b" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="4 (#109)">109</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jorn-inge-henriksen-107tZxOPnZ">Jørn Inge Henriksen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lieltqm2g22s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -910,7 +910,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>108</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/wackyWheels_square_2xrdqe.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/WackyWheels_chapters.json?v=6df30194" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/WackyWheels_chapters.json?v=2eef34d3" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="3 (#108)">108</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lhbda2qfgk2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -935,7 +935,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>107</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/NFS.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/NFS_chapters.json?v=46b5ac18" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/NFS_chapters.json?v=81b707d2" type="application/json"/>
         <podcast:season name="Vår 2025">11</podcast:season>
         <podcast:episode display="2 (#107)">107</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lg62mftguk2c" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -960,7 +960,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>106</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Spill_ret_19946gujy.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/g8feb5kyeimpu4xb/1994.vtt?v=6aba7575-2899d" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1994_chapters.json?v=b840a77d" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1994_chapters.json?v=78417c24" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="7 (#106)">106</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/andreas-hedemann-107tZxQKsJ" img="https://creator-images.podchaser.com/d88195bef7df62e72d49db5cedf2f96b.jpeg">Andreas Hedemann</podcast:person>
@@ -995,7 +995,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>105</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/ports_of_call_vx2huz.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/PoC_chapters_json_chapters.json?v=299cf66c" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/PoC_chapters_json_chapters.json?v=73697ecf" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="6 (#105)">105</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hans-arne-jacobsen-107toAUy2R">Hans Arne Jacobsen</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3lbrdgfnqcs2t" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1022,7 +1022,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>104</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I_have_no_mouth_and_i_must_scream_rtu8f8.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/IHNMAIMS_chapters_json_chapters.json?v=f5db9bf8" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/IHNMAIMS_chapters_json_chapters.json?v=0ca5aada" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="5 (#104)">104</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3laoa535uis2n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1046,7 +1046,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>103</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RoboCod_x4xjfz.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/James_Pond8c174_chapters_json_chapters.json?v=04d92eec" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/James_Pond8c174_chapters_json_chapters.json?v=0e22293f" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="4 (#103)">103</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/terje-hoiback-107tZxO8Lg" img="https://creator-images.podchaser.com/380a8aad2c76ec113246d8a012919ee7.jpeg">Terje Høiback</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l7kxqzbd4k2g" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1070,7 +1070,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>102</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/EGATrek4.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/vkhbjhfscvph6dpp/EGATrek.vtt?v=69e22d2e-f9fe" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/EGA_Trek615tz_chapters_json_chapters.json?v=6629bb9e" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/EGA_Trek615tz_chapters_json_chapters.json?v=ecdadf02" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="3 (#102)">102</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l6i3tasagy2p" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -1093,7 +1093,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>101</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Leisure_Suit_Larry909e1.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Larry1_chapters.json?v=c4a26279" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Larry1_chapters.json?v=caa9e5ef" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="2 (#101)">101</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3l5vvyp3shn2q" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -1116,7 +1116,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>100</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/100_epidoser_collagebmaf5.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/100_chapters_json_chapters.json?v=9ef97dd7" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/100_chapters_json_chapters.json?v=436b6970" type="application/json"/>
         <podcast:season name="Høst 2024">10</podcast:season>
         <podcast:episode display="1 (#100)">100</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
@@ -1152,7 +1152,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>99</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/diablo.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Diablo_chapters.json?v=8c31a9f1" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Diablo_chapters.json?v=24f9e94a" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="12 (#99)">99</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kvnvvplzfw2o" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1181,7 +1181,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>98</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TexMurphy2_7z3e4m.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MartianMemorandum_chapters.json?v=6ad49153" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/MartianMemorandum_chapters.json?v=0a38f5ff" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="11 (#98)">98</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kukqfqhp2t2u" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -1205,7 +1205,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>97</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Duke_8r3yx7.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DukeNukem_chapters.json?v=ea170295" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DukeNukem_chapters.json?v=3c262067" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="10 (#97)">97</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kthlfepiyh24" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1229,7 +1229,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>96</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Moonstone_kontrast.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Moonstone_chapters.json?v=c0cf07ba" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Moonstone_chapters.json?v=d3121cd5" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="9 (#96)">96</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/torbjorn-preus-schou-107tZxPEkH">Torbjørn Preus Schou</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3ksefro4le327" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1255,7 +1255,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>95</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Settlers.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Settlers2_chapters.json?v=793d54bb" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Settlers2_chapters.json?v=10ab9673" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="8 (#95)">95</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3krb36sxjor25" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1279,7 +1279,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>94</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Legends_saturated.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Legend_chapters.json?v=95869c8b" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Legend_chapters.json?v=152b04da" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="7 (#94)">94</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kq5wky7knf2r" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -1305,7 +1305,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>93</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/I.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/rthmchy5gsh5r7jx/Aprilsnarr.vtt?v=6ab4b469-1ab52" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/I_chapters.json?v=3a7df39f" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/I_chapters.json?v=c5c9e196" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="6 (#93)">93</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kp2nstw6vs2y" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1340,7 +1340,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>92</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Another_world7uwfs.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Another_World6exgv_chapters.json?v=f39863e5" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Another_World6exgv_chapters.json?v=bc191fc9" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="5 (#92)">92</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/joachim-froholt-107tZxOPjT">Joachim Froholt</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3knxmshlrge2j" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1364,7 +1364,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>91</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DoubleDragon.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DoubleDragon_chapters.json?v=12c26608" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DoubleDragon_chapters.json?v=7a70e2d9" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="4 (#91)">91</podcast:episode><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kmuhm247j32m" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
@@ -1387,7 +1387,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>90</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Raptor_square.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Raptor_chapters.json?v=129a6bd6" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Raptor_chapters.json?v=6d945bd9" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="3 (#90)">90</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3klrqd54iwv2q" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1417,7 +1417,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>89</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MonkeyIsland2_color9dz4g.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/mi2_chapters_json_chapters.json?v=63efe1aa" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/mi2_chapters_json_chapters.json?v=7de78f63" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="2 (#89)">89</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person>
@@ -1443,8 +1443,8 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>9</itunes:season>
         <itunes:episode>88</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DungeonKeeper_square.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DungeonKeeper_chapters.json?v=2a421ce6" type="application/json"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Dungeon_Keeper_wcvzry.jpg"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DungeonKeeper_chapters.json?v=9bdca21c" type="application/json"/>
         <podcast:season name="Vår 2024">9</podcast:season>
         <podcast:episode display="1 (#88)">88</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kjkul62ais2s" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1468,7 +1468,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>87</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/spill_ret_19938u0f7.png"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/3p7n8ndkge7tkdt7/1993.vtt?v=6aba7629-267c1" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1993_chapters.json?v=2914383d" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1993_chapters.json?v=7fd0c190" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="9 (#87)">87</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
@@ -1509,7 +1509,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>86</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/SimTower.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/SimTower_chapters.json?v=b5ab81b0" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/SimTower_chapters.json?v=817ef479" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="8 (#86)">86</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3kf65eglxys2n" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1534,7 +1534,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>85</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Indy_atlantis_9jhqt9.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Fate_of_Atlantis_chapters.json?v=2baf175a" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Fate_of_Atlantis_chapters.json?v=c2cbd7f3" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="7 (#85)">85</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/eirik-gjerlow-107tZxOga0" img="https://creator-images.podchaser.com/61f8e90e014b56419767d636059994d7.jpeg">Eirik Gjerløw</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3ke2tnrxdrs2b" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -1558,7 +1558,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>84</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/starcraft_square.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/StarCraft_chapters.json?v=4a2ede9a" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/StarCraft_chapters.json?v=08606941" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="6 (#84)">84</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aksel-bjerke-107tVQyvLM">Aksel M. Bjerke</podcast:person>
@@ -1585,7 +1585,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>83</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Simon_square2.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/SimonTheSorcerer_chapters.json?v=596cccec" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/SimonTheSorcerer_chapters.json?v=a9d4bca5" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="5 (#83)">83</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/martin-gjesdal-107tjKjRt1" img="https://creator-images.podchaser.com/3cc8055c0568d0c6707d03964e6f6559.jpeg">Martin Gjesdal</podcast:person>
@@ -1611,7 +1611,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>82</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/RailroadTycoon_r5s6jz.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/RailroadTycoon_chapters.json?v=9ff482e1" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/RailroadTycoon_chapters.json?v=26a2e5d9" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="4 (#82)">82</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
@@ -1636,7 +1636,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>81</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CheatCodes.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/cheats_chapters.json?v=b221ac3d" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/cheats_chapters.json?v=c0302c8c" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="3 (#81)">81</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person>
@@ -1661,7 +1661,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>80</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/StarWars-DF-JJ.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/darkforces_chapters.json?v=5b57e109" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/darkforces_chapters.json?v=61ccc019" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="2 (#80)">80</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person>
@@ -1685,7 +1685,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>79</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Freddi_Fisk_Kelp_Seedsa085v.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/freddi_chapters.json?v=13e2b4bc" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/freddi_chapters.json?v=ad2e020c" type="application/json"/>
         <podcast:season name="Høst 2023">8</podcast:season>
         <podcast:episode display="1 (#79)">79</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/c-alexander-espeseth-107tZxOPfK">C. Alexander Espeseth</podcast:person></item>
@@ -1774,7 +1774,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>78</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CaleforniaGames2_utq63e.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/cg_chapters.json?v=77693601" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/cg_chapters.json?v=9fff26ac" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="12 (#78)">78</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jostein-hakestad-107tZxOPnX">Jostein Hakestad</podcast:person></item>
@@ -1797,7 +1797,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>77</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/digger_smaller6r4ym.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DigDug_chapters.json?v=a3a684ab" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/DigDug_chapters.json?v=462024aa" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="11 (#77)">77</podcast:episode></item>
     <item>
@@ -1819,7 +1819,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>76</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/syndicate.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/syndicate_chapters.json?v=47c4b4dd" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/syndicate_chapters.json?v=0a7d56e6" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="10 (#76)">76</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/jan-anders-ekroll-107tekt7yb">Anders Ekroll</podcast:person></item>
@@ -1842,7 +1842,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>75</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/CaptainComic.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaptainComic_chapters.json?v=e1c811b3" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaptainComic_chapters.json?v=fdc10d48" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="9 (#75)">75</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/sindre-skaare-107tZxQbrB">Sindre Skaare</podcast:person></item>
@@ -1865,7 +1865,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>74</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/BattleChess_v2b2eg3.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/BattleChess_vizzy_chapters.json?v=fec36952" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/BattleChess_vizzy_chapters.json?v=54cb0248" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="8 (#74)">74</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/aleks-gisvold-107tZxOga3" img="https://creator-images.podchaser.com/6b33c7cd704ba1634d56d4ab1e3d6a72.jpeg">Aleks Gisvold</podcast:person></item>
@@ -1893,7 +1893,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>73</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/DeadlyGames.jpg"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/pPmA3KuEqubX_chapters.json?v=9a05a7eb" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/pPmA3KuEqubX_chapters.json?v=db3d8d34" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="7 (#73)">73</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/roar-granevang-107tehTONy" img="https://creator-images.podchaser.com/f612968bfc92c75a5cf078e5c1f623c1.jpeg">Roar Granevang</podcast:person></item>
@@ -1917,7 +1917,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>72</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thegames.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/efpt4zite36t9e7q/WinterChallenge.vtt?v=6acd61a4-18cfd" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/theGames_chapters.json?v=f275975f" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/theGames_chapters.json?v=903ab07d" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="6 (#72)">72</podcast:episode></item>
     <item>
@@ -1943,7 +1943,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>71</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/colonization.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/jbczy6ets5kw8f7m/Colonization.vtt?v=69e5536d-28455" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/colonization_chapters.json?v=6f090a17" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/colonization_chapters.json?v=bffc3100" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="5 (#71)">71</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/erlend-fiddan-107tefDhsD" img="https://creator-images.podchaser.com/85764bf571e1d27104e4bff41375c02d.jpeg">Erlend Fiddan</podcast:person>
@@ -1971,7 +1971,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>70</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/dstroy2.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8rhfnqae64ndey2s/DStroy.vtt?v=69e5cc7d-15080" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/dstroy_chapters.json?v=9c60786f" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/dstroy_chapters.json?v=84102ea1" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="4 (#70)">70</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/anette-vik-j%C3%B8sendal-107tZxOgVx" img="https://creator-images.podchaser.com/c82bfe635643f24d15b127b729cc81d3.jpeg">Anette Vik Jøsendal</podcast:person></item>
@@ -1994,7 +1994,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>69</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/Chicago_90-_newcutamwzu.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/74siiw8ytbk9fsx7/Chicago90.vtt?v=69e5db92-f794" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/ch90_chapters.json?v=09b02e35" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/ch90_chapters.json?v=3aed693d" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="3 (#69)">69</podcast:episode></item>
     <item>
@@ -2016,7 +2016,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>68</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/paperboy_square65abo.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/h6crsw6agrwiguun/Paperboy.vtt?v=69e5ec3e-1390c" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Paperboy_chapters.json?v=035b3d8d" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Paperboy_chapters.json?v=4db6a444" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="2 (#68)">68</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/hakon-puntervold-107tZxOga5">Håkon Puntervold</podcast:person></item>
@@ -2039,7 +2039,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>67</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSpill_spill_ret1992_cuvp68.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wzdqhchh8mpvqjp2/1992.vtt?v=69e61505-1c528" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1992_chapters.json?v=13a1de7e" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1992_chapters.json?v=807c38e1" type="application/json"/>
         <podcast:season name="Høst 2022">6</podcast:season>
         <podcast:episode display="10 (#67)">67</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/adrian-haugen-107tZxOga4">Adrian Haugen</podcast:person>
@@ -2592,7 +2592,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>44</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cd_spill_floppy_1991_86txsc.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/rjwh22x2tr7ibwc4/1991.vtt?v=69e6913e-188de" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1991_chapters.json?v=fab1414d" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1991_chapters.json?v=94d240a4" type="application/json"/>
         <podcast:season name="Høst 2021">4</podcast:season>
         <podcast:episode display="9 (#44)">44</podcast:episode></item>
     <item>
@@ -3402,7 +3402,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>1</itunes:season>
         <itunes:episode>9</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/drago_mickp7.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8gqbmfsuckrg5i9j/Drago.vtt?v=69e20916-b4d2" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/drago.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/8gqbmfsuckrg5i9j/Drago.vtt?v=69e20916-b4d2" type="text/vtt" language="no"/>
         <podcast:season name="Vår 2020">1</podcast:season>
         <podcast:episode display="9 (#9)">9</podcast:episode></item>
     <item>

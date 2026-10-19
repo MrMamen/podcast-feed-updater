@@ -45,7 +45,7 @@
       "startTime": 1474.754,
       "title": "Tech Specs",
       "url": "https://www.mobygames.com/game/3507/shufflepuck-cafe/specs/",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/tech.jpg"
     },
     {
       "startTime": 1612.224,
@@ -115,7 +115,7 @@
     {
       "startTime": 2607.694,
       "title": "Musikken",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/music.jpg"
     },
     {
       "startTime": 2825.565,
@@ -194,7 +194,7 @@
     {
       "startTime": 4351.679,
       "title": "Kommentarer fra sosiale medier",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/shufflepuck_8jwezd.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/social_media.jpg"
     },
     {
       "startTime": 4521.439,
@@ -203,7 +203,9 @@
     },
     {
       "startTime": 4807.814,
-      "title": "Finnes det noe tilsvarende idag?"
+      "title": "Finnes det noe tilsvarende idag?",
+      "url": "https://store.steampowered.com/app/259510/Shufflepuck_Cantina_Deluxe/",
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/259510/header.jpg"
     },
     {
       "startTime": 4992.276,

@@ -39,7 +39,7 @@
     {
       "startTime": 1451.193,
       "title": "Tech Specs",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/tech.jpg"
     },
     {
       "startTime": 2011.607,
@@ -92,9 +92,7 @@
     {
       "startTime": 2503.329,
       "title": "Earthquake",
-      "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/quake.jpg",
-      "url": "https://podcasts.apple.com/no/podcast/quake-med-ketil-espen%C3%A6s/id1502143710?i=1000523620558"
+      "toc": false
     },
     {
       "startTime": 2544.249,
@@ -262,7 +260,7 @@
       "startTime": 4060.103,
       "title": "Musikken",
       "url": "https://music.apple.com/no/artist/russell-shaw/281071067",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/music.jpg"
     },
     {
       "startTime": 4302.453,
@@ -282,12 +280,13 @@
     },
     {
       "startTime": 5266.2,
-      "title": "Manglende Brett"
+      "title": "Manglende brett"
     },
     {
       "startTime": 5450.445,
       "title": "Magic Carpet 2",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+      "url": "https://www.gog.com/en/game/magic_carpet_2_the_netherworlds",
+      "img": "https://images.gog-statics.com/988a7638f8e55985639448792c232eb911c69748e55489d5e9248c4ca97bd3cd.jpg"
     },
     {
       "startTime": 5673.191,
@@ -298,7 +297,7 @@
     {
       "startTime": 5718.608,
       "title": "Kommentarer fra sosiale medier",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/magic_carpet_square_b88zf5.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/social_media.jpg"
     },
     {
       "startTime": 6011.188,
@@ -307,23 +306,29 @@
     },
     {
       "startTime": 6268.69,
-      "title": "Finnes det noe tilsvarende idag?"
+      "title": "Finnes det noe tilsvarende idag?",
+      "url": "https://store.steampowered.com/app/1206560/WorldBox__God_Simulator/",
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1206560/library_600x900_2x.jpg"
     },
     {
       "startTime": 6440.816,
       "title": "Terminal Velocity",
-      "toc": false
+      "url": "https://store.steampowered.com/app/1956430/Terminal_Velocity_Boosted_Edition/",
+      "toc": false,
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1956430/library_600x900_2x.jpg"
     },
     {
       "startTime": 6466.599,
-      "title": "Populous: The beginning",
+      "title": "Populous: The Beginning",
       "toc": false,
       "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL_pop_square_f9j8r5.jpg",
       "url": "https://podcasts.apple.com/no/podcast/populous-the-beginning-med-aksel-m-bjerke/id1502143710?i=1000564489898"
     },
     {
       "startTime": 6542.895,
-      "title": "Spørsmål fra Sigve"
+      "title": "Spørsmål fra Sigve",
+      "url": "https://store.steampowered.com/app/3105440/Heroes_of_Might_and_Magic_Olden_Era/",
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3105440/library_600x900_2x.jpg"
     },
     {
       "startTime": 6708.57,

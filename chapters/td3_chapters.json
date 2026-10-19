@@ -29,9 +29,7 @@
     {
       "startTime": 1141.53,
       "title": "Lamborghini Diablo",
-      "toc": false,
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/diablo.jpg",
-      "url": "https://podcasts.apple.com/no/podcast/diablo-med-martin-gjesdal/id1502143710?i=1000660030797"
+      "toc": false
     },
     {
       "startTime": 1158.813,
@@ -54,7 +52,7 @@
     {
       "startTime": 1721.259,
       "title": "Tech Specs",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/test-drive-iii-the-passion.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/tech.jpg"
     },
     {
       "startTime": 2026.159,
@@ -103,16 +101,20 @@
     },
     {
       "startTime": 3080.336,
-      "title": "Forløperne"
+      "title": "Forløperne",
+      "url": "https://en.wikipedia.org/wiki/Test_Drive_(1987_video_game)",
+      "img": "https://upload.wikimedia.org/wikipedia/en/1/16/Test_Drive_cover.jpg"
     },
     {
       "startTime": 3323.353,
-      "title": "Oppfølgere"
+      "title": "Oppfølgere",
+      "url": "https://store.steampowered.com/app/1249970/Test_Drive_Unlimited_Solar_Crown/",
+      "img": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1249970/library_600x900_2x.jpg"
     },
     {
       "startTime": 3560.67,
       "title": "Kommentarer fra sosiale medier",
-      "img": "https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/test-drive-iii-the-passion.jpg"
+      "img": "https://mrmamen.github.io/podcast-feed-updater/chapters/images/social_media.jpg"
     },
     {
       "startTime": 3776.83,
