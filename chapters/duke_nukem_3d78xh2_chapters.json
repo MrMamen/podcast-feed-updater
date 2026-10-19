@@ -73,7 +73,8 @@
     },
     {
       "startTime": 4179.321,
-      "title": "Duke Nukem Forever"
+      "title": "Duke Nukem Forever",
+        "url": "https://store.steampowered.com/app/57900/Duke_Nukem_Forever/"
     },
     {
       "startTime": 4401.577,
@@ -97,22 +98,26 @@
     },
     {
       "startTime": 5699.191,
-      "title": "Saint's row",
+      "title": "Saints Row",
+      "url": "https://store.steampowered.com/app/742420/Saints_Row/",
       "toc": false
     },
     {
       "startTime": 5755.568,
       "title": "Broforce",
+      "url": "https://store.steampowered.com/app/274190/Broforce/",
       "toc": false
     },
     {
       "startTime": 5781.416,
       "title": "New Order",
+      "url": "https://store.steampowered.com/app/201810/Wolfenstein_The_New_Order/",
       "toc": false
     },
     {
       "startTime": 5873.431,
       "title": "Ion Fury",
+      "url": "https://store.steampowered.com/app/562860/Ion_Fury/",
       "toc": false
     },
     {
@@ -121,7 +126,8 @@
     },
     {
       "startTime": 6098.654,
-      "title": "Kjøp Overvåkerne"
+      "title": "Kjøp Overvåkerne",
+      "url": "https://store.steampowered.com/app/3567200/Overvakerne_The_Monitors/"
     }
   ]
 }

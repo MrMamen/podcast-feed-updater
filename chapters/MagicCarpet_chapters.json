@@ -269,11 +269,12 @@
     },
     {
       "startTime": 5266.2,
-      "title": "Manglende Brett"
+      "title": "Manglende brett"
     },
     {
       "startTime": 5450.445,
-      "title": "Magic Carpet 2"
+      "title": "Magic Carpet 2",
+      "url": "https://www.gog.com/en/game/magic_carpet_2_the_netherworlds"
     },
     {
       "startTime": 5673.191,
@@ -290,21 +291,24 @@
     },
     {
       "startTime": 6268.69,
-      "title": "Finnes det noe tilsvarende idag?"
+      "title": "Finnes det noe tilsvarende idag?",
+      "url": "https://store.steampowered.com/app/1206560/WorldBox__God_Simulator/"
     },
     {
       "startTime": 6440.816,
       "title": "Terminal Velocity",
+      "url": "https://store.steampowered.com/app/1956430/Terminal_Velocity_Boosted_Edition/",
       "toc": false
     },
     {
       "startTime": 6466.599,
-      "title": "Populous: The beginning",
+      "title": "Populous: The Beginning",
       "toc": false
     },
     {
       "startTime": 6542.895,
-      "title": "Spørsmål fra Sigve"
+      "title": "Spørsmål fra Sigve",
+      "url": "https://store.steampowered.com/app/3105440/Heroes_of_Might_and_Magic_Olden_Era/"
     },
     {
       "startTime": 6708.57,

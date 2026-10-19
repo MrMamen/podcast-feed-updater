@@ -1065,13 +1065,14 @@ class FeedEnricher(BaseFeed):
         host = parsed.netloc.lower()
 
         try:
-            # Steam: portrait library cover, built from the app id in the link
+            # Steam: portrait library cover, built from the app id in the link.
+            # Older games lack it and fall back to the landscape store header.
             if host.endswith("steampowered.com"):
                 match = re.search(r"/app/(\d+)", parsed.path)
                 if not match:
                     return None
                 base = f"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{match.group(1)}"
-                for name in ("library_600x900_2x.jpg", "library_600x900.jpg"):
+                for name in ("library_600x900_2x.jpg", "library_600x900.jpg", "header.jpg"):
                     if requests.head(f"{base}/{name}", timeout=10).status_code == 200:
                         return f"{base}/{name}"
                 return None

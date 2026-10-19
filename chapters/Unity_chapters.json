@@ -24,7 +24,8 @@
     },
     {
       "startTime": 703.506,
-      "title": "Dark Seed"
+      "title": "Dark Seed",
+      "url": "https://en.wikipedia.org/wiki/Dark_Seed_(video_game)"
     },
     {
       "startTime": 810.855,
@@ -126,7 +127,8 @@
     },
     {
       "startTime": 4571.78,
-      "title": "Finnes det noe tilsvarende idag?"
+      "title": "Finnes det noe tilsvarende idag?",
+      "url": "https://store.steampowered.com/app/17460/Mass_Effect_2007/"
     },
     {
       "startTime": 4657.978,
@@ -136,7 +138,7 @@
     {
       "startTime": 4690.629,
       "title": "Tips fra Sigve",
-      "url": "https://www.mobygames.com/game/148626/travellers-rest/"
+      "url": "https://www.gog.com/en/game/travellers_rest"
     },
     {
       "startTime": 4754.925,
@@ -144,11 +146,13 @@
     },
     {
       "startTime": 4817.645,
-      "title": "Pressfire"
+      "title": "Pressfire",
+        "url": "https://www.pressfire.no/"
     },
     {
       "startTime": 4854.202,
-      "title": "Spillhistorie"
+      "title": "Spillhistorie",
+        "url": "https://spillhistorie.no/"
     },
     {
       "startTime": 4882.73,
