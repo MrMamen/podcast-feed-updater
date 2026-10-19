@@ -12,7 +12,11 @@ from __future__ import annotations
 import os
 
 from src.common.feed_loader import resolve_feed_source
-from src.common.guest_config import flatten_for_enricher, load_known_guests_data, load_permanent_staff
+from src.common.guest_config import (
+    flatten_for_enricher,
+    load_known_guests_data,
+    load_permanent_staff,
+)
 from src.common.podcast_utils import season_namer
 from src.config import OUTPUT_DIR, PodcastConfig
 from src.enrichment.enricher import FeedEnricher

@@ -5,9 +5,9 @@ Fetches person/creator information from Podchaser.
 
 import os
 import sys
+from typing import Dict, List, Optional
 
 import requests
-from typing import List, Dict, Optional
 
 
 class PodchaserAPI:

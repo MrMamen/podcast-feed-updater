@@ -77,9 +77,10 @@ pip install -e .
 ```
 podcast-feed-updater/
 ├── src/
-│   ├── common/                # Felles utilities (feed_loader, guest_config, guest_store, episodes)
-│   ├── enrichment/            # FeedEnricher + Podchaser API
-│   └── listfeed/              # Tiltcast-listefeed
+│   ├── config.py              # Leser podcasts/<id>/podcast.toml
+│   ├── common/                # Felles utilities (feed_loader, guest_config, guest_store, episodes, podcast_utils)
+│   ├── enrichment/            # FeedEnricher (enricher.py + ett modul per tema), pipeline, varianter, Podchaser API
+│   └── listfeed/              # Listefeeder fra Podchaser-lister
 ├── enrich.py                  # Berik feed etter podcasts/<id>/podcast.toml, også --variant (kjøres av CI)
 ├── build_list_feed.py         # Tiltcast-listefeed (kjøres av CI)
 ├── guests.py                  # Gjestevedlikehold: meny + add/refresh/sync/episode/list/cache
