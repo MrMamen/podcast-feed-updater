@@ -8,8 +8,7 @@ from __future__ import annotations
 import re
 from typing import Callable, Dict, List, Optional, Union
 
-# "(#123)" or "(123)" at the end of a title
-DEFAULT_EPISODE_NUMBER_SUFFIX = r'\s*\(#?\d+\)$'
+EPISODE_NUMBER_SOURCES = ("itunes", "title")
 
 
 def is_bonus_episode(text: str) -> bool:
@@ -30,7 +29,8 @@ class TitleRules:
     - ``guest_separator``: word(s) between several guests (``og``).
     - ``subject_separator``: text between what the episode is about and the
       guests (``" med "``), used to match chapters against other episodes.
-    - ``episode_number_suffix``: regex for the episode number at the end.
+    - ``episode_number_pattern``: regex for the episode number in the title,
+      with the number as group 1 (``\s*\(#?(\d+)\)$`` for ``"(#123)"``).
     """
 
     def __init__(
@@ -38,7 +38,7 @@ class TitleRules:
         guest_pattern: Optional[str] = None,
         guest_separator: Union[str, List[str], None] = None,
         subject_separator: Optional[str] = None,
-        episode_number_suffix: str = DEFAULT_EPISODE_NUMBER_SUFFIX,
+        episode_number_pattern: Optional[str] = None,
     ):
         self.guest_pattern = re.compile(guest_pattern, re.IGNORECASE) if guest_pattern else None
         separators = [guest_separator] if isinstance(guest_separator, str) else guest_separator or []
@@ -47,8 +47,7 @@ class TitleRules:
             if separators else None
         )
         self.subject_separator = subject_separator
-        self.episode_number_suffix = episode_number_suffix
-        self._suffix_re = re.compile(episode_number_suffix)
+        self.episode_number_re = re.compile(episode_number_pattern) if episode_number_pattern else None
 
     @classmethod
     def from_config(cls, titles: Dict) -> 'TitleRules':
@@ -57,12 +56,19 @@ class TitleRules:
             guest_pattern=titles.get("guest_pattern"),
             guest_separator=titles.get("guest_separator"),
             subject_separator=titles.get("subject_separator"),
-            episode_number_suffix=titles.get("episode_number_suffix", DEFAULT_EPISODE_NUMBER_SUFFIX),
+            episode_number_pattern=titles.get("episode_number_pattern"),
         )
 
-    def strip_episode_suffix(self, title: str) -> str:
-        """Remove a trailing episode number marker such as ``(#123)`` from a title."""
-        return self._suffix_re.sub('', title or '')
+    def strip_episode_number(self, title: str) -> str:
+        """The title without its episode number (``"Game (#123)"`` → ``"Game"``)."""
+        if not self.episode_number_re:
+            return title or ''
+        return self.episode_number_re.sub('', title or '')
+
+    def episode_number(self, title: str) -> Optional[str]:
+        """The episode number in the title (group 1 of the pattern), or None."""
+        match = self.episode_number_re.search(title or '') if self.episode_number_re else None
+        return match.group(1) if match and match.groups() else None
 
     def extract_guests(self, title: str) -> List[str]:
         """
@@ -76,8 +82,7 @@ class TitleRules:
         if not match:
             return []
 
-        guest_blob = match.group(1).strip()
-        guest_blob = self._suffix_re.sub('', guest_blob)
+        guest_blob = self.strip_episode_number(match.group(1).strip())
 
         parts = self.guest_split.split(guest_blob) if self.guest_split else [guest_blob]
         return [p.strip() for p in parts if p.strip()]

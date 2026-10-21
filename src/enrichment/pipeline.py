@@ -17,9 +17,10 @@ from src.common.guest_config import (
     load_known_guests_data,
     load_permanent_staff,
 )
-from src.common.podcast_utils import season_namer
-from src.config import OUTPUT_DIR, PodcastConfig
+from src.common.podcast_utils import EPISODE_NUMBER_SOURCES, season_namer
+from src.config import OUTPUT_DIR, ConfigError, PodcastConfig
 from src.enrichment.enricher import FeedEnricher
+from src.enrichment.episode_numbers import itunes_episode_number
 
 
 def _load_hosts(cfg: PodcastConfig) -> list:
@@ -59,6 +60,36 @@ def _load_known_guests(cfg: PodcastConfig) -> dict:
     with_images = sum(1 for g in guests.values() if g.get('img'))
     print(f"✓ Loaded {len(guests)} guests ({with_images} with images) and {len(aliases)} aliases")
     return flatten_for_enricher(data)
+
+
+def _episode_number_getter(cfg: PodcastConfig):
+    """
+    Function from item to its episode number, trying [titles]
+    episode_number_source in order: "itunes" (itunes:episode) and/or "title"
+    (group 1 of episode_number_pattern).
+    """
+    title_rules = cfg.title_rules
+    sources = cfg.section("titles").get("episode_number_source", ["itunes"])
+    sources = [sources] if isinstance(sources, str) else sources
+    unknown = set(sources) - set(EPISODE_NUMBER_SOURCES)
+    if unknown:
+        raise ConfigError(f"{cfg.config_path}: [titles] episode_number_source: unknown "
+                          f"{sorted(unknown)} (use {list(EPISODE_NUMBER_SOURCES)})")
+    if "title" in sources and not title_rules.episode_number_re:
+        raise ConfigError(f"{cfg.config_path}: episode_number_source \"title\" needs "
+                          f"[titles] episode_number_pattern")
+
+    def episode_number(item):
+        for source in sources:
+            if source == "itunes":
+                number = itunes_episode_number(item)
+            else:
+                number = title_rules.episode_number(item.findtext('title'))
+            if number:
+                return number
+        return None
+
+    return episode_number
 
 
 def chapter_options(cfg: PodcastConfig) -> dict:
@@ -115,15 +146,20 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
     # Fails loudly if the source feed starts carrying tags we add ourselves
     enricher.validate_no_conflicts()
 
+    # Before the numbers are removed from the titles, which may be their source
+    enricher.add_podcast_season_episode(season_namer(cfg.section("seasons")),
+                                        _episode_number_getter(cfg))
+
     if titles.get("remove_episode_numbers"):
-        enricher.remove_episode_numbers_from_titles(title_rules.episode_number_suffix)
+        if not title_rules.episode_number_re:
+            raise ConfigError(f"{cfg.config_path}: remove_episode_numbers needs "
+                              f"[titles] episode_number_pattern")
+        enricher.remove_episode_numbers_from_titles(title_rules.episode_number_re.pattern)
 
     enricher.add_channel_persons(_load_hosts(cfg))
 
     if cfg.guid:
         enricher.add_guid(cfg.guid)
-
-    enricher.add_podcast_season_episode(season_namer(cfg.section("seasons")))
 
     # Guests from episode titles plus extra_episodes from known_guests.json
     known_guests = _load_known_guests(cfg)

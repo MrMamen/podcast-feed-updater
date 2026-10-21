@@ -32,14 +32,19 @@ def _chapters_for_variant(enricher: FeedEnricher, cfg: PodcastConfig, use_local:
 
 def build_youtube(cfg: PodcastConfig, *, use_local: bool = False) -> str:
     """
-    YouTube: episode numbers back in the titles and chapter timestamps in the
-    descriptions (YouTube reads neither podcast:chapters nor psc:chapters).
+    YouTube: chapter timestamps in the descriptions (YouTube reads neither
+    podcast:chapters nor psc:chapters), and with episode_number_format the
+    episode numbers back in the titles.
     """
     variant = cfg.variant("youtube")
     enricher = FeedEnricher(resolve_enriched_source(cfg, use_local))
     enricher.fetch_feed()
 
-    enricher.restore_episode_numbers_to_titles(variant.get("episode_number_format", " (#{episode})"))
+    if variant.get("episode_number_format"):
+        enricher.restore_episode_numbers_to_titles(
+            variant["episode_number_format"],
+            has_number=lambda title: cfg.title_rules.episode_number(title) is not None,
+        )
 
     # psc:chapters are only needed to extract the timestamps from
     _chapters_for_variant(enricher, cfg, use_local)
@@ -59,6 +64,12 @@ def build_spotify(cfg: PodcastConfig, *, use_local: bool = False) -> str:
     variant = cfg.variant("spotify")
     enricher = FeedEnricher(resolve_enriched_source(cfg, use_local))
     enricher.fetch_feed()
+
+    if variant.get("episode_number_format"):
+        enricher.restore_episode_numbers_to_titles(
+            variant["episode_number_format"],
+            has_number=lambda title: cfg.title_rules.episode_number(title) is not None,
+        )
 
     # Must run before removing podcast:chapters since the JSON URL is read from there
     _chapters_for_variant(enricher, cfg, use_local)

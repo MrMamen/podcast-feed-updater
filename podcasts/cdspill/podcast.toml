@@ -32,7 +32,9 @@ remove_content_encoded = true
 shift_latest_pubdate_hours = 3
 
 [titles]
-# Fjern "(#123)" fra slutten av episodetitlene (YouTube-varianten legger dem tilbake)
+# Episodenummeret står sist i tittelen hos Podbean: "Spill med Gjest (#123)"
+episode_number_pattern = '\s*\(#?(\d+)\)$'
+# Fjernes i hovedfeeden (og Spotify), YouTube-varianten legger dem tilbake
 remove_episode_numbers = true
 # Gjester hentes fra titler som "Spill med Gjest A og Gjest B (#123)"
 guest_pattern = 'med (.+?)(?:\s*\(|$)'
@@ -188,6 +190,7 @@ unless_contains = ["sosiale medier", "forrige", "sist", "facebook", "twitter", "
 
 [variants.youtube]
 feed = "cdspill-youtube.xml"
+episode_number_format = " (#{episode})"
 
 [variants.spotify]
 feed = "cdspill-spotify.xml"

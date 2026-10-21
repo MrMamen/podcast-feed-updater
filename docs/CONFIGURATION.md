@@ -55,7 +55,9 @@ Hvordan titlene skrives, f.eks. `"Spill med Gjest A og Gjest B (#123)"`. Bruk `'
 
 | Nøkkel | Betydning |
 |--------|-----------|
-| `remove_episode_numbers` | Fjern episodenummeret (`episode_number_suffix`, standard `'\s*\(#?\d+\)$'`) |
+| `episode_number_pattern` | Regex for episodenummeret i tittelen, med nummeret i gruppe 1: `'\s*\(#?(\d+)\)$'` for «(#123)», `'^Episode (\d+)'` for «Episode 91: …» |
+| `episode_number_source` | Hvor `podcast:episode` hentes fra, i rekkefølge: `"itunes"` (`itunes:episode`, standard) og/eller `"title"` (mønsteret over) |
+| `remove_episode_numbers` | Fjern nummeret fra titlene. Varianter kan sette det inn igjen med `episode_number_format` |
 | `guest_pattern` | Regex der gruppe 1 er gjestene: `'med (.+?)(?:\s*\(\|$)'` |
 | `guest_separator` | Ord mellom gjester: `"og"`, eller en liste |
 | `subject_separator` | Mellom tema og gjester (`" med "`), for å koble kapitler til andre episoder |
@@ -145,6 +147,10 @@ Varianter bygges fra den publiserte berikede feeden (med `--local-cache`: fra `o
 
 | Variant | Endrer | Nøkler |
 |---------|--------|--------|
-| `youtube` | Episodenummer i titlene, kapitler som tidskoder i beskrivelsen | `feed`, `generator`, `episode_number_format`, `shift_latest_pubdate_hours` |
-| `spotify` | `psc:chapters` i stedet for `podcast:chapters` | `feed`, `generator`, `shift_latest_pubdate_hours` |
+| `youtube` | Kapitler som tidskoder i beskrivelsen | `feed`, `generator`, `episode_number_format`, `shift_latest_pubdate_hours` |
+| `spotify` | `psc:chapters` i stedet for `podcast:chapters` | `feed`, `generator`, `episode_number_format`, `shift_latest_pubdate_hours` |
 | `fallback-test` | Tre testfeeder som mangler hvert sitt beskrivelsesfelt | `feed_prefix` |
+
+`episode_number_format` setter episodenummeret (fra `podcast:episode`) inn i titlene igjen:
+`" (#{episode})"` legges til på slutten, `"#{episode} – {title}"` erstatter hele tittelen.
+Titler som allerede har et nummer (`episode_number_pattern`) får det ikke dobbelt.

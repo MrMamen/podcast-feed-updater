@@ -7,26 +7,32 @@ from lxml import etree
 
 from src.common.base_feed import BaseFeed
 from src.common.namespaces import ITUNES, PODCAST
-from src.common.podcast_utils import DEFAULT_EPISODE_NUMBER_SUFFIX
+
+
+def itunes_episode_number(item) -> Optional[str]:
+    """The item's itunes:episode, or None."""
+    return (item.findtext(f'{ITUNES}episode') or '').strip() or None
 
 
 class EpisodeNumbersMixin(BaseFeed):
     """FeedEnricher methods for episode numbers in titles, and podcast:season / podcast:episode."""
 
-    def remove_episode_numbers_from_titles(
-        self, pattern: str = DEFAULT_EPISODE_NUMBER_SUFFIX
-    ) -> Self:
+    def remove_episode_numbers_from_titles(self, pattern: str) -> Self:
         """
-        Remove episode numbers from episode titles.
+        Remove episode numbers from episode titles. A title that is nothing but
+        the number ("Spillmatic #513") is kept as it is.
 
         Args:
-            pattern: Regex pattern to match episode numbers (default: matches "(#123)" or "(123)" at end of title)
+            pattern: Regex matching the episode number, e.g. r'\s*\(#?\d+\)$' for "(#123)"
 
         Returns:
             Self for chaining
         """
         if self.channel is None:
             raise ValueError("Must fetch feed first")
+
+        def without_number(title: str) -> str:
+            return re.sub(pattern, '', title).strip() or title
 
         items = self.channel.findall('item')
         removed_count = 0
@@ -35,7 +41,7 @@ class EpisodeNumbersMixin(BaseFeed):
             # Update <title>
             title_elem = item.find('title')
             if title_elem is not None and title_elem.text:
-                new_title = re.sub(pattern, '', title_elem.text).strip()
+                new_title = without_number(title_elem.text)
                 if new_title != title_elem.text:
                     title_elem.text = new_title
                     removed_count += 1
@@ -43,17 +49,19 @@ class EpisodeNumbersMixin(BaseFeed):
             # Also update <itunes:title> if present
             itunes_title = item.find(f'{ITUNES}title')
             if itunes_title is not None and itunes_title.text:
-                itunes_title.text = re.sub(pattern, '', itunes_title.text).strip()
+                itunes_title.text = without_number(itunes_title.text)
 
         print(f"✓ Removed episode numbers from {removed_count} episode titles")
         return self
 
     def add_podcast_season_episode(
-        self, season_name: Optional[Callable[[int], str]] = None
+        self,
+        season_name: Optional[Callable[[int], str]] = None,
+        episode_number: Callable[[etree._Element], Optional[str]] = itunes_episode_number,
     ) -> Self:
         """
         Add podcast:season and podcast:episode tags to all episodes.
-        Uses itunes:season and itunes:episode as source.
+        Uses itunes:season, and itunes:episode unless episode_number says otherwise.
 
         The podcast:episode tag includes a display attribute showing both
         the season episode number and total episode number (e.g., "2 (#80)").
@@ -61,6 +69,7 @@ class EpisodeNumbersMixin(BaseFeed):
         Args:
             season_name: Function from season number to the podcast:season name
                 attribute (see podcast_utils.season_namer); None adds no name
+            episode_number: Function from item to its episode number, or None
 
         Returns:
             Self for chaining
@@ -85,9 +94,8 @@ class EpisodeNumbersMixin(BaseFeed):
         added_count = 0
 
         for item in items:
-            # Find itunes:season and itunes:episode
             season_elem = item.find(f'{ITUNES}season')
-            episode_elem = item.find(f'{ITUNES}episode')
+            episode_num_text = episode_number(item)
 
             if season_elem is not None and season_elem.text:
                 season_num = int(season_elem.text)
@@ -99,8 +107,8 @@ class EpisodeNumbersMixin(BaseFeed):
                 podcast_season.text = str(season_num)
                 item.append(podcast_season)
 
-            if episode_elem is not None and episode_elem.text:
-                total_episode_num = int(episode_elem.text)
+            if episode_num_text:
+                total_episode_num = int(episode_num_text)
 
                 # Calculate season episode number (reverse chronological order)
                 if season_elem is not None and season_elem.text:
@@ -132,23 +140,29 @@ class EpisodeNumbersMixin(BaseFeed):
                     podcast_episode.text = str(total_episode_num)
                     item.append(podcast_episode)
 
-            if season_elem is not None or episode_elem is not None:
+            if season_elem is not None or episode_num_text:
                 added_count += 1
 
         print(f"✓ Added podcast:season and podcast:episode tags to {added_count} episodes")
         return self
 
-    def restore_episode_numbers_to_titles(self, format: str = ' (#{episode})') -> Self:
+    def restore_episode_numbers_to_titles(
+        self,
+        format: str = ' (#{episode})',
+        has_number: Optional[Callable[[str], bool]] = None,
+    ) -> Self:
         """
-        Restore episode numbers to episode titles from itunes:episode tags.
-        Inverse operation of remove_episode_numbers_from_titles().
-
-        This is useful for feeds like YouTube that display episode numbers differently
-        than podcast apps. Skips bonus episodes (episodeType=bonus) as they should
-        not have episode numbers in titles.
+        Put episode numbers back into the titles, from podcast:episode (or
+        itunes:episode). Inverse of remove_episode_numbers_from_titles(), for
+        destinations like YouTube that show no episode number otherwise. Skips
+        bonus episodes (episodeType=bonus).
 
         Args:
-            format: Format string with {episode} placeholder (default: ' (#{episode})')
+            format: Appended to the title, with {episode} for the number
+                (' (#{episode})'), or the whole title if it contains {title}
+                ('#{episode} – {title}')
+            has_number: Titles for which this returns True already show their
+                number and are left alone
 
         Returns:
             Self for chaining
@@ -156,36 +170,37 @@ class EpisodeNumbersMixin(BaseFeed):
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
+        def numbered(title: str, number: str) -> str:
+            if has_number and has_number(title):
+                return title
+            if '{title}' in format:
+                return format.format(title=title, episode=number)
+            suffix = format.format(episode=number)
+            return title if suffix in title else title + suffix  # Avoid duplicates
+
         items = self.channel.findall('item')
         restored_count = 0
         skipped_bonus = 0
 
         for item in items:
-            # Skip bonus episodes (they should not have episode numbers in titles)
-            episode_type = item.find(f'{ITUNES}episodeType')
-            if episode_type is not None and episode_type.text == 'bonus':
+            if item.findtext(f'{ITUNES}episodeType') == 'bonus':
                 skipped_bonus += 1
                 continue
 
-            episode_elem = item.find(f'{ITUNES}episode')
-            if episode_elem is None or not episode_elem.text:
+            number = (item.findtext(f'{PODCAST}episode') or '').strip() or itunes_episode_number(item)
+            if not number:
                 continue
 
-            episode_num = episode_elem.text.strip()
-            suffix = format.format(episode=episode_num)
-
-            # Update <title>
             title_elem = item.find('title')
             if title_elem is not None and title_elem.text:
-                if suffix not in title_elem.text:  # Avoid duplicates
-                    title_elem.text = title_elem.text + suffix
+                new_title = numbered(title_elem.text, number)
+                if new_title != title_elem.text:
+                    title_elem.text = new_title
                     restored_count += 1
 
-            # Update <itunes:title> if present
             itunes_title = item.find(f'{ITUNES}title')
             if itunes_title is not None and itunes_title.text:
-                if suffix not in itunes_title.text:
-                    itunes_title.text = itunes_title.text + suffix
+                itunes_title.text = numbered(itunes_title.text, number)
 
         print(f"✓ Restored episode numbers to {restored_count} episode titles (skipped {skipped_bonus} bonus episodes)")
         return self

@@ -23,7 +23,9 @@ feed = "minpodcast-enriched.xml"
 op3 = true
 
 # [titles]
-# remove_episode_numbers = true              # fjern "(#123)" fra titlene
+# episode_number_pattern = '^Episode (\d+)'  # nummeret i tittelen, i gruppe 1
+# episode_number_source = ["itunes", "title"] # itunes:episode, ellers fra tittelen
+# remove_episode_numbers = true               # fjern nummeret fra titlene
 # guest_pattern = 'with (.+?)(?:\s*\(|$)'    # gruppe 1 = gjest(er): "Tema with Ann and Bob"
 # guest_separator = ["and", "&"]
 # subject_separator = " with "

@@ -374,7 +374,7 @@ def cmd_episode(args) -> None:
         print(f"❌ Mangler podchaser_id under [podcast] i {cfg.config_path}")
         sys.exit(1)
     client = from_env(required=True)
-    clean_title = cfg.title_rules.strip_episode_suffix(episode.title)
+    clean_title = cfg.title_rules.strip_episode_number(episode.title)
     pc_episode = client.search_episode(podchaser_id, clean_title, first=5)
     if not pc_episode:
         print("❌ Fant ikke episoden på Podchaser")
