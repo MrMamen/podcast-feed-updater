@@ -27,6 +27,7 @@ import sys
 from dotenv import load_dotenv
 
 from src.config import KNOWN_VARIANTS, ConfigError, add_podcast_argument, load_podcast_or_exit
+from src.enrichment.enricher import FeedConflictError
 from src.enrichment.pipeline import enrich
 from src.enrichment.variants import VARIANTS
 
@@ -60,7 +61,7 @@ def main():
             VARIANTS[args.variant](cfg, use_local=args.local_cache)
         else:
             enrich(cfg, use_cache=args.local_cache)
-    except ConfigError as e:
+    except (ConfigError, FeedConflictError) as e:
         print(f"\n❌ {e}")
         sys.exit(1)
 

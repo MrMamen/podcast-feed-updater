@@ -18,6 +18,7 @@ from src.common.guest_config import (
     load_permanent_staff,
 )
 from src.common.podcast_utils import EPISODE_NUMBER_SOURCES, podcast_guid, season_namer
+from src.common.namespaces import PODCAST
 from src.config import OUTPUT_DIR, ConfigError, PodcastConfig
 from src.enrichment.enricher import FeedEnricher
 from src.enrichment.episode_numbers import itunes_episode_number
@@ -143,8 +144,33 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
     enricher = FeedEnricher(source)
     enricher.fetch_feed()
 
-    # Fails loudly if the source feed starts carrying tags we add ourselves
-    enricher.validate_no_conflicts()
+    hosts = _load_hosts(cfg)
+    known_guests = _load_known_guests(cfg, bool(titles.get("guest_pattern")))
+    detect_guests = bool(titles.get("guest_pattern") or known_guests)
+    funding = cfg.section("funding")
+    frequency = cfg.section("update_frequency")
+    podroll = cfg.list_section("podroll")
+    socials = cfg.list_section("social_interact")
+    article_domain = podcast.get("episode_article_domain")
+    bluesky_handle = cfg.section("bluesky").get("handle") if article_domain else None
+
+    # Fails loudly if the source feed already has (e.g. its host starts adding)
+    # tags that we are configured to add
+    enricher.validate_no_conflicts(
+        channel_tags={tag: setting for tag, setting, enabled in [
+            ("guid", "[podcast] guid", cfg.guid),
+            ("person", cfg.permanent_staff_path.name, hosts),
+            ("funding", "[funding]", funding),
+            ("medium", "[podcast] medium", podcast.get("medium")),
+            ("updateFrequency", "[update_frequency]", frequency),
+            ("podroll", "[[podroll]]", podroll),
+            ("socialInteract", "[[social_interact]]", socials),
+        ] if enabled},
+        item_tags={tag: setting for tag, setting, enabled in [
+            ("person", "[titles] guest_pattern / known_guests.json", detect_guests),
+            ("socialInteract", "[bluesky]", bluesky_handle),
+        ] if enabled},
+    )
 
     # Before the numbers are removed from the titles, which may be their source
     enricher.add_podcast_season_episode(season_namer(cfg.section("seasons")),
@@ -156,27 +182,27 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
                               f"[titles] episode_number_pattern")
         enricher.remove_episode_numbers_from_titles(title_rules.episode_number_re.pattern)
 
-    enricher.add_channel_persons(_load_hosts(cfg))
+    enricher.add_channel_persons(hosts)
 
+    source_guid = enricher.channel.findtext(f'{PODCAST}guid')
     if cfg.guid:
         enricher.add_guid(cfg.guid)
+    elif source_guid:
+        print(f"ℹ️  Keeping the source feed's podcast:guid {source_guid}")
     else:
         print(f"\nℹ️  No [podcast] guid. Podcast Index derives this one from the source feed's URL:\n"
               f'   guid = "{podcast_guid(cfg.source_feed)}"')
 
     # Guests from episode titles plus extra_episodes from known_guests.json
-    known_guests = _load_known_guests(cfg, bool(titles.get("guest_pattern")))
-    if titles.get("guest_pattern") or known_guests:
+    if detect_guests:
         enricher.auto_detect_guests_from_titles(title_rules=title_rules, known_guests=known_guests)
 
-    funding = cfg.section("funding")
     if funding:
         enricher.add_funding(url=funding["url"], message=funding.get("message", "Support the show"))
 
     if podcast.get("medium"):
         enricher.add_medium(podcast["medium"])
 
-    frequency = cfg.section("update_frequency")
     if frequency:
         enricher.add_update_frequency(
             complete=frequency.get("complete", False),
@@ -185,7 +211,6 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
             rrule=frequency.get("rrule"),
         )
 
-    podroll = cfg.list_section("podroll")
     if podroll:
         enricher.add_podroll([
             {"url": p["url"], **({"title": p["title"]} if "title" in p else {}),
@@ -193,7 +218,7 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
             for p in podroll
         ])
 
-    for social in cfg.list_section("social_interact"):
+    for social in socials:
         enricher.add_social_interact(
             protocol=social["protocol"],
             uri=social["uri"],
@@ -203,11 +228,9 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
         )
 
     # Per-episode Bluesky post (comment thread), matched via the article link
-    article_domain = podcast.get("episode_article_domain")
-    bluesky = cfg.section("bluesky")
-    if bluesky.get("handle") and article_domain:
+    if bluesky_handle:
         enricher.add_bluesky_episode_social_interact(
-            handle=bluesky["handle"],
+            handle=bluesky_handle,
             article_domain=article_domain,
             timezone=cfg.timezone,
         )

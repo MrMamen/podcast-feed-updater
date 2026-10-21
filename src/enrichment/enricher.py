@@ -7,7 +7,7 @@ social, descriptions, transcripts, chapters); this class combines them. All
 methods return self, so they can be chained.
 """
 
-from typing import Self
+from typing import Dict, Self
 
 from src.common.namespaces import PODCAST
 from src.enrichment.channel import ChannelMixin
@@ -17,6 +17,10 @@ from src.enrichment.episode_numbers import EpisodeNumbersMixin
 from src.enrichment.persons import PersonsMixin
 from src.enrichment.social import SocialMixin
 from src.enrichment.transcripts import TranscriptsMixin
+
+
+class FeedConflictError(Exception):
+    """The source feed already has tags the configuration would add."""
 
 
 class FeedEnricher(
@@ -30,71 +34,38 @@ class FeedEnricher(
 ):
     """Enrich podcast feeds with Podcasting 2.0 tags."""
 
-    def validate_no_conflicts(self) -> Self:
+    def validate_no_conflicts(self, channel_tags: Dict[str, str], item_tags: Dict[str, str]) -> Self:
         """
-        Validate that the source feed doesn't already contain Podcasting 2.0 tags
-        that this enricher will add. This prevents silent conflicts when the
-        original feed starts supporting these tags.
+        Fail if the source feed already has Podcasting 2.0 tags that the
+        configured steps would add, so they aren't added twice without anyone
+        noticing (e.g. when the host starts supporting a tag).
+
+        Args:
+            channel_tags, item_tags: podcast: tag name → the setting that adds it,
+                for the error message (e.g. {"guid": "[podcast] guid"})
 
         Raises:
-            ValueError: If any conflicting tags are found
-
-        Returns:
-            Self for chaining
+            FeedConflictError: listing the tags and settings
         """
         if self.channel is None:
             raise ValueError("Must fetch feed first")
 
-        # Tags we check at channel level
-        channel_tags_to_check = [
-            'guid', 'funding', 'medium', 'updateFrequency',
-            'podroll', 'socialInteract', 'person'
-        ]
-
-        # Tags we check at item level
-        item_tags_to_check = ['season', 'episode', 'person', 'socialInteract']
-
         conflicts = []
-
-        # Check channel level
-        for tag in channel_tags_to_check:
-            found = self.channel.findall(f'{PODCAST}{tag}')
+        for tag, setting in channel_tags.items():
+            found = len(self.channel.findall(f'{PODCAST}{tag}'))
             if found:
-                conflicts.append(f"podcast:{tag} (found {len(found)} at channel level)")
-
-        # Check item level
-        items = self.channel.findall('item')
-        item_conflicts = {}
-        for tag in item_tags_to_check:
-            for item in items:
-                found = item.findall(f'{PODCAST}{tag}')
-                if found:
-                    if tag not in item_conflicts:
-                        item_conflicts[tag] = 0
-                    item_conflicts[tag] += len(found)
-
-        for tag, count in item_conflicts.items():
-            conflicts.append(f"podcast:{tag} (found {count} across episodes)")
+                conflicts.append(f"podcast:{tag} ({found} at channel level), added by {setting}")
+        for tag, setting in item_tags.items():
+            found = sum(len(item.findall(f'{PODCAST}{tag}')) for item in self.channel.findall('item'))
+            if found:
+                conflicts.append(f"podcast:{tag} ({found} in episodes), added by {setting}")
 
         if conflicts:
-            error_msg = (
-                "\n" + "="*60 + "\n"
-                "CONFLICT DETECTED: Source feed already contains Podcasting 2.0 tags!\n"
-                + "="*60 + "\n\n"
-                "The original feed now has support for tags that this enricher adds.\n"
-                "Please update the enrichment script to handle these tags.\n\n"
-                "Conflicting tags found:\n"
+            raise FeedConflictError(
+                "The source feed already has tags that the configuration adds:\n"
+                + "".join(f"  ❌ {c}\n" for c in conflicts)
+                + "Remove these settings to keep the source feed's own tags."
             )
-            for conflict in conflicts:
-                error_msg += f"  ❌ {conflict}\n"
-            error_msg += (
-                "\nThis is intentional to prevent silent conflicts.\n"
-                "Update the podcast's podcast.toml or the pipeline to either:\n"
-                "  1. Stop adding these tags (remove the config section)\n"
-                "  2. Modify the enricher to handle existing tags\n"
-                "  3. Add explicit override logic if needed\n"
-            )
-            raise ValueError(error_msg)
 
         print("✓ Validation passed: No conflicting Podcasting 2.0 tags found")
         return self

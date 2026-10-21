@@ -60,7 +60,8 @@ class EpisodeNumbersMixin(BaseFeed):
         episode_number: Callable[[etree._Element], Optional[str]] = itunes_episode_number,
     ) -> Self:
         """
-        Add podcast:season and podcast:episode tags to all episodes.
+        Add podcast:season and podcast:episode tags to all episodes, except
+        where the source feed already has them.
         Uses itunes:season, and itunes:episode unless episode_number says otherwise.
 
         The podcast:episode tag includes a display attribute showing both
@@ -93,9 +94,14 @@ class EpisodeNumbersMixin(BaseFeed):
         season_counters = {}
         added_count = 0
 
+        kept_count = 0
+
         for item in items:
             season_elem = item.find(f'{ITUNES}season')
             episode_num_text = episode_number(item)
+            has_season = item.find(f'{PODCAST}season') is not None
+            has_episode = item.find(f'{PODCAST}episode') is not None
+            kept_count += has_season or has_episode
 
             if season_elem is not None and season_elem.text:
                 season_num = int(season_elem.text)
@@ -105,7 +111,8 @@ class EpisodeNumbersMixin(BaseFeed):
                 if season_name:
                     podcast_season.set('name', season_name(season_num))
                 podcast_season.text = str(season_num)
-                item.append(podcast_season)
+                if not has_season:
+                    item.append(podcast_season)
 
             if episode_num_text:
                 total_episode_num = int(episode_num_text)
@@ -131,19 +138,23 @@ class EpisodeNumbersMixin(BaseFeed):
                         display=display_value
                     )
                     podcast_episode.text = str(total_episode_num)
-                    item.append(podcast_episode)
+                    if not has_episode:
+                        item.append(podcast_episode)
                 else:
                     # No season info, just use total episode number
                     podcast_episode = etree.Element(
                         f'{PODCAST}episode'
                     )
                     podcast_episode.text = str(total_episode_num)
-                    item.append(podcast_episode)
+                    if not has_episode:
+                        item.append(podcast_episode)
 
             if season_elem is not None or episode_num_text:
                 added_count += 1
 
         print(f"✓ Added podcast:season and podcast:episode tags to {added_count} episodes")
+        if kept_count:
+            print(f"  ℹ️  Kept the source feed's own tags on {kept_count} episodes")
         return self
 
     def restore_episode_numbers_to_titles(

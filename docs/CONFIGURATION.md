@@ -23,7 +23,10 @@ Kommandoene velger podcast med `--podcast <id>`, miljøvariabelen `PODCAST` (f.e
 3. Publisering: se [DEPLOYMENT.md](DEPLOYMENT.md).
 
 Et steg kjøres bare når seksjonen eller valget finnes. Rekkefølgen er fast, se
-`src/enrichment/pipeline.py`.
+`src/enrichment/pipeline.py`. Podcasting 2.0-tagger som kildefeeden allerede har, beholdes.
+Ber konfigen om å legge til en tag kilden har fra før (f.eks. `guid`), stopper berikingen
+med beskjed om hvilken innstilling som må fjernes. `podcast:season` og `podcast:episode`
+legges bare til der de mangler.
 
 ## `[podcast]`
 
