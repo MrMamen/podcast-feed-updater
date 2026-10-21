@@ -144,7 +144,8 @@ class ChaptersMixin(BaseFeed):
         For each episode with a podcast:chapters JSON: load it (a file with the
         same name in chapters_dir takes precedence over the source feed's), sort
         it, add an intro chapter at 00:00 if missing, add images and links (see
-        chapter_images.ChapterImageMatcher), and with output_dir save it there
+        chapter_images.ChapterImageMatcher), drop hidden chapters left without
+        either, and with output_dir save it there
         and point podcast:chapters at the hosted copy. With include_psc_tags,
         also insert the visible chapters as <psc:chapters> (Spotify).
 
@@ -215,7 +216,7 @@ class ChaptersMixin(BaseFeed):
             match_other_episodes=match_other_episodes,
         )
 
-        converted_count = failed_count = local_count = total_links = 0
+        converted_count = failed_count = local_count = total_links = total_dropped = 0
         used_local_files = set()
 
         for item_index, item in enumerate(items):
@@ -257,6 +258,7 @@ class ChaptersMixin(BaseFeed):
                         NEXT_COVER: episode_covers[item_index - 1] if item_index > 0 else None,
                         PODCAST_LOGO: podcast_logo,
                     })
+                    total_dropped += self._drop_empty_hidden_chapters(chapters)
                     if output_dir:
                         podcast_chapters.set(
                             'url', self._host_chapter_file(chapters_data, output_dir, filename, base_url)
@@ -280,6 +282,8 @@ class ChaptersMixin(BaseFeed):
             print(f"  📁 {local_count} from local files (with toc: false support)")
         if apple_podcast_id:
             print(f"  🔗 {total_links} chapter links to other episodes in Apple Podcasts")
+        if total_dropped > 0:
+            print(f"  🗑️  Dropped {total_dropped} hidden chapters with neither image nor link")
         if failed_count > 0:
             print(f"  ⚠ {failed_count} episodes failed to convert")
 
@@ -407,6 +411,21 @@ class ChaptersMixin(BaseFeed):
                 if field in chapter and not chapter[field]:
                     del chapter[field]
         return links_added
+
+    @staticmethod
+    def _drop_empty_hidden_chapters(chapters: List[Dict]) -> int:
+        """
+        Remove "toc": false chapters that still have neither "img" nor "url"
+        after images and links are added. They exist to show an image embedded
+        in the MP3's ID3 tags, which the JSON can't carry, so without one they
+        only make apps without image inheritance fall back to the episode cover.
+        Returns the number removed.
+        """
+        kept = [ch for ch in chapters
+                if ch.get('toc', True) is not False or 'img' in ch or 'url' in ch]
+        dropped = len(chapters) - len(kept)
+        chapters[:] = kept
+        return dropped
 
     @staticmethod
     def _host_chapter_file(chapters_data: Dict, output_dir: str, filename: str, base_url: str) -> str:
