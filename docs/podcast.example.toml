@@ -1,75 +1,26 @@
-# Mal for en ny podcast. Kopier til podcasts/<id>/podcast.toml og fyll inn.
-# <id> er et kort navn uten mellomrom (brukes i filnavn og --podcast <id>).
-# Alle valg er beskrevet i docs/CONFIGURATION.md; podcasts/cdspill/podcast.toml
-# er et fullt eksempel. Seksjoner som er kommentert ut, slås av.
+# Eksempel på podcast.toml. Kopier til podcasts/<id>/podcast.toml, der <id> er et
+# kort navn uten mellomrom (brukes i filnavn og som --podcast <id>).
+#
+# Bare source_feed og base_url er påkrevd. Resten er valgfritt: fjern # for å slå på.
+# Alle valg: docs/CONFIGURATION.md. Fullt eksempel: podcasts/cdspill/podcast.toml.
 
 [podcast]
-name = "Min podcast"
-source_feed = "https://example.com/feed.xml"
-# podcast:guid. Uten den skriver enrich.py ut den Podcast Index bruker for feeden.
-# guid = "..."
-medium = "podcast"
-timezone = "Europe/Oslo"
-# episode_article_domain = "example.com"   # nettsted med en artikkel per episode (<link>)
-# apple_podcast_id = 123456789
-# apple_country = "no"
-# podchaser_id = "123456"                   # for guests.py episode
+source_feed = "https://example.com/feed.xml"     # feeden som skal berikes
+# name = "Min podcast"                           # visningsnavn (standard: <id>)
+# guid = "..."                                   # enrich.py skriver ut riktig verdi
+# timezone = "Europe/Oslo"                       # standard: UTC
 
 [publish]
-# Der output/ publiseres, f.eks. GitHub Pages
-base_url = "https://<bruker>.github.io/podcast-feed-updater"
-feed = "minpodcast-enriched.xml"
-# op3 = true                                 # nedlastingsstatistikk via op3.dev
+base_url = "https://<bruker>.github.io/<repo>"   # der output/ publiseres
+# op3 = true                                     # nedlastingsstatistikk via op3.dev
 
+# Episodenummer fra tittelen når itunes:episode mangler ("Episode 91: ...")
 # [titles]
-# episode_number_pattern = '^Episode (\d+)'  # nummeret i tittelen, i gruppe 1
-# episode_number_source = ["itunes", "title"] # itunes:episode, ellers fra tittelen
-# remove_episode_numbers = true               # fjern nummeret fra titlene
-# guest_pattern = 'with (.+?)(?:\s*\(|$)'    # gruppe 1 = gjest(er): "Tema with Ann and Bob"
-# guest_separator = ["and", "&"]
-# subject_separator = " with "
+# episode_number_pattern = '^Episode (\d+)'
+# episode_number_source = ["itunes", "title"]
 
-# [seasons]
-# naming = "format"
-# name_format = "Season {season}"
-
-# [funding]
-# name = "Patreon"
-# url = "https://www.patreon.com/minpodcast"
-# message = "Support the show on Patreon"
-
-# [update_frequency]
-# complete = false
-# frequency = 1
-# dtstart = "2024-01-01T00:00:00Z"
-# rrule = "FREQ=WEEKLY"
-
-# [[podroll]]
-# title = "En annen podcast"
-# url = "https://example.org/feed.xml"
-# feed_guid = "..."
-
-# [[social_interact]]
-# protocol = "disabled"
-# uri = "https://bsky.app/profile/minpodcast.bsky.social"
-# account_id = "@minpodcast.bsky.social"
-# account_url = "https://bsky.app/profile/minpodcast.bsky.social"
-# priority = 1
-
-# [bluesky]
-# handle = "minpodcast.bsky.social"           # krever episode_article_domain
-
-# [description_footer]
-# funding_text = "Support us on"
-# follow_text = "Follow us on"
-# and_word = "and"
-# social_links = [{ name = "Bluesky", url = "https://bsky.app/profile/minpodcast.bsky.social" }]
-
-# [transcripts]
-# language = "en"
-
+# Host kapittelfilene selv; første kapittel får episodens cover
 # [chapters]
-# publish_path = "chapters/minpodcast"
 
+# YouTube-variant med kapitlene som tidskoder: uv run enrich.py --variant youtube
 # [variants.youtube]
-# [variants.spotify]
