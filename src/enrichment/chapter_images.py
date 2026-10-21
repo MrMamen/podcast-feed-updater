@@ -14,6 +14,9 @@ The order, first match wins:
    episode's name ("Ligner på Doom").
 6. Fuzzy word overlap with another episode's subject.
 
+Steps 4 and 6 suit podcasts where each episode is about one thing (a game),
+and are only on with ``match_other_episodes``.
+
 Titles are compared case-insensitively, with curly apostrophes made straight.
 """
 
@@ -114,6 +117,8 @@ class ChapterImageMatcher:
         images_base_url: Public URL of the chapter images directory, for rules
             whose image is a file name
         link_cover: Cover URL for a chapter link (Steam/GOG/Wikipedia), or None
+        match_other_episodes: Match chapter titles against other episodes'
+            subjects (steps 4 and 6)
     """
 
     def __init__(
@@ -123,8 +128,10 @@ class ChapterImageMatcher:
         cross_references: Optional[List[Dict]] = None,
         images_base_url: Optional[str] = None,
         link_cover: Optional[Callable[[str], Optional[str]]] = None,
+        match_other_episodes: bool = False,
     ):
         self.subject_covers = subject_covers
+        self.match_other_episodes = match_other_episodes
         self.image_rules = [_ImageRule(r) for r in image_rules or []]
         self.cross_references = [_CrossReference(r) for r in cross_references or []]
         self.images_base_url = images_base_url
@@ -168,9 +175,10 @@ class ChapterImageMatcher:
                 return image
 
         # 4. The chapter title refers to another episode
-        image = self._match_subject(title)
-        if image:
-            return image
+        if self.match_other_episodes:
+            image = self._match_subject(title)
+            if image:
+                return image
 
         # 5. Podcast-specific phrases introducing another episode's name
         for reference in self.cross_references:
@@ -181,7 +189,7 @@ class ChapterImageMatcher:
                 return image
 
         # 6. Last resort
-        return self._match_fuzzy(title)
+        return self._match_fuzzy(title) if self.match_other_episodes else None
 
     def _match_subject(self, title: str) -> Optional[str]:
         covers = self.subject_covers

@@ -137,6 +137,8 @@ images_dir = "chapter-images"
 publish_path = "chapters"
 # Kapitler som viser en annen episodes cover lenker til den episoden i Apple Podcasts
 apple_links = true
+# Hver episode handler om ett spill, så kapitler om et spill får den episodens cover
+match_other_episodes = true
 
 # Bilder til kapitler uten "img" (sett "img": null i kapittelfila for å slå av).
 # Første kapittel får alltid episodens cover. Så prøves reglene under i rekkefølge;

@@ -105,6 +105,7 @@ def chapter_options(cfg: PodcastConfig) -> dict:
         "title_rules": cfg.title_rules,
         "image_rules": chapters.get("image_rules", []),
         "cross_references": chapters.get("cross_references", []),
+        "match_other_episodes": chapters.get("match_other_episodes", False),
     }
 
 
@@ -256,7 +257,7 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
     # psc:chapters is NOT added here — it's Spotify-specific and added by the
     # spotify variant, so the main feed stays clean.
     chapters = cfg.section("chapters")
-    if chapters:
+    if "chapters" in cfg.data:  # an empty [chapters] means "on, with defaults"
         apple_id = podcast.get("apple_podcast_id") if chapters.get("apple_links") else None
         enricher.convert_json_chapters_to_psc(
             include_psc_tags=False,

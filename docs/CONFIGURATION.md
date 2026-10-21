@@ -124,6 +124,9 @@ transkripsjon endrer feeden.
 | `images_dir` | – | Bilder for faste kapitler |
 | `publish_path` | `chapters/<id>` | Under `output/` og `base_url` |
 | `apple_links` | `false` | Lenk kapitler med en annen episodes cover til den episoden i Apple Podcasts |
+| `match_other_episodes` | `false` | Gi kapitler som handler om det en annen episode handler om, den episodens cover (punkt 4 og 6 under). For podcaster med én ting, f.eks. ett spill, per episode |
+
+En tom `[chapters]` slår på kapitlene med standardverdiene.
 
 ### Kapittelbilder
 
@@ -134,10 +137,11 @@ Kapitler uten `img` får bilde i denne rekkefølgen. Første treff vinner, og `"
    eller er lik (`equals`) en tekst. `image` er `episode_cover`, `previous_cover`,
    `next_cover`, `podcast_logo` eller en fil i `images_dir`.
 3. En lenke til Steam, GOG eller Wikipedia gir spillets cover.
-4. Tittelen matcher det en annen episode handler om («Doom II» → Doom-episoden).
+4. Med `match_other_episodes`: tittelen matcher det en annen episode handler om
+   («Doom II» → Doom-episoden).
 5. `[[chapters.cross_references]]`: en frase som etterfølges av navnet på en annen episode
    («Ligner på Doom»). `match` er `exact`, `contains` eller `words`.
-6. Mange felles ord med en annen episode.
+6. Med `match_other_episodes`: mange felles ord med en annen episode.
 
 Store og små bokstaver regnes likt. Se `podcasts/cdspill/podcast.toml` for eksempler.
 

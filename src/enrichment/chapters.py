@@ -135,6 +135,7 @@ class ChaptersMixin(BaseFeed):
         title_rules: Optional[TitleRules] = None,
         image_rules: Optional[List[Dict]] = None,
         cross_references: Optional[List[Dict]] = None,
+        match_other_episodes: bool = False,
     ) -> Self:
         """
         Process the chapter JSON of every episode and optionally add Podlove
@@ -170,8 +171,8 @@ class ChaptersMixin(BaseFeed):
             apple_country: Apple Podcasts storefront for those links (e.g. "no")
             title_rules: Title conventions, so chapters can be matched against what
                 other episodes are about ("Rainbow Six med Jostein" → "Rainbow Six")
-            image_rules, cross_references: Podcast-specific rules for chapter images,
-                see chapter_images.ChapterImageMatcher
+            image_rules, cross_references, match_other_episodes: Podcast-specific rules
+                for chapter images, see chapter_images.ChapterImageMatcher
 
         Returns:
             Self for chaining
@@ -211,6 +212,7 @@ class ChaptersMixin(BaseFeed):
             cross_references=cross_references,
             images_base_url=f"{base_url}/images" if images_dir else None,
             link_cover=link_cover,
+            match_other_episodes=match_other_episodes,
         )
 
         converted_count = failed_count = local_count = total_links = 0
