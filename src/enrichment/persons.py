@@ -31,8 +31,19 @@ class PersonsMixin(BaseFeed):
         # Ensure podcast namespace is registered
         self._ensure_podcast_namespace()
 
-        # Add persons to channel
-        for person_data in persons:
+        # Insert after the (first block of) itunes tags for organization,
+        # keeping the order of the list
+        def is_itunes(elem):
+            return isinstance(elem.tag, str) and 'itunes' in elem.tag
+
+        children = list(self.channel)
+        position = next(
+            (i + 1 for i in range(len(children) - 1)
+             if is_itunes(children[i]) and not is_itunes(children[i + 1])),
+            len(children),
+        )
+
+        for offset, person_data in enumerate(persons):
             person_elem = etree.Element(
                 f'{PODCAST}person',
                 role=person_data.get('role', 'host')
@@ -44,17 +55,7 @@ class PersonsMixin(BaseFeed):
             if 'href' in person_data:
                 person_elem.set('href', person_data['href'])
 
-            # Insert after last itunes tag for organization
-            inserted = False
-            for i, elem in enumerate(self.channel):
-                if 'itunes' in elem.tag and i + 1 < len(self.channel):
-                    if 'itunes' not in self.channel[i + 1].tag:
-                        self.channel.insert(i + 1, person_elem)
-                        inserted = True
-                        break
-
-            if not inserted:
-                self.channel.append(person_elem)
+            self.channel.insert(position + offset, person_elem)
 
         print(f"✓ Added {len(persons)} default host(s) to channel")
         return self

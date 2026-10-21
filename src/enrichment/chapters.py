@@ -127,6 +127,7 @@ class ChaptersMixin(BaseFeed):
         base_url: str,
         chapters_dir: str = "chapters",
         output_dir: Optional[str] = None,
+        hosted_dir: Optional[str] = None,
         images_dir: Optional[str] = None,
         include_psc_tags: bool = True,
         apple_podcast_id: Optional[int] = None,
@@ -156,6 +157,9 @@ class ChaptersMixin(BaseFeed):
             output_dir: Directory to copy chapter files to for hosting. None skips hosting
                 and leaves podcast:chapters URLs as they are, so variant feeds don't
                 overwrite the chapter files the main feed publishes.
+            hosted_dir: Where the main feed wrote its hosted copies. Variants built from a
+                local enriched feed read them from here, since its podcast:chapters URLs
+                point to files that aren't published yet.
             images_dir: Directory with images for recurring chapters, copied to
                 output_dir/images and published at base_url/images
             include_psc_tags: If True, insert <psc:chapters> inline (for Spotify variant).
@@ -226,9 +230,13 @@ class ChaptersMixin(BaseFeed):
                     json_url, os.path.join(chapters_dir, filename), episode_title
                 )
                 is_local = chapters_data is not None
+                hosted_file = os.path.join(hosted_dir, filename) if hosted_dir else None
                 if is_local:
                     local_count += 1
                     used_local_files.add(filename)
+                elif hosted_file and os.path.exists(hosted_file):
+                    with open(hosted_file, 'r', encoding='utf-8') as f:
+                        chapters_data = json.load(f)
                 else:
                     response = requests.get(json_url, timeout=10)
                     response.raise_for_status()

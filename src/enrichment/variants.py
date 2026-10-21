@@ -19,10 +19,13 @@ from src.enrichment.enricher import FeedEnricher
 from src.enrichment.pipeline import chapter_options, finish_feed
 
 
-def _chapters_for_variant(enricher: FeedEnricher, cfg: PodcastConfig) -> None:
+def _chapters_for_variant(enricher: FeedEnricher, cfg: PodcastConfig, use_local: bool) -> None:
     # Rebuild psc:chapters inline from the chapter JSON the main feed points to.
-    # output_dir=None: the chapter files (with Apple links) are hosted by the main feed
+    # output_dir=None: the chapter files (with Apple links) are hosted by the main feed.
+    # From a local enriched feed, read the main feed's copies in output/, since
+    # they may not be published yet.
     options = chapter_options(cfg)
+    options["hosted_dir"] = options["output_dir"] if use_local else None
     options["output_dir"] = None
     enricher.convert_json_chapters_to_psc(**options)
 
@@ -39,7 +42,7 @@ def build_youtube(cfg: PodcastConfig, *, use_local: bool = False) -> str:
     enricher.restore_episode_numbers_to_titles(variant.get("episode_number_format", " (#{episode})"))
 
     # psc:chapters are only needed to extract the timestamps from
-    _chapters_for_variant(enricher, cfg)
+    _chapters_for_variant(enricher, cfg, use_local)
     enricher.add_chapter_timestamps_to_description()
     enricher.remove_chapter_tags()
 
@@ -58,7 +61,7 @@ def build_spotify(cfg: PodcastConfig, *, use_local: bool = False) -> str:
     enricher.fetch_feed()
 
     # Must run before removing podcast:chapters since the JSON URL is read from there
-    _chapters_for_variant(enricher, cfg)
+    _chapters_for_variant(enricher, cfg, use_local)
     # The JSON reference is dead weight for Spotify and only slows down parsing
     enricher.remove_chapter_tags(remove_podcast=True, remove_psc=False)
 
