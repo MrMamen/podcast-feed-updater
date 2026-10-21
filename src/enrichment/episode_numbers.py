@@ -23,7 +23,7 @@ class EpisodeNumbersMixin(BaseFeed):
         the number ("Spillmatic #513") is kept as it is.
 
         Args:
-            pattern: Regex matching the episode number, e.g. r'\s*\(#?\d+\)$' for "(#123)"
+            pattern: Regex matching the episode number, e.g. r'\\s*\\(#?\\d+\\)$' for "(#123)"
 
         Returns:
             Self for chaining

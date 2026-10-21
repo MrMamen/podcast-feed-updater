@@ -17,7 +17,7 @@ from src.common.guest_config import (
     load_known_guests_data,
     load_permanent_staff,
 )
-from src.common.podcast_utils import EPISODE_NUMBER_SOURCES, season_namer
+from src.common.podcast_utils import EPISODE_NUMBER_SOURCES, podcast_guid, season_namer
 from src.config import OUTPUT_DIR, ConfigError, PodcastConfig
 from src.enrichment.enricher import FeedEnricher
 from src.enrichment.episode_numbers import itunes_episode_number
@@ -25,11 +25,10 @@ from src.enrichment.episode_numbers import itunes_episode_number
 
 def _load_hosts(cfg: PodcastConfig) -> list:
     path = cfg.permanent_staff_path
-    print(f"\n📋 Loading permanent staff from: {path}")
     if not path.exists():
-        print(f"⚠ Config file not found: {path}")
-        print("  Using empty host list")
+        print(f"\nℹ️  No {path.name}, so no hosts at channel level")
         return []
+    print(f"\n📋 Loading permanent staff from: {path}")
     try:
         hosts = load_permanent_staff(path)
     except Exception as e:
@@ -43,14 +42,14 @@ def _load_hosts(cfg: PodcastConfig) -> list:
     return hosts
 
 
-def _load_known_guests(cfg: PodcastConfig) -> dict:
+def _load_known_guests(cfg: PodcastConfig, guests_in_titles: bool) -> dict:
     path = cfg.known_guests_path
-    print(f"\n📦 Loading known guests from: {path}")
     if not path.exists():
-        print(f"⚠ File not found: {path}")
-        print("  Guests will not have profile images")
-        print("  Use 'uv run guests.py add <name>' to add guest data")
+        if guests_in_titles:
+            print(f"\nℹ️  No {path.name}, so guests get no image or link. "
+                  f"Add them with: uv run guests.py --podcast {cfg.id}")
         return {}
+    print(f"\n📦 Loading known guests from: {path}")
     try:
         data = load_known_guests_data(path)
     except Exception as e:
@@ -161,9 +160,12 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
 
     if cfg.guid:
         enricher.add_guid(cfg.guid)
+    else:
+        print(f"\nℹ️  No [podcast] guid. Podcast Index derives this one from the source feed's URL:\n"
+              f'   guid = "{podcast_guid(cfg.source_feed)}"')
 
     # Guests from episode titles plus extra_episodes from known_guests.json
-    known_guests = _load_known_guests(cfg)
+    known_guests = _load_known_guests(cfg, bool(titles.get("guest_pattern")))
     if titles.get("guest_pattern") or known_guests:
         enricher.auto_detect_guests_from_titles(title_rules=title_rules, known_guests=known_guests)
 

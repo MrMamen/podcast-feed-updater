@@ -6,9 +6,18 @@ Shared helpers for reasoning about a podcast's episodes: its title conventions
 from __future__ import annotations
 
 import re
+import uuid
 from typing import Callable, Dict, List, Optional, Union
 
 EPISODE_NUMBER_SOURCES = ("itunes", "title")
+
+# Namespace for podcast:guid, see https://podcasting2.org/docs/podcast-namespace/tags/guid
+PODCAST_GUID_NAMESPACE = uuid.UUID("ead4c236-bf58-58c6-a2c6-a6b28d128cb6")
+
+
+def podcast_guid(feed_url: str) -> str:
+    """podcast:guid as Podcast Index derives it: uuid5 of the feed URL without scheme."""
+    return str(uuid.uuid5(PODCAST_GUID_NAMESPACE, re.sub(r'^[a-z]+://', '', feed_url).rstrip('/')))
 
 
 def is_bonus_episode(text: str) -> bool:
@@ -30,7 +39,7 @@ class TitleRules:
     - ``subject_separator``: text between what the episode is about and the
       guests (``" med "``), used to match chapters against other episodes.
     - ``episode_number_pattern``: regex for the episode number in the title,
-      with the number as group 1 (``\s*\(#?(\d+)\)$`` for ``"(#123)"``).
+      with the number as group 1 (``\\s*\\(#?(\\d+)\\)$`` for ``"(#123)"``).
     """
 
     def __init__(

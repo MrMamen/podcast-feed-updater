@@ -23,6 +23,7 @@ from itertools import groupby
 from typing import Dict, List, Optional, Tuple
 
 import inquirer
+from dotenv import load_dotenv
 
 from src.common.episodes import Episode, iter_episodes, parse_duration
 from src.common.feed_loader import download_cache, load_feed
@@ -30,6 +31,8 @@ from src.common.guest_config import load_known_guests, load_known_guests_data, r
 from src.common.guest_store import episode_number_from_note, find_guests_matching
 from src.common.podcast_utils import is_bonus_episode
 from src.config import PodcastConfig, add_podcast_argument, load_podcast_or_exit
+
+load_dotenv()
 
 CANCEL = "❌ Avbryt"
 

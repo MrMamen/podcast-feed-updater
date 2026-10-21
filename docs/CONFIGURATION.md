@@ -11,13 +11,13 @@ podcasts/cdspill/
 └── chapter-images/       # bilder for faste kapitler
 ```
 
-Kommandoene velger podcast med `--podcast <id>`, miljøvariabelen `PODCAST`, eller den eneste
-som finnes. Stier i `podcast.toml` er relative til mappen, og ukjente seksjoner gir feil.
+Kommandoene velger podcast med `--podcast <id>`, miljøvariabelen `PODCAST` (f.eks.
+`PODCAST=cdspill` i `.env`), eller den eneste som finnes. Stier i `podcast.toml` er relative til mappen, og ukjente seksjoner gir feil.
 
 ## Ny podcast
 
 1. Kopier [podcast.example.toml](podcast.example.toml) til `podcasts/<id>/podcast.toml`,
-   og fyll inn `source_feed` og `base_url`.
+   og fyll inn `source_feed` og `base_url`. Første kjøring skriver ut `guid` du kan lime inn.
 2. `uv run guests.py --podcast <id> cache` og `uv run enrich.py --podcast <id> --local-cache`,
    og se på resultatet i `output/`.
 3. Publisering: se [DEPLOYMENT.md](DEPLOYMENT.md).

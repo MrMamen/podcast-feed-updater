@@ -156,7 +156,7 @@ def _load_toml(config_id: Optional[str], config_name: str, option: str, env: str
     if not config_id:
         if len(available) != 1:
             raise ConfigError(
-                f"Velg med {option} <id> (eller {env}=<id>). "
+                f"Velg med {option} <id>, eller sett {env}=<id> (f.eks. i .env). "
                 f"Tilgjengelige: {', '.join(available) or 'ingen'}"
             )
         config_id = available[0]

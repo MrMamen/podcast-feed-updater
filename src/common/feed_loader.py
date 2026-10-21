@@ -9,7 +9,8 @@ import requests
 
 from src.config import PodcastConfig
 
-CACHE_HINT = "   Kjør først: uv run analyze.py cache   (eller: uv run guests.py cache)"
+def _cache_hint(cfg: PodcastConfig) -> str:
+    return f"   Kjør først: uv run guests.py --podcast {cfg.id} cache"
 
 
 def download_cache(cfg: PodcastConfig, quiet: bool = False) -> Path:
@@ -48,7 +49,7 @@ def load_feed(
                 download_cache(cfg, quiet=quiet)
             else:
                 print(f"❌ Fant ikke lokal cache på {cache_path}")
-                print(CACHE_HINT)
+                print(_cache_hint(cfg))
                 sys.exit(1)
         if not quiet:
             print(f"📂 Leser feed fra {cache_path}...")
@@ -77,7 +78,7 @@ def resolve_feed_source(cfg: PodcastConfig, use_cache: bool) -> str:
     if use_cache:
         if not cfg.cache_path.exists():
             print(f"❌ Fant ikke lokal cache på {cfg.cache_path}")
-            print(CACHE_HINT)
+            print(_cache_hint(cfg))
             sys.exit(1)
         return str(cfg.cache_path)
     return cfg.source_feed

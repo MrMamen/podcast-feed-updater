@@ -57,7 +57,8 @@ class PersonsMixin(BaseFeed):
 
             self.channel.insert(position + offset, person_elem)
 
-        print(f"✓ Added {len(persons)} default host(s) to channel")
+        if persons:
+            print(f"✓ Added {len(persons)} default host(s) to channel")
         return self
 
     def auto_detect_guests_from_titles(

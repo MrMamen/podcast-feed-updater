@@ -6,9 +6,8 @@
 [podcast]
 name = "Min podcast"
 source_feed = "https://example.com/feed.xml"
-# podcast:guid. Lag en med uuid5 av feed-URL-en uten protokoll, se
-# https://podcasting2.org/docs/podcast-namespace/tags/guid
-guid = "00000000-0000-0000-0000-000000000000"
+# podcast:guid. Uten den skriver enrich.py ut den Podcast Index bruker for feeden.
+# guid = "..."
 medium = "podcast"
 timezone = "Europe/Oslo"
 # episode_article_domain = "example.com"   # nettsted med en artikkel per episode (<link>)
@@ -20,7 +19,7 @@ timezone = "Europe/Oslo"
 # Der output/ publiseres, f.eks. GitHub Pages
 base_url = "https://<bruker>.github.io/podcast-feed-updater"
 feed = "minpodcast-enriched.xml"
-op3 = true
+# op3 = true                                 # nedlastingsstatistikk via op3.dev
 
 # [titles]
 # episode_number_pattern = '^Episode (\d+)'  # nummeret i tittelen, i gruppe 1
