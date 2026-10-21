@@ -62,7 +62,3 @@ output/              generert, publiseres til GitHub Pages
 ```
 
 Utvikling: `uv run ruff check .`
-
-## Lisens
-
-MIT
