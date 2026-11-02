@@ -9,7 +9,7 @@
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
     <pubDate>Mon, 02 Nov 2026 07:20:00 +0100</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Mon, 02 Nov 2026 10:20:19 +0100</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 02 Nov 2026 10:30:04 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -42,6 +42,7 @@
                                     <description>&lt;p&gt;Incubation også kjent som det fjerde spillet i Battle Isle-serien er noe vi ikke har prøvd før nå. Men et turbasert skytespill i X-COM-stil kan jo ikke slå feil? André Nordstrand aka Takras kommer oss heldigvis til unnsetning.&lt;/p&gt;
 
 &lt;p&gt;Spillhistorie har skrevet &lt;a href='https://spillhistorie.no/2026/11/02/bekjemp-virus-infiserte-romvesener-i-incubation/'&gt;en artikkel om episoden&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Diskuter episoden på &lt;a href='https://bsky.app/profile/did:plc:5aqf36gcpdex4ld7hpkuxgln/post/3mzcyviznpk2b'&gt;Bluesky&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
 Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
                                                             <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/6vvjnu69m3786zvq/Incubation.mp3" length="98084675" type="audio/mpeg"/>
@@ -56,7 +57,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Incubation_chapters.json?v=caea8fb6" type="application/json"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="3 (#138)">138</podcast:episode>
-        <podcast:person role="guest">André Nordstrand</podcast:person></item>
+        <podcast:person role="guest">André Nordstrand</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mzcyviznpk2b" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
     <item>
         <title>Caesar III med Tor-Andre Kiil Mørkved</title>
         <itunes:title>Caesar III med Tor-Andre Kiil Mørkved</itunes:title>
@@ -77,7 +78,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>137</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/umbtfksjqtb4kq4q/CaesarIII.vtt?v=6acd53e0-263f4" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaesarIII_chapters.json?v=77ada007" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaesarIII_chapters.json?v=160153b5" type="application/json"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="2 (#137)">137</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY" img="https://creator-images.podchaser.com/89bd64cfae550b51f3e4e8a15294938f.jpeg">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mxo4o3dgis2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
