@@ -7,9 +7,9 @@
     <atom:link href="https://mrmamen.github.io/podcast-feed-updater/cdspill-enriched.xml" rel="self" type="application/rss+xml"/>
     <link>https://spillhistorie.no/tag/cd-spill/</link>
     <description>En retrospillpodcast med utelukkende fokus på gamle PC-spill. Vi prater om både legendariske DOS-spill fra 80-tallet, og obskure Windows-spill fra 90-tallet. Våre Amiga-venner sier det er mange godbiter fra deres sfære også. Vi håper dere koser dere med nostalgien og lærer litt underveis.</description>
-    <pubDate>Mon, 12 Oct 2026 09:09:00 +0200</pubDate>
+    <pubDate>Mon, 02 Nov 2026 07:20:00 +0100</pubDate>
     <generator>podcast-feed-updater v1.0 (enriched from Podbean)</generator>
-    <lastBuildDate>Thu, 22 Oct 2026 18:48:03 +0200</lastBuildDate><language>no</language>
+    <lastBuildDate>Mon, 02 Nov 2026 08:44:59 +0100</lastBuildDate><language>no</language>
     <spotify:countryOfOrigin>no</spotify:countryOfOrigin>
     <copyright>Copyright 2026 All Rights Reserved</copyright>
     <category>Leisure:Video Games</category>
@@ -35,9 +35,32 @@
         <height>144</height>
     </image>
     <item>
+        <title>Incubation: Time is Running Out med André Nordstrand</title>
+        <itunes:title>Incubation: Time is Running Out med André Nordstrand</itunes:title>
+        <link>https://cdspill.podbean.com/e/incubation/</link>
+                    <comments>https://cdspill.podbean.com/e/incubation/#comments</comments>        <pubDate>Mon, 02 Nov 2026 10:20:00 +0100</pubDate>
+        <guid isPermaLink="false">cdspill.podbean.com/dc7c6b26-974d-39b9-933e-c4a15004caa9</guid>
+                                    <description>&lt;p&gt;Incubation også kjent som det fjerde spillet i Battle Isle-serien er noe vi ikke har prøvd før nå. Men et turbasert skytespill i X-COM-stil kan jo ikke slå feil? André Nordstrand aka Takras kommer oss heldigvis til unnsetning.&lt;/p&gt;
+
+&lt;p&gt;Støtt oss gjerne på &lt;a href='https://www.patreon.com/cdSPILL'&gt;Patreon&lt;/a&gt;.&lt;br&gt;
+Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&gt;Bluesky&lt;/a&gt;, &lt;a href='https://x.com/cd_SPILL'&gt;X&lt;/a&gt;, &lt;a href='https://www.facebook.com/cdSPILL'&gt;Facebook&lt;/a&gt;, og &lt;a href='https://www.podchaser.com/cdSPILL'&gt;Podchaser&lt;/a&gt;.&lt;/p&gt;</description>
+                                                            <enclosure url="https://op3.dev/e/mcdn.podbean.com/mf/web/6vvjnu69m3786zvq/Incubation.mp3" length="98084675" type="audio/mpeg"/>
+        <itunes:author>C:\SPILL＞</itunes:author>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:block>No</itunes:block>
+        <itunes:duration>4217</itunes:duration>
+        <itunes:season>14</itunes:season>
+        <itunes:episode>138</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/incubation-time-is-running-out.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/xh3r4mwjrf6t7xu4/Incubation.vtt?v=6ae62fe9-190bb" type="text/vtt" language="no"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/Incubation_chapters.json?v=caea8fb6" type="application/json"/>
+        <podcast:season name="Høst 2026">14</podcast:season>
+        <podcast:episode display="3 (#138)">138</podcast:episode>
+        <podcast:person role="guest">André Nordstrand</podcast:person></item>
+    <item>
         <title>Caesar III med Tor-Andre Kiil Mørkved</title>
         <itunes:title>Caesar III med Tor-Andre Kiil Mørkved</itunes:title>
-        <link>https://spillhistorie.no/2026/10/12/bygg-byer-i-romertiden-i-legendariske-caesar-iii/</link>        <pubDate>Mon, 12 Oct 2026 12:09:00 +0200</pubDate>
+        <link>https://spillhistorie.no/2026/10/12/bygg-byer-i-romertiden-i-legendariske-caesar-iii/</link>        <pubDate>Mon, 12 Oct 2026 09:09:00 +0200</pubDate>
         <guid isPermaLink="false">cdspill.podbean.com/24e9c269-291e-31ea-ac6e-8ab69e4c4ae5</guid>
                                     <description>&lt;p&gt;Caesar III var for mange høydepunktet i bybyggerspillserien. Hvordan bygge byer i antikke Roma uten at hverken gudene eller keiseren blir sint på deg? Tor-Andre Kiil Mørkved hjelper oss med alle tipsene!&lt;/p&gt;
 
@@ -54,7 +77,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:episode>137</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
         <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/caesar-iii.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/umbtfksjqtb4kq4q/CaesarIII.vtt?v=6acd53e0-263f4" type="text/vtt" language="no"/>
-        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaesarIII_chapters.json?v=e61d4e70" type="application/json"/>
+        <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/CaesarIII_chapters.json?v=77ada007" type="application/json"/>
         <podcast:season name="Høst 2026">14</podcast:season>
         <podcast:episode display="2 (#137)">137</podcast:episode>
         <podcast:person role="guest" href="https://www.podchaser.com/creators/tor-andre-kiil-morkved-107tjRYvfY" img="https://creator-images.podchaser.com/89bd64cfae550b51f3e4e8a15294938f.jpeg">Tor-Andre Kiil Mørkved</podcast:person><podcast:socialInteract protocol="atproto" uri="at://did:plc:5aqf36gcpdex4ld7hpkuxgln/app.bsky.feed.post/3mxo4o3dgis2w" accountId="@cdspill.bsky.social" accountUrl="https://bsky.app/profile/cdspill.bsky.social" priority="1"/></item>
@@ -474,7 +497,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>12</itunes:season>
         <itunes:episode>124</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wuw64fvqeaj7sxj7/1985.vtt?v=6ab4539f-1da74" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/cdSPILL1985.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/wuw64fvqeaj7sxj7/1985.vtt?v=6adfcb61-1da74" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/1985_chapters.json?v=13e4cabd" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="6 (#124)">124</podcast:episode>
@@ -581,7 +604,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>12</itunes:season>
         <itunes:episode>120</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TotalAn_ttpqnw.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/zpmph4wwmwniy9gd/TA.vtt?v=6abd6735-23005" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/TotalAn_ttpqnw.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/zpmph4wwmwniy9gd/TA.vtt?v=6ae092f7-23005" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/TA_chapters.json?v=44c4d820" type="application/json"/>
         <podcast:season name="Høst 2025">12</podcast:season>
         <podcast:episode display="2 (#120)">120</podcast:episode>
@@ -1916,7 +1939,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>7</itunes:season>
         <itunes:episode>72</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thegames.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/efpt4zite36t9e7q/WinterChallenge.vtt?v=6acd61a4-18cfd" type="text/vtt" language="no"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/thegames.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/efpt4zite36t9e7q/WinterChallenge.vtt?v=6ae05b59-18cfd" type="text/vtt" language="no"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/theGames_chapters.json?v=903ab07d" type="application/json"/>
         <podcast:season name="Vår 2023">7</podcast:season>
         <podcast:episode display="6 (#72)">72</podcast:episode></item>
@@ -2070,7 +2093,7 @@ Følg oss gjerne på &lt;a href='https://bsky.app/profile/cdspill.bsky.social'&g
         <itunes:season>6</itunes:season>
         <itunes:episode>66</itunes:episode>
         <itunes:episodeType>bonus</itunes:episodeType>
-        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MartinAlper_9nvcpx.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/frdriz43jzdqqwgf/transcript_2_6q2ae.vtt?v=69472d06-574d" type="text/vtt" language="en"/>
+        <itunes:image href="https://pbcdn1.podbean.com/imglogo/ep-logo/pbblog7653866/MartinAlper_9nvcpx.jpg"/><podcast:transcript url="https://mcdn.podbean.com/mf/web/frdriz43jzdqqwgf/transcript_2_6q2ae.vtt?v=6ae0bcbf-574d" type="text/vtt" language="en"/>
         <podcast:chapters url="https://mrmamen.github.io/podcast-feed-updater/chapters/martin-alper_chapters.json?v=d90a1d2c" type="application/json"/>
         <podcast:season name="Høst 2022">6</podcast:season>
         <podcast:episode display="9 (#66)">66</podcast:episode></item>
