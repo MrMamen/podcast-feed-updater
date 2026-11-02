@@ -29,7 +29,7 @@ op3 = true
 remove_itunes_summary = true
 remove_content_encoded = true
 # Eksperiment: flytt nyeste episodes pubDate for å se hvordan klienter reagerer
-shift_latest_pubdate_hours = 3
+shift_latest_pubdate_hours = 2
 
 [titles]
 # Episodenummeret står sist i tittelen hos Podbean: "Spill med Gjest (#123)"
@@ -196,8 +196,7 @@ episode_number_format = " (#{episode})"
 
 [variants.spotify]
 feed = "cdspill-spotify.xml"
-# Eksperiment: nyeste episode en uke frem i Spotify-feeden
-shift_latest_pubdate_hours = 168
+shift_latest_pubdate_hours = 3
 
 [variants.fallback-test]
 feed_prefix = "cdspill-test-"
