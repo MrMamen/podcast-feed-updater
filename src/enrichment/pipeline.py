@@ -10,6 +10,8 @@ missing from podcast.toml is skipped.
 from __future__ import annotations
 
 import os
+import shutil
+from urllib.parse import quote
 
 from src.common.feed_loader import resolve_feed_source
 from src.common.guest_config import (
@@ -60,6 +62,27 @@ def _load_known_guests(cfg: PodcastConfig, guests_in_titles: bool) -> dict:
     with_images = sum(1 for g in guests.values() if g.get('img'))
     print(f"✓ Loaded {len(guests)} guests ({with_images} with images) and {len(aliases)} aliases")
     return flatten_for_enricher(data)
+
+
+def _publish_own_images(cfg: PodcastConfig, people: list) -> None:
+    """
+    Copy [guests] images_dir to output/guests/<id>/ and turn an "img" that is
+    just a filename into its published URL. Full URLs (Podchaser) are left as is.
+    """
+    images_dir = cfg.guest_images_dir
+    local = [p for p in people if p.get('img') and '://' not in p['img']]
+    if not local:
+        return
+    if not images_dir.is_dir():
+        raise ConfigError(f"{', '.join(p['img'] for p in local)}: no image folder {images_dir} "
+                          f"([guests] images_dir)")
+    publish_path = f"guests/{cfg.id}"
+    shutil.copytree(images_dir, OUTPUT_DIR / publish_path, dirs_exist_ok=True)
+    for person in local:
+        if not (images_dir / person['img']).is_file():
+            raise ConfigError(f"Image {person['img']} not found in {images_dir}")
+        person['img'] = f"{cfg.base_url}/{publish_path}/{quote(person['img'])}"
+    print(f"✓ {len(local)} own image(s) published under {cfg.base_url}/{publish_path}/")
 
 
 def _episode_number_getter(cfg: PodcastConfig):
@@ -146,6 +169,7 @@ def enrich(cfg: PodcastConfig, *, use_cache: bool = False) -> str:
 
     hosts = _load_hosts(cfg)
     known_guests = _load_known_guests(cfg, bool(titles.get("guest_pattern")))
+    _publish_own_images(cfg, hosts + list(known_guests.values()))
     detect_guests = bool(titles.get("guest_pattern") or known_guests)
     funding = cfg.section("funding")
     frequency = cfg.section("update_frequency")

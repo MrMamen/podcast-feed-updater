@@ -106,6 +106,11 @@ class PodcastConfig:
         return self.path(self.section("guests").get("permanent_staff", "permanent_staff.json"))
 
     @property
+    def guest_images_dir(self) -> Path:
+        """Own images for hosts and guests, referenced by filename in "img"."""
+        return self.path(self.section("guests").get("images_dir", "guest-images"))
+
+    @property
     def cache_path(self) -> Path:
         """Local copy of the source feed (``--local-cache``)."""
         return CACHE_DIR / f"{self.id}-original.xml"

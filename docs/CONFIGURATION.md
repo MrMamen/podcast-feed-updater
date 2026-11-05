@@ -8,7 +8,8 @@ podcasts/cdspill/
 ├── permanent_staff.json  # faste verter
 ├── known_guests.json     # gjester, vedlikeholdes med guests.py
 ├── chapters/             # lokale kapittelfiler, går foran kildens
-└── chapter-images/       # bilder for faste kapitler
+├── chapter-images/       # bilder for faste kapitler
+└── guest-images/         # egne bilder av verter og gjester
 ```
 
 Kommandoene velger podcast med `--podcast <id>`, miljøvariabelen `PODCAST` (f.eks.
@@ -91,6 +92,10 @@ legger en gjest til episoder der navnet ikke står i tittelen:
 
 Vedlikehold fila med `guests.py`. Den fyller bare inn det som mangler, og overskriver aldri.
 Hvert oppslag koster rundt 10 Podchaser-poeng. Filnavnene kan endres i `[guests]`.
+
+Egne bilder legges i `guest-images/` (`[guests] images_dir`), og `img` er da bare filnavnet
+(`"img": "navn.jpg"`). De publiseres under `<base_url>/guests/<id>/`, og `guests.py refresh`
+lar dem være. Gjelder både gjester og verter. Bruk kvadratiske bilder på 400–600 px.
 
 ## Kanal og sosiale medier
 

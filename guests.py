@@ -305,7 +305,8 @@ def cmd_refresh(args) -> None:
 
         new_img = creator.get("imageUrl")
         old_img = entry.get("img")
-        if new_img and old_img and new_img != old_img:
+        # A bare filename is our own image (guest-images/), so keep it
+        if new_img and old_img and new_img != old_img and "://" in old_img:
             print(f"— {name}: 🖼 bildet på Podchaser er endret")
             print(f"    nå:      {old_img}")
             print(f"    Podchaser: {new_img}")
